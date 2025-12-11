@@ -1,0 +1,10 @@
+#!/bin/bash
+# Test prosoc via Python's unittest module
+echo "Testing prosoc ..."
+set -x
+
+python -m unittest discover tests "*_test.py"
+
+# Turn off logging and print a blank line
+{ set +x; } 2>/dev/null
+echo
