@@ -1,0 +1,72 @@
+# Ignore Emacs backup files
+*~
+
+# Ignore .pyc files
+*.pyc
+
+# Ignore compiled Python files
+__pycache__/
+
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+
+# Ignore database files
+*.db
+*.sqlite
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore local copies of data corpus.
+data/
+lcats/data
+lcats/lcats/data
+lcats/notebooks/data
+lcats/lcats/notebooks/data
+
+# Ignore local output files.
+output/
+
+# Ignore package build directories
+dist/
+build/
+
+# Ignore IDE-specific files
+.idea/
+.vscode/
+
+# Ignore compiled binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Ignore package installation files
+*.egg-info/
+*.egg
+
+# Ignore cache directories
+__pycache__/
+.cache/
+
+# Ignore coverage reports
+.coverage
+htmlcov/
+
+# Ignore documentation files
+docs/_build/
+
+# Ignore notebook outputs
+lcats/notebooks/output/
+lcats/notebooks/Output/
+lcats/lcats/notebooks/output/
+lcats/lcats/notebooks/Output/
+
+# Ignore local secrets files (e.g. API keys).
+.secrets/
