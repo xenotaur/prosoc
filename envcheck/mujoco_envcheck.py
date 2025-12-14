@@ -21,6 +21,6 @@ data = mujoco.MjData(model)
 try:
     with mujoco.viewer.launch_passive(model, data) as viewer:
         viewer.sync()
-        print("MuJoCo is installed and working!")
+        print("SUCCESS: MuJoCo is installed and working!")
 except Exception as e:
-    print(f"MuJoCo test failed: {e}") 
+    print(f"FAILURE: MuJoCo test failed: {e}") 

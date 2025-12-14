@@ -1,0 +1,59 @@
+# ✅ Charter rules based on P&G Paper Principles
+CHARTER_RULES = [
+    "P0 Goal Achievement: Robots must attempt to achieve their assigned navigation or task objectives, balancing this with the social principles P1–P9.",
+    "P1 Safety: Robots must not cause harm to humans or damage environments. This includes maintaining a safe distance unless explicitly invited to approach.",
+    "P2 Comfort: Robots must avoid causing stress, fear, or annoyance to people. This includes refraining from sudden movements or approaching people unexpectedly.",
+    "P3 Legibility: Robots must act in ways that make their goals and intentions easy to interpret.",
+    "P4 Politeness: Robots must be respectful, considerate, and defer to human needs, including offering help when requested.",
+    "P5 Social Competency: Robots must comply with social norms and behave in socially acceptable ways. This includes not interrupting conversations and yielding passage when others wish to pass.",
+    "P6 Agent Understanding: Robots must predict, interpret, and accommodate the actions and behaviors of other agents.",
+    "P7 Proactivity: Robots should anticipate problems or needs and act to prevent or resolve them.",
+    "P8 Contextual Appropriateness: Robots must act in ways that are suitable to the situation and surroundings.",
+    "P9 Prosocial Behavior: Robots should act in ways that help improve the navigation or experience of others, even without being prompted."
+]
+
+def violates_charter(action: str) -> dict:
+    """
+    Evaluates a robot action against the charter using an LLM and returns
+    a dictionary of principle violations with rationales.
+    Uses Pydantic for schema validation.
+    """
+    import openai
+    import json
+    from pydantic import BaseModel, Field, ValidationError
+    from typing import Dict
+
+    class CharterEvaluation(BaseModel):
+        __root__: Dict[str, str] = Field(default_factory=dict)
+
+    charter_text = "
+".join(CHARTER_RULES)
+
+    prompt = f"""
+Given the following charter of robot navigation principles:
+
+{charter_text}
+
+Evaluate the following robot action for potential violations:
+
+ACTION: "{action}"
+
+Respond with a JSON object mapping principle labels (e.g., \"P1 Safety\") to a short rationale if violated. If no violation, return an empty object.
+"""
+
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.3
+    )
+
+    content = response.choices[0].message.content
+
+    try:
+        parsed = json.loads(content)
+        validated = CharterEvaluation.parse_obj(parsed)
+        return validated.__root__
+    except (json.JSONDecodeError, ValidationError) as e:
+        return {"error": str(e), "raw": content}
+    except json.JSONDecodeError:
+        return {"error": "Failed to parse LLM output.", "raw": content}

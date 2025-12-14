@@ -2,4 +2,4 @@
 # Get the directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Run mjpython with the Python file in the same directory
-mjpython "$SCRIPT_DIR/mujoco_test.py"
+mjpython "$SCRIPT_DIR/mujoco_envcheck.py"

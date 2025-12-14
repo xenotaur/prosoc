@@ -1,0 +1,48 @@
+#!/bin/bash
+# Run all environment checks and summarize results.
+
+echo "Running environment checks ..."
+set -euo pipefail
+
+# Initialize counters
+total=0
+successes=0
+failures=0
+errors=0
+
+# Use process substitution instead of piping into while loop
+while read -r check; do
+  echo "---Running: $check---"
+  output="$(bash "$check" 2>&1)"
+  last_line="$(echo "$output" | tail -n 1)"
+  echo "$output"
+
+  ((total++))
+
+  if [[ "$last_line" == SUCCESS:* ]]; then
+    echo "✅ Passed: $check"
+    ((successes++))
+  elif [[ "$last_line" == FAILURE:* ]]; then
+    echo "❌ Failed: $check"
+    ((failures++))
+  else
+    echo "⚠️ Error: Could not detect SUCCESS or FAILURE in $check"
+    ((errors++))
+  fi
+
+  echo
+done < <(find envcheck -type f -name "*_envcheck_run" | sort)
+
+# Summary
+echo "Environment Check Summary:"
+echo "   Total checks:    $total"
+echo "   ✅ Successes:    $successes"
+echo "   ❌ Failures:     $failures"
+echo "   ⚠️  Errors:       $errors"
+
+# Exit code for CI
+if [[ "$failures" -gt 0 || "$errors" -gt 0 ]]; then
+  exit 1
+else
+  exit 0
+fi
