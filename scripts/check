@@ -3,4 +3,4 @@ set -euo pipefail
 
 scripts/lint
 black --check prosoc tests
-python -m unittest discover -v
+scripts/test
