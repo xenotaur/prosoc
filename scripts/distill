@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# -----------------------------------------------------------------------------
+# scripts/distill
+#
+# Convenience wrapper for distilling the prosocial robot navigation charter.
+#
+# This script delegates all real logic to `prosoc.charter.distill`, which:
+#   - Parses prosoc/charter/charter.md
+#   - Validates it against prosoc/charter/schema.json
+#   - Optionally shows diffs against the existing charter.yml
+#   - Writes prosoc/charter/charter.yml atomically
+#
+# Common usage:
+#
+#   scripts/distill
+#       Distill charter.md → charter.yml (atomic overwrite)
+#
+#   scripts/distill --dry-run
+#       Validate and compile the charter, but do not write output
+#
+#   scripts/distill --show-diffs
+#       Show a unified diff between existing and distilled charter.yml
+#       (does not prevent writing unless combined with --dry-run)
+#
+#   scripts/distill --dry-run --show-diffs
+#       Preview changes without modifying any files (recommended for review)
+#
+# Notes:
+#   - Any validation or schema error will abort without modifying charter.yml
+#   - This script is intentionally thin; all correctness guarantees live in Python
+# -----------------------------------------------------------------------------
+
+set -euo pipefail
+
+# Ensure we run from the project root (so imports resolve correctly)
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$PROJECT_ROOT"
+
+# Delegate to the Python module CLI
+python -m prosoc.charter.distill "$@"
