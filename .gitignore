@@ -25,10 +25,10 @@ Thumbs.db
 
 # Ignore local copies of data corpus.
 data/
-lcats/data
-lcats/lcats/data
-lcats/notebooks/data
-lcats/lcats/notebooks/data
+prosoc/data
+prosoc/prosoc/data
+prosoc/notebooks/data
+prosoc/prosoc/notebooks/data
 
 # Ignore local output files.
 output/
@@ -63,10 +63,10 @@ htmlcov/
 docs/_build/
 
 # Ignore notebook outputs
-lcats/notebooks/output/
-lcats/notebooks/Output/
-lcats/lcats/notebooks/output/
-lcats/lcats/notebooks/Output/
+prosoc/notebooks/output/
+prosoc/notebooks/Output/
+prosoc/prosoc/notebooks/output/
+prosoc/prosoc/notebooks/Output/
 
 # Ignore local secrets files (e.g. API keys).
 .secrets/
