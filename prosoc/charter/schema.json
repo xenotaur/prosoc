@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prosocial-robotics.org/schemas/charter.schema.json",
+  "title": "Prosocial Robot Navigation Charter",
+  "description": "Schema for the Prosocial Robot Navigation Charter principles (P0–P9).",
+  "type": "object",
+  "required": ["principles"],
+  "additionalProperties": false,
+
+  "properties": {
+    "principles": {
+      "type": "array",
+      "description": "Ordered list of prosocial navigation principles.",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/principle"
+      }
+    }
+  },
+
+  "$defs": {
+    "principle": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "severity",
+        "examples"
+      ],
+      "additionalProperties": false,
+
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Principle identifier (e.g., P0, P1, ...).",
+          "pattern": "^P[0-9]+$"
+        },
+
+        "name": {
+          "type": "string",
+          "description": "Short human-readable name of the principle.",
+          "minLength": 1
+        },
+
+        "description": {
+          "type": "string",
+          "description": "Normative description of the principle.",
+          "minLength": 1
+        },
+
+        "severity": {
+          "type": "string",
+          "description": "Severity of violations of this principle.",
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "optional"
+          ]
+        },
+
+        "examples": {
+          "type": "object",
+          "description": "Illustrative examples of compliance and violation.",
+          "required": [
+            "positive",
+            "negative"
+          ],
+          "additionalProperties": false,
+
+          "properties": {
+            "positive": {
+              "type": "array",
+              "description": "Examples demonstrating correct behavior.",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+
+            "negative": {
+              "type": "array",
+              "description": "Examples demonstrating violations.",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
