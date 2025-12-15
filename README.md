@@ -188,7 +188,109 @@ Prosoc is currently:
 
 APIs, schemas, and charter contents may change as the research matures.
 
+
 ---
+
+## Development Philosophy and Workflow
+
+Prosoc follows a deliberately **conservative, explicit, and research-friendly software development philosophy**. The goal is not rapid feature accretion, but *clarity, auditability, and reproducibility*—especially for artifacts that encode normative or ethical assumptions.
+
+### Guiding Principles
+
+The development approach emphasizes:
+
+* **Explicit over implicit behavior**  
+  Important assumptions (e.g., navigation norms) are represented as data and documents, not hidden in code paths or learned weights.
+
+* **Single sources of truth**  
+  Human-authored artifacts (such as `charter.md`) are treated as authoritative and compiled into machine-readable forms. Generated files should never be edited by hand.
+
+* **Human review before automation**  
+  Tools validate, diff, and check consistency, but do not silently “fix” or rewrite important artifacts in CI.
+
+* **Boundaries over cleverness**  
+  Clear module boundaries, schemas, and runtime models are preferred over tightly coupled or overly abstract designs.
+
+* **Tooling as guardrails, not gatekeepers**  
+  Linters, formatters, and CI exist to catch mistakes and drift—not to enforce stylistic uniformity for its own sake.
+
+---
+
+### Scripts and Command-Line Workflow
+
+The `scripts/` directory contains small, explicit wrappers around common development tasks. These scripts are intentionally simple and transparent, and can be read or modified easily.
+
+Key scripts include:
+
+* `scripts/distill`  
+  Regenerates the machine-readable charter (`charter.yml`) from the human-readable source (`charter.md`).  
+  Supports `--dry-run` and `--show-diffs` to preview changes safely.
+
+* `scripts/develop`  
+  Installs Prosoc in editable mode (`pip install -e .`) for local development.
+
+* `scripts/build`  
+  Builds distribution artifacts using Python’s standard build system.
+
+* `scripts/lint`  
+  Runs static analysis using Ruff. Additional flags (such as `--fix`) may be passed through.
+
+These scripts are intended to be the **canonical interface** for common tasks, both locally and in CI.
+
+---
+
+### Linting, Formatting, and Code Style
+
+Prosoc uses a minimal, modern tooling stack:
+
+* **Ruff** for linting and static analysis
+* **Black** for code formatting
+
+The responsibilities are intentionally separated:
+
+* Black handles formatting deterministically.
+* Ruff focuses on correctness, hygiene, and likely errors.
+
+Formatting and linting are:
+* Encouraged locally (and supported in VS Code)
+* Enforced in CI in *check-only* mode
+* Never auto-applied by CI
+
+This ensures that all changes remain intentional and reviewable.
+
+---
+
+### VS Code Recommendations
+
+Prosoc works well with VS Code, though no editor is required.
+
+Recommended (optional) setup:
+* Install the **Ruff** extension for inline lint feedback
+* Use **Black** as the Python formatter
+* Enable format-on-save if desired
+
+These settings provide fast feedback during development while preserving full control over when changes are committed.
+
+---
+
+### Continuous Integration Philosophy
+
+CI is used to enforce **invariants**, not to make decisions on behalf of developers.
+
+In particular:
+* CI verifies that `charter.md` and `charter.yml` are consistent
+* CI fails if generated artifacts are out of sync
+* CI does not modify files or commit changes automatically
+
+If CI fails due to charter inconsistency, the expected resolution is:
+
+```bash
+scripts/distill
+git commit
+```
+
+---
+
 
 ## License
 
@@ -208,8 +310,11 @@ See the project documents and charter for detailed references and context.
 
 ---
 
+
 ## Disclaimer
 
 This software is provided for research purposes only.
 
 Robotic systems operating in real-world environments should undergo extensive safety testing, validation, and regulatory review before deployment.
+
+
