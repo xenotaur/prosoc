@@ -1,8 +1,8 @@
 #!/bin/bash
-# Build LCATS via Python's build module
+# Build prosoc via Python's build module
 # Requires:
 # - pip install build
-echo "Building the lcats package..."
+echo "Building the prosoc package..."
 set -x
 
 python -m build
