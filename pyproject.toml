@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prosoc"
+version = "0.1.0"
+description = "Prosocial robot navigation framework and constitutional charter system"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+authors = [
+    { name = "Anthony Francis", email = "your@email.com" }
+]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    "pyyaml",
+    "jsonschema",
+    "pydantic",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "black",
+    "build",
+    "twine",
+]
+
+[tool.setuptools]
+packages = ["prosoc"]
+
+[tool.setuptools.package-data]
+"prosoc.charter" = [
+    "charter.md",
+    "charter.yml",
+    "schema.json",
+]

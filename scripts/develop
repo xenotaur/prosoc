@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Installing lcats in develop mode..."
+echo "Installing prosoc in develop mode..."
 set -x
 
 pip install -e .
