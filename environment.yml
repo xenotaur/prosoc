@@ -34,10 +34,12 @@ dependencies:
       - attrs==25.3.0
       - babel==2.17.0
       - beautifulsoup4==4.13.4
+      - black==25.12.0
       - bleach==6.2.0
       - certifi==2025.6.15
       - cffi==1.17.1
       - charset-normalizer==3.4.2
+      - click==8.3.1
       - comm==0.2.2
       - dataclasses-json==0.6.7
       - debugpy==1.8.14
@@ -117,6 +119,7 @@ dependencies:
       - packaging==25.0
       - pandocfilters==1.5.1
       - parso==0.8.4
+      - pathspec==0.12.1
       - pexpect==4.9.0
       - platformdirs==4.3.8
       - prometheus-client==0.22.1
@@ -136,6 +139,7 @@ dependencies:
       - python-dateutil==2.9.0.post0
       - python-dotenv==1.2.1
       - python-json-logger==3.3.0
+      - pytokens==0.3.0
       - pyyaml==6.0.2
       - pyzmq==27.0.0
       - referencing==0.36.2
@@ -145,6 +149,7 @@ dependencies:
       - rfc3339-validator==0.1.4
       - rfc3986-validator==0.1.1
       - rpds-py==0.25.1
+      - ruff==0.14.9
       - scipy==1.16.0
       - send2trash==1.8.3
       - six==1.17.0

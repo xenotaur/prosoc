@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+black prosoc tests
