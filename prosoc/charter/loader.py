@@ -35,6 +35,7 @@ DEFAULT_SCHEMA_JSON = CHARTER_DIR / "schema.json"
 # Loader API
 # -----------------------------------------------------------------------------
 
+
 def load_charter(
     charter_path: pathlib.Path = DEFAULT_CHARTER_YAML,
     schema_path: pathlib.Path = DEFAULT_SCHEMA_JSON,
@@ -79,6 +80,7 @@ def load_charter(
 # -----------------------------------------------------------------------------
 # Convenience helpers
 # -----------------------------------------------------------------------------
+
 
 def load_principles(
     charter_path: pathlib.Path = DEFAULT_CHARTER_YAML,

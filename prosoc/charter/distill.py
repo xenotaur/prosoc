@@ -53,6 +53,7 @@ _YAML_BLOCK_RE = re.compile(
 # Extraction
 # ---------------------------------------------------------------------
 
+
 def extract_yaml_blocks(markdown_text: str) -> List[str]:
     """
     Extract all fenced ```yaml blocks from a Markdown document.
@@ -76,6 +77,7 @@ def extract_yaml_blocks(markdown_text: str) -> List[str]:
 # Parsing
 # ---------------------------------------------------------------------
 
+
 def parse_yaml_blocks(blocks: List[str]) -> List[Dict[str, Any]]:
     """
     Parse raw YAML blocks into Python dictionaries.
@@ -95,14 +97,10 @@ def parse_yaml_blocks(blocks: List[str]) -> List[Dict[str, Any]]:
         try:
             parsed = yaml.safe_load(block)
         except yaml.YAMLError as e:
-            raise ValueError(
-                f"Failed to parse YAML block #{i + 1}"
-            ) from e
+            raise ValueError(f"Failed to parse YAML block #{i + 1}") from e
 
         if not isinstance(parsed, dict):
-            raise ValueError(
-                f"YAML block #{i + 1} did not parse to a mapping/object"
-            )
+            raise ValueError(f"YAML block #{i + 1} did not parse to a mapping/object")
 
         principles.append(parsed)
 
@@ -112,6 +110,7 @@ def parse_yaml_blocks(blocks: List[str]) -> List[Dict[str, Any]]:
 # ---------------------------------------------------------------------
 # Assembly
 # ---------------------------------------------------------------------
+
 
 def assemble_charter(principles: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
@@ -123,14 +122,13 @@ def assemble_charter(principles: List[Dict[str, Any]]) -> Dict[str, Any]:
     Returns:
         Charter dictionary suitable for schema validation.
     """
-    return {
-        "principles": principles
-    }
+    return {"principles": principles}
 
 
 # ---------------------------------------------------------------------
 # Validation
 # ---------------------------------------------------------------------
+
 
 def validate_charter(charter: Dict[str, Any], schema: Dict[str, Any]) -> None:
     """
@@ -149,6 +147,7 @@ def validate_charter(charter: Dict[str, Any], schema: Dict[str, Any]) -> None:
 # ---------------------------------------------------------------------
 # Serialization and writing
 # ---------------------------------------------------------------------
+
 
 def serialize_charter(charter: Dict[str, Any]) -> str:
     """
@@ -185,6 +184,7 @@ def atomic_write_text(path: Path, text: str) -> None:
 # High-level pipeline
 # ---------------------------------------------------------------------
 
+
 def distill_markdown_to_yaml(
     markdown_text: str,
     schema: Dict[str, Any],
@@ -215,6 +215,7 @@ def distill_file(
 # Diff helpers
 # ---------------------------------------------------------------------
 
+
 def unified_diff(old: str, new: str, path: Path) -> str:
     """
     Produce a unified diff between two text blobs.
@@ -233,10 +234,9 @@ def unified_diff(old: str, new: str, path: Path) -> str:
 # CLI entry point
 # ---------------------------------------------------------------------
 
+
 def main(argv: List[str] | None = None) -> None:
-    parser = argparse.ArgumentParser(
-        description="Distill charter.md into charter.yml"
-    )
+    parser = argparse.ArgumentParser(description="Distill charter.md into charter.yml")
     parser.add_argument(
         "--dry-run",
         action="store_true",

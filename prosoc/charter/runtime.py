@@ -21,6 +21,7 @@ import pydantic
 # Runtime models
 # -----------------------------------------------------------------------------
 
+
 class ExampleSet(pydantic.BaseModel):
     """
     Illustrative examples associated with a charter principle.

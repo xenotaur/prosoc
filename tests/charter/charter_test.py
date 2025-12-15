@@ -24,7 +24,7 @@ class TestCharterFilesWellFormed(unittest.TestCase):
         self.charter_md = charter_dir / "charter.md"
         self.charter_yml = charter_dir / "charter.yml"
         self.schema_json = charter_dir / "schema.json"
-    
+
     # ------------------------------------------------------------------
     # charter.md tests
     # ------------------------------------------------------------------
