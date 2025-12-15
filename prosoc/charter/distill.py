@@ -141,7 +141,7 @@ def validate_charter(charter: Dict[str, Any], schema: Dict[str, Any]) -> None:
         schema: Loaded JSON Schema.
 
     Raises:
-        SchemaValidationError: if validation fails.
+        jsonschema.exceptions.ValidationError: if validation fails.
     """
     jsonschema_validate(instance=charter, schema=schema)
 

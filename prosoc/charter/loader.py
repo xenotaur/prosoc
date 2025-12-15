@@ -52,7 +52,7 @@ def load_charter(
     Raises:
         FileNotFoundError: If the charter or schema file does not exist.
         yaml.YAMLError: If the YAML cannot be parsed.
-        SchemaValidationError: If the charter violates the schema.
+        jsonschema.exceptions.ValidationError: If the charter violates the schema.
         pydantic.ValidationError: If runtime instantiation fails.
     """
     if not charter_path.exists():
