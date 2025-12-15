@@ -9,6 +9,8 @@ This module:
 - Parses them into Python objects
 - Validates against a JSON Schema
 - Emits a canonical charter dictionary
+- Serializes the charter to canonical YAML text
+- Writes output atomically (no partial or corrupt writes)
 
 This module intentionally does NOT:
 - Define runtime behavior
@@ -18,8 +20,12 @@ This module intentionally does NOT:
 
 from __future__ import annotations
 
+import argparse
+import difflib
 import json
+import os
 import re
+import tempfile
 from pathlib import Path
 from typing import List, Dict, Any
 
@@ -141,6 +147,41 @@ def validate_charter(charter: Dict[str, Any], schema: Dict[str, Any]) -> None:
 
 
 # ---------------------------------------------------------------------
+# Serialization and writing
+# ---------------------------------------------------------------------
+
+def serialize_charter(charter: Dict[str, Any]) -> str:
+    """
+    Serialize a validated charter dictionary to canonical YAML text.
+    """
+    return yaml.safe_dump(
+        charter,
+        sort_keys=False,
+        default_flow_style=False,
+    )
+
+
+def atomic_write_text(path: Path, text: str) -> None:
+    """
+    Atomically write text to disk.
+
+    The target file is either fully replaced or left untouched.
+    """
+    directory = path.parent
+
+    with tempfile.NamedTemporaryFile(
+        mode="w",
+        encoding="utf-8",
+        dir=directory,
+        delete=False,
+    ) as tmp:
+        tmp.write(text)
+        tmp_path = Path(tmp.name)
+
+    os.replace(tmp_path, path)
+
+
+# ---------------------------------------------------------------------
 # High-level pipeline
 # ---------------------------------------------------------------------
 
@@ -150,16 +191,6 @@ def distill_markdown_to_yaml(
 ) -> Dict[str, Any]:
     """
     Full distillation pipeline from Markdown text to validated charter dict.
-
-    Args:
-        markdown_text: Charter Markdown source.
-        schema: JSON Schema dictionary.
-
-    Returns:
-        Validated charter dictionary.
-
-    Raises:
-        ValueError, SchemaValidationError on failure.
     """
     blocks = extract_yaml_blocks(markdown_text)
     principles = parse_yaml_blocks(blocks)
@@ -174,13 +205,6 @@ def distill_file(
 ) -> Dict[str, Any]:
     """
     Distill a charter.md file into a validated charter dictionary.
-
-    Args:
-        md_path: Path to charter.md.
-        schema_path: Path to charter.schema.json.
-
-    Returns:
-        Validated charter dictionary.
     """
     markdown_text = md_path.read_text(encoding="utf-8")
     schema = json.loads(schema_path.read_text(encoding="utf-8"))
@@ -188,24 +212,61 @@ def distill_file(
 
 
 # ---------------------------------------------------------------------
+# Diff helpers
+# ---------------------------------------------------------------------
+
+def unified_diff(old: str, new: str, path: Path) -> str:
+    """
+    Produce a unified diff between two text blobs.
+    """
+    return "".join(
+        difflib.unified_diff(
+            old.splitlines(keepends=True),
+            new.splitlines(keepends=True),
+            fromfile=str(path),
+            tofile=f"{path} (distilled)",
+        )
+    )
+
+
+# ---------------------------------------------------------------------
 # CLI entry point
 # ---------------------------------------------------------------------
 
-def main() -> None:
-    """
-    CLI entry point: distill charter.md → charter.yml
-    """
+def main(argv: List[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(
+        description="Distill charter.md into charter.yml"
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Run distillation without writing output",
+    )
+    parser.add_argument(
+        "--show-diffs",
+        action="store_true",
+        help="Show diff between existing and distilled charter",
+    )
+
+    args = parser.parse_args(argv)
+
     charter = distill_file()
+    new_text = serialize_charter(charter)
 
-    with open(DEFAULT_CHARTER_YAML, "w", encoding="utf-8") as f:
-        yaml.safe_dump(
-            charter,
-            f,
-            sort_keys=False,
-            default_flow_style=False,
-        )
+    old_text = ""
+    if DEFAULT_CHARTER_YAML.exists():
+        old_text = DEFAULT_CHARTER_YAML.read_text(encoding="utf-8")
 
-    print(f"Wrote distilled charter to {DEFAULT_CHARTER_YAML}")
+    if args.show_diffs:
+        diff = unified_diff(old_text, new_text, DEFAULT_CHARTER_YAML)
+        if diff:
+            print(diff)
+        else:
+            print("No changes.")
+
+    if not args.dry_run:
+        atomic_write_text(DEFAULT_CHARTER_YAML, new_text)
+        print(f"Wrote distilled charter to {DEFAULT_CHARTER_YAML}")
 
 
 if __name__ == "__main__":

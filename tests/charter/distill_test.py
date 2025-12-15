@@ -141,6 +141,28 @@ class TestSchemaValidation(unittest.TestCase):
             )
 
 
+class TestSerialization(unittest.TestCase):
+
+    def test_serialize_charter_produces_yaml(self):
+        charter = distill.distill_markdown_to_yaml(
+            VALID_MARKDOWN,
+            minimal_schema(),
+        )
+        text = distill.serialize_charter(charter)
+        self.assertIn("principles", text)
+        self.assertIn("P0", text)
+
+
+class TestDiffHelpers(unittest.TestCase):
+
+    def test_unified_diff_detects_change(self):
+        old = "a: 1\n"
+        new = "a: 2\n"
+        diff = distill.unified_diff(old, new, Path("charter.yml"))
+        self.assertIn("-a: 1", diff)
+        self.assertIn("+a: 2", diff)
+
+
 class TestDistillFileIntegration(unittest.TestCase):
 
     def test_distill_file_round_trip(self):
@@ -163,6 +185,18 @@ class TestDistillFileIntegration(unittest.TestCase):
 
             self.assertEqual(len(charter["principles"]), 2)
             self.assertEqual(charter["principles"][0]["id"], "P0")
+
+
+class TestAtomicWrite(unittest.TestCase):
+
+    def test_atomic_write_text_writes_file(self):
+        with tempfile.TemporaryDirectory() as td:
+            td = Path(td)
+            target = td / "out.yml"
+
+            distill.atomic_write_text(target, "hello: world\n")
+            self.assertTrue(target.exists())
+            self.assertEqual(target.read_text(), "hello: world\n")
 
 
 if __name__ == "__main__":
