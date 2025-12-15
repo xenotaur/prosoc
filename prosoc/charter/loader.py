@@ -15,10 +15,9 @@ IMPORTANT:
 
 import json
 import pathlib
-from typing import Optional
 
 import yaml
-from jsonschema import validate as jsonschema_validate, ValidationError as SchemaValidationError
+from jsonschema import validate as jsonschema_validate
 
 from prosoc.charter import runtime
 

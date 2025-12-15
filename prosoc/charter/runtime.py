@@ -12,7 +12,6 @@ IMPORTANT:
 - These models exist for typing, ergonomics, and runtime convenience only.
 """
 
-import pathlib
 from typing import List, Optional
 
 import pydantic

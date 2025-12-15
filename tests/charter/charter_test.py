@@ -1,7 +1,6 @@
 import unittest
 from pathlib import Path
 
-from jsonschema import ValidationError as SchemaValidationError
 
 import prosoc
 from prosoc.charter import distill

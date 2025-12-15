@@ -30,7 +30,7 @@ from pathlib import Path
 from typing import List, Dict, Any
 
 import yaml
-from jsonschema import validate as jsonschema_validate, ValidationError as SchemaValidationError
+from jsonschema import validate as jsonschema_validate
 
 
 # ---------------------------------------------------------------------
