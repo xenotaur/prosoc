@@ -1,139 +1,139 @@
 principles:
-  - id: P0
-    name: Goal Achievement
-    description: >-
-      Robots must attempt to achieve their assigned navigation or task objectives,
-      balancing this with the social principles P1–P9.
-    severity: high
-    examples:
-      positive:
-        - "Robot efficiently reaches destination while yielding to a pedestrian."
-        - "Robot adjusts route slightly but still completes its delivery task."
-      negative:
-        - "Robot abandons delivery because it was unsure how to pass a person."
-        - "Robot refuses to move despite being asked to navigate a known path."
+- id: P0
+  name: Goal Achievement
+  severity: high
+  description: "Robots must attempt to achieve their assigned navigation or task objectives,\
+    \ balancing this with the social principles P1\u2013P9.\n"
+  examples:
+    positive:
+    - Robot efficiently reaches destination while yielding to a pedestrian.
+    - Robot adjusts route slightly but still completes its delivery task.
+    negative:
+    - Robot abandons delivery because it was unsure how to pass a person.
+    - Robot refuses to move despite being asked to navigate a known path.
+- id: P1
+  name: Safety
+  severity: critical
+  description: 'Robots must not cause harm to humans or damage environments. This
+    includes maintaining a safe distance unless explicitly invited to approach.
 
-  - id: P1
-    name: Safety
-    description: >-
-      Robots must not cause harm to humans or damage environments. This includes
-      maintaining a safe distance unless explicitly invited to approach.
-    severity: critical
-    examples:
-      positive:
-        - "Robot stops 1 meter away from a child playing in its path."
-        - "Robot navigates around a slippery floor to avoid damage."
-      negative:
-        - "Robot bumps into a human in a narrow hallway."
-        - "Robot knocks over a shelf while turning too quickly."
+    '
+  examples:
+    positive:
+    - Robot stops 1 meter away from a child playing in its path.
+    - Robot navigates around a slippery floor to avoid damage.
+    negative:
+    - Robot bumps into a human in a narrow hallway.
+    - Robot knocks over a shelf while turning too quickly.
+- id: P2
+  name: Comfort
+  severity: high
+  description: 'Robots must avoid causing stress, fear, or annoyance. This includes
+    refraining from sudden movements or uninvited approaches.
 
-  - id: P2
-    name: Comfort
-    description: >-
-      Robots must avoid causing stress, fear, or annoyance. This includes refraining
-      from sudden movements or uninvited approaches.
-    severity: high
-    examples:
-      positive:
-        - "Robot slows down and gives space when approaching from behind."
-        - "Robot announces its presence softly before entering a room."
-      negative:
-        - "Robot startles a person by approaching quickly from behind."
-        - "Robot hovers near someone for no reason, causing discomfort."
+    '
+  examples:
+    positive:
+    - Robot slows down and gives space when approaching from behind.
+    - Robot announces its presence softly before entering a room.
+    negative:
+    - Robot startles a person by approaching quickly from behind.
+    - Robot hovers near someone for no reason, causing discomfort.
+- id: P3
+  name: Legibility
+  severity: medium
+  description: 'Robots must act in ways that make their goals and intentions easy
+    to understand.
 
-  - id: P3
-    name: Legibility
-    description: >-
-      Robots must act in ways that make their goals and intentions easy to understand.
-    severity: medium
-    examples:
-      positive:
-        - "Robot signals its intended direction before turning."
-        - "Robot slows before making an unexpected stop."
-      negative:
-        - "Robot moves erratically, confusing bystanders."
-        - "Robot stops abruptly without signaling intent."
+    '
+  examples:
+    positive:
+    - Robot signals its intended direction before turning.
+    - Robot slows before making an unexpected stop.
+    negative:
+    - Robot moves erratically, confusing bystanders.
+    - Robot stops abruptly without signaling intent.
+- id: P4
+  name: Politeness
+  severity: medium
+  description: 'Robots must be respectful and considerate, offering help when asked
+    and avoiding dismissive or intrusive behaviors.
 
-  - id: P4
-    name: Politeness
-    description: >-
-      Robots must be respectful and considerate, offering help when asked
-      and avoiding dismissive or intrusive behaviors.
-    severity: medium
-    examples:
-      positive:
-        - "Robot pauses to let two people pass during their conversation."
-        - "Robot responds when asked for directions."
-      negative:
-        - "Robot interrupts a human speaking to another."
-        - "Robot ignores a direct request for assistance."
+    '
+  examples:
+    positive:
+    - Robot pauses to let two people pass during their conversation.
+    - Robot responds when asked for directions.
+    negative:
+    - Robot interrupts a human speaking to another.
+    - Robot ignores a direct request for assistance.
+- id: P5
+  name: Social Competency
+  severity: medium
+  description: 'Robots must follow social norms and avoid inappropriate behaviors
+    such as interrupting conversations or blocking passage.
 
-  - id: P5
-    name: Social Competency
-    description: >-
-      Robots must follow social norms and avoid inappropriate behaviors such
-      as interrupting conversations or blocking passage.
-    severity: medium
-    examples:
-      positive:
-        - "Robot waits at the side while people pass in a narrow hallway."
-        - "Robot follows the queue at a doorway."
-      negative:
-        - "Robot cuts in front of someone waiting."
-        - "Robot blocks a person trying to exit a room."
+    '
+  examples:
+    positive:
+    - Robot waits at the side while people pass in a narrow hallway.
+    - Robot follows the queue at a doorway.
+    negative:
+    - Robot cuts in front of someone waiting.
+    - Robot blocks a person trying to exit a room.
+- id: P6
+  name: Agent Understanding
+  severity: high
+  description: 'Robots must predict and accommodate the behaviors of other agents
+    (humans, robots, pets, etc.).
 
-  - id: P6
-    name: Agent Understanding
-    description: >-
-      Robots must predict and accommodate the behaviors of other agents
-      (humans, robots, pets, etc.).
-    severity: high
-    examples:
-      positive:
-        - "Robot slows down when it sees a person approaching quickly."
-        - "Robot yields to another robot moving through a tight space."
-      negative:
-        - "Robot tries to occupy the same space as a moving person."
-        - "Robot moves forward without accounting for a toddler's presence."
+    '
+  examples:
+    positive:
+    - Robot slows down when it sees a person approaching quickly.
+    - Robot yields to another robot moving through a tight space.
+    negative:
+    - Robot tries to occupy the same space as a moving person.
+    - Robot moves forward without accounting for a toddler's presence.
+- id: P7
+  name: Proactivity
+  severity: medium
+  description: 'Robots should anticipate potential issues and take initiative to avoid
+    or resolve them.
 
-  - id: P7
-    name: Proactivity
-    description: >-
-      Robots should anticipate potential issues and take initiative
-      to avoid or resolve them.
-    severity: medium
-    examples:
-      positive:
-        - "Robot re-routes before entering a known blocked corridor."
-        - "Robot offers help when it sees someone struggling with bags."
-      negative:
-        - "Robot waits passively in front of a blocked path."
-        - "Robot does nothing while someone struggles with a door."
+    '
+  examples:
+    positive:
+    - Robot re-routes before entering a known blocked corridor.
+    - Robot offers help when it sees someone struggling with bags.
+    negative:
+    - Robot waits passively in front of a blocked path.
+    - Robot does nothing while someone struggles with a door.
+- id: P8
+  name: Contextual Appropriateness
+  severity: medium
+  description: 'Robots must act in ways that are appropriate for the situation and
+    context they are in.
 
-  - id: P8
-    name: Contextual Appropriateness
-    description: >-
-      Robots must act in ways that are appropriate for the situation
-      and context they are in.
-    severity: medium
-    examples:
-      positive:
-        - "Robot lowers its volume in a quiet room."
-        - "Robot avoids rushing in a crowded hallway."
-      negative:
-        - "Robot zooms through a funeral procession."
-        - "Robot speaks loudly in a library."
+    '
+  examples:
+    positive:
+    - Robot lowers its volume in a quiet room.
+    - Robot avoids rushing in a crowded hallway.
+    negative:
+    - Robot zooms through a funeral procession.
+    - Robot speaks loudly in a library.
+- id: P9
+  name: Prosocial Behavior
+  severity: optional
+  description: 'Robots should act in ways that improve the experience or success of
+    other agents, even without being explicitly asked.
 
-  - id: P9
-    name: Prosocial Behavior
-    description: >-
-      Robots should act in ways that improve the experience or success
-      of other agents, even without being explicitly asked.
-    severity: optional
-    examples:
-      positive:
-        - "Robot holds open a door for another person."
-        - "Robot clears debris to make the path safer for others."
-      negative:
-        - "Robot could have warned about a hazard but didn't."
-        - "Robot leaves clutter behind that inconveniences others."
+    '
+  examples:
+    positive:
+    - Robot holds open a door for another person.
+    - Robot clears debris to make the path safer for others.
+    negative:
+    - Robot could have warned about a hazard but didn't.
+    - Robot leaves clutter behind that inconveniences others.
