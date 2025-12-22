@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Prosoc Social Navigation Scenario",
+  "type": "object",
+  "required": ["id", "name", "summary"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the scenario"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable scenario name"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Brief description of the scenario"
+    },
+
+    "context": {
+      "type": "object",
+      "description": "Environmental and social context",
+      "properties": {
+        "environment": {
+          "type": "object",
+          "properties": {
+            "type": { "type": "string" },
+            "setting": { "type": "string" },
+            "width": { "type": "string" }
+          },
+          "additionalProperties": true
+        },
+        "social_setting": {
+          "type": "object",
+          "properties": {
+            "formality": { "type": "string" },
+            "crowd_level": { "type": "string" }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "agents": {
+      "type": "object",
+      "description": "Agents participating in the scenario",
+      "properties": {
+        "robot": {
+          "type": "object",
+          "properties": {
+            "role": { "type": "string" },
+            "capabilities": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "additionalProperties": true
+        },
+        "humans": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "role": { "type": "string" },
+              "count": { "type": "integer", "minimum": 1 },
+              "attributes": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+
+    "initial_conditions": {
+      "type": "object",
+      "description": "Initial spatial or situational setup",
+      "additionalProperties": true
+    },
+
+    "expected_behaviors": {
+      "type": "object",
+      "description": "Normative expectations within this scenario",
+      "properties": {
+        "must": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "should": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "should_not": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "relevant_principles": {
+      "type": "array",
+      "description": "Charter principles implicated by this scenario",
+      "items": {
+        "type": "string",
+        "pattern": "^P[0-9]+$"
+      }
+    },
+
+    "evaluation_notes": {
+      "type": "string",
+      "description": "Guidance for evaluators interpreting behavior in this scenario"
+    }
+  },
+
+  "additionalProperties": false
+}
