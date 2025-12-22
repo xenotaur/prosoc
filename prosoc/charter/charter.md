@@ -64,6 +64,7 @@ While much work in social navigation focuses on avoiding harm or discomfort, a r
 
 P0 ensures that social behavior does not collapse into paralysis or over-cautiousness. A robot should not abandon a task simply because it encounters social complexity; instead, it should seek socially appropriate ways to proceed.
 
+
 ```yaml
 id: P0
 name: Goal Achievement
@@ -322,3 +323,90 @@ This charter is intended to be consumed by:
 
 The charter itself is **not modifiable by the robot**.
 
+
+## Definitions and Glossary
+
+This section defines key terms used throughout the Prosocial Navigation Charter. These definitions are intended to be **normative and disambiguating**, and should be used by implementers, evaluators, and researchers to ensure consistent interpretation of the charter.
+
+### Charter
+
+A **charter** is a formally specified set of principles that define acceptable and unacceptable behavior for a system. In this project, the charter serves as a *constitutional layer* that constrains and guides robot navigation behavior independently of any particular algorithm, planner, or learning method.
+
+### Constitutional Layer
+
+The **constitutional layer** refers to the role of the charter as a high-level normative constraint on system behavior. It is not an optimizer, planner, or controller, but a source of rules, principles, and evaluative criteria that other system components must respect. The constitutional layer is intended to be stable, inspectable, and auditable.
+
+### Principle
+
+A **principle** is a high-level normative rule that expresses an expectation about robot behavior. Principles are intentionally general and may require interpretation or trade-offs in concrete situations. Each principle is identified by an ID (e.g., P0–P9) and accompanied by explanations and examples.
+
+### Normative
+
+**Normative** statements describe how a system *ought* to behave, rather than how it currently behaves or how it is optimized. Normative content in this charter expresses values, expectations, and constraints, not predictions or empirical claims.
+
+### Normative Statement
+
+A **normative statement** is the concise, prescriptive formulation of a principle. It represents the authoritative rule associated with that principle and should be treated as the primary reference point for interpretation and enforcement.
+
+### Explanation
+
+An **explanation** elaborates the intent, scope, and motivation of a principle. Explanations provide interpretive guidance but do not override the normative statement. When ambiguities arise, explanations should be used to clarify intent rather than to weaken or negate the principle.
+
+### Example (Positive / Negative)
+
+An **example** is a concrete, illustrative scenario used to clarify how a principle applies in practice.
+
+* **Positive examples** illustrate behavior that is consistent with the principle.
+* **Negative examples** illustrate behavior that violates the principle.
+
+Examples are illustrative rather than exhaustive and should not be treated as the only valid or invalid behaviors.
+
+### Severity
+
+**Severity** is a qualitative indicator of the importance or priority of a principle relative to others. Higher-severity principles (e.g., safety) are expected to dominate lower-severity principles in cases of conflict. Severity does not eliminate the need for judgment but provides guidance for trade-offs.
+
+### Social Robot Navigation
+
+**Social robot navigation** refers to navigation behavior in environments shared with humans (and other agents) where social norms, expectations, and interactions are relevant. It extends beyond collision avoidance to include comfort, legibility, politeness, and context sensitivity.
+
+### Social
+
+In this document, **social** refers to behaviors that respect or respond to human norms, expectations, and interactions in shared spaces. Social behavior may be neutral (e.g., yielding) or cooperative, but does not necessarily require active assistance.
+
+### Prosocial
+
+**Prosocial** behavior goes beyond social compliance to include actions that actively improve the experience, safety, or success of others. Prosocial actions are typically discretionary rather than strictly required and may involve helping, accommodating, or cooperating with other agents.
+
+### Agent
+
+An **agent** is any entity in the environment that exhibits goal-directed or intentional behavior. This includes humans, robots, animals, and other autonomous systems. Treating others as agents implies predicting and accommodating their likely actions rather than modeling them as static obstacles.
+
+### Human-Readable
+
+**Human-readable** artifacts are designed to be easily read, understood, and reviewed by people. In this project, `charter.md` is the human-readable source of truth and is intended to support deliberation, review, and discussion.
+
+### Machine-Readable
+
+**Machine-readable** artifacts are structured representations intended for programmatic use. In this project, `charter.yml` is generated from the human-readable charter and is used by software components for validation, evaluation, or runtime reasoning.
+
+### Source of Truth
+
+A **source of truth** is the authoritative representation of information. For the Prosocial Navigation Charter, the human-authored Markdown document (`charter.md`) is the sole source of truth. All machine-readable representations are derived from it and must remain consistent.
+
+### Non-Modifiable (Generated Artifact)
+
+A **non-modifiable** artifact is a file that should not be edited directly by humans. Generated files such as `charter.yml` fall into this category and must be produced via the designated distillation tools to ensure consistency and traceability.
+
+### Implementation
+
+An **implementation** is any concrete navigation system, planner, controller, or learning-based approach that claims to adhere to or be evaluated against this charter. The charter does not prescribe how principles are implemented, only the standards against which behavior is judged.
+
+### Evaluation
+
+**Evaluation** refers to the process of assessing whether a system’s behavior complies with the principles in the charter. This may involve simulation, real-world trials, human judgment, automated checks, or a combination thereof.
+
+## References
+
+- Francis, A., et al. *Principles and Guidelines for Evaluating Social Robot Navigation Algorithms*. IEEE Transactions on Human-Machine Systems.
+- Dragan, A. D., Lee, K. C. T., & Srinivasa, S. S. (2013). Legibility and predictability of robot motion. *HRI*.
+- Hall, E. T. (1966). *The Hidden Dimension*. Doubleday.

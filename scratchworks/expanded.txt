@@ -1,0 +1,63 @@
+Expanded Explanations to Add (P0–P9)
+
+Below, each block is designed to be inserted under the existing Explanation (or as a new Expanded Explanation) section for each principle.
+
+P0 — Goal Achievement (Expanded Explanation)
+
+The P&G paper makes clear that social navigation is not a replacement for task-oriented navigation, but an extension of it. A robot that behaves politely yet fails to accomplish its task is not socially effective in practice. Humans routinely balance efficiency with courtesy, safety, and situational awareness when navigating shared spaces, and robots are expected to do the same.
+
+P0 establishes goal achievement as the teleological anchor of navigation behavior. Without a goal, social behavior loses meaning; without social constraints, goal pursuit becomes disruptive. This principle directly addresses failure modes observed in overly conservative systems, where robots freeze or abandon tasks when faced with social uncertainty—an issue noted in evaluations of real-world deployments discussed in the P&G paper.
+
+P1 — Safety (Expanded Explanation)
+
+Safety is treated in the P&G paper as a non-negotiable foundation of social navigation. A robot that causes harm violates not only social expectations but basic ethical norms, regardless of efficiency or intent. For this reason, P1 dominates all other principles.
+
+Importantly, the paper emphasizes that safety is not purely geometric. It includes respecting personal space, accounting for vulnerable populations, and anticipating indirect harm (e.g., forcing humans into evasive maneuvers). This broader framing aligns with work on proxemics (Hall, 1966) and socially-aware motion planning, which recognize that perceived safety is as important as physical safety.
+
+P2 — Comfort (Expanded Explanation)
+
+Beyond physical harm, the P&G paper highlights psychological comfort as a core dimension of navigation quality. Humans can experience stress, fear, or annoyance even when a robot’s actions are technically safe. Sudden accelerations, looming approaches, or unexplained proximity can all degrade the human experience.
+
+Studies cited in the P&G paper show that discomfort often arises from violations of expectation rather than from objective danger. As a result, comfort overlaps with—but is distinct from—safety and legibility. P2 encodes the expectation that robots minimize unnecessary cognitive and emotional load on nearby humans by adjusting speed, distance, and approach behavior appropriately.
+
+P3 — Legibility (Expanded Explanation)
+
+Legibility is a central concept in both the P&G paper and the broader literature on human–robot interaction (e.g., Dragan et al., 2013). A legible robot enables humans to predict its future actions, reducing uncertainty and enabling smooth coordination.
+
+Illegible behavior increases perceived risk and discomfort, even when no actual danger exists. The P&G paper emphasizes that legibility is especially important in dynamic environments, where humans must make rapid decisions. Legibility may be achieved through motion cues, signaling, or consistent behavioral patterns, and does not necessarily require explicit communication.
+
+P4 — Politeness (Expanded Explanation)
+
+Politeness captures adherence to social conventions that are not strictly required for safety or efficiency but are essential for social acceptance. The P&G paper frames politeness as particularly important in long-term interactions, where small discourtesies can accumulate into negative perceptions.
+
+Examples include yielding the right of way, not interrupting conversations, and responding appropriately when addressed. While politeness norms vary across cultures and contexts, the underlying expectation is that robots behave as considerate participants rather than purely utilitarian agents.
+
+P5 — Social Competency (Expanded Explanation)
+
+Social competency refers to a robot’s ability to navigate implicit social rules governing shared spaces, such as queuing, turn-taking, and appropriate spacing. The P&G paper distinguishes social competency from politeness by focusing on situational norms rather than courtesy.
+
+Failures of social competency are often cited by users as frustrating or confusing, even when they do not result in harm. Examples include blocking exits, cutting in line, or standing in socially inappropriate locations. P5 encodes the expectation that robots internalize and respect these norms as part of operating fluently in human environments.
+
+P6 — Agent Understanding (Expanded Explanation)
+
+The P&G paper emphasizes that effective social navigation requires modeling others as intentional agents, not static obstacles. Humans and other agents have goals, preferences, and patterns of behavior that must be anticipated.
+
+Agent understanding includes predicting likely trajectories, recognizing urgency or hesitation, and adapting behavior accordingly. This principle aligns with work on intention recognition and theory of mind in robotics. Violations of P6 often result in asymmetric interactions where humans are forced to constantly adjust around the robot, degrading the overall experience.
+
+P7 — Proactivity (Expanded Explanation)
+
+Proactivity extends beyond reactive collision avoidance. The P&G paper notes that socially adept robots anticipate potential conflicts and take initiative to prevent them, such as rerouting early or adjusting speed to avoid congestion.
+
+Proactivity is particularly important in crowded or dynamic environments, where purely reactive behavior can lead to deadlocks or inefficiencies. While proactivity must remain subordinate to safety and context, P7 encourages robots to behave as thoughtful participants rather than passive obstacles.
+
+P8 — Contextual Appropriateness (Expanded Explanation)
+
+Contextual appropriateness reflects the observation, emphasized in the P&G paper, that identical actions can be perceived very differently depending on context. Speed, proximity, and communication style that are acceptable in one setting may be inappropriate in another.
+
+Context includes physical environment, social setting, and cultural expectations. Failures of contextual appropriateness are often described by users as “tone-deaf,” even when other principles are satisfied. P8 encodes adaptability as a core social skill for robots operating in diverse human environments.
+
+P9 — Prosocial Behavior (Expanded Explanation)
+
+P9 extends the P&G framework by explicitly naming prosocial behavior as a first-class principle. While the P&G paper discusses cooperation and human-aware assistance, it does not formalize these behaviors as a distinct normative category.
+
+Prosocial behavior involves actively improving the experience or success of others, even when not required for task completion. Examples include holding doors, clearing paths, or sharing information about hazards. Marking P9 as optional acknowledges that such behaviors may depend on system capability and deployment context, while still recognizing their importance for truly human-centered robotics.
