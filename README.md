@@ -1,27 +1,27 @@
-# Prosoc: A Prosocial Robot Navigation Framework
+# `prosoc`: A Prosocial Robot Navigation Framework
 
-**Prosoc** is a research-oriented Python framework for developing, evaluating, and reasoning about **prosocial robot navigation** systems. It is designed to support *constitutional AI–style approaches* to robotics, where navigation behavior is guided by an explicit, inspectable **charter of principles** rather than opaque reward functions alone.
+**`prosoc`** is a research-oriented Python framework for developing, evaluating, and reasoning about **prosocial robot navigation** systems: robotic systems that take responsibility for improving the physical and social environments within which they operate, consistent with achieving their own goals. In particular, `prosoc` is designed to support experimentation with *constitutional AI–style approaches* to robotics, where navigation behavior is guided by an explicit, inspectable **charter of principles** rather than solely relying on opaque black box models or hard-to-reason about algorithms and reward functions.
 
-The project emphasizes:
+The `prosoc` project emphasizes and is developing tooling support for:
 
 * Human-readable, source-controlled norms
 * Machine-checkable policy artifacts
 * Reproducibility and auditability
 * Compatibility with learning-based and planning-based systems
 
-Prosoc is currently in **active research development** and should be considered *alpha software*.
+`prosoc` is currently in **active research development** and should be considered *pre-alpha software*.
 
 ---
 
 ## Motivation
 
-Autonomous robots increasingly operate in **human-centered environments**: homes, hospitals, workplaces, and public spaces. In these contexts, navigation is not merely about reaching a goal efficiently—it must also respect human safety, comfort, social norms, and ethical expectations.
+Autonomous robots increasingly operate in **human-centered environments**: homes, hospitals, workplaces, and public spaces. In these contexts, navigating humans do not merely care about reaching their goal efficiently, nor even simply respecting human safety, comfort, social norms, and ethical expectations; they actually do work to improve their navigation environments by providing signage, clearing obstructions, and providing directions to passersby. Robots operating in these environments should aspire to do the same.
 
-Traditional navigation systems typically encode these concerns indirectly, via cost functions or heuristics. Prosoc takes a different approach:
+Traditional navigation systems typically encode these concerns indirectly, via cost functions or heuristics, or by providing large numbers of rated examples to train learning systems. `prosoc` is designed to explore a different approach:
 
 > **Make the robot’s navigation principles explicit, inspectable, and enforceable.**
 
-Inspired by work on **prosocial robotics**, **social navigation**, and **constitutional AI**, Prosoc treats navigation norms as a first-class artifact: a *charter* that can be read by humans, validated by machines, and referenced by downstream decision-making systems.
+Inspired by work on **prosocial psychology**, **social navigation**, and **constitutional AI**, `prosoc` treats navigation norms as a first-class artifact: a *charter* that can be read by humans, validated by machines, and referenced by downstream decision-making systems. This charter is based on the Social Navigation Principles and Scenarios from the [Principles and Guidelines for Evaluating Social Robot Navigation Algorithms](https://dl.acm.org/doi/10.1145/3700599) paper.
 
 ---
 
