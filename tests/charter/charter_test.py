@@ -1,94 +1,96 @@
+# Guardrail tests for prosoc charter consistency
+
 import unittest
 from pathlib import Path
 
-
 import prosoc
-from prosoc.charter import distill
 from prosoc.charter import loader
+from prosoc.literate import compiler, utils
 
 
 class TestCharterFilesWellFormed(unittest.TestCase):
     """
-    Guardrail tests ensuring that the on-disk charter artifacts
-    (charter.md and charter.yml) are mutually consistent and well-formed.
+    Guardrail tests ensuring that:
+    - charter.md exists
+    - charter.yml exists
+    - charter.md distills exactly to charter.yml
 
-    These tests are intentionally *integration-level* and operate on the
-    repository's canonical files, not temporary fixtures.
-
-    If any of these tests fail, it usually means someone manually edited
-    charter.md or charter.yml without running scripts/distill.
+    These tests enforce the "single source of truth" invariant:
+    charter.md is authoritative, charter.yml must be its canonical derivative.
     """
 
     def setUp(self):
+        # Locate prosoc/charter directory via package import
         charter_dir = Path(prosoc.__file__).parent / "charter"
+
         self.charter_md = charter_dir / "charter.md"
         self.charter_yml = charter_dir / "charter.yml"
         self.schema_json = charter_dir / "schema.json"
 
-    # ------------------------------------------------------------------
-    # charter.md tests
-    # ------------------------------------------------------------------
-
     def test_charter_md_exists(self):
-        self.assertTrue(self.charter_md.exists(), "charter.md must exist")
-
-    def test_charter_md_distills_cleanly(self):
-        """
-        charter.md should be parseable, valid, and schema-compliant.
-        """
-        markdown_text = self.charter_md.read_text(encoding="utf-8")
-        schema = self.schema_json.read_text(encoding="utf-8")
-
-        charter = distill.distill_markdown_to_yaml(
-            markdown_text,
-            schema=distill.json.loads(schema),
+        self.assertTrue(
+            self.charter_md.exists(),
+            "charter.md must exist in prosoc/charter",
         )
-
-        self.assertIn("principles", charter)
-        self.assertGreater(len(charter["principles"]), 0)
-
-    # ------------------------------------------------------------------
-    # charter.yml tests
-    # ------------------------------------------------------------------
 
     def test_charter_yml_exists(self):
-        self.assertTrue(self.charter_yml.exists(), "charter.yml must exist")
-
-    def test_charter_yml_loads_via_loader(self):
-        """
-        charter.yml should load cleanly through the schema gate and runtime.
-        """
-        charter = loader.load_charter(
-            charter_path=self.charter_yml,
-            schema_path=self.schema_json,
+        self.assertTrue(
+            self.charter_yml.exists(),
+            "charter.yml must exist in prosoc/charter",
         )
-
-        self.assertGreater(len(charter.principles), 0)
-
-    # ------------------------------------------------------------------
-    # Consistency tests
-    # ------------------------------------------------------------------
 
     def test_charter_md_and_yml_are_consistent(self):
         """
-        Distilling charter.md should reproduce charter.yml exactly
-        (canonical YAML serialization).
+        Distilling charter.md should reproduce charter.yml exactly.
+        This fails if charter.md is edited without regenerating charter.yml.
         """
-        # Distill from Markdown
-        distilled = distill.distill_file(
+        compiled = compiler.compile_file(
             md_path=self.charter_md,
             schema_path=self.schema_json,
+            root_key="principles",
         )
-        distilled_text = distill.serialize_charter(distilled)
 
-        # Load existing charter.yml text
-        existing_text = self.charter_yml.read_text(encoding="utf-8")
+        compiled_yaml = utils.dump_yaml(compiled)
+        existing_yaml = self.charter_yml.read_text(encoding="utf-8")
+
+        compiled_yaml = utils.dump_yaml(compiled)
+        existing_yaml = self.charter_yml.read_text(encoding="utf-8")
 
         self.assertEqual(
-            distilled_text.strip(),
-            existing_text.strip(),
-            "charter.md and charter.yml are out of sync; run scripts/distill",
+            compiled_yaml,
+            existing_yaml,
+            "charter.yml is out of sync with charter.md; run scripts/distill",
         )
+
+
+class TestCharterRuntimeLoading(unittest.TestCase):
+    """
+    Sanity check that the generated charter.yml loads into runtime models.
+    """
+
+    def test_loader_can_load_charter(self):
+        charter = loader.load_charter()
+        principles = charter.principles
+
+
+        self.assertGreater(
+            len(principles),
+            0,
+            "Charter should contain at least one principle",
+        )
+
+        for principle in principles:
+            self.assertTrue(
+                principle.id.startswith("P"),
+                "Principle ID should start with 'P'",
+            )
+            self.assertIsInstance(principle.name, str)
+            self.assertIsInstance(principle.description, str)
+            self.assertTrue(
+                principle.examples.positive
+                or principle.examples.negative,
+                "Principle must have at least one example",
+            )
 
 
 if __name__ == "__main__":

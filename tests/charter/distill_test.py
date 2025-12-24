@@ -1,11 +1,12 @@
+# Unit tests for prosoc.charter.distill
+
 import json
-import unittest
 import tempfile
+import unittest
 from pathlib import Path
 
-from jsonschema import ValidationError as SchemaValidationError
-
-from prosoc.charter import distill
+from prosoc.literate import compiler
+from prosoc.literate import errors
 
 
 VALID_MARKDOWN = """
@@ -90,80 +91,37 @@ def minimal_schema():
     }
 
 
-class TestExtractYamlBlocks(unittest.TestCase):
+class TestDistillMarkdown(unittest.TestCase):
 
-    def test_extracts_multiple_blocks(self):
-        blocks = distill.extract_yaml_blocks(VALID_MARKDOWN)
-        self.assertEqual(len(blocks), 2)
+    def test_valid_markdown_distills(self):
+        charter = compiler.compile_markdown(
+            markdown_text=VALID_MARKDOWN,
+            schema=minimal_schema(),
+            root_key="principles",
+        )
 
-    def test_raises_if_no_blocks(self):
-        with self.assertRaises(ValueError):
-            distill.extract_yaml_blocks("No YAML here.")
-
-
-class TestParseYamlBlocks(unittest.TestCase):
-
-    def test_parses_valid_blocks(self):
-        blocks = distill.extract_yaml_blocks(VALID_MARKDOWN)
-        parsed = distill.parse_yaml_blocks(blocks)
-        self.assertEqual(len(parsed), 2)
-        self.assertEqual(parsed[0]["id"], "P0")
-
-    def test_invalid_yaml_raises(self):
-        blocks = distill.extract_yaml_blocks(INVALID_YAML_MARKDOWN)
-        with self.assertRaises(ValueError):
-            distill.parse_yaml_blocks(blocks)
-
-
-class TestAssembleCharter(unittest.TestCase):
-
-    def test_assemble_structure(self):
-        principles = [{"id": "P0"}, {"id": "P1"}]
-        charter = distill.assemble_charter(principles)
         self.assertIn("principles", charter)
         self.assertEqual(len(charter["principles"]), 2)
+        self.assertEqual(charter["principles"][0]["id"], "P0")
 
+    def test_invalid_yaml_raises_parse_error(self):
+        with self.assertRaises(errors.LiterateYamlError):
+            compiler.compile_markdown(
+                markdown_text=INVALID_YAML_MARKDOWN,
+                schema=minimal_schema(),
+                root_key="principles",
+            )
 
-class TestSchemaValidation(unittest.TestCase):
-
-    def test_valid_charter_passes_schema(self):
-        charter = distill.distill_markdown_to_yaml(
-            VALID_MARKDOWN,
-            minimal_schema(),
-        )
-        self.assertIn("principles", charter)
-
-    def test_invalid_charter_fails_schema(self):
-        with self.assertRaises(SchemaValidationError):
-            distill.distill_markdown_to_yaml(
-                INVALID_SCHEMA_MARKDOWN,
-                minimal_schema(),
+    def test_schema_violation_raises_schema_error(self):
+        with self.assertRaises(errors.LiterateSchemaError):
+            compiler.compile_markdown(
+                markdown_text=INVALID_SCHEMA_MARKDOWN,
+                schema=minimal_schema(),
+                root_key="principles",
             )
 
 
-class TestSerialization(unittest.TestCase):
-
-    def test_serialize_charter_produces_yaml(self):
-        charter = distill.distill_markdown_to_yaml(
-            VALID_MARKDOWN,
-            minimal_schema(),
-        )
-        text = distill.serialize_charter(charter)
-        self.assertIn("principles", text)
-        self.assertIn("P0", text)
-
-
-class TestDiffHelpers(unittest.TestCase):
-
-    def test_unified_diff_detects_change(self):
-        old = "a: 1\n"
-        new = "a: 2\n"
-        diff = distill.unified_diff(old, new, Path("charter.yml"))
-        self.assertIn("-a: 1", diff)
-        self.assertIn("+a: 2", diff)
-
-
-class TestDistillFileIntegration(unittest.TestCase):
+class TestDistillFile(unittest.TestCase):
 
     def test_distill_file_round_trip(self):
         with tempfile.TemporaryDirectory() as td:
@@ -178,25 +136,14 @@ class TestDistillFileIntegration(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            charter = distill.distill_file(
+            charter = compiler.compile_file(
                 md_path=md_path,
                 schema_path=schema_path,
+                root_key="principles",
             )
 
             self.assertEqual(len(charter["principles"]), 2)
-            self.assertEqual(charter["principles"][0]["id"], "P0")
-
-
-class TestAtomicWrite(unittest.TestCase):
-
-    def test_atomic_write_text_writes_file(self):
-        with tempfile.TemporaryDirectory() as td:
-            td = Path(td)
-            target = td / "out.yml"
-
-            distill.atomic_write_text(target, "hello: world\n")
-            self.assertTrue(target.exists())
-            self.assertEqual(target.read_text(), "hello: world\n")
+            self.assertEqual(charter["principles"][1]["id"], "P1")
 
 
 if __name__ == "__main__":
