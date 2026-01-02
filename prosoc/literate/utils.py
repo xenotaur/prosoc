@@ -36,6 +36,15 @@ def dump_yaml(data: Any) -> str:
 
     This function centralizes YAML formatting decisions so that
     diffs are stable and predictable.
+
+    Args:
+        data: Python data to serialize.
+
+    Returns:
+        A canonical YAML string.
+
+    Raises:
+        LiterateIOError: if serialization fails.
     """
     try:
         return yaml.safe_dump(
@@ -63,6 +72,15 @@ def unified_diff(
 ) -> str:
     """
     Produce a unified diff between two strings.
+
+    Args:
+        old_text: Original text.
+        new_text: New text.
+        fromfile: Name of the original file (default: "before").
+        tofile: Name of the new file (default: "after").
+
+    Returns:
+        A unified diff string.
     """
     diff = difflib.unified_diff(
         old_text.splitlines(keepends=True),
@@ -89,6 +107,11 @@ def atomic_write(
 
     The file is written to a temporary location and then
     replaced to avoid partial writes.
+
+    Args:
+        path: Path to the file to write.
+        content: Content to write to the file.
+        encoding: Encoding to use for writing the file (default: "utf-8").
 
     Raises:
         LiterateIOError on failure.

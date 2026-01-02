@@ -1,7 +1,4 @@
-"""
-compiler.py
-
-Generic compiler for literate Markdown artifacts.
+"""Generic compiler for literate Markdown artifacts.
 
 This module:
 - Extracts fenced YAML blocks from Markdown
@@ -44,6 +41,12 @@ def extract_yaml_blocks(markdown_text: str) -> List[str]:
     """
     Extract all fenced YAML blocks from a Markdown document.
 
+    Args:
+        markdown_text: Markdown source text.
+
+    Returns:
+        List of yaml blocks found in the markdown text.
+
     Raises:
         LiterateSourceError: if no YAML blocks are found.
     """
@@ -58,6 +61,12 @@ def extract_yaml_blocks(markdown_text: str) -> List[str]:
 def parse_yaml_blocks(blocks: List[str]) -> List[Dict[str, Any]]:
     """
     Parse raw YAML blocks into Python dictionaries.
+
+    Args:
+        blocks: List of raw YAML blocks.
+
+    Returns:
+        List of parsed YAML blocks.
 
     Raises:
         LiterateYamlError: if YAML parsing fails.
@@ -91,6 +100,13 @@ def assemble_document(
     """
     Assemble parsed YAML blocks into a top-level document.
 
+    Args:
+        items: List of parsed YAML blocks.
+        root_key: Key to use for the root of the document.
+
+    Returns:
+        A document dictionary with the root_key as the top-level key.
+
     Raises:
         LiterateStructureError: if root_key is invalid.
     """
@@ -108,6 +124,10 @@ def validate_document(
 ) -> None:
     """
     Validate a document against a JSON Schema.
+
+    Args:
+        document: Document to validate.
+        schema: JSON Schema to validate against.
 
     Raises:
         LiterateSchemaError: if validation fails.
@@ -134,7 +154,19 @@ def compile_markdown(
     """
     Compile Markdown source into a validated document dictionary.
 
-    This function is side-effect free and suitable for unit testing.
+    Args:
+        markdown_text: Markdown source text.
+        schema: JSON Schema to validate against.
+        root_key: Key to use for the root of the document.
+
+    Returns:
+        A validated document dictionary.
+
+    Raises:
+        LiterateSourceError: if no YAML blocks are found.
+        LiterateYamlError: if YAML parsing fails.
+        LiterateStructureError: if parsed YAML is not a mapping.
+        LiterateSchemaError: if document fails schema validation.
     """
     blocks = extract_yaml_blocks(markdown_text)
     items = parse_yaml_blocks(blocks)
@@ -151,6 +183,14 @@ def compile_file(
 ) -> Dict[str, Any]:
     """
     Compile a Markdown file into a validated document dictionary.
+
+    Args:
+        md_path: Path to the Markdown file.
+        schema_path: Path to the JSON Schema file.
+        root_key: Key to use for the root of the document.
+
+    Returns:
+        A validated document dictionary.
 
     Raises:
         LiterateIOError: if files cannot be read.
