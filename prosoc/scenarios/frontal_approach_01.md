@@ -1,16 +1,22 @@
-# Scenario: Passing a Human in a Narrow Hallway
+# Scenario: Frontal Approach
 
-This scenario describes a canonical **social navigation coordination problem** in which a robot and a human approach each other from opposite ends of a narrow hallway. The scenario tests **mutual coordination under ambiguity**, where neither agent has an explicit right-of-way and successful navigation depends on interpreting intent, resolving hesitation, and avoiding discomfort or deadlock.
+## STATUS: DRAFT 2026-01-02
+- SOURCE: Prompt to ChatGPT 5.2
+- DRAFTED: ChatGPT 5.2, 2026-01-02
+- EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-05
+
+## Overview
+
+This scenario describes a canonical social navigation conflict in which a robot and a human approach each other in opposite directions in a narrow hallway where neither agent has an explicit right-of-way. Successful navigation depends on sensing and agile navigation, and successful social navigation may require trajectory prediction, interpreting intent, resolving hesitation, and resolving conflicts. The scenario tests social navigation principles including safety, comfort, legibility, following social norms, and agent understanding.
 
 ---
 
 ```yaml
-id: hallway_passing_01
-name: Passing a Human in a Narrow Hallway
+id: frontal_approach_01
+name:  Frontal Approach
 
 summary: >
-  A robot and a human approach each other from opposite ends of a narrow hallway,
-  requiring mutual coordination to pass safely, comfortably, and without
+  A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without
   prolonged hesitation.
 
 context:
@@ -27,14 +33,14 @@ agents:
     role: navigating_agent
     capabilities:
       - forward_motion
+      - steering
       - stopping
-      - lateral_adjustment
   humans:
     - role: pedestrian
       count: 1
       attributes:
         mobility: typical
-        awareness: attentive
+        awareness: typical
 
 initial_conditions:
   robot_position: end_of_hallway
@@ -58,18 +64,18 @@ relevant_principles:
   - P1  # Safety
   - P2  # Comfort
   - P3  # Legibility
-  - P4  # Politeness
+  - P5  # Social Competency
+  - P6  # Agent Understanding
 
 
  evaluation_notes: >
-  This scenario evaluates how well the robot coordinates with a human under
-  mutual uncertainty. Brief hesitation may be acceptable if it increases
-  legibility or clarifies intent, but prolonged deadlock, abrupt reversals,
+  This scenario evaluates how well the robot navigates through shared space with a human in the conditions for a mild and typiocal conflict.
+  Changing direction, slowing down, braking or hesitation may be acceptable if they increase safety, comfort, or legibility, but  prolonged deadlock, abrupt reversals,
   or aggressive advancement are indicative of poor performance.
 
-  The scenario assumes an attentive human pedestrian. Different behaviors may
-  be appropriate if the human is distracted, impaired, or encumbered, which
-  are addressed in separate scenario variants.
+  The scenario assumes a pedestrian with a typical level of awareness,
+  neither oblivious to the presence of the robot nor overly attettentive too it.
+
 ```
 
 ---

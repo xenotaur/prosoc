@@ -39,6 +39,14 @@ The charter consists of **ten principles**, P0–P9:
 
 - **P0** establishes *goal achievement* as a first-class concern
 - **P1–P8** correspond to the principles defined in the P&G paper
+  - **P1** Safety 
+  - **P2** Comfort 
+  - **P3** Legibility 
+  - **P4** Politeness 
+  - **P5** Social Competency 
+  - **P6** Agent Understanding 
+  - **P7** Proactivity 
+  - **P8** Context 
 - **P9** introduces *Prosocial Behavior* as an explicit extension
 
 Each principle includes:
