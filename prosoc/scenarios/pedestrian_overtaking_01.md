@@ -1,4 +1,4 @@
-# Pedestrian Overtaking
+# Scenario:Pedestrian Overtaking
 
 ## STATUS: DRAFT 2026-01-02
 - SOURCE: Prompt to ChatGPT 5.2
@@ -6,8 +6,6 @@
 - EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-02
 
 ## Overview
-
-## Scenario Overview
 
 In this scenario, **a human pedestrian overtakes a slower-moving robot from behind** while both are traveling in the same direction along a shared pathway.
 

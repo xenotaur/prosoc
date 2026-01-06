@@ -1,14 +1,17 @@
-# Robot Overtaking
+# Scenario: Robot Overtaking
 
-## Scenario Overview
+## STATUS: DRAFT 2026-01-06
+- SOURCE: Prompt to ChatGPT 5.2
+- DRAFTED: ChatGPT 5.2, 2026-01-02
+- EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-06
+
+## Overview
 
 This scenario describes a **robot overtaking interaction**, in which a robot approaches a human from behind while both are traveling in the same direction along a shared pathway.
 
 Robot overtaking is a socially asymmetric interaction: the robot typically has greater situational awareness, higher mobility, and clearer intent, while the human may be unaware of the robot’s presence. As a result, the robot bears primary responsibility for managing safety, comfort, and legibility.
 
-The scenario evaluates whether the robot can balance **goal achievement** with **prosocial navigation norms**, including respecting personal space, avoiding startle responses, and communicating intent through motion.
-
----
+The scenario evaluates whether the robot can balance **goal achievement** with **social navigation norms**, including respecting personal space, avoiding startle responses, and communicating intent through motion.
 
 ## Social Navigation Context
 
@@ -23,8 +26,6 @@ Violations of these norms can cause discomfort, surprise, or perceived aggressio
 
 This scenario is inspired by pedestrian overtaking cases discussed in the *Principles and Guidelines for Social Robot Navigation* paper, where overtaking is treated as a core test of socially aware navigation behavior.
 
----
-
 ## Normative Expectations
 
 Acceptable robot behavior in this scenario may include:
@@ -34,8 +35,6 @@ Acceptable robot behavior in this scenario may include:
 - passing smoothly with adequate clearance and minimal speed differential.
 
 Unacceptable behavior includes tailgating, abrupt lateral motion, or accelerating aggressively to pass.
-
----
 
 ## Scenario Specification (Machine-Readable)
 
@@ -97,8 +96,7 @@ relevant_principles:
   - P2  # Comfort
   - P3  # Legibility
   - P4  # Politeness
-  - P9  # Prosocial Behavior
-
+  
 evaluation_notes: >
   This scenario evaluates how the robot handles an interaction in which it
   has greater situational control than the human. Acceptable behavior may
@@ -112,8 +110,6 @@ evaluation_notes: >
   Human awareness is assumed to be variable; overly assertive behavior is
   inappropriate even if the pedestrian appears unaware of the robot’s presence.
 ```
-
----
 
 ## Notes for Scenario Designers and Evaluators
 
