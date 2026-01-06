@@ -22,6 +22,16 @@
       "description": "Brief natural-language description of the scenario and its salient features."
     },
 
+    "scientific_purpose": {
+      "type": "string",
+      "description": "Scientific or evaluative purpose of the scenario (e.g., pedestrian interaction, legibility, safety)."
+    },
+
+    "geometric_layout": {
+      "type": "string",
+      "description": "Canonical geometric layout category (e.g., intersection, corridor, sidewalk)."
+    },
+
     "context": {
       "type": "object",
       "description": "Environmental, social, and situational context in which the scenario occurs.",
@@ -94,6 +104,16 @@
       "additionalProperties": true
     },
 
+    "intended_robot_task": {
+      "type": "string",
+      "description": "Assumed task or objective of the robot in this scenario (e.g., navigate from A to B)."
+    },
+
+    "intended_human_behavior": {
+      "type": "string",
+      "description": "Assumed behavior of the human(s) in the scenario (e.g., cross navigate, gesture wait)."
+    },
+
     "expected_behaviors": {
       "type": "object",
       "description": "Scenario-specific normative expectations describing appropriate and inappropriate robot behavior.",
@@ -124,6 +144,11 @@
         "type": "string",
         "pattern": "^P[0-9]+$"
       }
+    },
+
+    "ideal_outcome": {
+      "type": "string",
+      "description": "Concise description of the ideal outcome of the scenario."
     },
 
     "evaluation_notes": {
