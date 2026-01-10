@@ -1,16 +1,20 @@
-# Social Navigation Scenario Template
+# Scenario: Social Navigation Scenario Template
 
-This template defines the recommended structure for authoring **social navigation scenarios** in the Prosoc project.
+## STATUS: DRAFT 2026-01-06
+- SOURCE: Prompt to ChatGPT 5.2
+- DRAFTED: ChatGPT 5.2, 2026-01-02
+- EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-09
+
+This template defines the recommended structure for authoring **social navigation scenarios** in the Prosoc project. A social navigation scenario describes a situation in which a navigating robot operates in a shared human environment, and is designed to capture the context, agents, roles, tasks, evaluation criteria, and normative expectations relevant to evaluating robot navigation behavior in sufficient detail to recognize scenarios in data or to set up scenarios for evaluation.
 
 Scenarios authored using this template are intended to be:
-- human-readable and reviewable,
-- machine-readable via embedded YAML,
+- human-readable and reviewable as a coherent Markdown document,
+- machine-readable via embedded YAML within that document,
+- machine-validatable against the scenario JSON schema,
 - auditable against the Prosocial Navigation Charter,
 - and compatible with the scenario definitions in the *Principles and Guidelines for Social Robot Navigation* paper.
 
-Authors are encouraged to treat this template as a scaffold. Not all sections are required at early stages, but **AUDITED** scenarios should include all sections marked as such.
-
----
+Use this template as a starting point when authoring new scenario cards. Authors are encouraged to treat this template as a scaffold. Replace all placeholder text (`<...>`) with scenario-specific content, and remove sections that are not applicable. Avoid over-specifying details unless they are essential to the scenario’s intent. Not all sections are required at early stages, but **AUDITED** scenarios should include all sections marked as such.
 
 ## Status
 
@@ -23,28 +27,26 @@ Authors are encouraged to treat this template as a scaffold. Not all sections ar
 - **AUDITED:** <optional>  
 - **VALIDATED:** <optional>
 
-See `workflow.md` for definitions of lifecycle states.
-
----
+See [`workflow.md`](workflow.md) for definitions of lifecycle states.
 
 ## Scenario Card Summary
 
 > **Required for AUDITED scenarios**  
-> Mirrors Table 3 of the P&G paper.
+> Drawin from Tables 2 and 3 of the P&G paper.
 
 - **Scenario Name:** <concise, canonical name>
 - **Scenario Description:** <1–2 sentence physical description of the interaction>
+- **Scientific Purpose:** <e.g., pedestrian interaction, legibility, safety>
 - **Physical Environment:** <Indoor / Outdoor>
 - **Geometric Layout:** <Intersection / Corridor / Sidewalk / …>
-- **Scientific Purpose:** <e.g., pedestrian interaction, legibility, safety>
 - **Robot Role:** <Any / Leader / Follower / …>
 - **Robot Task:** <e.g., Navigate from A to B>
 - **Human Behavior:** <e.g., Cross navigate, gesture wait, gesture proceed>
+- **Success Metrics:** <list, if any>
+- **Quality Metrics:** <list, if any>
 - **Ideal Outcome:** <concise outcome statement>
 - **Related Scenarios:** <list, if any>
 - **Cited In:** <references, if applicable>
-
----
 
 ## Scenario Overview
 
@@ -56,8 +58,6 @@ Provide a clear, human-readable description of the scenario. This section should
 - and why coordination or social judgment is required.
 
 Avoid technical jargon where possible; this section should be understandable without the YAML specification.
-
----
 
 ## Social Navigation Context
 
@@ -76,8 +76,6 @@ Describe the broader social or behavioral context of the scenario, including:
 
 Describe acceptable and unacceptable robot behaviors in natural language. This section provides interpretive guidance beyond the formal specification.
 
----
-
 ## Scenario Specification (Machine-Readable)
 
 > **Required**
@@ -86,7 +84,7 @@ This section contains the machine-readable YAML specification for the scenario. 
 
 ```yaml
 id: <unique_scenario_id>
-name: <scenario_name>
+name: <Human-Readable Scenario Name>
 
 summary: >
   <Concise physical description of the interaction>
@@ -96,47 +94,50 @@ scientific_purpose: >
 
 context:
   environment:
-    type: <indoor|outdoor>
-    setting: <text description>
+    type: <Environment Type, e.g., indoor | outdoor | mixed | other>
+    setting: <Physical Layout, e.g., hallway, lobby, sidewalk, plaza>
+    width: <Qualitative Description, e.g., narrow, wide>
   social_setting:
-    formality: <informal|formal|mixed>
-    crowd_level: <low|medium|high>
+    formality: <Social Formality, e.g., informal | formal | mixed>
+    crowd_level: <Crowd Level, e.g., low | medium | high>
 
 agents:
   robot:
-    role: <navigating_agent|leader|follower|any>
+    role: <Robot Role, e.g., navigating_agent | leader | follower | any>
     capabilities:
-      - <capability>
+      - <Capability>
   humans:
-    - role: <pedestrian|group>
+    - role: <Human Role, e.g., pedestrian | group>
       count: <integer>
       attributes:
-        <key>: <value>
+        <Attribute>: <Value>
 
 initial_conditions:
-  <key>: <value>
+  <Key>: <Value>
 
-intended_robot_task: <e.g., navigate from A to B>
-intended_human_behavior: <e.g., cross navigate, gesture wait>
+intended_robot_task: <Robot Task, e.g., navigate from A to B>
+intended_human_behavior: <Human Behavior, e.g., cross navigate, gesture wait>
 
 expected_behaviors:
   must:
-    - <required behavior>
+    - <Behavior that is required for acceptable performance>
   should:
-    - <preferred behavior>
+    - <Behavior that is encouraged or preferred>
   should_not:
-    - <prohibited behavior>
+    - <Behavior that is discouraged or unacceptable>
 
 relevant_principles:
-  - P0
-  - P1
+  - <Principle>
 
 
 evaluation_notes: >
-  <High-level guidance for evaluators>
+  <Guidance for evaluators on how to interpret behavior in this scenario.
+  Note acceptable trade-offs, common failure modes, and assumptions
+  about human behavior or context. Optionally, describe why it is
+  socially or evaluatively interesting. Focus on the coordination
+  challenge rather than implementation details unless they are
+  relevant to the evaluation.>
 ```
-
----
 
 ## Scenario Usage Guide
 
@@ -161,8 +162,6 @@ Enumerate common or critical ways the scenario can fail.
 ### Labeling Criteria
 
 Provide guidance for annotators or evaluators on how to label outcomes.
-
----
 
 ## Notes for Scenario Designers and Evaluators
 
