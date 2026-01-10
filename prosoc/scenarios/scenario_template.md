@@ -32,7 +32,7 @@ See [`workflow.md`](workflow.md) for definitions of lifecycle states.
 ## Scenario Card Summary
 
 > **Required for AUDITED scenarios**  
-> Drawin from Tables 2 and 3 of the P&G paper.
+> Drawn from Tables 2 and 3 of the P&G paper.
 
 - **Scenario Name:** <concise, canonical name>
 - **Scenario Description:** <1–2 sentence physical description of the interaction>
@@ -129,6 +129,17 @@ expected_behaviors:
 relevant_principles:
   - <Principle>
 
+ideal_outcome: <concise outcome statement>
+
+scenario_usage_guide:
+  success_metrics:
+    - <metric-id>            # e.g., SR, NoCollisions
+  quality_metrics:
+    - <principle-id>         # e.g., P2, P3
+  failure_modes:
+    - <failure-description>  # e.g., collision with human
+  labeling_criteria:
+    - <criterion-description>
 
 evaluation_notes: >
   <Guidance for evaluators on how to interpret behavior in this scenario.

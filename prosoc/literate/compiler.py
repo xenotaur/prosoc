@@ -110,10 +110,15 @@ def assemble_document(
     Raises:
         LiterateStructureError: if root_key is invalid.
     """
+    if root_key is None:
+        if len(items) != 1:
+            raise errors.LiterateStructureError(
+                "Expected exactly one document when root_key is None"
+            )
+        return items[0]
+
     if not root_key or not isinstance(root_key, str):
-        raise errors.LiterateStructureError(
-            "root_key must be a non-empty string"
-        )
+        raise errors.LiterateStructureError("root_key must be non-empty string")
 
     return {root_key: items}
 

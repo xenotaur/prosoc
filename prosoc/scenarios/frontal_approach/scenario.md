@@ -13,7 +13,7 @@ This scenario describes a canonical social navigation conflict in which a robot 
 
 ```yaml
 id: frontal_approach_01
-name:  Frontal Approach
+name: Frontal Approach
 
 summary: >
   A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without
@@ -67,8 +67,23 @@ relevant_principles:
   - P5  # Social Competency
   - P6  # Agent Understanding
 
+scenario_usage_guide:
+  success_metrics:
+    - SR
+    - NoCollisions
+  quality_metrics:
+    - P2   # Comfort
+    - P3   # Legibility
+    - P5   # Social Competency
+  failure_modes:
+    - robot collides with human
+    - robot fails to pass within time limit
+  labeling_criteria:
+    - robot and human face each other at the start of the episode
+    - robot and human move toward each other
+    - sufficient clearance exists for passing
 
- evaluation_notes: >
+evaluation_notes: >
   This scenario evaluates how well the robot navigates through shared space with a human in the conditions for a mild and typiocal conflict.
   Changing direction, slowing down, braking or hesitation may be acceptable if they increase safety, comfort, or legibility, but  prolonged deadlock, abrupt reversals,
   or aggressive advancement are indicative of poor performance.

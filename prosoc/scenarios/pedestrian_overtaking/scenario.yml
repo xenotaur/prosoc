@@ -1,0 +1,57 @@
+id: pedestrian_overtaking_01
+name: Pedestrian Overtaking a Robot from Behind
+summary: 'A human pedestrian approaches and overtakes a slower-moving robot from behind
+  in a shared pathway. The robot must behave predictably and cooperatively, allowing
+  safe and comfortable passing without impeding the pedestrian.
+
+  '
+context:
+  environment:
+    type: indoor
+    setting: corridor or sidewalk-like passage
+    width: moderate
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - speed_adjustment
+    - lateral_adjustment
+    - stopping
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      awareness: attentive
+initial_conditions:
+  robot_position: ahead_of_pedestrian
+  relative_speed: pedestrian_faster
+  visibility: pedestrian_clear_view
+expected_behaviors:
+  must:
+  - "avoid impeding the pedestrian\u2019s overtaking maneuver"
+  - maintain a predictable trajectory during passing
+  should:
+  - yield lateral space when feasible
+  - avoid sudden speed or direction changes
+  - maintain steady motion to reduce uncertainty
+  should_not:
+  - accelerate to block overtaking
+  - drift unpredictably during passing
+  - force the pedestrian to slow or change path
+relevant_principles:
+- P0
+- P1
+- P2
+- P3
+- P4
+- P9
+evaluation_notes: "This scenario evaluates the robot\u2019s ability to act as a cooperative\
+  \ and predictable participant when being overtaken by a human. Successful behavior\
+  \ minimizes the cognitive and physical burden on the pedestrian and allows passing\
+  \ to occur smoothly.\nFailure modes include blocking behavior, sudden motion changes,\
+  \ or trajectories that require the pedestrian to hesitate or reroute."

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Distill social navigation scenarios from Markdown to YAML
+#
+# This script compiles all scenario.md files under prosoc/scenarios
+# into scenario.yml files using the literate compiler pipeline.
+#
+# Supported layouts:
+#   --layout directory   (default; one scenario per directory)
+#   --layout flat        (legacy; one scenario per .md file)
+#
+# Common flags:
+#   --dry-run     Do not write files; report what would change
+#   --show-diffs  Show diffs between existing and generated YAML
+#
+# Examples:
+#   scripts/distill_scenarios
+#   scripts/distill_scenarios --dry-run --show-diffs
+#   scripts/distill_scenarios --layout flat
+
+set -euo pipefail
+
+echo "Distilling Prosoc social navigation scenarios..."
+set -x
+
+python -m prosoc.scenarios.distill "$@"
+
+# Turn off tracing and print a blank line
+{ set +x; } 2>/dev/null
+echo
+

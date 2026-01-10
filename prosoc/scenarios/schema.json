@@ -3,35 +3,32 @@
   "title": "Prosoc Social Navigation Scenario",
   "description": "Schema for a human-authored social navigation scenario card, used to describe contextual situations in which robot navigation behavior is evaluated against the Prosocial Navigation Charter.",
   "type": "object",
-
-  "required": ["id", "name", "summary"],
-
+  "required": [
+    "id",
+    "name",
+    "summary"
+  ],
   "properties": {
     "id": {
       "type": "string",
       "description": "Unique identifier for the scenario. Intended to be stable and suitable for referencing across experiments, datasets, and evaluations."
     },
-
     "name": {
       "type": "string",
       "description": "Human-readable name for the scenario."
     },
-
     "summary": {
       "type": "string",
       "description": "Brief natural-language description of the scenario and its salient features."
     },
-
     "scientific_purpose": {
       "type": "string",
       "description": "Scientific or evaluative purpose of the scenario (e.g., pedestrian interaction, legibility, safety)."
     },
-
     "geometric_layout": {
       "type": "string",
       "description": "Canonical geometric layout category (e.g., intersection, corridor, sidewalk)."
     },
-
     "context": {
       "type": "object",
       "description": "Environmental, social, and situational context in which the scenario occurs.",
@@ -40,26 +37,34 @@
           "type": "object",
           "description": "Physical environment description (e.g., indoor/outdoor, hallway, plaza).",
           "properties": {
-            "type": { "type": "string" },
-            "setting": { "type": "string" },
-            "width": { "type": "string" }
+            "type": {
+              "type": "string"
+            },
+            "setting": {
+              "type": "string"
+            },
+            "width": {
+              "type": "string"
+            }
           },
           "additionalProperties": true
         },
-
         "social_setting": {
           "type": "object",
           "description": "Social context such as formality, norms, or crowd characteristics.",
           "properties": {
-            "formality": { "type": "string" },
-            "crowd_level": { "type": "string" }
+            "formality": {
+              "type": "string"
+            },
+            "crowd_level": {
+              "type": "string"
+            }
           },
           "additionalProperties": true
         }
       },
       "additionalProperties": true
     },
-
     "agents": {
       "type": "object",
       "description": "Agents participating in the scenario, including the robot and other entities.",
@@ -68,23 +73,31 @@
           "type": "object",
           "description": "Description of the robot agent and its assumed capabilities.",
           "properties": {
-            "role": { "type": "string" },
+            "role": {
+              "type": "string"
+            },
             "capabilities": {
               "type": "array",
-              "items": { "type": "string" }
+              "items": {
+                "type": "string"
+              }
             }
           },
           "additionalProperties": true
         },
-
         "humans": {
           "type": "array",
           "description": "Human agents present in the scenario.",
           "items": {
             "type": "object",
             "properties": {
-              "role": { "type": "string" },
-              "count": { "type": "integer", "minimum": 1 },
+              "role": {
+                "type": "string"
+              },
+              "count": {
+                "type": "integer",
+                "minimum": 1
+              },
               "attributes": {
                 "type": "object",
                 "description": "Optional human attributes relevant to the scenario (e.g., mobility, attentiveness).",
@@ -97,23 +110,19 @@
       },
       "additionalProperties": true
     },
-
     "initial_conditions": {
       "type": "object",
       "description": "Initial spatial, temporal, or situational conditions at the start of the scenario.",
       "additionalProperties": true
     },
-
     "intended_robot_task": {
       "type": "string",
       "description": "Assumed task or objective of the robot in this scenario (e.g., navigate from A to B)."
     },
-
     "intended_human_behavior": {
       "type": "string",
       "description": "Assumed behavior of the human(s) in the scenario (e.g., cross navigate, gesture wait)."
     },
-
     "expected_behaviors": {
       "type": "object",
       "description": "Scenario-specific normative expectations describing appropriate and inappropriate robot behavior.",
@@ -121,22 +130,27 @@
         "must": {
           "type": "array",
           "description": "Behaviors that are required for acceptable performance in this scenario.",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "should": {
           "type": "array",
           "description": "Behaviors that are preferred or encouraged but not strictly required.",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "should_not": {
           "type": "array",
           "description": "Behaviors that are discouraged or indicative of poor performance.",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": false
     },
-
     "relevant_principles": {
       "type": "array",
       "description": "Identifiers of charter principles (e.g., P1, P3) that are particularly relevant to this scenario.",
@@ -145,18 +159,50 @@
         "pattern": "^P[0-9]+$"
       }
     },
-
     "ideal_outcome": {
       "type": "string",
       "description": "Concise description of the ideal outcome of the scenario."
     },
-
     "evaluation_notes": {
       "type": "string",
       "description": "Additional guidance for evaluators interpreting behavior within this scenario."
+    },
+    "scenario_usage_guide": {
+      "type": "object",
+      "description": "Guidance for using this scenario in experiments, evaluation, and dataset labeling, following the Social Navigation Scenario Card structure in the P&G paper.",
+      "properties": {
+        "success_metrics": {
+          "type": "array",
+          "description": "Task-level success metrics used to evaluate whether the scenario was successfully completed (e.g., SR, collisions).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quality_metrics": {
+          "type": "array",
+          "description": "Charter principles used specifically as quality metrics for evaluating behavior in this scenario.",
+          "items": {
+            "type": "string",
+            "pattern": "^P[0-9]+$"
+          }
+        },
+        "failure_modes": {
+          "type": "array",
+          "description": "Outcome-level failure cases observed when the robot performs poorly in this scenario.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "labeling_criteria": {
+          "type": "array",
+          "description": "Criteria used to determine whether an observed episode or trace qualifies as an instance of this scenario, independent of behavior quality.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
     }
   },
-
   "additionalProperties": false
 }
-

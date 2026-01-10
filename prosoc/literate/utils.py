@@ -96,11 +96,14 @@ def unified_diff(
 # ---------------------------------------------------------------------
 
 
+
 def atomic_write(
     path: Path,
     content: str,
     *,
     encoding: str = "utf-8",
+    dry_run: bool = False,
+    show_diffs: bool = False,
 ) -> None:
     """
     Atomically write content to a file.
@@ -112,10 +115,25 @@ def atomic_write(
         path: Path to the file to write.
         content: Content to write to the file.
         encoding: Encoding to use for writing the file (default: "utf-8").
+        dry_run: If True, do not write to the file.
+        show_diffs: If True, show diffs between the old and new content.
 
     Raises:
         LiterateIOError on failure.
     """
+    if show_diffs:
+        old_text = path.read_text(encoding=encoding)
+        diff = unified_diff(
+            old_text=old_text,
+            new_text=content,
+            fromfile=str(path),
+            tofile=str(path),
+        )
+        print(diff)
+    
+    if dry_run:
+        return
+
     try:
         with tempfile.NamedTemporaryFile(
             mode="w",

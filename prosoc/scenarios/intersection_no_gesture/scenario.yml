@@ -1,0 +1,56 @@
+id: intersection_no_gesture_01
+name: "Intersection \u2013 No Gesture"
+summary: 'A robot and a human pedestrian approach and cross an indoor intersection
+  without any explicit gestural communication. The robot must coordinate passage safely
+  and legibly using motion cues and social norms alone.
+
+  '
+context:
+  environment:
+    type: indoor
+    setting: hallway intersection
+    width: moderate
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - speed_adjustment
+    - stopping
+    - path_commitment
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      gesturing: none
+initial_conditions:
+  approach_pattern: orthogonal
+  arrival_timing: near_simultaneous
+  visibility: mutual
+expected_behaviors:
+  must:
+  - avoid collision with the human at the intersection
+  - behave conservatively when right-of-way is ambiguous
+  should:
+  - slow slightly when approaching the intersection
+  - "yield if the human\u2019s intent appears dominant"
+  - commit clearly once a crossing decision is made
+  should_not:
+  - aggressively assert right-of-way
+  - oscillate indecisively at the intersection
+  - force the human to stop abruptly
+relevant_principles:
+- P0
+- P1
+- P2
+- P3
+- P4
+evaluation_notes: "This scenario evaluates the robot\u2019s ability to navigate an\
+  \ intersection using implicit coordination cues only. Successful behavior allows\
+  \ both agents to pass smoothly without collision or hesitation.\nCommon failure\
+  \ modes include overly aggressive entry, excessive hesitation, or late yielding\
+  \ that disrupts the human\u2019s motion."
