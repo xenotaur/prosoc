@@ -1,17 +1,13 @@
 """
-Scenario distillation tool.
+Context distillation tool.
 
-This module distills human-authored social navigation scenarios written in
-Markdown with fenced YAML blocks into machine-readable YAML files, validated
-against the scenario JSON schema.
+This module distills human-authored context cards written in
+Markdown with fenced YAML blocks into machine-readable YAML files,
+validated against the context JSON schema.
 
-It supports two layouts:
+Directory layout (default):
 
-1. Directory layout (default):
-   prosoc/scenarios/<scenario_id>/scenario.md -> scenario.yml
-
-2. Flat layout (legacy / optional):
-   prosoc/scenarios/<scenario_id>.md -> <scenario_id>.yml
+prosoc/contexts/<context_id>/context.md -> context.yml
 
 The core Markdown→YAML logic is delegated to prosoc.literate.compiler.
 """
@@ -31,15 +27,15 @@ from prosoc.literate import utils
 # -----------------------------------------------------------------------------
 
 SCHEMA_PATH = pathlib.Path(__file__).parent / "schema.json"
-DEFAULT_ROOT_KEY = None  # was "scenario"
+DEFAULT_ROOT_KEY = None  # keep consistent with scenarios
 
 
 # -----------------------------------------------------------------------------
-# Scenario source abstraction
+# Context source abstraction
 # -----------------------------------------------------------------------------
 
 
-class ScenarioSource(NamedTuple):
+class ContextSource(NamedTuple):
     md_path: pathlib.Path
     yml_path: pathlib.Path
 
@@ -49,39 +45,18 @@ class ScenarioSource(NamedTuple):
 # -----------------------------------------------------------------------------
 
 
-def discover_directory_layout(root: pathlib.Path) -> Iterable[ScenarioSource]:
-    """Discover scenarios using the directory-based layout."""
+def discover_contexts(root: pathlib.Path) -> Iterable[ContextSource]:
+    """Discover contexts using the directory-based layout."""
     for child in root.iterdir():
         if not child.is_dir():
             continue
-        md_path = child / "scenario.md"
+
+        md_path = child / "context.md"
         if md_path.exists():
-            yield ScenarioSource(
+            yield ContextSource(
                 md_path=md_path,
-                yml_path=child / "scenario.yml",
+                yml_path=child / "context.yml",
             )
-
-
-def discover_flat_layout(root: pathlib.Path) -> Iterable[ScenarioSource]:
-    """Discover scenarios using the flat-file layout."""
-    for md_path in root.glob("*.md"):
-        if md_path.name in {"README.md", "scenario_template.md"}:
-            continue
-        yield ScenarioSource(
-            md_path=md_path,
-            yml_path=md_path.with_suffix(".yml"),
-        )
-
-
-def discover_scenarios(
-    root: pathlib.Path,
-    layout: str,
-) -> list[ScenarioSource]:
-    if layout == "directory":
-        return list(discover_directory_layout(root))
-    if layout == "flat":
-        return list(discover_flat_layout(root))
-    raise ValueError(f"Unknown scenario layout: {layout}")
 
 
 # -----------------------------------------------------------------------------
@@ -89,14 +64,14 @@ def discover_scenarios(
 # -----------------------------------------------------------------------------
 
 
-def distill_scenario(
-    source: ScenarioSource,
+def distill_context(
+    source: ContextSource,
     *,
     schema_path: pathlib.Path,
     dry_run: bool,
     show_diffs: bool,
 ) -> None:
-    """Distill a single scenario."""
+    """Distill a single context card."""
 
     compiled = compiler.compile_file(
         md_path=source.md_path,
@@ -122,20 +97,19 @@ def distill_scenario(
 def distill_all(
     *,
     root: pathlib.Path,
-    layout: str = "directory",
     dry_run: bool = False,
     show_diffs: bool = False,
 ) -> None:
     schema_path = SCHEMA_PATH
 
-    sources = discover_scenarios(root, layout)
+    sources = list(discover_contexts(root))
     if not sources:
         from prosoc.literate.errors import LiterateDiscoveryError
 
-        raise LiterateDiscoveryError(f"No scenarios found under {root}")
+        raise LiterateDiscoveryError(f"No contexts found under {root}")
 
     for source in sources:
-        distill_scenario(
+        distill_context(
             source,
             schema_path=schema_path,
             dry_run=dry_run,
@@ -149,12 +123,8 @@ def distill_all(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Distill social navigation scenarios")
-    parser.add_argument(
-        "--layout",
-        choices=["directory", "flat"],
-        default="directory",
-        help="Scenario layout style",
+    parser = argparse.ArgumentParser(
+        description="Distill prosocial navigation context cards"
     )
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--show-diffs", action="store_true")
@@ -165,7 +135,6 @@ def main() -> None:
 
     distill_all(
         root=root,
-        layout=args.layout,
         dry_run=args.dry_run,
         show_diffs=args.show_diffs,
     )

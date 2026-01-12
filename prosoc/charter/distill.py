@@ -40,6 +40,7 @@ ROOT_KEY = "principles"
 # Distillation logic
 # ---------------------------------------------------------------------
 
+
 def distill_charter(
     *,
     md_path: Path = DEFAULT_CHARTER_MD,
@@ -62,10 +63,9 @@ def distill_charter(
 # CLI entry point
 # ---------------------------------------------------------------------
 
+
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Distill charter.md into charter.yml"
-    )
+    parser = argparse.ArgumentParser(description="Distill charter.md into charter.yml")
     parser.add_argument(
         "--dry-run",
         action="store_true",

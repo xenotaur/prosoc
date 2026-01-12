@@ -34,6 +34,7 @@ DEFAULT_ROOT_KEY = None  # tasks use a single top-level YAML object
 # Task source abstraction
 # -----------------------------------------------------------------------------
 
+
 class TaskSource(NamedTuple):
     md_path: pathlib.Path
     yml_path: pathlib.Path
@@ -42,6 +43,7 @@ class TaskSource(NamedTuple):
 # -----------------------------------------------------------------------------
 # Discovery
 # -----------------------------------------------------------------------------
+
 
 def discover_directory_layout(root: pathlib.Path) -> Iterable[TaskSource]:
     """Discover tasks using the directory-based layout."""
@@ -63,6 +65,7 @@ def discover_tasks(root: pathlib.Path) -> list[TaskSource]:
 # -----------------------------------------------------------------------------
 # Distillation
 # -----------------------------------------------------------------------------
+
 
 def distill_task(
     source: TaskSource,
@@ -93,6 +96,7 @@ def distill_task(
 # High-level entry point
 # -----------------------------------------------------------------------------
 
+
 def distill_all(
     *,
     root: pathlib.Path,
@@ -104,6 +108,7 @@ def distill_all(
     sources = discover_tasks(root)
     if not sources:
         from prosoc.literate.errors import LiterateDiscoveryError
+
         raise LiterateDiscoveryError(f"No tasks found under {root}")
 
     for source in sources:
@@ -118,6 +123,7 @@ def distill_all(
 # -----------------------------------------------------------------------------
 # CLI
 # -----------------------------------------------------------------------------
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Distill robot navigation tasks")

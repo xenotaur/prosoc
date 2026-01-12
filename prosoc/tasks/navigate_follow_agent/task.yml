@@ -1,0 +1,34 @@
+id: navigate.follow_agent
+name: Follow an Agent
+summary: 'The robot navigates by following a human or other agent, maintaining an
+  appropriate relative position as the agent moves through the environment.
+
+  '
+task_type: navigation
+primary_intent: 'Maintain motion that follows a target agent while preserving an appropriate
+  following relationship.
+
+  '
+scope:
+  includes:
+  - following a moving agent as a dynamic navigation reference
+  - adapting speed to remain with the agent
+  - pausing or slowing to preserve the following relationship
+  - resuming following after brief interruption
+  excludes:
+  - leading or guiding the agent
+  - explicit social signaling or communication
+  - defining socially appropriate distance or side preference
+  - negotiating passage, overtaking, or yielding as primary objectives
+related_principles:
+- P0
+- P2
+- P3
+- P6
+common_failure_modes:
+- loss of followed agent
+- excessive lag or crowding
+- unstable oscillatory following behavior
+example_scenarios:
+- human_following_corridor
+- group_following_open_space

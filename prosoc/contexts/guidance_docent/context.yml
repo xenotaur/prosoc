@@ -1,0 +1,53 @@
+id: guidance.docent
+name: Guidance and Docent Operation
+context_class: core
+primary_robot_role: guide
+applies_to_tasks:
+- navigate.lead_agent
+axes:
+  cultural: 'Cultural norms shape expectations for pacing, interpersonal distance,
+    and formality during guided movement.
+
+    '
+  diversity: 'Followers may have varied abilities or needs; accommodation and adaptability
+    are often expected by default.
+
+    '
+  environmental:
+    geometric: 'Semi-structured spaces with landmarks, intersections, and variable
+      visibility.
+
+      '
+    operational: 'Environment supports stopping, slowing, and rerouting to maintain
+      group cohesion and understanding.
+
+      '
+  task: 'Guidance tasks prioritize clarity, cohesion, and successful escort over shortest-path
+    efficiency.
+
+    '
+  interpersonal: 'Humans are treated as guided participants requiring sustained attention
+    and responsiveness.
+
+    '
+principle_emphasis:
+  emphasized:
+  - P2
+  - P3
+  - P9
+  deprioritized:
+  - P0
+  common_tensions:
+  - pace versus group cohesion
+  - efficiency versus clarity
+  - autonomy versus responsiveness
+limits:
+  includes:
+  - sustained guidance or escort roles
+  - navigation where motion is communicative
+  excludes:
+  - navigation without followers
+  - emergency or delivery-focused contexts
+related_contexts:
+- baseline.public_navigation
+- service.routine_delivery

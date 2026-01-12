@@ -53,9 +53,7 @@ def dump_yaml(data: Any) -> str:
             default_flow_style=False,
         )
     except yaml.YAMLError as e:
-        raise errors.LiterateIOError(
-            "Failed to serialize data to YAML"
-        ) from e
+        raise errors.LiterateIOError("Failed to serialize data to YAML") from e
 
 
 # ---------------------------------------------------------------------
@@ -96,7 +94,6 @@ def unified_diff(
 # ---------------------------------------------------------------------
 
 
-
 def atomic_write(
     path: Path,
     content: str,
@@ -130,7 +127,7 @@ def atomic_write(
             tofile=str(path),
         )
         print(diff)
-    
+
     if dry_run:
         return
 
@@ -147,6 +144,4 @@ def atomic_write(
         temp_path.replace(path)
 
     except OSError as e:
-        raise errors.LiterateIOError(
-            f"Failed to atomically write file: {path}"
-        ) from e
+        raise errors.LiterateIOError(f"Failed to atomically write file: {path}") from e

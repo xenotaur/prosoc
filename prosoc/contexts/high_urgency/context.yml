@@ -1,0 +1,54 @@
+id: emergency.high_urgency
+name: Emergency High-Urgency Operation
+context_class: core
+primary_robot_role: emergency responder
+applies_to_tasks:
+- '*'
+axes:
+  cultural: 'Broad cultural recognition that emergency situations justify exceptional
+    navigation behavior, with some regional variation.
+
+    '
+  diversity: 'Humans may be stressed, impaired, or unpredictable; cooperation cannot
+    be assumed.
+
+    '
+  environmental:
+    geometric: 'Crowded, constrained, or dynamically changing spaces with limited
+      predictability.
+
+      '
+    operational: 'Environment is temporarily repurposed for emergency response, implicitly
+      granting priority without guaranteed formal right-of-way.
+
+      '
+  task: 'Task goals are time-critical and justify assertive navigation when safety
+    constraints are respected.
+
+    '
+  interpersonal: 'Humans are treated as collaborators in a shared emergency rather
+    than neutral bystanders.
+
+    '
+principle_emphasis:
+  emphasized:
+  - P0
+  - P1
+  - P9
+  deprioritized:
+  - P2
+  - P3
+  common_tensions:
+  - speed versus safety
+  - assertiveness versus predictability
+  - urgency versus politeness
+limits:
+  includes:
+  - time-critical emergency operations
+  - navigation where delay increases harm
+  excludes:
+  - routine, non-urgent service tasks
+  - contexts lacking recognized urgency
+related_contexts:
+- service.routine_delivery
+- baseline.public_navigation

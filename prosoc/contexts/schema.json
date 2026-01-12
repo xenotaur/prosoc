@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Prosocial Robot Navigation Context Card",
+  "description": "Schema for Core and Derived Context Cards specifying normative context for social robot navigation.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "context_class",
+    "primary_robot_role",
+    "applies_to_tasks",
+    "axes",
+    "principle_emphasis",
+    "limits"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Canonical identifier for the context.",
+      "pattern": "^[a-z]+(\\.[a-z0-9_]+)+$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable context name."
+    },
+    "context_class": {
+      "type": "string",
+      "enum": [
+        "core",
+        "derived"
+      ],
+      "description": "Whether this context is a core context or a derived/parameterized context."
+    },
+    "primary_robot_role": {
+      "type": "string",
+      "description": "Primary social role the robot occupies in this context."
+    },
+    "applies_to_tasks": {
+      "type": "array",
+      "description": "Task IDs this context commonly applies to, or '*' for general applicability.",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "axes": {
+      "type": "object",
+      "required": [
+        "cultural",
+        "diversity",
+        "environmental",
+        "task",
+        "interpersonal"
+      ],
+      "properties": {
+        "cultural": {
+          "type": "string",
+          "description": "Cultural norms or variability relevant to this context."
+        },
+        "diversity": {
+          "type": "string",
+          "description": "Assumptions about human diversity, abilities, or vulnerabilities."
+        },
+        "environmental": {
+          "type": "object",
+          "required": [
+            "geometric",
+            "operational"
+          ],
+          "properties": {
+            "geometric": {
+              "type": "string",
+              "description": "Geometric characteristics of the environment."
+            },
+            "operational": {
+              "type": "string",
+              "description": "Operational use and expectations of the environment."
+            }
+          },
+          "additionalProperties": false
+        },
+        "task": {
+          "type": "string",
+          "description": "How task type influences appropriate behavior in this context."
+        },
+        "interpersonal": {
+          "type": "string",
+          "description": "How humans are typically regarded in this context."
+        }
+      },
+      "additionalProperties": false
+    },
+    "principle_emphasis": {
+      "type": "object",
+      "required": [
+        "emphasized",
+        "deprioritized",
+        "common_tensions"
+      ],
+      "properties": {
+        "emphasized": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^P[0-9]+$"
+          }
+        },
+        "deprioritized": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^P[0-9]+$"
+          }
+        },
+        "common_tensions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "limits": {
+      "type": "object",
+      "required": [
+        "includes",
+        "excludes"
+      ],
+      "properties": {
+        "includes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "related_contexts": {
+      "type": "array",
+      "description": "Other contexts related to or derived from this one.",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

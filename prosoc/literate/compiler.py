@@ -140,9 +140,7 @@ def validate_document(
     try:
         jsonschema.validate(instance=document, schema=schema)
     except jsonschema.exceptions.ValidationError as e:
-        raise errors.LiterateSchemaError(
-            "Document failed schema validation"
-        ) from e
+        raise errors.LiterateSchemaError("Document failed schema validation") from e
 
 
 # ---------------------------------------------------------------------
@@ -203,9 +201,7 @@ def compile_file(
     try:
         markdown_text = md_path.read_text(encoding="utf-8")
     except OSError as e:
-        raise errors.LiterateIOError(
-            f"Failed to read Markdown file: {md_path}"
-        ) from e
+        raise errors.LiterateIOError(f"Failed to read Markdown file: {md_path}") from e
 
     try:
         schema_text = schema_path.read_text(encoding="utf-8")

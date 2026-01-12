@@ -72,7 +72,6 @@ class TestCharterRuntimeLoading(unittest.TestCase):
         charter = loader.load_charter()
         principles = charter.principles
 
-
         self.assertGreater(
             len(principles),
             0,
@@ -87,8 +86,7 @@ class TestCharterRuntimeLoading(unittest.TestCase):
             self.assertIsInstance(principle.name, str)
             self.assertIsInstance(principle.description, str)
             self.assertTrue(
-                principle.examples.positive
-                or principle.examples.negative,
+                principle.examples.positive or principle.examples.negative,
                 "Principle must have at least one example",
             )
 
