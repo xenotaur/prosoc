@@ -1,0 +1,53 @@
+id: baseline.public_navigation
+name: Baseline Public Navigation
+context_class: core
+primary_robot_role: neutral navigator
+applies_to_tasks:
+- '*'
+axes:
+  cultural: 'Local cultural norms for shared public space, including personal space,
+    yielding behavior, and passing conventions.
+
+    '
+  diversity: 'Heterogeneous population with varying mobility, attention, and familiarity
+    with robots; conservative assumptions apply.
+
+    '
+  environmental:
+    geometric: 'Variable-width public spaces with mixed static and dynamic obstacles
+      and fluctuating crowd density.
+
+      '
+    operational: 'General public use with no specialized operational priority or assigned
+      right-of-way.
+
+      '
+  task: 'Task goals do not justify assertive or disruptive navigation behavior.
+
+    '
+  interpersonal: 'Humans are treated as independent pedestrians with minimal expected
+    engagement.
+
+    '
+principle_emphasis:
+  emphasized:
+  - P1
+  - P2
+  - P3
+  deprioritized:
+  - P0
+  common_tensions:
+  - efficiency versus comfort
+  - direct paths versus legibility
+  - goal completion versus yielding
+limits:
+  includes:
+  - general public navigation without specialized role
+  - shared spaces with mixed pedestrian traffic
+  excludes:
+  - emergency response contexts
+  - service delivery or guidance roles
+related_contexts:
+- service.routine_delivery
+- environment.child_centric
+- environment.dense_crowd

@@ -1,0 +1,55 @@
+id: service.routine_delivery
+name: Routine Service Delivery
+context_class: core
+primary_robot_role: service provider
+applies_to_tasks:
+- deliver.object
+axes:
+  cultural: 'Cultural expectations shape tolerance for service robots occupying shared
+    space and prioritizing task completion.
+
+    '
+  diversity: 'Mixed population with varying expectations and abilities; accommodation
+    may be expected but does not eliminate delivery obligations.
+
+    '
+  environmental:
+    geometric: 'Constrained indoor spaces such as corridors, offices, and storage
+      areas with moderate pedestrian density.
+
+      '
+    operational: 'Environment supports routine service activities without granting
+      formal priority or exclusive access.
+
+      '
+  task: 'The delivery task justifies purposeful motion and limited assertiveness but
+    does not override everyday social norms.
+
+    '
+  interpersonal: 'Humans are primarily bystanders or recipients of service, with brief
+    and transactional interactions.
+
+    '
+principle_emphasis:
+  emphasized:
+  - P0
+  - P1
+  - P2
+  - P3
+  - P9
+  deprioritized: []
+  common_tensions:
+  - efficiency versus politeness
+  - delivery speed versus human comfort
+  - task completion versus yielding
+limits:
+  includes:
+  - routine, non-urgent delivery services
+  - shared environments supporting service robots
+  excludes:
+  - emergency or time-critical delivery
+  - roles involving guidance or authority
+related_contexts:
+- baseline.public_navigation
+- emergency.high_urgency
+- workplace.formalized_service
