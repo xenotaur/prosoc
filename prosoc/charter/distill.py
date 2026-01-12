@@ -83,7 +83,7 @@ def main() -> None:
         charter = distill_charter()
     except errors.LiterateError as e:
         print(f"ERROR: {e}")
-        raise SystemExit(1)
+        raise SystemExit(1) from e
 
     new_yaml = utils.dump_yaml(charter)
 
@@ -113,7 +113,7 @@ def main() -> None:
             utils.atomic_write(DEFAULT_CHARTER_YML, new_yaml)
         except errors.LiterateIOError as e:
             print(f"ERROR: {e}")
-            raise SystemExit(1)
+            raise SystemExit(1) from e
 
         print(f"Wrote distilled charter to {DEFAULT_CHARTER_YML}")
     else:
