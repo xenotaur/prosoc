@@ -1,0 +1,90 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Prosoc Robot Navigation Task Card",
+    "description": "Schema for a human-authored robot navigation task card. Task cards specify abstract robot intents that are composed with scenarios, contexts, and charter principles during evaluation.",
+    "type": "object",
+    "required": [
+        "id",
+        "name",
+        "summary",
+        "task_type",
+        "primary_intent",
+        "scope"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Canonical, stable identifier for the task. Intended to be referenced by scenarios and evaluators.",
+            "pattern": "^[a-z]+(\\.[a-z0-9_]+)+$"
+        },
+        "name": {
+            "type": "string",
+            "description": "Human-readable name for the task."
+        },
+        "summary": {
+            "type": "string",
+            "description": "Brief abstract description of the task's intent, suitable for display or indexing."
+        },
+        "task_type": {
+            "type": "string",
+            "description": "High-level category of task intent.",
+            "enum": [
+                "navigation",
+                "interaction",
+                "coordination"
+            ]
+        },
+        "primary_intent": {
+            "type": "string",
+            "description": "Concise statement of what the robot is trying to accomplish when executing this task."
+        },
+        "scope": {
+            "type": "object",
+            "description": "Explicit definition of what this task includes and excludes.",
+            "required": [
+                "includes",
+                "excludes"
+            ],
+            "properties": {
+                "includes": {
+                    "type": "array",
+                    "description": "Behaviors or goals that are considered part of this task.",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "excludes": {
+                    "type": "array",
+                    "description": "Behaviors, goals, or considerations that are explicitly not part of this task.",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "related_principles": {
+            "type": "array",
+            "description": "Identifiers of Prosocial Navigation Charter principles typically implicated by this task.",
+            "items": {
+                "type": "string",
+                "pattern": "^P[0-9]+$"
+            }
+        },
+        "common_failure_modes": {
+            "type": "array",
+            "description": "Task-level failure modes that indicate poor execution independent of social context.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "example_scenarios": {
+            "type": "array",
+            "description": "Scenario identifiers that commonly involve this task. Provided for traceability and discoverability.",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "additionalProperties": false
+}

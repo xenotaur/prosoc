@@ -1,0 +1,33 @@
+id: navigate.point_to_point
+name: Navigate from Start to Goal
+summary: 'The robot attempts to move from an initial location to a specified destination,
+  serving as the baseline navigation intent underlying most social navigation scenarios.
+
+  '
+task_type: navigation
+primary_intent: 'Reach a designated goal location from a starting position.
+
+  '
+scope:
+  includes:
+  - progressing toward a destination
+  - pausing or stopping temporarily while pursuing the goal
+  - resuming motion toward the goal after interruption
+  excludes:
+  - explicit interaction with specific agents
+  - yielding or asserting right-of-way as a primary objective
+  - interpretation of social signals or gestures
+  - optimization for social comfort or legibility beyond goal completion
+related_principles:
+- P0
+- P1
+- P2
+- P3
+common_failure_modes:
+- failure to reach destination
+- excessive delay without justification
+- abandonment of navigation goal
+example_scenarios:
+- frontal_approach_01
+- intersection_no_gesture
+- pedestrian_overtaking

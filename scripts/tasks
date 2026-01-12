@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Distill social navigation tasks from Markdown to YAML
+#
+# This script compiles all task.md files under prosoc/tasks
+# into task.yml files using the literate compiler pipeline.
+#
+# Supported layouts:
+#   --layout directory   (default; one task per directory)
+#   --layout flat        (legacy; one task per .md file)
+#
+# Common flags:
+#   --dry-run     Do not write files; report what would change
+#   --show-diffs  Show diffs between existing and generated YAML
+#
+# Examples:
+#   scripts/tasks
+#   scripts/tasks --dry-run --show-diffs
+#   scripts/tasks --layout flat
+
+set -euo pipefail
+
+echo "Distilling Prosoc social navigation tasks..."
+set -x
+
+python -m prosoc.tasks.distill "$@"
+
+# Turn off tracing and print a blank line
+{ set +x; } 2>/dev/null
+echo
+
