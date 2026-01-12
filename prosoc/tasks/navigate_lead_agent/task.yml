@@ -1,0 +1,35 @@
+id: navigate.lead_agent
+name: Lead an Agent
+summary: 'The robot navigates ahead of a human or other agent, providing a moving
+  reference that the agent is expected to follow toward a destination.
+
+  '
+task_type: navigation
+primary_intent: 'Guide a target agent by moving ahead and establishing a trajectory
+  to be followed.
+
+  '
+scope:
+  includes:
+  - leading a target agent as a navigation reference
+  - selecting paths that can be reasonably followed
+  - adapting speed to maintain a leading relationship
+  - pausing or slowing to preserve guidance coherence
+  - resuming leading after brief interruption
+  excludes:
+  - explicit verbal or gestural communication
+  - confirming whether the agent is following
+  - social signaling beyond motion itself
+  - yielding, overtaking, or negotiating passage as primary objectives
+related_principles:
+- P0
+- P2
+- P3
+- P6
+common_failure_modes:
+- excessive speed preventing following
+- unclear or erratic leading motion
+- selection of unsafe or impractical paths
+example_scenarios:
+- guided_navigation_corridor
+- escort_to_destination

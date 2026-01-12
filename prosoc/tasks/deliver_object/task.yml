@@ -1,0 +1,35 @@
+id: deliver.object
+name: Deliver an Object
+summary: 'The robot transfers a specified object from a source to a destination, navigating
+  in service of successful delivery rather than independent travel.
+
+  '
+task_type: navigation
+primary_intent: 'Transport an object from its source to an intended destination.
+
+  '
+scope:
+  includes:
+  - navigating while carrying or transporting an object
+  - pausing or rerouting to preserve delivery success
+  - coordinating navigation across delivery phases
+  excludes:
+  - object manipulation mechanics
+  - social authorization or consent for delivery
+  - urgency, politeness, or priority judgments
+  - detailed hand-off negotiation beyond co-location
+related_principles:
+- P0
+- P1
+- P2
+- P3
+- P9
+common_failure_modes:
+- failure to deliver object
+- delivery to incorrect destination
+- abandonment of delivery task
+- excessive delay rendering delivery ineffective
+example_scenarios:
+- package_delivery_office
+- handoff_to_human_corridor
+- pickup_and_deliver_shelf_to_desk
