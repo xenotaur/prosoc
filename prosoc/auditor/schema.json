@@ -1,0 +1,253 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://xenotaur.github.io/prosoc/schemas/audit_report.schema.json",
+    "title": "Prosoc Normative Card Audit Report",
+    "description": "Structured audit report evaluating consistency between a Normative Card's Markdown description, extracted YAML, and optional reference documents (e.g., P&G paper).",
+    "type": "object",
+    "required": [
+        "audit_metadata",
+        "card_metadata",
+        "schema_validation",
+        "internal_consistency",
+        "reference_consistency",
+        "summary"
+    ],
+    "properties": {
+        "audit_metadata": {
+            "type": "object",
+            "required": [
+                "auditor",
+                "model",
+                "timestamp",
+                "audit_version"
+            ],
+            "properties": {
+                "auditor": {
+                    "type": "string",
+                    "description": "Identifier for the auditing system or tool."
+                },
+                "model": {
+                    "type": "string",
+                    "description": "LLM model identifier used for the audit."
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "audit_version": {
+                    "type": "string",
+                    "description": "Version of the audit protocol/schema."
+                }
+            },
+            "additionalProperties": false
+        },
+        "card_metadata": {
+            "type": "object",
+            "required": [
+                "card_id",
+                "card_type"
+            ],
+            "properties": {
+                "card_id": {
+                    "type": "string",
+                    "description": "Unique identifier of the normative card."
+                },
+                "card_type": {
+                    "type": "string",
+                    "description": "Type of normative card (e.g., scenario, principle, guideline)."
+                },
+                "source_path": {
+                    "type": "string",
+                    "description": "Filesystem or repository path of the card."
+                }
+            },
+            "additionalProperties": false
+        },
+        "schema_validation": {
+            "type": "object",
+            "required": [
+                "valid"
+            ],
+            "properties": {
+                "valid": {
+                    "type": "boolean",
+                    "description": "Whether the extracted YAML passed JSON Schema validation."
+                },
+                "errors": {
+                    "type": "array",
+                    "description": "Schema validation errors (if any).",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "internal_consistency": {
+            "type": "object",
+            "required": [
+                "status",
+                "issues"
+            ],
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "pass",
+                        "fail",
+                        "uncertain"
+                    ],
+                    "description": "Overall judgment of Markdown ↔ YAML consistency."
+                },
+                "issues": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/consistency_issue"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "reference_consistency": {
+            "type": "object",
+            "required": [
+                "status",
+                "issues"
+            ],
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "pass",
+                        "fail",
+                        "not_evaluated",
+                        "uncertain"
+                    ],
+                    "description": "Overall judgment of consistency with reference documents."
+                },
+                "issues": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/reference_issue"
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
+        "summary": {
+            "type": "object",
+            "required": [
+                "error_count",
+                "warning_count",
+                "note_count",
+                "recommendations"
+            ],
+            "properties": {
+                "error_count": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "warning_count": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "note_count": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "recommendations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "confidence": {
+                    "type": "string",
+                    "enum": [
+                        "high",
+                        "medium",
+                        "low"
+                    ],
+                    "description": "Auditor's confidence in the assessment."
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "$defs": {
+        "consistency_issue": {
+            "type": "object",
+            "required": [
+                "severity",
+                "yaml_path",
+                "description",
+                "markdown_evidence",
+                "yaml_value"
+            ],
+            "properties": {
+                "severity": {
+                    "type": "string",
+                    "enum": [
+                        "error",
+                        "warning",
+                        "note"
+                    ]
+                },
+                "yaml_path": {
+                    "type": "string",
+                    "description": "JSONPath or dotted-path into the extracted YAML."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Explanation of the inconsistency or concern."
+                },
+                "markdown_evidence": {
+                    "type": "string",
+                    "description": "Quoted or paraphrased evidence from the Markdown prose."
+                },
+                "yaml_value": {
+                    "description": "Value found in YAML at the specified path."
+                },
+                "expected_value": {
+                    "description": "Expected value inferred from the Markdown (if applicable)."
+                }
+            },
+            "additionalProperties": false
+        },
+        "reference_issue": {
+            "type": "object",
+            "required": [
+                "severity",
+                "yaml_path",
+                "description",
+                "reference_evidence"
+            ],
+            "properties": {
+                "severity": {
+                    "type": "string",
+                    "enum": [
+                        "error",
+                        "warning",
+                        "note"
+                    ]
+                },
+                "yaml_path": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "reference_evidence": {
+                    "type": "string",
+                    "description": "Quoted or paraphrased evidence from the reference document."
+                },
+                "reference_citation": {
+                    "type": "string",
+                    "description": "Section, table, or page identifier in the reference."
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
