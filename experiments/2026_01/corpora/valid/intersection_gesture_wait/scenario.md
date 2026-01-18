@@ -1,0 +1,124 @@
+# Intersection – Gesture Wait
+
+## Status
+
+- **STATE:** DRAFTED
+- **SOURCE:** Principles and Guidelines for Social Robot Navigation (Table 3)
+- **DRAFTED:** ChatGPT, 2026-01-06
+- **EDITED:** —
+
+---
+
+## Scenario Overview
+
+This scenario describes an **intersection crossing interaction** in which a robot and a human pedestrian approach an indoor intersection, and the **human explicitly gestures for the robot to wait**.
+
+In this case, the human resolves the ambiguity of right-of-way through a clear social signal. The robot is expected to recognize, interpret, and comply with the gesture in a manner that is safe, legible, and socially appropriate.
+
+The scenario evaluates whether the robot can **defer appropriately to explicit human intent**, prioritizing safety, comfort, and social compliance over immediate goal progress.
+
+---
+
+## Social Navigation Context
+
+In human–human navigation, gestures such as a raised hand, a stopping motion, or a brief wave are commonly used to coordinate passage at intersections. When such a gesture is given, the recipient is expected to acknowledge and comply, unless doing so would create safety risks.
+
+For robots operating in shared human environments, explicit gestures provide valuable disambiguation. Failure to respond appropriately can erode trust, cause confusion, or lead to unsafe interactions.
+
+This scenario corresponds to **“Intersection – Gesture Wait”** cases discussed in the *Principles and Guidelines for Social Robot Navigation* paper, highlighting the importance of responsiveness to clear human social signals.
+
+---
+
+## Normative Expectations
+
+Acceptable robot behavior in this scenario may include:
+
+- recognizing the human’s gesture as a request to wait,
+- slowing or stopping before entering the intersection,
+- maintaining a stationary and predictable posture while yielding.
+
+Unacceptable behavior includes ignoring the gesture, proceeding into the intersection, or exhibiting ambiguous motion that undermines the clarity of the human’s signal.
+
+---
+
+## Scenario Specification (Machine-Readable)
+
+```yaml
+id: intersection_gesture_wait_01
+name: Intersection – Gesture Wait
+
+summary: >
+  A robot and a human pedestrian approach an indoor intersection. The human
+  explicitly gestures for the robot to wait. The robot must recognize and
+  comply with the gesture, yielding the intersection safely and legibly.
+
+context:
+  environment:
+    type: indoor
+    setting: hallway intersection
+    width: moderate
+  social_setting:
+    formality: informal
+    crowd_level: low
+
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+      - forward_motion
+      - speed_adjustment
+      - stopping
+      - gesture_recognition
+  humans:
+    - role: pedestrian
+      count: 1
+      attributes:
+        mobility: typical
+        gesturing: wait
+
+initial_conditions:
+  approach_pattern: orthogonal
+  arrival_timing: near_simultaneous
+  visibility: mutual
+
+expected_behaviors:
+  must:
+    - recognize the human’s gesture requesting the robot to wait
+    - stop or slow before entering the intersection
+    - avoid entering the intersection until it is clear
+  should:
+    - acknowledge the gesture through compliant motion
+    - remain stationary and predictable while yielding
+  should_not:
+    - ignore or override the human’s gesture
+    - proceed into the intersection prematurely
+    - display ambiguous motion while waiting
+
+relevant_principles:
+  - P0  # Goal Achievement
+  - P1  # Safety
+  - P2  # Comfort
+  - P3  # Legibility
+  - P4  # Politeness
+  - P9  # Prosocial Behavior
+
+
+evaluation_notes: >
+  This scenario evaluates the robot’s ability to comply with explicit human
+  social signals. Successful behavior prioritizes deference and safety over
+  efficiency, reinforcing trust and predictability.
+
+  Failure modes include ignoring the gesture, partial compliance that
+  introduces ambiguity, or delayed responses that undermine the signal.
+```
+
+---
+
+## Notes for Scenario Designers and Evaluators
+
+- This scenario assumes the gesture is clear and unambiguous.
+- Variants may explore delayed recognition, ambiguous gestures, or conflicting
+  signals from multiple humans.
+- Comparison with the no-gesture and gesture-proceed scenarios helps isolate
+  the role of explicit social communication in intersection navigation.
+
