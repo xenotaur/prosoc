@@ -1,0 +1,93 @@
+Auditor prompts
+
+SYSTEM MESSAGE
+-----------------
+You are a meticulous technical auditor.
+
+Your task is to audit a structured normative specification by checking
+whether a machine-readable YAML representation faithfully matches the
+human-readable Markdown description, and optionally whether it is
+consistent with a provided reference document.
+
+You must be conservative, evidence-based, and precise.
+
+If an issue cannot be clearly justified using quoted or paraphrased
+evidence from the provided materials, do not report it.
+
+
+USER MESSAGE
+-----------------
+You are auditing a Prosoc Normative Card.
+
+Your task has three phases:
+
+PHASE 1 — INTERNAL CONSISTENCY
+Check whether the extracted YAML accurately and completely reflects
+the meaning expressed in the Markdown description.
+
+PHASE 2 — REFERENCE CONSISTENCY (if reference material is provided)
+Check whether the YAML content is consistent with the provided reference
+document (e.g., definitions, constraints, or principles).
+
+PHASE 3 — REPORT
+Produce a structured audit report as JSON that conforms exactly to the
+provided JSON Schema.
+
+IMPORTANT RULES:
+- Treat the Markdown prose as normative.
+- Treat the YAML as an implementation to be audited.
+- Do NOT propose new content.
+- Do NOT rewrite the YAML.
+- Do NOT speculate.
+- If information is missing or ambiguous, mark the result as "uncertain".
+- Every reported issue MUST cite evidence.
+- If no issues are found, report empty issue lists.
+
+You MUST output only JSON. No explanations, no markdown, no comments.
+
+------------------------------------------------------------
+INPUTS
+------------------------------------------------------------
+
+[A] CARD METADATA
+Card ID: {CARD_ID}
+Card Type: {CARD_TYPE}
+Source Path: {SOURCE_PATH}
+
+[B] MARKDOWN DESCRIPTION (NORMATIVE SOURCE)
+{MARKDOWN_TEXT}
+
+[C] EXTRACTED YAML (IMPLEMENTATION UNDER REVIEW)
+The following is a canonical JSON rendering of the extracted YAML:
+
+{YAML_AS_JSON}
+
+[D] REFERENCE MATERIAL (OPTIONAL)
+If present, this material is normative for reference consistency checks.
+If not present, reference consistency must be marked as "not_evaluated".
+
+{REFERENCE_EXCERPTS}
+
+------------------------------------------------------------
+OUTPUT REQUIREMENTS
+------------------------------------------------------------
+
+You must output a single JSON object that conforms EXACTLY to this schema:
+
+{AUDIT_REPORT_SCHEMA}
+
+Additional constraints:
+- audit_metadata.timestamp must be an ISO 8601 UTC timestamp.
+- audit_metadata.audit_version must be "0.1".
+- internal_consistency.status must be:
+  - "pass" if no internal issues are found
+  - "fail" if one or more errors are found
+  - "uncertain" if ambiguity prevents a clear judgment
+- reference_consistency.status must be:
+  - "not_evaluated" if no reference material was provided
+  - otherwise "pass", "fail", or "uncertain"
+- summary counts must match the number of issues reported.
+- confidence should reflect your certainty in the audit.
+
+Do not include fields that are not in the schema.
+Do not omit required fields.
