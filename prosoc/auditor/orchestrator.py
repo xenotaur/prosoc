@@ -10,11 +10,16 @@ from __future__ import annotations
 from typing import Optional, Protocol, Dict, Any
 from datetime import datetime, timezone
 
-# Not used yet, commenting out to eliminate lint issue.
-# import json
+import json
+from pathlib import Path
 
 from prosoc.auditor import validator
-from prosoc.auditor.prompts import build_audit_prompt
+from prosoc.auditor import prompts
+
+
+_SCHEMA_PATH = Path(__file__).parent / "schema.json"
+with _SCHEMA_PATH.open("r", encoding="utf-8") as f:
+    AUDIT_REPORT_SCHEMA = json.load(f)
 
 
 class LLMClient(Protocol):
@@ -42,7 +47,7 @@ def audit_normative_card(
     yaml_dict: Dict[str, Any],
     reference_excerpts: Optional[str],
     llm_client: LLMClient,
-    model_name: str,
+    model_name: str = "default",
 ) -> Dict[str, Any]:
     """
     Orchestrate an audit of a Prosoc normative card.
@@ -81,23 +86,24 @@ def audit_normative_card(
     # 1. Build prompts
     # ------------------------------------------------------------
 
-    system_prompt, user_prompt = build_audit_prompt(
+    system_prompt, user_prompt = prompts.build_audit_prompt(
         card_id=card_id,
         card_type=card_type,
         source_path=source_path,
         markdown_text=markdown_text,
         yaml_dict=yaml_dict,
         reference_excerpts=reference_excerpts,
-        model_name=model_name,
+        audit_report_schema=AUDIT_REPORT_SCHEMA,
     )
 
     # ------------------------------------------------------------
     # 2. Call LLM
     # ------------------------------------------------------------
 
-    report = llm_client.audit(
+    report = llm_client.complete(
         system_prompt=system_prompt,
         user_prompt=user_prompt,
+        model_name=model_name,
     )
 
     # ------------------------------------------------------------

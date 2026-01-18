@@ -18,8 +18,8 @@ from pathlib import Path
 import random
 import sys
 
-from prosoc.literate.compiler import extract_yaml_blocks
-from prosoc.utils.experiments.mutator import replace_yaml_block
+from prosoc.literate import compiler
+from prosoc.utils.experiments import mutator
 from prosoc.utils.paths import find_repo_root
 
 
@@ -54,7 +54,7 @@ def main():
             continue
 
         markdown_text = md_path.read_text(encoding="utf-8")
-        yaml_blocks = extract_yaml_blocks(markdown_text)
+        yaml_blocks = compiler.extract_yaml_blocks(markdown_text)
 
         if len(yaml_blocks) != 1:
             print(f"Skipping {path.name}: expected exactly one YAML block", file=sys.stderr)
@@ -107,7 +107,7 @@ def main():
         out_dir = invalid_root / s["name"]
         out_dir.mkdir(exist_ok=True)
 
-        mutated_markdown = replace_yaml_block(
+        mutated_markdown = mutator.replace_yaml_block(
             markdown_text=s["markdown"],
             new_yaml_dict=wrong_yaml,
         )
