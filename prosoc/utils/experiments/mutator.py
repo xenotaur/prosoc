@@ -73,17 +73,9 @@ def replace_yaml_block(markdown_text: str, new_yaml_dict: dict) -> str:
     ).rstrip()
 
     # Reconstruct Markdown
-    before = markdown_text[: start_idx]
+    before = markdown_text[:start_idx]
     after = markdown_text[end_idx + len(fence_end) :]
 
-    replaced = (
-        before
-        + fence_start
-        + "\n"
-        + new_yaml_text
-        + "\n"
-        + fence_end
-        + after
-    )
+    replaced = before + fence_start + "\n" + new_yaml_text + "\n" + fence_end + after
 
     return replaced

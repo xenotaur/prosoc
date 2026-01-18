@@ -52,13 +52,7 @@ class TestReplaceYamlBlock(unittest.TestCase):
 
     def test_multiple_yaml_blocks_raises_error(self):
         markdown_with_two_yaml_blocks = (
-            "```yaml\n"
-            "id: one\n"
-            "```\n"
-            "\n"
-            "```yaml\n"
-            "id: two\n"
-            "```\n"
+            "```yaml\n" "id: one\n" "```\n" "\n" "```yaml\n" "id: two\n" "```\n"
         )
 
         with self.assertRaises(mutator.MultipleYamlBlocksError):

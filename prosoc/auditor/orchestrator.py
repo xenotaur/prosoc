@@ -9,7 +9,9 @@ from __future__ import annotations
 
 from typing import Optional, Protocol, Dict, Any
 from datetime import datetime, timezone
-import json
+
+# Not used yet, commenting out to eliminate lint issue.
+# import json
 
 from prosoc.auditor import validator
 from prosoc.auditor.prompts import build_audit_prompt
