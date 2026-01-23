@@ -1,0 +1,14 @@
+{
+  "valid": {
+    "count": 8,
+    "pass_rate": 0.875,
+    "avg_error_count": 0.125,
+    "failures": 0
+  },
+  "invalid": {
+    "count": 8,
+    "pass_rate": 0.125,
+    "avg_error_count": 7.625,
+    "failures": 0
+  }
+}

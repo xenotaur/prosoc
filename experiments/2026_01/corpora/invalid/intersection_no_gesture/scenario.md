@@ -48,47 +48,94 @@ Unacceptable behavior includes aggressively asserting right-of-way, oscillating 
 ## Scenario Specification (Machine-Readable)
 
 ```yaml
-"id: movable_obstruction_01\nname: Movable Obstruction\n\nsummary: >\n  A robot and\
-  \ a human approach each other in a hallway that is partially blocked by a movable\
-  \ obstruction.\n  The robot must decide whether to yield, wait, remove the obstruction,\
-  \ or report it, balancing task goals\n  with prosocial responsibility.\n\ncontext:\n\
-  \  environment:\n    type: indoor\n    setting: office hallway\n    width: nominal\n\
-  \    obstruction:\n      present: true\n      movable: true\n      blocks_full_passing:\
-  \ true\n  social_setting:\n    formality: informal\n    crowd_level: low\n\nagents:\n\
-  \  robot:\n    role: navigating_agent\n    capabilities:\n      - forward_motion\n\
-  \      - steering\n      - stopping\n      - manipulation\n      - object_movement\n\
-  \  humans:\n    - role: pedestrian\n      count: 1\n      attributes:\n        mobility:\
-  \ typical\n        awareness: typical\n\ninitial_conditions:\n  robot_position:\
-  \ end_of_hallway\n  human_position: opposite_end\n  obstruction_position: center_of_hallway\n\
-  \  visibility: clear\n\nexpected_behaviors:\n  must:\n    - maintain a safe physical\
-  \ distance from the human\n    - avoid causing the human to take evasive or unsafe\
-  \ actions\n  should:\n    - recognize that the obstruction limits comfortable passing\n\
-  \    - communicate intent clearly through motion or signaling\n    - select a behavior\
-  \ that resolves or mitigates the obstruction-induced conflict\n    - remove the\
-  \ obstruction if physically capable and task-appropriate\n    - report the obstruction\
-  \ to facility management when appropriate\n    - yield or wait if intervention is\
-  \ inappropriate\n  should_not:\n    - ignore the obstruction if it predictably causes\
-  \ repeated conflicts\n    - force the human into single-file passage without acknowledgment\n\
-  \    - manipulate the obstruction in a way that creates new hazards\n\nrelevant_principles:\n\
-  \  - P1  # Safety\n  - P2  # Comfort\n  - P3  # Legibility\n  - P5  # Social Competency\n\
-  \  - P6  # Agent Understanding\n  - P7  # Proactivity\n  - P9  # Prosocial Behavior\n\
-  \nscenario_usage_guide:\n  success_metrics:\n    - SR\n    - NoCollisions\n    -\
-  \ ConflictResolved\n  quality_metrics:\n    - P2   # Comfort\n    - P7   # Proactivity\n\
-  \    - P9   # Prosocial Behavior\n  failure_modes:\n    - robot repeatedly yields\
-  \ without addressing obstruction\n    - robot causes discomfort by forcing single-file\
-  \ passage\n    - robot manipulates obstruction unsafely\n  labeling_criteria:\n\
-  \    - obstruction is movable and blocks comfortable passing\n    - robot and human\
-  \ approach from opposite directions\n    - robot is physically capable of intervention\n\
-  \nevaluation_notes: >\n  This scenario evaluates whether a robot treats navigation\
-  \ as a shared, community-level problem\n  rather than a purely local motion-planning\
-  \ task. Proactive behavior (P7) may involve yielding or\n  signaling to avoid immediate\
-  \ conflict. Prosocial behavior (P9) is demonstrated when the robot\n  improves the\
-  \ environment itself\u2014by removing or reporting the obstruction\u2014thereby\
-  \ benefiting\n  not only the current interaction but future navigators as well.\n\
-  \n  Appropriate behavior depends on task and context. A robot prioritizing timely\
-  \ delivery may choose\n  to report the obstruction rather than remove it, while\
-  \ a robot acting as a guidance or service agent\n  may reasonably take responsibility\
-  \ for clearing the path."
+id: movable_obstruction_01
+name: Movable Obstruction
+summary: 'A robot and a human approach each other in a hallway that is partially blocked
+  by a movable obstruction. The robot must decide whether to yield, wait, remove the
+  obstruction, or report it, balancing task goals with prosocial responsibility.
+
+  '
+context:
+  environment:
+    type: indoor
+    setting: office hallway
+    width: nominal
+    obstruction:
+      present: true
+      movable: true
+      blocks_full_passing: true
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - manipulation
+    - object_movement
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      awareness: typical
+initial_conditions:
+  robot_position: end_of_hallway
+  human_position: opposite_end
+  obstruction_position: center_of_hallway
+  visibility: clear
+expected_behaviors:
+  must:
+  - maintain a safe physical distance from the human
+  - avoid causing the human to take evasive or unsafe actions
+  should:
+  - recognize that the obstruction limits comfortable passing
+  - communicate intent clearly through motion or signaling
+  - select a behavior that resolves or mitigates the obstruction-induced conflict
+  - remove the obstruction if physically capable and task-appropriate
+  - report the obstruction to facility management when appropriate
+  - yield or wait if intervention is inappropriate
+  should_not:
+  - ignore the obstruction if it predictably causes repeated conflicts
+  - force the human into single-file passage without acknowledgment
+  - manipulate the obstruction in a way that creates new hazards
+relevant_principles:
+- P1
+- P2
+- P3
+- P5
+- P6
+- P7
+- P9
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  - ConflictResolved
+  quality_metrics:
+  - P2
+  - P7
+  - P9
+  failure_modes:
+  - robot repeatedly yields without addressing obstruction
+  - robot causes discomfort by forcing single-file passage
+  - robot manipulates obstruction unsafely
+  labeling_criteria:
+  - obstruction is movable and blocks comfortable passing
+  - robot and human approach from opposite directions
+  - robot is physically capable of intervention
+evaluation_notes: "This scenario evaluates whether a robot treats navigation as a\
+  \ shared, community-level problem rather than a purely local motion-planning task.\
+  \ Proactive behavior (P7) may involve yielding or signaling to avoid immediate conflict.\
+  \ Prosocial behavior (P9) is demonstrated when the robot improves the environment\
+  \ itself\u2014by removing or reporting the obstruction\u2014thereby benefiting not\
+  \ only the current interaction but future navigators as well.\nAppropriate behavior\
+  \ depends on task and context. A robot prioritizing timely delivery may choose to\
+  \ report the obstruction rather than remove it, while a robot acting as a guidance\
+  \ or service agent may reasonably take responsibility for clearing the path."
 ```
 
 ---

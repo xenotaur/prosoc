@@ -1,0 +1,124 @@
+{
+  "audit_metadata": {
+    "auditor": "prosoc_audit_llm_v1",
+    "model": "gpt-4-0613",
+    "timestamp": "2024-06-10T21:13:00Z",
+    "audit_version": "0.1"
+  },
+  "card_metadata": {
+    "card_id": "intersection_gesture_proceed_01",
+    "card_type": "None",
+    "source_path": "/Users/centaur/Workspace/ProsocialRobotics/prosocial/experiments/2026_01/corpora/invalid/robot_overtaking/scenario.md"
+  },
+  "schema_validation": {
+    "valid": true,
+    "errors": []
+  },
+  "internal_consistency": {
+    "status": "fail",
+    "issues": [
+      {
+        "severity": "error",
+        "yaml_path": "id",
+        "description": "The YAML 'id' field is 'intersection_gesture_proceed_01', but the Markdown scenario is about 'robot overtaking', not intersection gesture scenarios. The YAML content does not match the described scenario.",
+        "markdown_evidence": "This scenario describes a robot overtaking interaction, in which a robot approaches a human from behind while both are traveling in the same direction along a shared pathway.",
+        "yaml_value": "intersection_gesture_proceed_01",
+        "expected_value": "A scenario id and content related to robot overtaking, not intersection gesture proceed."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "name",
+        "description": "The YAML 'name' is 'Intersection \u2013 Gesture Proceed', which does not correspond to the robot overtaking scenario described in the Markdown.",
+        "markdown_evidence": "This scenario describes a robot overtaking interaction...",
+        "yaml_value": "Intersection \u2013 Gesture Proceed",
+        "expected_value": "A name reflecting robot overtaking, not intersection gesture proceed."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "summary",
+        "description": "The YAML 'summary' describes a scenario where a human gestures for the robot to proceed at an intersection, which is unrelated to the robot overtaking scenario described in the Markdown.",
+        "markdown_evidence": "This scenario describes a robot overtaking interaction, in which a robot approaches a human from behind while both are traveling in the same direction along a shared pathway.",
+        "yaml_value": "A robot and a human pedestrian approach an indoor intersection. The human explicitly gestures for the robot to proceed. The robot must recognize the gesture and cross the intersection safely, legibly, and without undue delay.\n",
+        "expected_value": "A summary describing a robot overtaking a human from behind."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "context.environment.setting",
+        "description": "The YAML context is for a 'hallway intersection', but the Markdown scenario is about a shared pathway with overtaking from behind, not an intersection.",
+        "markdown_evidence": "a robot approaches a human from behind while both are traveling in the same direction along a shared pathway.",
+        "yaml_value": "hallway intersection",
+        "expected_value": "A setting describing a shared pathway suitable for overtaking from behind."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "agents.humans[0].attributes.gesturing",
+        "description": "The YAML specifies the human is 'gesturing: proceed', but the Markdown scenario does not mention any gesture; it is about implicit overtaking, not explicit permission.",
+        "markdown_evidence": "the human may be unaware of the robot\u2019s presence. As a result, the robot bears primary responsibility for managing safety, comfort, and legibility.",
+        "yaml_value": "proceed",
+        "expected_value": "No explicit gesturing; human is unaware or neutral."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "initial_conditions.approach_pattern",
+        "description": "The YAML specifies 'orthogonal' approach, but the Markdown scenario is about overtaking from behind (same direction), not orthogonal or intersection approach.",
+        "markdown_evidence": "a robot approaches a human from behind while both are traveling in the same direction along a shared pathway.",
+        "yaml_value": "orthogonal",
+        "expected_value": "Approach pattern: same direction, robot behind human."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "initial_conditions.visibility",
+        "description": "The YAML specifies 'mutual' visibility, but the Markdown scenario emphasizes that the human may be unaware of the robot's presence (i.e., not mutual visibility).",
+        "markdown_evidence": "the human may be unaware of the robot\u2019s presence.",
+        "yaml_value": "mutual",
+        "expected_value": "Visibility: robot has awareness, human may not."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors.must[0]",
+        "description": "The YAML requires the robot to 'recognize the human\u2019s gesture granting permission to proceed', but the Markdown scenario does not involve any gesture or explicit permission.",
+        "markdown_evidence": "the human may be unaware of the robot\u2019s presence. As a result, the robot bears primary responsibility...",
+        "yaml_value": "recognize the human\u2019s gesture granting permission to proceed",
+        "expected_value": "Behaviors related to overtaking safely, not gesture recognition."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors.should[0]",
+        "description": "The YAML expects the robot to 'commit promptly to motion after the gesture', but the Markdown scenario does not involve a gesture or explicit permission.",
+        "markdown_evidence": "the human may be unaware of the robot\u2019s presence.",
+        "yaml_value": "commit promptly to motion after the gesture",
+        "expected_value": "Behaviors about smooth overtaking, not responding to gestures."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors.should_not[0]",
+        "description": "The YAML says the robot should not 'hesitate excessively after permission is given', but the Markdown scenario does not involve explicit permission.",
+        "markdown_evidence": "the human may be unaware of the robot\u2019s presence.",
+        "yaml_value": "hesitate excessively after permission is given",
+        "expected_value": "Should not tailgate, startle, or pass aggressively."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "evaluation_notes",
+        "description": "The YAML evaluation notes focus on explicit human permission and gesture, which is not present in the Markdown scenario about implicit overtaking.",
+        "markdown_evidence": "This scenario evaluates whether the robot can balance goal achievement with social navigation norms, including respecting personal space, avoiding startle responses, and communicating intent through motion.",
+        "yaml_value": "This scenario evaluates the robot\u2019s ability to act appropriately on explicit human permission. Successful behavior demonstrates timely commitment, predictable motion, and respect for the human\u2019s safety and comfort.\nFailure modes include ignoring the gesture, delayed or ambiguous motion, or overly aggressive crossing behavior.",
+        "expected_value": "Evaluation of robot's ability to overtake safely, smoothly, and in accordance with social norms."
+      }
+    ]
+  },
+  "reference_consistency": {
+    "status": "not_evaluated",
+    "issues": []
+  },
+  "summary": {
+    "error_count": 10,
+    "warning_count": 0,
+    "note_count": 0,
+    "recommendations": [
+      "Replace the YAML content with a scenario that matches the robot overtaking interaction described in the Markdown.",
+      "Ensure all scenario fields (id, name, summary, context, agents, initial_conditions, expected_behaviors, evaluation_notes) are consistent with the overtaking scenario, not an intersection gesture scenario."
+    ],
+    "confidence": "high"
+  }
+}

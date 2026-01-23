@@ -1,0 +1,54 @@
+{
+  "audit_metadata": {
+    "auditor": "prosoc_auditor_v1",
+    "model": "gpt-4-0613",
+    "timestamp": "2024-06-17T21:13:00Z",
+    "audit_version": "0.1"
+  },
+  "card_metadata": {
+    "card_id": "single_file_hallway_01",
+    "card_type": "None",
+    "source_path": "/Users/centaur/Workspace/ProsocialRobotics/prosocial/experiments/2026_01/corpora/valid/single_file_hallway/scenario.md"
+  },
+  "schema_validation": {
+    "valid": true,
+    "errors": []
+  },
+  "internal_consistency": {
+    "status": "fail",
+    "issues": [
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors.should_not",
+        "description": "Duplicate entries found in the 'should_not' list. Each of the three behaviors is listed twice, which is not reflected in the Markdown and may cause confusion or implementation errors.",
+        "markdown_evidence": "- force the human to back up unexpectedly\n- enter the hallway and create a stalemate\n- rely on last-moment braking to resolve the conflict",
+        "yaml_value": [
+          "force the human to back up unexpectedly",
+          "enter the hallway and create a stalemate",
+          "rely on last-moment braking to resolve the conflict",
+          "force the human to back up unexpectedly",
+          "enter the hallway and create a stalemate",
+          "rely on last-moment braking to resolve the conflict"
+        ],
+        "expected_value": [
+          "force the human to back up unexpectedly",
+          "enter the hallway and create a stalemate",
+          "rely on last-moment braking to resolve the conflict"
+        ]
+      }
+    ]
+  },
+  "reference_consistency": {
+    "status": "not_evaluated",
+    "issues": []
+  },
+  "summary": {
+    "error_count": 1,
+    "warning_count": 0,
+    "note_count": 0,
+    "recommendations": [
+      "Remove duplicate entries from 'expected_behaviors.should_not' to ensure clarity and faithful representation of the Markdown intent."
+    ],
+    "confidence": "high"
+  }
+}

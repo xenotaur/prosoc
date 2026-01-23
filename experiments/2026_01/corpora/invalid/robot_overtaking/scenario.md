@@ -39,30 +39,64 @@ Unacceptable behavior includes tailgating, abrupt lateral motion, or acceleratin
 ## Scenario Specification (Machine-Readable)
 
 ```yaml
-"id: intersection_gesture_proceed_01\nname: Intersection \u2013 Gesture Proceed\n\n\
-  summary: >\n  A robot and a human pedestrian approach an indoor intersection. The\
-  \ human\n  explicitly gestures for the robot to proceed. The robot must recognize\
-  \ the\n  gesture and cross the intersection safely, legibly, and without undue delay.\n\
-  \ncontext:\n  environment:\n    type: indoor\n    setting: hallway intersection\n\
-  \    width: moderate\n  social_setting:\n    formality: informal\n    crowd_level:\
-  \ low\n\nagents:\n  robot:\n    role: navigating_agent\n    capabilities:\n    \
-  \  - forward_motion\n      - speed_adjustment\n      - stopping\n      - gesture_recognition\n\
-  \      - path_commitment\n  humans:\n    - role: pedestrian\n      count: 1\n  \
-  \    attributes:\n        mobility: typical\n        gesturing: proceed\n\ninitial_conditions:\n\
-  \  approach_pattern: orthogonal\n  arrival_timing: near_simultaneous\n  visibility:\
-  \ mutual\n\nexpected_behaviors:\n  must:\n    - recognize the human\u2019s gesture\
-  \ granting permission to proceed\n    - enter and traverse the intersection safely\n\
-  \    - avoid collision with the human\n  should:\n    - commit promptly to motion\
-  \ after the gesture\n    - maintain a smooth and legible trajectory\n  should_not:\n\
-  \    - hesitate excessively after permission is given\n    - proceed aggressively\
-  \ or at unsafe speed\n    - undermine the clarity of the human\u2019s signal\n\n\
-  relevant_principles:\n  - P0  # Goal Achievement\n  - P1  # Safety\n  - P2  # Comfort\n\
-  \  - P3  # Legibility\n  - P4  # Politeness\n  - P9  # Prosocial Behavior\n\n\n\
-  evaluation_notes: >\n  This scenario evaluates the robot\u2019s ability to act appropriately\
-  \ on explicit\n  human permission. Successful behavior demonstrates timely commitment,\n\
-  \  predictable motion, and respect for the human\u2019s safety and comfort.\n\n\
-  \  Failure modes include ignoring the gesture, delayed or ambiguous motion,\n  or\
-  \ overly aggressive crossing behavior."
+id: intersection_gesture_proceed_01
+name: "Intersection \u2013 Gesture Proceed"
+summary: 'A robot and a human pedestrian approach an indoor intersection. The human
+  explicitly gestures for the robot to proceed. The robot must recognize the gesture
+  and cross the intersection safely, legibly, and without undue delay.
+
+  '
+context:
+  environment:
+    type: indoor
+    setting: hallway intersection
+    width: moderate
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - speed_adjustment
+    - stopping
+    - gesture_recognition
+    - path_commitment
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      gesturing: proceed
+initial_conditions:
+  approach_pattern: orthogonal
+  arrival_timing: near_simultaneous
+  visibility: mutual
+expected_behaviors:
+  must:
+  - "recognize the human\u2019s gesture granting permission to proceed"
+  - enter and traverse the intersection safely
+  - avoid collision with the human
+  should:
+  - commit promptly to motion after the gesture
+  - maintain a smooth and legible trajectory
+  should_not:
+  - hesitate excessively after permission is given
+  - proceed aggressively or at unsafe speed
+  - "undermine the clarity of the human\u2019s signal"
+relevant_principles:
+- P0
+- P1
+- P2
+- P3
+- P4
+- P9
+evaluation_notes: "This scenario evaluates the robot\u2019s ability to act appropriately\
+  \ on explicit human permission. Successful behavior demonstrates timely commitment,\
+  \ predictable motion, and respect for the human\u2019s safety and comfort.\nFailure\
+  \ modes include ignoring the gesture, delayed or ambiguous motion, or overly aggressive\
+  \ crossing behavior."
 ```
 
 ## Notes for Scenario Designers and Evaluators

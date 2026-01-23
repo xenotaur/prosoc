@@ -17,6 +17,7 @@ This script operates on Markdown-with-embedded-YAML, which is the
 from pathlib import Path
 import random
 import sys
+import yaml
 
 from prosoc.literate import compiler
 from prosoc.utils.experiments import mutator
@@ -56,14 +57,15 @@ def main():
         markdown_text = md_path.read_text(encoding="utf-8")
         yaml_blocks = compiler.extract_yaml_blocks(markdown_text)
 
-        if len(yaml_blocks) != 1:
-            print(f"Skipping {path.name}: expected exactly one YAML block", file=sys.stderr)
+        yaml_dict = yaml.safe_load(yaml_blocks[0])
+        if not isinstance(yaml_dict, dict):
+            print(f"Skipping {path.name}: YAML block did not parse to a mapping", file=sys.stderr)
             continue
 
         scenarios.append({
             "name": path.name,
             "markdown": markdown_text,
-            "yaml": yaml_blocks[0],
+            "yaml": yaml_dict,
         })
 
     if len(scenarios) < 2:

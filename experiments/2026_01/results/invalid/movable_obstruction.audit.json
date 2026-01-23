@@ -1,0 +1,109 @@
+{
+  "audit_metadata": {
+    "auditor": "prosoc_auditor_v1",
+    "model": "gpt-4-0613",
+    "timestamp": "2024-06-13T21:41:00Z",
+    "audit_version": "0.1"
+  },
+  "card_metadata": {
+    "card_id": "intersection_gesture_wait_01",
+    "card_type": "None",
+    "source_path": "/Users/centaur/Workspace/ProsocialRobotics/prosocial/experiments/2026_01/corpora/invalid/movable_obstruction/scenario.md"
+  },
+  "schema_validation": {
+    "valid": true,
+    "errors": []
+  },
+  "internal_consistency": {
+    "status": "fail",
+    "issues": [
+      {
+        "severity": "error",
+        "yaml_path": "",
+        "description": "The YAML scenario describes an intersection with a gesture-based yielding interaction, but the Markdown scenario is about a hallway with a movable obstruction and environmental intervention, not gesture-based yielding.",
+        "markdown_evidence": "This scenario describes a social navigation conflict in which a robot and a human approach each other in a hallway that is nominally wide enough for passing, but partially blocked by a movable obstruction (e.g., a cart, box, or misplaced furniture). ... successful navigation in this scenario may involve environmental intervention (physically moving the obstruction or reporting it), not just motion planning or yielding behavior.",
+        "yaml_value": {
+          "id": "intersection_gesture_wait_01",
+          "name": "Intersection \u0013 Gesture Wait",
+          "summary": "A robot and a human pedestrian approach an indoor intersection. The human explicitly gestures for the robot to wait. The robot must recognize and comply with the gesture, yielding the intersection safely and legibly.\n",
+          "context": {
+            "environment": {
+              "type": "indoor",
+              "setting": "hallway intersection",
+              "width": "moderate"
+            },
+            "social_setting": {
+              "formality": "informal",
+              "crowd_level": "low"
+            }
+          },
+          "agents": {
+            "robot": {
+              "role": "navigating_agent",
+              "capabilities": [
+                "forward_motion",
+                "speed_adjustment",
+                "stopping",
+                "gesture_recognition"
+              ]
+            },
+            "humans": [
+              {
+                "role": "pedestrian",
+                "count": 1,
+                "attributes": {
+                  "mobility": "typical",
+                  "gesturing": "wait"
+                }
+              }
+            ]
+          },
+          "initial_conditions": {
+            "approach_pattern": "orthogonal",
+            "arrival_timing": "near_simultaneous",
+            "visibility": "mutual"
+          },
+          "expected_behaviors": {
+            "must": [
+              "recognize the human\u0019s gesture requesting the robot to wait",
+              "stop or slow before entering the intersection",
+              "avoid entering the intersection until it is clear"
+            ],
+            "should": [
+              "acknowledge the gesture through compliant motion",
+              "remain stationary and predictable while yielding"
+            ],
+            "should_not": [
+              "ignore or override the human\u0019s gesture",
+              "proceed into the intersection prematurely",
+              "display ambiguous motion while waiting"
+            ]
+          },
+          "relevant_principles": [
+            "P0",
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "P9"
+          ],
+          "evaluation_notes": "This scenario evaluates the robot\u0019s ability to comply with explicit human social signals. Successful behavior prioritizes deference and safety over efficiency, reinforcing trust and predictability.\nFailure modes include ignoring the gesture, partial compliance that introduces ambiguity, or delayed responses that undermine the signal."
+        },
+        "expected_value": "A scenario involving a hallway partially blocked by a movable obstruction, with opportunities for the robot to physically move or report the obstruction, not a gesture-based yielding interaction."
+      }
+    ]
+  },
+  "reference_consistency": {
+    "status": "not_evaluated",
+    "issues": []
+  },
+  "summary": {
+    "error_count": 1,
+    "warning_count": 0,
+    "note_count": 0,
+    "recommendations": [
+      "Replace the YAML content with a scenario that matches the Markdown description, focusing on a hallway with a movable obstruction and the possibility of environmental intervention."
+    ],
+    "confidence": "high"
+  }
+}

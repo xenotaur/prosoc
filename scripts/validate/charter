@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-scripts/distill --dry-run
+scripts/distill/charter --dry-run
 git diff --exit-code prosoc/charter/charter.yml

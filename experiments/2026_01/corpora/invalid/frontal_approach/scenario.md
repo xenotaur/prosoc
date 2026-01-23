@@ -12,29 +12,62 @@ This scenario describes a canonical social navigation conflict in which a robot 
 ---
 
 ```yaml
-"id: intersection_no_gesture_01\nname: Intersection \u2013 No Gesture\n\nsummary:\
-  \ >\n  A robot and a human pedestrian approach and cross an indoor intersection\n\
-  \  without any explicit gestural communication. The robot must coordinate\n  passage\
-  \ safely and legibly using motion cues and social norms alone.\n\ncontext:\n  environment:\n\
-  \    type: indoor\n    setting: hallway intersection\n    width: moderate\n  social_setting:\n\
-  \    formality: informal\n    crowd_level: low\n\nagents:\n  robot:\n    role: navigating_agent\n\
-  \    capabilities:\n      - forward_motion\n      - speed_adjustment\n      - stopping\n\
-  \      - path_commitment\n  humans:\n    - role: pedestrian\n      count: 1\n  \
-  \    attributes:\n        mobility: typical\n        gesturing: none\n\ninitial_conditions:\n\
-  \  approach_pattern: orthogonal\n  arrival_timing: near_simultaneous\n  visibility:\
-  \ mutual\n\nexpected_behaviors:\n  must:\n    - avoid collision with the human at\
-  \ the intersection\n    - behave conservatively when right-of-way is ambiguous\n\
-  \  should:\n    - slow slightly when approaching the intersection\n    - yield if\
-  \ the human\u2019s intent appears dominant\n    - commit clearly once a crossing\
-  \ decision is made\n  should_not:\n    - aggressively assert right-of-way\n    -\
-  \ oscillate indecisively at the intersection\n    - force the human to stop abruptly\n\
-  \nrelevant_principles:\n  - P0  # Goal Achievement\n  - P1  # Safety\n  - P2  #\
-  \ Comfort\n  - P3  # Legibility\n  - P4  # Politeness\n\n\nevaluation_notes: >\n\
-  \  This scenario evaluates the robot\u2019s ability to navigate an intersection\n\
-  \  using implicit coordination cues only. Successful behavior allows both\n  agents\
-  \ to pass smoothly without collision or hesitation.\n\n  Common failure modes include\
-  \ overly aggressive entry, excessive hesitation,\n  or late yielding that disrupts\
-  \ the human\u2019s motion."
+id: intersection_no_gesture_01
+name: "Intersection \u2013 No Gesture"
+summary: 'A robot and a human pedestrian approach and cross an indoor intersection
+  without any explicit gestural communication. The robot must coordinate passage safely
+  and legibly using motion cues and social norms alone.
+
+  '
+context:
+  environment:
+    type: indoor
+    setting: hallway intersection
+    width: moderate
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - speed_adjustment
+    - stopping
+    - path_commitment
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      gesturing: none
+initial_conditions:
+  approach_pattern: orthogonal
+  arrival_timing: near_simultaneous
+  visibility: mutual
+expected_behaviors:
+  must:
+  - avoid collision with the human at the intersection
+  - behave conservatively when right-of-way is ambiguous
+  should:
+  - slow slightly when approaching the intersection
+  - "yield if the human\u2019s intent appears dominant"
+  - commit clearly once a crossing decision is made
+  should_not:
+  - aggressively assert right-of-way
+  - oscillate indecisively at the intersection
+  - force the human to stop abruptly
+relevant_principles:
+- P0
+- P1
+- P2
+- P3
+- P4
+evaluation_notes: "This scenario evaluates the robot\u2019s ability to navigate an\
+  \ intersection using implicit coordination cues only. Successful behavior allows\
+  \ both agents to pass smoothly without collision or hesitation.\nCommon failure\
+  \ modes include overly aggressive entry, excessive hesitation, or late yielding\
+  \ that disrupts the human\u2019s motion."
 ```
 
 ---

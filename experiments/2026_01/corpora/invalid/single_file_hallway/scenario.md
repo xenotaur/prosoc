@@ -14,30 +14,63 @@ The purpose of this scenario is to isolate and evaluate **Proactivity (P7)** wit
 ---
 
 ```yaml
-"id: pedestrian_overtaking_01\nname: Pedestrian Overtaking a Robot from Behind\n\n\
-  summary: >\n  A human pedestrian approaches and overtakes a slower-moving robot\
-  \ from\n  behind in a shared pathway. The robot must behave predictably and\n  cooperatively,\
-  \ allowing safe and comfortable passing without impeding\n  the pedestrian.\n\n\
-  context:\n  environment:\n    type: indoor\n    setting: corridor or sidewalk-like\
-  \ passage\n    width: moderate\n  social_setting:\n    formality: informal\n   \
-  \ crowd_level: low\n\nagents:\n  robot:\n    role: navigating_agent\n    capabilities:\n\
-  \      - forward_motion\n      - speed_adjustment\n      - lateral_adjustment\n\
-  \      - stopping\n  humans:\n    - role: pedestrian\n      count: 1\n      attributes:\n\
-  \        mobility: typical\n        awareness: attentive\n\ninitial_conditions:\n\
-  \  robot_position: ahead_of_pedestrian\n  relative_speed: pedestrian_faster\n  visibility:\
-  \ pedestrian_clear_view\n\nexpected_behaviors:\n  must:\n    - avoid impeding the\
-  \ pedestrian\u2019s overtaking maneuver\n    - maintain a predictable trajectory\
-  \ during passing\n  should:\n    - yield lateral space when feasible\n    - avoid\
-  \ sudden speed or direction changes\n    - maintain steady motion to reduce uncertainty\n\
-  \  should_not:\n    - accelerate to block overtaking\n    - drift unpredictably\
-  \ during passing\n    - force the pedestrian to slow or change path\n\nrelevant_principles:\n\
-  \  - P0  # Goal Achievement\n  - P1  # Safety\n  - P2  # Comfort\n  - P3  # Legibility\n\
-  \  - P4  # Politeness\n  - P9  # Prosocial Behavior\n\nevaluation_notes: >\n  This\
-  \ scenario evaluates the robot\u2019s ability to act as a cooperative and\n  predictable\
-  \ participant when being overtaken by a human. Successful\n  behavior minimizes\
-  \ the cognitive and physical burden on the pedestrian\n  and allows passing to occur\
-  \ smoothly.\n\n  Failure modes include blocking behavior, sudden motion changes,\
-  \ or\n  trajectories that require the pedestrian to hesitate or reroute."
+id: pedestrian_overtaking_01
+name: Pedestrian Overtaking a Robot from Behind
+summary: 'A human pedestrian approaches and overtakes a slower-moving robot from behind
+  in a shared pathway. The robot must behave predictably and cooperatively, allowing
+  safe and comfortable passing without impeding the pedestrian.
+
+  '
+context:
+  environment:
+    type: indoor
+    setting: corridor or sidewalk-like passage
+    width: moderate
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - speed_adjustment
+    - lateral_adjustment
+    - stopping
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      awareness: attentive
+initial_conditions:
+  robot_position: ahead_of_pedestrian
+  relative_speed: pedestrian_faster
+  visibility: pedestrian_clear_view
+expected_behaviors:
+  must:
+  - "avoid impeding the pedestrian\u2019s overtaking maneuver"
+  - maintain a predictable trajectory during passing
+  should:
+  - yield lateral space when feasible
+  - avoid sudden speed or direction changes
+  - maintain steady motion to reduce uncertainty
+  should_not:
+  - accelerate to block overtaking
+  - drift unpredictably during passing
+  - force the pedestrian to slow or change path
+relevant_principles:
+- P0
+- P1
+- P2
+- P3
+- P4
+- P9
+evaluation_notes: "This scenario evaluates the robot\u2019s ability to act as a cooperative\
+  \ and predictable participant when being overtaken by a human. Successful behavior\
+  \ minimizes the cognitive and physical burden on the pedestrian and allows passing\
+  \ to occur smoothly.\nFailure modes include blocking behavior, sudden motion changes,\
+  \ or trajectories that require the pedestrian to hesitate or reroute."
 ```
 
 ---

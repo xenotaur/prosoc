@@ -1,8 +1,11 @@
 import unittest
+
+from unittest import mock
 from typing import Any, Dict
 
 import jsonschema
 
+from prosoc.auditor.orchestrator import audit_markdown_card
 from prosoc.auditor.orchestrator import audit_normative_card
 from prosoc.auditor.validator import validate_audit_report
 
@@ -114,6 +117,114 @@ class TestAuditNormativeCard(unittest.TestCase):
             audit_normative_card(
                 llm_client=fake_llm,
                 **self.card_kwargs,
+            )
+
+
+class TestAuditMarkdownCard(unittest.TestCase):
+    """Unit tests for the high-level audit_markdown_card wrapper."""
+
+    def setUp(self):
+        # Minimal schema
+        self.schema = {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string"},
+                "type": {"type": "string"},
+            },
+            "required": ["id"],
+        }
+
+        # Minimal but schema-valid audit report
+        self.valid_audit_report = {
+            "audit_metadata": {
+                "auditor": "prosoc-auditor",
+                "model": "default",
+                "timestamp": "2026-01-18T00:00:00Z",
+                "audit_version": "0.1",
+            },
+            "card_metadata": {
+                "card_id": "test_card",
+                "card_type": "scenario",
+                "source_path": "tests/data/scenario.md",
+            },
+            "schema_validation": {
+                "valid": True,
+                "errors": [],
+            },
+            "internal_consistency": {
+                "status": "pass",
+                "issues": [],
+            },
+            "reference_consistency": {
+                "status": "not_evaluated",
+                "issues": [],
+            },
+            "summary": {
+                "error_count": 0,
+                "warning_count": 0,
+                "note_count": 0,
+                "recommendations": [],
+                "confidence": "high",
+            },
+        }
+
+        self.fake_llm = FakeLLM(self.valid_audit_report)
+
+        self.markdown_text = '"""\n# Test Scenario\n\nSome prose.\n\n```yaml\nid: test_card\ntype: scenario\n```\n"""'
+
+        self.source_path = "tests/data/test_card/scenario.md"
+
+    @mock.patch("prosoc.literate.compiler.compile_markdown")
+    def test_audit_markdown_card_success(self, mock_compile_markdown):
+        """
+        audit_markdown_card should extract YAML via the literate compiler
+        and delegate correctly to audit_normative_card.
+        """
+        mock_compile_markdown.return_value = {
+            "yaml": [
+                {
+                    "id": "test_card",
+                    "type": "scenario",
+                }
+            ]
+        }
+
+        report = audit_markdown_card(
+            markdown_text=self.markdown_text,
+            source_path=self.source_path,
+            schema=self.schema,
+            root_key="scenario",
+            llm_client=self.fake_llm,
+            model_name="default",
+        )
+
+        # Should return a validated audit report
+        validate_audit_report(report)
+
+        self.assertEqual(report["card_metadata"]["card_id"], "test_card")
+        self.assertEqual(report["internal_consistency"]["status"], "pass")
+
+        mock_compile_markdown.assert_called_once_with(
+            self.markdown_text,
+            schema=self.schema,
+            root_key="scenario",
+        )
+
+    @mock.patch("prosoc.literate.compiler.compile_markdown")
+    def test_audit_markdown_card_no_yaml_raises(self, mock_compile_markdown):
+        """
+        audit_markdown_card should raise if no YAML blocks are found.
+        """
+        mock_compile_markdown.return_value = {"yaml": []}
+
+        with self.assertRaises(ValueError):
+            audit_markdown_card(
+                markdown_text=self.markdown_text,
+                source_path=self.source_path,
+                schema=self.schema,
+                root_key="scenario",
+                llm_client=self.fake_llm,
+                model_name="default",
             )
 
 

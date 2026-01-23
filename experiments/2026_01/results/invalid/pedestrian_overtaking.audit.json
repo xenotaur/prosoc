@@ -1,0 +1,124 @@
+{
+  "audit_metadata": {
+    "auditor": "prosoc_auditor_v1",
+    "model": "gpt-4-0613",
+    "timestamp": "2024-06-13T21:13:00Z",
+    "audit_version": "0.1"
+  },
+  "card_metadata": {
+    "card_id": "robot_overtaking_01",
+    "card_type": "None",
+    "source_path": "/Users/centaur/Workspace/ProsocialRobotics/prosocial/experiments/2026_01/corpora/invalid/pedestrian_overtaking/scenario.md"
+  },
+  "schema_validation": {
+    "valid": true,
+    "errors": []
+  },
+  "internal_consistency": {
+    "status": "fail",
+    "issues": [
+      {
+        "severity": "error",
+        "yaml_path": "name",
+        "description": "The YAML scenario name describes the robot overtaking a pedestrian, but the Markdown scenario is about a human pedestrian overtaking a slower-moving robot from behind.",
+        "markdown_evidence": "In this scenario, **a human pedestrian overtakes a slower-moving robot from behind** while both are traveling in the same direction along a shared pathway.",
+        "yaml_value": "Overtaking a Pedestrian from Behind",
+        "expected_value": "Being Overtaken by a Pedestrian from Behind"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "summary",
+        "description": "The YAML summary describes the robot approaching and overtaking a human pedestrian, but the Markdown scenario is about the human overtaking the robot.",
+        "markdown_evidence": "In this scenario, **a human pedestrian overtakes a slower-moving robot from behind** while both are traveling in the same direction along a shared pathway.",
+        "yaml_value": "A robot approaches a human pedestrian from behind in a shared pathway where both are moving in the same direction. The robot must decide whether to follow or overtake in a manner that is safe, legible, and socially comfortable.\n",
+        "expected_value": "A human pedestrian approaches and overtakes a slower-moving robot from behind in a shared pathway. The robot must behave predictably and avoid increasing uncertainty, discomfort, or risk for the human."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "initial_conditions.robot_position",
+        "description": "The YAML states the robot is behind the pedestrian and faster, but the Markdown specifies the robot is ahead and slower, being overtaken by the human.",
+        "markdown_evidence": "a human pedestrian overtakes a slower-moving robot from behind",
+        "yaml_value": "behind_pedestrian",
+        "expected_value": "ahead_of_pedestrian"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "initial_conditions.relative_speed",
+        "description": "The YAML says 'robot_faster', but the Markdown scenario is about the robot being slower than the human pedestrian.",
+        "markdown_evidence": "a human pedestrian overtakes a slower-moving robot from behind",
+        "yaml_value": "robot_faster",
+        "expected_value": "robot_slower"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors.must",
+        "description": "The YAML expected behaviors are written as if the robot is overtaking the human, not being overtaken. The Markdown expects the robot to maintain predictability and yield space while being overtaken.",
+        "markdown_evidence": "The robot must recognize that it is being overtaken and avoid behaviors that increase uncertainty, discomfort, or risk for the human.\nAcceptable robot behavior in this scenario may include:\n- maintaining a consistent speed and heading while being overtaken,\n- subtly yielding lateral space when feasible,\n- avoiding sudden changes in velocity or direction.",
+        "yaml_value": [
+          "avoid colliding with or startling the pedestrian",
+          "maintain a safe and respectful distance during approach and passing"
+        ],
+        "expected_value": [
+          "maintain a steady and predictable trajectory while being overtaken",
+          "avoid sudden lateral movements or acceleration",
+          "yield sufficient space for safe passing"
+        ]
+      },
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors.should",
+        "description": "The YAML says the robot should 'signal overtaking intent', but the Markdown and Notes explicitly state the robot is not expected to signal intent when being overtaken.",
+        "markdown_evidence": "- The robot is not expected to signal overtaking intent; instead, it should avoid behaviors that interfere with the human\u2019s maneuver.",
+        "yaml_value": [
+          "signal overtaking intent through smooth, predictable motion",
+          "choose a passing side consistent with local social norms",
+          "adjust speed to minimize perceived pressure on the pedestrian"
+        ],
+        "expected_value": [
+          "subtly yield lateral space when feasible",
+          "avoid sudden changes in velocity or direction"
+        ]
+      },
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors.should_not",
+        "description": "The YAML 'should_not' behaviors are written from the perspective of the robot overtaking the human, not being overtaken. The Markdown expects the robot to avoid blocking, accelerating, or drifting unpredictably while being overtaken.",
+        "markdown_evidence": "Unacceptable behavior includes accelerating to prevent passing, drifting unpredictably, or positioning itself in a way that forces the pedestrian to take evasive action.",
+        "yaml_value": [
+          "follow too closely from behind",
+          "pass abruptly or at excessive speed",
+          "force the pedestrian to change path or pace"
+        ],
+        "expected_value": [
+          "accelerate to prevent passing",
+          "drift unpredictably",
+          "block or force the pedestrian to take evasive action"
+        ]
+      },
+      {
+        "severity": "warning",
+        "yaml_path": "agents.robot.role",
+        "description": "The YAML lists the robot's role as 'navigating_agent', but the Markdown emphasizes the robot's role as a reactive, socially compliant participant being overtaken.",
+        "markdown_evidence": "this interaction places the **initiative primarily with the human**, while the robot is expected to behave as a predictable, socially compliant participant.",
+        "yaml_value": "navigating_agent",
+        "expected_value": "reactive_agent"
+      }
+    ]
+  },
+  "reference_consistency": {
+    "status": "not_evaluated",
+    "issues": []
+  },
+  "summary": {
+    "error_count": 6,
+    "warning_count": 1,
+    "note_count": 0,
+    "recommendations": [
+      "Correct the scenario name, summary, and initial conditions to reflect that the human is overtaking the robot, not the other way around.",
+      "Revise expected behaviors to match the robot's role as a reactive participant being overtaken.",
+      "Remove or rephrase references to the robot signaling overtaking intent.",
+      "Align agent roles and scenario details with the Markdown description."
+    ],
+    "confidence": "high"
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "audit_metadata": {
+    "auditor": "prosoc_auditor_v1",
+    "model": "gpt-4-0613",
+    "timestamp": "2024-06-10T21:13:00Z",
+    "audit_version": "0.1"
+  },
+  "card_metadata": {
+    "card_id": "movable_obstruction_01",
+    "card_type": "None",
+    "source_path": "/Users/centaur/Workspace/ProsocialRobotics/prosocial/experiments/2026_01/corpora/invalid/intersection_no_gesture/scenario.md"
+  },
+  "schema_validation": {
+    "valid": true,
+    "errors": []
+  },
+  "internal_consistency": {
+    "status": "fail",
+    "issues": [
+      {
+        "severity": "error",
+        "yaml_path": "id",
+        "description": "The YAML scenario describes a 'movable obstruction' in a hallway, but the Markdown scenario is about an intersection crossing with no explicit gestural communication and does not mention any obstruction.",
+        "markdown_evidence": "This scenario describes an intersection crossing interaction in which a robot and a human pedestrian arrive at and traverse an indoor intersection without any explicit gestural communication from the human.",
+        "yaml_value": "movable_obstruction_01",
+        "expected_value": "A scenario identifier and content matching an intersection crossing without gestures, not a movable obstruction."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "name",
+        "description": "The YAML 'name' is 'Movable Obstruction', which does not match the Markdown scenario, which is about an intersection with no gesture.",
+        "markdown_evidence": "# Intersection \u2013 No Gesture",
+        "yaml_value": "Movable Obstruction",
+        "expected_value": "Intersection \u2013 No Gesture"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "summary",
+        "description": "The YAML summary describes a hallway blocked by a movable obstruction, which is not mentioned anywhere in the Markdown. The Markdown scenario is about implicit coordination at an intersection, not about obstructions.",
+        "markdown_evidence": "This scenario describes an intersection crossing interaction in which a robot and a human pedestrian arrive at and traverse an indoor intersection without any explicit gestural communication from the human.",
+        "yaml_value": "A robot and a human approach each other in a hallway that is partially blocked by a movable obstruction. The robot must decide whether to yield, wait, remove the obstruction, or report it, balancing task goals with prosocial responsibility.\n",
+        "expected_value": "A summary describing an intersection crossing with no gestures, not a hallway with a movable obstruction."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "context.environment.obstruction",
+        "description": "The YAML includes an 'obstruction' object, but the Markdown scenario does not mention any obstruction or blockage; it is about an intersection with no gestures.",
+        "markdown_evidence": "Unlike gesture-based intersection scenarios, the human does not signal for the robot to proceed or wait. As a result, the robot must rely solely on motion cues, spatial context, and social norms to coordinate safe passage.",
+        "yaml_value": {
+          "present": true,
+          "movable": true,
+          "blocks_full_passing": true
+        },
+        "expected_value": "No obstruction present; the scenario is about an intersection, not a blocked hallway."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors",
+        "description": "The YAML expected behaviors focus on handling an obstruction (e.g., removing or reporting it), which is not part of the Markdown scenario. The Markdown's expectations are about speed modulation, yielding, and legible, non-intrusive intersection crossing.",
+        "markdown_evidence": "Acceptable robot behavior in this scenario may include: approaching the intersection at a moderated speed, yielding when right-of-way is ambiguous, clearly committing to a trajectory once a decision is made. Unacceptable behavior includes aggressively asserting right-of-way, oscillating indecisively, or entering the intersection in a way that forces the human to stop abruptly.",
+        "yaml_value": {
+          "must": [
+            "maintain a safe physical distance from the human",
+            "avoid causing the human to take evasive or unsafe actions"
+          ],
+          "should": [
+            "recognize that the obstruction limits comfortable passing",
+            "communicate intent clearly through motion or signaling",
+            "select a behavior that resolves or mitigates the obstruction-induced conflict",
+            "remove the obstruction if physically capable and task-appropriate",
+            "report the obstruction to facility management when appropriate",
+            "yield or wait if intervention is inappropriate"
+          ],
+          "should_not": [
+            "ignore the obstruction if it predictably causes repeated conflicts",
+            "force the human into single-file passage without acknowledgment",
+            "manipulate the obstruction in a way that creates new hazards"
+          ]
+        },
+        "expected_value": "Behaviors about intersection crossing, speed modulation, yielding, and legibility, not about obstructions."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "agents.robot.capabilities",
+        "description": "The YAML lists 'manipulation' and 'object_movement' as robot capabilities, which are only relevant for scenarios involving objects or obstructions. The Markdown scenario does not mention any need for manipulation or object movement.",
+        "markdown_evidence": "The scenario evaluates whether the robot can navigate the intersection in a way that balances goal achievement with prosocial navigation norms, including safety, legibility, and non-intrusive behavior, under conditions of implicit coordination.",
+        "yaml_value": [
+          "forward_motion",
+          "steering",
+          "stopping",
+          "manipulation",
+          "object_movement"
+        ],
+        "expected_value": "Capabilities relevant to navigation and social interaction, not object manipulation."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "initial_conditions.obstruction_position",
+        "description": "The YAML specifies an 'obstruction_position', but the Markdown scenario does not mention any obstruction.",
+        "markdown_evidence": "This scenario describes an intersection crossing interaction ... without any explicit gestural communication from the human.",
+        "yaml_value": "center_of_hallway",
+        "expected_value": "No obstruction position; the scenario is about an intersection."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "scenario_usage_guide.failure_modes",
+        "description": "The YAML failure modes are about failing to address an obstruction, causing discomfort by forcing single-file passage, or manipulating an obstruction unsafely. The Markdown scenario's failure modes are about aggressive assertion of right-of-way, indecisiveness, or forcing the human to stop abruptly.",
+        "markdown_evidence": "Unacceptable behavior includes aggressively asserting right-of-way, oscillating indecisively, or entering the intersection in a way that forces the human to stop abruptly.",
+        "yaml_value": [
+          "robot repeatedly yields without addressing obstruction",
+          "robot causes discomfort by forcing single-file passage",
+          "robot manipulates obstruction unsafely"
+        ],
+        "expected_value": "Failure modes about intersection crossing, not about obstructions."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "evaluation_notes",
+        "description": "The YAML evaluation notes discuss treating navigation as a community-level problem, removing or reporting obstructions, and proactive/prosocial behavior in the context of obstructions. The Markdown scenario is about implicit coordination at intersections, not about environmental improvement or obstruction handling.",
+        "markdown_evidence": "This scenario evaluates whether the robot can navigate the intersection in a way that balances goal achievement with prosocial navigation norms, including safety, legibility, and non-intrusive behavior, under conditions of implicit coordination.",
+        "yaml_value": "This scenario evaluates whether a robot treats navigation as a shared, community-level problem rather than a purely local motion-planning task. Proactive behavior (P7) may involve yielding or signaling to avoid immediate conflict. Prosocial behavior (P9) is demonstrated when the robot improves the environment itself\u2014by removing or reporting the obstruction\u2014thereby benefiting not only the current interaction but future navigators as well.\nAppropriate behavior depends on task and context. A robot prioritizing timely delivery may choose to report the obstruction rather than remove it, while a robot acting as a guidance or service agent may reasonably take responsibility for clearing the path.",
+        "expected_value": "Evaluation notes about intersection crossing, implicit coordination, and legibility."
+      }
+    ]
+  },
+  "reference_consistency": {
+    "status": "not_evaluated",
+    "issues": []
+  },
+  "summary": {
+    "error_count": 8,
+    "warning_count": 0,
+    "note_count": 0,
+    "recommendations": [
+      "Replace the YAML content with a scenario that matches the Markdown description of an intersection crossing with no gestures, not a movable obstruction.",
+      "Ensure all scenario fields (id, name, summary, context, expected behaviors, failure modes, evaluation notes) are consistent with the intersection crossing scenario described in the Markdown."
+    ],
+    "confidence": "high"
+  }
+}

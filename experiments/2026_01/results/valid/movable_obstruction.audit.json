@@ -1,0 +1,32 @@
+{
+  "audit_metadata": {
+    "auditor": "prosoc_auditor_v1",
+    "model": "gpt-4-0613",
+    "timestamp": "2024-06-19T21:13:00Z",
+    "audit_version": "0.1"
+  },
+  "card_metadata": {
+    "card_id": "movable_obstruction_01",
+    "card_type": "None",
+    "source_path": "/Users/centaur/Workspace/ProsocialRobotics/prosocial/experiments/2026_01/corpora/valid/movable_obstruction/scenario.md"
+  },
+  "schema_validation": {
+    "valid": true,
+    "errors": []
+  },
+  "internal_consistency": {
+    "status": "pass",
+    "issues": []
+  },
+  "reference_consistency": {
+    "status": "not_evaluated",
+    "issues": []
+  },
+  "summary": {
+    "error_count": 0,
+    "warning_count": 0,
+    "note_count": 0,
+    "recommendations": [],
+    "confidence": "high"
+  }
+}

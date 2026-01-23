@@ -1,0 +1,200 @@
+{
+  "audit_metadata": {
+    "auditor": "prosoc_auditor_v1",
+    "model": "gpt-4-0613",
+    "timestamp": "2024-06-09T19:23:00Z",
+    "audit_version": "0.1"
+  },
+  "card_metadata": {
+    "card_id": "frontal_approach_01",
+    "card_type": "None",
+    "source_path": "/Users/centaur/Workspace/ProsocialRobotics/prosocial/experiments/2026_01/corpora/invalid/intersection_gesture_proceed/scenario.md"
+  },
+  "schema_validation": {
+    "valid": true,
+    "errors": []
+  },
+  "internal_consistency": {
+    "status": "fail",
+    "issues": [
+      {
+        "severity": "error",
+        "yaml_path": "id",
+        "description": "YAML 'id' is 'frontal_approach_01', but the scenario described in the Markdown is 'Intersection \u2013 Gesture Proceed'.",
+        "markdown_evidence": "Markdown scenario is titled 'Intersection \u2013 Gesture Proceed' and all content refers to an intersection crossing with a gesture, not a frontal approach.",
+        "yaml_value": "frontal_approach_01",
+        "expected_value": "intersection_gesture_proceed or similar"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "name",
+        "description": "YAML 'name' is 'Frontal Approach', which does not match the scenario described in the Markdown ('Intersection \u2013 Gesture Proceed').",
+        "markdown_evidence": "Markdown: '# Intersection \u2013 Gesture Proceed' and repeated references to intersection and gesture.",
+        "yaml_value": "Frontal Approach",
+        "expected_value": "Intersection \u2013 Gesture Proceed"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "summary",
+        "description": "YAML 'summary' describes a narrow hallway and passing, which does not match the intersection and gesture scenario in the Markdown.",
+        "markdown_evidence": "Markdown summary: 'Physical robot and human cross at an indoor intersection; the human explicitly gestures for the robot to proceed.'",
+        "yaml_value": "A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without prolonged hesitation.\n",
+        "expected_value": "Physical robot and human cross at an indoor intersection; the human explicitly gestures for the robot to proceed."
+      },
+      {
+        "severity": "error",
+        "yaml_path": "context.environment.setting",
+        "description": "YAML environment setting is 'office hallway', but the Markdown specifies 'indoor intersection'.",
+        "markdown_evidence": "Markdown: 'Physical Environment: Indoor', 'Geometric Layout: Intersection'",
+        "yaml_value": "office hallway",
+        "expected_value": "intersection"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "context.environment.width",
+        "description": "YAML specifies 'width: narrow', but the Markdown does not specify a narrow environment; it describes an intersection.",
+        "markdown_evidence": "Markdown: 'Geometric Layout: Intersection'",
+        "yaml_value": "narrow",
+        "expected_value": null
+      },
+      {
+        "severity": "error",
+        "yaml_path": "agents.robot.role",
+        "description": "YAML robot role is 'navigating_agent', which is consistent, but the scenario context and behaviors described in YAML are for a hallway passing, not an intersection with gesture.",
+        "markdown_evidence": "Markdown: 'Robot Role: Any (navigating agent)', but all scenario details are about intersection and gesture, not hallway passing.",
+        "yaml_value": "navigating_agent",
+        "expected_value": "navigating_agent (but with intersection/gesture context)"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "initial_conditions.robot_position",
+        "description": "YAML initial condition is 'end_of_hallway', which does not match the intersection scenario described in the Markdown.",
+        "markdown_evidence": "Markdown: 'Physical robot and human cross at an indoor intersection...'",
+        "yaml_value": "end_of_hallway",
+        "expected_value": "approaching intersection"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "initial_conditions.human_position",
+        "description": "YAML initial condition is 'opposite_end', which is for a hallway scenario, not an intersection.",
+        "markdown_evidence": "Markdown: 'cross at an indoor intersection; the human explicitly gestures for the robot to proceed.'",
+        "yaml_value": "opposite_end",
+        "expected_value": "approaching intersection from another direction"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors",
+        "description": "YAML expected behaviors are for hallway passing (e.g., 'maintain a safe physical distance', 'avoid physical contact or forcing evasive action'), but the Markdown specifies behaviors about recognizing and responding to a gesture at an intersection.",
+        "markdown_evidence": "Markdown: 'recognizing the human\u2019s gesture as permission to proceed', 'entering the intersection without undue delay', 'maintaining a smooth and predictable trajectory while crossing'.",
+        "yaml_value": {
+          "must": [
+            "maintain a safe physical distance",
+            "avoid physical contact or forcing evasive action"
+          ],
+          "should": [
+            "signal intent clearly through motion or positioning",
+            "resolve hesitation without prolonged deadlock",
+            "yield if appropriate given the spatial configuration"
+          ],
+          "should_not": [
+            "force the human to stop abruptly",
+            "invade personal space",
+            "advance aggressively in a way that causes discomfort"
+          ]
+        },
+        "expected_value": {
+          "must": [
+            "recognize the human\u2019s gesture as permission to proceed",
+            "enter the intersection without undue delay",
+            "maintain a smooth and predictable trajectory while crossing"
+          ]
+        }
+      },
+      {
+        "severity": "error",
+        "yaml_path": "scenario_usage_guide.success_metrics",
+        "description": "YAML success metrics are 'SR' and 'NoCollisions', which are generic and do not reflect the gesture-specific success metrics in the Markdown.",
+        "markdown_evidence": "Markdown: 'Success Metrics: No collision occurs; Robot commits to crossing promptly after gesture; Human proceeds without hesitation or retreat'",
+        "yaml_value": [
+          "SR",
+          "NoCollisions"
+        ],
+        "expected_value": [
+          "No collision occurs",
+          "Robot commits to crossing promptly after gesture",
+          "Human proceeds without hesitation or retreat"
+        ]
+      },
+      {
+        "severity": "error",
+        "yaml_path": "scenario_usage_guide.quality_metrics",
+        "description": "YAML quality metrics are 'P2', 'P3', 'P5', which are not explained and do not match the Markdown's quality metrics about timing, smoothness, and predictability.",
+        "markdown_evidence": "Markdown: 'Quality Metrics: Time between gesture and robot motion; Smoothness and predictability of robot trajectory; Absence of oscillation or hesitation'",
+        "yaml_value": [
+          "P2",
+          "P3",
+          "P5"
+        ],
+        "expected_value": [
+          "Time between gesture and robot motion",
+          "Smoothness and predictability of robot trajectory",
+          "Absence of oscillation or hesitation"
+        ]
+      },
+      {
+        "severity": "error",
+        "yaml_path": "scenario_usage_guide.failure_modes",
+        "description": "YAML failure modes are for hallway passing (e.g., 'robot collides with human', 'robot fails to pass within time limit'), not for gesture/intersection scenario.",
+        "markdown_evidence": "Markdown: 'Failure Modes: Ignoring the gesture; Excessive hesitation after permission; Aggressive or unsafe crossing'",
+        "yaml_value": [
+          "robot collides with human",
+          "robot fails to pass within time limit"
+        ],
+        "expected_value": [
+          "Ignoring the gesture",
+          "Excessive hesitation after permission",
+          "Aggressive or unsafe crossing"
+        ]
+      },
+      {
+        "severity": "error",
+        "yaml_path": "scenario_usage_guide.labeling_criteria",
+        "description": "YAML labeling criteria are for hallway passing (e.g., 'robot and human face each other at the start of the episode'), not for intersection/gesture scenario.",
+        "markdown_evidence": "Markdown: 'Labeling Criteria: Outcome: Success / Partial Success / Failure; Gesture recognized: Yes / No; Human disrupted: Yes / No'",
+        "yaml_value": [
+          "robot and human face each other at the start of the episode",
+          "robot and human move toward each other",
+          "sufficient clearance exists for passing"
+        ],
+        "expected_value": [
+          "Outcome: Success / Partial Success / Failure",
+          "Gesture recognized: Yes / No",
+          "Human disrupted: Yes / No"
+        ]
+      },
+      {
+        "severity": "error",
+        "yaml_path": "evaluation_notes",
+        "description": "YAML evaluation notes discuss hallway passing and mild conflict, not intersection, gesture, or explicit permission as described in the Markdown.",
+        "markdown_evidence": "Markdown: 'This scenario assumes the human\u2019s gesture is clear and unambiguous. Variants may explore delayed execution, partial gestures, or conflicting signals from multiple humans.'",
+        "yaml_value": "This scenario evaluates how well the robot navigates through shared space with a human in the conditions for a mild and typiocal conflict. Changing direction, slowing down, braking or hesitation may be acceptable if they increase safety, comfort, or legibility, but  prolonged deadlock, abrupt reversals, or aggressive advancement are indicative of poor performance.\nThe scenario assumes a pedestrian with a typical level of awareness, neither oblivious to the presence of the robot nor overly attettentive too it.",
+        "expected_value": "Notes about gesture clarity, variants with delayed execution, partial gestures, or conflicting signals, and comparison with no-gesture and gesture-wait scenarios."
+      }
+    ]
+  },
+  "reference_consistency": {
+    "status": "not_evaluated",
+    "issues": []
+  },
+  "summary": {
+    "error_count": 14,
+    "warning_count": 0,
+    "note_count": 0,
+    "recommendations": [
+      "Replace the YAML content with a scenario specification that matches the 'Intersection \u2013 Gesture Proceed' scenario as described in the Markdown.",
+      "Ensure all fields (id, name, summary, context, agents, initial_conditions, expected_behaviors, scenario_usage_guide, evaluation_notes) are consistent with the intersection and gesture context.",
+      "Remove all references to hallway passing and replace with intersection and gesture-specific details."
+    ],
+    "confidence": "high"
+  }
+}

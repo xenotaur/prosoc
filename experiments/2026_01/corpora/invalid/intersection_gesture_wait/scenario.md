@@ -44,43 +44,85 @@ Unacceptable behavior includes ignoring the gesture, proceeding into the interse
 ## Scenario Specification (Machine-Readable)
 
 ```yaml
-"id: single_file_hallway_01\nname: Single File Hallway\n\nsummary: >\n  A robot and\
-  \ a human approach each other in a hallway that is too narrow for safe and comfortable\n\
-  \  passing. The robot must proactively avoid conflict by yielding, signaling, or\
-  \ negotiating\n  right-of-way.\n\ncontext:\n  environment:\n    type: indoor\n \
-  \   setting: office hallway\n    width: single_file\n  social_setting:\n    formality:\
-  \ informal\n    crowd_level: low\n\nagents:\n  robot:\n    role: navigating_agent\n\
-  \    capabilities:\n      - forward_motion\n      - steering\n      - stopping\n\
-  \      - signaling\n  humans:\n    - role: pedestrian\n      count: 1\n      attributes:\n\
-  \        mobility: typical\n        awareness: typical\n\ninitial_conditions:\n\
-  \  robot_position: end_of_hallway\n  human_position: opposite_end\n  visibility:\
-  \ clear\n\nexpected_behaviors:\n  must:\n    - maintain a safe physical distance\
-  \ from the human\n    - avoid entering the hallway simultaneously with the human\n\
-  \  should:\n    - recognize early that the hallway does not permit passing\n   \
-  \ - signal intent clearly (e.g., yielding or requesting priority)\n    - resolve\
-  \ the encounter without prolonged deadlock\n  should_not:\n    - force the human\
-  \ to back up unexpectedly\n    - enter the hallway and create a stalemate\n    -\
-  \ rely on last-moment braking to resolve the conflict\n\n# NOTE: Optional behaviors\
-  \ previously listed under `may` are intentionally\n# subsumed under `should` to\
-  \ comply with the scenario schema, which restricts\n# expected_behaviors to {must,\
-  \ should, should_not} only.\n\n\n    - force the human to back up unexpectedly\n\
-  \    - enter the hallway and create a stalemate\n    - rely on last-moment braking\
-  \ to resolve the conflict\n\nrelevant_principles:\n  - P1  # Safety\n  - P2  # Comfort\n\
-  \  - P3  # Legibility\n  - P5  # Social Competency\n  - P6  # Agent Understanding\n\
-  \  - P7  # Proactivity\n\nscenario_usage_guide:\n  success_metrics:\n    - SR\n\
-  \    - NoCollisions\n    - DeadlockFree\n  quality_metrics:\n    - P2   # Comfort\n\
-  \    - P3   # Legibility\n    - P7   # Proactivity\n  failure_modes:\n    - prolonged\
-  \ deadlock at hallway entrance\n    - human forced to retreat without warning\n\
-  \    - uncomfortable proximity due to late yielding\n  labeling_criteria:\n    -\
-  \ hallway width prevents safe passing\n    - robot and human approach from opposite\
-  \ ends\n    - no alternative routes available\n\nevaluation_notes: >\n  This scenario\
-  \ evaluates whether the robot treats predictable spatial constraints as a planning\n\
-  \  problem rather than a reactive one. Proactive behavior (P7) is demonstrated when\
-  \ the robot\n  anticipates the single-file constraint early and communicates its\
-  \ intent clearly, preventing\n  hesitation or discomfort.\n\n  Because the environment\
-  \ cannot be modified, prosocial behavior (P9) is intentionally out of\n  scope.\
-  \ The robot\u2019s responsibility is to manage the interaction gracefully, not to\
-  \ improve the\n  environment itself."
+id: single_file_hallway_01
+name: Single File Hallway
+summary: 'A robot and a human approach each other in a hallway that is too narrow
+  for safe and comfortable passing. The robot must proactively avoid conflict by yielding,
+  signaling, or negotiating right-of-way.
+
+  '
+context:
+  environment:
+    type: indoor
+    setting: office hallway
+    width: single_file
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - signaling
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      awareness: typical
+initial_conditions:
+  robot_position: end_of_hallway
+  human_position: opposite_end
+  visibility: clear
+expected_behaviors:
+  must:
+  - maintain a safe physical distance from the human
+  - avoid entering the hallway simultaneously with the human
+  should:
+  - recognize early that the hallway does not permit passing
+  - signal intent clearly (e.g., yielding or requesting priority)
+  - resolve the encounter without prolonged deadlock
+  should_not:
+  - force the human to back up unexpectedly
+  - enter the hallway and create a stalemate
+  - rely on last-moment braking to resolve the conflict
+  - force the human to back up unexpectedly
+  - enter the hallway and create a stalemate
+  - rely on last-moment braking to resolve the conflict
+relevant_principles:
+- P1
+- P2
+- P3
+- P5
+- P6
+- P7
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  - DeadlockFree
+  quality_metrics:
+  - P2
+  - P3
+  - P7
+  failure_modes:
+  - prolonged deadlock at hallway entrance
+  - human forced to retreat without warning
+  - uncomfortable proximity due to late yielding
+  labeling_criteria:
+  - hallway width prevents safe passing
+  - robot and human approach from opposite ends
+  - no alternative routes available
+evaluation_notes: "This scenario evaluates whether the robot treats predictable spatial\
+  \ constraints as a planning problem rather than a reactive one. Proactive behavior\
+  \ (P7) is demonstrated when the robot anticipates the single-file constraint early\
+  \ and communicates its intent clearly, preventing hesitation or discomfort.\nBecause\
+  \ the environment cannot be modified, prosocial behavior (P9) is intentionally out\
+  \ of scope. The robot\u2019s responsibility is to manage the interaction gracefully,\
+  \ not to improve the environment itself."
 ```
 
 ---

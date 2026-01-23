@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+
+import argparse
+import json
+from pathlib import Path
+
+from prosoc.utils.cards import validator
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Validate a Markdown normative card against a schema."
+    )
+    parser.add_argument("card", help="Path to Markdown card")
+    parser.add_argument("schema", help="Path to JSON schema")
+    parser.add_argument(
+        "--root-key",
+        default=None,
+        help="Optional root key for the schema (e.g. scenario, task, context). "
+             "Omit for single-card schemas such as scenarios.",
+    )
+
+    args = parser.parse_args()
+
+    markdown_text = Path(args.card).read_text(encoding="utf-8")
+    schema = json.loads(Path(args.schema).read_text(encoding="utf-8"))
+
+    result = validator.validate_markdown_card(
+        markdown_text=markdown_text,
+        schema=schema,
+        root_key=args.root_key,
+    )
+
+    if result["valid"]:
+        print("✔ VALID")
+        print(json.dumps(result, indent=2))
+    else:
+        print("✖ INVALID")
+        print(json.dumps(result, indent=2))
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

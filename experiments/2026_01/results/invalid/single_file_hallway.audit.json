@@ -1,0 +1,125 @@
+{
+  "audit_metadata": {
+    "auditor": "prosoc_auditor_v1",
+    "model": "gpt-4-0613",
+    "timestamp": "2024-06-19T21:13:00Z",
+    "audit_version": "0.1"
+  },
+  "card_metadata": {
+    "card_id": "pedestrian_overtaking_01",
+    "card_type": "None",
+    "source_path": "/Users/centaur/Workspace/ProsocialRobotics/prosocial/experiments/2026_01/corpora/invalid/single_file_hallway/scenario.md"
+  },
+  "schema_validation": {
+    "valid": true,
+    "errors": []
+  },
+  "internal_consistency": {
+    "status": "fail",
+    "issues": [
+      {
+        "severity": "error",
+        "yaml_path": "id",
+        "description": "The YAML 'id' is 'pedestrian_overtaking_01', but the Markdown scenario is titled 'Single File Hallway' and describes a head-on encounter in a narrow hallway, not an overtaking scenario.",
+        "markdown_evidence": "This scenario describes a social navigation conflict in which a robot and a human approach each other in a hallway that is too narrow for safe and comfortable passing... the hallway geometry enforces single\u2011file passage.",
+        "yaml_value": "pedestrian_overtaking_01",
+        "expected_value": "single_file_hallway or similar"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "name",
+        "description": "The YAML 'name' describes 'Pedestrian Overtaking a Robot from Behind', which does not match the Markdown scenario of a head-on approach in a single-file hallway.",
+        "markdown_evidence": "a robot and a human approach each other in a hallway that is too narrow for safe and comfortable passing... the hallway geometry enforces single\u2011file passage.",
+        "yaml_value": "Pedestrian Overtaking a Robot from Behind",
+        "expected_value": "Single File Hallway or similar"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "summary",
+        "description": "The YAML 'summary' describes a pedestrian overtaking a robot from behind, which is inconsistent with the Markdown's head-on, single-file hallway scenario.",
+        "markdown_evidence": "a robot and a human approach each other in a hallway that is too narrow for safe and comfortable passing... the hallway geometry enforces single\u2011file passage.",
+        "yaml_value": "A human pedestrian approaches and overtakes a slower-moving robot from behind in a shared pathway. The robot must behave predictably and cooperatively, allowing safe and comfortable passing without impeding the pedestrian.\n",
+        "expected_value": "A summary describing a head-on encounter in a single-file hallway"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "context.environment.setting",
+        "description": "The YAML context allows for 'corridor or sidewalk-like passage' and 'moderate' width, but the Markdown specifies a hallway that is too narrow for safe and comfortable passing, enforcing single-file passage.",
+        "markdown_evidence": "a hallway that is too narrow for safe and comfortable passing... the hallway geometry enforces single\u2011file passage.",
+        "yaml_value": "corridor or sidewalk-like passage",
+        "expected_value": "hallway (too narrow for passing, single-file enforced)"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "context.environment.width",
+        "description": "The YAML specifies 'moderate' width, but the Markdown requires the hallway to be too narrow for safe and comfortable passing, enforcing single-file passage.",
+        "markdown_evidence": "a hallway that is too narrow for safe and comfortable passing... the hallway geometry enforces single\u2011file passage.",
+        "yaml_value": "moderate",
+        "expected_value": "narrow (single-file only)"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "initial_conditions.robot_position",
+        "description": "The YAML initial condition places the robot ahead of the pedestrian, implying an overtaking scenario, but the Markdown describes a head-on approach.",
+        "markdown_evidence": "a robot and a human approach each other in a hallway that is too narrow for safe and comfortable passing",
+        "yaml_value": "ahead_of_pedestrian",
+        "expected_value": "robot and human approaching each other"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "initial_conditions.relative_speed",
+        "description": "The YAML specifies 'pedestrian_faster', which is only relevant for overtaking, not for a head-on encounter as described in the Markdown.",
+        "markdown_evidence": "a robot and a human approach each other in a hallway that is too narrow for safe and comfortable passing",
+        "yaml_value": "pedestrian_faster",
+        "expected_value": "not applicable or both agents approaching"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors.must[0]",
+        "description": "The YAML expected behavior is to 'avoid impeding the pedestrian\u2019s overtaking maneuver', which is not relevant to the Markdown's head-on, single-file hallway scenario.",
+        "markdown_evidence": "the hallway geometry enforces single\u2011file passage... The robot must anticipate the conflict and take initiative\u2014through signaling, yielding, or negotiation\u2014to prevent deadlock or discomfort.",
+        "yaml_value": "avoid impeding the pedestrian\u2019s overtaking maneuver",
+        "expected_value": "Behaviors related to head-on negotiation, signaling, yielding, or deadlock prevention"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "expected_behaviors.must[1]",
+        "description": "The YAML expected behavior is to 'maintain a predictable trajectory during passing', which is ambiguous in the context of a head-on, single-file hallway scenario.",
+        "markdown_evidence": "The robot must anticipate the conflict and take initiative\u2014through signaling, yielding, or negotiation\u2014to prevent deadlock or discomfort.",
+        "yaml_value": "maintain a predictable trajectory during passing",
+        "expected_value": "Behaviors related to negotiation, yielding, or signaling in a head-on encounter"
+      },
+      {
+        "severity": "error",
+        "yaml_path": "relevant_principles",
+        "description": "The YAML lists P0, P1, P2, P3, P4, P9, but the Markdown specifically highlights P7 (Proactivity) and excludes P9 (Prosocial Behavior) as a focus.",
+        "markdown_evidence": "The purpose of this scenario is to isolate and evaluate Proactivity (P7) without introducing opportunities for Prosocial Behavior (P9).",
+        "yaml_value": [
+          "P0",
+          "P1",
+          "P2",
+          "P3",
+          "P4",
+          "P9"
+        ],
+        "expected_value": "P7 (Proactivity), and not P9"
+      }
+    ]
+  },
+  "reference_consistency": {
+    "status": "not_evaluated",
+    "issues": []
+  },
+  "summary": {
+    "error_count": 10,
+    "warning_count": 0,
+    "note_count": 0,
+    "recommendations": [
+      "Align the YAML scenario ID, name, and summary with the Markdown's 'Single File Hallway' scenario.",
+      "Update the context and initial conditions to reflect a head-on, single-file hallway encounter.",
+      "Revise expected behaviors to focus on negotiation, signaling, and yielding in a head-on, single-file context.",
+      "Correct the relevant principles to emphasize P7 (Proactivity) and remove P9 (Prosocial Behavior) as a focus."
+    ],
+    "confidence": "high"
+  }
+}

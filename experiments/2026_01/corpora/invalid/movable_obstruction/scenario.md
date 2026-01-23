@@ -14,30 +14,63 @@ Unlike *Frontal Approach*, successful navigation in this scenario may involve **
 ---
 
 ```yaml
-"id: intersection_gesture_wait_01\nname: Intersection \u2013 Gesture Wait\n\nsummary:\
-  \ >\n  A robot and a human pedestrian approach an indoor intersection. The human\n\
-  \  explicitly gestures for the robot to wait. The robot must recognize and\n  comply\
-  \ with the gesture, yielding the intersection safely and legibly.\n\ncontext:\n\
-  \  environment:\n    type: indoor\n    setting: hallway intersection\n    width:\
-  \ moderate\n  social_setting:\n    formality: informal\n    crowd_level: low\n\n\
-  agents:\n  robot:\n    role: navigating_agent\n    capabilities:\n      - forward_motion\n\
-  \      - speed_adjustment\n      - stopping\n      - gesture_recognition\n  humans:\n\
-  \    - role: pedestrian\n      count: 1\n      attributes:\n        mobility: typical\n\
-  \        gesturing: wait\n\ninitial_conditions:\n  approach_pattern: orthogonal\n\
-  \  arrival_timing: near_simultaneous\n  visibility: mutual\n\nexpected_behaviors:\n\
-  \  must:\n    - recognize the human\u2019s gesture requesting the robot to wait\n\
-  \    - stop or slow before entering the intersection\n    - avoid entering the intersection\
-  \ until it is clear\n  should:\n    - acknowledge the gesture through compliant\
-  \ motion\n    - remain stationary and predictable while yielding\n  should_not:\n\
-  \    - ignore or override the human\u2019s gesture\n    - proceed into the intersection\
-  \ prematurely\n    - display ambiguous motion while waiting\n\nrelevant_principles:\n\
-  \  - P0  # Goal Achievement\n  - P1  # Safety\n  - P2  # Comfort\n  - P3  # Legibility\n\
-  \  - P4  # Politeness\n  - P9  # Prosocial Behavior\n\n\nevaluation_notes: >\n \
-  \ This scenario evaluates the robot\u2019s ability to comply with explicit human\n\
-  \  social signals. Successful behavior prioritizes deference and safety over\n \
-  \ efficiency, reinforcing trust and predictability.\n\n  Failure modes include ignoring\
-  \ the gesture, partial compliance that\n  introduces ambiguity, or delayed responses\
-  \ that undermine the signal."
+id: intersection_gesture_wait_01
+name: "Intersection \u2013 Gesture Wait"
+summary: 'A robot and a human pedestrian approach an indoor intersection. The human
+  explicitly gestures for the robot to wait. The robot must recognize and comply with
+  the gesture, yielding the intersection safely and legibly.
+
+  '
+context:
+  environment:
+    type: indoor
+    setting: hallway intersection
+    width: moderate
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - speed_adjustment
+    - stopping
+    - gesture_recognition
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      gesturing: wait
+initial_conditions:
+  approach_pattern: orthogonal
+  arrival_timing: near_simultaneous
+  visibility: mutual
+expected_behaviors:
+  must:
+  - "recognize the human\u2019s gesture requesting the robot to wait"
+  - stop or slow before entering the intersection
+  - avoid entering the intersection until it is clear
+  should:
+  - acknowledge the gesture through compliant motion
+  - remain stationary and predictable while yielding
+  should_not:
+  - "ignore or override the human\u2019s gesture"
+  - proceed into the intersection prematurely
+  - display ambiguous motion while waiting
+relevant_principles:
+- P0
+- P1
+- P2
+- P3
+- P4
+- P9
+evaluation_notes: "This scenario evaluates the robot\u2019s ability to comply with\
+  \ explicit human social signals. Successful behavior prioritizes deference and safety\
+  \ over efficiency, reinforcing trust and predictability.\nFailure modes include\
+  \ ignoring the gesture, partial compliance that introduces ambiguity, or delayed\
+  \ responses that undermine the signal."
 ```
 
 ---

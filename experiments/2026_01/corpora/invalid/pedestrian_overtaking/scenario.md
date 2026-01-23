@@ -45,34 +45,65 @@ Unacceptable behavior includes accelerating to prevent passing, drifting unpredi
 ## Scenario Specification (Machine-Readable)
 
 ```yaml
-"id: robot_overtaking_01\nname: Overtaking a Pedestrian from Behind\n\nsummary: >\n\
-  \  A robot approaches a human pedestrian from behind in a shared pathway\n  where\
-  \ both are moving in the same direction. The robot must decide whether\n  to follow\
-  \ or overtake in a manner that is safe, legible, and socially\n  comfortable.\n\n\
-  context:\n  environment:\n    type: indoor\n    setting: corridor or sidewalk-like\
-  \ passage\n    width: moderate\n  social_setting:\n    formality: informal\n   \
-  \ crowd_level: low\n\nagents:\n  robot:\n    role: navigating_agent\n    capabilities:\n\
-  \      - forward_motion\n      - speed_adjustment\n      - lateral_adjustment\n\
-  \      - stopping\n  humans:\n    - role: pedestrian\n      count: 1\n      attributes:\n\
-  \        mobility: typical\n        awareness: variable\n\ninitial_conditions:\n\
-  \  robot_position: behind_pedestrian\n  relative_speed: robot_faster\n  visibility:\
-  \ clear_forward_view\n\nexpected_behaviors:\n  must:\n    - avoid colliding with\
-  \ or startling the pedestrian\n    - maintain a safe and respectful distance during\
-  \ approach and passing\n  should:\n    - signal overtaking intent through smooth,\
-  \ predictable motion\n    - choose a passing side consistent with local social norms\n\
-  \    - adjust speed to minimize perceived pressure on the pedestrian\n  should_not:\n\
-  \    - follow too closely from behind\n    - pass abruptly or at excessive speed\n\
-  \    - force the pedestrian to change path or pace\n\nrelevant_principles:\n  -\
-  \ P0  # Goal Achievement\n  - P1  # Safety\n  - P2  # Comfort\n  - P3  # Legibility\n\
-  \  - P4  # Politeness\n  \nevaluation_notes: >\n  This scenario evaluates how the\
-  \ robot handles an interaction in which it\n  has greater situational control than\
-  \ the human. Acceptable behavior may\n  include delaying overtaking when space is\
-  \ limited.\n\n  Successful overtaking is characterized by early intent signaling,\n\
-  \  sufficient lateral clearance, and minimal disruption to the pedestrian\u2019\
-  s\n  motion. Failure modes include tailgating, sudden lateral movements, or\n  passing\
-  \ in a way that causes surprise or discomfort.\n\n  Human awareness is assumed to\
-  \ be variable; overly assertive behavior is\n  inappropriate even if the pedestrian\
-  \ appears unaware of the robot\u2019s presence."
+id: robot_overtaking_01
+name: Overtaking a Pedestrian from Behind
+summary: 'A robot approaches a human pedestrian from behind in a shared pathway where
+  both are moving in the same direction. The robot must decide whether to follow or
+  overtake in a manner that is safe, legible, and socially comfortable.
+
+  '
+context:
+  environment:
+    type: indoor
+    setting: corridor or sidewalk-like passage
+    width: moderate
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - speed_adjustment
+    - lateral_adjustment
+    - stopping
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      awareness: variable
+initial_conditions:
+  robot_position: behind_pedestrian
+  relative_speed: robot_faster
+  visibility: clear_forward_view
+expected_behaviors:
+  must:
+  - avoid colliding with or startling the pedestrian
+  - maintain a safe and respectful distance during approach and passing
+  should:
+  - signal overtaking intent through smooth, predictable motion
+  - choose a passing side consistent with local social norms
+  - adjust speed to minimize perceived pressure on the pedestrian
+  should_not:
+  - follow too closely from behind
+  - pass abruptly or at excessive speed
+  - force the pedestrian to change path or pace
+relevant_principles:
+- P0
+- P1
+- P2
+- P3
+- P4
+evaluation_notes: "This scenario evaluates how the robot handles an interaction in\
+  \ which it has greater situational control than the human. Acceptable behavior may\
+  \ include delaying overtaking when space is limited.\nSuccessful overtaking is characterized\
+  \ by early intent signaling, sufficient lateral clearance, and minimal disruption\
+  \ to the pedestrian\u2019s motion. Failure modes include tailgating, sudden lateral\
+  \ movements, or passing in a way that causes surprise or discomfort.\nHuman awareness\
+  \ is assumed to be variable; overly assertive behavior is inappropriate even if\
+  \ the pedestrian appears unaware of the robot\u2019s presence."
 ```
 
 ---
