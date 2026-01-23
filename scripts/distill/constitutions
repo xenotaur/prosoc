@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Distill social navigation constitutions from Markdown to YAML
+#
+# This script compiles all constitution.md files under prosoc/constitutions
+# into constitution.yml files using the literate compiler pipeline.
+#
+# Supported layouts:
+#   --layout directory   (default; one constitution per directory)
+#   --layout flat        (legacy; one constitution per .md file)
+#
+# Common flags:
+#   --dry-run     Do not write files; report what would change
+#   --show-diffs  Show diffs between existing and generated YAML
+#
+# Examples:
+#   scripts/distill/constitutions
+#   scripts/distill/constitutions --dry-run --show-diffs
+#   scripts/distill/constitutions --layout flat
+
+set -euo pipefail
+
+echo "Distilling Prosoc constitutions..."
+set -x
+
+python -m prosoc.constitutions.distill "$@"
+
+# Turn off tracing and print a blank line
+{ set +x; } 2>/dev/null
+echo
+

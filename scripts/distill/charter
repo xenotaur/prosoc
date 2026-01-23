@@ -5,10 +5,10 @@
 # All command-line arguments are forwarded verbatim.
 #
 # Examples:
-#   scripts/distill
-#   scripts/distill --dry-run
-#   scripts/distill --show-diffs
-#   scripts/distill --dry-run --show-diffs
+#   scripts/distill/charter
+#   scripts/distill/charter --dry-run
+#   scripts/distill/charter --show-diffs
+#   scripts/distill/charter --dry-run --show-diffs
 
 set -euo pipefail
 

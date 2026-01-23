@@ -13,9 +13,9 @@
 #   --show-diffs  Show diffs between existing and generated YAML
 #
 # Examples:
-#   scripts/distill_scenarios
-#   scripts/distill_scenarios --dry-run --show-diffs
-#   scripts/distill_scenarios --layout flat
+#   scripts/distill/scenarios
+#   scripts/distill/scenarios --dry-run --show-diffs
+#   scripts/distill/scenarios --layout flat
 
 set -euo pipefail
 

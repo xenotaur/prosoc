@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - "prosoc/charter/**"
-      - "scripts/distill"
+      - "scripts/distill/charter"
       - ".github/workflows/charter.yml"
   push:
     branches:
@@ -31,7 +31,7 @@ jobs:
 
       - name: Run charter distillation (dry-run)
         run: |
-          scripts/distill --dry-run
+          scripts/distill/charter --dry-run
 
       - name: Check that charter.yml is up to date
         run: |
