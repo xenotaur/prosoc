@@ -1,6 +1,6 @@
 # Constitution Card: Asimov's Three Laws of Robotics
 
-## STATUS: DRAFT 2026-01-23
+## STATUS: EDITED 2026-01-26
 - SOURCE: Asimov, I. (1942). Runaround. Astounding Science Fiction.
 - DRAFTED: ChatGPT 5.2, 2026-01-23
 - EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-26

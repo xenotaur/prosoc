@@ -1,6 +1,6 @@
 # Constitution Card: Asimov's Four Laws of Robotics
 
-## STATUS: DRAFT 2026-01-23
+## STATUS: EDITED 2026-01-26
 - SOURCE: Asimov, I. (1985). Robots and Empire.
 - DRAFTED: Anthony Francis centaur@logicalrobotics.com, 2026-01-26
 - EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-26
