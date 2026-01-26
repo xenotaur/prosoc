@@ -149,7 +149,9 @@ def distill_all(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Distill social navigation constitutions")
+    parser = argparse.ArgumentParser(
+        description="Distill social navigation constitutions"
+    )
     parser.add_argument(
         "--layout",
         choices=["directory", "flat"],
