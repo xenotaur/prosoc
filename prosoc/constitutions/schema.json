@@ -11,7 +11,6 @@
       "required": [
         "id",
         "name",
-        "schema_version",
         "rules"
       ],
       "properties": {
@@ -20,36 +19,6 @@
         },
         "name": {
           "type": "string"
-        },
-        "schema_version": {
-          "type": "string"
-        },
-        "provenance": {
-          "type": "object",
-          "properties": {
-            "derived_from": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "generation_method": {
-              "type": "string",
-              "enum": [
-                "manual",
-                "compiled",
-                "auto-amended"
-              ]
-            },
-            "generator": {
-              "type": "string"
-            },
-            "date_generated": {
-              "type": "string",
-              "format": "date"
-            }
-          },
-          "additionalProperties": false
         },
         "scope": {
           "type": "object",
@@ -145,58 +114,6 @@
             },
             "notes": {
               "type": "string"
-            }
-          },
-          "additionalProperties": false
-        },
-        "runtime_profile": {
-          "type": "object",
-          "properties": {
-            "estimated_tokens": {
-              "type": "integer"
-            },
-            "recommended_subset": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "additionalProperties": false
-        },
-        "evaluation": {
-          "type": "object",
-          "properties": {
-            "benchmarks": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "known_failure_modes": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "regression_tests": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "required": [
-                  "test_id",
-                  "description"
-                ],
-                "properties": {
-                  "test_id": {
-                    "type": "string"
-                  },
-                  "description": {
-                    "type": "string"
-                  }
-                },
-                "additionalProperties": false
-              }
             }
           },
           "additionalProperties": false

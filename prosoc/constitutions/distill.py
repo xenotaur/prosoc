@@ -1,152 +1,174 @@
 """
-Distiller for Prosoc Constitution Cards.
+Constitution distillation tool.
 
-Extracts and validates constitution YAML blocks from Markdown files and
-emits machine-consumable constitution artifacts.
+This module distills human-authored social navigation constitutions written in
+Markdown with fenced YAML blocks into machine-readable YAML files, validated
+against the constitution JSON schema.
+
+It supports two layouts:
+
+1. Directory layout (default):
+   prosoc/constitutions/<constitution_id>/constitution.md -> constitution.yml
+
+2. Flat layout (legacy / optional):
+   prosoc/constitutions/<constitution_id>.md -> <constitution_id>.yml
+
+The core Markdown→YAML logic is delegated to prosoc.literate.compiler.
 """
 
 from __future__ import annotations
 
-import json
-import hashlib
-from pathlib import Path
-from typing import Dict, Any, List
+import argparse
+import pathlib
+from typing import Iterable, NamedTuple
 
-from jsonschema import validate, ValidationError
-
-from prosoc.literate.compiler import (
-    load_markdown,
-    extract_yaml_blocks,
-)
-from prosoc.literate.errors import DistillationError
-from prosoc.literate.utils import atomic_write
+from prosoc.literate import compiler
+from prosoc.literate import utils
 
 
-# ---------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# Constants
+# -----------------------------------------------------------------------------
 
-CONSTITUTIONS_DIR = Path(__file__).parent
-SCHEMA_PATH = CONSTITUTIONS_DIR / "schema.json"
-OUTPUT_DIR = CONSTITUTIONS_DIR / "distilled"
-
-
-# ---------------------------------------------------------------------
-# Utilities
-# ---------------------------------------------------------------------
-
-def _hash_text(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+SCHEMA_PATH = pathlib.Path(__file__).parent / "schema.json"
+DEFAULT_ROOT_KEY = None  # was "constitution"
 
 
-def _load_schema() -> Dict[str, Any]:
-    with open(SCHEMA_PATH, "r") as f:
-        return json.load(f)
+# -----------------------------------------------------------------------------
+# Constitution source abstraction
+# -----------------------------------------------------------------------------
 
 
-# ---------------------------------------------------------------------
-# Core distillation
-# ---------------------------------------------------------------------
+class ConstitutionSource(NamedTuple):
+    md_path: pathlib.Path
+    yml_path: pathlib.Path
 
-def distill_constitution(md_path: Path) -> Dict[str, Any]:
-    """
-    Distill a single constitution Markdown file.
 
-    Returns a validated constitution dictionary with provenance metadata.
-    """
-    text = load_markdown(md_path)
-    yaml_blocks = extract_yaml_blocks(text)
+# -----------------------------------------------------------------------------
+# Discovery
+# -----------------------------------------------------------------------------
 
-    if len(yaml_blocks) == 0:
-        raise DistillationError(
-            f"No YAML block found in constitution: {md_path}"
-        )
-    if len(yaml_blocks) > 1:
-        raise DistillationError(
-            f"Multiple YAML blocks found in constitution: {md_path}"
+
+def discover_directory_layout(root: pathlib.Path) -> Iterable[ConstitutionSource]:
+    """Discover constitutions using the directory-based layout."""
+    for child in root.iterdir():
+        if not child.is_dir():
+            continue
+        md_path = child / "constitution.md"
+        if md_path.exists():
+            yield ConstitutionSource(
+                md_path=md_path,
+                yml_path=child / "constitution.yml",
+            )
+
+
+def discover_flat_layout(root: pathlib.Path) -> Iterable[ConstitutionSource]:
+    """Discover constitutions using the flat-file layout."""
+    for md_path in root.glob("*.md"):
+        if md_path.name in {"README.md", "constitution_template.md"}:
+            continue
+        yield ConstitutionSource(
+            md_path=md_path,
+            yml_path=md_path.with_suffix(".yml"),
         )
 
-    document = yaml_blocks[0]
 
-    if "constitution" not in document:
-        raise DistillationError(
-            f"Top-level key 'constitution' missing in {md_path}"
-        )
-
-    schema = _load_schema()
-
-    try:
-        validate(instance=document, schema=schema)
-    except ValidationError as e:
-        raise DistillationError(
-            f"Schema validation failed for {md_path}:\n{e}"
-        )
-
-    constitution = document["constitution"]
-
-    # Inject distillation metadata
-    constitution["_meta"] = {
-        "source_file": str(md_path),
-        "source_hash": _hash_text(text),
-        "distilled_from": "constitution_card",
-    }
-
-    return constitution
+def discover_constitutions(
+    root: pathlib.Path,
+    layout: str,
+) -> list[ConstitutionSource]:
+    if layout == "directory":
+        return list(discover_directory_layout(root))
+    if layout == "flat":
+        return list(discover_flat_layout(root))
+    raise ValueError(f"Unknown constitution layout: {layout}")
 
 
-# ---------------------------------------------------------------------
-# Batch distillation
-# ---------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# Distillation
+# -----------------------------------------------------------------------------
 
-def distill_all(
-    input_dir: Path | None = None,
-    output_dir: Path | None = None,
-) -> List[Dict[str, Any]]:
-    """
-    Distill all constitution cards in a directory.
-    """
-    input_dir = input_dir or CONSTITUTIONS_DIR
-    output_dir = output_dir or OUTPUT_DIR
-    output_dir.mkdir(parents=True, exist_ok=True)
 
-    results = []
+def distill_constitution(
+    source: ConstitutionSource,
+    *,
+    schema_path: pathlib.Path,
+    dry_run: bool,
+    show_diffs: bool,
+) -> None:
+    """Distill a single constitution."""
 
-    for md_path in sorted(input_dir.glob("*.md")):
-        constitution = distill_constitution(md_path)
-        cid = constitution["id"]
-
-        out_path = output_dir / f"{cid}.json"
-        atomic_write(out_path, json.dumps(constitution, indent=2))
-
-        results.append(constitution)
-
-    # Write index
-    index = {
-        "count": len(results),
-        "constitutions": [
-            {
-                "id": c["id"],
-                "name": c["name"],
-                "source_file": c["_meta"]["source_file"],
-            }
-            for c in results
-        ],
-    }
-
-    atomic_write(
-        output_dir / "index.json",
-        json.dumps(index, indent=2),
+    compiled = compiler.compile_file(
+        md_path=source.md_path,
+        schema_path=schema_path,
+        root_key=DEFAULT_ROOT_KEY,
     )
 
-    return results
+    yaml_text = utils.dump_yaml(compiled)
+
+    utils.atomic_write(
+        path=source.yml_path,
+        content=yaml_text,
+        dry_run=dry_run,
+        show_diffs=show_diffs,
+    )
 
 
-# ---------------------------------------------------------------------
-# CLI entry point
-# ---------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# High-level entry point
+# -----------------------------------------------------------------------------
+
+
+def distill_all(
+    *,
+    root: pathlib.Path,
+    layout: str = "directory",
+    dry_run: bool = False,
+    show_diffs: bool = False,
+) -> None:
+    schema_path = SCHEMA_PATH
+
+    sources = discover_constitutions(root, layout)
+    if not sources:
+        from prosoc.literate.errors import LiterateDiscoveryError
+
+        raise LiterateDiscoveryError(f"No constitutions found under {root}")
+
+    for source in sources:
+        distill_constitution(
+            source,
+            schema_path=schema_path,
+            dry_run=dry_run,
+            show_diffs=show_diffs,
+        )
+
+
+# -----------------------------------------------------------------------------
+# CLI
+# -----------------------------------------------------------------------------
+
 
 def main() -> None:
-    distill_all()
+    parser = argparse.ArgumentParser(description="Distill social navigation constitutions")
+    parser.add_argument(
+        "--layout",
+        choices=["directory", "flat"],
+        default="directory",
+        help="Constitution layout style",
+    )
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--show-diffs", action="store_true")
+
+    args = parser.parse_args()
+
+    root = pathlib.Path(__file__).parent
+
+    distill_all(
+        root=root,
+        layout=args.layout,
+        dry_run=args.dry_run,
+        show_diffs=args.show_diffs,
+    )
 
 
 if __name__ == "__main__":
