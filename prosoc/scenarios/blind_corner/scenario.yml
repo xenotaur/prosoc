@@ -1,0 +1,92 @@
+id: blind_corner_01
+name: Blind Corner
+summary: 'A robot and a human pedestrian approach each other from opposite directions
+  and meet at an indoor blind corner, where neither can see the other until they are
+  in close proximity. The robot must detect the human at short range and resolve the
+  encounter safely without collision or prolonged obstruction.
+
+  '
+scientific_purpose: pedestrian interaction
+geometric_layout: corner
+context:
+  environment:
+    type: indoor
+    setting: office or hospital corridor with a blind turn
+    width: narrow to moderate
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - speed_adjustment
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      awareness: typical
+      visibility_of_robot: none_until_close
+initial_conditions:
+  robot_position: one side of the corner
+  human_position: other side of the corner
+  mutual_visibility: none
+  detection_range: short
+intended_robot_task: navigate from A to B through the corner
+intended_human_behavior: navigate from B to A through the corner
+expected_behaviors:
+  must:
+  - avoid collision with the human at the corner
+  - not force the human to take abrupt evasive action
+  should:
+  - reduce speed when approaching blind corners
+  - stop promptly upon detecting the human at close range
+  - yield to the human when space is insufficient for simultaneous passage
+  - resolve the encounter without requiring either party to reverse unnecessarily
+  should_not:
+  - approach blind corners at full speed without any modulation
+  - continue advancing after human detection in a way that causes alarm
+  - remain stopped indefinitely without attempting to resolve the encounter
+relevant_principles:
+- P1
+- P2
+- P3
+- P7
+ideal_outcome: robot and human pass each other at the corner without collision or
+  obstruction
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  quality_metrics:
+  - P2
+  - P3
+  failure_modes:
+  - robot collides with human at or around the corner
+  - robot startles human by appearing suddenly at full speed
+  - encounter results in prolonged standoff requiring one party to reverse
+  - robot stops and fails to resolve the encounter within time limit
+  labeling_criteria:
+  - robot and human approach the same corner from opposite sides
+  - neither agent has line-of-sight to the other at the start of the episode
+  - agents come into detection range within a short distance of the corner apex
+evaluation_notes: "This scenario evaluates the robot's ability to handle unexpected\
+  \ close encounters caused by limited visibility. The key challenge is not just avoiding\
+  \ collision but doing so in a way that does not alarm or inconvenience the human.\n\
+  Speed modulation on approach \u2014 slowing before the corner even without detecting\
+  \ the human \u2014 is a proactive safety behavior that distinguishes socially competent\
+  \ navigation from purely reactive collision avoidance. Evaluators should distinguish\
+  \ between: (a) a robot that stops safely because it detected the human in time,\
+  \ and (b) a robot that narrowly avoids collision because it happened to be moving\
+  \ slowly.\nThe scenario is related to the Frontal Approach scenario but differs\
+  \ in that the critical constraint is reduced detection range rather than hallway\
+  \ width. Variants may include different corner angles (sharp 90\xB0 vs. gentle curves),\
+  \ different corridor widths, and different robot speeds on approach.\nHuman behavior\
+  \ playbook: the human confederate should approach the corner at a natural walking\
+  \ pace without anticipating the robot's presence. The confederate should not slow\
+  \ down preemptively \u2014 the encounter should simulate a natural blind corner\
+  \ meeting."
