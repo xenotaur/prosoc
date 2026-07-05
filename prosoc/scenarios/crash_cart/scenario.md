@@ -92,16 +92,22 @@ agents:
       attributes:
         mobility: typical
         awareness: typical
+    - role: recipient
+      count: 1
+      attributes:
+        mobility: stationary
+        awareness: aware_of_incoming_delivery
 
 initial_conditions:
   robot_position: starting point of an urgent delivery route
   human_positions: bystanders along the corridor, unaware of the specific urgency
+  recipient_position: destination of the delivery route
   delivery_urgency: high
   destination: patient or recipient location
 
 intended_robot_task: deliver the medical product urgently
 
-intended_human_behavior: receive the object
+intended_human_behavior: bystanders yield to the passing robot; recipient receives the medical product upon arrival
 
 expected_behaviors:
   must:
