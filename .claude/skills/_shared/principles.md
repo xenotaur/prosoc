@@ -49,10 +49,10 @@ standard abbreviation doesn't exist.
 - **P2 (Comfort)** — include whenever the robot's proximity or speed could cause stress
 - **P3 (Legibility)** — include whenever the robot's intent might be unclear to a human
 - **P4 (Politeness)** — include whenever turn-taking, yielding, or consideration is required
-- **P5 (Social Norms)** — include whenever a cultural or contextual convention governs behavior
+- **P5 (Social Competency)** — include whenever a cultural or contextual convention governs behavior
 - **P6 (Agent Understanding)** — include whenever the robot must predict or model human intent
 - **P7 (Proactivity)** — include specifically when deadlock or hesitation is the core challenge
-- **P8 (Context)** — include when the appropriate behavior depends heavily on environment/task context
+- **P8 (Contextual Appropriateness)** — include when the appropriate behavior depends heavily on environment/task context
 - **P9 (Prosocial Behavior)** — include when the scenario turns on discretionary, beyond-the-task helpfulness rather than mere compliance
 
 Limit `relevant_principles` to the 3–5 most directly relevant. Including all ten dilutes meaning.
