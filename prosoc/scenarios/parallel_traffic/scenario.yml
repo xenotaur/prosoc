@@ -1,0 +1,87 @@
+id: parallel_traffic_01
+name: Parallel Traffic
+summary: 'A robot navigates from A to B while a crowd of pedestrians moves broadly
+  in the same direction, forming an emergent pedestrian stream. The robot must merge
+  into and hold a stable position within the flow, matching pace and minimizing lateral
+  weaving.
+
+  '
+scientific_purpose: crowd navigation
+geometric_layout: passable space
+context:
+  environment:
+    type: generic
+    setting: busy sidewalk, corridor, or transit concourse
+    width: wide
+  social_setting:
+    formality: informal
+    crowd_level: high
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - speed_adjustment
+  humans:
+  - role: pedestrian
+    count: 15
+    attributes:
+      mobility: typical
+      awareness: typical
+      movement_pattern: parallel_stream
+initial_conditions:
+  robot_position: entering the pedestrian stream from one side
+  human_positions: distributed along a shared direction of travel roughly parallel
+    to the robot's path
+  flow_direction: broadly aligned with robot's A-to-B path
+intended_robot_task: navigate from A to B
+intended_human_behavior: mill from A to B, forming a parallel pedestrian stream
+expected_behaviors:
+  must:
+  - avoid collision with any pedestrian in the stream
+  - not cut across multiple pedestrians' lanes to force a position
+  should:
+  - merge into the stream smoothly at a natural entry point
+  - match pace broadly to the surrounding flow
+  - maintain a consistent lateral position within the flow
+  should_not:
+  - move substantially faster or slower than the surrounding stream without cause
+  - weave laterally between pedestrians repeatedly
+  - force an overtake through an insufficiently clear gap
+relevant_principles:
+- P1
+- P2
+- P5
+- P6
+ideal_outcome: robot merges into and travels with the pedestrian stream without collision
+  or obstruction
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  - TTG
+  quality_metrics:
+  - P2
+  - P5
+  failure_modes:
+  - robot collides with a pedestrian while merging or traveling within the stream
+  - robot cuts across the flow, disrupting multiple pedestrians
+  - robot's pace diverges substantially from the surrounding stream
+  - robot weaves laterally rather than holding a stable lane position
+  labeling_criteria:
+  - a crowd of pedestrians is present with a broadly shared direction of travel
+  - the robot's intended path is roughly aligned with that shared direction
+  - the robot's task requires sustained travel through the stream rather than a single
+    crossing
+evaluation_notes: 'This scenario isolates directional-flow conformance from the more
+  general Crowd Navigation scenario, where crowd motion has no shared direction. Evaluators
+  should measure lateral weaving (e.g., variance in lane position) and pace-matching
+  (relative speed to the local stream) as quality indicators distinct from simple
+  collision avoidance.
+
+  This scenario is related to Circular Crossing (Figure 7, not in Table 3), which
+  involves pedestrians crossing at an angle rather than moving parallel to the robot,
+  and to Perpendicular Traffic, which specializes crowd motion to a direction orthogonal
+  to the robot''s path.'
