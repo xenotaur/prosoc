@@ -2,14 +2,23 @@
 
 - **Scenario:** `prosoc/scenarios/intersection_no_gesture/`
 - **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Not ready — 2 blocking issues
+- **Verdict:** Not ready — 1 blocking issue (corrected 2026-07-05 — see Correction Notice)
 
-## Findings
+## Correction Notice (2026-07-05)
 
-### 1. Invalid principle ID `P0` in `relevant_principles` — blocking
-- **Section/field:** Scenario Specification (YAML) → `relevant_principles`
-- **Issue:** The YAML lists `P0  # Goal Achievement` alongside P1–P4. `../../../.claude/skills/_shared/principles.md` defines only P1–P8; there is no P0, and no principle named "Goal Achievement" exists in the charter. `schema.json`'s `pattern: "^P[0-9]+$"` has no upper bound, so this passes schema/dry-run validation silently — it is a charter-compliance defect, not a schema error.
-- **Recommended fix:** Remove `P0`. If "goal achievement" is a concept the author wants to flag as a tension against prosocial behavior, note it in `evaluation_notes` instead of inventing a new principle ID, per `../../../.claude/skills/_shared/principles.md`'s explicit guidance.
+This audit originally flagged `P0` in `relevant_principles` as an invalid,
+non-canonical principle ID (Finding 1 below). That was incorrect:
+`prosoc/charter/charter.md` (the sole source of truth) defines **ten** principles,
+P0–P9 — P0 (Goal Achievement) is this project's own explicit, intentional
+extension beyond the P&G paper's eight, not an invented ID. `charter.yml` (the
+generated artifact) confirms this (distiller dry-run reports no diff). The error
+originated in a stale `.claude/skills/_shared/principles.md`, which claimed only
+P1–P8 were valid and has since been corrected. Finding 1 is retracted; Finding 4
+is corrected to reflect the real principle count of 5, not 4.
+
+### 1. ~~Invalid principle ID `P0` in `relevant_principles`~~ — RETRACTED
+- **Status:** Retracted 2026-07-05. See Correction Notice above — P0 is a valid
+  canonical principle per `prosoc/charter/charter.md`, not an invented ID.
 
 ### 2. Missing `scenario_usage_guide` block entirely — blocking
 - **Section/field:** Scenario Specification (YAML) — `scenario_usage_guide` (success_metrics, quality_metrics, failure_modes, labeling_criteria)
@@ -21,10 +30,10 @@
 - **Issue:** The card jumps from Status straight to Scenario Overview; the structured summary block (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success/Quality Metrics, Ideal Outcome, Related Scenarios, Cited In) is entirely absent.
 - **Recommended fix:** Add the section, drawing on prose already present (Overview, Normative Expectations) and the `../../../.claude/skills/_shared/pg_scenarios.md` Table 3 entry for "Intersection No Gesture."
 
-### 4. `relevant_principles` count of 4 (once P0 is removed) omits some plausible candidates — suggestion
-- **Section/field:** `relevant_principles` (P1, P2, P3, P4 remain after removing the invalid ID)
-- **Issue:** Once P0 is dropped, 4 principles remain — within the 3–5 guidance band, so not a problem on its own. However, the prose repeatedly emphasizes "implicit coordination," "mutual anticipation of trajectories," and avoiding "oscillate indecisively" — which sound like P6 (Agent Understanding — predicting the human's trajectory/intent) and P7 (Proactivity — resolving the ambiguity/deadlock without hesitation). Neither is listed.
-- **Recommended fix:** Human editor should consider whether P6 or P7 belong, without exceeding 5 total.
+### 4. `relevant_principles` count of 5 (P0, P1–P4) sits at the upper edge of guidance and omits some plausible candidates — suggestion
+- **Section/field:** `relevant_principles` (P0, P1, P2, P3, P4 — corrected 2026-07-05, see Correction Notice)
+- **Issue:** With P0 correctly counted as valid, 5 principles are listed — at the top of the 3–5 guidance band, not over it. However, the prose repeatedly emphasizes "implicit coordination," "mutual anticipation of trajectories," and avoiding "oscillate indecisively" — which sound like P6 (Agent Understanding — predicting the human's trajectory/intent) and P7 (Proactivity — resolving the ambiguity/deadlock without hesitation). Neither is listed.
+- **Recommended fix:** Human editor should consider whether P6 or P7 would be more central than one of the currently-listed entries, without exceeding 5 total.
 
 ### 5. Possible over-specification in `should_not` — suggestion
 - **Section/field:** `expected_behaviors.should_not` vs. P&G Guideline N6 (over-specification)

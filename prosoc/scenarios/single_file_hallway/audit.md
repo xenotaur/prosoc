@@ -2,7 +2,19 @@
 
 - **Scenario:** `prosoc/scenarios/single_file_hallway/`
 - **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Not ready — 3 blocking issues
+- **Verdict:** Not ready — 3 blocking issues (Finding 5 corrected 2026-07-05 — see Correction Notice; blocking count unchanged)
+
+## Correction Notice (2026-07-05)
+
+Finding 5 below originally questioned whether "Prosocial Behavior (P9)," referenced
+in prose, was a real principle, since `.claude/skills/_shared/principles.md` (at
+the time) claimed the canonical set was only P1–P8. It is real:
+`prosoc/charter/charter.md` (the sole source of truth) defines **ten** principles,
+P0–P9, and P9 (Prosocial Behavior) is this project's own explicit extension
+beyond the P&G paper's eight. `charter.yml` confirms this (distiller dry-run
+reports no diff). The shared reference file has since been corrected. This does
+not change this scenario's blocking count — Finding 5 was already suggestion-level
+and none of the 3 blocking findings (1–3) relate to principle IDs.
 
 ## Findings
 
@@ -69,22 +81,12 @@
   single-file constraint early, one yields clearly, and both pass through the hallway
   without collision, backing up, or prolonged hesitation."
 
-### 5. Reference to "Prosocial Behavior (P9)" — a principle outside P1–P8 — suggestion
-- **Section/field:** Overview prose and `evaluation_notes`
-- **Issue:** The prose repeatedly references "Prosocial Behavior (P9)" as a principle
-  being deliberately excluded from this scenario's scope ("isolate and evaluate
-  Proactivity (P7) without introducing opportunities for Prosocial Behavior (P9)"; "P9 is
-  intentionally out of scope"). Per `../../../.claude/skills/_shared/principles.md`, the canonical principle set
-  is only P1–P8; there is no P9. This does not appear in `relevant_principles` or
-  `quality_metrics` (which correctly stay within P1–P8), so it is not a schema/charter
-  compliance violation — it's confined to prose — but it references a principle ID that
-  doesn't exist in the charter as documented here.
-- **Recommended fix:** Either confirm P9 is a real, separately-tracked principle (e.g.
-  from a newer charter revision not yet reflected in `../../../.claude/skills/_shared/principles.md`) and update
-  the shared reference file accordingly, or rephrase the prose to avoid citing a
-  numbered principle that isn't part of the canonical P1–P8 set — e.g. "without
-  introducing opportunities for environmental stewardship or third-party benefit" (the
-  Discussion section already uses this phrasing, which doesn't depend on a P9 label).
+### 5. ~~Reference to "Prosocial Behavior (P9)" — a principle outside P1–P8~~ — RETRACTED
+- **Status:** Retracted 2026-07-05. See Correction Notice above — P9 (Prosocial
+  Behavior) is a valid, canonical charter principle per `prosoc/charter/charter.md`,
+  not an out-of-range ID. The prose's references to "Prosocial Behavior (P9)" as
+  deliberately out of scope for this scenario are correct as written; no change
+  needed.
 
 ### 6. Minor over-specification phrasing — suggestion
 - **Section/field:** `expected_behaviors.should` — "signal intent clearly (e.g., yielding

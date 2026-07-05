@@ -4,7 +4,7 @@ This is a verification rubric, companion to `prosoc/scenarios/schema.json` and
 `prosoc/scenarios/template.md`. Where `prosoc-scenario-new`'s `schema_guide.md`
 explains what to put in each field when authoring, this file explains what to check
 when auditing an already-drafted card. Read `../../_shared/principles.md` for the
-P1–P8 definitions referenced below.
+P0–P9 definitions referenced below.
 
 ## Required Fields (schema.json)
 
@@ -31,10 +31,10 @@ emphasis or detail rather than outright contradictory — still worth a should-f
 
 - [ ] `scenario.yml` validates against `schema.json` (no `additionalProperties`
       violations; `expected_behaviors` only has `must`/`should`/`should_not`)
-- [ ] `relevant_principles` — every entry matches `^P[0-9]+$` and is P1–P8
-- [ ] `relevant_principles` count is roughly 3–5 (0 is likely under-specified; 8 dilutes
+- [ ] `relevant_principles` — every entry matches `^P[0-9]+$` and is P0–P9
+- [ ] `relevant_principles` count is roughly 3–5 (0 is likely under-specified; 10 dilutes
       meaning per `../../_shared/principles.md`)
-- [ ] `scenario_usage_guide.quality_metrics` — same P1–P8 constraint
+- [ ] `scenario_usage_guide.quality_metrics` — same P0–P9 constraint
 - [ ] `expected_behaviors` entries describe a *kind* of behavior, not an exact motion,
       numeric threshold, or implementation detail (P&G Guideline N6 — over-specification)
 

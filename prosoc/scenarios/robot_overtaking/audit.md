@@ -2,22 +2,24 @@
 
 - **Scenario:** `prosoc/scenarios/robot_overtaking/`
 - **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Not ready — 3 blocking issues
+- **Verdict:** Not ready — 2 blocking issues (corrected 2026-07-05 — see Correction Notice)
 
-## Findings
+## Correction Notice (2026-07-05)
 
-### 1. Invalid principle identifier `P0` in `relevant_principles` — blocking
-- **Section/field:** `relevant_principles` (scenario.md embedded YAML and scenario.yml)
-- **Issue:** The list includes `P0  # Goal Achievement`. Per `../../../.claude/skills/_shared/principles.md`, only
-  P1–P8 are defined charter principles; there is no P0. `P0` matches the schema's regex
-  pattern (`^P[0-9]+$`) so it passes JSON Schema validation, but it is not a real
-  principle identifier and dilutes/misuses the taxonomy. "Goal Achievement" is not one of
-  the eight named principles.
-- **Recommended fix:** Remove `P0` from `relevant_principles` in both `scenario.md` and
-  `scenario.yml`. If the author wants to flag that goal achievement is a relevant
-  tension in this scenario, note it in `evaluation_notes` instead (as
-  `principles.md` recommends for principles not captured by P1–P8), not as a
-  fabricated principle ID.
+This audit originally flagged `P0` in `relevant_principles` as an invalid,
+non-canonical principle ID (Finding 1 below). That was incorrect:
+`prosoc/charter/charter.md` (the sole source of truth) defines **ten** principles,
+P0–P9 — P0 (Goal Achievement) is this project's own explicit, intentional
+extension beyond the P&G paper's eight, not an invented ID. `charter.yml` (the
+generated artifact) confirms this (distiller dry-run reports no diff). The error
+originated in a stale `.claude/skills/_shared/principles.md`, which claimed only
+P1–P8 were valid and has since been corrected. Finding 1 is retracted; the
+`relevant_principles` list totals 5 (P0, P1–P4) once P0 is correctly counted,
+which is within the 3–5 guidance, so no replacement finding is needed.
+
+### 1. ~~Invalid principle identifier `P0` in `relevant_principles`~~ — RETRACTED
+- **Status:** Retracted 2026-07-05. See Correction Notice above — P0 is a valid
+  canonical principle per `prosoc/charter/charter.md`, not an invented ID.
 
 ### 2. Missing "Scenario Card Summary" section — blocking
 - **Section/field:** Scenario Card Summary (per `template.md`, "Required for AUDITED
@@ -46,7 +48,7 @@
   discomfort") but this content has not been structured into `failure_modes` or the
   other required subfields.
 - **Recommended fix:** Add a `scenario_usage_guide` block with `success_metrics` (e.g.
-  SR, NoCollisions, PSC), `quality_metrics` (a P1–P8 subset, e.g. P1, P2, P3), and convert
+  SR, NoCollisions, PSC), `quality_metrics` (a subset of `relevant_principles`, e.g. P1, P2, P3), and convert
   the failure-mode language already in `evaluation_notes` into explicit
   `failure_modes` and `labeling_criteria` entries, plus the matching "Scenario Usage
   Guide" prose section in `scenario.md`.
@@ -126,8 +128,8 @@ Per `template.md`'s "Required for AUDITED scenarios" fields:
   currently in YAML or prose; P&G-style metrics (SR, NoCollisions, PSC) are a natural fit
   given the scenario's safety/comfort focus.
 - **Scenario Usage Guide — Quality Metrics:** should probably be filled in now — the
-  `relevant_principles` list already identifies the applicable P1–P4 (once P0 is
-  removed); reuse a subset directly.
+  `relevant_principles` list (P0, P1–P4) already identifies applicable candidates;
+  reuse a subset directly.
 - **Scenario Usage Guide — Ideal Outcome:** reasonably present in spirit (see
   `ideal_outcome`-equivalent language in `evaluation_notes`), but there is no explicit
   top-level `ideal_outcome` field in the YAML at all (the schema defines one) — should

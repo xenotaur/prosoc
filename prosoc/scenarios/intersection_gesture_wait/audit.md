@@ -2,19 +2,28 @@
 
 - **Scenario:** `prosoc/scenarios/intersection_gesture_wait/`
 - **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Not ready — 3 blocking issues
+- **Verdict:** Not ready — 1 blocking issue (corrected 2026-07-05 — see Correction Notice)
 
-## Findings
+## Correction Notice (2026-07-05)
 
-### 1. Invalid principle IDs `P0` and `P9` in `relevant_principles` — blocking
-- **Section/field:** Scenario Specification (YAML) → `relevant_principles`
-- **Issue:** The YAML lists `P0  # Goal Achievement` and `P9  # Prosocial Behavior` alongside P1–P4. `../../../.claude/skills/_shared/principles.md` defines only P1–P8; there is no P0 or P9, and no principle named "Goal Achievement" or "Prosocial Behavior" exists in the charter. `schema.json`'s `pattern: "^P[0-9]+$"` has no upper bound, so this passes schema/dry-run validation silently — it is a charter-compliance defect, not a schema error.
-- **Recommended fix:** Remove `P0` and `P9`. If "goal achievement" and "prosocial behavior generally" are concepts the author wants to flag, note them in `evaluation_notes` instead of inventing new principle IDs, per `../../../.claude/skills/_shared/principles.md`'s explicit guidance.
+This audit originally flagged `P0` and `P9` in `relevant_principles` as invalid,
+non-canonical principle IDs (Findings 1 and 2 below). That was incorrect:
+`prosoc/charter/charter.md` (the sole source of truth) defines **ten** principles,
+P0–P9 — P0 (Goal Achievement) and P9 (Prosocial Behavior) are this project's own
+explicit, intentional extensions beyond the P&G paper's eight, not invented IDs.
+`charter.yml` (the generated artifact) confirms this (distiller dry-run reports no
+diff). The error originated in a stale `.claude/skills/_shared/principles.md`,
+which claimed only P1–P8 were valid and has since been corrected. Findings 1 and 2
+are retracted; Finding 6 (principle count) is corrected to reflect the real count
+of 6, not 4.
 
-### 2. Same invalid IDs would need to be checked in `quality_metrics` — blocking (moot, but related)
-- **Section/field:** `scenario_usage_guide.quality_metrics`
-- **Issue:** This field doesn't exist in the card at all (see Finding 4), so the P1–P8-only constraint can't yet be violated there — but whoever fills it in should not reuse P0/P9 from `relevant_principles`.
-- **Recommended fix:** When authoring `quality_metrics`, draw only from the corrected P1–P8 list, not from the current (invalid) `relevant_principles` set.
+### 1. ~~Invalid principle IDs `P0` and `P9` in `relevant_principles`~~ — RETRACTED
+- **Status:** Retracted 2026-07-05. See Correction Notice above — P0 and P9 are
+  valid canonical principles per `prosoc/charter/charter.md`, not invented IDs.
+
+### 2. ~~Same invalid IDs would need to be checked in `quality_metrics`~~ — RETRACTED
+- **Status:** Retracted 2026-07-05, moot along with Finding 1 — P0/P9 are valid,
+  so there is no invalid-ID constraint to check `quality_metrics` against.
 
 ### 3. Missing `scenario_usage_guide` block entirely — blocking
 - **Section/field:** Scenario Specification (YAML) — `scenario_usage_guide` (success_metrics, quality_metrics, failure_modes, labeling_criteria)
@@ -31,10 +40,10 @@
 - **Issue:** `../../../.claude/skills/_shared/pg_scenarios.md`'s Table 3 entry for "Intersection Gesture Wait" lists **Robot Role: Servant**. The scenario's YAML instead sets `agents.robot.role: navigating_agent` (a generic/default value used elsewhere across scenarios, not specific to this one). This isn't a hard contradiction — "navigating_agent" isn't false — but it drops information the source specifies.
 - **Recommended fix:** Consider setting `role: servant` (or otherwise noting the Servant role in prose/YAML) to align with Table 3, or explicitly explain in `evaluation_notes` why a more generic role was chosen instead.
 
-### 6. `relevant_principles` count of 4 (once P0/P9 removed) is within guidance but omits some plausible candidates — suggestion
-- **Section/field:** `relevant_principles` (P1, P2, P3, P4 remain after removing invalid IDs)
-- **Issue:** Once P0 and P9 are dropped, 4 principles remain — within the 3–5 guidance band, so not a problem on its own. However, P6 (Agent Understanding — predicting/accommodating the human's gesture) and P7 (Proactivity — resolving the wait/proceed ambiguity) both seem plausibly relevant to a gesture-compliance scenario and are not listed.
-- **Recommended fix:** Human editor should consider whether P6 or P7 belong, without exceeding 5 total.
+### 6. `relevant_principles` lists 6 principles (P0, P1–P4, P9), one above the 3–5 guidance — suggestion
+- **Section/field:** `relevant_principles` (P0, P1, P2, P3, P4, P9 — corrected 2026-07-05, see Correction Notice)
+- **Issue:** With P0 and P9 correctly counted as valid, 6 principles are listed — one over the 3–5 "most directly relevant" guidance. This is advisory guidance, not a hard rule, so it is flagged at suggestion level. Separately, P6 (Agent Understanding — predicting/accommodating the human's gesture) and P7 (Proactivity — resolving the wait/proceed ambiguity) both seem plausibly relevant to a gesture-compliance scenario and are not listed.
+- **Recommended fix:** Human editor should consider trimming toward 3–5 (or justifying the full set in `evaluation_notes`), and separately consider whether P6 or P7 would be more central than one of the currently-listed entries.
 
 ## Source Fidelity
 

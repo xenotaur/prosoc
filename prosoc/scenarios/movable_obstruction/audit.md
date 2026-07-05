@@ -2,29 +2,40 @@
 
 - **Scenario:** `prosoc/scenarios/movable_obstruction/`
 - **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Not ready — 3 blocking issues
+- **Verdict:** Not ready — 2 blocking issues (corrected 2026-07-05 — see Correction Notice)
 
-## Findings
+## Correction Notice (2026-07-05)
 
-### 1. `relevant_principles` and `quality_metrics` invent a non-canonical principle ID (P9) — blocking
-- **Section/field:** `relevant_principles`; `scenario_usage_guide.quality_metrics`
-- **Issue:** Both lists include `P9` ("Prosocial Behavior"), which is not one of the eight canonical principles defined in `../../../.claude/skills/_shared/principles.md` (P1–P8). The schema's `^P[0-9]+$` pattern permits it syntactically, but `../../../.claude/skills/_shared/principles.md` is explicit: "Only emit P1–P8... If a scenario involves a principle not well-captured by P1–P8, note it in `evaluation_notes` rather than inventing a new ID." The scenario's own prose (Overview, Discussion) leans heavily on this invented P9 concept and also references an undefined "P0 (Goal Achievement)" in the Discussion section.
-- **Recommended fix:** Remove `P9` from both `relevant_principles` and `quality_metrics`. If the "environmental stewardship beyond immediate interaction" concept is important to preserve, move it into `evaluation_notes` as prose rather than a principle ID, and remove the "P0 (Goal Achievement)" reference in the Discussion section for the same reason (P0 is not a defined principle anywhere in the corpus).
+This audit originally flagged `P9` (and, in prose, `P0`) as invented,
+non-canonical principle IDs (Finding 1 below). That was incorrect:
+`prosoc/charter/charter.md` (the sole source of truth) defines **ten** principles,
+P0–P9 — P0 (Goal Achievement) and P9 (Prosocial Behavior) are this project's own
+explicit, intentional extensions beyond the P&G paper's eight, not invented IDs.
+`charter.yml` (the generated artifact) confirms this (distiller dry-run reports no
+diff). The error originated in a stale `.claude/skills/_shared/principles.md`,
+which claimed only P1–P8 were valid and has since been corrected. Finding 1 is
+retracted. Finding 2 (principle count) survives the correction — the list still
+has 7 entries, over guidance — but its wording is corrected to drop the "invalid
+P9" framing. Finding 4 is corrected likewise.
 
-### 2. `relevant_principles` count (7, after excluding P9) exceeds the 3–5 guidance — blocking
+### 1. ~~`relevant_principles` and `quality_metrics` invent a non-canonical principle ID (P9)~~ — RETRACTED
+- **Status:** Retracted 2026-07-05. See Correction Notice above — P9 (and P0) are
+  valid canonical principles per `prosoc/charter/charter.md`, not invented IDs.
+
+### 2. `relevant_principles` count (7 entries, all valid IDs) exceeds the 3–5 guidance — blocking
 - **Section/field:** `relevant_principles`
-- **Issue:** The list currently has 7 entries (P1, P2, P3, P5, P6, P7, P9). Even discounting the invalid P9, that leaves 6 (P1, P2, P3, P5, P6, P7) — still above the "3–5 most directly relevant" guidance in `../../../.claude/skills/_shared/principles.md`, which warns that including too many "dilutes meaning."
-- **Recommended fix:** Narrow to the 3–5 principles most central to the scenario's core conflict (obstruction handling/intervention vs. yielding). P1 (Safety), P7 (Proactivity), and P5 (Social Competency) look most load-bearing given the prose; P2, P3, and P6 are plausible but should be reconsidered for necessity.
+- **Issue:** The list has 7 entries (P1, P2, P3, P5, P6, P7, P9) — all of them valid principle IDs per `prosoc/charter/charter.md` (corrected 2026-07-05; P9 is not invalid, see Correction Notice), but still above the "3–5 most directly relevant" guidance in `../../../.claude/skills/_shared/principles.md`, which warns that including too many "dilutes meaning."
+- **Recommended fix:** Narrow to the 3–5 principles most central to the scenario's core conflict (obstruction handling/intervention vs. yielding). P1 (Safety), P7 (Proactivity), and P5 (Social Competency) look most load-bearing given the prose; P2, P3, P6, and P9 are plausible but should be reconsidered for necessity.
 
 ### 3. `scenario.md` does not follow `template.md`'s structure — no Scenario Card Summary, Social Navigation Context, Normative Expectations, or Scenario Usage Guide sections — blocking
 - **Section/field:** Whole-document structure vs. `template.md`
 - **Issue:** The card consists only of a `## STATUS` block, an `## Overview` section, the embedded YAML, and a `## Discussion` section. It is missing the `## Scenario Card Summary` block (required for AUDITED scenarios — Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Ideal Outcome, etc.), the `## Social Navigation Context` section, a dedicated `## Normative Expectations` section, and the `## Scenario Usage Guide` section (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria as prose). Some of this content exists only inside the YAML block or is absent entirely — see Completeness below.
 - **Recommended fix:** Restructure `scenario.md` to follow `template.md`'s section headings, adding the missing prose sections (Scenario Card Summary, Social Navigation Context, Normative Expectations, Scenario Usage Guide) before this scenario can be considered for AUDITED status.
 
-### 4. Prose refers to concepts absent from the YAML schema (P9, P0, task names) — should-fix
+### 4. Prose references task/context names not connected to the YAML — should-fix
 - **Section/field:** Overview / Discussion vs. `scenario.yml`
-- **Issue:** The Overview and Discussion sections reference "Prosocial Behavior (P9)" and "Goal Achievement (P0)" as if these were established principles in this project, and name specific tasks/contexts (`NAVIGATE_POINT_TO_POINT`, `DELIVER_OBJECT`, `ROUTINE_DELIVERY`, `GUIDANCE_DOCENT`, `HIGH_URGENCY`) that appear to reference `prosoc/tasks/` and `prosoc/contexts/` IDs but are not connected to this scenario's YAML in any structured field (no `initial_conditions` or other field ties the scenario to a specific task/context pairing).
-- **Recommended fix:** Once P9/P0 are resolved (Finding 1), align the prose's principle references with the corrected `relevant_principles` list. If the task/context cross-references are intentional, consider whether they belong in `evaluation_notes` or a "Related Scenarios"/cross-reference field rather than embedded narrative prose only.
+- **Issue:** Corrected 2026-07-05 (see Correction Notice): the Overview and Discussion sections' references to "Prosocial Behavior (P9)" and "Goal Achievement (P0)" are valid principle citations, not a defect. The remaining issue is that the Overview and Discussion also name specific tasks/contexts (`NAVIGATE_POINT_TO_POINT`, `DELIVER_OBJECT`, `ROUTINE_DELIVERY`, `GUIDANCE_DOCENT`, `HIGH_URGENCY`) that appear to reference `prosoc/tasks/` and `prosoc/contexts/` IDs but are not connected to this scenario's YAML in any structured field (no `initial_conditions` or other field ties the scenario to a specific task/context pairing).
+- **Recommended fix:** If the task/context cross-references are intentional, consider whether they belong in `evaluation_notes` or a "Related Scenarios"/cross-reference field rather than embedded narrative prose only.
 
 ### 5. `scenario.yml`'s top-level `evaluation_notes` matches `scenario.md`'s content but was reflowed by the distiller — suggestion
 - **Section/field:** `evaluation_notes`
@@ -44,7 +55,7 @@ Per `template.md`'s "Required for AUDITED scenarios" fields:
 **Scenario Card Summary (entirely absent as a prose section):**
 - **Scenario Name** — should-fill-in-now (trivially available: "Movable Obstruction")
 - **Scenario Description** — should-fill-in-now (derivable from the YAML `summary` field, which is already populated)
-- **Scientific Purpose** — should-fill-in-now; the YAML has no `scientific_purpose` field at all (unlike `narrow_doorway`, which populates it as `pedestrian interaction`), though the Overview prose implies something like "proactivity vs. prosocial/environmental-stewardship distinction." This should be captured explicitly once Finding 1 is resolved.
+- **Scientific Purpose** — should-fill-in-now; the YAML has no `scientific_purpose` field at all (unlike `narrow_doorway`, which populates it as `pedestrian interaction`), though the Overview prose implies something like "proactivity vs. prosocial/environmental-stewardship distinction." This should be captured explicitly.
 - **Physical Environment** — should-fill-in-now (readily available from `context.environment.type: indoor`)
 - **Geometric Layout** — should-fill-in-now; no `geometric_layout` field exists in the YAML (schema supports it, `narrow_doorway` uses it as `room and door`). Here it would be something like "hallway."
 - **Robot Role** — should-fill-in-now (available as `agents.robot.role: navigating_agent`)
@@ -57,7 +68,7 @@ Per `template.md`'s "Required for AUDITED scenarios" fields:
 
 **Scenario Usage Guide (as a prose section — currently only exists inside the YAML block, not as human-readable prose):**
 - **Success Metrics** — should-fill-in-now as prose (YAML values exist: SR, NoCollisions, ConflictResolved)
-- **Quality Metrics** — should-fill-in-now as prose, pending the P9 fix (Finding 1)
+- **Quality Metrics** — should-fill-in-now as prose, ideally drawn from a `relevant_principles` list narrowed per Finding 2
 - **Ideal Outcome** — should-fill-in-now; blocked on adding the `ideal_outcome` YAML field first
 - **Failure Modes** — should-fill-in-now as prose (YAML values exist and are reasonably detailed)
 - **Labeling Criteria** — should-fill-in-now as prose (YAML values exist)

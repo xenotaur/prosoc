@@ -44,7 +44,7 @@ Load these before auditing:
    with `prosoc-scenario-new`; do not fork a local copy. Use this to check source
    fidelity whenever SOURCE cites the P&G paper.
 
-2. **`../_shared/principles.md`** — The P1–P8 principle definitions and selection
+2. **`../_shared/principles.md`** — The P0–P9 principle definitions and selection
    guidance. Shared with `prosoc-scenario-new`; do not fork a local copy. Use this to
    validate `relevant_principles` usage.
 
@@ -210,7 +210,7 @@ Before reporting completion, verify:
       were not modified
 - [ ] The scenario's STATUS/STATE block was not changed
 - [ ] Every finding has a severity, a section/field, and a recommended fix
-- [ ] `relevant_principles` was checked against P1–P8 only
+- [ ] `relevant_principles` was checked against P0–P9 only
 - [ ] Source fidelity was either checked against a real source or explicitly marked
       not checkable — never fabricated
 - [ ] Completeness covers every field `template.md` marks "Required for AUDITED

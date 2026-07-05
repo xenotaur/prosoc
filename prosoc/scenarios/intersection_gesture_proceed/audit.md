@@ -2,19 +2,29 @@
 
 - **Scenario:** `prosoc/scenarios/intersection_gesture_proceed/`
 - **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Not ready for AUDITED — 2 blocking issues, several should-fix gaps
+- **Verdict:** Not ready for AUDITED — 1 blocking issue, several should-fix gaps (corrected 2026-07-05 — see Correction Notice)
 
-## Findings
+## Correction Notice (2026-07-05)
 
-### 1. Invalid principle identifiers P0 and P9 used in `relevant_principles` — blocking
-- **Section/field:** `scenario.yml` / embedded YAML `relevant_principles` (both list `P0  # Goal Achievement` and `P9  # Prosocial Behavior`)
-- **Issue:** Per `../../../.claude/skills/_shared/principles.md`, only P1–P8 are valid principle identifiers, and the schema's regex (`^P[0-9]+$`) does not by itself enforce this — it will accept `P0`/`P9` syntactically without error (confirmed: the dry-run distiller check reported no schema violation). "Goal Achievement" and "Prosocial Behavior" are not among the eight canonical principles (Safety, Comfort, Legibility, Politeness, Social Competency, Agent Understanding, Proactivity, Contextual Appropriateness) and appear to be invented identifiers. This also means `relevant_principles` effectively has only 4 valid P1–P8 entries (P1–P4), which is below the recommended 3–5 range in spirit once the invalid ones are discounted, though nominally 6 entries are listed.
-- **Recommended fix:** Remove `P0` and `P9`. If "Goal Achievement" or "Prosocial Behavior" concepts are important to this scenario, note them in `evaluation_notes` instead (per `../../../.claude/skills/_shared/principles.md`'s explicit guidance: "If a scenario involves a principle not well-captured by P1–P8, note it in `evaluation_notes` rather than inventing a new ID"). Consider whether P6 (Agent Understanding) or P7 (Proactivity) should be added instead, since the scenario involves predicting/responding to a human's explicit gesture — currently neither is included despite being plausibly relevant.
+This audit originally flagged `P0` and `P9` in `relevant_principles` as invalid,
+non-canonical principle IDs (Finding 1 below). That was incorrect:
+`prosoc/charter/charter.md` (the sole source of truth) defines **ten** principles,
+P0–P9 — P0 (Goal Achievement) and P9 (Prosocial Behavior) are this project's own
+explicit, intentional extensions beyond the P&G paper's eight, not invented IDs.
+`charter.yml` (the generated artifact) confirms this (distiller dry-run reports no
+diff). The error originated in a stale `.claude/skills/_shared/principles.md`,
+which claimed only P1–P8 were valid and has since been corrected. Finding 1 is
+retracted; the residual, genuine issue it surfaced (principle count) is now
+Finding 6.
+
+### 1. ~~Invalid principle identifiers P0 and P9 used in `relevant_principles`~~ — RETRACTED
+- **Status:** Retracted 2026-07-05. See Correction Notice above — P0 and P9 are
+  valid canonical principles per `prosoc/charter/charter.md`, not invented IDs.
 
 ### 2. `scenario_usage_guide` block entirely absent from machine-readable YAML — blocking
 - **Section/field:** `scenario.yml` (missing `scenario_usage_guide`); prose "Scenario Usage Guide" section (present, with Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria all populated)
-- **Issue:** The prose section fully specifies Success Metrics ("No collision occurs," "Robot commits to crossing promptly after gesture," "Human proceeds without hesitation or retreat"), Quality Metrics, Failure Modes, and Labeling Criteria — but none of this is reflected in the embedded YAML or `scenario.yml`. This is a one-sided claim (present in prose, absent from YAML) affecting the entire `scenario_usage_guide` object, not just one field. It also means `quality_metrics` was never checked against the P1–P8 constraint in machine-readable form, since the field doesn't exist there (the prose Quality Metrics list — "Time between gesture and robot motion," "Smoothness and predictability of robot trajectory," "Absence of oscillation or hesitation" — doesn't even use P1–P8 identifiers, it uses free-text descriptions, which is itself inconsistent with how `scenario_usage_guide.quality_metrics` is used elsewhere in the corpus, e.g. `frontal_approach`, where it holds principle IDs).
-- **Recommended fix:** Add a `scenario_usage_guide` block to the YAML with `success_metrics`, `quality_metrics` (using P1–P8 IDs, not free text), `failure_modes`, and `labeling_criteria`, transcribing the content already drafted in the prose section.
+- **Issue:** The prose section fully specifies Success Metrics ("No collision occurs," "Robot commits to crossing promptly after gesture," "Human proceeds without hesitation or retreat"), Quality Metrics, Failure Modes, and Labeling Criteria — but none of this is reflected in the embedded YAML or `scenario.yml`. This is a one-sided claim (present in prose, absent from YAML) affecting the entire `scenario_usage_guide` object, not just one field. It also means `quality_metrics` was never checked against the P0–P9 constraint in machine-readable form, since the field doesn't exist there (the prose Quality Metrics list — "Time between gesture and robot motion," "Smoothness and predictability of robot trajectory," "Absence of oscillation or hesitation" — doesn't even use P0–P9 identifiers, it uses free-text descriptions, which is itself inconsistent with how `scenario_usage_guide.quality_metrics` is used elsewhere in the corpus, e.g. `frontal_approach`, where it holds principle IDs).
+- **Recommended fix:** Add a `scenario_usage_guide` block to the YAML with `success_metrics`, `quality_metrics` (using P0–P9 IDs, not free text), `failure_modes`, and `labeling_criteria`, transcribing the content already drafted in the prose section.
 
 ### 3. `ideal_outcome`, `scientific_purpose`, `geometric_layout`, `intended_robot_task`, `intended_human_behavior` all absent from YAML despite being specified in prose — should-fix
 - **Section/field:** `scenario.yml` (missing all five fields); Scenario Card Summary (has Scientific Purpose: "Pedestrian interaction", Geometric Layout: "Intersection", Robot Task: "Navigate from A to B", Human Behavior: "Cross navigation with explicit proceed gesture", Ideal Outcome: "Human gestures, robot proceeds, human proceeds, no collision" — all populated in prose)
@@ -30,6 +40,11 @@
 - **Section/field:** `expected_behaviors.should` — "commit promptly to motion after the gesture"; Quality Metrics prose — "Time between gesture and robot motion"
 - **Issue:** These are still qualitative ("promptly," not a numeric threshold), so this does not clearly violate P&G Guideline N6 over-specification as written. However, "Time between gesture and robot motion" as a *quality metric* edges toward a measurable latency criterion without stating what counts as acceptable, which could invite inconsistent labeling.
 - **Recommended fix:** No changes strictly required; optionally clarify in `evaluation_notes` what a "prompt" response window looks like qualitatively (e.g. "within a natural conversational turn-taking pause") without introducing a hard numeric threshold.
+
+### 6. `relevant_principles` lists 6 principles (P0, P1–P4, P9), one above the 3–5 guidance — suggestion
+- **Section/field:** `relevant_principles`
+- **Issue:** Added 2026-07-05 (see Correction Notice): with P0 and P9 correctly counted as valid, this scenario's `relevant_principles` has 6 entries (P0, P1, P2, P3, P4, P9) — one over the 3–5 "most directly relevant" guidance in `_shared/principles.md`. This is advisory guidance, not a hard rule, so it is flagged at suggestion level rather than blocking.
+- **Recommended fix:** Human editor should consider whether all six are load-bearing for this scenario, or whether one could be trimmed (or its relevance explained in `evaluation_notes`) to stay within guidance.
 
 ## Source Fidelity
 
