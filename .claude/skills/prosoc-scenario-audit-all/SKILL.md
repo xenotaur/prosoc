@@ -54,10 +54,13 @@ dispatched subagent loads that skill's own reference set
 ```bash
 git checkout main
 git pull
-git checkout -b xenotaur/chore/audit-all-scenarios-<YYYY-MM-DD>
+git checkout -b <branch-prefix>/audit-all-scenarios-<YYYY-MM-DD>
 ```
 
-Use today's date to avoid colliding with a still-open prior audit-all branch/PR. If
+`<branch-prefix>` should follow whatever branch naming convention this repo already
+uses (check recent branches with `git branch -r` or `git log --all --oneline` for the
+pattern in use, e.g. `chore` or `<username>/chore`); it is not a fixed value. Use
+today's date to avoid colliding with a still-open prior audit-all branch/PR. If
 `main` has local uncommitted changes that would be clobbered, stop and report — do not
 stash or discard anything without asking.
 
@@ -84,9 +87,11 @@ skill's own frontmatter + prose output contract (see its SKILL.md Step 6). Alway
 overwrite any existing `audit.md` for a targeted scenario; this run is a fresh
 point-in-time snapshot, not an incremental update.
 
-If a scenario in a batch is missing `scenario.md` or `scenario.yml`, that scenario is
-skipped (per `prosoc-scenario-audit`'s own stop condition) — report it as skipped in
-the batch result, but do not fail the rest of the batch over it.
+Step 2 already guarantees every batched scenario has a `scenario.md`, so the only thing
+that can still be missing at this stage is `scenario.yml`. If a scenario in a batch is
+missing `scenario.yml`, that scenario is skipped (per `prosoc-scenario-audit`'s own stop
+condition) — report it as skipped in the batch result, but do not fail the rest of the
+batch over it.
 
 ### 5. Aggregate
 
@@ -104,14 +109,21 @@ do not silently drop it from the table — list it as a row with an explicit
 
 ### 6. Recurring patterns
 
-Across all findings (by title/issue, not by scenario), identify any finding that
-recurs in at least the configured threshold (default 3, or `--recurring-threshold`)
-distinct scenarios. List these separately from the per-scenario findings, as
-observations noticed while aggregating — not something any individual audit checked,
-since cross-scenario consistency is explicitly out of scope for
-`prosoc-scenario-audit` itself. For each recurring pattern, name the affected
-scenarios and suggest whether it looks like a shared drafting-time error or a
-template/checklist gap worth fixing at the source rather than scenario-by-scenario.
+Extract the canonical key for each finding from its `### N. <short title> — <severity>`
+heading (see `prosoc-scenario-audit`'s SKILL.md Step 6 findings format): strip the
+leading `N. ` numbering and the trailing ` — <severity>`, then case-fold the remaining
+`<short title>`. Two findings recur under the same key only if their normalized titles
+match exactly after this stripping — do not fuzzy-match on partial wording.
+
+Group all findings across all scenarios by this key. Any key held by at least the
+configured threshold (default 3, or `--recurring-threshold`) of *distinct scenarios*
+(not distinct findings — a scenario contributes at most once per key) is a recurring
+pattern. List these separately from the per-scenario findings, as observations noticed
+while aggregating — not something any individual audit checked, since cross-scenario
+consistency is explicitly out of scope for `prosoc-scenario-audit` itself. For each
+recurring pattern, name the affected scenarios and suggest whether it looks like a
+shared drafting-time error or a template/checklist gap worth fixing at the source
+rather than scenario-by-scenario.
 
 ### 7. Write the corpus summary
 
@@ -128,7 +140,7 @@ Write `prosoc/scenarios/AUDIT_SUMMARY.md`, regenerating it wholesale (not append
 
 <Step 5's table>
 
-**Totals:** <N> scenarios, <N> ready, <N> ready-with-fixes, <N> not-ready.
+**Totals:** <N> scenarios, <N> `ready`, <N> `ready_with_fixes`, <N> `not_ready`.
 <N> blocking, <N> should-fix, <N> suggestion findings.
 
 ## Recurring Patterns
@@ -165,7 +177,7 @@ Tell the user:
 Before reporting completion, verify:
 
 - [ ] Every targeted scenario either has a freshly written `audit.md` or is reported
-      as explicitly skipped (missing `scenario.md`/`scenario.yml`)
+      as explicitly skipped (missing `scenario.yml`)
 - [ ] No `scenario.md`, `scenario.yml`, `schema.json`, `template.md`, `distill.py`, or
       any STATUS/STATE block was modified anywhere in the corpus
 - [ ] No scenario's lifecycle STATE was promoted

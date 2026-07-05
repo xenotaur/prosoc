@@ -167,7 +167,7 @@ same spirit as the scenario's own STATUS block, followed by the findings:
 ```markdown
 ---
 scenario: <id>
-verdict: ready | ready_with_fixes | not_ready
+verdict: <one of: ready, ready_with_fixes, not_ready>
 blocking: <count>
 should_fix: <count>
 suggestion: <count>
