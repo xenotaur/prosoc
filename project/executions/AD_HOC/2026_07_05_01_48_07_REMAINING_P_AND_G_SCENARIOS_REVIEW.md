@@ -2,14 +2,14 @@
 execution_id: 2026_07_05_01_48_07_REMAINING_P_AND_G_SCENARIOS_REVIEW
 prompt_id: PROMPT(AD_HOC:REMAINING_P_AND_G_SCENARIOS_REVIEW)[2026-07-05T01:42:13-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/2
-commit: f5d9fe6
+commit: 178e557b42c3eb932c49d731ee478d9064f2faba
 created_at: 2026-07-05T01:48:07-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/2
-session_transcript: pending
+session_transcript: claude-app:7ad24dd3-0d53-4a31-a992-7d3bee31c04f
 ---
 
 # Summary
@@ -46,9 +46,9 @@ in the same request.
 
 # Follow-up
 
-- `session_transcript` should be updated from `pending` to
-  `claude-app:<session-id>` after this session ends.
 - No original primary execution record exists for this branch's work
   (repo had no prior `project/executions/`), so `rerun_of` is left blank.
-- Full `lrh setup` (e.g. `focus/current_focus.md`) was out of scope for
-  this task and was not performed.
+- Full LRH project bootstrap (`lrh project init`, incl. authoring a real
+  `project/focus/current_focus.md`) was assessed and deliberately deferred
+  as out of scope for this PR's closeout — see `lrh project doctor` output
+  from 2026-07-05 for the full list of missing scaffolding.
