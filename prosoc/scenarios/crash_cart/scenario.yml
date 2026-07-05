@@ -1,0 +1,88 @@
+id: crash_cart_01
+name: Crash Cart
+summary: 'A robot in a leader role delivers an urgent medical product through an indoor
+  environment (e.g., a hospital), moving with elevated pace and priority while signaling
+  its urgent status to bystanders, and still avoiding collisions despite the time
+  pressure.
+
+  '
+scientific_purpose: interactive navigation
+geometric_layout: passable space
+context:
+  environment:
+    type: indoor
+    setting: hospital or medical facility corridor
+    width: moderate
+  social_setting:
+    formality: formal
+    crowd_level: medium
+agents:
+  robot:
+    role: leader
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - speed_adjustment
+    - gesture_or_signal_output
+  humans:
+  - role: pedestrian
+    count: 3
+    attributes:
+      mobility: typical
+      awareness: typical
+initial_conditions:
+  robot_position: starting point of an urgent delivery route
+  human_positions: bystanders along the corridor, unaware of the specific urgency
+  delivery_urgency: high
+  destination: patient or recipient location
+intended_robot_task: deliver the medical product urgently
+intended_human_behavior: receive the object
+expected_behaviors:
+  must:
+  - avoid collision with bystanders despite elevated pace
+  - deliver the medical product to the intended recipient
+  should:
+  - move at an elevated pace appropriate to the delivery's urgency
+  - signal urgent status clearly to bystanders in its path
+  - take reasonable priority at intersections when signaling is acknowledged
+  - revert to normal-priority behavior once the delivery is complete
+  should_not:
+  - increase speed without corresponding urgency signaling
+  - force passage through bystanders who have not yielded
+  - reduce safety margins or collision-avoidance behavior due to time pressure
+relevant_principles:
+- P1
+- P3
+- P7
+- P8
+ideal_outcome: delivery of medicine to the recipient promptly and without collision
+  or unsafe maneuvers
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  - TTG
+  quality_metrics:
+  - P3
+  - P8
+  failure_modes:
+  - robot collides with or startles a bystander while moving urgently
+  - robot moves quickly without signaling urgency, appearing reckless to bystanders
+  - robot fails to complete the delivery within an acceptable time
+  - robot continues urgent-priority behavior after the delivery is complete
+  labeling_criteria:
+  - the robot's task is a time-critical object delivery in an indoor setting
+  - the robot's navigation priority is elevated relative to a routine delivery
+  - bystanders are present who must be aware of and accommodate the robot's urgency
+evaluation_notes: "This scenario is explicitly about context-dependent norm shifting:\
+  \ the same behaviors (fast pace, taking priority) that would be a failure mode in\
+  \ Object Handover or Frontal Approach are expected and appropriate here, provided\
+  \ they are matched with clear urgency signaling. Evaluators should calibrate expectations\
+  \ to the stated urgency level rather than applying routine-delivery norms.\nBecause\
+  \ urgency does not suspend safety, evaluators should treat any collision or near-miss\
+  \ as a serious failure regardless of the time pressure \u2014 this scenario tests\
+  \ assertive-but-safe navigation, not reckless navigation.\nThis scenario is related\
+  \ to Object Handover (the general delivery/handoff task without urgency) and to\
+  \ Food Delivery (a related but lower-urgency delivery context, not separately defined\
+  \ in Table 3)."
