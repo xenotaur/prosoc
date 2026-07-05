@@ -1,0 +1,82 @@
+id: entering_room_01
+name: Entering Room
+summary: 'A robot approaches a room from outside with the task of entering, while
+  a human occupant inside the room is simultaneously heading toward the same doorway
+  to exit. The robot must defer to the exiting human before entering.
+
+  '
+scientific_purpose: pedestrian interaction
+geometric_layout: room and door
+context:
+  environment:
+    type: indoor
+    setting: office or home room with a single doorway
+    width: narrow
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - speed_adjustment
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      awareness: typical
+initial_conditions:
+  robot_position: outside the room, near the doorway
+  human_position: inside the room, moving toward the doorway
+  robot_task_direction: outside to inside
+  human_task_direction: inside to outside
+intended_robot_task: navigate from outside to inside the room
+intended_human_behavior: navigate from inside to outside the room
+expected_behaviors:
+  must:
+  - avoid blocking the human's exit path
+  - avoid collision with the human at the doorway
+  should:
+  - hold position outside the doorway until the human has exited
+  - proceed to enter promptly once the threshold is clear
+  should_not:
+  - attempt to enter while the human is still in the doorway
+  - crowd the doorway in a way that pressures the human while exiting
+  - wait indefinitely after the doorway is clear
+relevant_principles:
+- P1
+- P4
+- P5
+- P6
+ideal_outcome: robot lets the human exit fully, then enters the room without obstruction
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  quality_metrics:
+  - P4
+  - P5
+  failure_modes:
+  - robot attempts to enter while human is still exiting, causing collision or blocking
+  - robot crowds the doorway, forcing the human to squeeze past
+  - robot waits far longer than necessary after the human has cleared the doorway
+  labeling_criteria:
+  - robot is positioned outside a room with the task of entering
+  - a human occupant is inside the room and moving toward the same doorway to exit
+  - the robot's and human's paths intersect at the doorway
+evaluation_notes: 'This scenario specifically tests role-sensitive yielding: the robot''s
+  yielding should be driven by the recognition that the human is exiting a room it
+  is trying to enter, not simply by generic doorway right-of-way rules. Evaluators
+  should distinguish a robot that defers because it recognizes the exit norm from
+  one that happens to yield due to proximity-based reactive stopping.
+
+  This scenario is closely related to Entering Elevator (Figure 7, not in Table 3),
+  which shares the same "let people out first" norm but in an elevator car context
+  with typically higher crowd density and a hard time constraint (door closing).
+
+  The inverse of this scenario is Exiting Room, where the robot is the one leaving
+  while a human enters.'
