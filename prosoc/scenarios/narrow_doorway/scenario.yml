@@ -1,0 +1,84 @@
+id: narrow_doorway_01
+name: Narrow Doorway
+summary: 'A robot and a human pedestrian approach a narrow doorway from opposite directions.
+  The doorway permits only single-file passage, so the two agents must sequence their
+  passage through the threshold without collision or mutual blocking.
+
+  '
+scientific_purpose: pedestrian interaction
+geometric_layout: room and door
+context:
+  environment:
+    type: indoor
+    setting: office or residential room with a single doorway
+    width: narrow
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - speed_adjustment
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      awareness: typical
+initial_conditions:
+  robot_position: one side of the doorway
+  human_position: opposite side of the doorway
+  doorway_width: single-file only
+  mutual_visibility: full, from moderate distance
+intended_robot_task: navigate from A to B through the doorway
+intended_human_behavior: navigate from B to A through the doorway
+expected_behaviors:
+  must:
+  - avoid collision with the human at or in the doorway
+  - not stop in a position that blocks the doorway for both agents
+  should:
+  - recognize the single-file bottleneck and adjust approach speed
+  - yield clearly when the human is closer to the threshold
+  - proceed decisively and without hesitation when the robot has priority
+  should_not:
+  - arrive at the threshold simultaneously with the human without resolving priority
+  - commit to passage after the human has already entered the doorway
+  - oscillate between yielding and proceeding
+relevant_principles:
+- P1
+- P3
+- P4
+- P7
+ideal_outcome: robot and human sequence through the doorway one at a time without
+  collision or obstruction
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  quality_metrics:
+  - P3
+  - P4
+  failure_modes:
+  - robot collides with human at the doorway threshold
+  - robot and human reach a stand-off, neither proceeding
+  - robot stops inside the doorway, blocking passage
+  - human is forced to squeeze past the robot at close quarters
+  labeling_criteria:
+  - robot and human approach a single doorway from opposite sides
+  - the doorway geometry does not permit side-by-side passage
+  - agents are on a collision course toward the same threshold
+evaluation_notes: 'This scenario isolates sequencing behavior at a hard single-file
+  bottleneck, as distinct from the lateral trajectory negotiation tested in Frontal
+  Approach. Evaluators should focus on whether the robot resolves right-of-way early
+  and legibly, rather than on the specific trajectory taken.
+
+  The scenario is related to Blind Corner in that both involve constrained geometry,
+  but Narrow Doorway typically affords full mutual visibility from a distance, so
+  failures here reflect poor sequencing decisions rather than limited detection range.
+
+  Variants may include different approach speeds, a partially open vs. fully open
+  door, or a human carrying an object that further narrows the usable width.'
