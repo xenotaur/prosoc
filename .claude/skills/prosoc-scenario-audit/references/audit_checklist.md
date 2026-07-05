@@ -1,10 +1,10 @@
 # Prosoc Scenario Audit Checklist
 
 This is a verification rubric, companion to `prosoc/scenarios/schema.json` and
-`prosoc/scenarios/template.md`. Where `new-scenario`'s `schema_guide.md` explains what
-to put in each field when authoring, this file explains what to check when auditing
-an already-drafted card. Read `../../_shared/principles.md` for the P1–P8 definitions
-referenced below.
+`prosoc/scenarios/template.md`. Where `prosoc-scenario-new`'s `schema_guide.md`
+explains what to put in each field when authoring, this file explains what to check
+when auditing an already-drafted card. Read `../../_shared/principles.md` for the
+P1–P8 definitions referenced below.
 
 ## Required Fields (schema.json)
 

@@ -74,15 +74,36 @@ Find `prosoc/scenarios/<name>/scenario.md` and `scenario.yml`. If either is miss
 stop and report — do not proceed with a partial audit.
 
 Read `scenario.md` in full (prose sections plus the embedded YAML block) and the
-distilled `scenario.yml`. Confirm the two are in sync by **re-running the distiller**
-(`python prosoc/scenarios/distill.py`) and checking it exits cleanly with no diff to
-the committed `scenario.yml` — do not diff the embedded YAML block against
-`scenario.yml` textually, since the distiller re-serializes YAML (strips comments,
-rewraps long strings, changes flow style) even when perfectly in sync, which makes a
-literal text diff always show noise. If re-running the distiller produces a real
-(post-re-run) diff or a validation error, flag it as **blocking** — it is a
-tooling-freshness issue, not prose/YAML drift, so report it separately from Step 2's
-findings.
+distilled `scenario.yml`. Confirm the two are in sync by re-running the distiller for
+**this scenario only**, in dry-run mode:
+
+```bash
+python -c "
+from pathlib import Path
+from prosoc.scenarios import distill
+
+source = distill.ScenarioSource(
+    md_path=Path('prosoc/scenarios/<name>/scenario.md'),
+    yml_path=Path('prosoc/scenarios/<name>/scenario.yml'),
+)
+distill.distill_scenario(source, schema_path=distill.SCHEMA_PATH, dry_run=True, show_diffs=True)
+"
+```
+
+Run this from the repository root. **Do not** run `python prosoc/scenarios/distill.py`
+or `python -m prosoc.scenarios.distill` for this check: both distill *every* scenario
+under `prosoc/scenarios/`, which can surface unrelated failures outside this audit's
+scope, and both write `scenario.yml` unless `--dry-run` is passed — silently violating
+this skill's promise not to modify scenario files. The invocation above scopes to one
+scenario and never writes (`dry_run=True`), while still running the same schema
+validation and reporting any diff.
+
+Do not diff the embedded YAML block against `scenario.yml` as raw text — the distiller
+re-serializes YAML (strips comments, rewraps long strings, changes flow style) even
+when perfectly in sync, so a literal text diff always shows noise regardless of
+whether anything is actually stale. If the dry-run above reports a diff or a schema
+validation error, flag it as **blocking** — it is a tooling-freshness issue, not
+prose/YAML drift, so report it separately from Step 2's findings.
 
 ### 2. Prose vs. YAML consistency
 
@@ -100,9 +121,9 @@ Expectations** prose sections against the embedded YAML's `intended_robot_task`,
 
 ### 3. Schema and charter compliance
 
-- Validate `scenario.yml` against `prosoc/scenarios/schema.json` (re-run
-  `python prosoc/scenarios/distill.py` if there's any doubt it reflects the current
-  `scenario.md`).
+- Validate `scenario.yml` against `prosoc/scenarios/schema.json` (if there's any doubt
+  it reflects the current `scenario.md`, re-run the single-scenario dry-run check
+  from Step 1 — do not run the full-corpus distiller here either).
 - Check `relevant_principles` (and `scenario_usage_guide.quality_metrics`) contain
   only `P1`–`P8` per `../_shared/principles.md`. Flag 0 principles (probably
   under-specified) or all 8 (dilutes meaning per `../_shared/principles.md`'s

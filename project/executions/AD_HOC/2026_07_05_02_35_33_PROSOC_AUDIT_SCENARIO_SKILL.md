@@ -4,7 +4,7 @@ prompt_id: PROMPT(AD_HOC:PROSOC_AUDIT_SCENARIO_SKILL)[2026-07-05T02:24:03-04:00]
 work_item: AD_HOC
 status: in_progress
 rerun_of: 
-pr: 3
+pr: https://github.com/xenotaur/prosoc/pull/3
 commit: 
 created_at: 2026-07-05T02:35:33-04:00
 agent: claude_app
