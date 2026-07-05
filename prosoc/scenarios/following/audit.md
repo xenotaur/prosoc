@@ -18,12 +18,12 @@
 
 ### 3. Reference-table "Robot Task" wording is internally inconsistent, unremarked by the card — suggestion
 - **Section/field:** Source Fidelity — P&G Table 3 "Robot Task" field vs. `intended_robot_task`
-- **Issue:** The reference data (`.claude/skills/_shared/pg_scenarios.md`) lists Table 3's Robot Task for this scenario as "Follow lead robot," which is very likely itself a transcription artifact in the source table (the scenario Description reads "A robot follows a person," not another robot). The card sensibly renders this as `intended_robot_task: follow the lead human`, which is more internally coherent than the literal table text, but the card does not call out this discrepancy the way `exiting_room`'s card explicitly notes its own Table 3 ambiguity.
+- **Issue:** The reference data (`../../../.claude/skills/_shared/pg_scenarios.md`) lists Table 3's Robot Task for this scenario as "Follow lead robot," which is very likely itself a transcription artifact in the source table (the scenario Description reads "A robot follows a person," not another robot). The card sensibly renders this as `intended_robot_task: follow the lead human`, which is more internally coherent than the literal table text, but the card does not call out this discrepancy the way `exiting_room`'s card explicitly notes its own Table 3 ambiguity.
 - **Recommended fix:** Optional — a human editor with access to the original P&G paper could add a short `evaluation_notes` remark (as `exiting_room` does) noting that the card's "follow the lead human" reading resolves an apparent wording slip in the reference table's "Follow lead robot" text, for consistency with how the sibling scenario documents its own source ambiguity.
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3, cited in [50]. Compared against `.claude/skills/_shared/pg_scenarios.md`'s "Following" entry:
+SOURCE cites P&G Paper Table 3, cited in [50]. Compared against `../../../.claude/skills/_shared/pg_scenarios.md`'s "Following" entry:
 
 | Field | Table 3 | This card | Match? |
 |---|---|---|---|

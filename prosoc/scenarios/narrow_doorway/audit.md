@@ -18,7 +18,7 @@
 
 ## Source Fidelity
 
-SOURCE cites "P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [126]." This matches a real Table 3 entry in `../_shared/pg_scenarios.md`, under Doorway Scenarios → **Narrow Doorway**. Comparison:
+SOURCE cites "P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [126]." This matches a real Table 3 entry in `../../../.claude/skills/_shared/pg_scenarios.md`, under Doorway Scenarios → **Narrow Doorway**. Comparison:
 
 | Field | P&G Table 3 (`pg_scenarios.md`) | This scenario | Match? |
 |---|---|---|---|

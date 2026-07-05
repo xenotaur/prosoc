@@ -8,8 +8,8 @@
 
 ### 1. Invalid principle identifiers `P0` and `P9` — blocking
 - **Section/field:** `relevant_principles` (scenario.md embedded YAML and scenario.yml)
-- **Issue:** The list is `[P0, P9, P1, P2, P3, P4]` (ordered `P0, P1, P2, P3, P4, P9` in the file). `P0` ("Goal Achievement") and `P9` ("Prosocial Behavior") are not among the eight canonical charter principles (P1–Safety through P8–Contextual Appropriateness) defined in `_shared/principles.md`. Both values happen to satisfy the schema's `^P[0-9]+$` regex, so `schema.json` validation and the distiller's dry-run do not catch this — it is a charter-compliance issue, not a schema error.
-- **Recommended fix:** Remove `P0` and `P9`. If the drafter intended to flag a concept not captured by P1–P8 (e.g., "goal achievement" or "general prosocial behavior"), move that idea into `evaluation_notes` as guidance rather than inventing new principle IDs, per `_shared/principles.md`'s explicit instruction. After removing the two invalid entries, the remaining set (P1 Safety, P2 Comfort, P3 Legibility, P4 Politeness) is a reasonable 4-principle selection for this scenario and does not need further reduction.
+- **Issue:** The list is `[P0, P9, P1, P2, P3, P4]` (ordered `P0, P1, P2, P3, P4, P9` in the file). `P0` ("Goal Achievement") and `P9` ("Prosocial Behavior") are not among the eight canonical charter principles (P1–Safety through P8–Contextual Appropriateness) defined in `../../../.claude/skills/_shared/principles.md`. Both values happen to satisfy the schema's `^P[0-9]+$` regex, so `schema.json` validation and the distiller's dry-run do not catch this — it is a charter-compliance issue, not a schema error.
+- **Recommended fix:** Remove `P0` and `P9`. If the drafter intended to flag a concept not captured by P1–P8 (e.g., "goal achievement" or "general prosocial behavior"), move that idea into `evaluation_notes` as guidance rather than inventing new principle IDs, per `../../../.claude/skills/_shared/principles.md`'s explicit instruction. After removing the two invalid entries, the remaining set (P1 Safety, P2 Comfort, P3 Legibility, P4 Politeness) is a reasonable 4-principle selection for this scenario and does not need further reduction.
 
 ### 2. Missing Scenario Card Summary and Scenario Usage Guide sections — blocking
 - **Section/field:** `scenario.md` structure; YAML fields `scientific_purpose`, `geometric_layout`, `ideal_outcome`, `intended_robot_task`, `intended_human_behavior`, and the entire `scenario_usage_guide` block (`success_metrics`, `quality_metrics`, `failure_modes`, `labeling_criteria`)
@@ -28,7 +28,7 @@
 
 ## Source Fidelity
 
-SOURCE is listed as "Prompt to ChatGPT 5.2" (informal, no retrievable content of the prompt itself). However, the prose explicitly states "This scenario corresponds to pedestrian-overtaking cases discussed in the *Principles and Guidelines for Social Robot Navigation* paper," which points to a checkable source: `_shared/pg_scenarios.md`'s "Pedestrian Overtaking" entry (P&G Table 3, cited in [26]).
+SOURCE is listed as "Prompt to ChatGPT 5.2" (informal, no retrievable content of the prompt itself). However, the prose explicitly states "This scenario corresponds to pedestrian-overtaking cases discussed in the *Principles and Guidelines for Social Robot Navigation* paper," which points to a checkable source: `../../../.claude/skills/_shared/pg_scenarios.md`'s "Pedestrian Overtaking" entry (P&G Table 3, cited in [26]).
 
 Comparison against that entry:
 - **Description** ("Pedestrian overtakes moving robot"): matches — scenario has the human pedestrian overtaking a slower-moving robot.
@@ -50,4 +50,4 @@ Per `template.md`'s "Required for AUDITED scenarios" fields:
 - **Ideal Outcome** — absent as a discrete field, though implied by prose ("safe and comfortable passing without impeding the pedestrian"). Should-fill-in-now.
 - **Failure Modes** — not present as a `scenario_usage_guide.failure_modes` list, though `evaluation_notes` already states failure modes in prose ("blocking behavior, sudden motion changes, or trajectories that require the pedestrian to hesitate or reroute"). Should-fill-in-now: this content already exists and just needs to move into the structured field.
 - **Labeling Criteria** — absent. Should-fill-in-now: criteria are implicit in `initial_conditions` (robot ahead, pedestrian faster, clear visibility) and could be directly adapted into a labeling-criteria list.
-- **Related Scenarios / Cited In** — absent. Reasonably blank: while `_shared/pg_scenarios.md` lists "Down Path" as a related scenario and `[26]` as a citation, whether to carry these into the card is a minor editorial choice, not a required inference from existing prose in this card.
+- **Related Scenarios / Cited In** — absent. Reasonably blank: while `../../../.claude/skills/_shared/pg_scenarios.md` lists "Down Path" as a related scenario and `[26]` as a citation, whether to carry these into the card is a minor editorial choice, not a required inference from existing prose in this card.

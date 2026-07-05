@@ -74,13 +74,13 @@
 - **Issue:** The prose repeatedly references "Prosocial Behavior (P9)" as a principle
   being deliberately excluded from this scenario's scope ("isolate and evaluate
   Proactivity (P7) without introducing opportunities for Prosocial Behavior (P9)"; "P9 is
-  intentionally out of scope"). Per `_shared/principles.md`, the canonical principle set
+  intentionally out of scope"). Per `../../../.claude/skills/_shared/principles.md`, the canonical principle set
   is only P1–P8; there is no P9. This does not appear in `relevant_principles` or
   `quality_metrics` (which correctly stay within P1–P8), so it is not a schema/charter
   compliance violation — it's confined to prose — but it references a principle ID that
   doesn't exist in the charter as documented here.
 - **Recommended fix:** Either confirm P9 is a real, separately-tracked principle (e.g.
-  from a newer charter revision not yet reflected in `_shared/principles.md`) and update
+  from a newer charter revision not yet reflected in `../../../.claude/skills/_shared/principles.md`) and update
   the shared reference file accordingly, or rephrase the prose to avoid citing a
   numbered principle that isn't part of the canonical P1–P8 set — e.g. "without
   introducing opportunities for environmental stewardship or third-party benefit" (the
@@ -101,7 +101,7 @@
 ## Source Fidelity
 
 SOURCE is explicitly cited as "Principles and Guidelines for Evaluating Social Robot
-Navigation (P&G paper)" — a checkable source. However, per `_shared/pg_scenarios.md`,
+Navigation (P&G paper)" — a checkable source. However, per `../../../.claude/skills/_shared/pg_scenarios.md`,
 "Single File Hallway" is **not** one of the 18 named entries in P&G Table 3. The
 reference file's "Additional Scenarios (Figure 7, not in Table 3)" section states:
 

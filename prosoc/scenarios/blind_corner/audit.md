@@ -23,7 +23,7 @@
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3, "Blind Corner" entry, cited in [126, 171]. Compared against `_shared/pg_scenarios.md`:
+SOURCE cites P&G Paper Table 3, "Blind Corner" entry, cited in [126, 171]. Compared against `../../../.claude/skills/_shared/pg_scenarios.md`:
 
 | Field | Table 3 | scenario.yml / scenario.md | Match? |
 |---|---|---|---|

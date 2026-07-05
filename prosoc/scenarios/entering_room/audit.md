@@ -17,13 +17,13 @@
 - **Recommended fix:** Add a `## Scenario Usage Guide` section with the five subheadings, restating the YAML list content in prose/bulleted form for human readability, as the template specifies.
 
 ### 3. P3 (Legibility) not included in relevant_principles — suggestion
-- **Section/field:** `relevant_principles` vs. `_shared/principles.md` selection guidance
+- **Section/field:** `relevant_principles` vs. `../../../.claude/skills/_shared/principles.md` selection guidance
 - **Issue:** The scenario's normative core is about the robot recognizing and communicating deference at a threshold ("proceed to enter promptly once the threshold is clear," avoiding "waiting so far back... entry is delayed"). P3 (Legibility — behave so robot goals can be understood by others) arguably applies here, since a human benefits from being able to tell that the robot is intentionally waiting rather than malfunctioning or blocked. Current selection (P1, P4, P5, P6) is reasonable and within the 3-5 guidance, so this is not a defect, just worth a human's consideration.
 - **Recommended fix:** Optionally add P3 if the editor agrees legibility of the robot's "waiting" intent is a distinct concern from politeness/social-norm compliance; otherwise no change needed.
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3 and Robots@Games (R@G). Compared against `_shared/pg_scenarios.md`'s "Entering Room" entry (Doorway Scenarios section):
+SOURCE cites P&G Paper Table 3 and Robots@Games (R@G). Compared against `../../../.claude/skills/_shared/pg_scenarios.md`'s "Entering Room" entry (Doorway Scenarios section):
 
 - Description ("Robot enters a room occupied by a human") — matches.
 - Physical Environment: Indoor — matches (`context.environment.type: indoor`).

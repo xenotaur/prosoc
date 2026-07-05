@@ -18,7 +18,7 @@
 
 ## Source Fidelity
 
-SOURCE cites "P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [167]" — checked against `_shared/pg_scenarios.md`'s "Perpendicular Traffic" entry (under Crowd Scenarios):
+SOURCE cites "P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [167]" — checked against `../../../.claude/skills/_shared/pg_scenarios.md`'s "Perpendicular Traffic" entry (under Crowd Scenarios):
 
 | Field | P&G Table 3 | Scenario card | Match? |
 |---|---|---|---|
@@ -39,7 +39,7 @@ No mismatches found. The card is faithful to the Table 3 entry across every chec
 Per `template.md`'s "Required for AUDITED scenarios" fields — checked at the YAML level (all present) and the Markdown-section level (two missing, per Findings 1 and 2 above):
 
 - **Scenario Card Summary (YAML-equivalent data)** — all present: `scientific_purpose`, `geometric_layout`, `intended_robot_task`, `intended_human_behavior`, `ideal_outcome` are populated. As a standalone Markdown section, absent (Finding 1).
-- **Success Metrics** — present: `SR`, `NoCollisions`, `TTG` (all standard metric IDs per `_shared/principles.md`).
+- **Success Metrics** — present: `SR`, `NoCollisions`, `TTG` (all standard metric IDs per `../../../.claude/skills/_shared/principles.md`).
 - **Quality Metrics** — present: `P3`, `P7`, both valid P1–P8 identifiers and a subset of `relevant_principles`.
 - **Ideal Outcome** — present, both in `ideal_outcome` and restated in `scenario_usage_guide` context via `evaluation_notes`.
 - **Failure Modes** — present: four concrete failure modes listed (collision, mid-crossing stop/reversal, indefinite waiting, forcing pedestrians to stop/swerve).

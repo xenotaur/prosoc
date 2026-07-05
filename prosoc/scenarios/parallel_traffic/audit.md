@@ -23,7 +23,7 @@
 
 ## Source Fidelity
 
-SOURCE cites "P&G Paper, Table 3 ... cited in [167]." Compared against the canonical Table 3 "Parallel Traffic" entry in `_shared/pg_scenarios.md`:
+SOURCE cites "P&G Paper, Table 3 ... cited in [167]." Compared against the canonical Table 3 "Parallel Traffic" entry in `../../../.claude/skills/_shared/pg_scenarios.md`:
 
 | Field | P&G Table 3 | scenario.md / scenario.yml | Result |
 |---|---|---|---|

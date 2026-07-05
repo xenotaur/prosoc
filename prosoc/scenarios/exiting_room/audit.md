@@ -23,7 +23,7 @@
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3. Compared against `.claude/skills/_shared/pg_scenarios.md`'s "Exiting Room" entry:
+SOURCE cites P&G Paper Table 3. Compared against `../../../.claude/skills/_shared/pg_scenarios.md`'s "Exiting Room" entry:
 
 | Field | Table 3 | This card | Match? |
 |---|---|---|---|

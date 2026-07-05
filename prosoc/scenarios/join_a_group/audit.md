@@ -18,7 +18,7 @@
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3, "Join a Group" (cited in [50, 161]), which matches the entry in `../../.claude/skills/_shared/pg_scenarios.md`:
+SOURCE cites P&G Paper Table 3, "Join a Group" (cited in [50, 161]), which matches the entry in `../../../.claude/skills/_shared/pg_scenarios.md`:
 
 | Table 3 field | Reference value | Scenario card |
 |---|---|---|

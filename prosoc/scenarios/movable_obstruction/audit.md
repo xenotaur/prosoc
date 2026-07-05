@@ -8,12 +8,12 @@
 
 ### 1. `relevant_principles` and `quality_metrics` invent a non-canonical principle ID (P9) — blocking
 - **Section/field:** `relevant_principles`; `scenario_usage_guide.quality_metrics`
-- **Issue:** Both lists include `P9` ("Prosocial Behavior"), which is not one of the eight canonical principles defined in `../_shared/principles.md` (P1–P8). The schema's `^P[0-9]+$` pattern permits it syntactically, but `_shared/principles.md` is explicit: "Only emit P1–P8... If a scenario involves a principle not well-captured by P1–P8, note it in `evaluation_notes` rather than inventing a new ID." The scenario's own prose (Overview, Discussion) leans heavily on this invented P9 concept and also references an undefined "P0 (Goal Achievement)" in the Discussion section.
+- **Issue:** Both lists include `P9` ("Prosocial Behavior"), which is not one of the eight canonical principles defined in `../../../.claude/skills/_shared/principles.md` (P1–P8). The schema's `^P[0-9]+$` pattern permits it syntactically, but `../../../.claude/skills/_shared/principles.md` is explicit: "Only emit P1–P8... If a scenario involves a principle not well-captured by P1–P8, note it in `evaluation_notes` rather than inventing a new ID." The scenario's own prose (Overview, Discussion) leans heavily on this invented P9 concept and also references an undefined "P0 (Goal Achievement)" in the Discussion section.
 - **Recommended fix:** Remove `P9` from both `relevant_principles` and `quality_metrics`. If the "environmental stewardship beyond immediate interaction" concept is important to preserve, move it into `evaluation_notes` as prose rather than a principle ID, and remove the "P0 (Goal Achievement)" reference in the Discussion section for the same reason (P0 is not a defined principle anywhere in the corpus).
 
 ### 2. `relevant_principles` count (7, after excluding P9) exceeds the 3–5 guidance — blocking
 - **Section/field:** `relevant_principles`
-- **Issue:** The list currently has 7 entries (P1, P2, P3, P5, P6, P7, P9). Even discounting the invalid P9, that leaves 6 (P1, P2, P3, P5, P6, P7) — still above the "3–5 most directly relevant" guidance in `../_shared/principles.md`, which warns that including too many "dilutes meaning."
+- **Issue:** The list currently has 7 entries (P1, P2, P3, P5, P6, P7, P9). Even discounting the invalid P9, that leaves 6 (P1, P2, P3, P5, P6, P7) — still above the "3–5 most directly relevant" guidance in `../../../.claude/skills/_shared/principles.md`, which warns that including too many "dilutes meaning."
 - **Recommended fix:** Narrow to the 3–5 principles most central to the scenario's core conflict (obstruction handling/intervention vs. yielding). P1 (Safety), P7 (Proactivity), and P5 (Social Competency) look most load-bearing given the prose; P2, P3, and P6 are plausible but should be reconsidered for necessity.
 
 ### 3. `scenario.md` does not follow `template.md`'s structure — no Scenario Card Summary, Social Navigation Context, Normative Expectations, or Scenario Usage Guide sections — blocking
@@ -33,7 +33,7 @@
 
 ## Source Fidelity
 
-The SOURCE field cites "Principles and Guidelines for Evaluating Social Robot Navigation (P&G paper)" generically, without a specific table or section reference. Per `../_shared/pg_scenarios.md`: **"The `movable_obstruction` scenario has no direct P&G Table 3 counterpart."** This is stated explicitly in the shared reference data, meaning there is no Table 3 entry to compare physical description, scientific purpose, geometric layout, roles, task, or ideal outcome against.
+The SOURCE field cites "Principles and Guidelines for Evaluating Social Robot Navigation (P&G paper)" generically, without a specific table or section reference. Per `../../../.claude/skills/_shared/pg_scenarios.md`: **"The `movable_obstruction` scenario has no direct P&G Table 3 counterpart."** This is stated explicitly in the shared reference data, meaning there is no Table 3 entry to compare physical description, scientific purpose, geometric layout, roles, task, or ideal outcome against.
 
 **Source fidelity: not checkable against Table 3 — the shared reference data explicitly states this scenario has no direct P&G Table 3 counterpart, and the SOURCE field does not cite a specific section, page, or figure of the paper that could be checked directly.** The SOURCE field should be more precise (e.g., citing the general P7/proactivity guideline discussion, or marking this as an original extension of *Frontal Approach* rather than a direct paper citation) so that future audits know what, if anything, is checkable.
 

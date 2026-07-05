@@ -8,7 +8,7 @@
 
 ### 1. Invalid principle identifier `P0` in `relevant_principles` — blocking
 - **Section/field:** `relevant_principles` (scenario.md embedded YAML and scenario.yml)
-- **Issue:** The list includes `P0  # Goal Achievement`. Per `_shared/principles.md`, only
+- **Issue:** The list includes `P0  # Goal Achievement`. Per `../../../.claude/skills/_shared/principles.md`, only
   P1–P8 are defined charter principles; there is no P0. `P0` matches the schema's regex
   pattern (`^P[0-9]+$`) so it passes JSON Schema validation, but it is not a real
   principle identifier and dilutes/misuses the taxonomy. "Goal Achievement" is not one of
@@ -78,7 +78,7 @@ SOURCE is cited informally as "Prompt to ChatGPT 5.2" with no retrievable conten
 the Social Navigation Context section explicitly says this scenario "is inspired by
 pedestrian overtaking cases discussed in the *Principles and Guidelines for Social Robot
 Navigation* paper," and the scenario clearly corresponds to the **Robot Overtaking**
-entry in P&G Table 3 (per `_shared/pg_scenarios.md`):
+entry in P&G Table 3 (per `../../../.claude/skills/_shared/pg_scenarios.md`):
 
 - **P&G Table 3 "Robot Overtaking":** Description: "Robot overtakes a moving pedestrian";
   Physical Env: Generic; Geometric Layout: Passable space; Scientific Purpose: Pedestrian

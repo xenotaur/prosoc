@@ -8,8 +8,8 @@
 
 ### 1. Invalid principle ID `P0` in `relevant_principles` — blocking
 - **Section/field:** Scenario Specification (YAML) → `relevant_principles`
-- **Issue:** The YAML lists `P0  # Goal Achievement` alongside P1–P4. `../_shared/principles.md` defines only P1–P8; there is no P0, and no principle named "Goal Achievement" exists in the charter. `schema.json`'s `pattern: "^P[0-9]+$"` has no upper bound, so this passes schema/dry-run validation silently — it is a charter-compliance defect, not a schema error.
-- **Recommended fix:** Remove `P0`. If "goal achievement" is a concept the author wants to flag as a tension against prosocial behavior, note it in `evaluation_notes` instead of inventing a new principle ID, per `../_shared/principles.md`'s explicit guidance.
+- **Issue:** The YAML lists `P0  # Goal Achievement` alongside P1–P4. `../../../.claude/skills/_shared/principles.md` defines only P1–P8; there is no P0, and no principle named "Goal Achievement" exists in the charter. `schema.json`'s `pattern: "^P[0-9]+$"` has no upper bound, so this passes schema/dry-run validation silently — it is a charter-compliance defect, not a schema error.
+- **Recommended fix:** Remove `P0`. If "goal achievement" is a concept the author wants to flag as a tension against prosocial behavior, note it in `evaluation_notes` instead of inventing a new principle ID, per `../../../.claude/skills/_shared/principles.md`'s explicit guidance.
 
 ### 2. Missing `scenario_usage_guide` block entirely — blocking
 - **Section/field:** Scenario Specification (YAML) — `scenario_usage_guide` (success_metrics, quality_metrics, failure_modes, labeling_criteria)
@@ -19,7 +19,7 @@
 ### 3. Missing "Scenario Card Summary" section — should-fix
 - **Section/field:** Prose — no "Scenario Card Summary" heading present (template.md requires it for AUDITED)
 - **Issue:** The card jumps from Status straight to Scenario Overview; the structured summary block (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success/Quality Metrics, Ideal Outcome, Related Scenarios, Cited In) is entirely absent.
-- **Recommended fix:** Add the section, drawing on prose already present (Overview, Normative Expectations) and the `../_shared/pg_scenarios.md` Table 3 entry for "Intersection No Gesture."
+- **Recommended fix:** Add the section, drawing on prose already present (Overview, Normative Expectations) and the `../../../.claude/skills/_shared/pg_scenarios.md` Table 3 entry for "Intersection No Gesture."
 
 ### 4. `relevant_principles` count of 4 (once P0 is removed) omits some plausible candidates — suggestion
 - **Section/field:** `relevant_principles` (P1, P2, P3, P4 remain after removing the invalid ID)
@@ -33,7 +33,7 @@
 
 ## Source Fidelity
 
-SOURCE cites "Principles and Guidelines for Social Robot Navigation (Table 3)," matching `../_shared/pg_scenarios.md`'s "Intersection No Gesture" entry. Comparison:
+SOURCE cites "Principles and Guidelines for Social Robot Navigation (Table 3)," matching `../../../.claude/skills/_shared/pg_scenarios.md`'s "Intersection No Gesture" entry. Comparison:
 
 | Field | Table 3 (pg_scenarios.md) | This scenario | Match? |
 |---|---|---|---|

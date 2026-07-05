@@ -8,8 +8,8 @@
 
 ### 1. Invalid principle identifiers P0 and P9 used in `relevant_principles` — blocking
 - **Section/field:** `scenario.yml` / embedded YAML `relevant_principles` (both list `P0  # Goal Achievement` and `P9  # Prosocial Behavior`)
-- **Issue:** Per `../_shared/principles.md`, only P1–P8 are valid principle identifiers, and the schema's regex (`^P[0-9]+$`) does not by itself enforce this — it will accept `P0`/`P9` syntactically without error (confirmed: the dry-run distiller check reported no schema violation). "Goal Achievement" and "Prosocial Behavior" are not among the eight canonical principles (Safety, Comfort, Legibility, Politeness, Social Competency, Agent Understanding, Proactivity, Contextual Appropriateness) and appear to be invented identifiers. This also means `relevant_principles` effectively has only 4 valid P1–P8 entries (P1–P4), which is below the recommended 3–5 range in spirit once the invalid ones are discounted, though nominally 6 entries are listed.
-- **Recommended fix:** Remove `P0` and `P9`. If "Goal Achievement" or "Prosocial Behavior" concepts are important to this scenario, note them in `evaluation_notes` instead (per `_shared/principles.md`'s explicit guidance: "If a scenario involves a principle not well-captured by P1–P8, note it in `evaluation_notes` rather than inventing a new ID"). Consider whether P6 (Agent Understanding) or P7 (Proactivity) should be added instead, since the scenario involves predicting/responding to a human's explicit gesture — currently neither is included despite being plausibly relevant.
+- **Issue:** Per `../../../.claude/skills/_shared/principles.md`, only P1–P8 are valid principle identifiers, and the schema's regex (`^P[0-9]+$`) does not by itself enforce this — it will accept `P0`/`P9` syntactically without error (confirmed: the dry-run distiller check reported no schema violation). "Goal Achievement" and "Prosocial Behavior" are not among the eight canonical principles (Safety, Comfort, Legibility, Politeness, Social Competency, Agent Understanding, Proactivity, Contextual Appropriateness) and appear to be invented identifiers. This also means `relevant_principles` effectively has only 4 valid P1–P8 entries (P1–P4), which is below the recommended 3–5 range in spirit once the invalid ones are discounted, though nominally 6 entries are listed.
+- **Recommended fix:** Remove `P0` and `P9`. If "Goal Achievement" or "Prosocial Behavior" concepts are important to this scenario, note them in `evaluation_notes` instead (per `../../../.claude/skills/_shared/principles.md`'s explicit guidance: "If a scenario involves a principle not well-captured by P1–P8, note it in `evaluation_notes` rather than inventing a new ID"). Consider whether P6 (Agent Understanding) or P7 (Proactivity) should be added instead, since the scenario involves predicting/responding to a human's explicit gesture — currently neither is included despite being plausibly relevant.
 
 ### 2. `scenario_usage_guide` block entirely absent from machine-readable YAML — blocking
 - **Section/field:** `scenario.yml` (missing `scenario_usage_guide`); prose "Scenario Usage Guide" section (present, with Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria all populated)
@@ -33,7 +33,7 @@
 
 ## Source Fidelity
 
-SOURCE is explicitly stated as "Principles and Guidelines for Social Robot Navigation (Table 3)," so it is checked directly against `../_shared/pg_scenarios.md`'s "Intersection Gesture Proceed" entry:
+SOURCE is explicitly stated as "Principles and Guidelines for Social Robot Navigation (Table 3)," so it is checked directly against `../../../.claude/skills/_shared/pg_scenarios.md`'s "Intersection Gesture Proceed" entry:
 
 | Field | P&G Table 3 | This scenario | Match? |
 |---|---|---|---|

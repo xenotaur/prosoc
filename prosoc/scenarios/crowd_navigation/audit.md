@@ -23,7 +23,7 @@
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3, "cited in various." Compared against `_shared/pg_scenarios.md`'s "Crowd Navigation" entry (Crowd Scenarios section):
+SOURCE cites P&G Paper Table 3, "cited in various." Compared against `../../../.claude/skills/_shared/pg_scenarios.md`'s "Crowd Navigation" entry (Crowd Scenarios section):
 
 - Description ("A robot navigates through a crowd") — matches.
 - Physical Environment: Generic — matches (`context.environment.type: generic`).

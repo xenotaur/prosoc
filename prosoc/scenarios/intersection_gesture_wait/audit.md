@@ -8,8 +8,8 @@
 
 ### 1. Invalid principle IDs `P0` and `P9` in `relevant_principles` — blocking
 - **Section/field:** Scenario Specification (YAML) → `relevant_principles`
-- **Issue:** The YAML lists `P0  # Goal Achievement` and `P9  # Prosocial Behavior` alongside P1–P4. `../_shared/principles.md` defines only P1–P8; there is no P0 or P9, and no principle named "Goal Achievement" or "Prosocial Behavior" exists in the charter. `schema.json`'s `pattern: "^P[0-9]+$"` has no upper bound, so this passes schema/dry-run validation silently — it is a charter-compliance defect, not a schema error.
-- **Recommended fix:** Remove `P0` and `P9`. If "goal achievement" and "prosocial behavior generally" are concepts the author wants to flag, note them in `evaluation_notes` instead of inventing new principle IDs, per `../_shared/principles.md`'s explicit guidance.
+- **Issue:** The YAML lists `P0  # Goal Achievement` and `P9  # Prosocial Behavior` alongside P1–P4. `../../../.claude/skills/_shared/principles.md` defines only P1–P8; there is no P0 or P9, and no principle named "Goal Achievement" or "Prosocial Behavior" exists in the charter. `schema.json`'s `pattern: "^P[0-9]+$"` has no upper bound, so this passes schema/dry-run validation silently — it is a charter-compliance defect, not a schema error.
+- **Recommended fix:** Remove `P0` and `P9`. If "goal achievement" and "prosocial behavior generally" are concepts the author wants to flag, note them in `evaluation_notes` instead of inventing new principle IDs, per `../../../.claude/skills/_shared/principles.md`'s explicit guidance.
 
 ### 2. Same invalid IDs would need to be checked in `quality_metrics` — blocking (moot, but related)
 - **Section/field:** `scenario_usage_guide.quality_metrics`
@@ -24,11 +24,11 @@
 ### 4. Missing "Scenario Card Summary" section — should-fix
 - **Section/field:** Prose — no "Scenario Card Summary" heading present (template.md requires it for AUDITED)
 - **Issue:** The card jumps from Status straight to Scenario Overview; the structured summary block (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success/Quality Metrics, Ideal Outcome, Related Scenarios, Cited In) is entirely absent.
-- **Recommended fix:** Add the section, drawing on prose already present (Overview, Normative Expectations) and the `../_shared/pg_scenarios.md` Table 3 entry for "Intersection Gesture Wait."
+- **Recommended fix:** Add the section, drawing on prose already present (Overview, Normative Expectations) and the `../../../.claude/skills/_shared/pg_scenarios.md` Table 3 entry for "Intersection Gesture Wait."
 
 ### 5. Robot Role drift vs. P&G source — should-fix
 - **Section/field:** Fidelity to source vs. `agents.robot.role`
-- **Issue:** `../_shared/pg_scenarios.md`'s Table 3 entry for "Intersection Gesture Wait" lists **Robot Role: Servant**. The scenario's YAML instead sets `agents.robot.role: navigating_agent` (a generic/default value used elsewhere across scenarios, not specific to this one). This isn't a hard contradiction — "navigating_agent" isn't false — but it drops information the source specifies.
+- **Issue:** `../../../.claude/skills/_shared/pg_scenarios.md`'s Table 3 entry for "Intersection Gesture Wait" lists **Robot Role: Servant**. The scenario's YAML instead sets `agents.robot.role: navigating_agent` (a generic/default value used elsewhere across scenarios, not specific to this one). This isn't a hard contradiction — "navigating_agent" isn't false — but it drops information the source specifies.
 - **Recommended fix:** Consider setting `role: servant` (or otherwise noting the Servant role in prose/YAML) to align with Table 3, or explicitly explain in `evaluation_notes` why a more generic role was chosen instead.
 
 ### 6. `relevant_principles` count of 4 (once P0/P9 removed) is within guidance but omits some plausible candidates — suggestion
@@ -38,7 +38,7 @@
 
 ## Source Fidelity
 
-SOURCE cites "Principles and Guidelines for Social Robot Navigation (Table 3)," matching `../_shared/pg_scenarios.md`'s "Intersection Gesture Wait" entry. Comparison:
+SOURCE cites "Principles and Guidelines for Social Robot Navigation (Table 3)," matching `../../../.claude/skills/_shared/pg_scenarios.md`'s "Intersection Gesture Wait" entry. Comparison:
 
 | Field | Table 3 (pg_scenarios.md) | This scenario | Match? |
 |---|---|---|---|

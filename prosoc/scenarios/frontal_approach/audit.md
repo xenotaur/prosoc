@@ -33,7 +33,7 @@
 
 ## Source Fidelity
 
-SOURCE is not stated as citing P&G directly in the scenario's own STATUS block (`SOURCE: Prompt to ChatGPT 5.2`), but the scenario's name and content clearly correspond to the P&G Table 3 "Frontal Approach" entry, so it is checked against `../_shared/pg_scenarios.md`:
+SOURCE is not stated as citing P&G directly in the scenario's own STATUS block (`SOURCE: Prompt to ChatGPT 5.2`), but the scenario's name and content clearly correspond to the P&G Table 3 "Frontal Approach" entry, so it is checked against `../../../.claude/skills/_shared/pg_scenarios.md`:
 
 | Field | P&G Table 3 | This scenario | Match? |
 |---|---|---|---|
