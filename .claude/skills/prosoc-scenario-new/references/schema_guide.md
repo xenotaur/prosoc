@@ -25,7 +25,7 @@ source paper content to scenario card fields.
 | `intended_robot_task` | string | e.g. "navigate from A to B", "deliver object to human" |
 | `intended_human_behavior` | string | e.g. "cross navigate", "gesture wait", "lead robot to destination" |
 | `ideal_outcome` | string | Concise: e.g. "robot and human pass without collision" |
-| `relevant_principles` | array of P1–P8 | See principles.md. Limit to 3–5 most relevant. |
+| `relevant_principles` | array of P0–P9 | See principles.md. Limit to 3–5 most relevant. |
 
 ## agents Block
 

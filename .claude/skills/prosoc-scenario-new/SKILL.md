@@ -45,7 +45,7 @@ Load these before generating the scenario card:
    already implemented and to get canonical metadata. Shared with `prosoc-scenario-audit`;
    do not fork a local copy.
 
-2. **`../_shared/principles.md`** — The P1–P8 principle definitions and common metric IDs.
+2. **`../_shared/principles.md`** — The P0–P9 principle definitions and common metric IDs.
    Read this to correctly populate `relevant_principles` and `scenario_usage_guide`. Shared
    with `prosoc-scenario-audit`; do not fork a local copy.
 
@@ -90,7 +90,7 @@ Map the source material to these fields (refer to `references/schema_guide.md`):
 - robot role and capabilities, human role and count
 - intended_robot_task, intended_human_behavior
 - ideal_outcome
-- relevant_principles (P1–P8 only — see `../_shared/principles.md`)
+- relevant_principles (P0–P9 only — see `../_shared/principles.md`)
 - expected_behaviors (must / should / should_not)
 - scenario_usage_guide (success_metrics, quality_metrics, failure_modes, labeling_criteria)
 - evaluation_notes
@@ -172,7 +172,7 @@ Before reporting completion, verify:
 - [ ] The scenario directory exists and contains both `scenario.md` and `scenario.yml`
 - [ ] The STATUS block is present and says DRAFTED
 - [ ] The fenced YAML block is valid and passes the distiller
-- [ ] `relevant_principles` contains only P1–P8 identifiers
+- [ ] `relevant_principles` contains only P0–P9 identifiers
 - [ ] `expected_behaviors` is flexible, not over-specified
 - [ ] The Scenario Overview is readable without the YAML
 - [ ] The source is cited in the STATUS block
