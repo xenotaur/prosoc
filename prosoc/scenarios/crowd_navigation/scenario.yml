@@ -1,0 +1,87 @@
+id: crowd_navigation_01
+name: Crowd Navigation
+summary: 'A robot navigates through a crowd of people who are milling about with no
+  single dominant trajectory. The robot must continuously replan around many loosely
+  coordinated human movements while making steady progress through the space.
+
+  '
+scientific_purpose: crowd navigation
+geometric_layout: passable space
+context:
+  environment:
+    type: generic
+    setting: plaza, lobby, or transit hub with ambient pedestrian traffic
+    width: wide
+  social_setting:
+    formality: informal
+    crowd_level: high
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - speed_adjustment
+  humans:
+  - role: pedestrian
+    count: 10
+    attributes:
+      mobility: typical
+      awareness: typical
+      movement_pattern: milling_about
+initial_conditions:
+  robot_position: one side of the crowded space
+  human_positions: distributed throughout the space, moving without a single shared
+    direction
+  crowd_density: high, variable across the space
+intended_robot_task: navigate through the crowd to a destination on the far side
+intended_human_behavior: mill about, moving independently without regard to the robot's
+  specific path
+expected_behaviors:
+  must:
+  - avoid collision with any individual in the crowd
+  - not become indefinitely stuck within the crowd
+  should:
+  - thread through gaps in the crowd as they become available
+  - maintain reasonable clearance from nearby individuals
+  - make steady, legible progress toward the goal
+  should_not:
+  - take excessively wide detours around minor crowd density
+  - move erratically or reverse direction frequently
+  - freeze indefinitely in response to a temporarily dense cluster
+relevant_principles:
+- P1
+- P2
+- P6
+- P7
+ideal_outcome: robot crosses the crowd without collision or obstruction, making steady
+  progress
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  - TTG
+  - PathLength
+  quality_metrics:
+  - P2
+  - P7
+  failure_modes:
+  - robot collides with or startles an individual in the crowd
+  - robot freezes indefinitely in a dense area
+  - robot takes an excessively long or wide detour
+  - robot moves erratically, oscillating direction in response to shifting crowd positions
+  labeling_criteria:
+  - multiple humans (more than a small group) are present and moving independently
+  - no single human's trajectory dominates the interaction
+  - the robot's task requires crossing through, rather than around, the occupied space
+evaluation_notes: 'Crowd density and movement pattern should be treated as configurable
+  parameters: this scenario spans a spectrum from lightly populated passable space
+  to dense, high-crowd-level conditions. Evaluators should report the crowd density
+  used, since acceptable clearance norms and progress expectations vary substantially
+  with density.
+
+  This scenario is related to Robot Crowding (Figure 7, not in Table 3), which considers
+  a stationary robot surrounded by pedestrians rather than a robot actively crossing
+  a milling crowd, and to Parallel Traffic and Perpendicular Traffic, which specialize
+  crowd motion to a single shared direction rather than unstructured milling.'

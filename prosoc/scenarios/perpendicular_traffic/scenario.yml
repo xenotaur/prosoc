@@ -1,0 +1,84 @@
+id: perpendicular_traffic_01
+name: Perpendicular Traffic
+summary: 'A robot crosses an intersection or plaza while a crowd of pedestrians flows
+  perpendicular to its path. The robot must assess the density and pace of the cross-flow,
+  select a safe gap or moment, and cross decisively without lingering within the flow.
+
+  '
+scientific_purpose: crowd navigation
+geometric_layout: intersection
+context:
+  environment:
+    type: generic
+    setting: busy corridor junction or plaza crossing
+    width: wide
+  social_setting:
+    formality: informal
+    crowd_level: high
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - speed_adjustment
+  humans:
+  - role: pedestrian
+    count: 15
+    attributes:
+      mobility: typical
+      awareness: typical
+      movement_pattern: perpendicular_stream
+initial_conditions:
+  robot_position: at the boundary of the perpendicular pedestrian flow
+  human_positions: a continuous stream moving from A to B, orthogonal to the robot's
+    intended path
+  flow_direction: perpendicular to robot's cross-navigate path
+intended_robot_task: cross navigate through the perpendicular flow
+intended_human_behavior: mill from A to B, forming a continuous perpendicular stream
+expected_behaviors:
+  must:
+  - avoid collision with any pedestrian in the flow
+  - not stop or reverse within the middle of the flow once crossing has begun
+  should:
+  - assess flow density and timing before committing to cross
+  - select a gap or lull and cross briskly and predictably
+  - commit decisively once crossing begins
+  should_not:
+  - enter the flow without adequate assessment, forcing pedestrians to stop or swerve
+  - wait indefinitely at the boundary without completing the crossing
+  - cross so slowly that it remains within the flow's path for an extended period
+relevant_principles:
+- P1
+- P3
+- P6
+- P7
+ideal_outcome: robot crosses the perpendicular flow without collision or obstruction
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  - TTG
+  quality_metrics:
+  - P3
+  - P7
+  failure_modes:
+  - robot collides with a pedestrian while crossing the flow
+  - robot stops or reverses mid-crossing, obstructing the flow
+  - robot waits indefinitely at the boundary without crossing
+  - robot forces multiple pedestrians to stop or swerve to avoid it
+  labeling_criteria:
+  - a crowd of pedestrians is present with a shared direction of travel
+  - the robot's intended path crosses that shared direction at an angle (typically
+    perpendicular)
+  - the robot's task requires traversing the flow rather than merging into it
+evaluation_notes: 'This scenario isolates decisive gap-selection and crossing behavior
+  against a continuous cross-flow, distinct from Intersection No Gesture, which involves
+  a single human rather than a continuous stream. Evaluators should measure both the
+  wait time before crossing (excessive waiting is a failure mode) and the smoothness/commitment
+  of the crossing itself.
+
+  This scenario is related to Plaza Crossing (a descriptive variant implied by [167],
+  not separately defined in Table 3) and to Parallel Traffic, which involves flow
+  aligned with rather than orthogonal to the robot''s path.'

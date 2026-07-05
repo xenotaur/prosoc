@@ -1,0 +1,90 @@
+id: exiting_room_01
+name: Exiting Room
+summary: 'A robot exits a room through a doorway while a human is simultaneously entering
+  the same room through the same doorway. The robot is expected to exit first, but
+  must avoid colliding with or blocking the entering human.
+
+  '
+scientific_purpose: pedestrian interaction
+geometric_layout: room and door
+context:
+  environment:
+    type: indoor
+    setting: office or home room with a single doorway
+    width: narrow
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - speed_adjustment
+  humans:
+  - role: pedestrian
+    count: 1
+    attributes:
+      mobility: typical
+      awareness: typical
+initial_conditions:
+  robot_position: inside the room, moving toward the doorway
+  human_position: outside the room, moving toward the doorway
+  robot_task_direction: inside to outside
+  human_task_direction: outside to inside
+intended_robot_task: navigate from inside to outside the room
+intended_human_behavior: navigate from outside to inside the room
+expected_behaviors:
+  must:
+  - avoid collision with the human at the doorway
+  - not force the human to reverse or stop abruptly if the human has already committed
+    to the doorway
+  should:
+  - proceed to exit promptly when the robot reaches the threshold first
+  - signal exiting intent clearly and early
+  - yield briefly if the human is already committed to entering
+  should_not:
+  - default to deferring to the human without cause, contrary to the expected robot-exits-first
+    outcome
+  - push through the doorway after the human has already begun entering
+  - hesitate indefinitely at the threshold
+relevant_principles:
+- P1
+- P3
+- P5
+- P6
+ideal_outcome: robot exits the room first, then the human enters, without collision
+  or obstruction
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  quality_metrics:
+  - P3
+  - P5
+  failure_modes:
+  - robot collides with human at the doorway
+  - robot defers to the human by default and fails to exit first as intended
+  - robot pushes through after the human has already begun entering
+  - prolonged stand-off with neither agent moving through the doorway
+  labeling_criteria:
+  - robot is positioned inside a room with the task of exiting
+  - a human is outside the room and moving toward the same doorway to enter
+  - the robot's and human's paths intersect at the doorway
+evaluation_notes: 'Ambiguity note: the P&G Table 3 entry for this scenario lists the
+  Human Behavior field as "Navigate in to out," which appears to be a transcription
+  inconsistency given the scenario Description ("Robot exits a room while a human
+  enters") and the stated Ideal Outcome ("Robot exits first"). This card follows the
+  Description and Ideal Outcome fields, treating the human as navigating from outside
+  to inside (entering) while the robot exits. A human editor should verify this interpretation
+  against the source paper text if available.
+
+  This scenario is the inverse of Entering Room. When both scenarios are used together,
+  evaluators can check whether the robot''s priority-taking correctly flips based
+  on its own task direction (entering defers, exiting proceeds) rather than applying
+  a single fixed rule regardless of role.
+
+  This scenario is related to Exiting Elevator (Figure 7, not in Table 3), which applies
+  a similar norm in a higher-density, time-constrained elevator context.'

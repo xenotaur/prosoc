@@ -1,0 +1,93 @@
+id: following_01
+name: Following
+summary: 'A robot in a servant role follows a human who leads their own navigation
+  through a walking space, freely choosing pace, direction, and path. The robot must
+  maintain an appropriate following distance and trajectory through turns, stops,
+  and pace changes.
+
+  '
+scientific_purpose: joint navigation
+geometric_layout: walking space
+context:
+  environment:
+    type: generic
+    setting: indoor or outdoor pedestrian walking space
+    width: moderate
+  social_setting:
+    formality: informal
+    crowd_level: low
+agents:
+  robot:
+    role: servant
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - speed_adjustment
+    - human_tracking
+  humans:
+  - role: leader
+    count: 1
+    attributes:
+      mobility: typical
+      awareness: typical
+initial_conditions:
+  robot_position: behind the human at a comfortable following distance
+  human_position: leading, free to choose path and pace
+  robot_task: maintain following relationship
+intended_robot_task: follow the lead human
+intended_human_behavior: lead, navigating freely through the space at self-chosen
+  pace and path
+expected_behaviors:
+  must:
+  - avoid collision with the human, other pedestrians, and obstacles
+  - not lose track of the human during turns or brief occlusions
+  should:
+  - maintain a socially comfortable following distance
+  - smoothly track the human's turns without cutting corners
+  - stop promptly when the human stops
+  - recover gracefully after temporary loss of line of sight
+  should_not:
+  - follow so closely that the human feels physically crowded
+  - follow so far behind that the human is lost at a turn or in a crowd
+  - cut through obstacles or other pedestrians to preserve distance
+  - overtake or lead when the human only pauses briefly
+relevant_principles:
+- P1
+- P2
+- P6
+- P8
+ideal_outcome: robot follows the person continuously, maintaining an appropriate distance
+  without losing track of them
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  - PathLength
+  quality_metrics:
+  - P2
+  - P6
+  failure_modes:
+  - robot loses track of the human at a turn or in a crowd
+  - robot follows too closely, crowding the human
+  - robot lags so far behind that following relationship breaks down
+  - robot cuts corners or clips obstacles while tracking a turn
+  labeling_criteria:
+  - robot is in a servant/follower role relative to a single leading human
+  - the human's path is not predetermined and may change direction or pace freely
+  - the robot's trajectory is derived from tracking the human rather than an independent
+    goal
+evaluation_notes: 'This scenario should be evaluated over a sustained trajectory rather
+  than a single conflict point, unlike most other Table 3 scenarios. Evaluators should
+  sample multiple turns, pace changes, and (if applicable) brief occlusions within
+  a single episode to assess consistency of following behavior, not just a single
+  snapshot of distance-keeping.
+
+  Following distance norms are context-dependent (P8): a narrow hallway may require
+  closer following than a wide plaza to avoid losing the human at a turn, while a
+  crowded space may require a different balance between proximity and collision avoidance
+  with third parties.
+
+  This scenario is related to Accompany Peer (Figure 7, not in Table 3), which involves
+  side-by-side co-navigation rather than following from behind, and to Leading, its
+  role-reversed counterpart where the robot leads and the human follows.'

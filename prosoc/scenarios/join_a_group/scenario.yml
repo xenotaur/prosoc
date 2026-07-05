@@ -1,0 +1,91 @@
+id: join_a_group_01
+name: Join a Group
+summary: 'A robot navigates across open space toward a standing group of robots or
+  people already engaged in conversation, and must approach and settle into the group''s
+  spatial formation as a new member, without disrupting the ongoing interaction.
+
+  '
+scientific_purpose: group interaction
+geometric_layout: open space
+context:
+  environment:
+    type: generic
+    setting: open indoor or outdoor gathering space
+    width: wide
+  social_setting:
+    formality: informal
+    crowd_level: medium
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+    - forward_motion
+    - steering
+    - stopping
+    - speed_adjustment
+    - orientation_control
+  humans:
+  - role: group
+    count: 3
+    attributes:
+      mobility: stationary
+      awareness: typical
+      group_size: 3
+      formation: conversing_circle
+initial_conditions:
+  robot_position: outside the group's O-space, approaching
+  human_position: standing group already in conversational formation
+  group_activity: ongoing conversation
+intended_robot_task: navigate to and join the group
+intended_human_behavior: continue conversing, accommodating the robot's arrival
+expected_behaviors:
+  must:
+  - avoid collision with any group member
+  - avoid cutting directly through the group's shared conversational space
+  should:
+  - approach along a peripheral or curved path
+  - slow down when nearing the group's formation boundary
+  - settle at a position and orientation consistent with joining the formation
+  should_not:
+  - stop abruptly at close range to a single group member
+  - position itself so close to one member that it appears to exclude the others
+  - leave its final position and orientation ambiguous as to whether it has joined
+relevant_principles:
+- P1
+- P2
+- P4
+- P5
+- P8
+ideal_outcome: robot joins the group, settling into the formation without disrupting
+  the conversation
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  quality_metrics:
+  - P2
+  - P4
+  - P5
+  failure_modes:
+  - robot collides with or comes uncomfortably close to a group member
+  - robot cuts through the group's conversational space
+  - robot's final position is ambiguous, unclear whether it has joined or is passing
+    by
+  - group members are startled or forced to step back to accommodate the robot
+  labeling_criteria:
+  - a stationary group of two or more agents is present in a recognizable conversational
+    formation
+  - the robot's trajectory terminates at or near the group rather than passing through
+    it
+  - the robot's final position and orientation face into the group's shared space
+evaluation_notes: "This scenario deliberately avoids over-specifying the robot's final\
+  \ stopping position, per P&G Guideline N6 \u2014 many final positions can correctly\
+  \ constitute \"joining,\" and evaluators should judge whether the approach and settling\
+  \ behavior is socially legible rather than checking against one fixed pose.\nEvaluators\
+  \ should pay particular attention to the *approach trajectory*, not just the final\
+  \ position: a robot that ends in a good position after cutting through the group's\
+  \ O-space at speed has still failed the social competency requirement even if no\
+  \ collision occurred.\nThis scenario is closely related to Leaving a Group (Figure\
+  \ 7, not in Table 3), its natural inverse, and to Accompany Peer (Figure 7), which\
+  \ involves ongoing co-location with a single human rather than a discrete join event\
+  \ with a multi-person group."

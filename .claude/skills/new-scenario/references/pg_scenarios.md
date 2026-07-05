@@ -93,7 +93,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** No collision / obstruction
 - **Related Scenarios:** (none listed)
 - **Cited In:** [126, 171]
-- **Implemented:** NO
+- **Implemented:** YES (`blind_corner`)
 
 ---
 
@@ -109,7 +109,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** No collision / obstruction
 - **Related Scenarios:** Narrow Arch
 - **Cited In:** [126]
-- **Implemented:** NO
+- **Implemented:** YES (`narrow_doorway`)
 
 ### Entering Room
 - **Description:** Robot enters a room occupied by a human
@@ -121,7 +121,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** Robot lets human exit
 - **Related Scenarios:** Entering Elevator (R@G)
 - **Cited In:** R@G
-- **Implemented:** NO
+- **Implemented:** YES (`entering_room`)
 
 ### Exiting Room
 - **Description:** Robot exits a room while a human enters
@@ -133,7 +133,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** Robot exits first
 - **Related Scenarios:** Exiting Elevator (R@G)
 - **Cited In:** R@G
-- **Implemented:** NO
+- **Implemented:** YES (`exiting_room`)
 
 ---
 
@@ -149,7 +149,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** Robot joins group
 - **Related Scenarios:** Leaving a Group
 - **Cited In:** [50, 161]
-- **Implemented:** NO
+- **Implemented:** YES (`join_a_group`)
 
 ### Following
 - **Description:** A robot follows a person
@@ -162,7 +162,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** Robot follows person
 - **Related Scenarios:** Accompany Peer
 - **Cited In:** [50]
-- **Implemented:** NO
+- **Implemented:** YES (`following`)
 
 ### Leading
 - **Description:** A robot leads a person
@@ -175,7 +175,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** Person follows robot
 - **Related Scenarios:** Tour Guide
 - **Cited In:** [50]
-- **Implemented:** NO
+- **Implemented:** YES (`leading`)
 
 ---
 
@@ -191,7 +191,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** No collision / obstruction
 - **Related Scenarios:** Robot Crowding
 - **Cited In:** Various
-- **Implemented:** NO
+- **Implemented:** YES (`crowd_navigation`)
 
 ### Parallel Traffic
 - **Description:** Crowd moves parallel to the robot
@@ -203,7 +203,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** No collision / obstruction
 - **Related Scenarios:** Circular Crossing
 - **Cited In:** [167]
-- **Implemented:** NO
+- **Implemented:** YES (`parallel_traffic`)
 
 ### Perpendicular Traffic
 - **Description:** Crowd moves perpendicular to the robot
@@ -215,7 +215,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** No collision / obstruction
 - **Related Scenarios:** Plaza Crossing
 - **Cited In:** [167]
-- **Implemented:** NO
+- **Implemented:** YES (`perpendicular_traffic`)
 
 ---
 
@@ -232,7 +232,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** Human takes object
 - **Related Scenarios:** Robot Courier
 - **Cited In:** [161]
-- **Implemented:** NO
+- **Implemented:** YES (`object_handover`)
 
 ### Crash Cart
 - **Description:** Robot delivering a medical product indoors
@@ -245,7 +245,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Ideal Outcome:** Delivery of medicine
 - **Related Scenarios:** Food Delivery
 - **Cited In:** this article
-- **Implemented:** NO
+- **Implemented:** YES (`crash_cart`)
 
 ---
 
