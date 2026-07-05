@@ -159,10 +159,21 @@ which of these it is:
 
 ### 6. Write the audit report
 
-Create `prosoc/scenarios/<name>/audit.md`. Give it a short provenance header in the
+Create `prosoc/scenarios/<name>/audit.md`. Start with a small structured frontmatter
+block — this is what lets tooling (e.g. `prosoc-scenario-audit-all`) parse verdicts
+and counts reliably instead of scraping prose — followed by a provenance header in the
 same spirit as the scenario's own STATUS block, followed by the findings:
 
 ```markdown
+---
+scenario: <id>
+verdict: <one of: ready, ready_with_fixes, not_ready>
+blocking: <count>
+should_fix: <count>
+suggestion: <count>
+audited: <today's date, YYYY-MM-DD>
+---
+
 # Audit: <Scenario Name>
 
 - **Scenario:** `prosoc/scenarios/<id>/`
@@ -185,6 +196,13 @@ same spirit as the scenario's own STATUS block, followed by the findings:
 ## Completeness
 <Blank fields from Step 5, each labeled reasonably-blank or should-fill-in-now.>
 ```
+
+Pick the frontmatter `verdict` by holistic judgment, the same judgment call the prose
+one-liner already makes — it is not purely derived from the counts (e.g. a scenario
+with zero blocking findings can still warrant `not_ready` if the should-fix findings
+are substantial enough that AUDITED promotion would be premature). `blocking`,
+`should_fix`, and `suggestion` must equal the number of findings actually listed at
+each severity below.
 
 This file is a report for the EDITED/AUDITED review pass, not something applied
 automatically. **Do not edit `scenario.md`, `scenario.yml`, or the STATUS/STATE
@@ -210,6 +228,8 @@ Before reporting completion, verify:
       were not modified
 - [ ] The scenario's STATUS/STATE block was not changed
 - [ ] Every finding has a severity, a section/field, and a recommended fix
+- [ ] The frontmatter's `blocking`/`should_fix`/`suggestion` counts match the findings
+      actually listed
 - [ ] `relevant_principles` was checked against P0–P9 only
 - [ ] Source fidelity was either checked against a real source or explicitly marked
       not checkable — never fabricated
