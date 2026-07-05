@@ -1,5 +1,5 @@
 ---
-name: new-scenario
+name: prosoc-scenario-new
 description: >
   Draft a new prosoc social navigation scenario card from a paper or description.
   Use this skill whenever the user asks to implement, add, create, author, or draft
@@ -10,7 +10,7 @@ description: >
   "fill in" missing scenarios or "implement scenarios from the paper".
 ---
 
-# new-scenario Skill
+# prosoc-scenario-new Skill
 
 This skill drafts a new social navigation scenario card for the prosoc project, following
 the project's literate-programming workflow: a human-readable `scenario.md` (with embedded
@@ -31,7 +31,7 @@ The user will provide at minimum a scenario name. Optional inputs:
 - **`--description "<text>"`** — a free-text description to use instead of reading a paper.
 
 If the scenario name matches one in Table 3 of the P&G paper, the reference data in
-`references/pg_scenarios.md` provides all the metadata you need and you do not need to
+`../_shared/pg_scenarios.md` provides all the metadata you need and you do not need to
 read a PDF.
 
 ---
@@ -40,12 +40,14 @@ read a PDF.
 
 Load these before generating the scenario card:
 
-1. **`references/pg_scenarios.md`** — Table 3 data for all 18 P&G scenarios, plus notes
+1. **`../_shared/pg_scenarios.md`** — Table 3 data for all 18 P&G scenarios, plus notes
    on which are already implemented. Always read this first to check if the scenario is
-   already implemented and to get canonical metadata.
+   already implemented and to get canonical metadata. Shared with `prosoc-scenario-audit`;
+   do not fork a local copy.
 
-2. **`references/principles.md`** — The P1–P8 principle definitions and common metric IDs.
-   Read this to correctly populate `relevant_principles` and `scenario_usage_guide`.
+2. **`../_shared/principles.md`** — The P1–P8 principle definitions and common metric IDs.
+   Read this to correctly populate `relevant_principles` and `scenario_usage_guide`. Shared
+   with `prosoc-scenario-audit`; do not fork a local copy.
 
 3. **`references/schema_guide.md`** — Field-by-field guidance for the scenario schema.
    Read this to understand what goes in each YAML field and what to leave blank.
@@ -70,7 +72,7 @@ silently overwrite existing work.
 
 ### 2. Identify the source
 
-- If the scenario name matches a P&G Table 3 entry (see `references/pg_scenarios.md`):
+- If the scenario name matches a P&G Table 3 entry (see `../_shared/pg_scenarios.md`):
   use the reference data directly. No PDF reading needed.
 - If `--paper` was given: read the relevant sections of the PDF. Focus on scenario
   descriptions, tables, and figures — not the full paper. Extract the metadata fields
@@ -88,7 +90,7 @@ Map the source material to these fields (refer to `references/schema_guide.md`):
 - robot role and capabilities, human role and count
 - intended_robot_task, intended_human_behavior
 - ideal_outcome
-- relevant_principles (P1–P8 only — see `references/principles.md`)
+- relevant_principles (P1–P8 only — see `../_shared/principles.md`)
 - expected_behaviors (must / should / should_not)
 - scenario_usage_guide (success_metrics, quality_metrics, failure_modes, labeling_criteria)
 - evaluation_notes
@@ -116,7 +118,7 @@ Create `prosoc/scenarios/<scenario-id>/scenario.md` following the structure in
 
 - **STATE:** DRAFTED
 - **SOURCE:** <paper citation or "P&G Paper, Table 3"> 
-- **DRAFTED:** Claude (new-scenario skill), <today's date>
+- **DRAFTED:** Claude (prosoc-scenario-new skill), <today's date>
 - **EDITED:** —
 ```
 
