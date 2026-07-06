@@ -24,7 +24,6 @@ import jsonschema
 
 from prosoc.literate import errors
 
-
 YAML_FENCE_LANGUAGE = "yaml"
 
 _YAML_BLOCK_RE = re.compile(
