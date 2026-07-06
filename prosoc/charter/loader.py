@@ -17,10 +17,10 @@ import json
 import pathlib
 
 import yaml
-from jsonschema import validate as jsonschema_validate
+import functools
+from jsonschema import validators
 
 from prosoc.charter import runtime
-
 
 # -----------------------------------------------------------------------------
 # Paths
@@ -34,6 +34,20 @@ DEFAULT_SCHEMA_JSON = CHARTER_DIR / "schema.json"
 # -----------------------------------------------------------------------------
 # Loader API
 # -----------------------------------------------------------------------------
+
+
+@functools.lru_cache(maxsize=None)
+def _get_validator(schema_path: pathlib.Path):
+    """
+    Load the JSON Schema from disk and compile a validator.
+    Cached to avoid disk I/O and schema recompilation on every load.
+    """
+    with schema_path.open("r", encoding="utf-8") as f:
+        schema = json.load(f)
+    ValidatorClass = validators.validator_for(schema)
+    # Check schema validates itself before instantiating
+    ValidatorClass.check_schema(schema)
+    return ValidatorClass(schema)
 
 
 def load_charter(
@@ -66,12 +80,9 @@ def load_charter(
     with charter_path.open("r", encoding="utf-8") as f:
         raw_charter = yaml.safe_load(f)
 
-    # Load JSON Schema
-    with schema_path.open("r", encoding="utf-8") as f:
-        schema = json.load(f)
-
-    # Validate against schema (normative gate)
-    jsonschema_validate(instance=raw_charter, schema=schema)
+    # Get cached validator and validate
+    validator = _get_validator(schema_path)
+    validator.validate(raw_charter)
 
     # Instantiate runtime representation (ergonomic layer)
     return runtime.Charter(**raw_charter)

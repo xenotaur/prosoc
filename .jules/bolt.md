@@ -1,0 +1,3 @@
+## 2025-10-24 - Repeated jsonschema compilation overhead
+**Learning:** `jsonschema.validate(instance, schema)` reads and compiles the schema on *every* call. In `prosoc`, schemas like `_AUDIT_REPORT_SCHEMA` or `charter_schema.json` are heavily reused during audits and loader validation.
+**Action:** When validating against a static or heavily reused JSON schema, always use `Validator = jsonschema.validators.validator_for(schema)(schema)` to pre-compile the validator instance, and then call `Validator.validate(instance)`. Alternatively, use `@functools.lru_cache` if the schema is dynamically loaded based on paths (like in `charter/loader.py`).
