@@ -125,8 +125,8 @@ Expectations** prose sections against the embedded YAML's `intended_robot_task`,
   it reflects the current `scenario.md`, re-run the single-scenario dry-run check
   from Step 1 — do not run the full-corpus distiller here either).
 - Check `relevant_principles` (and `scenario_usage_guide.quality_metrics`) contain
-  only `P1`–`P8` per `../_shared/principles.md`. Flag 0 principles (probably
-  under-specified) or all 8 (dilutes meaning per `../_shared/principles.md`'s
+  only `P0`–`P9` per `../_shared/principles.md`. Flag 0 principles (probably
+  under-specified) or all ten (dilutes meaning per `../_shared/principles.md`'s
   guidance to limit to 3–5 most relevant).
 - Check `expected_behaviors` for **over-specification** (P&G Guideline N6): flag
   entries that prescribe exact motions or numeric thresholds rather than describing
