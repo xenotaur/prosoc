@@ -106,6 +106,16 @@ class TestOpenAIClient(unittest.TestCase):
         _, kwargs = self.mock_completions.create.call_args
         self.assertEqual(kwargs["model"], "gpt-explicit")
 
+    def test_timeout_is_passed_to_openai_client(self):
+        """
+        The timeout parameter should be passed to the underlying
+        OpenAI client constructor.
+        """
+        OpenAIClient(timeout=42.0)
+
+        _, kwargs = self.mock_openai_cls.call_args
+        self.assertEqual(kwargs["timeout"], 42.0)
+
 
 if __name__ == "__main__":
     unittest.main()
