@@ -1,0 +1,29 @@
+{
+  "audit_metadata": {
+    "auditor": "test-auditor",
+    "model": "test-model",
+    "timestamp": "2026-07-06T14:00:00Z",
+    "audit_version": "1.0"
+  },
+  "card_metadata": {
+    "card_id": "test-card",
+    "card_type": "scenario"
+  },
+  "schema_validation": {
+    "valid": true
+  },
+  "internal_consistency": {
+    "status": "pass",
+    "issues": []
+  },
+  "reference_consistency": {
+    "status": "pass",
+    "issues": []
+  },
+  "summary": {
+    "error_count": 0,
+    "warning_count": 0,
+    "note_count": 0,
+    "recommendations": []
+  }
+}
