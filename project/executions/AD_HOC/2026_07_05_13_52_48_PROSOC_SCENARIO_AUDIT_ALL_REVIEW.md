@@ -2,14 +2,14 @@
 execution_id: 2026_07_05_13_52_48_PROSOC_SCENARIO_AUDIT_ALL_REVIEW
 prompt_id: PROMPT(AD_HOC:PROSOC_SCENARIO_AUDIT_ALL_REVIEW)[2026-07-05T12:50:23-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/6
-commit: 
+commit: 0385451818d43e71ffbc97ad726d392bd0e50a4a
 created_at: 2026-07-05T13:52:48-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/6
-session_transcript: pending
+session_transcript: claude-app:24be9fcc-85f9-4baa-9683-637b5f6548d2
 ---
 
 # Summary
