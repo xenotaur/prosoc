@@ -8,6 +8,7 @@ from pathlib import Path
 from prosoc.literate import compiler
 from prosoc.literate import errors
 
+
 VALID_MARKDOWN = """
 # Test Charter
 
