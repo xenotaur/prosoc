@@ -18,10 +18,9 @@ import pathlib
 
 import yaml
 from jsonschema import validate as jsonschema_validate
+from jsonschema.validators import validator_for
 
 from prosoc.charter import runtime
-
-
 
 
 # -----------------------------------------------------------------------------
@@ -32,17 +31,19 @@ CHARTER_DIR = pathlib.Path(__file__).parent
 DEFAULT_CHARTER_YAML = CHARTER_DIR / "charter.yml"
 DEFAULT_SCHEMA_JSON = CHARTER_DIR / "schema.json"
 
+
 # ⚡ Bolt Optimization: Load and compile the schema validator once at import time
 # to prevent expensive repeated file I/O, JSON parsing, and schema validation overhead.
 # Impact: Reduces `load_charter` time by over 90% for repeated calls.
 def _create_validator(schema_path: pathlib.Path = DEFAULT_SCHEMA_JSON):
-    from jsonschema.validators import Draft7Validator
     with schema_path.open("r", encoding="utf-8") as f:
         schema = json.load(f)
-    Draft7Validator.check_schema(schema)
-    return Draft7Validator(schema)
+    validator_class = validator_for(schema)
+    validator_class.check_schema(schema)
+    return validator_class(schema)
 
-_DEFAULT_VALIDATOR = _create_validator()
+
+_DEFAULT_VALIDATOR = None
 
 
 # -----------------------------------------------------------------------------
@@ -82,6 +83,9 @@ def load_charter(
 
     # ⚡ Bolt Optimization: Reuse pre-compiled validator for the default schema
     if schema_path == DEFAULT_SCHEMA_JSON:
+        global _DEFAULT_VALIDATOR
+        if _DEFAULT_VALIDATOR is None:
+            _DEFAULT_VALIDATOR = _create_validator()
         _DEFAULT_VALIDATOR.validate(raw_charter)
     else:
         with schema_path.open("r", encoding="utf-8") as f:
