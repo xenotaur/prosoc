@@ -1,0 +1,3 @@
+## 2024-05-19 - Caching JSONSchema Validators instead of Data
+**Learning:** In Python when working with functions that return mutable dictionaries from parsed files (like PyYAML or JSON), you cannot blindly use `functools.lru_cache` to cache the output. Caching mutable data objects creates shared state that causes state mutation bugs across the application. Furthermore, compiling `jsonschema` validators on the fly is extremely expensive and time consuming.
+**Action:** Always prefer to compile static artifacts, like `jsonschema` validators, once at import time rather than at runtime. Do not use `functools.lru_cache` on functions that return mutable objects.
