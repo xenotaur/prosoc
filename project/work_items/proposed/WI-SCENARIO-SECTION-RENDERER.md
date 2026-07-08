@@ -1,0 +1,163 @@
+---
+resolution: null
+blocked_reason: null
+blocked: false
+id: WI-SCENARIO-SECTION-RENDERER
+title: Add scenario section renderer (Scenario Card Summary / Usage Guide)
+type: deliverable
+status: proposed
+assigned_agents: []
+related_focus: []
+related_roadmap: []
+related_workstreams: []
+related_design: []
+depends_on: []
+blocked_by: []
+expected_actions:
+  - create_file
+  - edit_file
+  - run_tests
+  - create_pr
+forbidden_actions:
+  - edit_scenario_yml
+  - overwrite_existing_sections
+  - promote_scenario_state
+  - fabricate_missing_fields
+acceptance:
+  - Rendering against join_a_group, leading, and object_handover produces complete Scenario Card Summary and Scenario Usage Guide sections with zero gaps-checklist items
+  - Rendering against a partial scenario (e.g. movable_obstruction) produces a correct, non-fabricated gaps checklist for fields absent from scenario.yml
+  - Rendering against intersection_gesture_proceed (which already has both sections hand-authored) refuses and reports rather than overwriting
+  - tests/scenarios/render_sections_test.py exists and passes; scripts/lint, scripts/test, and lrh validate all report 0 errors attributable to this change
+required_evidence:
+  - manual_review
+  - lrh_validate
+  - test_output
+artifacts_expected:
+  - prosoc/scenarios/render_sections.py
+  - tests/scenarios/render_sections_test.py
+---
+
+## Summary
+
+Add `prosoc/scenarios/render_sections.py`, a script that mechanically renders
+the `template.md`-required "Scenario Card Summary" and "Scenario Usage Guide"
+sections into a scenario's `scenario.md` from its already-distilled
+`scenario.yml`, flagging (never fabricating) any field not yet present.
+
+## Problem / Context
+
+A full-corpus audit (`prosoc/scenarios/AUDIT_SUMMARY.md`, produced by
+`/prosoc-scenario-audit-all`) found these two sections missing from the large
+majority of scenario cards, most consistently as a should-fix/blocking finding
+across 11 "not ready" scenarios. A corpus scan performed during design showed
+3 of those 11 (`join_a_group`, `leading`, `object_handover`) already have
+100% of the underlying `scenario.yml` fields needed for both sections — the
+gap is purely that no section-rendering tool exists yet, not missing data.
+The remaining 8 have partial data. This item builds the rendering tool;
+fixing the remaining scenarios' missing YAML fields is separate follow-up
+work, not in scope here.
+
+## Scope
+
+- Add a new script, sibling to `prosoc/scenarios/distill.py`, that reads a
+  scenario's `scenario.yml` and renders the two required prose sections into
+  `scenario.md`.
+- Reuse the existing distiller's dry-run staleness check before rendering.
+- Support both single-scenario and `--all` batch invocation. `distill.py`
+  itself always processes every discovered scenario (no single-scenario
+  selection exists there — it only exposes `--layout`, `--dry-run`, and
+  `--show-diffs`), so single-scenario selection is new CLI surface for this
+  tool; only the `--dry-run`/`--show-diffs` flag conventions are mirrored
+  from `distill.py`.
+
+## Required Changes
+
+1. Create `prosoc/scenarios/render_sections.py`:
+   - Reads `scenario.yml` for a named scenario (or iterates all scenarios
+     under `--all`), gated by a freshness check equivalent to `distill.py`'s
+     existing dry-run/show-diffs mechanism — refuse and report if
+     `scenario.yml` doesn't match `scenario.md`'s embedded YAML block.
+   - Renders `## Scenario Card Summary` (Scenario Name, Description,
+     Scientific Purpose, Physical Environment, Geometric Layout, Robot Role,
+     Robot Task, Human Behavior, Success/Quality Metrics, Ideal Outcome) from
+     `name`, `summary`, `scientific_purpose`, `context.environment.type`,
+     `geometric_layout`, `agents.robot.role`, `intended_robot_task`,
+     `intended_human_behavior`, `scenario_usage_guide.{success_metrics,quality_metrics}`,
+     `ideal_outcome` — raw value pass-through, no display-name mapping table.
+   - Renders `## Scenario Usage Guide` (Success Metrics, Quality Metrics,
+     Ideal Outcome, Failure Modes, Labeling Criteria) from
+     `scenario_usage_guide.*` and `ideal_outcome`.
+   - `Related Scenarios` and `Cited In` have no corresponding `schema.json`
+     field (confirmed via schema property dump during design) — always
+     rendered as an explicit gap, never invented.
+   - For any field absent from `scenario.yml`, omit it from the rendered
+     section and instead list it in a trailing "Remaining gaps" section,
+     using the same bullet format as `prosoc-scenario-audit`'s `audit.md`
+     Completeness section (e.g. `- **Scientific Purpose** —
+     should-fill-in-now`) — plain labeled bullets, not `- [ ]` checkboxes.
+   - If either section already exists in `scenario.md` (as it does today for
+     `intersection_gesture_proceed`), refuse to insert and report
+     "already present, skipping" — no overwrite, no `--force` flag in this
+     version.
+   - Insert rendered sections at the position `template.md` specifies.
+   - Record the tool's involvement via the existing `EDITED:` field in the
+     scenario's Status block (per `workflow.md`'s Status Section Template),
+     not a new "generated by" marker convention.
+   - CLI flags: `--dry-run`, `--show-diffs`, mirroring `distill.py`.
+2. Create `tests/scenarios/render_sections_test.py` covering:
+   - Full rendering against a scenario with all fields present.
+   - Gaps-checklist rendering against a scenario with partial fields.
+   - Refuse-on-existing-section behavior.
+   - Refuse-on-stale-scenario.yml behavior.
+
+## Non-Goals
+
+- Do not modify `scenario.yml` — it is a generated artifact; this tool only
+  reads it.
+- Do not fix the underlying missing-field gaps in any scenario's `scenario.yml`
+  (e.g. authoring `scientific_purpose` for `pedestrian_overtaking`) — that is
+  separate, scenario-by-scenario editorial work, tracked elsewhere.
+- Do not add a `--force` overwrite flag — deferred until a genuine need
+  arises, given a real hand-authored section already exists in the corpus
+  (`intersection_gesture_proceed`) that a force flag could clobber.
+- Do not promote any scenario's lifecycle `STATE` — remains a human decision
+  per `workflow.md`.
+- Do not build a display-name mapping table for field values (e.g. rendering
+  `navigating_agent` as "Any (navigating agent)") — raw pass-through only.
+
+## Acceptance Criteria
+
+- `prosoc/scenarios/render_sections.py` exists and runs via
+  `python3 -m prosoc.scenarios.render_sections <scenario_id>` and `--all`.
+- Running against `join_a_group`, `leading`, and `object_handover` produces
+  complete sections with no gaps-checklist entries.
+- Running against `movable_obstruction` (or another partial-data scenario)
+  produces a correct gaps checklist, no fabricated content.
+- Running against `intersection_gesture_proceed` refuses and reports rather
+  than overwriting the existing hand-authored sections.
+- Running against a scenario with a deliberately stale `scenario.yml` refuses
+  and reports the staleness rather than rendering from outdated data.
+- `tests/scenarios/render_sections_test.py` exists and passes.
+- `scripts/lint`, `scripts/test`, and `lrh validate` all pass (the known
+  pre-existing `focus/current_focus.md` `lrh validate` error is expected and
+  unrelated).
+
+## Validation
+
+- `scripts/lint`
+- `scripts/test`
+- `lrh validate`
+- `python3 -m prosoc.scenarios.render_sections join_a_group --dry-run --show-diffs`
+- `python3 -m prosoc.scenarios.render_sections intersection_gesture_proceed --dry-run`
+
+## Risk Notes
+
+- The one existing hand-authored example (`intersection_gesture_proceed`) is
+  the only real-world precedent for the target prose format/tone — the
+  renderer's raw-pass-through style will read less polished than that
+  example; this is an accepted, explicit trade-off (see Non-Goals) rather
+  than an oversight.
+- `scenario_usage_guide` and card-summary fields are unevenly populated
+  across the corpus (verified during design: 3/11 not-ready scenarios fully
+  renderable, 8/11 only partially) — most of the value here comes from
+  those 3, plus a clearer punch list for the rest, not a full fix for all 11.
