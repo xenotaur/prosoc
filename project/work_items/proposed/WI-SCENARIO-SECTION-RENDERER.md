@@ -63,8 +63,12 @@ work, not in scope here.
   scenario's `scenario.yml` and renders the two required prose sections into
   `scenario.md`.
 - Reuse the existing distiller's dry-run staleness check before rendering.
-- Support both single-scenario and `--all` batch invocation, mirroring
-  `distill.py`'s existing CLI shape.
+- Support both single-scenario and `--all` batch invocation. `distill.py`
+  itself always processes every discovered scenario (no single-scenario
+  selection exists there — it only exposes `--layout`, `--dry-run`, and
+  `--show-diffs`), so single-scenario selection is new CLI surface for this
+  tool; only the `--dry-run`/`--show-diffs` flag conventions are mirrored
+  from `distill.py`.
 
 ## Required Changes
 
@@ -87,9 +91,10 @@ work, not in scope here.
      field (confirmed via schema property dump during design) — always
      rendered as an explicit gap, never invented.
    - For any field absent from `scenario.yml`, omit it from the rendered
-     section and instead list it in a trailing "Remaining gaps" checklist,
-     matching the Completeness-section convention already used in
-     `prosoc-scenario-audit`'s `audit.md` output format.
+     section and instead list it in a trailing "Remaining gaps" section,
+     using the same bullet format as `prosoc-scenario-audit`'s `audit.md`
+     Completeness section (e.g. `- **Scientific Purpose** —
+     should-fill-in-now`) — plain labeled bullets, not `- [ ]` checkboxes.
    - If either section already exists in `scenario.md` (as it does today for
      `intersection_gesture_proceed`), refuse to insert and report
      "already present, skipping" — no overwrite, no `--force` flag in this
