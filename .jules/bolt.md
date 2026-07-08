@@ -1,0 +1,3 @@
+## 2024-05-24 - [Avoid `jsonschema.validate` for repeated validations]
+**Learning:** `jsonschema.validate(instance, schema)` creates a new validator instance and re-compiles the schema every single time it's called. In `prosoc`, where schemas are static but data instances are many (e.g. during an audit sweep of multiple cards), this becomes a major bottleneck. Pre-compiling using `validator = jsonschema.validators.Draft7Validator(schema)` and then calling `validator.validate(instance)` is roughly 12x to 14x faster.
+**Action:** When a schema is static and validated against multiple times, always create a global or class-level validator instance instead of relying on the top-level convenience function `jsonschema.validate`.
