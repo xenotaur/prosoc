@@ -26,11 +26,11 @@ forbidden_actions:
   - force_push
   - delete_branch
 acceptance:
-  - python -m prosoc.scenarios.distill --scenario <id> --dry-run restricts discovery to exactly one scenario, for both directory and flat layouts
-  - python -m prosoc.scenarios.distill --scenario <bogus-id> raises a distinct "No scenario '<id>' found" error, not the existing corpus-empty message
+  - "`python -m prosoc.scenarios.distill --scenario <id> --dry-run` restricts discovery to exactly one scenario, for both directory and flat layouts"
+  - "`python -m prosoc.scenarios.distill --scenario <bogus-id>` raises a distinct not-found error naming both the missing scenario and the searched root (matching `LiterateDiscoveryError`'s `No scenario '{scenario}' found under {root}` shape), not the existing corpus-empty message"
   - tests/scenarios/distill_test.py exists and passes, covering scoping and no-match cases
   - .claude/skills/prosoc-scenario-new/SKILL.md Step 6 references only scripts/distill/scenarios (no cd prosoc && python -m ... or python prosoc/scenarios/distill.py invocations remain)
-  - .claude/skills/prosoc-scenario-audit/SKILL.md Step 1 invokes scripts/distill/scenarios --scenario <id> --dry-run --show-diffs in place of the inline python -c heredoc
+  - "`.claude/skills/prosoc-scenario-audit/SKILL.md` Step 1 invokes `scripts/distill/scenarios --scenario <id> --dry-run --show-diffs` in place of the inline python -c heredoc"
   - scripts/lint, scripts/test, and lrh validate all report 0 errors attributable to this change
 required_evidence:
   - manual_review
@@ -81,7 +81,7 @@ Add a `--scenario <id>` scoping flag to `prosoc/scenarios/distill.py`, and fix t
 ## Acceptance Criteria
 
 - `python -m prosoc.scenarios.distill --scenario <id> --dry-run` distills only that scenario (directory and flat layouts).
-- `python -m prosoc.scenarios.distill --scenario <bogus-id>` fails with a message naming the missing scenario, distinct from the empty-corpus message.
+- `python -m prosoc.scenarios.distill --scenario <bogus-id>` fails with a message naming both the missing scenario and the searched root (per the `LiterateDiscoveryError(f"No scenario '{scenario}' found under {root}")` shape specified in Required Changes), distinct from the empty-corpus message.
 - `tests/scenarios/distill_test.py` exists and passes.
 - `prosoc-scenario-new/SKILL.md` Step 6 contains no invocation that raises `ModuleNotFoundError` when run from the repo root.
 - `prosoc-scenario-audit/SKILL.md` Step 1 no longer contains an inline `python -c` heredoc.
