@@ -75,28 +75,19 @@ stop and report — do not proceed with a partial audit.
 
 Read `scenario.md` in full (prose sections plus the embedded YAML block) and the
 distilled `scenario.yml`. Confirm the two are in sync by re-running the distiller for
-**this scenario only**, in dry-run mode:
+**this scenario only**, in dry-run mode, from the repository root:
 
 ```bash
-python -c "
-from pathlib import Path
-from prosoc.scenarios import distill
-
-source = distill.ScenarioSource(
-    md_path=Path('prosoc/scenarios/<name>/scenario.md'),
-    yml_path=Path('prosoc/scenarios/<name>/scenario.yml'),
-)
-distill.distill_scenario(source, schema_path=distill.SCHEMA_PATH, dry_run=True, show_diffs=True)
-"
+scripts/distill/scenarios --scenario <name> --dry-run --show-diffs
 ```
 
-Run this from the repository root. **Do not** run `python prosoc/scenarios/distill.py`
-or `python -m prosoc.scenarios.distill` for this check: both distill *every* scenario
-under `prosoc/scenarios/`, which can surface unrelated failures outside this audit's
-scope, and both write `scenario.yml` unless `--dry-run` is passed — silently violating
-this skill's promise not to modify scenario files. The invocation above scopes to one
-scenario and never writes (`dry_run=True`), while still running the same schema
-validation and reporting any diff.
+**Do not** run `scripts/distill/scenarios` (or `python -m prosoc.scenarios.distill`)
+without `--scenario` for this check: unscoped, it distills *every* scenario under
+`prosoc/scenarios/`, which can surface unrelated failures outside this audit's scope,
+and it writes `scenario.yml` unless `--dry-run` is passed — silently violating this
+skill's promise not to modify scenario files. `--scenario <name>` restricts discovery
+to this one scenario and, combined with `--dry-run`, never writes, while still running
+the same schema validation and reporting any diff.
 
 Do not diff the embedded YAML block against `scenario.yml` as raw text — the distiller
 re-serializes YAML (strips comments, rewraps long strings, changes flow style) even
