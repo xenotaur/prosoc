@@ -56,3 +56,12 @@ class LiterateIOError(LiterateError):
     """
 
     pass
+
+
+class LiterateDiscoveryError(LiterateError):
+    """
+    Raised when source discovery finds no matching documents under a root,
+    e.g. an empty corpus or an unmatched single-item filter.
+    """
+
+    pass

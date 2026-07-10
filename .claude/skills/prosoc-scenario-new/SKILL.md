@@ -136,16 +136,10 @@ the complete scenario specification conforming to `prosoc/scenarios/schema.json`
 
 ### 6. Run the distiller
 
-After writing the file, run:
+After writing the file, run this from the repo root:
 
 ```bash
-cd prosoc && python -m prosoc.scenarios.distill
-```
-
-Or equivalently from the repo root:
-
-```bash
-python prosoc/scenarios/distill.py
+scripts/distill/scenarios
 ```
 
 If the distiller reports a schema validation error, fix the YAML before reporting
