@@ -2,14 +2,14 @@
 execution_id: 2026_07_09_16_38_11_WI_SCENARIO_DISTILL_INVOCATION
 prompt_id: PROMPT(WI-SCENARIO-DISTILL-INVOCATION:WI_SCENARIO_DISTILL_INVOCATION)[2026-07-09T16:30:02-04:00]
 work_item: WI-SCENARIO-DISTILL-INVOCATION
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/15
-commit: 
+commit: e65bb575448248b6d4b8d75e659d1eae0b33f3f0
 created_at: 2026-07-09T16:38:11-04:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-SCENARIO-DISTILL-INVOCATION.md
-session_transcript: pending
+session_transcript: claude-app:cce2dec4-70fb-48fa-b215-e794254850a0
 ---
 
 # Summary

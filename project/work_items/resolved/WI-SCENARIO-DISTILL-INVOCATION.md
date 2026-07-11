@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #15 (commit e65bb57). Note: two review comments (flat-layout distill_all test coverage, scoping prosoc-scenario-new Step 6 to --scenario) were not addressed before merge."
 blocked_reason: null
 blocked: false
 id: WI-SCENARIO-DISTILL-INVOCATION
 title: Fix scenario-authoring skills' distiller invocations; add --scenario scoping
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus: []
 related_roadmap: []
