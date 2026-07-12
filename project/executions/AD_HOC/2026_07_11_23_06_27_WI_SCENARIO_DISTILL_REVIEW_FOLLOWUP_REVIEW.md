@@ -2,14 +2,14 @@
 execution_id: 2026_07_11_23_06_27_WI_SCENARIO_DISTILL_REVIEW_FOLLOWUP_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_SCENARIO_DISTILL_REVIEW_FOLLOWUP_REVIEW)[2026-07-11T22:53:37-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/16
-commit: 7340725
+commit: 25a5b747e9d61bbc6ba18f8c9299883d44db4e1c
 created_at: 2026-07-11T23:06:27-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/16
-session_transcript: pending
+session_transcript: claude-app:cce2dec4-70fb-48fa-b215-e794254850a0
 ---
 
 # Summary
