@@ -24,8 +24,8 @@ forbidden_actions:
   - force_push
   - delete_branch
 acceptance:
-  - tests/scenarios/distill_test.py includes a test exercising distill_all(root=..., layout="flat", scenario=<nonexistent>) and asserting a LiterateDiscoveryError naming both the scenario and the root
-  - .claude/skills/prosoc-scenario-new/SKILL.md Step 6 runs scripts/distill/scenarios --scenario <scenario-id> (scoped to the scenario just drafted) instead of the unscoped whole-corpus invocation
+  - tests/scenarios/distill_test.py includes a test exercising `distill_all(root=..., layout="flat", scenario=<nonexistent>)` and asserting a `LiterateDiscoveryError` naming both the scenario and the root
+  - "`.claude/skills/prosoc-scenario-new/SKILL.md` Step 6 runs `scripts/distill/scenarios --scenario <scenario-id>` (scoped to the scenario just drafted) instead of the unscoped whole-corpus invocation"
   - scripts/lint, scripts/test, and lrh validate report 0 errors attributable to this change
 required_evidence:
   - manual_review
