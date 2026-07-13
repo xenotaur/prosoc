@@ -106,6 +106,20 @@ class TestDistillAllScenarioScoping(unittest.TestCase):
             self.assertNotIn("nonexistent", message)
             self.assertIn(str(root), message)
 
+    def test_flat_layout_no_match_raises_discovery_error_naming_scenario_and_root(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _make_flat_scenario(root, "blind_corner_01")
+
+            with self.assertRaises(errors.LiterateDiscoveryError) as ctx:
+                distill.distill_all(root=root, layout="flat", scenario="nonexistent")
+
+            message = str(ctx.exception)
+            self.assertIn("nonexistent", message)
+            self.assertIn(str(root), message)
+
 
 if __name__ == "__main__":
     unittest.main()

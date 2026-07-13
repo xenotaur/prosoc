@@ -136,11 +136,16 @@ the complete scenario specification conforming to `prosoc/scenarios/schema.json`
 
 ### 6. Run the distiller
 
-After writing the file, run this from the repo root:
+After writing the file, run this from the repo root, scoped to the scenario
+just drafted (using the `<scenario-id>` from Step 4):
 
 ```bash
-scripts/distill/scenarios
+scripts/distill/scenarios --scenario <scenario-id>
 ```
+
+Scoping to `--scenario` avoids rewriting every other scenario's `scenario.yml`
+and avoids failing on unrelated corpus issues that have nothing to do with
+the scenario just drafted.
 
 If the distiller reports a schema validation error, fix the YAML before reporting
 completion. Common errors:
