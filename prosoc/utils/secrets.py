@@ -39,9 +39,14 @@ def load_openai_api_key(
     if not secrets_path.exists():
         raise SecretsNotFoundError(f"Secrets file not found: {secrets_path}")
 
-    dotenv.load_dotenv(secrets_path)
+    # Use dotenv_values to securely load the secret without exposing it in os.environ
+    env_vars = dotenv.dotenv_values(secrets_path)
+    api_key = env_vars.get(env_var_name)
 
-    api_key = os.getenv(env_var_name)
+    # Fallback to checking the environment in case it was set externally
+    if not api_key:
+        api_key = os.getenv(env_var_name)
+
     if not api_key:
         raise SecretsNotFoundError(
             f"Environment variable {env_var_name} not set "
