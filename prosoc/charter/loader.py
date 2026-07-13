@@ -64,7 +64,8 @@ def load_charter(
 
     # Load YAML charter
     with charter_path.open("r", encoding="utf-8") as f:
-        raw_charter = yaml.safe_load(f)
+        Loader = getattr(yaml, 'CSafeLoader', yaml.SafeLoader)
+        raw_charter = yaml.load(f, Loader=Loader)
 
     # Load JSON Schema
     with schema_path.open("r", encoding="utf-8") as f:

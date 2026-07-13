@@ -2,8 +2,8 @@ principles:
 - id: P0
   name: Goal Achievement
   severity: high
-  description: "Robots must attempt to achieve their assigned navigation or task objectives,\
-    \ balancing this with the social principles P1\u2013P9.\n"
+  description: "Robots must attempt to achieve their assigned navigation or task objectives,
+    balancing this with the social principles P1\u2013P9.\n"
   examples:
     positive:
     - Robot efficiently reaches destination while yielding to a pedestrian.

@@ -66,8 +66,10 @@ def replace_yaml_block(markdown_text: str, new_yaml_dict: dict) -> str:
         raise MultipleYamlBlocksError("Multiple ```yaml fenced blocks found.")
 
     # Serialize new YAML
-    new_yaml_text = yaml.safe_dump(
+    Dumper = getattr(yaml, 'CSafeDumper', yaml.SafeDumper)
+    new_yaml_text = yaml.dump(
         new_yaml_dict,
+        Dumper=Dumper,
         sort_keys=False,
         default_flow_style=False,
     ).rstrip()

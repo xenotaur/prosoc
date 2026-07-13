@@ -47,8 +47,10 @@ def dump_yaml(data: Any) -> str:
         LiterateIOError: if serialization fails.
     """
     try:
-        return yaml.safe_dump(
+        Dumper = getattr(yaml, 'CSafeDumper', yaml.SafeDumper)
+        return yaml.dump(
             data,
+            Dumper=Dumper,
             sort_keys=False,
             default_flow_style=False,
         )

@@ -74,9 +74,11 @@ def parse_yaml_blocks(blocks: List[str]) -> List[Dict[str, Any]]:
     """
     parsed_blocks: List[Dict[str, Any]] = []
 
+    Loader = getattr(yaml, 'CSafeLoader', yaml.SafeLoader)
+
     for i, block in enumerate(blocks):
         try:
-            parsed = yaml.safe_load(block)
+            parsed = yaml.load(block, Loader=Loader)
         except yaml.YAMLError as e:
             raise errors.LiterateYamlError(
                 f"Failed to parse YAML block #{i + 1}"
