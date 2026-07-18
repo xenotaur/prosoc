@@ -2,14 +2,14 @@
 execution_id: 2026_07_13_18_34_30_WI_SCENARIO_DISTILL_REVIEW_FOLLOWUP
 prompt_id: PROMPT(WI-SCENARIO-DISTILL-REVIEW-FOLLOWUP:WI_SCENARIO_DISTILL_REVIEW_FOLLOWUP)[2026-07-13T01:20:47-04:00]
 work_item: WI-SCENARIO-DISTILL-REVIEW-FOLLOWUP
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/19
-commit: 
+commit: 9e83419846f0e8cbe3c119812f2c5abc993506df
 created_at: 2026-07-13T18:34:30-04:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-SCENARIO-DISTILL-REVIEW-FOLLOWUP.md
-session_transcript: pending
+session_transcript: claude-app:cce2dec4-70fb-48fa-b215-e794254850a0
 ---
 
 # Summary

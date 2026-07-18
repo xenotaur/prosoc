@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #19 (commit 9e83419). Closes both deferred review comments from PR #15."
 blocked_reason: null
 blocked: false
 id: WI-SCENARIO-DISTILL-REVIEW-FOLLOWUP
 title: Address deferred PR #15 review comments on scenario distiller scoping
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus: []
 related_roadmap: []
