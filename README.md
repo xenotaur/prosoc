@@ -126,7 +126,7 @@ pip install .[dev]
 After modifying `prosoc/charter/charter.md`, regenerate the machine-readable charter with:
 
 ```bash
-scripts/distill
+scripts/distill/charter
 ```
 
 This operation is:
@@ -140,7 +140,7 @@ This operation is:
 To preview changes without writing files:
 
 ```bash
-scripts/distill --dry-run --show-diffs
+scripts/distill/charter --dry-run --show-diffs
 ```
 
 This is the recommended workflow before committing charter changes.
@@ -222,9 +222,12 @@ The `scripts/` directory contains small, explicit wrappers around common develop
 
 Key scripts include:
 
-* `scripts/distill`  
+* `scripts/distill/charter`  
   Regenerates the machine-readable charter (`charter.yml`) from the human-readable source (`charter.md`).  
   Supports `--dry-run` and `--show-diffs` to preview changes safely.
+  Sibling wrappers (`scripts/distill/constitutions`, `scripts/distill/contexts`,
+  `scripts/distill/scenarios`, `scripts/distill/tasks`) distill the other
+  literate-programming content types the same way.
 
 * `scripts/develop`  
   Installs Prosoc in editable mode (`pip install -e .`) for local development.
@@ -285,7 +288,7 @@ In particular:
 If CI fails due to charter inconsistency, the expected resolution is:
 
 ```bash
-scripts/distill
+scripts/distill/charter
 git commit
 ```
 
