@@ -2,14 +2,14 @@
 execution_id: 2026_07_18_23_42_57_README_DISTILL_SCRIPT_PATH
 prompt_id: PROMPT(AD_HOC:README_DISTILL_SCRIPT_PATH)[2026-07-18T23:41:22-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/20
-commit: 
+commit: 6f3a436b3dab282695a97e1424a5df0a98d28b5b
 created_at: 2026-07-18T23:42:57-04:00
 agent: claude_app
 instruction_source: ad hoc — README.md stale scripts/distill references, deferred from WI-SCENARIO-DISTILL-INVOCATION's design discussion as a separate doc-drift bug
-session_transcript: pending
+session_transcript: claude-app:cce2dec4-70fb-48fa-b215-e794254850a0
 ---
 
 # Summary
