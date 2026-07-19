@@ -245,6 +245,25 @@ class TestRefuseOnExistingSection(unittest.TestCase):
             with self.assertRaises(render_sections.SectionAlreadyPresentError):
                 render_sections.render_scenario_sections(source)
 
+    def test_existing_section_check_short_circuits_before_freshness_check(self):
+        # A scenario.yml that is stale (or missing) shouldn't matter if the
+        # sections are already present: refusing to overwrite is a purely
+        # prose-level decision and should win over a compile-and-compare
+        # freshness check the renderer would never need to run.
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = _write_scenario(
+                root, "full_scenario", yaml_body=FULL_YAML, stale=True
+            )
+            existing = source.md_path.read_text(encoding="utf-8").replace(
+                "## Scenario Overview",
+                "## Scenario Card Summary\n\n- **Scenario Name:** Full Scenario\n\n---\n\n## Scenario Overview",
+            )
+            source.md_path.write_text(existing, encoding="utf-8")
+
+            with self.assertRaises(render_sections.SectionAlreadyPresentError):
+                render_sections.render_scenario_sections(source)
+
 
 class TestRefuseOnStaleYaml(unittest.TestCase):
 

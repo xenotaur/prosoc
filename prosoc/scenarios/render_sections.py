@@ -265,8 +265,6 @@ def render_scenario_sections(
         prosoc.literate.errors.LiterateStructureError: if a required
             insertion anchor heading is missing from scenario.md.
     """
-    compiled = _load_and_check_freshness(source, schema_path)
-
     text = source.md_path.read_text(encoding="utf-8")
 
     present = [
@@ -278,6 +276,8 @@ def render_scenario_sections(
         raise SectionAlreadyPresentError(
             f"{source.md_path} already has {', '.join(present)}; skipping"
         )
+
+    compiled = _load_and_check_freshness(source, schema_path)
 
     card_summary = _render_section(
         CARD_SUMMARY_HEADER,
