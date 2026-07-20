@@ -5,7 +5,33 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [50, 161]
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-19
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Join a Group
+- **Scenario Description:** A robot navigates across open space toward a standing group of robots or people already engaged in conversation, and must approach and settle into the group's spatial formation as a new member, without disrupting the ongoing interaction.
+- **Scientific Purpose:** group interaction
+- **Physical Environment:** generic
+- **Geometric Layout:** open space
+- **Robot Role:** navigating_agent
+- **Robot Task:** navigate to and join the group
+- **Human Behavior:** continue conversing, accommodating the robot's arrival
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P4
+  - P5
+- **Ideal Outcome:** robot joins the group, settling into the formation without disrupting the conversation
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -161,6 +187,28 @@ evaluation_notes: >
   involves ongoing co-location with a single human rather than a discrete
   join event with a multi-person group.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P4
+  - P5
+- **Ideal Outcome:** robot joins the group, settling into the formation without disrupting the conversation
+- **Failure Modes:**
+  - robot collides with or comes uncomfortably close to a group member
+  - robot cuts through the group's conversational space
+  - robot's final position is ambiguous, unclear whether it has joined or is passing by
+  - group members are startled or forced to step back to accommodate the robot
+- **Labeling Criteria:**
+  - a stationary group of two or more agents is present in a recognizable conversational formation
+  - the robot's trajectory terminates at or near the group rather than passing through it
+  - the robot's final position and orientation face into the group's shared space
 
 ---
 

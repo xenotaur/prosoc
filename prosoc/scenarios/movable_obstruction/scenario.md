@@ -1,17 +1,48 @@
 # Scenario: Movable Obstruction
 
-## STATUS: DRAFT 2026-01-16
-- SOURCE: Principles and Guidelines for Evaluating Social Robot Navigation (P&G paper)
-- DRAFTED: ChatGPT 5.2, 2026-01-16
-- EDITED: Anthony Francis centaur@logicalrobotics.com (pending)
+## Status
 
-## Overview
+- **STATE:** DRAFT
+- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation (P&G paper)
+- **DRAFTED:** ChatGPT 5.2, 2026-01-16
+- **EDITED:** render_sections.py, 2026-07-19
+
+## Scenario Card Summary
+
+- **Scenario Name:** Movable Obstruction
+- **Scenario Description:** A robot and a human approach each other in a hallway that is partially blocked by a movable obstruction. The robot must decide whether to yield, wait, remove the obstruction, or report it, balancing task goals with prosocial responsibility.
+- **Physical Environment:** indoor
+- **Robot Role:** navigating_agent
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - ConflictResolved
+- **Quality Metrics:**
+  - P2
+  - P7
+  - P9
+
+**Remaining gaps:**
+
+- **Scientific Purpose** — should-fill-in-now
+- **Geometric Layout** — should-fill-in-now
+- **Robot Task** — should-fill-in-now
+- **Human Behavior** — should-fill-in-now
+- **Ideal Outcome** — should-fill-in-now
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
+
+---
+
+## Scenario Overview
 
 This scenario describes a social navigation conflict in which a robot and a human approach each other in a hallway that is nominally wide enough for passing, but partially blocked by a **movable obstruction** (e.g., a cart, box, or misplaced furniture). The scenario is designed to distinguish **Proactivity (P7)** from **Prosocial Behavior (P9)** by introducing opportunities for the robot to improve the navigability of the environment, rather than merely adapting to it.
 
 Unlike *Frontal Approach*, successful navigation in this scenario may involve **environmental intervention** (physically moving the obstruction or reporting it), not just motion planning or yielding behavior.
 
 ---
+
+## Scenario Specification (Machine-Readable)
 
 ```yaml
 id: movable_obstruction_01
@@ -126,3 +157,28 @@ The **MOVABLE_OBSTRUCTION** scenario explicitly extends *Frontal Approach* by in
 
 This scenario is intentionally underdetermined: multiple behaviors may be acceptable depending on task weighting and context, but **persistent failure to address a known, movable obstruction** is indicative of poor prosocial performance.
 
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - ConflictResolved
+- **Quality Metrics:**
+  - P2
+  - P7
+  - P9
+- **Failure Modes:**
+  - robot repeatedly yields without addressing obstruction
+  - robot causes discomfort by forcing single-file passage
+  - robot manipulates obstruction unsafely
+- **Labeling Criteria:**
+  - obstruction is movable and blocks comfortable passing
+  - robot and human approach from opposite directions
+  - robot is physically capable of intervention
+
+**Remaining gaps:**
+
+- **Ideal Outcome** — should-fill-in-now

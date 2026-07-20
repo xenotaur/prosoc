@@ -5,7 +5,32 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [161]
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-19
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Object Handover
+- **Scenario Description:** A robot in a servant role navigates to a human and hands over an object. The robot must transition from open navigation to a close-range, comfortable final approach, present the object for an easy reach, and recognize when the human has received it.
+- **Scientific Purpose:** interactive navigation
+- **Physical Environment:** generic
+- **Geometric Layout:** passable space
+- **Robot Role:** servant
+- **Robot Task:** deliver the object to the human
+- **Human Behavior:** receive the object
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P4
+- **Ideal Outcome:** human takes the object from the robot without awkwardness, collision, or dropped object
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -158,6 +183,27 @@ evaluation_notes: >
   (a general delivery task without the close-range interactive handoff
   emphasized here).
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P4
+- **Ideal Outcome:** human takes the object from the robot without awkwardness, collision, or dropped object
+- **Failure Modes:**
+  - robot collides with or startles the human during final approach
+  - robot stops too far away, forcing an awkward reach
+  - object is dropped due to premature release or unclear grip timing
+  - robot lingers after handover, prolonging the interaction unnecessarily
+- **Labeling Criteria:**
+  - the robot is carrying or holding an object intended for a specific human
+  - the robot's task terminates in a close-range handover rather than a pass-through
+  - the episode includes a final approach phase distinct from open-space navigation
 
 ---
 
