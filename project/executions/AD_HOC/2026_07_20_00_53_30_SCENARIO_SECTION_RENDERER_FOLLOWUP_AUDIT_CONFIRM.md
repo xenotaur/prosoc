@@ -2,13 +2,13 @@
 execution_id: 2026_07_20_00_53_30_SCENARIO_SECTION_RENDERER_FOLLOWUP_AUDIT_CONFIRM
 prompt_id: PROMPT(AD_HOC:SCENARIO_SECTION_RENDERER_FOLLOWUP_AUDIT_CONFIRM)[2026-07-20T00:52:36-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_07_20_00_35_05_SCENARIO_SECTION_RENDERER_FOLLOWUP_AUDIT
 pr: https://github.com/xenotaur/prosoc/pull/24
-commit: 
+commit: 03dacc067bf84777cfa030c6ea9e31106271b424
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/24
-session_transcript: pending
+session_transcript: claude-app:e2216c34-0687-42db-a1fa-2245f8a00059
 created_at: 2026-07-20T00:53:30-04:00
 ---
 

@@ -2,13 +2,13 @@
 execution_id: 2026_07_20_00_35_05_SCENARIO_SECTION_RENDERER_FOLLOWUP_AUDIT
 prompt_id: PROMPT(AD_HOC:SCENARIO_SECTION_RENDERER_FOLLOWUP_AUDIT)[2026-07-20T00:34:15-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/24
-commit: 
+commit: 03dacc067bf84777cfa030c6ea9e31106271b424
 agent: claude_app
 instruction_source: ad_hoc conversation — follow-up to the WI-SCENARIO-SECTION-RENDERER corpus pass (PR #21/#22); user asked for a human-facing summary of remaining scenario gaps, stashed under project/audits/, to inform a manual editing pass before a later real re-audit
-session_transcript: pending
+session_transcript: claude-app:e2216c34-0687-42db-a1fa-2245f8a00059
 created_at: 2026-07-20T00:35:05-04:00
 ---
 
