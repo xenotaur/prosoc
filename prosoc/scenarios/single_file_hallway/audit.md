@@ -1,3 +1,12 @@
+---
+scenario: single_file_hallway
+verdict: not_ready
+blocking: 3
+should_fix: 1
+suggestion: 1
+audited: 2026-07-05
+---
+
 # Audit: Single File Hallway
 
 - **Scenario:** `prosoc/scenarios/single_file_hallway/`

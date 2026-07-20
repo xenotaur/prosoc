@@ -1,3 +1,12 @@
+---
+scenario: pedestrian_overtaking
+verdict: not_ready
+blocking: 1
+should_fix: 1
+suggestion: 2
+audited: 2026-07-05
+---
+
 # Audit: Pedestrian Overtaking
 
 - **Scenario:** `prosoc/scenarios/pedestrian_overtaking/`

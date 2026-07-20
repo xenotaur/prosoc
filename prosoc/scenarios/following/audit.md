@@ -1,3 +1,12 @@
+---
+scenario: following
+verdict: ready_with_fixes
+blocking: 0
+should_fix: 2
+suggestion: 1
+audited: 2026-07-05
+---
+
 # Audit: Following
 
 - **Scenario:** `prosoc/scenarios/following/`

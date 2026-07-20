@@ -1,3 +1,12 @@
+---
+scenario: entering_room
+verdict: ready_with_fixes
+blocking: 0
+should_fix: 2
+suggestion: 1
+audited: 2026-07-05
+---
+
 # Audit: Entering Room
 
 - **Scenario:** `prosoc/scenarios/entering_room/`

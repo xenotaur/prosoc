@@ -1,3 +1,12 @@
+---
+scenario: movable_obstruction
+verdict: not_ready
+blocking: 2
+should_fix: 1
+suggestion: 1
+audited: 2026-07-05
+---
+
 # Audit: Movable Obstruction
 
 - **Scenario:** `prosoc/scenarios/movable_obstruction/`

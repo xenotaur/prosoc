@@ -1,3 +1,12 @@
+---
+scenario: leading
+verdict: not_ready
+blocking: 2
+should_fix: 0
+suggestion: 1
+audited: 2026-07-05
+---
+
 # Audit: Leading
 
 - **Scenario:** `prosoc/scenarios/leading/`

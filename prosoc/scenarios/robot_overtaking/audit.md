@@ -1,3 +1,12 @@
+---
+scenario: robot_overtaking
+verdict: not_ready
+blocking: 2
+should_fix: 1
+suggestion: 1
+audited: 2026-07-05
+---
+
 # Audit: Robot Overtaking
 
 - **Scenario:** `prosoc/scenarios/robot_overtaking/`
