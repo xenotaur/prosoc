@@ -13,14 +13,14 @@ IMPORTANT:
 - `runtime.py` assumes all data has already passed this gate.
 """
 
+import functools
 import json
 import pathlib
 
 import yaml
-from jsonschema import validate as jsonschema_validate
+import jsonschema
 
 from prosoc.charter import runtime
-
 
 # -----------------------------------------------------------------------------
 # Paths
@@ -34,6 +34,22 @@ DEFAULT_SCHEMA_JSON = CHARTER_DIR / "schema.json"
 # -----------------------------------------------------------------------------
 # Loader API
 # -----------------------------------------------------------------------------
+
+
+@functools.lru_cache(maxsize=4)
+def _get_cached_validator(schema_path: pathlib.Path):
+    """
+    Load the schema from disk and return a compiled jsonschema validator.
+    Caching this avoids expensive file I/O and schema re-compilation on every call.
+    """
+    if not schema_path.exists():
+        raise FileNotFoundError(f"Schema file not found: {schema_path}")
+
+    with schema_path.open("r", encoding="utf-8") as f:
+        schema = json.load(f)
+
+    ValidatorClass = jsonschema.validators.validator_for(schema)
+    return ValidatorClass(schema)
 
 
 def load_charter(
@@ -59,19 +75,15 @@ def load_charter(
     if not charter_path.exists():
         raise FileNotFoundError(f"Charter file not found: {charter_path}")
 
-    if not schema_path.exists():
-        raise FileNotFoundError(f"Schema file not found: {schema_path}")
+    # Retrieve pre-compiled validator (also verifies schema existence)
+    validator = _get_cached_validator(schema_path)
 
     # Load YAML charter
     with charter_path.open("r", encoding="utf-8") as f:
         raw_charter = yaml.safe_load(f)
 
-    # Load JSON Schema
-    with schema_path.open("r", encoding="utf-8") as f:
-        schema = json.load(f)
-
     # Validate against schema (normative gate)
-    jsonschema_validate(instance=raw_charter, schema=schema)
+    validator.validate(instance=raw_charter)
 
     # Instantiate runtime representation (ergonomic layer)
     return runtime.Charter(**raw_charter)

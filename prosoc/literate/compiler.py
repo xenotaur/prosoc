@@ -14,6 +14,7 @@ This module intentionally does NOT:
 
 from __future__ import annotations
 
+import functools
 import json
 import re
 from pathlib import Path
@@ -23,7 +24,6 @@ import yaml
 import jsonschema
 
 from prosoc.literate import errors
-
 
 YAML_FENCE_LANGUAGE = "yaml"
 
@@ -123,6 +123,16 @@ def assemble_document(
     return {root_key: items}
 
 
+@functools.lru_cache(maxsize=32)
+def _get_validator(schema_str: str) -> Any:
+    """
+    Cache compiled jsonschema validators to avoid expensive re-evaluation.
+    """
+    schema = json.loads(schema_str)
+    ValidatorClass = jsonschema.validators.validator_for(schema)
+    return ValidatorClass(schema)
+
+
 def validate_document(
     document: Dict[str, Any],
     schema: Dict[str, Any],
@@ -138,7 +148,10 @@ def validate_document(
         LiterateSchemaError: if validation fails.
     """
     try:
-        jsonschema.validate(instance=document, schema=schema)
+        # Serialize schema to a stable string to use as cache key
+        schema_str = json.dumps(schema, sort_keys=True)
+        validator = _get_validator(schema_str)
+        validator.validate(instance=document)
     except jsonschema.exceptions.ValidationError as e:
         raise errors.LiterateSchemaError("Document failed schema validation") from e
 
