@@ -1,11 +1,34 @@
-# Scenario:Pedestrian Overtaking
+# Scenario: Pedestrian Overtaking a Robot from Behind
 
-## STATUS: DRAFT 2026-01-02
-- SOURCE: Prompt to ChatGPT 5.2
-- DRAFTED: ChatGPT 5.2, 2026-01-02
-- EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-02
+## Status
 
-## Overview
+- **STATE:** DRAFT
+- **SOURCE:** Prompt to ChatGPT 5.2
+- **DRAFTED:** ChatGPT 5.2, 2026-01-02
+- **EDITED:** render_sections.py, 2026-07-19
+
+## Scenario Card Summary
+
+- **Scenario Name:** Pedestrian Overtaking a Robot from Behind
+- **Scenario Description:** A human pedestrian approaches and overtakes a slower-moving robot from behind in a shared pathway. The robot must behave predictably and cooperatively, allowing safe and comfortable passing without impeding the pedestrian.
+- **Physical Environment:** indoor
+- **Robot Role:** navigating_agent
+
+**Remaining gaps:**
+
+- **Scientific Purpose** — should-fill-in-now
+- **Geometric Layout** — should-fill-in-now
+- **Robot Task** — should-fill-in-now
+- **Human Behavior** — should-fill-in-now
+- **Success Metrics** — should-fill-in-now
+- **Quality Metrics** — should-fill-in-now
+- **Ideal Outcome** — should-fill-in-now
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
+
+---
+
+## Scenario Overview
 
 In this scenario, **a human pedestrian overtakes a slower-moving robot from behind** while both are traveling in the same direction along a shared pathway.
 
@@ -113,6 +136,18 @@ evaluation_notes: >
   Failure modes include blocking behavior, sudden motion changes, or
   trajectories that require the pedestrian to hesitate or reroute.
 ```
+
+---
+
+## Scenario Usage Guide
+
+**Remaining gaps:**
+
+- **Success Metrics** — should-fill-in-now
+- **Quality Metrics** — should-fill-in-now
+- **Ideal Outcome** — should-fill-in-now
+- **Failure Modes** — should-fill-in-now
+- **Labeling Criteria** — should-fill-in-now
 
 ---
 

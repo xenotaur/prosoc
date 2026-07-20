@@ -1,17 +1,48 @@
 # Scenario: Single File Hallway
 
-## STATUS: DRAFT 2026-01-16
-- SOURCE: Principles and Guidelines for Evaluating Social Robot Navigation (P&G paper)
-- DRAFTED: ChatGPT 5.2, 2026-01-16
-- EDITED: Anthony Francis centaur@logicalrobotics.com (pending)
+## Status
 
-## Overview
+- **STATE:** DRAFT
+- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation (P&G paper)
+- **DRAFTED:** ChatGPT 5.2, 2026-01-16
+- **EDITED:** render_sections.py, 2026-07-19
+
+## Scenario Card Summary
+
+- **Scenario Name:** Single File Hallway
+- **Scenario Description:** A robot and a human approach each other in a hallway that is too narrow for safe and comfortable passing. The robot must proactively avoid conflict by yielding, signaling, or negotiating right-of-way.
+- **Physical Environment:** indoor
+- **Robot Role:** navigating_agent
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - DeadlockFree
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P7
+
+**Remaining gaps:**
+
+- **Scientific Purpose** — should-fill-in-now
+- **Geometric Layout** — should-fill-in-now
+- **Robot Task** — should-fill-in-now
+- **Human Behavior** — should-fill-in-now
+- **Ideal Outcome** — should-fill-in-now
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
+
+---
+
+## Scenario Overview
 
 This scenario describes a social navigation conflict in which a robot and a human approach each other in a hallway that is **too narrow for safe and comfortable passing**. Unlike *Frontal Approach* and *Movable Obstruction*, the environment itself cannot be improved by intervention: the hallway geometry enforces **single‑file passage**.
 
 The purpose of this scenario is to isolate and evaluate **Proactivity (P7)** without introducing opportunities for **Prosocial Behavior (P9)**. The robot must anticipate the conflict and take initiative—through signaling, yielding, or negotiation—to prevent deadlock or discomfort.
 
 ---
+
+## Scenario Specification (Machine-Readable)
 
 ```yaml
 id: single_file_hallway_01
@@ -129,3 +160,28 @@ scenario set that:
 This scenario is especially useful for benchmarking hesitation handling, signaling clarity, and
 right‑of‑way negotiation under unavoidable spatial constraints.
 
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - DeadlockFree
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P7
+- **Failure Modes:**
+  - prolonged deadlock at hallway entrance
+  - human forced to retreat without warning
+  - uncomfortable proximity due to late yielding
+- **Labeling Criteria:**
+  - hallway width prevents safe passing
+  - robot and human approach from opposite ends
+  - no alternative routes available
+
+**Remaining gaps:**
+
+- **Ideal Outcome** — should-fill-in-now

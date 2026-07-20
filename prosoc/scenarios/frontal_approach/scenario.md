@@ -1,15 +1,45 @@
 # Scenario: Frontal Approach
 
-## STATUS: DRAFT 2026-01-05
-- SOURCE: Prompt to ChatGPT 5.2
-- DRAFTED: ChatGPT 5.2, 2026-01-02
-- EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-05
+## Status
 
-## Overview
+- **STATE:** DRAFT
+- **SOURCE:** Prompt to ChatGPT 5.2
+- **DRAFTED:** ChatGPT 5.2, 2026-01-02
+- **EDITED:** render_sections.py, 2026-07-19
+
+## Scenario Card Summary
+
+- **Scenario Name:** Frontal Approach
+- **Scenario Description:** A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without prolonged hesitation.
+- **Physical Environment:** indoor
+- **Robot Role:** navigating_agent
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P5
+
+**Remaining gaps:**
+
+- **Scientific Purpose** — should-fill-in-now
+- **Geometric Layout** — should-fill-in-now
+- **Robot Task** — should-fill-in-now
+- **Human Behavior** — should-fill-in-now
+- **Ideal Outcome** — should-fill-in-now
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
+
+---
+
+## Scenario Overview
 
 This scenario describes a canonical social navigation conflict in which a robot and a human approach each other in opposite directions in a narrow hallway where neither agent has an explicit right-of-way. Successful navigation depends on sensing and agile navigation, and successful social navigation may require trajectory prediction, interpreting intent, resolving hesitation, and resolving conflicts. The scenario tests social navigation principles including safety, comfort, legibility, following social norms, and agent understanding.
 
 ---
+
+## Scenario Specification (Machine-Readable)
 
 ```yaml
 id: frontal_approach_01
@@ -99,3 +129,26 @@ evaluation_notes: >
 
 This scenario is intended as a **baseline social navigation test case** and may be extended through variants that modify hallway width, human attentiveness, group size, or cultural expectations around yielding. The goal is not to prescribe a single correct behavior, but to evaluate whether the robot behaves as a cooperative, legible participant in shared space, consistent with the Prosocial Navigation Charter.
 
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P5
+- **Failure Modes:**
+  - robot collides with human
+  - robot fails to pass within time limit
+- **Labeling Criteria:**
+  - robot and human face each other at the start of the episode
+  - robot and human move toward each other
+  - sufficient clearance exists for passing
+
+**Remaining gaps:**
+
+- **Ideal Outcome** — should-fill-in-now

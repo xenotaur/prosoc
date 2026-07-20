@@ -5,7 +5,33 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [50]
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-19
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Leading
+- **Scenario Description:** A robot in a leader role guides a human through a walking space, choosing the path and pace, while the human's task is to follow. The robot must move legibly, match its pace to the human's ability, and monitor whether the human remains present and following.
+- **Scientific Purpose:** joint navigation
+- **Physical Environment:** generic
+- **Geometric Layout:** walking space
+- **Robot Role:** leader
+- **Robot Task:** lead the human to a destination
+- **Human Behavior:** follow the robot, tracking its path and pace
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - TTG
+- **Quality Metrics:**
+  - P3
+  - P6
+- **Ideal Outcome:** person follows the robot to the destination, with the robot adapting pace and signaling turns so the human stays with it
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -157,6 +183,28 @@ evaluation_notes: >
   not separately defined in Table 3) and is the role-reversed counterpart
   of Following, where the human leads and the robot tracks them instead.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - TTG
+- **Quality Metrics:**
+  - P3
+  - P6
+- **Ideal Outcome:** person follows the robot to the destination, with the robot adapting pace and signaling turns so the human stays with it
+- **Failure Modes:**
+  - robot loses the human without noticing and continues to the destination alone
+  - robot's pace is mismatched to the human's ability, causing separation
+  - robot turns without adequate warning, confusing the human
+  - human is uncertain whether the robot is actually leading (ambiguous role signaling)
+- **Labeling Criteria:**
+  - robot is in a leader role relative to a single following human
+  - the robot's path determines the intended route, and the human's task is to track it
+  - the robot has some means of monitoring the human's continued presence
 
 ---
 

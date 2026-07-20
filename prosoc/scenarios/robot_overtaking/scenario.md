@@ -1,11 +1,34 @@
-# Scenario: Robot Overtaking
+# Scenario: Overtaking a Pedestrian from Behind
 
-## STATUS: DRAFT 2026-01-06
-- SOURCE: Prompt to ChatGPT 5.2
-- DRAFTED: ChatGPT 5.2, 2026-01-02
-- EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-06
+## Status
 
-## Overview
+- **STATE:** DRAFT
+- **SOURCE:** Prompt to ChatGPT 5.2
+- **DRAFTED:** ChatGPT 5.2, 2026-01-02
+- **EDITED:** render_sections.py, 2026-07-19
+
+## Scenario Card Summary
+
+- **Scenario Name:** Overtaking a Pedestrian from Behind
+- **Scenario Description:** A robot approaches a human pedestrian from behind in a shared pathway where both are moving in the same direction. The robot must decide whether to follow or overtake in a manner that is safe, legible, and socially comfortable.
+- **Physical Environment:** indoor
+- **Robot Role:** navigating_agent
+
+**Remaining gaps:**
+
+- **Scientific Purpose** — should-fill-in-now
+- **Geometric Layout** — should-fill-in-now
+- **Robot Task** — should-fill-in-now
+- **Human Behavior** — should-fill-in-now
+- **Success Metrics** — should-fill-in-now
+- **Quality Metrics** — should-fill-in-now
+- **Ideal Outcome** — should-fill-in-now
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
+
+---
+
+## Scenario Overview
 
 This scenario describes a **robot overtaking interaction**, in which a robot approaches a human from behind while both are traveling in the same direction along a shared pathway.
 
@@ -110,6 +133,18 @@ evaluation_notes: >
   Human awareness is assumed to be variable; overly assertive behavior is
   inappropriate even if the pedestrian appears unaware of the robot’s presence.
 ```
+
+## Scenario Usage Guide
+
+**Remaining gaps:**
+
+- **Success Metrics** — should-fill-in-now
+- **Quality Metrics** — should-fill-in-now
+- **Ideal Outcome** — should-fill-in-now
+- **Failure Modes** — should-fill-in-now
+- **Labeling Criteria** — should-fill-in-now
+
+---
 
 ## Notes for Scenario Designers and Evaluators
 
