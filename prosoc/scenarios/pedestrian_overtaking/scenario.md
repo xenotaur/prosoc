@@ -1,4 +1,4 @@
-# Scenario:Pedestrian Overtaking
+# Scenario: Pedestrian Overtaking a Robot from Behind
 
 ## Status
 
