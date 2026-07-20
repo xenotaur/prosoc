@@ -2,13 +2,13 @@
 execution_id: 2026_07_20_00_33_14_AUDIT_FRONTMATTER_BACKFILL
 prompt_id: PROMPT(AD_HOC:AUDIT_FRONTMATTER_BACKFILL)[2026-07-20T00:32:22-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/23
-commit: 
+commit: 66937774e317ab3d6667e48fad5c5f5ebec9b4e6
 agent: claude_app
 instruction_source: ad_hoc conversation — user asked whether the missing frontmatter block across all 20 scenario audit.md files (discovered while analyzing options for a post-render human-work summary) could be backfilled automatically, then asked for it as its own small PR
-session_transcript: pending
+session_transcript: claude-app:e2216c34-0687-42db-a1fa-2245f8a00059
 created_at: 2026-07-20T00:33:14-04:00
 ---
 
