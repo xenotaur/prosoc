@@ -2,13 +2,13 @@
 execution_id: 2026_07_19_23_03_34_SCENARIO_SECTION_RENDERER_CORPUS_PASS_REVIEW
 prompt_id: PROMPT(AD_HOC:SCENARIO_SECTION_RENDERER_CORPUS_PASS_REVIEW)[2026-07-19T23:02:09-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_07_19_22_39_29_SCENARIO_SECTION_RENDERER_CORPUS_PASS
 pr: https://github.com/xenotaur/prosoc/pull/22
-commit: 
+commit: d06b0a119ea7f2675d532960b5a5f505a775206e
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/22
-session_transcript: pending
+session_transcript: claude-app:e2216c34-0687-42db-a1fa-2245f8a00059
 created_at: 2026-07-19T23:03:34-04:00
 ---
 
