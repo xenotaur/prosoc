@@ -1,3 +1,12 @@
+---
+scenario: join_a_group
+verdict: not_ready
+blocking: 2
+should_fix: 0
+suggestion: 0
+audited: 2026-07-05
+---
+
 # Audit: Join a Group
 
 - **Scenario:** `prosoc/scenarios/join_a_group/`

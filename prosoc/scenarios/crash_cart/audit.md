@@ -1,3 +1,12 @@
+---
+scenario: crash_cart
+verdict: ready_with_fixes
+blocking: 0
+should_fix: 3
+suggestion: 1
+audited: 2026-07-05
+---
+
 # Audit: Crash Cart
 
 - **Scenario:** `prosoc/scenarios/crash_cart/`

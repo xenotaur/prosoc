@@ -1,3 +1,12 @@
+---
+scenario: narrow_doorway
+verdict: ready
+blocking: 0
+should_fix: 0
+suggestion: 2
+audited: 2026-07-05
+---
+
 # Audit: Narrow Doorway
 
 - **Scenario:** `prosoc/scenarios/narrow_doorway/`

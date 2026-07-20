@@ -1,3 +1,12 @@
+---
+scenario: object_handover
+verdict: not_ready
+blocking: 0
+should_fix: 3
+suggestion: 1
+audited: 2026-07-05
+---
+
 # Audit: Object Handover
 
 - **Scenario:** `prosoc/scenarios/object_handover/`

@@ -1,3 +1,12 @@
+---
+scenario: intersection_no_gesture
+verdict: not_ready
+blocking: 1
+should_fix: 1
+suggestion: 2
+audited: 2026-07-05
+---
+
 # Audit: Intersection – No Gesture
 
 - **Scenario:** `prosoc/scenarios/intersection_no_gesture/`

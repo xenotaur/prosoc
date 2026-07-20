@@ -1,3 +1,12 @@
+---
+scenario: crowd_navigation
+verdict: ready_with_fixes
+blocking: 0
+should_fix: 2
+suggestion: 1
+audited: 2026-07-05
+---
+
 # Audit: Crowd Navigation
 
 - **Scenario:** `prosoc/scenarios/crowd_navigation/`

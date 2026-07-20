@@ -1,3 +1,12 @@
+---
+scenario: perpendicular_traffic
+verdict: ready_with_fixes
+blocking: 0
+should_fix: 2
+suggestion: 0
+audited: 2026-07-05
+---
+
 # Audit: Perpendicular Traffic
 
 - **Scenario:** `prosoc/scenarios/perpendicular_traffic/`

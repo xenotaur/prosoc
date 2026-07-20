@@ -1,3 +1,12 @@
+---
+scenario: frontal_approach
+verdict: not_ready
+blocking: 1
+should_fix: 2
+suggestion: 2
+audited: 2026-07-05
+---
+
 # Audit: Frontal Approach
 
 - **Scenario:** `prosoc/scenarios/frontal_approach/`
