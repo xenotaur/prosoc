@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: Implemented and merged in PR #21 (commit 3e454a0)
 blocked_reason: null
 blocked: false
 id: WI-SCENARIO-SECTION-RENDERER
 title: Add scenario section renderer (Scenario Card Summary / Usage Guide)
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus: []
 related_roadmap: []

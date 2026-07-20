@@ -2,13 +2,13 @@
 execution_id: 2026_07_19_15_45_02_WI_SCENARIO_SECTION_RENDERER_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_SCENARIO_SECTION_RENDERER_REVIEW)[2026-07-19T15:43:24-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_07_19_14_59_17_WI_SCENARIO_SECTION_RENDERER
 pr: https://github.com/xenotaur/prosoc/pull/21
-commit: 
+commit: 3e454a04fd6724f3f4437ab8712c96d8827751bd
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/21
-session_transcript: pending
+session_transcript: claude-app:e2216c34-0687-42db-a1fa-2245f8a00059
 created_at: 2026-07-19T15:45:02-04:00
 ---
 

@@ -2,13 +2,13 @@
 execution_id: 2026_07_19_14_59_17_WI_SCENARIO_SECTION_RENDERER
 prompt_id: PROMPT(WI-SCENARIO-SECTION-RENDERER:WI_SCENARIO_SECTION_RENDERER)[2026-07-19T14:35:46-04:00]
 work_item: WI-SCENARIO-SECTION-RENDERER
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/21
-commit: 
+commit: 3e454a04fd6724f3f4437ab8712c96d8827751bd
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-SCENARIO-SECTION-RENDERER.md
-session_transcript: pending
+session_transcript: claude-app:e2216c34-0687-42db-a1fa-2245f8a00059
 created_at: 2026-07-19T14:59:17-04:00
 ---
 
