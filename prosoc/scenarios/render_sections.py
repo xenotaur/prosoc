@@ -24,7 +24,6 @@ from prosoc.literate import errors
 from prosoc.literate import utils
 from prosoc.scenarios import distill
 
-
 # -----------------------------------------------------------------------------
 # Constants
 # -----------------------------------------------------------------------------

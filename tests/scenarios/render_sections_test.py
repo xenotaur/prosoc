@@ -10,7 +10,6 @@ from prosoc.literate import utils
 from prosoc.scenarios import distill
 from prosoc.scenarios import render_sections
 
-
 FULL_YAML = """\
 id: full_scenario_01
 name: Full Scenario
