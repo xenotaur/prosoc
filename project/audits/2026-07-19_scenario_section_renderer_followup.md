@@ -97,8 +97,9 @@ and not covered here.
 - **Needs a researcher's judgment:** `Scientific Purpose`, `Geometric
   Layout`, `Robot Task`, `Human Behavior`, `Success Metrics`, `Quality
   Metrics`, `Ideal Outcome`, `Failure Modes`, `Labeling Criteria`,
-  `Related Scenarios`, `Cited In` — this scenario's `scenario_usage_guide`
-  YAML block is effectively empty; the largest gap of the 8.
+  `Related Scenarios`, `Cited In` — no `scenario_usage_guide:` key exists
+  at all in this scenario's YAML (same as `robot_overtaking`, below); the
+  largest gap of the 8.
 
 ## robot_overtaking
 
