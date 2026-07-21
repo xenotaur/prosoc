@@ -57,6 +57,10 @@ relevant_principles:
 - P8
 ideal_outcome: person follows the robot to the destination, with the robot adapting
   pace and signaling turns so the human stays with it
+related_scenarios:
+- following
+cited_in:
+- '50'
 scenario_usage_guide:
   success_metrics:
   - SR

@@ -48,6 +48,7 @@ expected_behaviors:
   - drift unpredictably during passing
   - force the pedestrian to slow or change path
 relevant_principles:
+- P0
 - P1
 - P2
 - P3

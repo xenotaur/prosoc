@@ -27,11 +27,8 @@
   - P3
   - P8
 - **Ideal Outcome:** delivery of medicine to the recipient promptly and without collision or unsafe maneuvers
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** object_handover
+- **Cited In:** this article
 
 ---
 
@@ -156,6 +153,12 @@ relevant_principles:
   - P8  # Contextual Appropriateness — navigation norms shift with task urgency
 
 ideal_outcome: delivery of medicine to the recipient promptly and without collision or unsafe maneuvers
+
+related_scenarios:
+  - object_handover
+
+cited_in:
+  - "this article"
 
 scenario_usage_guide:
   success_metrics:

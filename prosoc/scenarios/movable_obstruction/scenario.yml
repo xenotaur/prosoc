@@ -58,6 +58,7 @@ expected_behaviors:
   - force the human into single-file passage without acknowledgment
   - manipulate the obstruction in a way that creates new hazards
 relevant_principles:
+- P0
 - P1
 - P3
 - P5

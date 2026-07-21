@@ -58,6 +58,10 @@ relevant_principles:
 - P6
 ideal_outcome: human takes the object from the robot without awkwardness, collision,
   or dropped object
+related_scenarios:
+- crash_cart
+cited_in:
+- '161'
 scenario_usage_guide:
   success_metrics:
   - SR

@@ -26,11 +26,8 @@
   - P3
   - P4
 - **Ideal Outcome:** robot and human sequence through the doorway one at a time without collision or obstruction
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** blind_corner, entering_room, exiting_room
+- **Cited In:** 126
 
 ---
 
@@ -146,6 +143,14 @@ relevant_principles:
   - P7  # Proactivity — resolving the sequencing decision without deadlock
 
 ideal_outcome: robot and human sequence through the doorway one at a time without collision or obstruction
+
+related_scenarios:
+  - blind_corner
+  - entering_room
+  - exiting_room
+
+cited_in:
+  - "126"
 
 scenario_usage_guide:
   success_metrics:

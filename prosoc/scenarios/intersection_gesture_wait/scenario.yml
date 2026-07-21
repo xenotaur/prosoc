@@ -48,6 +48,7 @@ expected_behaviors:
   - proceed into the intersection prematurely
   - display ambiguous motion while waiting
 relevant_principles:
+- P0
 - P1
 - P2
 - P3

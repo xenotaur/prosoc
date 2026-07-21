@@ -26,11 +26,8 @@
   - P2
   - P3
 - **Ideal Outcome:** robot and human pass each other at the corner without collision or obstruction
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** frontal_approach, narrow_doorway
+- **Cited In:** 126, 171
 
 ---
 
@@ -150,6 +147,14 @@ relevant_principles:
   - P7  # Proactivity — robot may need to take initiative to resolve a spatial deadlock
 
 ideal_outcome: robot and human pass each other at the corner without collision or obstruction
+
+related_scenarios:
+  - frontal_approach
+  - narrow_doorway
+
+cited_in:
+  - "126"
+  - "171"
 
 scenario_usage_guide:
   success_metrics:

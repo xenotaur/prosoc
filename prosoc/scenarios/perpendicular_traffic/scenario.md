@@ -27,11 +27,8 @@
   - P3
   - P7
 - **Ideal Outcome:** robot crosses the perpendicular flow without collision or obstruction
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** parallel_traffic, intersection_no_gesture
+- **Cited In:** 167
 
 ---
 
@@ -148,6 +145,13 @@ relevant_principles:
   - P7  # Proactivity — avoiding indefinite waiting at the flow boundary
 
 ideal_outcome: robot crosses the perpendicular flow without collision or obstruction
+
+related_scenarios:
+  - parallel_traffic
+  - intersection_no_gesture
+
+cited_in:
+  - "167"
 
 scenario_usage_guide:
   success_metrics:

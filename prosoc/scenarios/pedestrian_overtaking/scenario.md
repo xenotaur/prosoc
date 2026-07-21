@@ -130,6 +130,7 @@ expected_behaviors:
     - force the pedestrian to slow or change path
 
 relevant_principles:
+  - P0  # Goal Achievement
   - P1  # Safety
   - P2  # Comfort
   - P3  # Legibility

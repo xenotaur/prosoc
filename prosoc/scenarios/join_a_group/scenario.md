@@ -27,11 +27,8 @@
   - P4
   - P5
 - **Ideal Outcome:** robot joins the group, settling into the formation without disrupting the conversation
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** crowd_navigation
+- **Cited In:** 50, 161
 
 ---
 
@@ -151,6 +148,13 @@ relevant_principles:
   - P8  # Contextual Appropriateness — behavior must fit the specific group and setting
 
 ideal_outcome: robot joins the group, settling into the formation without disrupting the conversation
+
+related_scenarios:
+  - crowd_navigation
+
+cited_in:
+  - "50"
+  - "161"
 
 scenario_usage_guide:
   success_metrics:

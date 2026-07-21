@@ -113,6 +113,7 @@ expected_behaviors:
     - manipulate the obstruction in a way that creates new hazards
 
 relevant_principles:
+  - P0  # Goal Achievement
   - P1  # Safety
   - P3  # Legibility
   - P5  # Social Competency

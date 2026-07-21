@@ -33,7 +33,9 @@ emphasis or detail rather than outright contradictory — still worth a should-f
       violations; `expected_behaviors` only has `must`/`should`/`should_not`)
 - [ ] `relevant_principles` — every entry matches `^P[0-9]+$` and is P0–P9
 - [ ] `relevant_principles` count is roughly 3–5 (0 is likely under-specified; 10 dilutes
-      meaning per `../../_shared/principles.md`)
+      meaning per `../../_shared/principles.md`) — but a count above 5 is not itself a
+      finding if the card's own prose explicitly discusses each included principle; check
+      before flagging as a suggestion
 - [ ] `scenario_usage_guide.quality_metrics` — same P0–P9 constraint
 - [ ] `expected_behaviors` entries describe a *kind* of behavior, not an exact motion,
       numeric threshold, or implementation detail (P&G Guideline N6 — over-specification)

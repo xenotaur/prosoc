@@ -27,11 +27,8 @@
   - P2
   - P6
 - **Ideal Outcome:** robot follows the person continuously, maintaining an appropriate distance without losing track of them
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** leading
+- **Cited In:** 50
 
 ---
 
@@ -150,6 +147,12 @@ relevant_principles:
   - P8  # Contextual Appropriateness — following distance should adapt to crowd density and space width
 
 ideal_outcome: robot follows the person continuously, maintaining an appropriate distance without losing track of them
+
+related_scenarios:
+  - leading
+
+cited_in:
+  - "50"
 
 scenario_usage_guide:
   success_metrics:

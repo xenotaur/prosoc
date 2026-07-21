@@ -120,6 +120,7 @@ expected_behaviors:
     - undermine the clarity of the human’s signal
 
 relevant_principles:
+  - P0  # Goal Achievement
   - P1  # Safety
   - P2  # Comfort
   - P3  # Legibility

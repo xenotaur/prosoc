@@ -120,7 +120,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Human Behavior:** Navigate in to out
 - **Ideal Outcome:** Robot lets human exit
 - **Related Scenarios:** Entering Elevator (R@G)
-- **Cited In:** R@G
+- **Cited In:** R@G — Robotics at Google, an internal scenario reference (not a public citation index)
 - **Implemented:** YES (`entering_room`)
 
 ### Exiting Room
@@ -132,7 +132,7 @@ not present here; leave fields blank if the paper does not specify them.
 - **Human Behavior:** Navigate in to out
 - **Ideal Outcome:** Robot exits first
 - **Related Scenarios:** Exiting Elevator (R@G)
-- **Cited In:** R@G
+- **Cited In:** R@G — Robotics at Google, an internal scenario reference (not a public citation index)
 - **Implemented:** YES (`exiting_room`)
 
 ---

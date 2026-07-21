@@ -28,11 +28,8 @@
   - P2
   - P7
 - **Ideal Outcome:** robot crosses the crowd without collision or obstruction, making steady progress
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** parallel_traffic, perpendicular_traffic
+- **Cited In:** various
 
 ---
 
@@ -150,6 +147,13 @@ relevant_principles:
   - P7  # Proactivity — avoiding indefinite freezing or excessive hesitation in dense areas
 
 ideal_outcome: robot crosses the crowd without collision or obstruction, making steady progress
+
+related_scenarios:
+  - parallel_traffic
+  - perpendicular_traffic
+
+cited_in:
+  - "various"
 
 scenario_usage_guide:
   success_metrics:

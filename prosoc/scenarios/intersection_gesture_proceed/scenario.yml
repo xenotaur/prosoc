@@ -49,6 +49,7 @@ expected_behaviors:
   - proceed aggressively or at unsafe speed
   - "undermine the clarity of the human\u2019s signal"
 relevant_principles:
+- P0
 - P1
 - P2
 - P3

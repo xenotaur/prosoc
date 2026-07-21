@@ -56,3 +56,12 @@ standard abbreviation doesn't exist.
 - **P9 (Prosocial Behavior)** — include when the scenario turns on discretionary, beyond-the-task helpfulness rather than mere compliance
 
 Limit `relevant_principles` to the 3–5 most directly relevant. Including all ten dilutes meaning.
+
+This is a soft guideline, not a hard cap: if a scenario's own prose (Overview,
+Discussion, or `evaluation_notes`) explicitly names and discusses a principle
+— e.g. analyzing a specific trade-off involving it, the way `movable_obstruction`'s
+Discussion names "Trade-offs between Goal Achievement (P0) and prosocial
+action" — include that principle even if the list grows past 5. A principle
+the card's own text explicitly discusses is definitionally relevant; dropping
+it solely to satisfy the count guideline would make `relevant_principles`
+contradict the rest of the card.

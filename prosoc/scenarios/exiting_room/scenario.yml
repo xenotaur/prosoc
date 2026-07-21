@@ -57,6 +57,11 @@ relevant_principles:
 - P6
 ideal_outcome: robot exits the room first, then the human enters, without collision
   or obstruction
+related_scenarios:
+- entering_room
+- narrow_doorway
+cited_in:
+- Robotics at Google (R@G), internal scenario reference
 scenario_usage_guide:
   success_metrics:
   - SR
