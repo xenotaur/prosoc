@@ -1,5 +1,5 @@
 ---
-scenario: intersection_gesture_wait_01
+scenario: intersection_gesture_wait
 verdict: not_ready
 blocking: 1
 should_fix: 1

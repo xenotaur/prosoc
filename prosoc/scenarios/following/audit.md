@@ -1,5 +1,5 @@
 ---
-scenario: following_01
+scenario: following
 verdict: ready_with_fixes
 blocking: 0
 should_fix: 1

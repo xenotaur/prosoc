@@ -165,7 +165,7 @@
     },
     "related_scenarios": {
       "type": "array",
-      "description": "IDs of other scenarios in this corpus that are conceptually related (e.g., variants, complements, or contrasts).",
+      "description": "Directory names (scenario keys, e.g. 'frontal_approach') of other scenarios in this corpus that are conceptually related (e.g., variants, complements, or contrasts). This is the same key used for the scenario's directory under prosoc/scenarios/, its audit.md frontmatter, and AUDIT_SUMMARY.md rows -- not the versioned scenario.yml 'id' field.",
       "items": {
         "type": "string"
       }

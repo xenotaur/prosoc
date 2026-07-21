@@ -1,5 +1,5 @@
 ---
-scenario: exiting_room_01
+scenario: exiting_room
 verdict: ready_with_fixes
 blocking: 0
 should_fix: 1

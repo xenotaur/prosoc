@@ -1,5 +1,5 @@
 ---
-scenario: intersection_no_gesture_01
+scenario: intersection_no_gesture
 verdict: not_ready
 blocking: 1
 should_fix: 0

@@ -7,7 +7,8 @@
 This is a point-in-time index, not a live report — each scenario's own
 `audit.md` is the source of truth for full findings detail. Re-running the
 audit against a scenario does not automatically update this file; regenerate
-it by hand (or via a future batch-audit skill) after any re-audit.
+it (this file was produced by `/prosoc-scenario-audit-all`, see
+`.claude/skills/prosoc-scenario-audit-all/`) after any re-audit.
 
 No scenario's `scenario.md`, `scenario.yml`, or STATUS/STATE block was
 modified in producing these audits, and no scenario STATE was promoted —

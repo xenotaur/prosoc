@@ -1,5 +1,5 @@
 ---
-scenario: frontal_approach_01
+scenario: frontal_approach
 verdict: ready_with_fixes
 blocking: 0
 should_fix: 2

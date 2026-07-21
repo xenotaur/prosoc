@@ -1,5 +1,5 @@
 ---
-scenario: intersection_gesture_proceed_01
+scenario: intersection_gesture_proceed
 verdict: ready_with_fixes
 blocking: 0
 should_fix: 1

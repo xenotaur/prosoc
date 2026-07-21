@@ -132,7 +132,7 @@ relevant_principles:
 ideal_outcome: <concise outcome statement>
 
 related_scenarios:
-  - <scenario-id>           # other scenarios in this corpus that are conceptually related
+  - <scenario-directory-name>  # e.g. frontal_approach -- the directory/key used in audit.md and AUDIT_SUMMARY.md, not scenario.yml's suffixed id
 
 cited_in:
   - <reference>             # external works or citation indices referencing this scenario

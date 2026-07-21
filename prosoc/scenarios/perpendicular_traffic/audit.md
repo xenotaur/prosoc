@@ -1,5 +1,5 @@
 ---
-scenario: perpendicular_traffic_01
+scenario: perpendicular_traffic
 verdict: ready_with_fixes
 blocking: 0
 should_fix: 1

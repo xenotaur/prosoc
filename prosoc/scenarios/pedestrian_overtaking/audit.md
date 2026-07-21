@@ -1,5 +1,5 @@
 ---
-scenario: pedestrian_overtaking_01
+scenario: pedestrian_overtaking
 verdict: ready
 blocking: 0
 should_fix: 0
