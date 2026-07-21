@@ -52,11 +52,11 @@ CARD_SUMMARY_FIELDS: list[tuple[str, tuple[str, ...]]] = [
     ("Success Metrics", ("scenario_usage_guide", "success_metrics")),
     ("Quality Metrics", ("scenario_usage_guide", "quality_metrics")),
     ("Ideal Outcome", ("ideal_outcome",)),
+    ("Related Scenarios", ("related_scenarios",)),
+    ("Cited In", ("cited_in",)),
 ]
 
-# No corresponding schema.json field exists for either of these; they are
-# always reported as gaps rather than invented.
-CARD_SUMMARY_UNSUPPORTED: tuple[str, ...] = ("Related Scenarios", "Cited In")
+CARD_SUMMARY_UNSUPPORTED: tuple[str, ...] = ()
 
 USAGE_GUIDE_FIELDS: list[tuple[str, tuple[str, ...]]] = [
     ("Success Metrics", ("scenario_usage_guide", "success_metrics")),

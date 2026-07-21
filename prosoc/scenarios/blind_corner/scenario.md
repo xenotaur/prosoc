@@ -5,7 +5,32 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [126, 171]
 - **DRAFTED:** Claude (new-scenario skill), 2026-06-19
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Blind Corner
+- **Scenario Description:** A robot and a human pedestrian approach each other from opposite directions and meet at an indoor blind corner, where neither can see the other until they are in close proximity. The robot must detect the human at short range and resolve the encounter safely without collision or prolonged obstruction.
+- **Scientific Purpose:** pedestrian interaction
+- **Physical Environment:** indoor
+- **Geometric Layout:** corner
+- **Robot Role:** navigating_agent
+- **Robot Task:** navigate from A to B through the corner
+- **Human Behavior:** navigate from B to A through the corner
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+- **Ideal Outcome:** robot and human pass each other at the corner without collision or obstruction
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -164,6 +189,27 @@ evaluation_notes: >
   should not slow down preemptively — the encounter should simulate a natural blind
   corner meeting.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+- **Ideal Outcome:** robot and human pass each other at the corner without collision or obstruction
+- **Failure Modes:**
+  - robot collides with human at or around the corner
+  - robot startles human by appearing suddenly at full speed
+  - encounter results in prolonged standoff requiring one party to reverse
+  - robot stops and fails to resolve the encounter within time limit
+- **Labeling Criteria:**
+  - robot and human approach the same corner from opposite sides
+  - neither agent has line-of-sight to the other at the start of the episode
+  - agents come into detection range within a short distance of the corner apex
 
 ---
 

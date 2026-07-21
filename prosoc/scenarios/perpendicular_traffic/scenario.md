@@ -5,7 +5,33 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [167]
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Perpendicular Traffic
+- **Scenario Description:** A robot crosses an intersection or plaza while a crowd of pedestrians flows perpendicular to its path. The robot must assess the density and pace of the cross-flow, select a safe gap or moment, and cross decisively without lingering within the flow.
+- **Scientific Purpose:** crowd navigation
+- **Physical Environment:** generic
+- **Geometric Layout:** intersection
+- **Robot Role:** navigating_agent
+- **Robot Task:** cross navigate through the perpendicular flow
+- **Human Behavior:** mill from A to B, forming a continuous perpendicular stream
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - TTG
+- **Quality Metrics:**
+  - P3
+  - P7
+- **Ideal Outcome:** robot crosses the perpendicular flow without collision or obstruction
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -153,6 +179,28 @@ evaluation_notes: >
   which involves flow aligned with rather than orthogonal to the robot's
   path.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - TTG
+- **Quality Metrics:**
+  - P3
+  - P7
+- **Ideal Outcome:** robot crosses the perpendicular flow without collision or obstruction
+- **Failure Modes:**
+  - robot collides with a pedestrian while crossing the flow
+  - robot stops or reverses mid-crossing, obstructing the flow
+  - robot waits indefinitely at the boundary without crossing
+  - robot forces multiple pedestrians to stop or swerve to avoid it
+- **Labeling Criteria:**
+  - a crowd of pedestrians is present with a shared direction of travel
+  - the robot's intended path crosses that shared direction at an angle (typically perpendicular)
+  - the robot's task requires traversing the flow rather than merging into it
 
 ---
 

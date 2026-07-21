@@ -5,7 +5,34 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in various
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Crowd Navigation
+- **Scenario Description:** A robot navigates through a crowd of people who are milling about with no single dominant trajectory. The robot must continuously replan around many loosely coordinated human movements while making steady progress through the space.
+- **Scientific Purpose:** crowd navigation
+- **Physical Environment:** generic
+- **Geometric Layout:** passable space
+- **Robot Role:** navigating_agent
+- **Robot Task:** navigate through the crowd to a destination on the far side
+- **Human Behavior:** mill about, moving independently without regard to the robot's specific path
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - TTG
+  - PathLength
+- **Quality Metrics:**
+  - P2
+  - P7
+- **Ideal Outcome:** robot crosses the crowd without collision or obstruction, making steady progress
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -114,6 +141,7 @@ expected_behaviors:
     - take excessively wide detours around minor crowd density
     - move erratically or reverse direction frequently
     - freeze indefinitely in response to a temporarily dense cluster
+    - proceed at a fixed pace or clearance regardless of local crowd density
 
 relevant_principles:
   - P1  # Safety — collision risk with multiple simultaneous humans
@@ -155,6 +183,29 @@ evaluation_notes: >
   Perpendicular Traffic, which specialize crowd motion to a single shared
   direction rather than unstructured milling.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - TTG
+  - PathLength
+- **Quality Metrics:**
+  - P2
+  - P7
+- **Ideal Outcome:** robot crosses the crowd without collision or obstruction, making steady progress
+- **Failure Modes:**
+  - robot collides with or startles an individual in the crowd
+  - robot freezes indefinitely in a dense area
+  - robot takes an excessively long or wide detour
+  - robot moves erratically, oscillating direction in response to shifting crowd positions
+- **Labeling Criteria:**
+  - multiple humans (more than a small group) are present and moving independently
+  - no single human's trajectory dominates the interaction
+  - the robot's task requires crossing through, rather than around, the occupied space
 
 ---
 

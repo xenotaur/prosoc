@@ -5,7 +5,32 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [126]
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Narrow Doorway
+- **Scenario Description:** A robot and a human pedestrian approach a narrow doorway from opposite directions. The doorway permits only single-file passage, so the two agents must sequence their passage through the threshold without collision or mutual blocking.
+- **Scientific Purpose:** pedestrian interaction
+- **Physical Environment:** indoor
+- **Geometric Layout:** room and door
+- **Robot Role:** navigating_agent
+- **Robot Task:** navigate from A to B through the doorway
+- **Human Behavior:** navigate from B to A through the doorway
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P3
+  - P4
+- **Ideal Outcome:** robot and human sequence through the doorway one at a time without collision or obstruction
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -154,6 +179,27 @@ evaluation_notes: >
   open door, or a human carrying an object that further narrows the usable
   width.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P3
+  - P4
+- **Ideal Outcome:** robot and human sequence through the doorway one at a time without collision or obstruction
+- **Failure Modes:**
+  - robot collides with human at the doorway threshold
+  - robot and human reach a stand-off, neither proceeding
+  - robot stops inside the doorway, blocking passage
+  - human is forced to squeeze past the robot at close quarters
+- **Labeling Criteria:**
+  - robot and human approach a single doorway from opposite sides
+  - the doorway geometry does not permit side-by-side passage
+  - agents are on a collision course toward the same threshold
 
 ---
 

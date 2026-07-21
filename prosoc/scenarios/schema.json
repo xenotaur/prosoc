@@ -163,6 +163,20 @@
       "type": "string",
       "description": "Concise description of the ideal outcome of the scenario."
     },
+    "related_scenarios": {
+      "type": "array",
+      "description": "IDs of other scenarios in this corpus that are conceptually related (e.g., variants, complements, or contrasts).",
+      "items": {
+        "type": "string"
+      }
+    },
+    "cited_in": {
+      "type": "array",
+      "description": "External works, papers, or reference indices that cite or reference this scenario (e.g., P&G paper citation numbers).",
+      "items": {
+        "type": "string"
+      }
+    },
     "evaluation_notes": {
       "type": "string",
       "description": "Additional guidance for evaluators interpreting behavior within this scenario."

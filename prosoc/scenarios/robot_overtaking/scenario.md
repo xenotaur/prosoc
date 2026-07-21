@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFT
+- **STATE:** DRAFTED
 - **SOURCE:** Prompt to ChatGPT 5.2
 - **DRAFTED:** ChatGPT 5.2, 2026-01-02
 - **EDITED:** render_sections.py, 2026-07-19
@@ -11,20 +11,22 @@
 
 - **Scenario Name:** Overtaking a Pedestrian from Behind
 - **Scenario Description:** A robot approaches a human pedestrian from behind in a shared pathway where both are moving in the same direction. The robot must decide whether to follow or overtake in a manner that is safe, legible, and socially comfortable.
+- **Scientific Purpose:** pedestrian interaction
 - **Physical Environment:** indoor
+- **Geometric Layout:** passable space
 - **Robot Role:** navigating_agent
-
-**Remaining gaps:**
-
-- **Scientific Purpose** — should-fill-in-now
-- **Geometric Layout** — should-fill-in-now
-- **Robot Task** — should-fill-in-now
-- **Human Behavior** — should-fill-in-now
-- **Success Metrics** — should-fill-in-now
-- **Quality Metrics** — should-fill-in-now
-- **Ideal Outcome** — should-fill-in-now
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Robot Task:** navigate from A to B
+- **Human Behavior:** navigate from A to B, slower than the robot
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P4
+- **Ideal Outcome:** robot passes the human safely, comfortably, and without disruption
+- **Related Scenarios:** pedestrian_overtaking
+- **Cited In:** 50, 157
 
 ---
 
@@ -71,6 +73,10 @@ summary: >
   to follow or overtake in a manner that is safe, legible, and socially
   comfortable.
 
+scientific_purpose: pedestrian interaction
+
+geometric_layout: passable space
+
 context:
   environment:
     type: indoor
@@ -100,6 +106,10 @@ initial_conditions:
   relative_speed: robot_faster
   visibility: clear_forward_view
 
+intended_robot_task: navigate from A to B
+
+intended_human_behavior: navigate from A to B, slower than the robot
+
 expected_behaviors:
   must:
     - avoid colliding with or startling the pedestrian
@@ -110,7 +120,8 @@ expected_behaviors:
     - adjust speed to minimize perceived pressure on the pedestrian
   should_not:
     - follow too closely from behind
-    - pass abruptly or at excessive speed
+    - pass abruptly / with sudden lateral motion
+    - accelerate excessively when passing
     - force the pedestrian to change path or pace
 
 relevant_principles:
@@ -119,7 +130,33 @@ relevant_principles:
   - P2  # Comfort
   - P3  # Legibility
   - P4  # Politeness
-  
+
+ideal_outcome: robot passes the human safely, comfortably, and without disruption
+
+related_scenarios:
+  - pedestrian_overtaking
+
+cited_in:
+  - "50"
+  - "157"
+
+scenario_usage_guide:
+  success_metrics:
+    - SR
+    - NoCollisions
+  quality_metrics:
+    - P2   # Comfort
+    - P3   # Legibility
+    - P4   # Politeness
+  failure_modes:
+    - robot tailgates the pedestrian for a prolonged period before passing
+    - robot makes sudden lateral movements while passing
+    - robot passes in a way that startles or discomforts the pedestrian
+  labeling_criteria:
+    - robot approaches a human pedestrian from behind in a shared pathway
+    - robot and human are moving in the same direction
+    - robot's speed exceeds the pedestrian's speed
+
 evaluation_notes: >
   This scenario evaluates how the robot handles an interaction in which it
   has greater situational control than the human. Acceptable behavior may
@@ -136,13 +173,22 @@ evaluation_notes: >
 
 ## Scenario Usage Guide
 
-**Remaining gaps:**
-
-- **Success Metrics** — should-fill-in-now
-- **Quality Metrics** — should-fill-in-now
-- **Ideal Outcome** — should-fill-in-now
-- **Failure Modes** — should-fill-in-now
-- **Labeling Criteria** — should-fill-in-now
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P4
+- **Ideal Outcome:** robot passes the human safely, comfortably, and without disruption
+- **Failure Modes:**
+  - robot tailgates the pedestrian for a prolonged period before passing
+  - robot makes sudden lateral movements while passing
+  - robot passes in a way that startles or discomforts the pedestrian
+- **Labeling Criteria:**
+  - robot approaches a human pedestrian from behind in a shared pathway
+  - robot and human are moving in the same direction
+  - robot's speed exceeds the pedestrian's speed
 
 ---
 

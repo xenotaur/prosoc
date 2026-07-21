@@ -5,6 +5,8 @@ summary: 'A robot and a human approach each other in a hallway that is partially
   obstruction, or report it, balancing task goals with prosocial responsibility.
 
   '
+scientific_purpose: interactive navigation
+geometric_layout: passable space, partially obstructed
 context:
   environment:
     type: indoor
@@ -37,6 +39,9 @@ initial_conditions:
   human_position: opposite_end
   obstruction_position: center_of_hallway
   visibility: clear
+intended_robot_task: navigate from one end of the hallway to the other, resolving
+  or mitigating the obstruction as appropriate
+intended_human_behavior: navigate from the opposite end toward the robot
 expected_behaviors:
   must:
   - maintain a safe physical distance from the human
@@ -54,19 +59,22 @@ expected_behaviors:
   - manipulate the obstruction in a way that creates new hazards
 relevant_principles:
 - P1
-- P2
 - P3
 - P5
-- P6
 - P7
 - P9
+ideal_outcome: robot and human pass safely; the robot resolves or mitigates the obstruction-induced
+  conflict (yielding, removing, or reporting it) rather than ignoring it
+related_scenarios:
+- frontal_approach
+- single_file_hallway
 scenario_usage_guide:
   success_metrics:
   - SR
   - NoCollisions
   - ConflictResolved
   quality_metrics:
-  - P2
+  - P3
   - P7
   - P9
   failure_modes:

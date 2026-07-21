@@ -4,6 +4,8 @@ summary: 'A robot and a human approach each other in opposite directions in a na
   hallway and pass each other safely, comfortably, and without prolonged hesitation.
 
   '
+scientific_purpose: pedestrian interaction
+geometric_layout: passable space
 context:
   environment:
     type: indoor
@@ -29,6 +31,8 @@ initial_conditions:
   robot_position: end_of_hallway
   human_position: opposite_end
   visibility: clear
+intended_robot_task: navigate from A to B
+intended_human_behavior: navigate from B to A
 expected_behaviors:
   must:
   - maintain a safe physical distance
@@ -47,6 +51,12 @@ relevant_principles:
 - P3
 - P5
 - P6
+ideal_outcome: robot and human pass each other safely, comfortably, and without prolonged
+  hesitation
+cited_in:
+- '50'
+- '126'
+- '167'
 scenario_usage_guide:
   success_metrics:
   - SR
@@ -57,16 +67,16 @@ scenario_usage_guide:
   - P5
   failure_modes:
   - robot collides with human
-  - robot fails to pass within time limit
+  - robot fails to make progress toward passing
   labeling_criteria:
   - robot and human face each other at the start of the episode
   - robot and human move toward each other
   - sufficient clearance exists for passing
 evaluation_notes: 'This scenario evaluates how well the robot navigates through shared
-  space with a human in the conditions for a mild and typiocal conflict. Changing
-  direction, slowing down, braking or hesitation may be acceptable if they increase
-  safety, comfort, or legibility, but  prolonged deadlock, abrupt reversals, or aggressive
-  advancement are indicative of poor performance.
+  space with a human in the conditions for a mild and typical conflict. Changing direction,
+  slowing down, braking or hesitation may be acceptable if they increase safety, comfort,
+  or legibility, but  prolonged deadlock, abrupt reversals, or aggressive advancement
+  are indicative of poor performance.
 
   The scenario assumes a pedestrian with a typical level of awareness, neither oblivious
-  to the presence of the robot nor overly attettentive too it.'
+  to the presence of the robot nor overly attentive to it.'

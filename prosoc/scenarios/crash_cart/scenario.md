@@ -5,7 +5,33 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in this article
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Crash Cart
+- **Scenario Description:** A robot in a leader role delivers an urgent medical product through an indoor environment (e.g., a hospital), moving with elevated pace and priority while signaling its urgent status to bystanders, and still avoiding collisions despite the time pressure.
+- **Scientific Purpose:** interactive navigation
+- **Physical Environment:** indoor
+- **Geometric Layout:** passable space
+- **Robot Role:** leader
+- **Robot Task:** deliver the medical product urgently
+- **Human Behavior:** bystanders yield to the passing robot; recipient receives the medical product upon arrival
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - TTG
+- **Quality Metrics:**
+  - P3
+  - P8
+- **Ideal Outcome:** delivery of medicine to the recipient promptly and without collision or unsafe maneuvers
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -100,7 +126,7 @@ agents:
 
 initial_conditions:
   robot_position: starting point of an urgent delivery route
-  human_positions: bystanders along the corridor, unaware of the specific urgency
+  human_positions: bystanders along the corridor, initially unaware of the specific urgency but expected to update upon perceiving the robot's signaling
   recipient_position: destination of the delivery route
   delivery_urgency: high
   destination: patient or recipient location
@@ -166,6 +192,28 @@ evaluation_notes: >
   task without urgency) and to Food Delivery (a related but lower-urgency
   delivery context, not separately defined in Table 3).
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - TTG
+- **Quality Metrics:**
+  - P3
+  - P8
+- **Ideal Outcome:** delivery of medicine to the recipient promptly and without collision or unsafe maneuvers
+- **Failure Modes:**
+  - robot collides with or startles a bystander while moving urgently
+  - robot moves quickly without signaling urgency, appearing reckless to bystanders
+  - robot fails to complete the delivery within an acceptable time
+  - robot continues urgent-priority behavior after the delivery is complete
+- **Labeling Criteria:**
+  - the robot's task is a time-critical object delivery in an indoor setting
+  - the robot's navigation priority is elevated relative to a routine delivery
+  - bystanders are present who must be aware of and accommodate the robot's urgency
 
 ---
 

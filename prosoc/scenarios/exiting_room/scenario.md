@@ -5,7 +5,32 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); Robots@Games (R@G)
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Exiting Room
+- **Scenario Description:** A robot exits a room through a doorway while a human is simultaneously entering the same room through the same doorway. The robot is expected to exit first, but must avoid colliding with or blocking the entering human.
+- **Scientific Purpose:** pedestrian interaction
+- **Physical Environment:** indoor
+- **Geometric Layout:** room and door
+- **Robot Role:** navigating_agent
+- **Robot Task:** navigate from inside to outside the room
+- **Human Behavior:** navigate from outside to inside the room
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P3
+  - P5
+- **Ideal Outcome:** robot exits the room first, then the human enters, without collision or obstruction
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -158,6 +183,27 @@ evaluation_notes: >
   which applies a similar norm in a higher-density, time-constrained
   elevator context.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P3
+  - P5
+- **Ideal Outcome:** robot exits the room first, then the human enters, without collision or obstruction
+- **Failure Modes:**
+  - robot collides with human at the doorway
+  - robot defers to the human by default and fails to exit first as intended
+  - robot pushes through after the human has already begun entering
+  - prolonged stand-off with neither agent moving through the doorway
+- **Labeling Criteria:**
+  - robot is positioned inside a room with the task of exiting
+  - a human is outside the room and moving toward the same doorway to enter
+  - the robot's and human's paths intersect at the doorway
 
 ---
 

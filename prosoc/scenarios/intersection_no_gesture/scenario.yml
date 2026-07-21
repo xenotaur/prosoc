@@ -5,6 +5,8 @@ summary: 'A robot and a human pedestrian approach and cross an indoor intersecti
   and legibly using motion cues and social norms alone.
 
   '
+scientific_purpose: pedestrian interaction
+geometric_layout: intersection
 context:
   environment:
     type: indoor
@@ -31,6 +33,8 @@ initial_conditions:
   approach_pattern: orthogonal
   arrival_timing: near_simultaneous
   visibility: mutual
+intended_robot_task: navigate from A to B
+intended_human_behavior: cross navigate
 expected_behaviors:
   must:
   - avoid collision with the human at the intersection
@@ -49,6 +53,15 @@ relevant_principles:
 - P2
 - P3
 - P4
+ideal_outcome: robot and human both cross the intersection without collision, absent
+  any explicit gesture
+related_scenarios:
+- intersection_gesture_proceed
+- intersection_gesture_wait
+cited_in:
+- '27'
+- '50'
+- '167'
 evaluation_notes: "This scenario evaluates the robot\u2019s ability to navigate an\
   \ intersection using implicit coordination cues only. Successful behavior allows\
   \ both agents to pass smoothly without collision or hesitation.\nCommon failure\

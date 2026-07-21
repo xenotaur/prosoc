@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFT
+- **STATE:** DRAFTED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation (P&G paper)
 - **DRAFTED:** ChatGPT 5.2, 2026-01-16
 - **EDITED:** render_sections.py, 2026-07-19
@@ -11,25 +11,25 @@
 
 - **Scenario Name:** Movable Obstruction
 - **Scenario Description:** A robot and a human approach each other in a hallway that is partially blocked by a movable obstruction. The robot must decide whether to yield, wait, remove the obstruction, or report it, balancing task goals with prosocial responsibility.
+- **Scientific Purpose:** interactive navigation
 - **Physical Environment:** indoor
+- **Geometric Layout:** passable space, partially obstructed
 - **Robot Role:** navigating_agent
+- **Robot Task:** navigate from one end of the hallway to the other, resolving or mitigating the obstruction as appropriate
+- **Human Behavior:** navigate from the opposite end toward the robot
 - **Success Metrics:**
   - SR
   - NoCollisions
   - ConflictResolved
 - **Quality Metrics:**
-  - P2
+  - P3
   - P7
   - P9
+- **Ideal Outcome:** robot and human pass safely; the robot resolves or mitigates the obstruction-induced conflict (yielding, removing, or reporting it) rather than ignoring it
+- **Related Scenarios:** frontal_approach, single_file_hallway
 
 **Remaining gaps:**
 
-- **Scientific Purpose** — should-fill-in-now
-- **Geometric Layout** — should-fill-in-now
-- **Robot Task** — should-fill-in-now
-- **Human Behavior** — should-fill-in-now
-- **Ideal Outcome** — should-fill-in-now
-- **Related Scenarios** — should-fill-in-now
 - **Cited In** — should-fill-in-now
 
 ---
@@ -52,6 +52,10 @@ summary: >
   A robot and a human approach each other in a hallway that is partially blocked by a movable obstruction.
   The robot must decide whether to yield, wait, remove the obstruction, or report it, balancing task goals
   with prosocial responsibility.
+
+scientific_purpose: interactive navigation
+
+geometric_layout: passable space, partially obstructed
 
 context:
   environment:
@@ -88,6 +92,10 @@ initial_conditions:
   obstruction_position: center_of_hallway
   visibility: clear
 
+intended_robot_task: navigate from one end of the hallway to the other, resolving or mitigating the obstruction as appropriate
+
+intended_human_behavior: navigate from the opposite end toward the robot
+
 expected_behaviors:
   must:
     - maintain a safe physical distance from the human
@@ -106,12 +114,16 @@ expected_behaviors:
 
 relevant_principles:
   - P1  # Safety
-  - P2  # Comfort
   - P3  # Legibility
   - P5  # Social Competency
-  - P6  # Agent Understanding
   - P7  # Proactivity
   - P9  # Prosocial Behavior
+
+ideal_outcome: robot and human pass safely; the robot resolves or mitigates the obstruction-induced conflict (yielding, removing, or reporting it) rather than ignoring it
+
+related_scenarios:
+  - frontal_approach
+  - single_file_hallway
 
 scenario_usage_guide:
   success_metrics:
@@ -119,7 +131,7 @@ scenario_usage_guide:
     - NoCollisions
     - ConflictResolved
   quality_metrics:
-    - P2   # Comfort
+    - P3   # Legibility
     - P7   # Proactivity
     - P9   # Prosocial Behavior
   failure_modes:
@@ -167,7 +179,7 @@ This scenario is intentionally underdetermined: multiple behaviors may be accept
   - NoCollisions
   - ConflictResolved
 - **Quality Metrics:**
-  - P2
+  - P3
   - P7
   - P9
 - **Failure Modes:**
@@ -178,7 +190,4 @@ This scenario is intentionally underdetermined: multiple behaviors may be accept
   - obstruction is movable and blocks comfortable passing
   - robot and human approach from opposite directions
   - robot is physically capable of intervention
-
-**Remaining gaps:**
-
-- **Ideal Outcome** — should-fill-in-now
+- **Ideal Outcome:** robot and human pass safely; the robot resolves or mitigates the obstruction-induced conflict (yielding, removing, or reporting it) rather than ignoring it

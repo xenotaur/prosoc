@@ -131,6 +131,12 @@ relevant_principles:
 
 ideal_outcome: <concise outcome statement>
 
+related_scenarios:
+  - <scenario-id>           # other scenarios in this corpus that are conceptually related
+
+cited_in:
+  - <reference>             # external works or citation indices referencing this scenario
+
 scenario_usage_guide:
   success_metrics:
     - <metric-id>            # e.g., SR, NoCollisions

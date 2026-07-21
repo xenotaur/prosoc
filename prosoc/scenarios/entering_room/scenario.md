@@ -5,7 +5,32 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); Robots@Games (R@G)
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Entering Room
+- **Scenario Description:** A robot approaches a room from outside with the task of entering, while a human occupant inside the room is simultaneously heading toward the same doorway to exit. The robot must defer to the exiting human before entering.
+- **Scientific Purpose:** pedestrian interaction
+- **Physical Environment:** indoor
+- **Geometric Layout:** room and door
+- **Robot Role:** navigating_agent
+- **Robot Task:** navigate from outside to inside the room
+- **Human Behavior:** navigate from inside to outside the room
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P4
+  - P5
+- **Ideal Outcome:** robot lets the human exit fully, then enters the room without obstruction
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -152,6 +177,26 @@ evaluation_notes: >
   The inverse of this scenario is Exiting Room, where the robot is the
   one leaving while a human enters.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P4
+  - P5
+- **Ideal Outcome:** robot lets the human exit fully, then enters the room without obstruction
+- **Failure Modes:**
+  - robot attempts to enter while human is still exiting, causing collision or blocking
+  - robot crowds the doorway, forcing the human to squeeze past
+  - robot waits far longer than necessary after the human has cleared the doorway
+- **Labeling Criteria:**
+  - robot is positioned outside a room with the task of entering
+  - a human occupant is inside the room and moving toward the same doorway to exit
+  - the robot's and human's paths intersect at the doorway
 
 ---
 
