@@ -1,76 +1,57 @@
 ---
 scenario: pedestrian_overtaking
-verdict: not_ready
-blocking: 1
-should_fix: 1
+verdict: ready
+blocking: 0
+should_fix: 0
 suggestion: 2
-audited: 2026-07-05
+audited: 2026-07-20
 ---
 
-# Audit: Pedestrian Overtaking
+# Audit: Pedestrian Overtaking a Robot from Behind
 
 - **Scenario:** `prosoc/scenarios/pedestrian_overtaking/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Not ready — 1 blocking issue (corrected 2026-07-05 — see Correction Notice)
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-20
+- **Verdict:** Ready — no blocking or should-fix issues found; two minor suggestions for human consideration.
 
-## Correction Notice (2026-07-05)
+## Findings
 
-This audit originally flagged `P0` and `P9` in `relevant_principles` as invalid,
-non-canonical principle IDs (Finding 1 below). That was incorrect:
-`prosoc/charter/charter.md` (the sole source of truth) defines **ten** principles,
-P0–P9 — P0 (Goal Achievement) and P9 (Prosocial Behavior) are this project's own
-explicit, intentional extensions beyond the P&G paper's eight, not invented IDs.
-`charter.yml` (the generated artifact) confirms this (distiller dry-run reports no
-diff). The error originated in a stale `.claude/skills/_shared/principles.md`,
-which claimed only P1–P8 were valid and has since been corrected. Finding 1 is
-retracted and replaced with Finding 5 (principle count).
+### 1. Physical Environment more specific than source table — suggestion
+- **Section/field:** Scenario Card Summary `Physical Environment` / YAML `context.environment.type` vs. P&G Table 3
+- **Issue:** `../_shared/pg_scenarios.md`'s Pedestrian Overtaking row lists Physical Env as "Generic," while this scenario commits to `indoor` (corridor or sidewalk-like passage). This isn't a contradiction — "Generic" in the source table means unspecified, and `indoor` is a reasonable concretization — but it is an editorial choice beyond the source, not something drawn directly from Table 3.
+- **Recommended fix:** No action required. Optionally note in `evaluation_notes` that the indoor setting is an authorial concretization of the source's generic physical environment, if precise source fidelity matters for downstream use.
 
-### 1. ~~Invalid principle identifiers `P0` and `P9`~~ — RETRACTED
-- **Status:** Retracted 2026-07-05. See Correction Notice above — P0 and P9 are
-  valid canonical principles per `prosoc/charter/charter.md`, not invented IDs.
-
-### 2. Missing Scenario Card Summary and Scenario Usage Guide sections — blocking
-- **Section/field:** `scenario.md` structure; YAML fields `scientific_purpose`, `geometric_layout`, `ideal_outcome`, `intended_robot_task`, `intended_human_behavior`, and the entire `scenario_usage_guide` block (`success_metrics`, `quality_metrics`, `failure_modes`, `labeling_criteria`)
-- **Issue:** `template.md` marks the "Scenario Card Summary" section and the "Scenario Usage Guide" section (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria) as **Required for AUDITED scenarios**. Neither section exists anywhere in `scenario.md` — the document jumps from `## STATUS` directly to `## Overview`, and after the YAML block goes straight to `## Notes for Scenario Designers and Evaluators`. Correspondingly, the YAML has no `scientific_purpose`, `geometric_layout`, `ideal_outcome`, `intended_robot_task`, `intended_human_behavior`, or `scenario_usage_guide` keys at all (confirmed: `scenario.yml` top-level keys are only `id, name, summary, context, agents, initial_conditions, expected_behaviors, relevant_principles, evaluation_notes`). This scenario cannot reach AUDITED status until these are added.
-- **Recommended fix:** Add a "Scenario Card Summary" section drawn from the P&G Table 3 entry for Pedestrian Overtaking (see Source Fidelity below), and a "Scenario Usage Guide" section with Success Metrics (e.g., `SR`, `NoCollisions`, `PSC`), Quality Metrics (a P0–P9 subset), Failure Modes, and Labeling Criteria. Add the corresponding `scientific_purpose: pedestrian interaction`, `geometric_layout: passable space` (or corridor/sidewalk), `ideal_outcome`, `intended_robot_task`, and `intended_human_behavior` fields to the YAML — this scenario predates the more complete field set used in newer cards (e.g. `perpendicular_traffic`) and should be brought up to that standard.
-
-### 3. STATUS block uses outdated template format — should-fix
-- **Section/field:** `## STATUS: DRAFT 2026-01-02` header
-- **Issue:** `template.md` and `workflow.md` specify the Status section should use a `**STATE:** DRAFTED` field within a `## Status` heading (see `perpendicular_traffic/scenario.md` for the current convention). This scenario instead folds the state and date into the heading text (`## STATUS: DRAFT 2026-01-02`) with no explicit `STATE:` line, and the state value `DRAFT` doesn't match the enumerated lifecycle states in `workflow.md` (`DRAFTED`, `EDITED`, `AUDITED`, `VALIDATED`, `DEPRECATED`/`RETIRED`) — closest is `DRAFTED`, but the file's `EDITED:` line is already filled in, so the actual current stage is ambiguous from the STATE value alone.
-- **Recommended fix:** Not a change this audit should make (STATUS block is off-limits per this skill's rules), but flagging for the human editor to normalize to the current Status template when next editing this file: `- **STATE:** EDITED` (since an EDITED line with a named editor and date is already present), plus the existing SOURCE/DRAFTED/EDITED lines.
-
-### 4. Title heading missing a space — suggestion
-- **Section/field:** `scenario.md` line 1, `# Scenario:Pedestrian Overtaking`
-- **Issue:** Missing space after the colon (compare `perpendicular_traffic`'s `# Scenario: Perpendicular Traffic`). Cosmetic only.
-- **Recommended fix:** Change to `# Scenario: Pedestrian Overtaking`.
-
-### 5. `relevant_principles` lists 6 principles (P0, P1–P4, P9), one above the 3–5 guidance — suggestion
-- **Section/field:** `relevant_principles` (P0, P1, P2, P3, P4, P9 — corrected 2026-07-05, see Correction Notice)
-- **Issue:** With P0 and P9 correctly counted as valid, this scenario's `relevant_principles` has 6 entries — one over the 3–5 "most directly relevant" guidance in `_shared/principles.md`. This is advisory guidance, not a hard rule, so it is flagged at suggestion level.
-- **Recommended fix:** Human editor should consider whether all six are load-bearing for this scenario, or whether one could be trimmed (or its relevance explained in `evaluation_notes`) to stay within guidance.
+### 2. P0 (Goal Achievement) dropped despite prose hinting at goal/social tension — suggestion
+- **Section/field:** `relevant_principles` vs. Scenario Overview prose
+- **Issue:** The Scenario Overview states the robot must maintain prosocial norms "while continuing to make progress toward its goal," which echoes the P0 selection criterion in `../_shared/principles.md` ("include when task completion/efficiency is in explicit tension with the social principles"). `relevant_principles` currently lists P1–P4 only (4 principles, within the recommended 3–5 range), with P0 and P9 trimmed this session (previously 6: P0, P1–P4, P9).
+- **Recommended fix:** No action required — 4 principles is well within guidance, and the trim to P1–P4 (Safety, Comfort, Legibility, Politeness) is defensible since the goal/progress tension here is mild (the robot need only hold speed and heading, not actively trade off goal progress against yielding). Flagging only so a human reviewer can confirm the trim was a deliberate scoping decision rather than an oversight.
 
 ## Source Fidelity
 
-SOURCE is listed as "Prompt to ChatGPT 5.2" (informal, no retrievable content of the prompt itself). However, the prose explicitly states "This scenario corresponds to pedestrian-overtaking cases discussed in the *Principles and Guidelines for Social Robot Navigation* paper," which points to a checkable source: `../../../.claude/skills/_shared/pg_scenarios.md`'s "Pedestrian Overtaking" entry (P&G Table 3, cited in [26]).
+The prose explicitly states this scenario "corresponds to pedestrian-overtaking cases discussed in the *Principles and Guidelines for Social Robot Navigation* paper," and `cited_in: ["26"]` points to the same source, so fidelity is checked against `../_shared/pg_scenarios.md`'s "Pedestrian Overtaking" entry (P&G Table 3) even though the Status block's `SOURCE:` line itself still reads "Prompt to ChatGPT 5.2" (informal, not directly checkable, but superseded here by the prose's explicit paper reference):
 
-Comparison against that entry:
-- **Description** ("Pedestrian overtakes moving robot"): matches — scenario has the human pedestrian overtaking a slower-moving robot.
-- **Physical Env / Geometric Layout** (Generic / Passable space): the scenario's `context.environment.setting` ("corridor or sidewalk-like passage") is a reasonable specialization of "Generic / Passable space," not a contradiction.
-- **Scientific Purpose** (Pedestrian interaction): consistent with the prose, though the field is absent from the YAML (see Finding 2).
-- **Robot Task** (Navigate A to B) / **Human Behavior** (Navigate A to B, faster): consistent with `initial_conditions.relative_speed: pedestrian_faster` and the prose, though `intended_robot_task`/`intended_human_behavior` fields are absent from the YAML (see Finding 2).
-- **Ideal Outcome** (Human passes robot): consistent with the prose's description of successful passing, though no `ideal_outcome` field exists in the YAML (see Finding 2).
-- **Related Scenarios** (Down Path): not mentioned in this card; reasonably blank at this stage (see Completeness).
+| Field | P&G Table 3 | This scenario | Match? |
+|---|---|---|---|
+| Description | Pedestrian overtakes moving robot | Human pedestrian approaches and overtakes a slower-moving robot from behind | Yes |
+| Scientific Purpose | Pedestrian interaction | pedestrian interaction | Yes |
+| Geometric Layout | Passable space | passable space | Yes |
+| Robot Task | Navigate A to B | navigate from A to B | Yes |
+| Human Behavior | Navigate A to B (faster) | navigate from A to B, faster than the robot | Yes |
+| Ideal Outcome | Human passes robot | human passes the robot safely, comfortably, and without disruption | Yes (elaborated, not contradicted) |
+| Physical Env | Generic | indoor | Concretized, not contradicted (see Finding 1) |
+| Related Scenarios | Down Path | robot_overtaking | Not a mismatch — "Down Path" is the P&G paper's own informal related-scenario label and has no corresponding entry anywhere in this project's implemented corpus (checked: no scenario named/aliased "down_path" exists, and no other row in `pg_scenarios.md` maps to it either). Pointing instead to the implemented `robot_overtaking` scenario is a reasonable, more useful editorial substitution. |
+| Cited In | [26] | 26 | Yes |
 
-No contradictions found. The card is faithful to the Table 3 entry in substance, but the SOURCE field itself should probably be updated to cite the P&G paper directly given the prose's explicit reference to it, rather than only "Prompt to ChatGPT 5.2." That's a should-fix-adjacent observation but is bundled into Finding 2's broader recommendation rather than listed separately, since it's about the SOURCE line rather than content correctness.
+No fidelity mismatches requiring a fix. All previously-missing fields this table depends on (`scientific_purpose`, `geometric_layout`, `intended_robot_task`, `intended_human_behavior`, `ideal_outcome`) are now present in the YAML, resolving what was the prior audit's blocking finding.
 
 ## Completeness
 
-Per `template.md`'s "Required for AUDITED scenarios" fields:
+All fields marked "Required for AUDITED scenarios" in `template.md` are now filled:
 
-- **Scenario Card Summary block** — entirely absent (see Finding 2). Should-fill-in-now: all sub-fields (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Ideal Outcome) are readily inferable from the existing Overview/Social Navigation Context/Normative Expectations prose and the P&G Table 3 entry above.
-- **Success Metrics** — absent. Should-fill-in-now: plausible candidates (`SR`, `NoCollisions`, `PSC`) are implied by the Normative Expectations prose (safe passing, no forced hesitation/reroute).
-- **Quality Metrics** — absent. Should-fill-in-now: a subset of `relevant_principles` (e.g., P2 Comfort, P3 Legibility), ideally narrowed per Finding 5.
-- **Ideal Outcome** — absent as a discrete field, though implied by prose ("safe and comfortable passing without impeding the pedestrian"). Should-fill-in-now.
-- **Failure Modes** — not present as a `scenario_usage_guide.failure_modes` list, though `evaluation_notes` already states failure modes in prose ("blocking behavior, sudden motion changes, or trajectories that require the pedestrian to hesitate or reroute"). Should-fill-in-now: this content already exists and just needs to move into the structured field.
-- **Labeling Criteria** — absent. Should-fill-in-now: criteria are implicit in `initial_conditions` (robot ahead, pedestrian faster, clear visibility) and could be directly adapted into a labeling-criteria list.
-- **Related Scenarios / Cited In** — absent. Reasonably blank: while `../../../.claude/skills/_shared/pg_scenarios.md` lists "Down Path" as a related scenario and `[26]` as a citation, whether to carry these into the card is a minor editorial choice, not a required inference from existing prose in this card.
+- **Scenario Card Summary:** Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics, Ideal Outcome, Related Scenarios, and Cited In are all present.
+- **Scenario Usage Guide:** Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, and Labeling Criteria are all present and substantive (this entire section was authored from scratch this session — previously entirely absent — and is now complete).
+
+No blank required fields remain.
+
+## Schema / Tooling Check
+
+`scripts/distill/scenarios --scenario pedestrian_overtaking --dry-run --show-diffs` produced no diff and exited 0 — `scenario.yml` is in sync with the embedded YAML in `scenario.md` and validates against `schema.json`. `expected_behaviors` uses only `must`/`should`/`should_not`. `relevant_principles` (P1, P2, P3, P4) and `scenario_usage_guide.quality_metrics` (P2, P3, P4) contain only valid P0–P9 identifiers, count 4 (within the 3–5 guidance, down from 6 previously). No over-specified (exact-motion or numeric-threshold) entries found in `expected_behaviors`. The `STATE` field reads `DRAFTED` (previously the invalid value `DRAFT`), a valid enumerated lifecycle state per `workflow.md`; this audit did not modify it.

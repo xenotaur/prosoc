@@ -2,37 +2,32 @@
 scenario: exiting_room
 verdict: ready_with_fixes
 blocking: 0
-should_fix: 2
+should_fix: 1
 suggestion: 1
-audited: 2026-07-05
+audited: 2026-07-20
 ---
 
 # Audit: Exiting Room
 
 - **Scenario:** `prosoc/scenarios/exiting_room/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-20
 - **Verdict:** Ready for AUDITED with minor fixes
 
 ## Findings
 
-### 1. Missing "Scenario Card Summary" section — should-fix
-- **Section/field:** `scenario.md` structure vs. `template.md`'s "Required for AUDITED scenarios" Scenario Card Summary block
-- **Issue:** `scenario.md` goes directly from the `## Status` block to `## Scenario Overview`. There is no standalone "Scenario Card Summary" section presenting Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success/Quality Metrics, Ideal Outcome, Related Scenarios, and Cited In as a scannable table, as `template.md` specifies for AUDITED scenarios. The equivalent information exists scattered inside the embedded YAML (`scientific_purpose`, `geometric_layout`, `intended_robot_task`, etc.) but not as the dedicated prose summary section.
-- **Recommended fix:** A human editor should add a "Scenario Card Summary" section populated from the existing YAML fields (this is a mechanical transcription, not new content) before promoting to AUDITED. Note this same gap appears in other scenario cards in the corpus (e.g. `entering_room`, `blind_corner`), so it may reflect a project-wide template drift rather than an issue unique to this card — worth flagging to the project maintainer if a corpus-wide fix is warranted (out of scope for this single-scenario audit).
+### 1. `related_scenarios` and `cited_in` fields absent from YAML — should-fix
+- **Section/field:** Scenario Card Summary ("Related Scenarios," "Cited In" — currently listed under "Remaining gaps") and the machine-readable `related_scenarios` / `cited_in` YAML keys (present in `schema.json` and `template.md` but omitted from `scenario.yml`)
+- **Issue:** The rendered Card Summary itself flags both as gaps ("should-fill-in-now"), and the prose already supplies the content needed to fill them: the "Notes for Scenario Designers and Evaluators" section names Entering Room, Exiting Elevator, and Narrow Doorway as related scenarios, and `../_shared/pg_scenarios.md`'s Exiting Room entry lists "Cited In: R@G." Neither is captured in the machine-readable spec, so tooling that reads `related_scenarios`/`cited_in` (e.g. cross-scenario consistency checks) can't see this information even though a human reading the prose would know it.
+- **Recommended fix:** Add `related_scenarios: [entering_room_01, narrow_doorway_01]` (or whichever precise IDs the corpus uses) and `cited_in: ["R@G"]` to the YAML block, then re-render the Card Summary's Related Scenarios / Cited In lines to match.
 
-### 2. Missing standalone "Scenario Usage Guide" prose section — should-fix
-- **Section/field:** `scenario.md` structure vs. `template.md`'s "Required for AUDITED scenarios" Scenario Usage Guide (Success Metrics / Quality Metrics / Ideal Outcome / Failure Modes / Labeling Criteria)
-- **Issue:** These fields exist and are populated inside the embedded YAML's `scenario_usage_guide` block (`success_metrics`, `quality_metrics`, `failure_modes`, `labeling_criteria`) and `ideal_outcome`, but `scenario.md` has no dedicated human-readable "Scenario Usage Guide" section with those subheadings, as distinct prose, per the template.
-- **Recommended fix:** A human editor should add the prose "Scenario Usage Guide" section (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria subheadings) transcribing the already-authored YAML content into readable form.
-
-### 3. Robot Role left implicit — suggestion
-- **Section/field:** Scenario Card Summary (would-be) "Robot Role" field vs. YAML `agents.robot.role: navigating_agent`
-- **Issue:** `navigating_agent` is a generic role label; it doesn't convey the "exits first" priority-holder framing that the prose spends two sections establishing. This isn't a contradiction (P&G Table 3 also leaves Robot Role blank for this entry), but a more specific role label could make the card's intent clearer at a glance.
-- **Recommended fix:** Optional — a human editor could consider whether a more descriptive role tag (still schema-valid as a free-form string) would aid legibility of the card itself, though this is not required by schema or template.
+### 2. `relevant_principles` omits P7 despite an explicit deadlock/hesitation theme — suggestion
+- **Section/field:** `relevant_principles` (currently P1, P3, P5, P6) vs. `expected_behaviors.should_not` ("hesitate indefinitely at the threshold") and `scenario_usage_guide.failure_modes` ("prolonged stand-off with neither agent moving through the doorway")
+- **Issue:** Per `../_shared/principles.md`, P7 (Proactivity) is specifically for scenarios where "deadlock or hesitation is the core challenge." This scenario names indefinite hesitation and stand-off as an explicit failure mode and unacceptable behavior, which is a reasonable match for P7, but P7 isn't listed.
+- **Recommended fix:** Consider adding P7 to `relevant_principles` (and possibly `scenario_usage_guide.quality_metrics`) if a human editor agrees the deadlock-avoidance angle is principal enough to call out explicitly; not required since P3/P5/P6 already partially cover the same ground via legibility and priority-timing.
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3. Compared against `../../../.claude/skills/_shared/pg_scenarios.md`'s "Exiting Room" entry:
+SOURCE cites P&G Paper Table 3 plus Robots@Games (R@G). Compared against `../_shared/pg_scenarios.md`'s "Exiting Room" entry (Doorway Scenarios section):
 
 | Field | Table 3 | This card | Match? |
 |---|---|---|---|
@@ -41,15 +36,19 @@ SOURCE cites P&G Paper Table 3. Compared against `../../../.claude/skills/_share
 | Geometric Layout | Room and door | `geometric_layout: room and door` | Match |
 | Scientific Purpose | Pedestrian interaction | `scientific_purpose: pedestrian interaction` | Match |
 | Robot Task | Navigate in to out | `intended_robot_task: navigate from inside to outside the room` | Match |
-| Human Behavior | **Navigate in to out** (as literally transcribed in Table 3) | `intended_human_behavior: navigate from outside to inside the room` | **Discrepancy, already flagged by the card itself** |
+| Human Behavior | Navigate in to out (as literally transcribed in Table 3) | `intended_human_behavior: navigate from outside to inside the room` | Discrepancy — already flagged and resolved by the card's own `evaluation_notes` |
 | Ideal Outcome | Robot exits first | `ideal_outcome: robot exits the room first, then the human enters...` | Match |
+| Related Scenarios | Exiting Elevator (R@G) | Not in YAML (see Finding 1); mentioned only in prose | Present in prose, not machine-readable |
+| Cited In | R@G | Not in YAML (see Finding 1) | Present in Status block's SOURCE line, not `cited_in` |
 
-The one discrepancy is the Human Behavior field: Table 3 as transcribed in the reference data literally reads "Navigate in to out" for Human Behavior, identical to the Robot Task field, which is inconsistent with the Description ("human enters") and the Ideal Outcome ("robot exits first"). This card's own `evaluation_notes` already identifies this exact inconsistency, attributes it to a probable transcription error in the source, and states the card follows the Description/Ideal Outcome reading (human enters, i.e., "outside to inside") rather than the literal Human Behavior field text. This is a reasonable, transparently-documented interpretive call — not a fabricated fidelity claim — and matches the reference data available in this repo. A human editor with access to the original P&G paper PDF could still verify which reading is correct, as the card itself recommends.
+The Human Behavior field discrepancy is unchanged from before this session's edits: Table 3 as transcribed in the reference data literally reads "Navigate in to out" for Human Behavior, identical to the Robot Task field, which is inconsistent with the Description ("human enters") and the Ideal Outcome ("robot exits first"). The card's `evaluation_notes` continues to identify this exact inconsistency, attribute it to a probable transcription error in the source, and state that the card follows the Description/Ideal Outcome reading (human enters, i.e., "outside to inside") rather than the literal Human Behavior field text — asking a human editor to verify against the original paper PDF if available. This remains a reasonable, transparently-documented interpretive call, not a fabricated fidelity claim.
 
 All other fields match cleanly.
 
 ## Completeness
 
-- **Scenario Card Summary** (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success/Quality Metrics, Ideal Outcome, Related Scenarios, Cited In): **should probably be filled in now** — all underlying data already exists in the YAML block; this is a transcription task, not new authoring. See Finding 1.
-- **Scenario Usage Guide** (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria as prose subsections): **should probably be filled in now** — same reasoning; content already exists in `scenario_usage_guide.*` YAML fields. See Finding 2.
-- **Related Scenarios / Cited In** (if presented as part of Scenario Card Summary): **reasonably blank as a standalone field for now**, since the equivalent content (Entering Room, Exiting Elevator) is already covered in the "Notes for Scenario Designers and Evaluators" section and in `evaluation_notes`; filling in the Scenario Card Summary (Finding 1) would naturally surface this too.
+Scenario Card Summary: Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics, and Ideal Outcome are all now present and rendered (this is new since the prior audit — the section did not previously exist as standalone prose). Related Scenarios and Cited In remain blank, and the rendered summary itself now explicitly labels them "should-fill-in-now" — see Finding 1.
+
+Scenario Usage Guide: Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, and Labeling Criteria are all present as a standalone rendered section (also new since the prior audit) and are non-trivial.
+
+No other required fields are blank. The dry-run distiller check (`scripts/distill/scenarios --scenario exiting_room --dry-run --show-diffs`) reported no diff and no schema validation errors, confirming `scenario.md` and `scenario.yml` are in sync.

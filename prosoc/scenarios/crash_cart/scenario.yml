@@ -38,7 +38,8 @@ agents:
       awareness: aware_of_incoming_delivery
 initial_conditions:
   robot_position: starting point of an urgent delivery route
-  human_positions: bystanders along the corridor, unaware of the specific urgency
+  human_positions: bystanders along the corridor, initially unaware of the specific
+    urgency but expected to update upon perceiving the robot's signaling
   recipient_position: destination of the delivery route
   delivery_urgency: high
   destination: patient or recipient location

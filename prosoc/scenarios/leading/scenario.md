@@ -123,7 +123,6 @@ agents:
 initial_conditions:
   robot_position: ahead of the human, at the start of the route
   human_position: behind the robot, ready to follow
-  robot_task: guide the human to a destination
 
 intended_robot_task: lead the human to a destination
 

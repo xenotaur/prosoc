@@ -1,38 +1,28 @@
 ---
 scenario: blind_corner
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 2
+should_fix: 0
 suggestion: 1
-audited: 2026-07-05
+audited: 2026-07-20
 ---
 
 # Audit: Blind Corner
 
 - **Scenario:** `prosoc/scenarios/blind_corner/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Ready for AUDITED with minor fixes
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-20
+- **Verdict:** Ready, no blocking or should-fix issues found
 
 ## Findings
 
-### 1. Missing "Scenario Card Summary" section — should-fix
-- **Section/field:** `scenario.md` structure vs. `template.md`'s "Required for AUDITED scenarios" Scenario Card Summary block
-- **Issue:** `scenario.md` has no `## Scenario Card Summary` section (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success/Quality Metrics, Ideal Outcome, Related Scenarios, Cited In). The equivalent content exists only inside the embedded YAML block, not as a human-readable summary table as the template structures it for AUDITED scenarios.
-- **Recommended fix:** Add a `## Scenario Card Summary` section populated from the YAML/prose fields already present (values are all available — this is a presentation gap, not a missing-information gap).
-
-### 2. Missing standalone "Scenario Usage Guide" prose section — should-fix
-- **Section/field:** `scenario.md` structure vs. `template.md`'s "Required for AUDITED scenarios" Scenario Usage Guide section (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria as prose subsections)
-- **Issue:** This content currently exists only inside `scenario_usage_guide` in the YAML block, not as the dedicated prose section template.md requires for AUDITED readiness.
-- **Recommended fix:** Add a `## Scenario Usage Guide` section with `### Success Metrics`, `### Quality Metrics`, `### Ideal Outcome`, `### Failure Modes`, `### Labeling Criteria` subsections, restating the YAML content in prose form.
-
-### 3. No "Related Scenarios" / "Cited In" callout outside Notes — suggestion
-- **Section/field:** Scenario Card Summary (once added) — Related Scenarios / Cited In fields
-- **Issue:** Table 3 lists no "Related Scenarios" for Blind Corner but does list `Cited In: [126, 171]`, which is captured in the Status block's SOURCE line but not surfaced as a distinct summary field. Minor, since the Status block already carries this.
-- **Recommended fix:** When adding the Scenario Card Summary section (Finding 1), carry `Cited In: [126, 171]` and `Related Scenarios: (none listed)` into it explicitly.
+### 1. Related Scenarios / Cited In not carried into Card Summary — suggestion
+- **Section/field:** Scenario Card Summary — Related Scenarios / Cited In fields
+- **Issue:** The rendered `## Scenario Card Summary` section (scenario.md lines 12-34) self-flags this under "Remaining gaps" as "should-fill-in-now" for both Related Scenarios and Cited In. Table 3 lists no related scenario for Blind Corner, and the citation `[126, 171]` is already present in the Status block's SOURCE line, so the information is not lost — it's just not duplicated into the summary table the template structures for this purpose.
+- **Recommended fix:** Add `**Related Scenarios:** (none listed)` and `**Cited In:** [126, 171]` lines to the Scenario Card Summary block to match the template's field list and resolve the doc's own self-flagged gap.
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3, "Blind Corner" entry, cited in [126, 171]. Compared against `../../../.claude/skills/_shared/pg_scenarios.md`:
+SOURCE cites P&G Paper Table 3, "Blind Corner" entry, cited in [126, 171]. Compared against `../../.claude/skills/_shared/pg_scenarios.md`:
 
 | Field | Table 3 | scenario.yml / scenario.md | Match? |
 |---|---|---|---|
@@ -50,6 +40,19 @@ No mismatches found. Source fidelity: confirmed against P&G Table 3.
 
 ## Completeness
 
-- **Scenario Card Summary fields** — should-fill-in-now. No dedicated section exists in `scenario.md`, but every underlying value (name, description, scientific purpose, physical environment, geometric layout, robot role, robot task, human behavior, ideal outcome, cited-in) is already present in prose or YAML. See Finding 1.
-- **Scenario Usage Guide (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria)** — should-fill-in-now as a prose section. All content already exists in the YAML's `scenario_usage_guide` block (SR, NoCollisions; P2, P3; failure modes list; labeling criteria list). See Finding 2.
-- **Related Scenarios / Cited In** — reasonably blank as a distinct summary field for now, since Table 3 lists no related scenario and the citation is already tracked in the Status block; would be folded in when Finding 1 is addressed.
+Re-checked against `template.md`'s "Required for AUDITED scenarios" fields, following the substantial rendering pass this session (Scenario Card Summary and Scenario Usage Guide are now both present as dedicated prose sections, resolving the two should-fix findings from the 2026-07-05 audit):
+
+- **Scenario Card Summary** (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics, Ideal Outcome) — present and populated (scenario.md lines 12-29).
+- **Related Scenarios / Cited In** (Card Summary fields) — reasonably blank as distinct summary fields; both are genuinely known (Table 3 lists no related scenario, citation is [126, 171]) but tracked in the Status block and the doc's own "Remaining gaps" note rather than duplicated in the summary table. See Finding 1.
+- **Scenario Usage Guide: Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria** — all present as a dedicated `## Scenario Usage Guide` prose section (scenario.md lines 195-213), consistent with the embedded YAML's `scenario_usage_guide` block.
+
+## Prose/YAML Consistency (Step 2)
+
+No contradictions or drift found. Scenario Overview, Social Navigation Context, and Normative Expectations align with `intended_robot_task`, `intended_human_behavior`, `agents`, `expected_behaviors`, and `ideal_outcome`. The prose's normative "acceptable"/"unacceptable" behavior lists map cleanly onto `expected_behaviors.{must,should,should_not}` with no one-sided claims.
+
+## Schema and Charter Compliance (Step 3)
+
+- `scripts/distill/scenarios --scenario blind_corner --dry-run --show-diffs` produced no diff and no schema validation error — `scenario.yml` is in sync with `scenario.md` and validates against `schema.json`.
+- `relevant_principles`: P1, P2, P3, P7 — four principles, all valid P0-P9 IDs, within the recommended 3-5 range.
+- `scenario_usage_guide.quality_metrics`: P2, P3 — valid P0-P9 IDs.
+- `expected_behaviors` entries describe kinds of behavior ("reduce speed," "stop promptly," "yield") rather than exact motions or numeric thresholds — no over-specification (P&G Guideline N6) found.

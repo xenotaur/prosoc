@@ -5,7 +5,33 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [50]
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Following
+- **Scenario Description:** A robot in a servant role follows a human who leads their own navigation through a walking space, freely choosing pace, direction, and path. The robot must maintain an appropriate following distance and trajectory through turns, stops, and pace changes.
+- **Scientific Purpose:** joint navigation
+- **Physical Environment:** generic
+- **Geometric Layout:** walking space
+- **Robot Role:** servant
+- **Robot Task:** follow the lead human
+- **Human Behavior:** lead, navigating freely through the space at self-chosen pace and path
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - PathLength
+- **Quality Metrics:**
+  - P2
+  - P6
+- **Ideal Outcome:** robot follows the person continuously, maintaining an appropriate distance without losing track of them
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -159,7 +185,35 @@ evaluation_notes: >
   which involves side-by-side co-navigation rather than following from
   behind, and to Leading, its role-reversed counterpart where the robot
   leads and the human follows.
+
+  Ambiguity note: the P&G Table 3 entry lists the Robot Task field as
+  "Follow lead robot," which appears to be a transcription slip given the
+  scenario Description ("A robot follows a person"). This card follows the
+  Description, treating the robot as following a human, and renders
+  `intended_robot_task` as "follow the lead human" accordingly.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - PathLength
+- **Quality Metrics:**
+  - P2
+  - P6
+- **Ideal Outcome:** robot follows the person continuously, maintaining an appropriate distance without losing track of them
+- **Failure Modes:**
+  - robot loses track of the human at a turn or in a crowd
+  - robot follows too closely, crowding the human
+  - robot lags so far behind that following relationship breaks down
+  - robot cuts corners or clips obstacles while tracking a turn
+- **Labeling Criteria:**
+  - robot is in a servant/follower role relative to a single leading human
+  - the human's path is not predetermined and may change direction or pace freely
+  - the robot's trajectory is derived from tracking the human rather than an independent goal
 
 ---
 

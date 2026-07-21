@@ -50,6 +50,7 @@ expected_behaviors:
   - take excessively wide detours around minor crowd density
   - move erratically or reverse direction frequently
   - freeze indefinitely in response to a temporarily dense cluster
+  - proceed at a fixed pace or clearance regardless of local crowd density
 relevant_principles:
 - P1
 - P2

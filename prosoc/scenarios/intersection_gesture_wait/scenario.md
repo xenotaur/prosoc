@@ -5,7 +5,28 @@
 - **STATE:** DRAFTED
 - **SOURCE:** Principles and Guidelines for Social Robot Navigation (Table 3)
 - **DRAFTED:** ChatGPT, 2026-01-06
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Intersection – Gesture Wait
+- **Scenario Description:** A robot and a human pedestrian approach an indoor intersection. The human explicitly gestures for the robot to wait. The robot must recognize and comply with the gesture, yielding the intersection safely and legibly.
+- **Scientific Purpose:** pedestrian interaction
+- **Physical Environment:** indoor
+- **Geometric Layout:** intersection
+- **Robot Role:** servant
+- **Robot Task:** navigate from A to B
+- **Human Behavior:** cross navigate (gesture wait)
+- **Ideal Outcome:** human gestures the robot to wait; human crosses first, then robot proceeds without collision
+- **Related Scenarios:** intersection_gesture_proceed, intersection_no_gesture
+- **Cited In:** 126
+
+**Remaining gaps:**
+
+- **Success Metrics** — should-fill-in-now
+- **Quality Metrics** — should-fill-in-now
 
 ---
 
@@ -52,6 +73,10 @@ summary: >
   explicitly gestures for the robot to wait. The robot must recognize and
   comply with the gesture, yielding the intersection safely and legibly.
 
+scientific_purpose: pedestrian interaction
+
+geometric_layout: intersection
+
 context:
   environment:
     type: indoor
@@ -63,7 +88,7 @@ context:
 
 agents:
   robot:
-    role: navigating_agent
+    role: servant
     capabilities:
       - forward_motion
       - speed_adjustment
@@ -81,6 +106,10 @@ initial_conditions:
   arrival_timing: near_simultaneous
   visibility: mutual
 
+intended_robot_task: navigate from A to B
+
+intended_human_behavior: cross navigate (gesture wait)
+
 expected_behaviors:
   must:
     - recognize the human’s gesture requesting the robot to wait
@@ -95,13 +124,19 @@ expected_behaviors:
     - display ambiguous motion while waiting
 
 relevant_principles:
-  - P0  # Goal Achievement
   - P1  # Safety
   - P2  # Comfort
   - P3  # Legibility
   - P4  # Politeness
-  - P9  # Prosocial Behavior
 
+ideal_outcome: human gestures the robot to wait; human crosses first, then robot proceeds without collision
+
+related_scenarios:
+  - intersection_gesture_proceed
+  - intersection_no_gesture
+
+cited_in:
+  - "126"
 
 evaluation_notes: >
   This scenario evaluates the robot’s ability to comply with explicit human
@@ -111,6 +146,19 @@ evaluation_notes: >
   Failure modes include ignoring the gesture, partial compliance that
   introduces ambiguity, or delayed responses that undermine the signal.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Ideal Outcome:** human gestures the robot to wait; human crosses first, then robot proceeds without collision
+
+**Remaining gaps:**
+
+- **Success Metrics** — should-fill-in-now
+- **Quality Metrics** — should-fill-in-now
+- **Failure Modes** — should-fill-in-now
+- **Labeling Criteria** — should-fill-in-now
 
 ---
 

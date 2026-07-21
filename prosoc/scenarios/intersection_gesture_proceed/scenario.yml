@@ -5,6 +5,8 @@ summary: 'A robot and a human pedestrian approach an indoor intersection. The hu
   and cross the intersection safely, legibly, and without undue delay.
 
   '
+scientific_purpose: pedestrian interaction
+geometric_layout: intersection
 context:
   environment:
     type: indoor
@@ -15,7 +17,7 @@ context:
     crowd_level: low
 agents:
   robot:
-    role: navigating_agent
+    role: servant
     capabilities:
     - forward_motion
     - speed_adjustment
@@ -32,6 +34,8 @@ initial_conditions:
   approach_pattern: orthogonal
   arrival_timing: near_simultaneous
   visibility: mutual
+intended_robot_task: navigate from A to B
+intended_human_behavior: cross navigate (gesture proceed)
 expected_behaviors:
   must:
   - "recognize the human\u2019s gesture granting permission to proceed"
@@ -45,12 +49,17 @@ expected_behaviors:
   - proceed aggressively or at unsafe speed
   - "undermine the clarity of the human\u2019s signal"
 relevant_principles:
-- P0
 - P1
 - P2
 - P3
 - P4
-- P9
+ideal_outcome: human gestures the robot to proceed; robot goes first and both cross
+  without collision
+related_scenarios:
+- intersection_gesture_wait
+- intersection_no_gesture
+cited_in:
+- '126'
 evaluation_notes: "This scenario evaluates the robot\u2019s ability to act appropriately\
   \ on explicit human permission. Successful behavior demonstrates timely commitment,\
   \ predictable motion, and respect for the human\u2019s safety and comfort.\nFailure\

@@ -5,6 +5,8 @@ summary: 'A human pedestrian approaches and overtakes a slower-moving robot from
   safe and comfortable passing without impeding the pedestrian.
 
   '
+scientific_purpose: pedestrian interaction
+geometric_layout: passable space
 context:
   environment:
     type: indoor
@@ -31,6 +33,8 @@ initial_conditions:
   robot_position: ahead_of_pedestrian
   relative_speed: pedestrian_faster
   visibility: pedestrian_clear_view
+intended_robot_task: navigate from A to B
+intended_human_behavior: navigate from A to B, faster than the robot
 expected_behaviors:
   must:
   - "avoid impeding the pedestrian\u2019s overtaking maneuver"
@@ -44,12 +48,31 @@ expected_behaviors:
   - drift unpredictably during passing
   - force the pedestrian to slow or change path
 relevant_principles:
-- P0
 - P1
 - P2
 - P3
 - P4
-- P9
+ideal_outcome: human passes the robot safely, comfortably, and without disruption
+related_scenarios:
+- robot_overtaking
+cited_in:
+- '26'
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  quality_metrics:
+  - P2
+  - P3
+  - P4
+  failure_modes:
+  - robot blocks or impedes the pedestrian's overtaking maneuver
+  - robot makes sudden speed or direction changes during passing
+  - robot's trajectory forces the pedestrian to hesitate or reroute
+  labeling_criteria:
+  - human pedestrian approaches and overtakes the robot from behind
+  - robot and human are moving in the same direction
+  - pedestrian's speed exceeds the robot's speed
 evaluation_notes: "This scenario evaluates the robot\u2019s ability to act as a cooperative\
   \ and predictable participant when being overtaken by a human. Successful behavior\
   \ minimizes the cognitive and physical burden on the pedestrian and allows passing\

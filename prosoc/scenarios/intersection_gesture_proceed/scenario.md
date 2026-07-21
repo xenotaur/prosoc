@@ -16,7 +16,7 @@
 - **Physical Environment:** Indoor
 - **Geometric Layout:** Intersection
 - **Scientific Purpose:** Pedestrian interaction
-- **Robot Role:** Any (navigating agent)
+- **Robot Role:** Servant
 - **Robot Task:** Navigate from A to B
 - **Human Behavior:** Cross navigation with explicit proceed gesture
 - **Ideal Outcome:** Human gestures, robot proceeds, human proceeds, no collision
@@ -68,6 +68,10 @@ summary: >
   explicitly gestures for the robot to proceed. The robot must recognize the
   gesture and cross the intersection safely, legibly, and without undue delay.
 
+scientific_purpose: pedestrian interaction
+
+geometric_layout: intersection
+
 context:
   environment:
     type: indoor
@@ -79,7 +83,7 @@ context:
 
 agents:
   robot:
-    role: navigating_agent
+    role: servant
     capabilities:
       - forward_motion
       - speed_adjustment
@@ -98,6 +102,10 @@ initial_conditions:
   arrival_timing: near_simultaneous
   visibility: mutual
 
+intended_robot_task: navigate from A to B
+
+intended_human_behavior: cross navigate (gesture proceed)
+
 expected_behaviors:
   must:
     - recognize the human’s gesture granting permission to proceed
@@ -112,13 +120,19 @@ expected_behaviors:
     - undermine the clarity of the human’s signal
 
 relevant_principles:
-  - P0  # Goal Achievement
   - P1  # Safety
   - P2  # Comfort
   - P3  # Legibility
   - P4  # Politeness
-  - P9  # Prosocial Behavior
 
+ideal_outcome: human gestures the robot to proceed; robot goes first and both cross without collision
+
+related_scenarios:
+  - intersection_gesture_wait
+  - intersection_no_gesture
+
+cited_in:
+  - "126"
 
 evaluation_notes: >
   This scenario evaluates the robot’s ability to act appropriately on explicit

@@ -5,6 +5,8 @@ summary: 'A robot and a human approach each other in a hallway that is too narro
   signaling, or negotiating right-of-way.
 
   '
+scientific_purpose: pedestrian interaction
+geometric_layout: narrow hallway
 context:
   environment:
     type: indoor
@@ -31,36 +33,38 @@ initial_conditions:
   robot_position: end_of_hallway
   human_position: opposite_end
   visibility: clear
+intended_robot_task: navigate from one end of the hallway to the other
+intended_human_behavior: navigate from the opposite end toward the robot
 expected_behaviors:
   must:
   - maintain a safe physical distance from the human
   - avoid entering the hallway simultaneously with the human
   should:
   - recognize early that the hallway does not permit passing
-  - signal intent clearly (e.g., yielding or requesting priority)
+  - signal intent clearly (e.g., yielding, requesting priority, or other clear signaling)
   - resolve the encounter without prolonged deadlock
   should_not:
   - force the human to back up unexpectedly
   - enter the hallway and create a stalemate
   - rely on last-moment braking to resolve the conflict
-  - force the human to back up unexpectedly
-  - enter the hallway and create a stalemate
-  - rely on last-moment braking to resolve the conflict
 relevant_principles:
 - P1
-- P2
 - P3
 - P5
-- P6
 - P7
+ideal_outcome: robot and human sequence through the hallway one at a time, without
+  collision, deadlock, or the human being forced to retreat
+related_scenarios:
+- frontal_approach
+- movable_obstruction
 scenario_usage_guide:
   success_metrics:
   - SR
   - NoCollisions
   - DeadlockFree
   quality_metrics:
-  - P2
   - P3
+  - P5
   - P7
   failure_modes:
   - prolonged deadlock at hallway entrance

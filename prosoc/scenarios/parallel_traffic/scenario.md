@@ -5,7 +5,33 @@
 - **STATE:** DRAFTED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [167]
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Parallel Traffic
+- **Scenario Description:** A robot navigates from A to B while a crowd of pedestrians moves broadly in the same direction, forming an emergent pedestrian stream. The robot must merge into and hold a stable position within the flow, matching pace and minimizing lateral weaving.
+- **Scientific Purpose:** crowd navigation
+- **Physical Environment:** generic
+- **Geometric Layout:** passable space
+- **Robot Role:** navigating_agent
+- **Robot Task:** navigate from A to B
+- **Human Behavior:** mill from A to B, forming a parallel pedestrian stream
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - TTG
+- **Quality Metrics:**
+  - P2
+  - P5
+- **Ideal Outcome:** robot merges into and travels with the pedestrian stream without collision or obstruction
+
+**Remaining gaps:**
+
+- **Related Scenarios** — should-fill-in-now
+- **Cited In** — should-fill-in-now
 
 ---
 
@@ -153,6 +179,28 @@ evaluation_notes: >
   parallel to the robot, and to Perpendicular Traffic, which specializes
   crowd motion to a direction orthogonal to the robot's path.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+  - TTG
+- **Quality Metrics:**
+  - P2
+  - P5
+- **Ideal Outcome:** robot merges into and travels with the pedestrian stream without collision or obstruction
+- **Failure Modes:**
+  - robot collides with a pedestrian while merging or traveling within the stream
+  - robot cuts across the flow, disrupting multiple pedestrians
+  - robot's pace diverges substantially from the surrounding stream
+  - robot weaves laterally rather than holding a stable lane position
+- **Labeling Criteria:**
+  - a crowd of pedestrians is present with a broadly shared direction of travel
+  - the robot's intended path is roughly aligned with that shared direction
+  - the robot's task requires sustained travel through the stream rather than a single crossing
 
 ---
 

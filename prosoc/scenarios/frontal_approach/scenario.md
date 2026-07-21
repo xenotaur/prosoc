@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFT
+- **STATE:** DRAFTED
 - **SOURCE:** Prompt to ChatGPT 5.2
 - **DRAFTED:** ChatGPT 5.2, 2026-01-02
 - **EDITED:** render_sections.py, 2026-07-19
@@ -11,8 +11,12 @@
 
 - **Scenario Name:** Frontal Approach
 - **Scenario Description:** A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without prolonged hesitation.
+- **Scientific Purpose:** pedestrian interaction
 - **Physical Environment:** indoor
+- **Geometric Layout:** passable space
 - **Robot Role:** navigating_agent
+- **Robot Task:** navigate from A to B
+- **Human Behavior:** navigate from B to A
 - **Success Metrics:**
   - SR
   - NoCollisions
@@ -20,16 +24,12 @@
   - P2
   - P3
   - P5
+- **Ideal Outcome:** robot and human pass each other safely, comfortably, and without prolonged hesitation
+- **Cited In:** 50, 126, 167
 
 **Remaining gaps:**
 
-- **Scientific Purpose** — should-fill-in-now
-- **Geometric Layout** — should-fill-in-now
-- **Robot Task** — should-fill-in-now
-- **Human Behavior** — should-fill-in-now
-- **Ideal Outcome** — should-fill-in-now
 - **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
 
 ---
 
@@ -48,6 +48,10 @@ name: Frontal Approach
 summary: >
   A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without
   prolonged hesitation.
+
+scientific_purpose: pedestrian interaction
+
+geometric_layout: passable space
 
 context:
   environment:
@@ -77,6 +81,10 @@ initial_conditions:
   human_position: opposite_end
   visibility: clear
 
+intended_robot_task: navigate from A to B
+
+intended_human_behavior: navigate from B to A
+
 expected_behaviors:
   must:
     - maintain a safe physical distance
@@ -97,6 +105,13 @@ relevant_principles:
   - P5  # Social Competency
   - P6  # Agent Understanding
 
+ideal_outcome: robot and human pass each other safely, comfortably, and without prolonged hesitation
+
+cited_in:
+  - "50"
+  - "126"
+  - "167"
+
 scenario_usage_guide:
   success_metrics:
     - SR
@@ -107,19 +122,19 @@ scenario_usage_guide:
     - P5   # Social Competency
   failure_modes:
     - robot collides with human
-    - robot fails to pass within time limit
+    - robot fails to make progress toward passing
   labeling_criteria:
     - robot and human face each other at the start of the episode
     - robot and human move toward each other
     - sufficient clearance exists for passing
 
 evaluation_notes: >
-  This scenario evaluates how well the robot navigates through shared space with a human in the conditions for a mild and typiocal conflict.
+  This scenario evaluates how well the robot navigates through shared space with a human in the conditions for a mild and typical conflict.
   Changing direction, slowing down, braking or hesitation may be acceptable if they increase safety, comfort, or legibility, but  prolonged deadlock, abrupt reversals,
   or aggressive advancement are indicative of poor performance.
 
   The scenario assumes a pedestrian with a typical level of awareness,
-  neither oblivious to the presence of the robot nor overly attettentive too it.
+  neither oblivious to the presence of the robot nor overly attentive to it.
 
 ```
 
@@ -143,12 +158,9 @@ This scenario is intended as a **baseline social navigation test case** and may 
   - P5
 - **Failure Modes:**
   - robot collides with human
-  - robot fails to pass within time limit
+  - robot fails to make progress toward passing
 - **Labeling Criteria:**
   - robot and human face each other at the start of the episode
   - robot and human move toward each other
   - sufficient clearance exists for passing
-
-**Remaining gaps:**
-
-- **Ideal Outcome** — should-fill-in-now
+- **Ideal Outcome:** robot and human pass each other safely, comfortably, and without prolonged hesitation

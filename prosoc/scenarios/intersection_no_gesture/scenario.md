@@ -5,7 +5,28 @@
 - **STATE:** DRAFTED
 - **SOURCE:** Principles and Guidelines for Social Robot Navigation (Table 3)
 - **DRAFTED:** ChatGPT, 2026-01-06
-- **EDITED:** —
+- **EDITED:** render_sections.py, 2026-07-20
+
+---
+
+## Scenario Card Summary
+
+- **Scenario Name:** Intersection – No Gesture
+- **Scenario Description:** A robot and a human pedestrian approach and cross an indoor intersection without any explicit gestural communication. The robot must coordinate passage safely and legibly using motion cues and social norms alone.
+- **Scientific Purpose:** pedestrian interaction
+- **Physical Environment:** indoor
+- **Geometric Layout:** intersection
+- **Robot Role:** navigating_agent
+- **Robot Task:** navigate from A to B
+- **Human Behavior:** cross navigate
+- **Ideal Outcome:** robot and human both cross the intersection without collision, absent any explicit gesture
+- **Related Scenarios:** intersection_gesture_proceed, intersection_gesture_wait
+- **Cited In:** 27, 50, 167
+
+**Remaining gaps:**
+
+- **Success Metrics** — should-fill-in-now
+- **Quality Metrics** — should-fill-in-now
 
 ---
 
@@ -56,6 +77,10 @@ summary: >
   without any explicit gestural communication. The robot must coordinate
   passage safely and legibly using motion cues and social norms alone.
 
+scientific_purpose: pedestrian interaction
+
+geometric_layout: intersection
+
 context:
   environment:
     type: indoor
@@ -85,6 +110,10 @@ initial_conditions:
   arrival_timing: near_simultaneous
   visibility: mutual
 
+intended_robot_task: navigate from A to B
+
+intended_human_behavior: cross navigate
+
 expected_behaviors:
   must:
     - avoid collision with the human at the intersection
@@ -105,6 +134,16 @@ relevant_principles:
   - P3  # Legibility
   - P4  # Politeness
 
+ideal_outcome: robot and human both cross the intersection without collision, absent any explicit gesture
+
+related_scenarios:
+  - intersection_gesture_proceed
+  - intersection_gesture_wait
+
+cited_in:
+  - "27"
+  - "50"
+  - "167"
 
 evaluation_notes: >
   This scenario evaluates the robot’s ability to navigate an intersection
@@ -114,6 +153,19 @@ evaluation_notes: >
   Common failure modes include overly aggressive entry, excessive hesitation,
   or late yielding that disrupts the human’s motion.
 ```
+
+---
+
+## Scenario Usage Guide
+
+- **Ideal Outcome:** robot and human both cross the intersection without collision, absent any explicit gesture
+
+**Remaining gaps:**
+
+- **Success Metrics** — should-fill-in-now
+- **Quality Metrics** — should-fill-in-now
+- **Failure Modes** — should-fill-in-now
+- **Labeling Criteria** — should-fill-in-now
 
 ---
 

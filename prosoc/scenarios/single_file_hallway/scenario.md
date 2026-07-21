@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFT
+- **STATE:** DRAFTED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation (P&G paper)
 - **DRAFTED:** ChatGPT 5.2, 2026-01-16
 - **EDITED:** render_sections.py, 2026-07-19
@@ -11,25 +11,25 @@
 
 - **Scenario Name:** Single File Hallway
 - **Scenario Description:** A robot and a human approach each other in a hallway that is too narrow for safe and comfortable passing. The robot must proactively avoid conflict by yielding, signaling, or negotiating right-of-way.
+- **Scientific Purpose:** pedestrian interaction
 - **Physical Environment:** indoor
+- **Geometric Layout:** narrow hallway
 - **Robot Role:** navigating_agent
+- **Robot Task:** navigate from one end of the hallway to the other
+- **Human Behavior:** navigate from the opposite end toward the robot
 - **Success Metrics:**
   - SR
   - NoCollisions
   - DeadlockFree
 - **Quality Metrics:**
-  - P2
   - P3
+  - P5
   - P7
+- **Ideal Outcome:** robot and human sequence through the hallway one at a time, without collision, deadlock, or the human being forced to retreat
+- **Related Scenarios:** frontal_approach, movable_obstruction
 
 **Remaining gaps:**
 
-- **Scientific Purpose** — should-fill-in-now
-- **Geometric Layout** — should-fill-in-now
-- **Robot Task** — should-fill-in-now
-- **Human Behavior** — should-fill-in-now
-- **Ideal Outcome** — should-fill-in-now
-- **Related Scenarios** — should-fill-in-now
 - **Cited In** — should-fill-in-now
 
 ---
@@ -52,6 +52,10 @@ summary: >
   A robot and a human approach each other in a hallway that is too narrow for safe and comfortable
   passing. The robot must proactively avoid conflict by yielding, signaling, or negotiating
   right-of-way.
+
+scientific_purpose: pedestrian interaction
+
+geometric_layout: narrow hallway
 
 context:
   environment:
@@ -82,35 +86,34 @@ initial_conditions:
   human_position: opposite_end
   visibility: clear
 
+intended_robot_task: navigate from one end of the hallway to the other
+
+intended_human_behavior: navigate from the opposite end toward the robot
+
 expected_behaviors:
   must:
     - maintain a safe physical distance from the human
     - avoid entering the hallway simultaneously with the human
   should:
     - recognize early that the hallway does not permit passing
-    - signal intent clearly (e.g., yielding or requesting priority)
+    - signal intent clearly (e.g., yielding, requesting priority, or other clear signaling)
     - resolve the encounter without prolonged deadlock
   should_not:
     - force the human to back up unexpectedly
     - enter the hallway and create a stalemate
     - rely on last-moment braking to resolve the conflict
 
-# NOTE: Optional behaviors previously listed under `may` are intentionally
-# subsumed under `should` to comply with the scenario schema, which restricts
-# expected_behaviors to {must, should, should_not} only.
-
-
-    - force the human to back up unexpectedly
-    - enter the hallway and create a stalemate
-    - rely on last-moment braking to resolve the conflict
-
 relevant_principles:
   - P1  # Safety
-  - P2  # Comfort
   - P3  # Legibility
   - P5  # Social Competency
-  - P6  # Agent Understanding
   - P7  # Proactivity
+
+ideal_outcome: robot and human sequence through the hallway one at a time, without collision, deadlock, or the human being forced to retreat
+
+related_scenarios:
+  - frontal_approach
+  - movable_obstruction
 
 scenario_usage_guide:
   success_metrics:
@@ -118,8 +121,8 @@ scenario_usage_guide:
     - NoCollisions
     - DeadlockFree
   quality_metrics:
-    - P2   # Comfort
     - P3   # Legibility
+    - P5   # Social Competency
     - P7   # Proactivity
   failure_modes:
     - prolonged deadlock at hallway entrance
@@ -170,8 +173,8 @@ right‑of‑way negotiation under unavoidable spatial constraints.
   - NoCollisions
   - DeadlockFree
 - **Quality Metrics:**
-  - P2
   - P3
+  - P5
   - P7
 - **Failure Modes:**
   - prolonged deadlock at hallway entrance
@@ -181,7 +184,4 @@ right‑of‑way negotiation under unavoidable spatial constraints.
   - hallway width prevents safe passing
   - robot and human approach from opposite ends
   - no alternative routes available
-
-**Remaining gaps:**
-
-- **Ideal Outcome** — should-fill-in-now
+- **Ideal Outcome:** robot and human sequence through the hallway one at a time, without collision, deadlock, or the human being forced to retreat
