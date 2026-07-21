@@ -2,32 +2,27 @@
 scenario: entering_room
 verdict: ready_with_fixes
 blocking: 0
-should_fix: 2
+should_fix: 1
 suggestion: 1
-audited: 2026-07-05
+audited: 2026-07-20
 ---
 
 # Audit: Entering Room
 
 - **Scenario:** `prosoc/scenarios/entering_room/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Ready for AUDITED with minor fixes — no blocking issues, some should-fix completeness gaps
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-20
+- **Verdict:** Ready for AUDITED with one minor fix — no blocking issues, one should-fix completeness gap, one optional suggestion
 
 ## Findings
 
-### 1. Missing "Scenario Card Summary" section — should-fix
-- **Section/field:** Markdown structure vs. `template.md`'s "Required for AUDITED scenarios" Scenario Card Summary block
-- **Issue:** `scenario.md` has no `## Scenario Card Summary` section. `template.md` marks this block (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success/Quality Metrics, Ideal Outcome, Related Scenarios, Cited In) as required for AUDITED scenarios, drawn from Tables 2/3 of the P&G paper. The document goes straight from `## Status` to `## Scenario Overview`.
-- **Recommended fix:** Add a `## Scenario Card Summary` section populated from data already present in the embedded YAML and STATUS block (e.g., Scientific Purpose: pedestrian interaction; Physical Environment: indoor; Geometric Layout: room and door; Robot Role: navigating_agent; Robot Task: navigate from outside to inside the room; Human Behavior: navigate from inside to outside; Ideal Outcome: robot lets the human exit fully, then enters without obstruction; Related Scenarios: Entering Elevator, Exiting Room, Narrow Doorway; Cited In: R@G).
+### 1. "Related Scenarios" and "Cited In" left blank in Scenario Card Summary — should-fix
+- **Section/field:** Scenario Card Summary vs. `template.md`'s "Required for AUDITED scenarios" block
+- **Issue:** The now-rendered `## Scenario Card Summary` section explicitly lists "Related Scenarios" and "Cited In" under its own "Remaining gaps" note as should-fill-in-now, and leaves them out of the bulleted summary entirely. Both are readily determinable: the STATUS block's SOURCE field already says "Robots@Games (R@G)," the "Notes for Scenario Designers and Evaluators" section already names Entering Elevator, Exiting Room, and Narrow Doorway as related, and `../../../.claude/skills/_shared/pg_scenarios.md`'s Entering Room entry lists "Related Scenarios: Entering Elevator (R@G)" / "Cited In: R@G" directly.
+- **Recommended fix:** Add `- **Related Scenarios:** Entering Elevator (R@G); see also Exiting Room, Narrow Doorway` and `- **Cited In:** R@G` to the Scenario Card Summary bullet list, and drop the "Remaining gaps" note once filled. Optionally also add `related_scenarios`/`cited_in` arrays to the YAML block (schema supports both fields; currently neither is populated in `scenario.yml`).
 
-### 2. Missing "Scenario Usage Guide" prose subsections — should-fix
-- **Section/field:** Markdown structure vs. `template.md`'s "Required for AUDITED scenarios" Scenario Usage Guide (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria)
-- **Issue:** The document has no `## Scenario Usage Guide` section with these five subsections as prose. The content exists in the YAML's `scenario_usage_guide` block (`success_metrics`, `quality_metrics`, `failure_modes`, `labeling_criteria`) and top-level `ideal_outcome`, but is not surfaced as human-readable prose per the template.
-- **Recommended fix:** Add a `## Scenario Usage Guide` section with the five subheadings, restating the YAML list content in prose/bulleted form for human readability, as the template specifies.
-
-### 3. P3 (Legibility) not included in relevant_principles — suggestion
+### 2. P3 (Legibility) not included in relevant_principles — suggestion
 - **Section/field:** `relevant_principles` vs. `../../../.claude/skills/_shared/principles.md` selection guidance
-- **Issue:** The scenario's normative core is about the robot recognizing and communicating deference at a threshold ("proceed to enter promptly once the threshold is clear," avoiding "waiting so far back... entry is delayed"). P3 (Legibility — behave so robot goals can be understood by others) arguably applies here, since a human benefits from being able to tell that the robot is intentionally waiting rather than malfunctioning or blocked. Current selection (P1, P4, P5, P6) is reasonable and within the 3-5 guidance, so this is not a defect, just worth a human's consideration.
+- **Issue:** The scenario's normative core is about the robot recognizing and communicating deference at a threshold ("proceed to enter promptly once the threshold is clear," avoiding "waiting so far back... entry is delayed"). P3 (Legibility — behave so robot goals can be understood by others) arguably applies here, since a human benefits from being able to tell that the robot is intentionally waiting rather than malfunctioning or blocked. Current selection (P1, P4, P5, P6) is reasonable and within the 3-5 guidance, so this is not a defect, just worth a human's consideration. Unchanged since the prior audit.
 - **Recommended fix:** Optionally add P3 if the editor agrees legibility of the robot's "waiting" intent is a distinct concern from politeness/social-norm compliance; otherwise no change needed.
 
 ## Source Fidelity
@@ -41,8 +36,8 @@ SOURCE cites P&G Paper Table 3 and Robots@Games (R@G). Compared against `../../.
 - Robot Task: Navigate out to in — matches (`intended_robot_task: navigate from outside to inside the room`).
 - Human Behavior: Navigate in to out — matches (`intended_human_behavior: navigate from inside to outside the room`).
 - Ideal Outcome: Robot lets human exit — matches almost verbatim (`ideal_outcome: robot lets the human exit fully, then enters the room without obstruction`).
-- Related Scenarios: Entering Elevator (R@G) — matches (cross-referenced in `evaluation_notes` and the Notes section; card also adds Exiting Room and Narrow Doorway as related, which is a reasonable extension consistent with `pg_scenarios.md`'s note that Exiting Room and Narrow Doorway are themselves Table 3 doorway-family entries).
-- Cited In: R@G — matches STATUS field ("Robots@Games (R@G)").
+- Related Scenarios: Entering Elevator (R@G) — matches the reference source, but as noted in Finding 1 this is not yet surfaced in the card's own Scenario Card Summary bullet list.
+- Cited In: R@G — matches STATUS field, likewise not yet surfaced in the summary bullet list.
 
 No mismatches found. Source fidelity: confirmed against P&G Table 3 / R@G.
 
@@ -50,6 +45,10 @@ No mismatches found. Source fidelity: confirmed against P&G Table 3 / R@G.
 
 Per `template.md`'s "Required for AUDITED scenarios" checklist:
 
-- **Scenario Card Summary block** — should-fill-in-now. Section is entirely absent from the Markdown prose, though its constituent data (scientific purpose, geometric layout, robot role/task, human behavior, ideal outcome, related scenarios, cited-in) is already present in the YAML and STATUS block and is directly inferable. See Finding 1.
-- **Scenario Usage Guide (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria)** — should-fill-in-now. Section is absent as prose; equivalent YAML lists (`scenario_usage_guide.success_metrics/quality_metrics/failure_modes/labeling_criteria`, top-level `ideal_outcome`) already exist and just need to be restated in prose form. See Finding 2.
-- **Related Scenarios / Cited In** (sub-fields of the summary block) — reasonably present in spirit: covered in the `evaluation_notes` YAML field and the "Notes for Scenario Designers and Evaluators" prose section, just not in the dedicated summary-block fields called for by the template.
+- **Scenario Card Summary block** — present (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics, Ideal Outcome all filled in from the embedded YAML). Previously missing entirely (prior audit, 2026-07-05); now rendered in, resolving that finding.
+- **Related Scenarios / Cited In** (sub-fields of the summary block) — should-fill-in-now. Explicitly flagged blank by the card's own "Remaining gaps" note. See Finding 1.
+- **Scenario Usage Guide (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria)** — present as prose, mirroring the YAML `scenario_usage_guide` block. Previously missing entirely (prior audit, 2026-07-05); now rendered in, resolving that finding.
+
+## Change vs. prior audit (2026-07-05)
+
+The prior audit (should_fix: 2, suggestion: 1, verdict ready_with_fixes) flagged: (1) missing Scenario Card Summary section, (2) missing Scenario Usage Guide prose subsections, and (3) a suggestion to consider adding P3 (Legibility). Findings 1 and 2 are resolved in this pass — both sections are now rendered in. The P3 suggestion is unchanged (still open, still non-blocking). One new, narrower should-fix remains: Related Scenarios/Cited In are still blank within the newly rendered summary block.

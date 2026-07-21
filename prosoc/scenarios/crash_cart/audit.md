@@ -2,42 +2,32 @@
 scenario: crash_cart
 verdict: ready_with_fixes
 blocking: 0
-should_fix: 3
+should_fix: 1
 suggestion: 1
-audited: 2026-07-05
+audited: 2026-07-20
 ---
 
 # Audit: Crash Cart
 
 - **Scenario:** `prosoc/scenarios/crash_cart/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-20
 - **Verdict:** Ready for AUDITED with minor fixes
 
 ## Findings
 
-### 1. Missing "Scenario Card Summary" section — should-fix
-- **Section/field:** `scenario.md` structure vs. `template.md`'s "Required for AUDITED scenarios" Scenario Card Summary block
-- **Issue:** `scenario.md` has no `## Scenario Card Summary` section (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success/Quality Metrics, Ideal Outcome, Related Scenarios, Cited In). The equivalent content exists only inside the embedded YAML block and prose narrative, not as the dedicated summary the template structures for AUDITED scenarios.
-- **Recommended fix:** Add a `## Scenario Card Summary` section populated from existing values (Robot Role: Leader; Robot Task: deliver medical product urgently; Human Behavior: bystanders yield / recipient receives; Ideal Outcome; Related Scenarios: Food Delivery, Object Handover; Cited In: this article).
+### 1. Related Scenarios / Cited In not carried into Card Summary — should-fix
+- **Section/field:** Scenario Card Summary — Related Scenarios / Cited In fields
+- **Issue:** The rendered `## Scenario Card Summary` section (scenario.md lines 12-34) self-flags this under "Remaining gaps" as "should-fill-in-now" for both fields. Unlike a genuinely-unknown gap, the content already exists elsewhere in the card: the Notes section names Food Delivery (Table 3's listed Related Scenario) and Object Handover, and the Status block states "cited in this article." Because the values are already written and readily copyable, this stays should-fix rather than dropping to a suggestion.
+- **Recommended fix:** Add `**Related Scenarios:** Food Delivery` and `**Cited In:** this article` lines to the Scenario Card Summary block, matching the template's field list.
 
-### 2. Missing standalone "Scenario Usage Guide" prose section — should-fix
-- **Section/field:** `scenario.md` structure vs. `template.md`'s "Required for AUDITED scenarios" Scenario Usage Guide section
-- **Issue:** Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, and Labeling Criteria exist only inside the YAML's `scenario_usage_guide` block, not as the dedicated prose section template.md requires for AUDITED readiness.
-- **Recommended fix:** Add a `## Scenario Usage Guide` section with `### Success Metrics`, `### Quality Metrics`, `### Ideal Outcome`, `### Failure Modes`, `### Labeling Criteria` subsections, restating the YAML content in prose form.
-
-### 3. Bystander awareness stated inconsistently across fields — should-fix
-- **Section/field:** `initial_conditions.human_positions` vs. `intended_human_behavior` / `expected_behaviors` / Normative Expectations
-- **Issue:** `initial_conditions.human_positions` states bystanders are "unaware of the specific urgency," yet `intended_human_behavior` assumes "bystanders yield to the passing robot," and both the prose Normative Expectations and `expected_behaviors.should` ("signal urgent status clearly to bystanders...so they can accommodate it") presuppose bystanders can and do perceive the robot's signaled urgency and respond accordingly. As written, it's ambiguous whether "unaware of the specific urgency" means bystanders start out unaware (and are expected to become aware via the robot's signaling, which is consistent) or that they remain unaware throughout (which would contradict the yield expectation). Likely just an underspecified initial condition rather than an outright contradiction.
-- **Recommended fix:** Clarify `initial_conditions.human_positions` to state bystanders begin unaware of the *specific* delivery's urgency but are expected to update upon perceiving the robot's signaling — this is probably the intended meaning but should be made explicit to avoid ambiguity.
-
-### 4. Bystander count is an unstated elaboration — suggestion
+### 2. Bystander count is an unstated elaboration — suggestion
 - **Section/field:** Scenario Overview / Social Navigation Context prose vs. `agents.humans[0].count: 3`
-- **Issue:** Prose never states a specific bystander count (uses "bystanders," "pedestrians" generically); YAML picks `count: 3`. This is drift rather than contradiction — a reasonable concretization for simulation setup, but worth a human sanity check since prose gives no basis to confirm 3 specifically (vs. 1, 2, or more).
-- **Recommended fix:** Either state an approximate bystander count in prose (e.g., "a small number of bystanders (2–3)") to ground the YAML's `count: 3`, or note in `evaluation_notes` that the count is a reasonable default subject to variation.
+- **Issue:** Prose still refers to "bystanders" and "pedestrians" generically throughout the Overview, Social Navigation Context, and Normative Expectations sections; no sentence grounds the specific `count: 3` chosen in the YAML. This is drift rather than contradiction — a reasonable concretization for simulation setup — but there's still no prose basis to confirm 3 specifically (vs. 1, 2, or more). Unresolved from the prior audit.
+- **Recommended fix:** Either state an approximate bystander count in prose (e.g., "a small number of bystanders (2-3)") to ground the YAML's `count: 3`, or note in `evaluation_notes` that the count is a reasonable default subject to variation.
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3, "Crash Cart" entry, cited in "this article." Compared against `../../../.claude/skills/_shared/pg_scenarios.md`:
+SOURCE cites P&G Paper Table 3, "Crash Cart" entry, cited in "this article." Compared against `../../.claude/skills/_shared/pg_scenarios.md`:
 
 | Field | Table 3 | scenario.yml / scenario.md | Match? |
 |---|---|---|---|
@@ -56,6 +46,19 @@ No mismatches found. Source fidelity: confirmed against P&G Table 3.
 
 ## Completeness
 
-- **Scenario Card Summary fields** — should-fill-in-now. No dedicated section exists in `scenario.md`, but every underlying value (name, description, scientific purpose, physical environment, geometric layout, robot role, robot task, human behavior, ideal outcome, related scenarios, cited-in) is already present in prose or YAML. See Finding 1.
-- **Scenario Usage Guide (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria)** — should-fill-in-now as a prose section. All content already exists in the YAML's `scenario_usage_guide` block (SR, NoCollisions, TTG; P3, P8; failure modes list; labeling criteria list). See Finding 2.
-- **Related Scenarios / Cited In** — should-fill-in-now once Finding 1's summary section is added; content (Food Delivery, Object Handover, "this article") is already written in the Notes and Status sections and just needs to be surfaced in the summary block.
+Re-checked against `template.md`'s "Required for AUDITED scenarios" fields, following the substantial rendering pass this session (Scenario Card Summary and Scenario Usage Guide are now both present as dedicated prose sections, resolving the prior audit's Findings 1 and 2; the bystander-awareness clarification in `initial_conditions.human_positions` — "initially unaware of the specific urgency but expected to update upon perceiving the robot's signaling" — resolves the prior audit's Finding 3):
+
+- **Scenario Card Summary** (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics, Ideal Outcome) — present and populated (scenario.md lines 12-29).
+- **Related Scenarios / Cited In** (Card Summary fields) — should-fill-in-now; values are already known and written elsewhere (Notes section, Status block) but not yet copied into the summary table. See Finding 1.
+- **Scenario Usage Guide: Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria** — all present as a dedicated `## Scenario Usage Guide` prose section (scenario.md lines 198-216), consistent with the embedded YAML's `scenario_usage_guide` block.
+
+## Prose/YAML Consistency (Step 2)
+
+No contradictions found. The bystander-awareness relationship between `initial_conditions.human_positions`, `intended_human_behavior`, and the Normative Expectations/`expected_behaviors` sections — flagged as ambiguous in the 2026-07-05 audit — is now internally consistent: bystanders start "unaware of the specific urgency" and are "expected to update upon perceiving the robot's signaling," which matches the prose's expectation that bystanders yield once the robot signals urgency and matches `expected_behaviors.should` ("signal urgent status clearly to bystanders... so they can accommodate it"). Scenario Overview, Social Navigation Context, and Normative Expectations otherwise align cleanly with `intended_robot_task`, `agents`, `expected_behaviors`, and `ideal_outcome`.
+
+## Schema and Charter Compliance (Step 3)
+
+- `scripts/distill/scenarios --scenario crash_cart --dry-run --show-diffs` produced no diff and no schema validation error — `scenario.yml` is in sync with `scenario.md` and validates against `schema.json`.
+- `relevant_principles`: P1, P3, P7, P8 — four principles, all valid P0-P9 IDs, within the recommended 3-5 range.
+- `scenario_usage_guide.quality_metrics`: P3, P8 — valid P0-P9 IDs.
+- `expected_behaviors` entries describe kinds of behavior ("move at an elevated pace," "signal urgent status," "take reasonable priority") rather than exact motions or numeric thresholds — no over-specification (P&G Guideline N6) found.

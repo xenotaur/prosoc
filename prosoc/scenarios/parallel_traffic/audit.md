@@ -4,62 +4,65 @@ verdict: ready_with_fixes
 blocking: 0
 should_fix: 2
 suggestion: 1
-audited: 2026-07-05
+audited: 2026-07-20
 ---
 
 # Audit: Parallel Traffic
 
 - **Scenario:** `prosoc/scenarios/parallel_traffic/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Ready for AUDITED with minor fixes — content is sound and source-faithful, but two required structural sections are missing from scenario.md.
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-20
+- **Verdict:** Ready for AUDITED with minor fixes — Card Summary and Usage Guide prose are now present and are a faithful, consistent rendering of the YAML; two required completeness fields remain blank but are readily fillable.
 
 ## Findings
 
-### 1. Scenario Card Summary section missing — should-fix
-- **Section/field:** scenario.md structure — "Scenario Card Summary" (template.md: "Required for AUDITED scenarios")
-- **Issue:** scenario.md has no `## Scenario Card Summary` section at all. template.md requires this block (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics, Ideal Outcome, Related Scenarios, Cited In) for any scenario reaching AUDITED. Every one of these values is already present elsewhere in the card (Scenario Overview prose, STATUS block, and the embedded YAML), so this is not missing information — it's a missing section.
-- **Recommended fix:** Add a `## Scenario Card Summary` section directly after `## Status`, populated from existing content: Scenario Name "Parallel Traffic"; Description drawn from the Scenario Overview's first sentence; Scientific Purpose "crowd navigation"; Physical Environment "Generic"; Geometric Layout "Passable space"; Robot Role "navigating_agent"; Robot Task "Navigate from A to B"; Human Behavior "Mill from A to B (parallel pedestrian stream)"; Success Metrics SR / NoCollisions / TTG; Quality Metrics P2, P5; Ideal Outcome per `ideal_outcome`; Related Scenarios Circular Crossing, Perpendicular Traffic, Crowd Navigation; Cited In [167].
+### 1. Related Scenarios blank in Scenario Card Summary — should-fix
+- **Section/field:** Scenario Card Summary — Related Scenarios (template.md: "Required for AUDITED scenarios")
+- **Issue:** The Card Summary's own "Remaining gaps" note already flags this field as blank. It is readily inferable: the "Notes for Scenario Designers and Evaluators" section and the YAML's `evaluation_notes` both already name *Perpendicular Traffic*, *Circular Crossing*, and *Crowd Navigation* as related scenarios, and `.claude/skills/_shared/pg_scenarios.md`'s P&G Table 3 entry for Parallel Traffic lists "Circular Crossing" as the canonical related scenario.
+- **Recommended fix:** Populate "Related Scenarios" in the Card Summary (and optionally a `related_scenarios` list in the YAML block, which schema.json supports but the file currently omits) with `circular_crossing`, `perpendicular_traffic`, and `crowd_navigation`.
 
-### 2. Scenario Usage Guide prose section missing — should-fix
-- **Section/field:** scenario.md structure — "Scenario Usage Guide" (template.md: "Required for AUDITED scenarios")
-- **Issue:** template.md requires a prose `## Scenario Usage Guide` section with `### Success Metrics`, `### Quality Metrics`, `### Ideal Outcome`, `### Failure Modes`, and `### Labeling Criteria` subsections, distinct from the machine-readable `scenario_usage_guide` YAML block. scenario.md only has the YAML version (embedded in the Scenario Specification section); no human-readable prose rendering of it exists in the document.
-- **Recommended fix:** Add a `## Scenario Usage Guide` section (e.g., after "Normative Expectations" or after the YAML spec) that restates the YAML's `scenario_usage_guide.success_metrics`, `.quality_metrics`, `.failure_modes`, and `.labeling_criteria` as short human-readable prose under the matching subheadings, plus an `### Ideal Outcome` subsection restating `ideal_outcome` in prose. All content already exists in the YAML — this is a transcription task, not new authoring.
+### 2. Cited In blank in Scenario Card Summary — should-fix
+- **Section/field:** Scenario Card Summary — Cited In (template.md: "Required for AUDITED scenarios")
+- **Issue:** Also self-flagged in the "Remaining gaps" note. The Status block's SOURCE line already states "cited in [167]," and pg_scenarios.md's Table 3 entry confirms `[167]` as the citation for Parallel Traffic, so the value is already known and just needs to be copied into the Card Summary (and optionally the YAML's `cited_in` field, which schema.json supports but the file omits).
+- **Recommended fix:** Populate "Cited In" with `[167]` in the Card Summary; consider adding `cited_in: ["167"]` to the YAML block for machine-readability.
 
-### 3. STATE is still DRAFTED, not yet EDITED — suggestion
-- **Section/field:** Status block — STATE
-- **Issue:** Per workflow.md, AUDITED review normally follows an EDITED pass. This scenario's STATUS block shows `STATE: DRAFTED` with `EDITED: —`. This isn't a defect in the scenario content, but the two missing required sections above (Findings 1 and 2) are exactly the kind of structural gaps an EDITED pass is meant to close before an AUDITED judgment is made final.
-- **Recommended fix:** No content change required from this audit; noting for the human editor that closing Findings 1 and 2 effectively constitutes the EDITED pass, after which STATE can be updated to EDITED (and, following separate human review, AUDITED). This audit does not change STATE itself.
+### 3. Normative Expectations prose doesn't mirror the must/should/should_not split — suggestion
+- **Section/field:** Normative Expectations vs. `expected_behaviors.{must,should,should_not}`
+- **Issue:** The prose "Normative Expectations" section presents two flat lists ("Acceptable robot behavior includes" / "Unacceptable behavior includes") without distinguishing `must` (strictly required) from `should` (preferred). For example, "Cutting perpendicular to the flow to reach a position, disrupting multiple pedestrians' paths" reads as strictly forbidden and correctly maps to `must` ("not cut across multiple pedestrians' lanes to force a position"), while "Merging into the pedestrian stream at a natural point" maps to `should` — but a reader relying only on the prose can't tell the two apart. Content matches the YAML; this is drift in emphasis, not a contradiction.
+- **Recommended fix:** Optionally annotate the prose list (e.g., "(required)" / "(preferred)" tags) or group must-items first, so a prose-only reader gets the same required/preferred signal as the YAML.
 
 ## Source Fidelity
 
-SOURCE cites "P&G Paper, Table 3 ... cited in [167]." Compared against the canonical Table 3 "Parallel Traffic" entry in `../../../.claude/skills/_shared/pg_scenarios.md`:
+SOURCE cites "P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [167]." Compared against `.claude/skills/_shared/pg_scenarios.md`'s Parallel Traffic entry (Crowd Scenarios section):
 
-| Field | P&G Table 3 | scenario.md / scenario.yml | Result |
+| Field | P&G Table 3 | Scenario card | Result |
 |---|---|---|---|
-| Description | Crowd moves parallel to the robot | Crowd of pedestrians moves broadly in the same direction, forming an emergent pedestrian stream | Consistent (elaborated, not contradicted) |
+| Description | "Crowd moves parallel to the robot" | Crowd moves broadly in the same direction, forming an emergent pedestrian stream the robot must merge into and hold position within | Match (elaborated) |
 | Physical Env | Generic | `context.environment.type: generic` | Match |
 | Geometric Layout | Passable space | `geometric_layout: passable space` | Match |
 | Scientific Purpose | Crowd navigation | `scientific_purpose: crowd navigation` | Match |
 | Robot Task | Navigate A to B | `intended_robot_task: navigate from A to B` | Match |
 | Human Behavior | Mill from A to B | `intended_human_behavior: mill from A to B, forming a parallel pedestrian stream` | Match (elaborated) |
-| Ideal Outcome | No collision / obstruction | `ideal_outcome: ...without collision or obstruction` | Match |
-| Related Scenarios | Circular Crossing | Notes/evaluation_notes cite Circular Crossing and also add Perpendicular Traffic, Crowd Navigation | Consistent; additional related scenarios do not contradict the source |
-| Cited In | [167] | STATUS: "cited in [167]" | Match |
+| Ideal Outcome | No collision / obstruction | "robot merges into and travels with the pedestrian stream without collision or obstruction" | Match |
+| Related Scenarios | Circular Crossing | Named in Notes/evaluation_notes (plus Perpendicular Traffic, Crowd Navigation), but blank in the required Card Summary field | See Finding 1 |
+| Cited In | [167] | Named in Status/SOURCE, but blank in the required Card Summary field | See Finding 2 |
 
-No mismatches found. The card is a faithful and appropriately elaborated rendering of the Table 3 entry — no fabrication or drift from the cited source.
+No mismatches. All checkable Table 3 fields agree with the scenario card.
+
+## Schema and Charter Compliance
+
+- Single-scenario dry-run distill (`scripts/distill/scenarios --scenario parallel_traffic --dry-run --show-diffs`) reported no diff and no schema validation error — `scenario.yml` is in sync with the embedded YAML in `scenario.md` and validates against `schema.json`.
+- `relevant_principles: [P1, P2, P5, P6]` — 4 entries, all valid P0–P9, within the recommended 3–5 range.
+- `scenario_usage_guide.quality_metrics: [P2, P5]` — valid P0–P9.
+- `expected_behaviors` entries describe kinds of behavior (e.g., "match pace broadly to the surrounding flow," "maintain a consistent lateral position within the flow") rather than exact motions or numeric thresholds — no P&G Guideline N6 over-specification found.
 
 ## Completeness
 
-**Blocking (Step 1 dry-run):** None. The single-scenario dry-run (`distill.distill_scenario(..., dry_run=True, show_diffs=True)`) produced no diff output and no schema validation error — scenario.md and scenario.yml are in sync and schema-valid.
+**Scenario Card Summary** (template.md: required for AUDITED):
+- Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics, Ideal Outcome — all present and consistent with the YAML and P&G source.
+- Related Scenarios — blank — **should-fill-in-now** (Finding 1).
+- Cited In — blank — **should-fill-in-now** (Finding 2).
 
-**Scenario Card Summary fields** (template.md, required for AUDITED) — *should probably be filled in now* (see Finding 1): the whole section is absent, but every field's value is already inferable from existing prose/YAML:
-- Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics, Ideal Outcome, Related Scenarios, Cited In — all **should-fill-in-now**.
+**Scenario Usage Guide** (template.md: required for AUDITED):
+- Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria — all present and consistent with the YAML's `scenario_usage_guide` block.
 
-**Scenario Usage Guide fields** (template.md, required for AUDITED) — *should probably be filled in now* (see Finding 2): the section is absent in prose form, but fully populated in the YAML:
-- Success Metrics — should-fill-in-now (YAML has SR, NoCollisions, TTG).
-- Quality Metrics — should-fill-in-now (YAML has P2, P5).
-- Ideal Outcome — should-fill-in-now (YAML has a one-line `ideal_outcome`; needs a short prose restatement).
-- Failure Modes — should-fill-in-now (YAML lists four failure modes already).
-- Labeling Criteria — should-fill-in-now (YAML lists three labeling criteria already).
-
-No fields were judged **reasonably blank** — this scenario has no gaps due to genuinely unknown or not-yet-applicable information; the only gaps are missing prose sections whose content already exists elsewhere in the document.
+No other required fields are blank.

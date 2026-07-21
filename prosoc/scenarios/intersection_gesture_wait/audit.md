@@ -1,84 +1,104 @@
 ---
-scenario: intersection_gesture_wait
+scenario: intersection_gesture_wait_01
 verdict: not_ready
 blocking: 1
-should_fix: 2
-suggestion: 1
-audited: 2026-07-05
+should_fix: 1
+suggestion: 2
+audited: 2026-07-20
 ---
 
 # Audit: Intersection – Gesture Wait
 
 - **Scenario:** `prosoc/scenarios/intersection_gesture_wait/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Not ready — 1 blocking issue (corrected 2026-07-05 — see Correction Notice)
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-20
+- **Verdict:** Not ready — 1 blocking issue (required Scenario Usage Guide content entirely unpopulated in the machine-readable spec) plus one principle-selection should-fix.
 
-## Correction Notice (2026-07-05)
+This is a full re-audit reflecting this session's edits (Card Summary/Usage Guide
+prose rendered in; `scientific_purpose`, `geometric_layout`, `intended_robot_task`,
+`intended_human_behavior`, `ideal_outcome`, `related_scenarios`, `cited_in` authored
+from P&G Table 3; Robot Role corrected from `navigating_agent` to `servant`;
+`relevant_principles` trimmed from 6 to 4). It supersedes and fully replaces the
+2026-07-05 audit below.
 
-This audit originally flagged `P0` and `P9` in `relevant_principles` as invalid,
-non-canonical principle IDs (Findings 1 and 2 below). That was incorrect:
-`prosoc/charter/charter.md` (the sole source of truth) defines **ten** principles,
-P0–P9 — P0 (Goal Achievement) and P9 (Prosocial Behavior) are this project's own
-explicit, intentional extensions beyond the P&G paper's eight, not invented IDs.
-`charter.yml` (the generated artifact) confirms this (distiller dry-run reports no
-diff). The error originated in a stale `.claude/skills/_shared/principles.md`,
-which claimed only P1–P8 were valid and has since been corrected. Findings 1 and 2
-are retracted; Finding 6 (principle count) is corrected to reflect the real count
-of 6, not 4.
+## Findings
 
-### 1. ~~Invalid principle IDs `P0` and `P9` in `relevant_principles`~~ — RETRACTED
-- **Status:** Retracted 2026-07-05. See Correction Notice above — P0 and P9 are
-  valid canonical principles per `prosoc/charter/charter.md`, not invented IDs.
+### 1. `scenario_usage_guide` block still entirely missing from YAML — blocking
+- **Section/field:** Scenario Usage Guide (prose) vs. `scenario_usage_guide` (YAML) — required for AUDITED per `template.md`
+- **Issue:** The rendered "Scenario Usage Guide" section now restates Ideal Outcome and explicitly lists Success Metrics, Quality Metrics, Failure Modes, and Labeling Criteria as "Remaining gaps." The embedded/distilled YAML still has no `scenario_usage_guide` key at all — not even empty placeholders. This is unchanged from the prior audit (previously Finding 3, blocking) and remains a required-for-AUDITED gap.
+- **Recommended fix:** Author `scenario_usage_guide.success_metrics` (e.g. `SR`, `NoCollisions` are directly applicable), `quality_metrics` (candidates: `P1`–`P4`, mirroring `relevant_principles`, once Finding 2 below is resolved), `failure_modes` (readily draftable from the existing `evaluation_notes` text — "ignoring the gesture," "partial compliance that introduces ambiguity," "delayed responses"), and `labeling_criteria` (needs fresh authoring, less directly inferable).
 
-### 2. ~~Same invalid IDs would need to be checked in `quality_metrics`~~ — RETRACTED
-- **Status:** Retracted 2026-07-05, moot along with Finding 1 — P0/P9 are valid,
-  so there is no invalid-ID constraint to check `quality_metrics` against.
+### 2. `relevant_principles` drops P0 despite prose explicitly describing a goal-vs-social tension — should-fix
+- **Section/field:** `relevant_principles` (now `P1, P2, P3, P4`, trimmed this session from `P0, P1, P2, P3, P4, P9`)
+- **Issue:** Per `_shared/principles.md`, P0 (Goal Achievement) should be included "when task completion/efficiency is in explicit tension with the social principles." The Scenario Overview explicitly states the robot must prioritize "safety, comfort, and social compliance over immediate goal progress," and `evaluation_notes` says success "prioritizes deference and safety over efficiency, reinforcing trust and predictability." Both are textbook P0 inclusion cases per the shared guidance, yet P0 was removed in this session's trim from 6 to 4 principles.
+- **Recommended fix:** Re-add `P0` to `relevant_principles` (5 principles, still within the 3–5 guidance band), or, if the omission is intentional, add a sentence to `evaluation_notes` clarifying why the explicit goal-tension language doesn't warrant P0. P9's removal, by contrast, looks correct — this scenario is externally-triggered compliance, not discretionary beyond-task helpfulness — no fix needed there. The prior 6-principle set's over-count (suggestion-level, previously Finding 6) is now resolved by the trim; only the specific choice of *which* principles to drop is in question.
 
-### 3. Missing `scenario_usage_guide` block entirely — blocking
-- **Section/field:** Scenario Specification (YAML) — `scenario_usage_guide` (success_metrics, quality_metrics, failure_modes, labeling_criteria)
-- **Issue:** The embedded YAML has no `scenario_usage_guide` key at all. `template.md` marks the Scenario Usage Guide (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria) as "Required for AUDITED scenarios."
-- **Recommended fix:** Add a `scenario_usage_guide` block. Much of the content is inferable from prose already on the card (see Completeness below) — a human editor should draft it before promoting to AUDITED.
+### 3. Related Scenarios lists one more entry than P&G Table 3 — suggestion
+- **Section/field:** Scenario Card Summary "Related Scenarios" / `related_scenarios` vs. `_shared/pg_scenarios.md`
+- **Issue:** Table 3 lists only "Gesture Proceed" as the related scenario for Intersection Gesture Wait. This card lists both `intersection_gesture_proceed` and `intersection_no_gesture`. Likely a reasonable corpus-level enrichment (all three intersection variants are natural comparators, and the scenario's own Notes section already discusses comparison with both) rather than an error, but it goes beyond what the cited source specifies.
+- **Recommended fix:** No action required if the addition is intentional; consider noting "per P&G Table 3" vs. "additional corpus cross-reference" if precision matters for future source-fidelity checks.
 
-### 4. Missing "Scenario Card Summary" section — should-fix
-- **Section/field:** Prose — no "Scenario Card Summary" heading present (template.md requires it for AUDITED)
-- **Issue:** The card jumps from Status straight to Scenario Overview; the structured summary block (Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success/Quality Metrics, Ideal Outcome, Related Scenarios, Cited In) is entirely absent.
-- **Recommended fix:** Add the section, drawing on prose already present (Overview, Normative Expectations) and the `../../../.claude/skills/_shared/pg_scenarios.md` Table 3 entry for "Intersection Gesture Wait."
-
-### 5. Robot Role drift vs. P&G source — should-fix
-- **Section/field:** Fidelity to source vs. `agents.robot.role`
-- **Issue:** `../../../.claude/skills/_shared/pg_scenarios.md`'s Table 3 entry for "Intersection Gesture Wait" lists **Robot Role: Servant**. The scenario's YAML instead sets `agents.robot.role: navigating_agent` (a generic/default value used elsewhere across scenarios, not specific to this one). This isn't a hard contradiction — "navigating_agent" isn't false — but it drops information the source specifies.
-- **Recommended fix:** Consider setting `role: servant` (or otherwise noting the Servant role in prose/YAML) to align with Table 3, or explicitly explain in `evaluation_notes` why a more generic role was chosen instead.
-
-### 6. `relevant_principles` lists 6 principles (P0, P1–P4, P9), one above the 3–5 guidance — suggestion
-- **Section/field:** `relevant_principles` (P0, P1, P2, P3, P4, P9 — corrected 2026-07-05, see Correction Notice)
-- **Issue:** With P0 and P9 correctly counted as valid, 6 principles are listed — one over the 3–5 "most directly relevant" guidance. This is advisory guidance, not a hard rule, so it is flagged at suggestion level. Separately, P6 (Agent Understanding — predicting/accommodating the human's gesture) and P7 (Proactivity — resolving the wait/proceed ambiguity) both seem plausibly relevant to a gesture-compliance scenario and are not listed.
-- **Recommended fix:** Human editor should consider trimming toward 3–5 (or justifying the full set in `evaluation_notes`), and separately consider whether P6 or P7 would be more central than one of the currently-listed entries.
+### 4. Consider whether P6 (Agent Understanding) applies — suggestion
+- **Section/field:** `relevant_principles`
+- **Issue:** The scenario's core mechanic is the robot recognizing and correctly interpreting an explicit human gesture — arguably a case of predicting/accommodating another agent's communicated intent, which is P6's definition ("Predict and accommodate the behavior of other agents"). Currently only P1–P4 are listed.
+- **Recommended fix:** Optional — if the editor judges gesture *recognition* (a perception/interpretation task) as materially different from behavior *prediction*, P6 can reasonably stay excluded. Flagging for a second opinion, not a required change.
 
 ## Source Fidelity
 
-SOURCE cites "Principles and Guidelines for Social Robot Navigation (Table 3)," matching `../../../.claude/skills/_shared/pg_scenarios.md`'s "Intersection Gesture Wait" entry. Comparison:
+Checked against `_shared/pg_scenarios.md`'s "Intersection Gesture Wait" entry (P&G Table 3):
 
-| Field | Table 3 (pg_scenarios.md) | This scenario | Match? |
+| Field | Table 3 | This card | Match |
 |---|---|---|---|
-| Description | Robot told to wait at intersection | Human gestures for robot to wait; robot complies | Match |
-| Physical Env | Indoor | indoor | Match |
-| Geometric Layout | Intersection | hallway intersection | Match |
-| Robot Task | Navigate A to B | intended_robot_task not explicitly stated as a separate field, but consistent with prose ("approach an indoor intersection") | Match (loosely — see completeness note) |
-| Human Behavior | Cross navigate (gesture wait) | human pedestrian, `gesturing: wait` | Match |
-| Robot Role | **Servant** | `navigating_agent` | **Mismatch** — see Finding 5 |
-| Ideal Outcome | Human goes, then robot | `expected_behaviors` implies this (robot yields, waits) but no explicit `ideal_outcome` field is present in the YAML at all | Partial — `ideal_outcome` field is missing (see Completeness) |
-| Related Scenarios | Gesture Proceed | Notes section mentions comparison with "no-gesture and gesture-proceed scenarios" | Match |
+| Physical Env | Indoor | indoor | Yes |
+| Geometric Layout | Intersection | intersection | Yes |
+| Scientific Purpose | Pedestrian interaction | pedestrian interaction | Yes |
+| Robot Role | Servant | servant | Yes — this session's role correction (`navigating_agent` → `servant`) resolves the prior audit's blocking Robot Role finding |
+| Robot Task | Navigate A to B | navigate from A to B | Yes |
+| Human Behavior | Cross navigate (gesture wait) | cross navigate (gesture wait) | Yes |
+| Ideal Outcome | Human goes, then robot | human gestures the robot to wait; human crosses first, then robot proceeds without collision | Yes — consistent, elaborated. Also resolves the prior audit's finding that `ideal_outcome` was missing from the YAML entirely |
+| Related Scenarios | Gesture Proceed | intersection_gesture_proceed, intersection_no_gesture | Partial — see Finding 3 |
+| Cited In | [126] | "126" | Yes |
 
-Overall: broadly faithful to Table 3, with one flagged Robot Role drift (Finding 5) and a missing `ideal_outcome` field (see Completeness).
+No contradictions found. Compared with the 2026-07-05 audit, the Robot Role
+correction and the newly-authored `ideal_outcome`/Card Summary fields resolve what
+were previously the audit's blocking and should-fix source-fidelity findings.
 
 ## Completeness
 
-Fields required for AUDITED per `template.md`:
+`scripts/distill/scenarios --scenario intersection_gesture_wait --dry-run --show-diffs`
+reports no diff and no schema errors — `scenario.md`'s embedded YAML and
+`scenario.yml` are in sync and schema-valid.
 
-- **Scenario Card Summary section** — **should probably be filled in now.** Entirely absent; content is readily inferable from Overview/Normative Expectations prose and the Table 3 entry.
-- **`ideal_outcome` (YAML field)** — **should probably be filled in now.** Not present in the embedded YAML at all, even though `schema.json` defines it and prose clearly implies one ("human goes, then robot"; robot yields safely and legibly).
-- **`scenario_usage_guide.success_metrics`** — **should probably be filled in now.** Plausible candidates (e.g., NoCollisions, a gesture-compliance/legibility metric) are inferable from Normative Expectations.
-- **`scenario_usage_guide.quality_metrics`** — **should probably be filled in now.** Should mirror a corrected `relevant_principles` list.
-- **`scenario_usage_guide.failure_modes`** — **should probably be filled in now.** Already implied in prose ("ignoring the gesture," "partial compliance," "delayed responses") and in `evaluation_notes` — just needs to be lifted into the structured field.
-- **`scenario_usage_guide.labeling_criteria`** — **reasonably blank**, but only in the sense that it requires new authoring judgment (how would an annotator recognize this scenario in a trace, independent of behavior quality) rather than being a straightforward lift from existing prose.
-- **Related Scenarios / Cited In (Scenario Card Summary sub-fields)** — **reasonably blank** for now if the Scenario Card Summary section is being added fresh, though the Notes section already names the related "gesture proceed" and "no-gesture" scenarios and "Cited In: [126]" is available from `pg_scenarios.md`.
+**Scenario Card Summary** (required for AUDITED): Scenario Name, Description,
+Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task,
+Human Behavior, Ideal Outcome, Related Scenarios, Cited In — all now present (this
+resolves the prior audit's Finding 4, "missing Scenario Card Summary section
+entirely"). Success Metrics and Quality Metrics — still blank, should-fill-in-now
+(the card itself already self-flags these as "Remaining gaps").
+
+**Scenario Usage Guide** (required for AUDITED): Ideal Outcome present (restated
+from Card Summary). Success Metrics, Quality Metrics, Failure Modes, Labeling
+Criteria — all blank, both in prose and absent from the YAML entirely (Finding 1).
+Failure Modes and Quality Metrics are should-fill-in-now (directly inferable from
+`evaluation_notes` and `relevant_principles` respectively). Labeling Criteria leans
+should-fill-in-now but requires genuine new authoring rather than transcription.
+
+Prose vs. YAML consistency (Scenario Overview, Social Navigation Context, Normative
+Expectations against `intended_robot_task`, `intended_human_behavior`, `agents`,
+`expected_behaviors`, `ideal_outcome`): no contradictions or drift found.
+`expected_behaviors` entries describe kinds of behavior, not exact motions or
+numeric thresholds — no over-specification (N6) issues.
+
+## Change Summary vs. 2026-07-05 Audit
+
+The prior audit (after its 2026-07-05 correction notice) recorded blocking:1,
+should_fix:2, suggestion:1 — the blocking finding was the missing
+`scenario_usage_guide` block, and the should-fix findings were the missing Scenario
+Card Summary section and the Robot Role drift (`navigating_agent` vs. source's
+`servant`). This session's edits resolved the Scenario Card Summary and Robot Role
+findings entirely, and authored a previously-missing `ideal_outcome` field. The
+`scenario_usage_guide` gap remains unresolved and stays blocking here — it is still
+completely absent from the YAML, unchanged from the prior audit. The principle trim
+from 6 to 4 introduced a new should-fix finding (dropping P0 despite prose that
+satisfies its inclusion criterion) not present in the prior audit; the prior
+suggestion about the 6-principle set being one over the 3–5 guidance band is now
+moot since the count dropped to 4.

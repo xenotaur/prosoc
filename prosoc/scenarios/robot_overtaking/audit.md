@@ -1,154 +1,109 @@
 ---
 scenario: robot_overtaking
-verdict: not_ready
-blocking: 2
+verdict: ready_with_fixes
+blocking: 0
 should_fix: 1
-suggestion: 1
-audited: 2026-07-05
+suggestion: 2
+audited: 2026-07-20
 ---
 
 # Audit: Robot Overtaking
 
 - **Scenario:** `prosoc/scenarios/robot_overtaking/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-05
-- **Verdict:** Not ready — 2 blocking issues (corrected 2026-07-05 — see Correction Notice)
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-20
+- **Verdict:** Ready for AUDITED with minor fixes — no blocking issues found; the
+  Scenario Card Summary and Scenario Usage Guide sections (blocking gaps in the prior
+  audit) are now fully authored and consistent with the YAML.
 
-## Correction Notice (2026-07-05)
+## Findings
 
-This audit originally flagged `P0` in `relevant_principles` as an invalid,
-non-canonical principle ID (Finding 1 below). That was incorrect:
-`prosoc/charter/charter.md` (the sole source of truth) defines **ten** principles,
-P0–P9 — P0 (Goal Achievement) is this project's own explicit, intentional
-extension beyond the P&G paper's eight, not an invented ID. `charter.yml` (the
-generated artifact) confirms this (distiller dry-run reports no diff). The error
-originated in a stale `.claude/skills/_shared/principles.md`, which claimed only
-P1–P8 were valid and has since been corrected. Finding 1 is retracted; the
-`relevant_principles` list totals 5 (P0, P1–P4) once P0 is correctly counted,
-which is within the 3–5 guidance, so no replacement finding is needed.
+### 1. `should_not` entry not reflected in Normative Expectations prose — should-fix
+- **Section/field:** Normative Expectations (prose) vs. `expected_behaviors.should_not`
+- **Issue:** The embedded YAML's `should_not` list has four entries: "follow too
+  closely from behind," "pass abruptly / with sudden lateral motion," "accelerate
+  excessively when passing," and "force the pedestrian to change path or pace." The
+  Normative Expectations prose only names three of these ("Unacceptable behavior
+  includes tailgating, abrupt lateral motion, or accelerating aggressively to pass"),
+  omitting the fourth ("force the pedestrian to change path or pace"). This is a minor
+  one-sided item — the behavior is specified in the machine-readable spec but not
+  echoed in the human-readable interpretive section.
+- **Recommended fix:** Add a clause to the Normative Expectations paragraph covering
+  forcing the pedestrian to alter path or pace (e.g. "...or forcing the pedestrian to
+  change path or pace to accommodate the robot.").
 
-### 1. ~~Invalid principle identifier `P0` in `relevant_principles`~~ — RETRACTED
-- **Status:** Retracted 2026-07-05. See Correction Notice above — P0 is a valid
-  canonical principle per `prosoc/charter/charter.md`, not an invented ID.
+### 2. Physical Environment specialization vs. P&G Table 3 "Generic" — suggestion
+- **Section/field:** Scenario Card Summary "Physical Environment" / YAML
+  `context.environment.type` vs. P&G Table 3's Robot Overtaking entry
+- **Issue:** The card specifies `indoor` / "corridor or sidewalk-like passage," while
+  P&G Table 3 categorizes Robot Overtaking's Physical Env as "Generic" (Geometric
+  Layout: "Passable space," which the card does match). This is a reasonable
+  specialization, not a contradiction, but the card doesn't note that it's a
+  deliberate narrowing of the paper's more general categorization.
+- **Recommended fix:** Optionally add a brief note (in `evaluation_notes` or the
+  Social Navigation Context section) that "indoor" is a deliberate specialization of
+  the paper's "generic" passable-space categorization, so a reader comparing against
+  Table 3 doesn't mistake it for drift.
 
-### 2. Missing "Scenario Card Summary" section — blocking
-- **Section/field:** Scenario Card Summary (per `template.md`, "Required for AUDITED
-  scenarios")
-- **Issue:** `scenario.md` has no Scenario Card Summary section at all — it goes directly
-  from the STATUS block to Overview. Fields such as Scenario Name, Scientific Purpose,
-  Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success
-  Metrics, Quality Metrics, Ideal Outcome, Related Scenarios, and Cited In are entirely
-  absent from the prose, even though several are inferable from the YAML and prose
-  elsewhere in the card.
-- **Recommended fix:** Add a Scenario Card Summary section per `template.md`, populated
-  from the existing YAML/prose content (e.g. Scientific Purpose: pedestrian interaction;
-  Physical Environment: indoor; Robot Task: navigate A to B / overtake pedestrian; Human
-  Behavior: navigate same direction, slower; Ideal Outcome: robot passes human safely and
-  comfortably) and from the P&G Table 3 "Robot Overtaking" entry (see Source Fidelity
-  below).
-
-### 3. Missing `scenario_usage_guide` YAML block and prose section — blocking
-- **Section/field:** `scenario_usage_guide` (YAML) / "Scenario Usage Guide" prose section
-  (template.md, "Required for AUDITED scenarios")
-- **Issue:** Neither the embedded YAML nor `scenario.yml` contains a
-  `scenario_usage_guide` object (success_metrics, quality_metrics, failure_modes,
-  labeling_criteria all absent), and `scenario.md` has no corresponding "Scenario Usage
-  Guide" prose section. `evaluation_notes` gestures at failure modes in prose
-  ("tailgating, sudden lateral movements, or passing in a way that causes surprise or
-  discomfort") but this content has not been structured into `failure_modes` or the
-  other required subfields.
-- **Recommended fix:** Add a `scenario_usage_guide` block with `success_metrics` (e.g.
-  SR, NoCollisions, PSC), `quality_metrics` (a subset of `relevant_principles`, e.g. P1, P2, P3), and convert
-  the failure-mode language already in `evaluation_notes` into explicit
-  `failure_modes` and `labeling_criteria` entries, plus the matching "Scenario Usage
-  Guide" prose section in `scenario.md`.
-
-### 4. `name` field does not match the scenario.md title heading — should-fix
-- **Section/field:** `id`/`name` (schema.json required fields) vs. `scenario.md` title
-- **Issue:** The document title is `# Scenario: Robot Overtaking`, but the YAML `name`
-  field is `Overtaking a Pedestrian from Behind`. The audit checklist requires `name` to
-  match the scenario's title heading in `scenario.md`; here they diverge (though both are
-  reasonable descriptions of the same scenario).
-- **Recommended fix:** Either rename the YAML `name` to match the title heading ("Robot
-  Overtaking") or update the title heading to match the YAML name, so the two are
-  consistent.
-
-### 5. Over-specification risk in `expected_behaviors.should_not` — suggestion
-- **Section/field:** `expected_behaviors.should_not` (P&G Guideline N6)
-- **Issue:** Entries are phrased at the level of a *kind* of behavior ("follow too
-  closely", "pass abruptly or at excessive speed") rather than exact numeric thresholds,
-  which is correct. This is a minor suggestion rather than a real violation: "pass
-  abruptly or at excessive speed" borders on conflating two distinct behaviors (abrupt
-  lateral motion vs. excessive speed) in one bullet.
-- **Recommended fix:** Consider splitting into two bullets for clarity ("pass abruptly /
-  with sudden lateral motion" and "accelerate excessively when passing"), though this is
-  optional polish, not a compliance issue.
+### 3. `related_scenarios` could include additional corpus matches named in prose — suggestion
+- **Section/field:** `related_scenarios` (YAML) / "Related Scenarios" (Card Summary)
+  vs. "Notes for Scenario Designers and Evaluators"
+- **Issue:** `related_scenarios` lists only `pedestrian_overtaking`, but the Notes
+  section says this scenario "pairs naturally with frontal approach scenarios, group
+  overtaking variants, narrow-passage constraints, and distracted pedestrian
+  variants." Two of these correspond to scenarios that already exist in the corpus —
+  `frontal_approach` and `single_file_hallway` (the corpus's narrow-passage scenario,
+  per `../../../.claude/skills/_shared/pg_scenarios.md`) — but neither is added to
+  `related_scenarios`.
+- **Recommended fix:** Consider adding `frontal_approach` and `single_file_hallway` to
+  `related_scenarios` if the pairing is intended to be a formal cross-reference; leave
+  as-is if the Notes mention is meant only as a loose, non-binding aside.
 
 ## Source Fidelity
 
 SOURCE is cited informally as "Prompt to ChatGPT 5.2" with no retrievable content, but
-the Social Navigation Context section explicitly says this scenario "is inspired by
-pedestrian overtaking cases discussed in the *Principles and Guidelines for Social Robot
-Navigation* paper," and the scenario clearly corresponds to the **Robot Overtaking**
-entry in P&G Table 3 (per `../../../.claude/skills/_shared/pg_scenarios.md`):
+the Social Navigation Context section explicitly ties this scenario to the *Principles
+and Guidelines for Social Robot Navigation* paper, and it clearly corresponds to the
+**Robot Overtaking** entry in P&G Table 3 (per `../../../.claude/skills/_shared/pg_scenarios.md`):
 
-- **P&G Table 3 "Robot Overtaking":** Description: "Robot overtakes a moving pedestrian";
-  Physical Env: Generic; Geometric Layout: Passable space; Scientific Purpose: Pedestrian
-  interaction; Robot Task: Navigate A to B; Human Behavior: Navigate A to B (slower);
-  Ideal Outcome: Robot passes human.
+- **P&G Table 3 "Robot Overtaking":** Description: "Robot overtakes a moving
+  pedestrian"; Physical Env: Generic; Geometric Layout: Passable space; Scientific
+  Purpose: Pedestrian interaction; Robot Task: Navigate A to B; Human Behavior:
+  Navigate A to B (slower); Ideal Outcome: Robot passes human; Cited In: [50, 157].
 
 Comparing against the card:
-- **Robot/human roles and relative speed:** Match — robot is faster (`relative_speed:
-  robot_faster`), human is the slower pedestrian being overtaken. Consistent with "Human
-  Behavior: Navigate A to B (slower)."
-- **Task:** Consistent — robot navigates forward and must decide whether to overtake,
-  matching "Navigate A to B."
-- **Ideal outcome:** Consistent in spirit — the card's evaluation_notes describe
-  "successful overtaking characterized by early intent signaling, sufficient lateral
-  clearance, and minimal disruption," aligned with Table 3's "Robot passes human," though
-  the card leaves open the possibility the robot chooses not to overtake (a reasonable,
-  compatible elaboration, not a contradiction).
-- **Physical environment mismatch:** Table 3 lists Physical Env as "Generic" and
-  Geometric Layout as "Passable space" (i.e., not indoor-specific), while the card's YAML
-  sets `context.environment.type: indoor` and `setting: corridor or sidewalk-like
-  passage`. This is a **drift**, not a contradiction — the scenario is a reasonable indoor
-  specialization of a "generic" paper scenario, but the mismatch is worth flagging since
-  the card doesn't note this is a deliberate narrowing.
+- **Robot/human roles and relative speed:** Match — `relative_speed: robot_faster`,
+  human is the slower pedestrian being overtaken, consistent with "Human Behavior:
+  Navigate A to B (slower)."
+- **Task:** Match — `intended_robot_task: navigate from A to B`.
+- **Geometric layout:** Match — `geometric_layout: passable space`.
+- **Scientific purpose:** Match — `scientific_purpose: pedestrian interaction`.
+- **Ideal outcome:** Match in substance — `ideal_outcome: robot passes the human
+  safely, comfortably, and without disruption` is a reasonable elaboration of Table
+  3's "Robot passes human."
+- **Cited In:** Match — `cited_in: ["50", "157"]` matches Table 3 exactly.
+- **Physical environment:** Drift, not contradiction — card specifies `indoor` where
+  Table 3 says "Generic" (see Finding 2 above).
 
-Overall: no outright contradictions found; one drift (physical environment specialization
-vs. paper's "generic" categorization) worth a should-fix note, captured above as informing
-Finding 2's Scenario Card Summary (Physical Environment field should either say "Generic"
-per the paper or explicitly note the indoor specialization as a deliberate choice).
+Overall: strong fidelity to the P&G Table 3 entry, with one minor, non-contradictory
+specialization (physical environment) noted above.
 
 ## Completeness
 
-Per `template.md`'s "Required for AUDITED scenarios" fields:
+Per `template.md`'s "Required for AUDITED scenarios" fields, all are now present:
 
-- **Scenario Card Summary** (Scenario Name, Description, Scientific Purpose, Physical
-  Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Ideal Outcome,
-  Success/Quality Metrics, Related Scenarios, Cited In): **should probably be filled in
-  now** — the section is entirely missing, but all core fields are readily inferable from
-  the existing Overview/Social Navigation Context prose and the YAML block (see Finding 2).
-  Related Scenarios and Cited In could reasonably stay blank/minimal for now, but note the
-  card's own "Notes for Scenario Designers and Evaluators" section already names related
-  scenarios in prose ("pairs naturally with frontal approach scenarios, group overtaking
-  variants, narrow-passage constraints, and distracted pedestrian variants") — this is
-  should-fill-in-now material for the "Related Scenarios" field.
-- **Scenario Usage Guide — Success Metrics:** should probably be filled in now — nothing
-  currently in YAML or prose; P&G-style metrics (SR, NoCollisions, PSC) are a natural fit
-  given the scenario's safety/comfort focus.
-- **Scenario Usage Guide — Quality Metrics:** should probably be filled in now — the
-  `relevant_principles` list (P0, P1–P4) already identifies applicable candidates;
-  reuse a subset directly.
-- **Scenario Usage Guide — Ideal Outcome:** reasonably present in spirit (see
-  `ideal_outcome`-equivalent language in `evaluation_notes`), but there is no explicit
-  top-level `ideal_outcome` field in the YAML at all (the schema defines one) — should
-  probably be filled in now, e.g. "Robot passes the pedestrian with adequate clearance,
-  minimal speed differential, and no perceived pressure or startle."
-- **Scenario Usage Guide — Failure Modes:** should probably be filled in now — already
-  implied in `evaluation_notes` prose ("tailgating, sudden lateral movements, passing in
-  a way that causes surprise or discomfort") but not extracted into a structured
-  `failure_modes` list.
-- **Scenario Usage Guide — Labeling Criteria:** should probably be filled in now — no
-  criteria currently given for recognizing this scenario in data (e.g. "robot and human
-  moving same direction," "robot approaching from behind at higher speed," "passable
-  width available").
+- **Scenario Card Summary:** Complete — Scenario Name, Description, Scientific
+  Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human
+  Behavior, Success Metrics, Quality Metrics, Ideal Outcome, Related Scenarios, and
+  Cited In are all populated and consistent with the YAML.
+- **Scenario Usage Guide — Success Metrics:** Complete (SR, NoCollisions).
+- **Scenario Usage Guide — Quality Metrics:** Complete (P2, P3, P4 — a sensible
+  subset of `relevant_principles`).
+- **Scenario Usage Guide — Ideal Outcome:** Complete.
+- **Scenario Usage Guide — Failure Modes:** Complete (three concrete failure modes,
+  consistent with `evaluation_notes`).
+- **Scenario Usage Guide — Labeling Criteria:** Complete (three concrete,
+  data-recognizable criteria).
+
+No required fields are blank. `related_scenarios` is populated but could arguably be
+expanded (see Finding 3, a suggestion rather than a completeness gap, since a single
+related scenario is a valid non-empty answer).
