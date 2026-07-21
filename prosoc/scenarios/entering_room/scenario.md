@@ -3,7 +3,7 @@
 ## Status
 
 - **STATE:** DRAFTED
-- **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); Robots@Games (R@G)
+- **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); Robotics at Google (R@G), internal scenario reference
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
 - **EDITED:** render_sections.py, 2026-07-20
 
@@ -26,11 +26,8 @@
   - P4
   - P5
 - **Ideal Outcome:** robot lets the human exit fully, then enters the room without obstruction
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** exiting_room, narrow_doorway
+- **Cited In:** Robotics at Google (R@G), internal scenario reference
 
 ---
 
@@ -144,6 +141,13 @@ relevant_principles:
   - P6  # Agent Understanding — recognizing the human's exit intent and role
 
 ideal_outcome: robot lets the human exit fully, then enters the room without obstruction
+
+related_scenarios:
+  - exiting_room
+  - narrow_doorway
+
+cited_in:
+  - "Robotics at Google (R@G), internal scenario reference"
 
 scenario_usage_guide:
   success_metrics:

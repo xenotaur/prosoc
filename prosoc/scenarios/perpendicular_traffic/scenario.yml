@@ -55,6 +55,11 @@ relevant_principles:
 - P6
 - P7
 ideal_outcome: robot crosses the perpendicular flow without collision or obstruction
+related_scenarios:
+- parallel_traffic
+- intersection_no_gesture
+cited_in:
+- '167'
 scenario_usage_guide:
   success_metrics:
   - SR

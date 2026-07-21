@@ -66,6 +66,10 @@ relevant_principles:
 - P8
 ideal_outcome: delivery of medicine to the recipient promptly and without collision
   or unsafe maneuvers
+related_scenarios:
+- object_handover
+cited_in:
+- this article
 scenario_usage_guide:
   success_metrics:
   - SR

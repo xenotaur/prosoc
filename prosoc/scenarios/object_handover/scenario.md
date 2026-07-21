@@ -26,11 +26,8 @@
   - P2
   - P4
 - **Ideal Outcome:** human takes the object from the robot without awkwardness, collision, or dropped object
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** crash_cart
+- **Cited In:** 161
 
 ---
 
@@ -149,6 +146,12 @@ relevant_principles:
   - P6  # Agent Understanding — recognizing grip and release timing
 
 ideal_outcome: human takes the object from the robot without awkwardness, collision, or dropped object
+
+related_scenarios:
+  - crash_cart
+
+cited_in:
+  - "161"
 
 scenario_usage_guide:
   success_metrics:

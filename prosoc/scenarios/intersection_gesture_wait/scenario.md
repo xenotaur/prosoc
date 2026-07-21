@@ -124,6 +124,7 @@ expected_behaviors:
     - display ambiguous motion while waiting
 
 relevant_principles:
+  - P0  # Goal Achievement
   - P1  # Safety
   - P2  # Comfort
   - P3  # Legibility

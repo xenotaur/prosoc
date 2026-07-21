@@ -27,11 +27,8 @@
   - P3
   - P6
 - **Ideal Outcome:** person follows the robot to the destination, with the robot adapting pace and signaling turns so the human stays with it
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** following
+- **Cited In:** 50
 
 ---
 
@@ -149,6 +146,12 @@ relevant_principles:
   - P8  # Contextual Appropriateness — pace and turn timing should adapt to the human's demonstrated capability
 
 ideal_outcome: person follows the robot to the destination, with the robot adapting pace and signaling turns so the human stays with it
+
+related_scenarios:
+  - following
+
+cited_in:
+  - "50"
 
 scenario_usage_guide:
   success_metrics:

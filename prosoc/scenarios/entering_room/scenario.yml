@@ -53,6 +53,11 @@ relevant_principles:
 - P5
 - P6
 ideal_outcome: robot lets the human exit fully, then enters the room without obstruction
+related_scenarios:
+- exiting_room
+- narrow_doorway
+cited_in:
+- Robotics at Google (R@G), internal scenario reference
 scenario_usage_guide:
   success_metrics:
   - SR

@@ -53,6 +53,10 @@ relevant_principles:
 - P6
 ideal_outcome: robot and human pass each other safely, comfortably, and without prolonged
   hesitation
+related_scenarios:
+- blind_corner
+- movable_obstruction
+- single_file_hallway
 cited_in:
 - '50'
 - '126'

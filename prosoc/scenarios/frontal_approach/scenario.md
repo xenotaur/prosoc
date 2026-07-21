@@ -25,11 +25,8 @@
   - P3
   - P5
 - **Ideal Outcome:** robot and human pass each other safely, comfortably, and without prolonged hesitation
+- **Related Scenarios:** blind_corner, movable_obstruction, single_file_hallway
 - **Cited In:** 50, 126, 167
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
 
 ---
 
@@ -106,6 +103,11 @@ relevant_principles:
   - P6  # Agent Understanding
 
 ideal_outcome: robot and human pass each other safely, comfortably, and without prolonged hesitation
+
+related_scenarios:
+  - blind_corner
+  - movable_obstruction
+  - single_file_hallway
 
 cited_in:
   - "50"

@@ -27,11 +27,8 @@
   - P2
   - P5
 - **Ideal Outcome:** robot merges into and travels with the pedestrian stream without collision or obstruction
-
-**Remaining gaps:**
-
-- **Related Scenarios** — should-fill-in-now
-- **Cited In** — should-fill-in-now
+- **Related Scenarios:** perpendicular_traffic, crowd_navigation
+- **Cited In:** 167
 
 ---
 
@@ -148,6 +145,13 @@ relevant_principles:
   - P6  # Agent Understanding — predicting the stream's aggregate pace and flow
 
 ideal_outcome: robot merges into and travels with the pedestrian stream without collision or obstruction
+
+related_scenarios:
+  - perpendicular_traffic
+  - crowd_navigation
+
+cited_in:
+  - "167"
 
 scenario_usage_guide:
   success_metrics:
