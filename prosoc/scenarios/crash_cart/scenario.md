@@ -194,6 +194,13 @@ evaluation_notes: >
   This scenario is related to Object Handover (the general delivery/handoff
   task without urgency) and to Food Delivery (a related but lower-urgency
   delivery context, not separately defined in Table 3).
+
+  Related Scenarios note: P&G Table 3 lists "Food Delivery" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references
+  object_handover, which this card's own Notes section already discusses.
+  This is expected per the related_scenarios convention
+  (prosoc-scenario-audit's audit_checklist.md), not a source-fidelity gap.
 ```
 
 ---

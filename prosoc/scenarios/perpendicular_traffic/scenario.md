@@ -182,6 +182,14 @@ evaluation_notes: >
   by [167], not separately defined in Table 3) and to Parallel Traffic,
   which involves flow aligned with rather than orthogonal to the robot's
   path.
+
+  Related Scenarios note: P&G Table 3 lists "Plaza Crossing" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references
+  parallel_traffic (discussed above) and intersection_no_gesture, a
+  single-pedestrian crossing analog of this multi-pedestrian-flow
+  scenario. This is expected per the related_scenarios convention
+  (prosoc-scenario-audit's audit_checklist.md), not a source-fidelity gap.
 ```
 
 ---

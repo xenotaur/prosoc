@@ -186,6 +186,14 @@ evaluation_notes: >
   a robot actively crossing a milling crowd, and to Parallel Traffic and
   Perpendicular Traffic, which specialize crowd motion to a single shared
   direction rather than unstructured milling.
+
+  Related Scenarios note: P&G Table 3 lists "Robot Crowding" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references
+  parallel_traffic and perpendicular_traffic, which this card's own Notes
+  section already discusses. This is expected per the related_scenarios
+  convention (prosoc-scenario-audit's audit_checklist.md), not a
+  source-fidelity gap.
 ```
 
 ---

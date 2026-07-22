@@ -190,6 +190,13 @@ evaluation_notes: >
   Table 3), its natural inverse, and to Accompany Peer (Figure 7), which
   involves ongoing co-location with a single human rather than a discrete
   join event with a multi-person group.
+
+  Related Scenarios note: P&G Table 3 lists "Leaving a Group" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references
+  crowd_navigation, since neither Leaving a Group nor Accompany Peer is
+  implemented yet. This is expected per the related_scenarios convention
+  (prosoc-scenario-audit's audit_checklist.md), not a source-fidelity gap.
 ```
 
 ---

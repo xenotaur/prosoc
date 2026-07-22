@@ -152,6 +152,13 @@ evaluation_notes: >
 
   Common failure modes include overly aggressive entry, excessive hesitation,
   or late yielding that disrupts the human’s motion.
+
+  Related Scenarios note: P&G Table 3 lists no related scenario for this
+  entry. `related_scenarios` adds intersection_gesture_proceed and
+  intersection_gesture_wait, this scenario's gesture-based counterparts,
+  which is expected — Table 3's silence isn't a claim that no relationship
+  exists (see the related_scenarios convention in prosoc-scenario-audit's
+  audit_checklist.md).
 ```
 
 ---

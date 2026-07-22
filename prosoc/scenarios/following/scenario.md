@@ -194,6 +194,13 @@ evaluation_notes: >
   scenario Description ("A robot follows a person"). This card follows the
   Description, treating the robot as following a human, and renders
   `intended_robot_task` as "follow the lead human" accordingly.
+
+  Related Scenarios note: P&G Table 3 lists "Accompany Peer" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references leading,
+  this scenario's role-reversed counterpart. This is expected per the
+  related_scenarios convention (prosoc-scenario-audit's
+  audit_checklist.md), not a source-fidelity gap.
 ```
 
 ---

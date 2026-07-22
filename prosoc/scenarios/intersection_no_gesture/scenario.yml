@@ -66,4 +66,8 @@ evaluation_notes: "This scenario evaluates the robot\u2019s ability to navigate 
   \ intersection using implicit coordination cues only. Successful behavior allows\
   \ both agents to pass smoothly without collision or hesitation.\nCommon failure\
   \ modes include overly aggressive entry, excessive hesitation, or late yielding\
-  \ that disrupts the human\u2019s motion."
+  \ that disrupts the human\u2019s motion.\nRelated Scenarios note: P&G Table 3 lists\
+  \ no related scenario for this entry. `related_scenarios` adds intersection_gesture_proceed\
+  \ and intersection_gesture_wait, this scenario's gesture-based counterparts, which\
+  \ is expected \u2014 Table 3's silence isn't a claim that no relationship exists\
+  \ (see the related_scenarios convention in prosoc-scenario-audit's audit_checklist.md)."

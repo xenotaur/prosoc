@@ -183,6 +183,14 @@ evaluation_notes: >
   Variants may include different approach speeds, a partially open vs. fully
   open door, or a human carrying an object that further narrows the usable
   width.
+
+  Related Scenarios note: P&G Table 3 lists "Narrow Arch" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references
+  blind_corner, entering_room, and exiting_room, which this card's own
+  Notes section already discusses. This is expected per the
+  related_scenarios convention (prosoc-scenario-audit's
+  audit_checklist.md), not a source-fidelity gap.
 ```
 
 ---

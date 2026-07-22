@@ -169,6 +169,13 @@ evaluation_notes: >
 
   Failure modes include blocking behavior, sudden motion changes, or
   trajectories that require the pedestrian to hesitate or reroute.
+
+  Related Scenarios note: P&G Table 3 lists "Down Path" as this scenario's
+  related entry, which has no implemented scenario directory under
+  prosoc/scenarios/. `related_scenarios` instead references
+  robot_overtaking, this scenario's role-reversed counterpart. This is
+  expected per the related_scenarios convention (prosoc-scenario-audit's
+  audit_checklist.md), not a source-fidelity gap.
 ```
 
 ---
