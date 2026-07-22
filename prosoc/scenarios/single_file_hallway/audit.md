@@ -4,17 +4,15 @@ verdict: ready_with_fixes
 blocking: 0
 should_fix: 1
 suggestion: 1
-audited: 2026-07-20
+audited: 2026-07-21
 ---
 
 # Audit: Single File Hallway
 
 - **Scenario:** `prosoc/scenarios/single_file_hallway/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-20
-- **Verdict:** Ready for AUDITED with minor fixes — all three prior blocking issues
-  (duplicated `should_not` entries, missing Scenario Card Summary, missing Scenario
-  Usage Guide prose) are resolved in the current card; only minor prose-completeness
-  gaps remain.
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-21
+- **Verdict:** Ready for AUDITED with minor fixes — no blocking issues; only minor
+  prose-completeness gaps remain.
 
 ## Findings
 
@@ -34,20 +32,22 @@ audited: 2026-07-20
   maintaining safe distance and not entering the hallway simultaneously with the
   human — in natural language, alongside the already-covered `should` guidance.
 
-### 2. "Cited In" gap note is stale/misleading given source limitations — suggestion
+### 2. "Cited In" gap note's phrasing could be clearer that the gap is permanent — suggestion
 - **Section/field:** Scenario Card Summary "Remaining gaps" note vs. Source Fidelity
 - **Issue:** The Card Summary block still carries a self-flagged note: "**Remaining
-  gaps:** Cited In — should-fill-in-now." However, per
+  gaps:** Cited In — should-fill-in-now." Per
   `../../../.claude/skills/_shared/pg_scenarios.md`, `single_file_hallway` corresponds
   to the Figure 7 "Narrow Hallway" sketch, which — unlike full Table 3 entries — has no
-  citation-index data available at all ("they do not have full Table 3 metadata").
-  There is no retrievable citation to fill in, so labeling this "should-fill-in-now"
-  overstates what's actually actionable; it reads more like "reasonably blank pending
-  a source that has this data."
-- **Recommended fix:** Either reword the gap note to reflect that Cited In is
-  currently unfillable from available sources (not a pending to-do), or remove the
-  note entirely if the omission is considered acceptable for a Figure-7-derived
-  scenario.
+  citation-index data available at all ("they do not have full Table 3 metadata"). This
+  is a genuine, permanent gap rather than an oversight: there is no P&G Table 3/Figure 7
+  citation index to draw from, so no future editing pass can "fill in" this field from
+  the available reference material. The current "should-fill-in-now" phrasing reads as
+  an actionable to-do, which overstates what's actually possible.
+- **Recommended fix:** Either reword the gap note to reflect that Cited In is currently
+  unfillable from available sources (e.g. "reasonably blank — no citation index exists
+  for Figure-7-derived scenarios"), or remove the note entirely if the omission is
+  considered acceptable as a permanent, source-driven limitation for this
+  Figure-7-derived scenario.
 
 ## Source Fidelity
 
@@ -72,26 +72,28 @@ Comparing the card against what's available:
   In fields listed in `pg_scenarios.md` beyond the one-line description), a
   field-by-field fidelity check like the one possible for Table 3 scenarios cannot be
   performed for `scientific_purpose`, `intended_robot_task`, `intended_human_behavior`,
-  `ideal_outcome`, or `cited_in` — all of these were authored this session without a
-  ground-truth Table 3 entry to check against.
+  `ideal_outcome`, or `cited_in`.
 
 **Source fidelity: partially checkable.** The high-level correspondence to the Figure
-7 "Narrow Hallway" concept holds, and the newly-authored fields (scientific_purpose,
-geometric_layout, intended_robot_task, intended_human_behavior, ideal_outcome) are all
+7 "Narrow Hallway" concept holds, and the authored fields (scientific_purpose,
+geometric_layout, intended_robot_task, intended_human_behavior, ideal_outcome) remain
 internally plausible and consistent with the Figure 7 gloss and the card's own
-Overview/Discussion prose, but they cannot be verified against Table-3-style
-ground truth because none exists for this scenario. Verifying deeper fidelity would
-require reading the P&G paper's Figure 7 discussion directly (not provided as
-`--paper` input for this audit) — this audit does not fabricate that comparison.
+Overview/Discussion prose, but they cannot be verified against Table-3-style ground
+truth because none exists for this scenario. Verifying deeper fidelity would require
+reading the P&G paper's Figure 7 discussion directly (not provided as `--paper` input
+for this audit) — this audit does not fabricate that comparison. In particular,
+`cited_in` has no ground-truth citation index available for this scenario at all (see
+Finding 2) — this is a permanent, source-driven limitation, not a gap this audit
+expects to close on a future pass.
 
 ## Completeness
 
 Per `template.md`'s "Required for AUDITED scenarios" fields:
 
 - **Scenario Card Summary:** Complete except **Cited In**, which is blank and
-  self-flagged in a "Remaining gaps" note (see Finding 2) — reasonably blank given no
-  citation data exists for this Figure-7-derived scenario in the available reference
-  material, though the note's phrasing overstates it as actionable.
+  self-flagged in a "Remaining gaps" note (see Finding 2) — reasonably blank, and
+  permanently so, given no citation data exists for this Figure-7-derived scenario in
+  the available reference material.
 - **Scenario Usage Guide — Success Metrics:** Complete (SR, NoCollisions,
   DeadlockFree).
 - **Scenario Usage Guide — Quality Metrics:** Complete (P3, P5, P7 — consistent with
@@ -102,5 +104,14 @@ Per `template.md`'s "Required for AUDITED scenarios" fields:
 - **Scenario Usage Guide — Labeling Criteria:** Complete (three concrete,
   data-recognizable criteria).
 
-No required fields are blank aside from the optional Cited In noted above. The
-optional "Normative Expectations" prose section remains absent (see Finding 1).
+No required fields are blank aside from the permanently-unfillable Cited In noted
+above. The optional "Normative Expectations" prose section remains absent (see
+Finding 1).
+
+## Re-audit Note
+
+This is a fresh point-in-time re-audit (2026-07-21). The scenario was not edited since
+the 2026-07-20 audit; `scripts/distill/scenarios --scenario single_file_hallway
+--dry-run --show-diffs` reports no diff and no schema errors. Findings, verdict, and
+counts are unchanged from the prior audit — the "Cited In" gap remains classified as a
+genuine, permanent gap rather than an oversight to be resolved.

@@ -4,16 +4,16 @@ verdict: ready_with_fixes
 blocking: 0
 should_fix: 1
 suggestion: 2
-audited: 2026-07-20
+audited: 2026-07-21
 ---
 
 # Audit: Robot Overtaking
 
 - **Scenario:** `prosoc/scenarios/robot_overtaking/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-20
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-21
 - **Verdict:** Ready for AUDITED with minor fixes — no blocking issues found; the
-  Scenario Card Summary and Scenario Usage Guide sections (blocking gaps in the prior
-  audit) are now fully authored and consistent with the YAML.
+  Scenario Card Summary and Scenario Usage Guide sections are fully authored and
+  consistent with the YAML.
 
 ## Findings
 
@@ -89,7 +89,7 @@ specialization (physical environment) noted above.
 
 ## Completeness
 
-Per `template.md`'s "Required for AUDITED scenarios" fields, all are now present:
+Per `template.md`'s "Required for AUDITED scenarios" fields, all are present:
 
 - **Scenario Card Summary:** Complete — Scenario Name, Description, Scientific
   Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human
@@ -107,3 +107,10 @@ Per `template.md`'s "Required for AUDITED scenarios" fields, all are now present
 No required fields are blank. `related_scenarios` is populated but could arguably be
 expanded (see Finding 3, a suggestion rather than a completeness gap, since a single
 related scenario is a valid non-empty answer).
+
+## Re-audit Note
+
+This is a fresh point-in-time re-audit (2026-07-21). The scenario was not edited since
+the 2026-07-20 audit; `scripts/distill/scenarios --scenario robot_overtaking --dry-run
+--show-diffs` reports no diff and no schema errors. Findings, verdict, and counts are
+unchanged from the prior audit.
