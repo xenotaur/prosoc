@@ -92,4 +92,11 @@ evaluation_notes: 'Ambiguity note: the P&G Table 3 entry for this scenario lists
   a single fixed rule regardless of role.
 
   This scenario is related to Exiting Elevator (Figure 7, not in Table 3), which applies
-  a similar norm in a higher-density, time-constrained elevator context.'
+  a similar norm in a higher-density, time-constrained elevator context.
+
+  Related Scenarios note: P&G Table 3 lists "Exiting Elevator (R@G)" as this scenario''s
+  related entry, which has no implemented scenario directory under prosoc/scenarios/.
+  `related_scenarios` instead references entering_room and narrow_doorway, which this
+  card''s own Notes section already discusses. This is expected per the related_scenarios
+  convention (prosoc-scenario-audit''s audit_checklist.md), not a source-fidelity
+  gap.'

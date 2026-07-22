@@ -138,6 +138,15 @@ evaluation_notes: >
   The scenario assumes a pedestrian with a typical level of awareness,
   neither oblivious to the presence of the robot nor overly attentive to it.
 
+  Related Scenarios note: P&G Table 3 lists "Ped. Obstruct" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references
+  blind_corner, movable_obstruction, and single_file_hallway, which this
+  corpus's own scenario set explicitly treats as a progressively
+  constrained variant series of this scenario. This is expected per the
+  related_scenarios convention (prosoc-scenario-audit's
+  audit_checklist.md), not a source-fidelity gap.
+
 ```
 
 ---

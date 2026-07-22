@@ -142,6 +142,13 @@ evaluation_notes: >
 
   Failure modes include ignoring the gesture, delayed or ambiguous motion,
   or overly aggressive crossing behavior.
+
+  Related Scenarios note: `related_scenarios` includes P&G Table 3's own
+  citation for this scenario (intersection_gesture_wait, listed as
+  "Gesture Wait") plus intersection_no_gesture, since Table 3's Related
+  Scenarios field is a single citation, not an exhaustive list. This is
+  expected per the related_scenarios convention (prosoc-scenario-audit's
+  audit_checklist.md).
 ```
 
 ---

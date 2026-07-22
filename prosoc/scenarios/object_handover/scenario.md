@@ -185,6 +185,13 @@ evaluation_notes: >
   urgent medical delivery in an indoor setting, and to Robot Courier
   (a general delivery task without the close-range interactive handoff
   emphasized here).
+
+  Related Scenarios note: P&G Table 3 lists "Robot Courier" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references
+  crash_cart, which this card's own Notes section already discusses. This
+  is expected per the related_scenarios convention (prosoc-scenario-audit's
+  audit_checklist.md), not a source-fidelity gap.
 ```
 
 ---

@@ -84,4 +84,11 @@ evaluation_notes: 'This scenario specifically tests role-sensitive yielding: the
   with typically higher crowd density and a hard time constraint (door closing).
 
   The inverse of this scenario is Exiting Room, where the robot is the one leaving
-  while a human enters.'
+  while a human enters.
+
+  Related Scenarios note: P&G Table 3 lists "Entering Elevator (R@G)" as this scenario''s
+  related entry, which has no implemented scenario directory under prosoc/scenarios/.
+  `related_scenarios` instead references exiting_room and narrow_doorway, which this
+  card''s own Notes section already discusses. This is expected per the related_scenarios
+  convention (prosoc-scenario-audit''s audit_checklist.md), not a source-fidelity
+  gap.'

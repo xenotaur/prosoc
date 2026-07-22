@@ -184,6 +184,13 @@ evaluation_notes: >
   This scenario is related to Tour Guide (a specialized, extended variant
   not separately defined in Table 3) and is the role-reversed counterpart
   of Following, where the human leads and the robot tracks them instead.
+
+  Related Scenarios note: P&G Table 3 lists "Tour Guide" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references
+  following, this scenario's role-reversed counterpart. This is expected
+  per the related_scenarios convention (prosoc-scenario-audit's
+  audit_checklist.md), not a source-fidelity gap.
 ```
 
 ---

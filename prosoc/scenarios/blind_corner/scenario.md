@@ -193,6 +193,13 @@ evaluation_notes: >
   natural walking pace without anticipating the robot's presence. The confederate
   should not slow down preemptively — the encounter should simulate a natural blind
   corner meeting.
+
+  Related Scenarios note: P&G Table 3 lists no related scenario for this
+  entry. `related_scenarios` adds frontal_approach and narrow_doorway
+  based on this card's own Notes section analysis, which is expected —
+  Table 3's silence isn't a claim that no relationship exists (see the
+  related_scenarios convention in prosoc-scenario-audit's
+  audit_checklist.md).
 ```
 
 ---

@@ -169,6 +169,12 @@ evaluation_notes: >
 
   Human awareness is assumed to be variable; overly assertive behavior is
   inappropriate even if the pedestrian appears unaware of the robot’s presence.
+
+  Related Scenarios note: P&G Table 3 lists no related scenario for this
+  entry. `related_scenarios` adds pedestrian_overtaking, this scenario's
+  role-reversed counterpart, which is expected — Table 3's silence isn't a
+  claim that no relationship exists (see the related_scenarios convention
+  in prosoc-scenario-audit's audit_checklist.md).
 ```
 
 ## Scenario Usage Guide

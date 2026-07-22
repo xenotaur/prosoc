@@ -90,4 +90,11 @@ evaluation_notes: 'Crowd density and movement pattern should be treated as confi
   This scenario is related to Robot Crowding (Figure 7, not in Table 3), which considers
   a stationary robot surrounded by pedestrians rather than a robot actively crossing
   a milling crowd, and to Parallel Traffic and Perpendicular Traffic, which specialize
-  crowd motion to a single shared direction rather than unstructured milling.'
+  crowd motion to a single shared direction rather than unstructured milling.
+
+  Related Scenarios note: P&G Table 3 lists "Robot Crowding" as this scenario''s related
+  entry, which has no implemented scenario directory under prosoc/scenarios/. `related_scenarios`
+  instead references parallel_traffic and perpendicular_traffic, which this card''s
+  own Notes section already discusses. This is expected per the related_scenarios
+  convention (prosoc-scenario-audit''s audit_checklist.md), not a source-fidelity
+  gap.'

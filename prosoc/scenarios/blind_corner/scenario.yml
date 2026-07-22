@@ -95,4 +95,8 @@ evaluation_notes: "This scenario evaluates the robot's ability to handle unexpec
   \ playbook: the human confederate should approach the corner at a natural walking\
   \ pace without anticipating the robot's presence. The confederate should not slow\
   \ down preemptively \u2014 the encounter should simulate a natural blind corner\
-  \ meeting."
+  \ meeting.\nRelated Scenarios note: P&G Table 3 lists no related scenario for this\
+  \ entry. `related_scenarios` adds frontal_approach and narrow_doorway based on this\
+  \ card's own Notes section analysis, which is expected \u2014 Table 3's silence\
+  \ isn't a claim that no relationship exists (see the related_scenarios convention\
+  \ in prosoc-scenario-audit's audit_checklist.md)."

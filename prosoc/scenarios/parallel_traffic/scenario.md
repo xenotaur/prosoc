@@ -182,6 +182,14 @@ evaluation_notes: >
   which involves pedestrians crossing at an angle rather than moving
   parallel to the robot, and to Perpendicular Traffic, which specializes
   crowd motion to a direction orthogonal to the robot's path.
+
+  Related Scenarios note: P&G Table 3 lists "Circular Crossing" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references
+  perpendicular_traffic and crowd_navigation, which this card's own Notes
+  section already discusses. This is expected per the related_scenarios
+  convention (prosoc-scenario-audit's audit_checklist.md), not a
+  source-fidelity gap.
 ```
 
 ---

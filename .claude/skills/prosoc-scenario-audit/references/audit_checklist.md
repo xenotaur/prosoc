@@ -39,6 +39,25 @@ emphasis or detail rather than outright contradictory — still worth a should-f
 - [ ] `scenario_usage_guide.quality_metrics` — same P0–P9 constraint
 - [ ] `expected_behaviors` entries describe a *kind* of behavior, not an exact motion,
       numeric threshold, or implementation detail (P&G Guideline N6 — over-specification)
+- [ ] `related_scenarios` — must reference scenario **directory names** (the key used
+      by `audit.md` frontmatter and `AUDIT_SUMMARY.md` rows), not the versioned
+      `scenario.yml` `id` field and not a P&G Table 3 citation string. It commonly
+      diverges from what P&G Table 3 itself lists as the scenario's "Related
+      Scenarios" entry — that divergence is **expected, not a defect**, in three
+      recognized cases (see `../../_shared/pg_scenarios.md` for Table 3 values):
+      - Table 3 names a scenario with no implemented directory yet (the most common
+        case — most of Table 3's own "Related Scenarios" values point at a Figure-7
+        or sibling scenario this corpus hasn't drafted), and the card substitutes an
+        implemented scenario it actually discusses in its own prose instead.
+      - Table 3's named scenario *is* implemented and *is* included, but the card
+        adds further scenarios beyond it — Table 3's field is a single citation, not
+        an exhaustive list, so extra editorially-relevant cross-references are fine.
+      - Table 3 lists no related scenario at all, but the card adds one anyway based
+        on its own prose/Notes analysis — again fine, since Table 3's silence isn't a
+        claim that no relationship exists.
+      Do not flag any of these as a should-fix "source-fidelity mismatch." Only flag
+      `related_scenarios` if it references a directory that doesn't exist under
+      `prosoc/scenarios/`, or if it clearly contradicts the card's own prose.
 
 ## Source Fidelity (only if a checkable source exists)
 
