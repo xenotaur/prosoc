@@ -2,14 +2,14 @@
 execution_id: 2026_07_22_03_07_54_PROSOC_AUDIT_REFRESH_20260721_CONFIRM
 prompt_id: PROMPT(AD_HOC:PROSOC_AUDIT_REFRESH_20260721_CONFIRM)[2026-07-22T00:05:35-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/29
-commit: 
+commit: 3c2c6855518b563e30df4418ecec3f7f70134195
 created_at: 2026-07-22T03:07:54-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/29
-session_transcript: pending
+session_transcript: claude-app:556d2127-e3d4-49e0-a746-95ad3c7a8f6e
 ---
 
 # Summary
