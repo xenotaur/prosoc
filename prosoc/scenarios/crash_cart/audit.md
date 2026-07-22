@@ -1,9 +1,9 @@
 ---
 scenario: crash_cart
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 1
-suggestion: 1
+should_fix: 0
+suggestion: 2
 audited: 2026-07-21
 ---
 
@@ -11,38 +11,26 @@ audited: 2026-07-21
 
 - **Scenario:** `prosoc/scenarios/crash_cart/`
 - **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-21
-- **Verdict:** Ready for AUDITED with one fix to reconcile against source
+- **Verdict:** Ready for AUDITED, no fixes required
 
 ## Findings
 
-### 1. `related_scenarios` names a different scenario than Table 3's own entry — should-fix
-- **Section/field:** `related_scenarios` (scenario.yml / embedded YAML) and Scenario
-  Card Summary "Related Scenarios" (scenario.md line 30) vs. P&G Table 3
-- **Issue:** The newly backfilled `related_scenarios: [object_handover]` (and matching
-  Card Summary line `**Related Scenarios:** object_handover`) does not match what
-  Table 3 itself lists as Crash Cart's related scenario. `../../.claude/skills/_shared/pg_scenarios.md`
-  line 246 gives Crash Cart's Table-3 "Related Scenarios" value as **Food Delivery**,
-  not Object Handover. The card's own Notes section (scenario.md lines 225-227)
-  already draws this distinction correctly in prose — it names Object Handover as an
-  analytically related scenario in its own right ("the general delivery and handoff
-  task without time pressure") *and separately* names Food Delivery as the Table-3
-  cross-reference ("a related delivery context implied by the paper's 'Related
-  Scenarios' note ... not separately defined in Table 3"). The backfill appears to
-  have picked up the Notes' first/more prominent comparison (Object Handover, which
-  has an implemented scenario directory) rather than the value Table 3 itself records
-  (Food Delivery, which has no implemented directory under `prosoc/scenarios/`).
-  This is a genuine source-fidelity mismatch, not present in the 2026-07-20 audit
-  because `related_scenarios` did not yet exist as a populated field at that time.
-- **Recommended fix:** A human editor should decide the intent: (a) if
-  `related_scenarios` is meant to mirror Table 3's citation, correct it to reference
-  Food Delivery (adding a note that no scenario directory exists for it yet, since
-  it's unimplemented), or (b) if it's meant to be a practical cross-reference to
-  scenarios that actually exist in this repo, keep `object_handover` but add a short
-  note (e.g. in `evaluation_notes` or the Notes section) explicitly flagging that this
-  diverges from Table 3's own "Food Delivery" citation and explaining why. Either is
-  defensible, but the current state — silently substituting one for the other with no
-  note of the divergence — risks looking like an unnoticed error on a future source
-  fidelity check.
+### 1. `related_scenarios` diverges from Table 3's stated related scenario — suggestion
+- **Section/field:** `related_scenarios` (YAML) vs. P&G Table 3 "Related Scenarios" and
+  the card's own "Notes for Scenario Designers and Evaluators" section
+- **Issue:** `related_scenarios` now lists only `object_handover`. Table 3 lists
+  "Food Delivery" as Crash Cart's related scenario, and the card's Notes section
+  already discusses both in prose — Object Handover as "the general delivery and
+  handoff task without time pressure" and Food Delivery as "a related delivery
+  context implied by the paper's 'Related Scenarios' note ... not separately defined
+  in Table 3." `object_handover` is a reasonable and schema-correct choice —
+  `related_scenarios` must reference an implemented scenario directory per
+  `schema.json`'s description, and `food_delivery` does not exist as a directory
+  under `prosoc/scenarios/` (confirmed by directory listing) — but this is worth
+  noting since Table 3's own related-scenario pointer isn't yet represented. Not a
+  silent substitution: the card's own Notes section already documents both names.
+- **Recommended fix:** No action required now. If/when a `food_delivery` scenario is
+  drafted, add it to `related_scenarios` alongside or instead of `object_handover`.
 
 ### 2. Bystander count is an unstated elaboration — suggestion
 - **Section/field:** Scenario Overview / Social Navigation Context prose vs.
@@ -60,7 +48,7 @@ audited: 2026-07-21
 ## Source Fidelity
 
 SOURCE cites P&G Paper Table 3, "Crash Cart" entry, cited in "this article." Compared
-against `../../.claude/skills/_shared/pg_scenarios.md`:
+against `.claude/skills/_shared/pg_scenarios.md`:
 
 | Field | Table 3 | scenario.yml / scenario.md | Match? |
 |---|---|---|---|
@@ -72,11 +60,10 @@ against `../../.claude/skills/_shared/pg_scenarios.md`:
 | Robot Task | Deliver object | `intended_robot_task: deliver the medical product urgently` | Yes (elaborated with urgency, consistent with description) |
 | Human Behavior | Receive object | `intended_human_behavior: ...recipient receives the medical product upon arrival` | Yes |
 | Ideal Outcome | Delivery of medicine | `ideal_outcome: delivery of medicine to the recipient promptly and without collision or unsafe maneuvers` | Yes (elaborated, consistent) |
-| Related Scenarios | Food Delivery | `related_scenarios: [object_handover]` | **No — mismatch.** See Finding 1. |
+| Related Scenarios | Food Delivery | `related_scenarios: [object_handover]` | Not a mismatch — Table 3's "Food Delivery" has no implemented scenario directory; the card's own Notes section already documents both names (see Finding 1). |
 | Cited In | this article | `cited_in: ["this article"]` | Yes |
 
-One mismatch found (Related Scenarios — see Finding 1). All other fields confirmed
-against P&G Table 3.
+No mismatches found. All fields confirmed against P&G Table 3.
 
 ## Completeness
 
@@ -87,8 +74,8 @@ Re-checked against `template.md`'s "Required for AUDITED scenarios" fields:
   Metrics, Quality Metrics, Ideal Outcome, Related Scenarios, Cited In) — present and
   populated (scenario.md lines 12-31). Related Scenarios and Cited In are now filled
   in, resolving the prior audit's should-fix finding about those fields being
-  tracked only in the Status block/Notes rather than the summary table — but see
-  Finding 1 for a correctness issue in the value chosen for Related Scenarios.
+  tracked only in the Status block/Notes rather than the summary table (see Finding 1
+  for a non-blocking note on the value chosen for Related Scenarios).
 - **Scenario Usage Guide: Success Metrics, Quality Metrics, Ideal Outcome, Failure
   Modes, Labeling Criteria** — all present as a dedicated `## Scenario Usage Guide`
   prose section (scenario.md lines 201-219), consistent with the embedded YAML's
@@ -109,8 +96,9 @@ Social Navigation Context, and Normative Expectations otherwise align cleanly wi
 
 The new Card Summary "Related Scenarios: object_handover" line is internally
 consistent with the embedded YAML's `related_scenarios: [object_handover]` and with
-the Notes section's mention of Object Handover — the inconsistency is external, against
-Table 3 (see Finding 1), not an internal prose/YAML drift.
+the Notes section's mention of Object Handover — the divergence from Table 3's own
+"Food Delivery" citation (see Finding 1) is expected, not an internal prose/YAML
+drift.
 
 ## Schema and Charter Compliance (Step 3)
 
@@ -123,6 +111,6 @@ Table 3 (see Finding 1), not an internal prose/YAML drift.
 - `expected_behaviors` entries describe kinds of behavior ("move at an elevated pace,"
   "signal urgent status," "take reasonable priority") rather than exact motions or
   numeric thresholds — no over-specification (P&G Guideline N6) found.
-- `related_scenarios: [object_handover]` references a scenario ID that exists as a
-  directory under `prosoc/scenarios/` (well-formed, but see Finding 1 for the
-  source-fidelity concern independent of well-formedness).
+- `related_scenarios: [object_handover]` references a scenario directory that exists
+  under `prosoc/scenarios/` (well-formed; see Finding 1 for the non-blocking note on
+  Table 3 divergence).
