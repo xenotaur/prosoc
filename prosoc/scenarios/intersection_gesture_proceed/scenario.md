@@ -19,6 +19,13 @@
 - **Robot Role:** Servant
 - **Robot Task:** Navigate from A to B
 - **Human Behavior:** Cross navigation with explicit proceed gesture
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P4
 - **Ideal Outcome:** Human gestures, robot proceeds, human proceeds, no collision
 - **Related Scenarios:** Intersection – No Gesture; Intersection – Gesture Wait
 - **Cited In:** Principles and Guidelines for Social Robot Navigation (Table 3)
@@ -135,6 +142,23 @@ related_scenarios:
 cited_in:
   - "126"
 
+scenario_usage_guide:
+  success_metrics:
+    - SR
+    - NoCollisions
+  quality_metrics:
+    - P2   # Comfort
+    - P3   # Legibility
+    - P4   # Politeness
+  failure_modes:
+    - robot ignores the human's proceed gesture
+    - robot hesitates excessively after permission is given
+    - robot proceeds aggressively or at unsafe speed after the gesture
+  labeling_criteria:
+    - robot and human approach an indoor intersection from different directions
+    - human gives an explicit gesture granting the robot permission to proceed
+    - robot is capable of gesture recognition
+
 evaluation_notes: >
   This scenario evaluates the robot’s ability to act appropriately on explicit
   human permission. Successful behavior demonstrates timely commitment,
@@ -155,29 +179,22 @@ evaluation_notes: >
 
 ## Scenario Usage Guide
 
-### Success Metrics
-- No collision occurs
-- Robot commits to crossing promptly after gesture
-- Human proceeds without hesitation or retreat
-
-### Quality Metrics
-- Time between gesture and robot motion
-- Smoothness and predictability of robot trajectory
-- Absence of oscillation or hesitation
-
-### Ideal Outcome
-- Robot accepts the gesture and crosses smoothly
-- Human follows and crosses without disruption
-
-### Failure Modes
-- Ignoring the gesture
-- Excessive hesitation after permission
-- Aggressive or unsafe crossing
-
-### Labeling Criteria
-- Outcome: Success / Partial Success / Failure
-- Gesture recognized: Yes / No
-- Human disrupted: Yes / No
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P4
+- **Ideal Outcome:** human gestures the robot to proceed; robot goes first and both cross without collision
+- **Failure Modes:**
+  - robot ignores the human's proceed gesture
+  - robot hesitates excessively after permission is given
+  - robot proceeds aggressively or at unsafe speed after the gesture
+- **Labeling Criteria:**
+  - robot and human approach an indoor intersection from different directions
+  - human gives an explicit gesture granting the robot permission to proceed
+  - robot is capable of gesture recognition
 
 ---
 

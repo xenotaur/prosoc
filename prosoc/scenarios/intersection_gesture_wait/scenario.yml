@@ -60,6 +60,22 @@ related_scenarios:
 - intersection_no_gesture
 cited_in:
 - '126'
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  quality_metrics:
+  - P2
+  - P3
+  - P4
+  failure_modes:
+  - robot ignores or overrides the human's wait gesture
+  - robot partially complies, introducing ambiguity about whether it will stop
+  - robot's response to the gesture is delayed enough to undermine trust in the signal
+  labeling_criteria:
+  - robot and human approach an indoor intersection from different directions
+  - human gives an explicit gesture requesting the robot to wait
+  - robot is capable of gesture recognition
 evaluation_notes: "This scenario evaluates the robot\u2019s ability to comply with\
   \ explicit human social signals. Successful behavior prioritizes deference and safety\
   \ over efficiency, reinforcing trust and predictability.\nFailure modes include\

@@ -22,11 +22,13 @@
 - **Ideal Outcome:** robot and human both cross the intersection without collision, absent any explicit gesture
 - **Related Scenarios:** intersection_gesture_proceed, intersection_gesture_wait
 - **Cited In:** 27, 50, 167
-
-**Remaining gaps:**
-
-- **Success Metrics** — should-fill-in-now
-- **Quality Metrics** — should-fill-in-now
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P4
 
 ---
 
@@ -145,6 +147,23 @@ cited_in:
   - "50"
   - "167"
 
+scenario_usage_guide:
+  success_metrics:
+    - SR
+    - NoCollisions
+  quality_metrics:
+    - P2   # Comfort
+    - P3   # Legibility
+    - P4   # Politeness
+  failure_modes:
+    - robot enters the intersection aggressively, forcing the human to yield
+    - robot hesitates excessively, creating an inefficient standoff
+    - robot yields too late, disrupting the human's already-committed motion
+  labeling_criteria:
+    - robot and human approach an indoor intersection from different directions
+    - neither agent gives an explicit gesture or signal
+    - both agents must coordinate passage using implicit cues alone
+
 evaluation_notes: >
   This scenario evaluates the robot’s ability to navigate an intersection
   using implicit coordination cues only. Successful behavior allows both
@@ -165,14 +184,22 @@ evaluation_notes: >
 
 ## Scenario Usage Guide
 
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P4
 - **Ideal Outcome:** robot and human both cross the intersection without collision, absent any explicit gesture
-
-**Remaining gaps:**
-
-- **Success Metrics** — should-fill-in-now
-- **Quality Metrics** — should-fill-in-now
-- **Failure Modes** — should-fill-in-now
-- **Labeling Criteria** — should-fill-in-now
+- **Failure Modes:**
+  - robot enters the intersection aggressively, forcing the human to yield
+  - robot hesitates excessively, creating an inefficient standoff
+  - robot yields too late, disrupting the human's already-committed motion
+- **Labeling Criteria:**
+  - robot and human approach an indoor intersection from different directions
+  - neither agent gives an explicit gesture or signal
+  - both agents must coordinate passage using implicit cues alone
 
 ---
 

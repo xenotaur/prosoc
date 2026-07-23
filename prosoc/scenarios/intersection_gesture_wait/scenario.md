@@ -22,11 +22,13 @@
 - **Ideal Outcome:** human gestures the robot to wait; human crosses first, then robot proceeds without collision
 - **Related Scenarios:** intersection_gesture_proceed, intersection_no_gesture
 - **Cited In:** 126
-
-**Remaining gaps:**
-
-- **Success Metrics** — should-fill-in-now
-- **Quality Metrics** — should-fill-in-now
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P4
 
 ---
 
@@ -139,6 +141,23 @@ related_scenarios:
 cited_in:
   - "126"
 
+scenario_usage_guide:
+  success_metrics:
+    - SR
+    - NoCollisions
+  quality_metrics:
+    - P2   # Comfort
+    - P3   # Legibility
+    - P4   # Politeness
+  failure_modes:
+    - robot ignores or overrides the human's wait gesture
+    - robot partially complies, introducing ambiguity about whether it will stop
+    - robot's response to the gesture is delayed enough to undermine trust in the signal
+  labeling_criteria:
+    - robot and human approach an indoor intersection from different directions
+    - human gives an explicit gesture requesting the robot to wait
+    - robot is capable of gesture recognition
+
 evaluation_notes: >
   This scenario evaluates the robot’s ability to comply with explicit human
   social signals. Successful behavior prioritizes deference and safety over
@@ -159,14 +178,22 @@ evaluation_notes: >
 
 ## Scenario Usage Guide
 
+- **Success Metrics:**
+  - SR
+  - NoCollisions
+- **Quality Metrics:**
+  - P2
+  - P3
+  - P4
 - **Ideal Outcome:** human gestures the robot to wait; human crosses first, then robot proceeds without collision
-
-**Remaining gaps:**
-
-- **Success Metrics** — should-fill-in-now
-- **Quality Metrics** — should-fill-in-now
-- **Failure Modes** — should-fill-in-now
-- **Labeling Criteria** — should-fill-in-now
+- **Failure Modes:**
+  - robot ignores or overrides the human's wait gesture
+  - robot partially complies, introducing ambiguity about whether it will stop
+  - robot's response to the gesture is delayed enough to undermine trust in the signal
+- **Labeling Criteria:**
+  - robot and human approach an indoor intersection from different directions
+  - human gives an explicit gesture requesting the robot to wait
+  - robot is capable of gesture recognition
 
 ---
 

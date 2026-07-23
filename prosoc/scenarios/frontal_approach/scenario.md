@@ -66,6 +66,7 @@ agents:
       - forward_motion
       - steering
       - stopping
+      - trajectory_prediction
   humans:
     - role: pedestrian
       count: 1

@@ -42,6 +42,14 @@ The purpose of this scenario is to isolate and evaluate **Proactivity (P7)** wit
 
 ---
 
+## Normative Expectations
+
+At minimum, the robot must maintain a safe physical distance from the human at all times and must not enter the hallway simultaneously with the human once a conflict is recognized. Beyond these required behaviors, acceptable robot behavior may include recognizing early that the hallway does not permit passing, signaling intent clearly, and resolving the encounter without prolonged deadlock.
+
+Unacceptable behavior includes forcing the human to back up unexpectedly, entering the hallway and creating a stalemate, or relying on last-moment braking to resolve the conflict.
+
+---
+
 ## Scenario Specification (Machine-Readable)
 
 ```yaml

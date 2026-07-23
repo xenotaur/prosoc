@@ -59,7 +59,7 @@ Acceptable robot behavior in this scenario may include:
 - choosing a passing side consistent with local social norms,
 - passing smoothly with adequate clearance and minimal speed differential.
 
-Unacceptable behavior includes tailgating, abrupt lateral motion, or accelerating aggressively to pass.
+Unacceptable behavior includes tailgating, abrupt lateral motion, accelerating aggressively to pass, or forcing the pedestrian to change path or pace to accommodate the robot.
 
 ## Scenario Specification (Machine-Readable)
 
