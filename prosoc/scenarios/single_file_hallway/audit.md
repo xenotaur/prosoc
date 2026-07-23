@@ -1,38 +1,22 @@
 ---
 scenario: single_file_hallway
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 1
+should_fix: 0
 suggestion: 1
-audited: 2026-07-21
+audited: 2026-07-22
 ---
 
 # Audit: Single File Hallway
 
 - **Scenario:** `prosoc/scenarios/single_file_hallway/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-21
-- **Verdict:** Ready for AUDITED with minor fixes — no blocking issues; only minor
-  prose-completeness gaps remain.
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
+- **Verdict:** Ready — no blocking or should-fix issues found; the prior audit's
+  missing-Normative-Expectations gap has been resolved.
 
 ## Findings
 
-### 1. `expected_behaviors.must` items not echoed anywhere in prose — should-fix
-- **Section/field:** Scenario Overview (prose) vs. `expected_behaviors.must`
-- **Issue:** `scenario.md` has no "Normative Expectations" or "Social Navigation
-  Context" section (both optional per `template.md`, but recommended). The Scenario
-  Overview does summarize the `should` list in natural language ("The robot must
-  anticipate the conflict and take initiative—through signaling, yielding, or
-  negotiation—to prevent deadlock or discomfort"), but the two safety-critical `must`
-  items — "maintain a safe physical distance from the human" and "avoid entering the
-  hallway simultaneously with the human" — are not stated anywhere in prose; they
-  exist only inside the embedded YAML/`scenario.yml`. This is a one-sided claim per
-  the audit checklist (behavior specified in YAML but absent from prose).
-- **Recommended fix:** Add a short "Normative Expectations" section (as
-  `robot_overtaking`'s card has) that states the required minimum behaviors —
-  maintaining safe distance and not entering the hallway simultaneously with the
-  human — in natural language, alongside the already-covered `should` guidance.
-
-### 2. "Cited In" gap note's phrasing could be clearer that the gap is permanent — suggestion
+### 1. "Cited In" gap note's phrasing could be clearer that the gap is permanent — suggestion
 - **Section/field:** Scenario Card Summary "Remaining gaps" note vs. Source Fidelity
 - **Issue:** The Card Summary block still carries a self-flagged note: "**Remaining
   gaps:** Cited In — should-fill-in-now." Per
@@ -83,7 +67,7 @@ truth because none exists for this scenario. Verifying deeper fidelity would req
 reading the P&G paper's Figure 7 discussion directly (not provided as `--paper` input
 for this audit) — this audit does not fabricate that comparison. In particular,
 `cited_in` has no ground-truth citation index available for this scenario at all (see
-Finding 2) — this is a permanent, source-driven limitation, not a gap this audit
+Finding 1) — this is a permanent, source-driven limitation, not a gap this audit
 expects to close on a future pass.
 
 ## Completeness
@@ -91,7 +75,7 @@ expects to close on a future pass.
 Per `template.md`'s "Required for AUDITED scenarios" fields:
 
 - **Scenario Card Summary:** Complete except **Cited In**, which is blank and
-  self-flagged in a "Remaining gaps" note (see Finding 2) — reasonably blank, and
+  self-flagged in a "Remaining gaps" note (see Finding 1) — reasonably blank, and
   permanently so, given no citation data exists for this Figure-7-derived scenario in
   the available reference material.
 - **Scenario Usage Guide — Success Metrics:** Complete (SR, NoCollisions,
@@ -105,13 +89,22 @@ Per `template.md`'s "Required for AUDITED scenarios" fields:
   data-recognizable criteria).
 
 No required fields are blank aside from the permanently-unfillable Cited In noted
-above. The optional "Normative Expectations" prose section remains absent (see
-Finding 1).
+above. The "Normative Expectations" section (see Re-audit Note below) now covers both
+`expected_behaviors.must` items in prose, closing the prior audit's should-fix finding.
 
 ## Re-audit Note
 
-This is a fresh point-in-time re-audit (2026-07-21). The scenario was not edited since
-the 2026-07-20 audit; `scripts/distill/scenarios --scenario single_file_hallway
---dry-run --show-diffs` reports no diff and no schema errors. Findings, verdict, and
-counts are unchanged from the prior audit — the "Cited In" gap remains classified as a
-genuine, permanent gap rather than an oversight to be resolved.
+This is a fresh point-in-time re-audit (2026-07-22), reflecting PR #31's addition of a
+new "Normative Expectations" section to `scenario.md`. That section states, in
+prose, this scenario's two safety-critical `expected_behaviors.must` items — "the
+robot must maintain a safe physical distance from the human at all times and must not
+enter the hallway simultaneously with the human once a conflict is recognized" —
+which previously existed only inside the embedded YAML/`scenario.yml` with no prose
+echo anywhere in the card. This closes the prior audit's (2026-07-21) sole should-fix
+finding — the section also restates the `should` and `should_not` lists, giving the
+card a complete Normative Expectations treatment in line with `robot_overtaking`'s
+card structure. `scripts/distill/scenarios --scenario single_file_hallway --dry-run
+--show-diffs` reports no diff and no schema errors. The one suggestion from the prior
+audit (the "Cited In" gap note's phrasing) remains open and is carried forward
+unchanged, as it was not addressed by this edit. Verdict is upgraded from
+`ready_with_fixes` to `ready` since no should-fix or blocking findings remain.
