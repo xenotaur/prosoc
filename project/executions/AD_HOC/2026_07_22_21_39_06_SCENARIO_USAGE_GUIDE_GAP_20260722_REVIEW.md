@@ -2,14 +2,14 @@
 execution_id: 2026_07_22_21_39_06_SCENARIO_USAGE_GUIDE_GAP_20260722_REVIEW
 prompt_id: PROMPT(AD_HOC:SCENARIO_USAGE_GUIDE_GAP_20260722_REVIEW)[2026-07-22T21:32:47-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/31
-commit: 600a6a3
+commit: c074667ec29fdb1395e9bf626571b7dddb690c08
 created_at: 2026-07-22T21:39:06-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/31
-session_transcript: pending
+session_transcript: claude-app:556d2127-e3d4-49e0-a746-95ad3c7a8f6e
 ---
 
 # Summary
