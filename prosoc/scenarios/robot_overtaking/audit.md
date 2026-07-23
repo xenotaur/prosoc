@@ -1,37 +1,22 @@
 ---
 scenario: robot_overtaking
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 1
+should_fix: 0
 suggestion: 2
-audited: 2026-07-21
+audited: 2026-07-22
 ---
 
 # Audit: Robot Overtaking
 
 - **Scenario:** `prosoc/scenarios/robot_overtaking/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-21
-- **Verdict:** Ready for AUDITED with minor fixes — no blocking issues found; the
-  Scenario Card Summary and Scenario Usage Guide sections are fully authored and
-  consistent with the YAML.
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
+- **Verdict:** Ready — no blocking or should-fix issues found; the Normative
+  Expectations gap flagged in the prior audit (2026-07-21) has been resolved.
 
 ## Findings
 
-### 1. `should_not` entry not reflected in Normative Expectations prose — should-fix
-- **Section/field:** Normative Expectations (prose) vs. `expected_behaviors.should_not`
-- **Issue:** The embedded YAML's `should_not` list has four entries: "follow too
-  closely from behind," "pass abruptly / with sudden lateral motion," "accelerate
-  excessively when passing," and "force the pedestrian to change path or pace." The
-  Normative Expectations prose only names three of these ("Unacceptable behavior
-  includes tailgating, abrupt lateral motion, or accelerating aggressively to pass"),
-  omitting the fourth ("force the pedestrian to change path or pace"). This is a minor
-  one-sided item — the behavior is specified in the machine-readable spec but not
-  echoed in the human-readable interpretive section.
-- **Recommended fix:** Add a clause to the Normative Expectations paragraph covering
-  forcing the pedestrian to alter path or pace (e.g. "...or forcing the pedestrian to
-  change path or pace to accommodate the robot.").
-
-### 2. Physical Environment specialization vs. P&G Table 3 "Generic" — suggestion
+### 1. Physical Environment specialization vs. P&G Table 3 "Generic" — suggestion
 - **Section/field:** Scenario Card Summary "Physical Environment" / YAML
   `context.environment.type` vs. P&G Table 3's Robot Overtaking entry
 - **Issue:** The card specifies `indoor` / "corridor or sidewalk-like passage," while
@@ -44,7 +29,7 @@ audited: 2026-07-21
   the paper's "generic" passable-space categorization, so a reader comparing against
   Table 3 doesn't mistake it for drift.
 
-### 3. `related_scenarios` could include additional corpus matches named in prose — suggestion
+### 2. `related_scenarios` could include additional corpus matches named in prose — suggestion
 - **Section/field:** `related_scenarios` (YAML) / "Related Scenarios" (Card Summary)
   vs. "Notes for Scenario Designers and Evaluators"
 - **Issue:** `related_scenarios` lists only `pedestrian_overtaking`, but the Notes
@@ -82,7 +67,7 @@ Comparing against the card:
   3's "Robot passes human."
 - **Cited In:** Match — `cited_in: ["50", "157"]` matches Table 3 exactly.
 - **Physical environment:** Drift, not contradiction — card specifies `indoor` where
-  Table 3 says "Generic" (see Finding 2 above).
+  Table 3 says "Generic" (see Finding 1 above).
 
 Overall: strong fidelity to the P&G Table 3 entry, with one minor, non-contradictory
 specialization (physical environment) noted above.
@@ -105,12 +90,20 @@ Per `template.md`'s "Required for AUDITED scenarios" fields, all are present:
   data-recognizable criteria).
 
 No required fields are blank. `related_scenarios` is populated but could arguably be
-expanded (see Finding 3, a suggestion rather than a completeness gap, since a single
+expanded (see Finding 2, a suggestion rather than a completeness gap, since a single
 related scenario is a valid non-empty answer).
 
 ## Re-audit Note
 
-This is a fresh point-in-time re-audit (2026-07-21). The scenario was not edited since
-the 2026-07-20 audit; `scripts/distill/scenarios --scenario robot_overtaking --dry-run
---show-diffs` reports no diff and no schema errors. Findings, verdict, and counts are
-unchanged from the prior audit.
+This is a fresh point-in-time re-audit (2026-07-22), reflecting PR #31's edit to the
+Normative Expectations prose. That edit added the previously-missing clause covering
+`expected_behaviors.should_not`'s fourth entry ("force the pedestrian to change path
+or pace"): the paragraph now reads "...or forcing the pedestrian to change path or
+pace to accommodate the robot." This closes the prior audit's (2026-07-21) sole
+should-fix finding — prose and YAML `should_not` are now fully aligned, all four
+entries covered. `scripts/distill/scenarios --scenario robot_overtaking --dry-run
+--show-diffs` reports no diff and no schema errors. The two suggestions from the prior
+audit (physical-environment specialization vs. Table 3's "Generic"; possible
+expansion of `related_scenarios`) remain open and are carried forward unchanged, as
+neither was addressed by this edit. Verdict is upgraded from `ready_with_fixes` to
+`ready` since no should-fix or blocking findings remain.

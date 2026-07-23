@@ -4,13 +4,13 @@ verdict: ready
 blocking: 0
 should_fix: 0
 suggestion: 1
-audited: 2026-07-21
+audited: 2026-07-22
 ---
 
 # Audit: Pedestrian Overtaking a Robot from Behind
 
 - **Scenario:** `prosoc/scenarios/pedestrian_overtaking/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-21
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
 - **Verdict:** Ready — no blocking or should-fix issues found; one minor suggestion for human consideration.
 
 ## Findings
@@ -49,6 +49,8 @@ No blank required fields remain.
 
 ## Schema / Tooling Check
 
-`scripts/distill/scenarios --scenario pedestrian_overtaking --dry-run --show-diffs` produced no diff and exited 0 — `scenario.yml` is in sync with the embedded YAML in `scenario.md` and validates against `schema.json`. `expected_behaviors` uses only `must`/`should`/`should_not`. `relevant_principles` (P0, P1, P2, P3, P4) and `scenario_usage_guide.quality_metrics` (P2, P3, P4) contain only valid P0–P9 identifiers. `relevant_principles` now lists five principles including P0 (Goal Achievement), up from four (P1–P4) at the prior audit.
+`scripts/distill/scenarios --scenario pedestrian_overtaking --dry-run --show-diffs` produced no diff and exited 0 — `scenario.yml` is in sync with the embedded YAML in `scenario.md` and validates against `schema.json`. `expected_behaviors` uses only `must`/`should`/`should_not`. `relevant_principles` (P0, P1, P2, P3, P4) and `scenario_usage_guide.quality_metrics` (P2, P3, P4) contain only valid P0–P9 identifiers. Five principles (P0–P4) is one over the nominal 3–5 range's midpoint but is covered by the explicit prose-discussion exception in `../_shared/principles.md` (the Scenario Overview explicitly discusses P0 — "while continuing to make progress toward its goal"), so it is not flagged.
 
-The prior audit (2026-07-20) flagged as a suggestion that P0 had been dropped from `relevant_principles` despite the Scenario Overview's explicit prose — "while continuing to make progress toward its goal" — echoing the P0 selection criterion in `../_shared/principles.md`. P0 has since been deliberately restored to `relevant_principles` per the project owner's direction that explicit prose discussion of a principle takes precedence over the 3–5 count guideline (now codified as a soft guideline in `../_shared/principles.md`). Five principles (P0–P4) is one over the nominal 3–5 range's midpoint but within the explicit prose-discussion exception, and is not flagged here. This finding is resolved and does not recur in this audit.
+## Change Since Last Audit (2026-07-21)
+
+No changes to `scenario.md` or `scenario.yml` since the 2026-07-21 audit. This re-audit reproduces the same verdict, finding, and counts (ready; 0 blocking; 0 should-fix; 1 suggestion) — no substantive change.

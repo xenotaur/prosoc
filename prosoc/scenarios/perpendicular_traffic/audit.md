@@ -4,22 +4,18 @@ verdict: ready
 blocking: 0
 should_fix: 0
 suggestion: 0
-audited: 2026-07-21
+audited: 2026-07-22
 ---
 
 # Audit: Perpendicular Traffic
 
 - **Scenario:** `prosoc/scenarios/perpendicular_traffic/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-21
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
 - **Verdict:** Ready — no blocking, should-fix, or suggestion findings.
 
 ## Findings
 
-No findings. The prior audit (2026-07-20) flagged one should-fix (missing `related_scenarios`/`cited_in` in the Scenario Card Summary and YAML, despite the content already existing in prose) and one suggestion (a stray "Remaining gaps" callout left in the Card Summary). Both are now resolved:
-
-- The Scenario Card Summary now includes `**Related Scenarios:** parallel_traffic, intersection_no_gesture` and `**Cited In:** 167`.
-- The embedded YAML and `scenario.yml` now both include `related_scenarios: [parallel_traffic, intersection_no_gesture]` and `cited_in: ["167"]`.
-- The "Remaining gaps" callout is no longer present anywhere in `scenario.md`.
+No findings. `scenario.md` and `scenario.yml` are unchanged since the 2026-07-21 audit, which itself found no outstanding issues (the should-fix and suggestion flagged in the 2026-07-20 audit — missing `related_scenarios`/`cited_in` in the Card Summary, and a stray "Remaining gaps" callout — were resolved before that pass and remain resolved here).
 
 ## Source Fidelity
 
@@ -51,3 +47,7 @@ No blank required fields remain.
 ## Schema / Tooling Check
 
 `scripts/distill/scenarios --scenario perpendicular_traffic --dry-run --show-diffs` produced no diff and exited 0 — `scenario.yml` is in sync with `scenario.md`'s embedded YAML and validates against `schema.json`. `expected_behaviors` uses only `must`/`should`/`should_not`, with no over-specified (exact-motion/numeric-threshold) entries. `relevant_principles` (P1, P3, P6, P7) and `scenario_usage_guide.quality_metrics` (P3, P7) contain only valid P0–P9 identifiers, count 4 (within the 3–5 guidance). `STATE` reads `DRAFTED`, a valid enumerated lifecycle state; this audit did not modify it.
+
+## Change Since Last Audit (2026-07-21)
+
+No changes to `scenario.md` or `scenario.yml` since the 2026-07-21 audit. This re-audit reproduces the same verdict and counts (ready; 0 blocking; 0 should-fix; 0 suggestion) — no substantive change.

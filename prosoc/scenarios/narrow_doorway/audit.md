@@ -4,15 +4,14 @@ verdict: ready
 blocking: 0
 should_fix: 0
 suggestion: 1
-audited: 2026-07-21
+audited: 2026-07-22
 ---
 
 # Audit: Narrow Doorway
 
 - **Scenario:** `prosoc/scenarios/narrow_doorway/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-21
-- **Verdict:** Ready, no blocking issues found — the prior audit's Related
-  Scenarios/Cited In transcription gap is now resolved.
+- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
+- **Verdict:** Ready, no blocking or should-fix issues found.
 
 ## Findings
 
@@ -28,12 +27,45 @@ audited: 2026-07-21
   tightened, could be rephrased as "proceed without ambiguity about intent" to keep
   focus on legibility (the underlying principle, P3) rather than motion style.
 
+### Distiller check
+
+`scripts/distill/scenarios --scenario narrow_doorway --dry-run --show-diffs` reports
+no diff and no schema validation error. `scenario.md`'s embedded YAML and
+`scenario.yml` are in sync.
+
+### Prose/YAML consistency
+
+- Scenario Overview / Social Navigation Context vs. `intended_robot_task`,
+  `intended_human_behavior`, `context`, `agents`: consistent — robot as
+  `navigating_agent`, one human pedestrian, opposite-direction approach to a
+  single-file bottleneck.
+- Normative Expectations vs. `expected_behaviors.{must,should,should_not}`:
+  consistent — no one-sided claims; all four "acceptable" prose bullets and all four
+  "unacceptable" prose bullets map onto the YAML's `should`/`must`/`should_not` lists.
+- `ideal_outcome` prose matches the YAML field verbatim in both Scenario Card Summary
+  and Scenario Usage Guide sections.
+
+### Schema and charter compliance
+
+- `scenario.yml` validates (confirmed via the dry-run distill above).
+- `relevant_principles`: `P1, P3, P4, P7` — all valid P0–P9 IDs, count of 4 is within
+  the 3–5 soft guideline.
+- `scenario_usage_guide.quality_metrics`: `P3, P4` — valid P0–P9 IDs, consistent
+  subset.
+- `expected_behaviors` entries describe kinds of behavior rather than exact motions or
+  numeric thresholds — no blocking over-specification (P&G Guideline N6); see Finding
+  1 above for the one minor phrasing note.
+- `related_scenarios: [blind_corner, entering_room, exiting_room]` — all three are
+  real directories under `prosoc/scenarios/`, and all three are discussed in the
+  card's own "Notes for Scenario Designers and Evaluators" section. No contradiction.
+- `cited_in: ["126"]` — present and matches the SOURCE field's "cited in [126]".
+
 ## Source Fidelity
 
 SOURCE cites "P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2,
 Article 34); cited in [126]." This matches the Table 3 entry in
-`.claude/skills/_shared/pg_scenarios.md` under Doorway Scenarios → **Narrow Doorway**.
-Comparison:
+`.claude/skills/_shared/pg_scenarios.md` under Doorway Scenarios -> **Narrow
+Doorway**. Comparison:
 
 | Field | P&G Table 3 (`pg_scenarios.md`) | This scenario | Match? |
 |---|---|---|---|
@@ -50,13 +82,13 @@ Comparison:
 **Source fidelity: checked against P&G Table 3 — full match, no mismatches found.**
 All physical description, purpose, layout, roles, task, and ideal-outcome fields are
 consistent with the canonical Table 3 entry. Table 3 names "Narrow Arch" as the
-related scenario, but no `narrow_arch` scenario card exists yet in
+related scenario, but no `narrow_arch` scenario card exists yet under
 `prosoc/scenarios/` (confirmed: no matching directory), so `related_scenarios`
-correctly points instead to the implemented, related-by-geometry scenarios
-(`blind_corner`, `entering_room`, `exiting_room`) rather than a not-yet-existing
-directory — consistent with `template.md`'s note that this field should reference
-"the directory/key used in audit.md and AUDIT_SUMMARY.md." This is not a fidelity
-mismatch.
+correctly substitutes the implemented, related-by-geometry scenarios (`blind_corner`,
+`entering_room`, `exiting_room`) instead of a not-yet-existing directory — the first
+recognized divergence case in `references/audit_checklist.md`'s `related_scenarios`
+convention, not a fidelity mismatch. The card's own `evaluation_notes` explicitly
+documents this substitution.
 
 ## Completeness
 
@@ -68,19 +100,20 @@ Walking `template.md`'s "Required for AUDITED scenarios" fields:
   consistent between prose and YAML.
 - Success Metrics / Quality Metrics — present (SR, NoCollisions / P3, P4), consistent
   across Card Summary, YAML, and the Scenario Usage Guide prose section.
-- **Related Scenarios** — now present (`blind_corner, entering_room, exiting_room`)
-  in both the Card Summary bullet and the YAML `related_scenarios` key. Resolves the
-  prior audit's Finding 1 (was should-fill-in-now).
-- **Cited In** — now present (`126`) in both the Card Summary bullet and the YAML
-  `cited_in` key. Resolves the prior audit's Finding 1.
+- Related Scenarios — present (`blind_corner, entering_room, exiting_room`) in both
+  the Card Summary bullet and the YAML `related_scenarios` key.
+- Cited In — present (`126`) in both the Card Summary bullet and the YAML `cited_in`
+  key.
 
 **Scenario Usage Guide:**
 - Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria —
   all present and consistent between the prose section and `scenario_usage_guide` in
   the YAML. No gaps.
 
-This card remains in good shape: schema-valid (dry-run distiller check produced no
-diff), principle count within guidance (4, within 3–5), no invented-principle issues,
-and full Table 3 fidelity including the now-transcribed Related Scenarios/Cited In
-fields. The only remaining item is the single low-severity phrasing suggestion above,
-which is not a blocker to AUDITED promotion.
+## Verdict Rationale
+
+This card remains in good shape: schema-valid, principle count within guidance (4,
+within 3–5), no invented-principle issues, full Table 3 fidelity, and complete
+required fields. No changes since the prior audit. The only remaining item is the
+single low-severity phrasing suggestion above (Finding 1), which is not a blocker to
+AUDITED promotion. Ready for AUDITED.
