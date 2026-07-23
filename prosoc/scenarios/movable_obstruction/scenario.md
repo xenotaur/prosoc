@@ -156,9 +156,10 @@ evaluation_notes: >
   may reasonably take responsibility for clearing the path.
 
   Task/context cross-reference: the Discussion section's illustrative task/context
-  pairing is NAVIGATE_POINT_TO_POINT (or DELIVER_OBJECT) under ROUTINE_DELIVERY,
-  GUIDANCE_DOCENT, or HIGH_URGENCY, corresponding to prosoc's task/context ID
-  convention (prosoc/tasks/, prosoc/contexts/). This scenario does not require a
+  pairing is navigate.point_to_point (or deliver.object) under
+  service.routine_delivery, guidance.docent, or emergency.high_urgency, matching
+  the actual IDs used in prosoc/tasks/*/task.yml and prosoc/contexts/*/context.yml.
+  This scenario does not require a
   specific task/context pairing to apply — it is illustrative of how the acceptable
   intervention behavior varies by task weighting and context, not a constraint on
   which pairing is valid.
@@ -173,8 +174,8 @@ The **MOVABLE_OBSTRUCTION** scenario explicitly extends *Frontal Approach* by in
 
 - The boundary between **conflict avoidance** (P7) and **environmental stewardship** (P9)
 - Trade-offs between **Goal Achievement (P0)** and prosocial action
-- The influence of **task** (e.g., NAVIGATE_POINT_TO_POINT vs DELIVER_OBJECT) and **context**
-  (ROUTINE_DELIVERY, GUIDANCE_DOCENT, HIGH_URGENCY)
+- The influence of **task** (e.g., `navigate.point_to_point` vs `deliver.object`) and **context**
+  (`service.routine_delivery`, `guidance.docent`, `emergency.high_urgency`)
 
 This scenario is intentionally underdetermined: multiple behaviors may be acceptable depending on task weighting and context, but **persistent failure to address a known, movable obstruction** is indicative of poor prosocial performance.
 
