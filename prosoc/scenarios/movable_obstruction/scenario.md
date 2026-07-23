@@ -155,6 +155,14 @@ evaluation_notes: >
   to report the obstruction rather than remove it, while a robot acting as a guidance or service agent
   may reasonably take responsibility for clearing the path.
 
+  Task/context cross-reference: the Discussion section's illustrative task/context
+  pairing is NAVIGATE_POINT_TO_POINT (or DELIVER_OBJECT) under ROUTINE_DELIVERY,
+  GUIDANCE_DOCENT, or HIGH_URGENCY, corresponding to prosoc's task/context ID
+  convention (prosoc/tasks/, prosoc/contexts/). This scenario does not require a
+  specific task/context pairing to apply — it is illustrative of how the acceptable
+  intervention behavior varies by task weighting and context, not a constraint on
+  which pairing is valid.
+
 ```
 
 ---

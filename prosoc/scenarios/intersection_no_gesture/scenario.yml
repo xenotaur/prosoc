@@ -62,6 +62,22 @@ cited_in:
 - '27'
 - '50'
 - '167'
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  quality_metrics:
+  - P2
+  - P3
+  - P4
+  failure_modes:
+  - robot enters the intersection aggressively, forcing the human to yield
+  - robot hesitates excessively, creating an inefficient standoff
+  - robot yields too late, disrupting the human's already-committed motion
+  labeling_criteria:
+  - robot and human approach an indoor intersection from different directions
+  - neither agent gives an explicit gesture or signal
+  - both agents must coordinate passage using implicit cues alone
 evaluation_notes: "This scenario evaluates the robot\u2019s ability to navigate an\
   \ intersection using implicit coordination cues only. Successful behavior allows\
   \ both agents to pass smoothly without collision or hesitation.\nCommon failure\

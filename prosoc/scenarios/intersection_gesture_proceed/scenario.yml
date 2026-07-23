@@ -61,6 +61,22 @@ related_scenarios:
 - intersection_no_gesture
 cited_in:
 - '126'
+scenario_usage_guide:
+  success_metrics:
+  - SR
+  - NoCollisions
+  quality_metrics:
+  - P2
+  - P3
+  - P4
+  failure_modes:
+  - robot ignores the human's proceed gesture
+  - robot hesitates excessively after permission is given
+  - robot proceeds aggressively or at unsafe speed after the gesture
+  labeling_criteria:
+  - robot and human approach an indoor intersection from different directions
+  - human gives an explicit gesture granting the robot permission to proceed
+  - robot is capable of gesture recognition
 evaluation_notes: "This scenario evaluates the robot\u2019s ability to act appropriately\
   \ on explicit human permission. Successful behavior demonstrates timely commitment,\
   \ predictable motion, and respect for the human\u2019s safety and comfort.\nFailure\

@@ -94,4 +94,10 @@ evaluation_notes: "This scenario evaluates whether a robot treats navigation as 
   \ only the current interaction but future navigators as well.\nAppropriate behavior\
   \ depends on task and context. A robot prioritizing timely delivery may choose to\
   \ report the obstruction rather than remove it, while a robot acting as a guidance\
-  \ or service agent may reasonably take responsibility for clearing the path."
+  \ or service agent may reasonably take responsibility for clearing the path.\nTask/context\
+  \ cross-reference: the Discussion section's illustrative task/context pairing is\
+  \ NAVIGATE_POINT_TO_POINT (or DELIVER_OBJECT) under ROUTINE_DELIVERY, GUIDANCE_DOCENT,\
+  \ or HIGH_URGENCY, corresponding to prosoc's task/context ID convention (prosoc/tasks/,\
+  \ prosoc/contexts/). This scenario does not require a specific task/context pairing\
+  \ to apply \u2014 it is illustrative of how the acceptable intervention behavior\
+  \ varies by task weighting and context, not a constraint on which pairing is valid."
