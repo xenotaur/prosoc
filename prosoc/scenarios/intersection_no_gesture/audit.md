@@ -32,13 +32,13 @@ patching it incrementally.
 - **Recommended fix:** Optional — may be left as-is; it still names a behavior class rather than an exact motion or numeric threshold.
 
 ### 3. Related Scenarios lists two entries where P&G Table 3 lists none — suggestion
-- **Section/field:** Scenario Card Summary "Related Scenarios" / `related_scenarios` vs. `../../_shared/pg_scenarios.md`
+- **Section/field:** Scenario Card Summary "Related Scenarios" / `related_scenarios` vs. `.claude/skills/_shared/pg_scenarios.md`
 - **Issue:** Not a defect — flagged for visibility only. The Table 3 entry for "Intersection No Gesture" has no "Related Scenarios" field at all. This card's Card Summary and YAML list `intersection_gesture_proceed` and `intersection_gesture_wait`. Per `audit_checklist.md`'s documented convention, this is an expected divergence (Table 3's silence is not a claim that no relationship exists), and the card's own `evaluation_notes` already self-documents the rationale explicitly citing this convention.
 - **Recommended fix:** None required.
 
 ## Source Fidelity
 
-Checked against `../../_shared/pg_scenarios.md`'s "Intersection No Gesture" entry (P&G Table 3):
+Checked against `.claude/skills/_shared/pg_scenarios.md`'s "Intersection No Gesture" entry (P&G Table 3):
 
 | Field | Table 3 | This card | Match |
 |---|---|---|---|

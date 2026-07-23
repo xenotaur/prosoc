@@ -17,12 +17,12 @@ audited: 2026-07-22
 
 ### 1. `relevant_principles` omits P7 despite an explicit deadlock/hesitation theme — suggestion
 - **Section/field:** `relevant_principles` (currently P1, P3, P5, P6) vs. `expected_behaviors.should_not` ("hesitate indefinitely at the threshold") and `scenario_usage_guide.failure_modes` ("prolonged stand-off with neither agent moving through the doorway")
-- **Issue:** Per `../_shared/principles.md`, P7 (Proactivity) is specifically for scenarios where "deadlock or hesitation is the core challenge." This scenario names indefinite hesitation and stand-off as an explicit failure mode and unacceptable behavior, which is a reasonable match for P7, but P7 isn't listed.
+- **Issue:** Per `.claude/skills/_shared/principles.md`, P7 (Proactivity) is specifically for scenarios where "deadlock or hesitation is the core challenge." This scenario names indefinite hesitation and stand-off as an explicit failure mode and unacceptable behavior, which is a reasonable match for P7, but P7 isn't listed.
 - **Recommended fix:** Consider adding P7 to `relevant_principles` (and possibly `scenario_usage_guide.quality_metrics`) if a human editor agrees the deadlock-avoidance angle is principal enough to call out explicitly; not required since P3/P5/P6 already partially cover the same ground via legibility and priority-timing.
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3 plus Robotics at Google (R@G), internal scenario reference. Compared against `../_shared/pg_scenarios.md`'s "Exiting Room" entry (Doorway Scenarios section):
+SOURCE cites P&G Paper Table 3 plus Robotics at Google (R@G), internal scenario reference. Compared against `.claude/skills/_shared/pg_scenarios.md`'s "Exiting Room" entry (Doorway Scenarios section):
 
 | Field | Table 3 | This card | Match? |
 |---|---|---|---|

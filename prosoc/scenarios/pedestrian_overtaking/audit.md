@@ -17,12 +17,12 @@ audited: 2026-07-22
 
 ### 1. Physical Environment more specific than source table — suggestion
 - **Section/field:** Scenario Card Summary `Physical Environment` / YAML `context.environment.type` vs. P&G Table 3
-- **Issue:** `../_shared/pg_scenarios.md`'s Pedestrian Overtaking row lists Physical Env as "Generic," while this scenario commits to `indoor` (corridor or sidewalk-like passage). This isn't a contradiction — "Generic" in the source table means unspecified, and `indoor` is a reasonable concretization — but it is an editorial choice beyond the source, not something drawn directly from Table 3.
+- **Issue:** `.claude/skills/_shared/pg_scenarios.md`'s Pedestrian Overtaking row lists Physical Env as "Generic," while this scenario commits to `indoor` (corridor or sidewalk-like passage). This isn't a contradiction — "Generic" in the source table means unspecified, and `indoor` is a reasonable concretization — but it is an editorial choice beyond the source, not something drawn directly from Table 3.
 - **Recommended fix:** No action required. Optionally note in `evaluation_notes` that the indoor setting is an authorial concretization of the source's generic physical environment, if precise source fidelity matters for downstream use.
 
 ## Source Fidelity
 
-The prose explicitly states this scenario "corresponds to pedestrian-overtaking cases discussed in the *Principles and Guidelines for Social Robot Navigation* paper," and `cited_in: ["26"]` points to the same source, so fidelity is checked against `../_shared/pg_scenarios.md`'s "Pedestrian Overtaking" entry (P&G Table 3) even though the Status block's `SOURCE:` line itself still reads "Prompt to ChatGPT 5.2" (informal, not directly checkable, but superseded here by the prose's explicit paper reference):
+The prose explicitly states this scenario "corresponds to pedestrian-overtaking cases discussed in the *Principles and Guidelines for Social Robot Navigation* paper," and `cited_in: ["26"]` points to the same source, so fidelity is checked against `.claude/skills/_shared/pg_scenarios.md`'s "Pedestrian Overtaking" entry (P&G Table 3) even though the Status block's `SOURCE:` line itself still reads "Prompt to ChatGPT 5.2" (informal, not directly checkable, but superseded here by the prose's explicit paper reference):
 
 | Field | P&G Table 3 | This scenario | Match? |
 |---|---|---|---|
@@ -49,7 +49,7 @@ No blank required fields remain.
 
 ## Schema / Tooling Check
 
-`scripts/distill/scenarios --scenario pedestrian_overtaking --dry-run --show-diffs` produced no diff and exited 0 — `scenario.yml` is in sync with the embedded YAML in `scenario.md` and validates against `schema.json`. `expected_behaviors` uses only `must`/`should`/`should_not`. `relevant_principles` (P0, P1, P2, P3, P4) and `scenario_usage_guide.quality_metrics` (P2, P3, P4) contain only valid P0–P9 identifiers. Five principles (P0–P4) is one over the nominal 3–5 range's midpoint but is covered by the explicit prose-discussion exception in `../_shared/principles.md` (the Scenario Overview explicitly discusses P0 — "while continuing to make progress toward its goal"), so it is not flagged.
+`scripts/distill/scenarios --scenario pedestrian_overtaking --dry-run --show-diffs` produced no diff and exited 0 — `scenario.yml` is in sync with the embedded YAML in `scenario.md` and validates against `schema.json`. `expected_behaviors` uses only `must`/`should`/`should_not`. `relevant_principles` (P0, P1, P2, P3, P4) and `scenario_usage_guide.quality_metrics` (P2, P3, P4) contain only valid P0–P9 identifiers. Five principles (P0–P4) is one over the nominal 3–5 range's midpoint but is covered by the explicit prose-discussion exception in `.claude/skills/_shared/principles.md` (the Scenario Overview explicitly discusses P0 — "while continuing to make progress toward its goal"), so it is not flagged.
 
 ## Change Since Last Audit (2026-07-21)
 

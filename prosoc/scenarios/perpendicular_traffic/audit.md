@@ -19,7 +19,7 @@ No findings. `scenario.md` and `scenario.yml` are unchanged since the 2026-07-21
 
 ## Source Fidelity
 
-SOURCE cites "P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [167]" — checked against `../_shared/pg_scenarios.md`'s "Perpendicular Traffic" entry:
+SOURCE cites "P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [167]" — checked against `.claude/skills/_shared/pg_scenarios.md`'s "Perpendicular Traffic" entry:
 
 | Field | P&G Table 3 | Scenario card | Match? |
 |---|---|---|---|

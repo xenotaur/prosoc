@@ -36,7 +36,7 @@ audited: 2026-07-22
 
 ## Source Fidelity
 
-Checked against `_shared/pg_scenarios.md`'s P&G Table 3 entry for **Frontal Approach**:
+Checked against `.claude/skills/_shared/pg_scenarios.md`'s P&G Table 3 entry for **Frontal Approach**:
 
 | Field | P&G Table 3 | This scenario | Match |
 |---|---|---|---|

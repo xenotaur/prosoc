@@ -27,7 +27,7 @@ audited: 2026-07-22
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3 and "Robotics at Google (R@G), internal scenario reference." Compared against `../../.claude/skills/_shared/pg_scenarios.md`'s "Entering Room" entry (Doorway Scenarios section):
+SOURCE cites P&G Paper Table 3 and "Robotics at Google (R@G), internal scenario reference." Compared against `.claude/skills/_shared/pg_scenarios.md`'s "Entering Room" entry (Doorway Scenarios section):
 
 - **Description** ("Robot enters a room occupied by a human") — matches.
 - **Physical Environment** (Indoor) — matches (`context.environment.type: indoor`).

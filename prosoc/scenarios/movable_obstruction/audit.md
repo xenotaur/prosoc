@@ -106,10 +106,12 @@ Per `template.md`'s "Required for AUDITED scenarios" fields:
   ConflictResolved` / `P3, P7, P9`).
 - **Related Scenarios** — present (`frontal_approach`, `single_file_hallway`).
 - **Failure Modes, Labeling Criteria** — present as both YAML and prose, matching.
-- **Cited In** — blank. Self-flagged in the scenario's own "Remaining gaps" note as
-  should-fill-in-now; concur with that self-assessment. Not blocking for AUDITED (no
-  evidence yet of external citation from another scenario's `related_scenarios`
-  or `Cited In` field), but should be revisited if this scenario later gets
+- **Cited In** — blank. This is a genuine, reasonably-blank gap rather than an
+  oversight: `movable_obstruction` has no P&G Table 3 or Figure 7 counterpart (per
+  `.claude/skills/_shared/pg_scenarios.md`), so there is no citation index to
+  transcribe. `Cited In` is "if applicable" per `template.md`, and no evidence
+  exists yet of external citation from another scenario's `related_scenarios` or
+  `Cited In` field — should be revisited only if this scenario later gets
   referenced elsewhere in the corpus.
 
 ## Verdict Rationale

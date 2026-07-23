@@ -19,7 +19,7 @@ No findings. Prose and YAML are consistent throughout: the Scenario Overview, So
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3, cited in [50]. Compared against `../_shared/pg_scenarios.md`'s "Following" entry (Interpersonal Scenarios section):
+SOURCE cites P&G Paper Table 3, cited in [50]. Compared against `.claude/skills/_shared/pg_scenarios.md`'s "Following" entry (Interpersonal Scenarios section):
 
 | Field | Table 3 | This card | Match? |
 |---|---|---|---|

@@ -29,15 +29,15 @@ audited: 2026-07-22
 
 - `scripts/distill/scenarios --scenario intersection_gesture_proceed --dry-run --show-diffs` produced no diff and no schema errors — `scenario.yml` is in sync with the embedded YAML block in `scenario.md`.
 - The prose "## Scenario Usage Guide" section (previously ad-hoc free text with measures like "Time between gesture and robot motion" and "Absence of oscillation or hesitation") has been replaced with the corpus's standard structured bullet format — Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria — and now matches the embedded YAML's `scenario_usage_guide` block exactly (SR/NoCollisions success metrics; P2/P3/P4 quality metrics; matching failure modes and labeling criteria).
-- `scenario.yml`'s `scenario_usage_guide.quality_metrics` (`P2, P3, P4`) now uses proper P0–P9 principle IDs consistent with `relevant_principles` and with how `_shared/principles.md` describes the field ("Charter principles used specifically as quality metrics") — closing the content-model gap flagged as should-fix in the prior audit (2026-07-21).
+- `scenario.yml`'s `scenario_usage_guide.quality_metrics` (`P2, P3, P4`) now uses proper P0–P9 principle IDs consistent with `relevant_principles` and with how `.claude/skills/_shared/principles.md` describes the field ("Charter principles used specifically as quality metrics") — closing the content-model gap flagged as should-fix in the prior audit (2026-07-21).
 - No contradictions found between prose (Overview, Social Navigation Context, Normative Expectations) and YAML (`agents`, `expected_behaviors`, `ideal_outcome`, `intended_robot_task`/`intended_human_behavior`).
-- `relevant_principles` (P0, P1, P2, P3, P4) validate against P0–P9; count of 5 is within the 3–5 guideline, and P0's inclusion is well-founded by the Overview's explicit "balancing goal achievement with safety and comfort" language (per `_shared/principles.md`'s P0 selection guidance).
+- `relevant_principles` (P0, P1, P2, P3, P4) validate against P0–P9; count of 5 is within the 3–5 guideline, and P0's inclusion is well-founded by the Overview's explicit "balancing goal achievement with safety and comfort" language (per `.claude/skills/_shared/principles.md`'s P0 selection guidance).
 - `expected_behaviors` entries describe kinds of behavior ("commit promptly to motion after the gesture," "maintain a smooth and legible trajectory") rather than exact motions or numeric thresholds — no over-specification (P&G Guideline N6) flagged.
 - `related_scenarios` (`intersection_gesture_wait`, `intersection_no_gesture`) — both directories exist under `prosoc/scenarios/` and reciprocally reference `intersection_gesture_proceed`; the broadening beyond P&G Table 3's single "Gesture Wait" citation is expected per the audit_checklist.md convention and self-documented in the card's own `evaluation_notes` (see Finding 2 / Source Fidelity).
 
 ## Source Fidelity
 
-SOURCE is explicitly stated as "Principles and Guidelines for Social Robot Navigation (Table 3)," so it is checked directly against `_shared/pg_scenarios.md`'s "Intersection Gesture Proceed" entry:
+SOURCE is explicitly stated as "Principles and Guidelines for Social Robot Navigation (Table 3)," so it is checked directly against `.claude/skills/_shared/pg_scenarios.md`'s "Intersection Gesture Proceed" entry:
 
 | Field | P&G Table 3 | This scenario | Match? |
 |---|---|---|---|

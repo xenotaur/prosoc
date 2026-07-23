@@ -22,7 +22,7 @@ patching it incrementally.
 ## Findings
 
 ### 1. `related_scenarios` lists one more entry than P&G Table 3's single citation — suggestion
-- **Section/field:** Scenario Card Summary "Related Scenarios" / `related_scenarios` vs. `../../_shared/pg_scenarios.md`
+- **Section/field:** Scenario Card Summary "Related Scenarios" / `related_scenarios` vs. `.claude/skills/_shared/pg_scenarios.md`
 - **Issue:** Not a defect — flagged for visibility only. Table 3 lists only "Gesture Proceed" as the related scenario for Intersection Gesture Wait; this card's `related_scenarios` also adds `intersection_no_gesture`. Per `audit_checklist.md`'s documented convention, this is an expected divergence (Table 3's Related Scenarios field is a single citation, not exhaustive), and the card's own `evaluation_notes` already self-documents the rationale explicitly citing this convention.
 - **Recommended fix:** None required.
 
@@ -33,7 +33,7 @@ patching it incrementally.
 
 ## Source Fidelity
 
-Checked against `../../_shared/pg_scenarios.md`'s "Intersection Gesture Wait" entry (P&G Table 3):
+Checked against `.claude/skills/_shared/pg_scenarios.md`'s "Intersection Gesture Wait" entry (P&G Table 3):
 
 | Field | Table 3 | This card | Match |
 |---|---|---|---|
