@@ -57,9 +57,8 @@ governs the work).
 `id` (must start with `WS-`, and the filename stem must match it), `kind:
 planning_node`, `title`, `status`, and `stage`. List fields — `work_items`,
 `related_design`, `related_focus`, `related_roadmap`, `exit_criteria`,
-`children`, `execution_records`, `evidence` — must be lists when present. See
-`.claude/skills/lrh-workstream/references/workstream-schema.md` for the full
-field reference.
+`children`, `execution_records`, `evidence` — must be lists when present, and
+`lrh validate` enforces the schema.
 
 ## Relationship to the other lifecycles
 
