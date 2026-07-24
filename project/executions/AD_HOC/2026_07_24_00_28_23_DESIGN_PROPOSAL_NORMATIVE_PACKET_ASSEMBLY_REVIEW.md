@@ -2,10 +2,10 @@
 execution_id: 2026_07_24_00_28_23_DESIGN_PROPOSAL_NORMATIVE_PACKET_ASSEMBLY_REVIEW
 prompt_id: PROMPT(AD_HOC:DESIGN_PROPOSAL_NORMATIVE_PACKET_ASSEMBLY_REVIEW)[2026-07-24T00:22:15-04:00]
 work_item: AD_HOC
-status: in_progress
-rerun_of: 
+status: landed
+rerun_of: 2026_07_24_03_30_38_DESIGN_PROPOSAL_NORMATIVE_PACKET_ASSEMBLY
 pr: https://github.com/xenotaur/prosoc/pull/36
-commit: 
+commit: 6706e829c91b195bf51ffa84cf9edc7f18dab678
 created_at: 2026-07-24T00:28:23-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/36
