@@ -73,9 +73,12 @@ and the charter loader pattern all already exist to build from.
 ## Prior Art Check
 
 ### Duplication search
-- In-repo: No existing implementation found. `grep -rl` for
-  `packet`/`manifest`/`provenance` across `prosoc/` and `.claude/skills/`
-  returns nothing.
+- In-repo: No existing implementation found. `grep -rl` for `packet` and
+  `manifest` across `prosoc/` and `.claude/skills/` returns nothing. The
+  term `provenance` does appear (e.g. `prosoc/scenarios/workflow.md`,
+  `.claude/skills/prosoc-scenario-audit/SKILL.md`), but only as a general
+  concept in card and audit docs — there is no packet *assembler* or
+  provenance-envelope implementation.
 - Sibling repos: None identified. LogicalRoboticsHarness is prosoc's control
   plane, not a normative-artifact consumer.
 - External libraries: None adoptable wholesale. in-toto/DSSE and SLSA
@@ -87,7 +90,9 @@ and the charter loader pattern all already exist to build from.
 ### Demand search
 - Work items: None found. `project/work_items/` holds only three resolved
   scenario-tooling items; there is no `proposed/` bucket.
-- Proposals: None found. This is the first proposal in the repo.
+- Proposals: None found requesting this capability — this set is the repo's
+  first design proposal, so there was no prior proposal to satisfy or
+  duplicate.
 - Backlog: No `project/design/backlog.md` exists.
 - Recommendation: No action. Note that `project/focus/current_focus.md`
   currently scopes the active focus to scenario-corpus maintenance; adopting
