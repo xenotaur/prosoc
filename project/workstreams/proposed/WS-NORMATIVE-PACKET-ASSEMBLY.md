@@ -6,7 +6,8 @@ status: proposed
 stage: designed
 origin: follow_up
 summary: Implement the manifest-driven normative packet assembler defined in PROP-NORMATIVE-PACKET-ASSEMBLY, from lifecycle/status normalization through the assembler engine, manifest card family, and CI drift checks.
-related_focus: []
+related_focus:
+  - FOCUS-NORMATIVE-PACKET-ASSEMBLY
 related_roadmap: []
 related_design:
   - project/design/proposals/proposed/normative-packet-assembly/00_proposal.md
