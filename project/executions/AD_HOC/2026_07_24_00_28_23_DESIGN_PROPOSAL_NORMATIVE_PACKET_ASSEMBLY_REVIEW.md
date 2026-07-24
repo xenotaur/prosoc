@@ -9,7 +9,7 @@ commit:
 created_at: 2026-07-24T00:28:23-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/36
-session_transcript: pending
+session_transcript: claude-app:ca4961c6-505e-4771-b683-a69b25ac2c2a
 ---
 
 # Summary
@@ -55,9 +55,7 @@ with an intentional design decision. No comments were skipped.
 
 # Follow-up
 
-- `session_transcript` is `pending`; update to `claude-app:<session-id>` after
-  the session ends.
-- PR #36 base still points at the merged scaffold branch and needs retargeting
-  to `main` before it can merge.
+- PR #36 base was retargeted from the merged scaffold branch to `main` after
+  this record was written.
 - Suggest `/lrh-confirm-fixes` on PR #36 before merge to resolve the two
   review threads.
