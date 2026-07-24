@@ -2,10 +2,10 @@
 execution_id: 2026_07_24_15_30_24_WORKSTREAM_NORMATIVE_PACKET_ASSEMBLY_REVIEW
 prompt_id: PROMPT(AD_HOC:WORKSTREAM_NORMATIVE_PACKET_ASSEMBLY_REVIEW)[2026-07-24T15:26:22-04:00]
 work_item: AD_HOC
-status: in_progress
-rerun_of: 
+status: landed
+rerun_of: 2026_07_24_16_03_03_WORKSTREAM_NORMATIVE_PACKET_ASSEMBLY
 pr: https://github.com/xenotaur/prosoc/pull/37
-commit: 
+commit: cfd48323a1d09928a5f392cbcb7a85dba613359b
 created_at: 2026-07-24T15:30:24-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/37
