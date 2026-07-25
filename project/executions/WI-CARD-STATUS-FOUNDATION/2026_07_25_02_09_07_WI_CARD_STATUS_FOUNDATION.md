@@ -49,7 +49,7 @@ scenarios README and the `workflow.md` Status template.
 Decisions A (keep `VALIDATED`, retire `VERIFIED`) and B (insert `APPROVED`,
 `AUDITED`→automated) were confirmed by the user at the implement plan gate.
 
-CHAIN-NOTE: cycles=1; stops=1; gates=[implement-plan, merge]; friction=state-required-broke-render-fixtures; note="making schema state required broke 5 render_sections fixtures (2 constants); fixed. One review round: 3 valid Copilot findings (flat-layout label, --fix crash guard, doc contradiction, test coverage)."
+CHAIN-NOTE: cycles=1; stops=0; gates=[implement-plan, merge]; friction=state-required-broke-render-fixtures; note="making schema state required broke 5 render_sections fixtures (2 constants); fixed. One review round: 3 valid Copilot findings (flat-layout label, --fix crash guard, doc contradiction, test coverage)."
 
 # Validation
 
