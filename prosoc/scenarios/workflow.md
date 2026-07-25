@@ -130,7 +130,7 @@ Deprecated scenarios should point to the preferred alternative when possible.
 
 ## Status Section Template
 
-Each scenario document should include a concise `## Status` section describing its current lifecycle state and provenance. The first bullet is the authoritative `STATE`; the remaining bullets record provenance. Only provenance fields that apply need to be included.
+Each scenario document should include a concise `## Status` section describing its current lifecycle state and provenance. The first bullet shows the `STATE` (a projection of the authoritative fenced-YAML `state:` — see below); the remaining bullets record provenance. Only provenance fields that apply need to be included.
 
 ```markdown
 ## Status

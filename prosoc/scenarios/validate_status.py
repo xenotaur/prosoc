@@ -58,7 +58,14 @@ def main(argv: list[str] | None = None) -> int:
 
     failures = 0
     for source in sources:
-        name = source.md_path.parent.name
+        # In directory layout the scenario id is the parent directory name; in
+        # flat layout the sources live directly under --root, so the id is the
+        # Markdown file stem.
+        if args.layout == "flat":
+            name = source.md_path.stem
+        else:
+            name = source.md_path.parent.name
+
         try:
             result = status.check_source(source.md_path, source.yml_path)
         except status.StatusStateError as exc:
@@ -72,6 +79,17 @@ def main(argv: list[str] | None = None) -> int:
 
         if args.fix:
             yaml_state = status.read_yaml_state(source.yml_path)
+            # Only project from an authoritative state that is itself valid;
+            # an unrecognised YAML state is a failure to report, not to fix
+            # (projecting it would raise). Keep going so the CLI still returns
+            # a non-zero status for the run.
+            if yaml_state not in status.STATES:
+                print(
+                    f"FAIL {name}: cannot fix — YAML state {yaml_state!r} "
+                    "is not a recognised lifecycle state"
+                )
+                failures += 1
+                continue
             fixed = status.project_state_into_markdown(
                 source.md_path.read_text(encoding="utf-8"), yaml_state
             )
