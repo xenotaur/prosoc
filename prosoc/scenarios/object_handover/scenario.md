@@ -79,6 +79,7 @@ Unacceptable behavior includes:
 ```yaml
 id: object_handover_01
 name: Object Handover
+state: DRAFTED
 
 summary: >
   A robot in a servant role navigates to a human and hands over an object.

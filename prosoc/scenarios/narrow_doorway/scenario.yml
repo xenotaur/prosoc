@@ -1,5 +1,6 @@
 id: narrow_doorway_01
 name: Narrow Doorway
+state: DRAFTED
 summary: 'A robot and a human pedestrian approach a narrow doorway from opposite directions.
   The doorway permits only single-file passage, so the two agents must sequence their
   passage through the threshold without collision or mutual blocking.

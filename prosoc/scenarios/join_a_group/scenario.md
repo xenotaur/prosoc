@@ -80,6 +80,7 @@ Unacceptable behavior includes:
 ```yaml
 id: join_a_group_01
 name: Join a Group
+state: DRAFTED
 
 summary: >
   A robot navigates across open space toward a standing group of robots or

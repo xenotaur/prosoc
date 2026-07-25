@@ -14,6 +14,7 @@ from prosoc.scenarios import render_sections
 FULL_YAML = """\
 id: full_scenario_01
 name: Full Scenario
+state: DRAFTED
 summary: >
   A robot and a human interact in a fully-specified scenario.
 scientific_purpose: pedestrian interaction
@@ -42,6 +43,7 @@ scenario_usage_guide:
 PARTIAL_YAML = """\
 id: partial_scenario_01
 name: Partial Scenario
+state: DRAFTED
 summary: A robot and a human interact in a partially-specified scenario.
 context:
   environment:

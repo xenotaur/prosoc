@@ -1,5 +1,6 @@
 id: crowd_navigation_01
 name: Crowd Navigation
+state: DRAFTED
 summary: 'A robot navigates through a crowd of people who are milling about with no
   single dominant trajectory. The robot must continuously replan around many loosely
   coordinated human movements while making steady progress through the space.

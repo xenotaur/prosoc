@@ -78,6 +78,7 @@ Unacceptable behavior includes:
 ```yaml
 id: narrow_doorway_01
 name: Narrow Doorway
+state: DRAFTED
 
 summary: >
   A robot and a human pedestrian approach a narrow doorway from opposite

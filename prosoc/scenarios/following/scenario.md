@@ -80,6 +80,7 @@ Unacceptable behavior includes:
 ```yaml
 id: following_01
 name: Following
+state: DRAFTED
 
 summary: >
   A robot in a servant role follows a human who leads their own navigation

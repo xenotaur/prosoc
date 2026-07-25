@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Validate scenario lifecycle-state consistency.
+#
+# Checks that each scenario's Markdown "## Status" STATE line agrees with the
+# machine-readable `state` field in its distilled scenario.yml. Exits non-zero
+# if any scenario is inconsistent or missing a state.
+#
+# Common flags (passed through to the module):
+#   --scenario <name>   Restrict to a single scenario
+#   --fix               Project the Markdown STATE line from the YAML state
+#
+# Examples:
+#   scripts/validate/status
+#   scripts/validate/status --scenario blind_corner
+#   scripts/validate/status --fix
+
+set -euo pipefail
+
+python -m prosoc.scenarios.validate_status "$@"

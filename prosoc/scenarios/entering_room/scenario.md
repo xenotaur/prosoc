@@ -78,6 +78,7 @@ Unacceptable behavior includes:
 ```yaml
 id: entering_room_01
 name: Entering Room
+state: DRAFTED
 
 summary: >
   A robot approaches a room from outside with the task of entering, while a

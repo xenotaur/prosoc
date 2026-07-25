@@ -69,6 +69,7 @@ Unacceptable behavior includes ignoring the gesture, hesitating excessively afte
 ```yaml
 id: intersection_gesture_proceed_01
 name: Intersection – Gesture Proceed
+state: DRAFTED
 
 summary: >
   A robot and a human pedestrian approach an indoor intersection. The human

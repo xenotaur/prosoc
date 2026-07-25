@@ -78,6 +78,7 @@ Unacceptable behavior includes:
 ```yaml
 id: exiting_room_01
 name: Exiting Room
+state: DRAFTED
 
 summary: >
   A robot exits a room through a doorway while a human is simultaneously

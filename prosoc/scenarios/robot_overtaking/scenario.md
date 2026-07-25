@@ -66,6 +66,7 @@ Unacceptable behavior includes tailgating, abrupt lateral motion, accelerating a
 ```yaml
 id: robot_overtaking_01
 name: Overtaking a Pedestrian from Behind
+state: DRAFTED
 
 summary: >
   A robot approaches a human pedestrian from behind in a shared pathway
