@@ -11,7 +11,8 @@ related_focus:
 related_roadmap: []
 related_design:
   - project/design/proposals/proposed/normative-packet-assembly/00_proposal.md
-work_items: []
+work_items:
+  - WI-CARD-STATUS-FOUNDATION
 exit_criteria:
   - PROP-NORMATIVE-PACKET-ASSEMBLY is adopted (status adopted)
   - All five card families carry a machine-readable status field with the APPROVED lifecycle state, projected into the Markdown STATUS block and enforced by scripts/validate/status
@@ -66,7 +67,9 @@ consumption, navigation — is blocked on there being a packet to consume.
 - Recommendation: Proceed.
 
 ### Demand search
-- Work items: None found — there is no `project/work_items/proposed/` bucket.
+- Work items: None found at authoring time — the
+  `project/work_items/proposed/` bucket did not yet exist. This workstream's
+  own first item, `WI-CARD-STATUS-FOUNDATION`, was created under it afterward.
 - Proposals: `PROP-NORMATIVE-PACKET-ASSEMBLY` — this workstream governs its
   implementation; not a duplicate.
 - Backlog: No `project/design/backlog.md` exists.
@@ -74,10 +77,16 @@ consumption, navigation — is blocked on there being a packet to consume.
 
 ## Work Items
 
-None created yet. Work items will be created via `/lrh-work-item` as each
-phase is planned, and added to `work_items:` as they land. The expected
-breakdown follows the phases in Scope — Phase 0a in particular is planned as
-family-by-family commits, which may be one work item or several.
+- **WI-CARD-STATUS-FOUNDATION** — Phase 0a foundation: resolve the lifecycle
+  enum (insert `APPROVED`; settle `VALIDATED`/`VERIFIED`), define the canonical
+  STATUS-block format and a machine-readable lifecycle-state field, and prove
+  the contract end-to-end on the scenarios family.
+
+Further work items are created via `/lrh-work-item` as each phase is planned
+and added to `work_items:` as they land. The expected breakdown follows the
+phases in Scope — Phase 0a in particular is planned as family-by-family work
+(the remaining four card families reuse the contract established by
+`WI-CARD-STATUS-FOUNDATION`), which may be one work item or several.
 
 ## Exit Criteria
 
