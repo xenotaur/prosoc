@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #40 (commit 1cc0374): scenarios-family card lifecycle-state foundation — APPROVED state inserted, machine-readable `state` field in schema + all 20 scenario.yml, projection + scripts/validate/status. Other four card families are follow-on items."
 blocked_reason: null
 blocked: false
 id: WI-CARD-STATUS-FOUNDATION
 title: Establish the card lifecycle-state field and STATUS-block projection (Phase 0a foundation)
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY

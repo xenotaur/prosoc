@@ -2,10 +2,10 @@
 execution_id: 2026_07_25_02_09_07_WI_CARD_STATUS_FOUNDATION
 prompt_id: PROMPT(WI-CARD-STATUS-FOUNDATION:WI_CARD_STATUS_FOUNDATION)[2026-07-25T01:29:53-04:00]
 work_item: WI-CARD-STATUS-FOUNDATION
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/40
-commit: 
+commit: 1cc03749eba6e4f063204449156920e93456dc17
 created_at: 2026-07-25T02:09:07-04:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CARD-STATUS-FOUNDATION.md
@@ -48,6 +48,8 @@ scenarios README and the `workflow.md` Status template.
 
 Decisions A (keep `VALIDATED`, retire `VERIFIED`) and B (insert `APPROVED`,
 `AUDITED`→automated) were confirmed by the user at the implement plan gate.
+
+CHAIN-NOTE: cycles=1; stops=1; gates=[implement-plan, merge]; friction=state-required-broke-render-fixtures; note="making schema state required broke 5 render_sections fixtures (2 constants); fixed. One review round: 3 valid Copilot findings (flat-layout label, --fix crash guard, doc contradiction, test coverage)."
 
 # Validation
 
