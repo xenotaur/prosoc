@@ -11,7 +11,8 @@ related_focus:
 related_roadmap: []
 related_design:
   - project/design/proposals/proposed/normative-packet-assembly/00_proposal.md
-work_items: []
+work_items:
+  - WI-CARD-STATUS-FOUNDATION
 exit_criteria:
   - PROP-NORMATIVE-PACKET-ASSEMBLY is adopted (status adopted)
   - All five card families carry a machine-readable status field with the APPROVED lifecycle state, projected into the Markdown STATUS block and enforced by scripts/validate/status
