@@ -2,10 +2,10 @@
 execution_id: 2026_07_24_22_53_21_WI_CARD_STATUS_FOUNDATION_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_CARD_STATUS_FOUNDATION_CONFIRM)[2026-07-24T22:53:09-04:00]
 work_item: AD_HOC
-status: in_progress
-rerun_of: 
+status: landed
+rerun_of: 2026_07_25_00_21_46_WI_CARD_STATUS_FOUNDATION
 pr: https://github.com/xenotaur/prosoc/pull/39
-commit: 
+commit: a4a02ad6b63a3bc47b84a963225893179fff27b9
 created_at: 2026-07-24T22:53:21-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/39
