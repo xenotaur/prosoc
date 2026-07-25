@@ -47,6 +47,7 @@ Unlike *Frontal Approach*, successful navigation in this scenario may involve **
 ```yaml
 id: movable_obstruction_01
 name: Movable Obstruction
+state: DRAFTED
 
 summary: >
   A robot and a human approach each other in a hallway that is partially blocked by a movable obstruction.

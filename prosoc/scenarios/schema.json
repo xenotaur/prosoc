@@ -6,6 +6,7 @@
   "required": [
     "id",
     "name",
+    "state",
     "summary"
   ],
   "properties": {
@@ -16,6 +17,19 @@
     "name": {
       "type": "string",
       "description": "Human-readable name for the scenario."
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "DRAFTED",
+        "EDITED",
+        "AUDITED",
+        "APPROVED",
+        "VALIDATED",
+        "DEPRECATED",
+        "RETIRED"
+      ],
+      "description": "Machine-readable lifecycle state of the scenario card (see prosoc/scenarios/workflow.md). Authoritative source for the state; the Markdown ## Status block's STATE line is a projection of this value, enforced by scripts/validate/status."
     },
     "summary": {
       "type": "string",

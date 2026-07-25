@@ -80,6 +80,7 @@ Unacceptable behavior includes:
 ```yaml
 id: perpendicular_traffic_01
 name: Perpendicular Traffic
+state: DRAFTED
 
 summary: >
   A robot crosses an intersection or plaza while a crowd of pedestrians

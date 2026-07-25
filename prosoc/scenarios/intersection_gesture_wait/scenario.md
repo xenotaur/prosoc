@@ -69,6 +69,7 @@ Unacceptable behavior includes ignoring the gesture, proceeding into the interse
 ```yaml
 id: intersection_gesture_wait_01
 name: Intersection – Gesture Wait
+state: DRAFTED
 
 summary: >
   A robot and a human pedestrian approach an indoor intersection. The human

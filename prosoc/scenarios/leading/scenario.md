@@ -80,6 +80,7 @@ Unacceptable behavior includes:
 ```yaml
 id: leading_01
 name: Leading
+state: DRAFTED
 
 summary: >
   A robot in a leader role guides a human through a walking space, choosing

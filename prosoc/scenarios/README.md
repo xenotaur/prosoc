@@ -76,15 +76,18 @@ See `workflow.md` for guidance on drafting, editing, auditing, and validation st
 
 ## Lifecycle and Status
 
-Each scenario should include a **Status** section indicating its current state, such as:
+Each scenario includes a **Status** section indicating its current lifecycle state, one of:
 
 - DRAFTED
 - EDITED
-- AUDITED
-- VALIDATED
-- DEPRECATED
+- AUDITED — automated audit passed (see the scenario's `audit.md`)
+- APPROVED — a human has reviewed and approved it for use
+- VALIDATED — supported by empirical evidence (optional)
+- DEPRECATED / RETIRED
 
-Only scenarios that have been **AUDITED** should be treated as ready for use in evaluation or experiments.
+Only scenarios that have been **APPROVED** should be treated as ready for production use; `AUDITED` denotes a passing automated audit, which precedes human approval.
+
+The same state is carried machine-readably as a `state:` field in the scenario's embedded YAML (the authoritative source), and projected onto the Markdown `## Status` block's `STATE` line. `scripts/validate/status` checks that the two agree (`--fix` reprojects the Markdown line from the YAML).
 
 See `workflow.md` for the full lifecycle definition.
 

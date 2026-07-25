@@ -80,6 +80,7 @@ Unacceptable behavior includes:
 ```yaml
 id: blind_corner_01
 name: Blind Corner
+state: DRAFTED
 
 summary: >
   A robot and a human pedestrian approach each other from opposite directions and

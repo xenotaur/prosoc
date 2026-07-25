@@ -80,6 +80,7 @@ Unacceptable behavior includes:
 ```yaml
 id: parallel_traffic_01
 name: Parallel Traffic
+state: DRAFTED
 
 summary: >
   A robot navigates from A to B while a crowd of pedestrians moves broadly

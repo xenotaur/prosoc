@@ -1,5 +1,6 @@
 id: perpendicular_traffic_01
 name: Perpendicular Traffic
+state: DRAFTED
 summary: 'A robot crosses an intersection or plaza while a crowd of pedestrians flows
   perpendicular to its path. The robot must assess the density and pace of the cross-flow,
   select a safe gap or moment, and cross decisively without lingering within the flow.

@@ -73,6 +73,7 @@ Unacceptable behavior includes aggressively asserting right-of-way, oscillating 
 ```yaml
 id: intersection_no_gesture_01
 name: Intersection – No Gesture
+state: DRAFTED
 
 summary: >
   A robot and a human pedestrian approach and cross an indoor intersection

@@ -55,6 +55,7 @@ Unacceptable behavior includes forcing the human to back up unexpectedly, enteri
 ```yaml
 id: single_file_hallway_01
 name: Single File Hallway
+state: DRAFTED
 
 summary: >
   A robot and a human approach each other in a hallway that is too narrow for safe and comfortable

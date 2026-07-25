@@ -1,5 +1,6 @@
 id: intersection_no_gesture_01
 name: "Intersection \u2013 No Gesture"
+state: DRAFTED
 summary: 'A robot and a human pedestrian approach and cross an indoor intersection
   without any explicit gestural communication. The robot must coordinate passage safely
   and legibly using motion cues and social norms alone.

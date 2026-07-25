@@ -80,6 +80,7 @@ Unacceptable behavior includes:
 ```yaml
 id: crash_cart_01
 name: Crash Cart
+state: DRAFTED
 
 summary: >
   A robot in a leader role delivers an urgent medical product through an

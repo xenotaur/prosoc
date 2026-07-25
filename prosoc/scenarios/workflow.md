@@ -1,8 +1,9 @@
 # Social Navigation Scenario Card Development Workflow
-## STATUS: EDITED 2026-01-02
+## STATUS: EDITED 2026-07-25
 - SOURCE: Prompt to ChatGPT 5.2
 - DRAFTED: ChatGPT 5.2, 2026-01-02
 - EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-02
+- EDITED: Claude (WI-CARD-STATUS-FOUNDATION), 2026-07-25 — insert APPROVED, redefine AUDITED as automated, retire VERIFIED in favor of VALIDATED, document machine-readable state field
 
 ## Overview
 
@@ -42,7 +43,15 @@ The scenario workflow is guided by the following principles:
 
 ## Scenario Lifecycle
 
-Each scenario progresses through a series of lifecycle states. Not all scenarios will reach all states.
+Each scenario progresses through a series of lifecycle states. Not all scenarios will reach all states. The canonical active chain is:
+
+```
+SOURCE (optional) → DRAFTED → EDITED → AUDITED → APPROVED → VALIDATED (optional) → DEPRECATED / RETIRED
+```
+
+A scenario's current lifecycle state is recorded in two places that must agree: the human-readable `STATE` line of its Markdown `## Status` block, and a machine-readable `state` field in its embedded (fenced) YAML — see the [Status Section Template](#status-section-template). The `state` value is one of `DRAFTED`, `EDITED`, `AUDITED`, `APPROVED`, `VALIDATED`, `DEPRECATED`, or `RETIRED` (`SOURCE` is a provenance stage, not a `state` value). `scripts/validate/status` checks that the two representations agree.
+
+`AUDITED` and `APPROVED` are distinct stages (see below): auditing is a machine-assisted readiness *check*, while approval is the *human* accountability gate. This distinction supports the Normative Card Architecture, in which downstream production use requires human approval, not merely a passing audit (see `PROP-NORMATIVE-PACKET-ASSEMBLY`).
 
 ### 1. SOURCE (optional)
 
@@ -78,16 +87,24 @@ An EDITED scenario is structurally sound but not yet formally approved.
 
 ### 4. AUDITED
 
-A human reviewer has examined the scenario and judged it ready for intended use. An audit asserts that the scenario:
+An **automated audit** — an agentic tool such as `/prosoc-scenario-audit` — has examined the scenario and recorded its findings (see the scenario's `audit.md`). An audit checks that the scenario:
 
-- is internally coherent
+- is internally coherent (prose/YAML consistency)
 - aligns with the Prosocial Navigation Charter
-- reasonably captures a social navigation situation
+- complies with the schema and reasonably captures a social navigation situation
 - is suitable for use in evaluation, simulation, or analysis
 
-Auditing does **not** imply empirical validation.
+Auditing is a machine-assisted readiness *check*. It does **not** by itself constitute human approval, and does **not** imply empirical validation.
 
-### 5. VALIDATED (optional)
+> **Note — change of meaning.** In earlier revisions, `AUDITED` denoted human approval. That role now belongs to `APPROVED` (stage 5); `AUDITED` denotes the automated audit that precedes it. This five-state lifecycle supports the Normative Card Architecture (see `PROP-NORMATIVE-PACKET-ASSEMBLY`). Note that the existence of an `audit.md` is agent tooling output; a scenario only *advances* to `state: AUDITED` when its `STATE` is set accordingly.
+
+### 5. APPROVED
+
+A **human reviewer** has examined the scenario (and its audit findings) and attested that it is ready for intended use. Approval is the human accountability gate (Design Principle 3): it asserts that the scenario is coherent, charter-aligned, and suitable for evaluation, simulation, or analysis, and that a human takes responsibility for that judgment. Downstream production use should require `APPROVED`, not merely `AUDITED`.
+
+Approval does **not** imply empirical validation.
+
+### 6. VALIDATED (optional)
 
 The scenario has been supported by empirical evidence. Validation may include:
 
@@ -98,7 +115,9 @@ The scenario has been supported by empirical evidence. Validation may include:
 
 VALIDATED scenarios should reference the supporting evidence.
 
-### 6. DEPRECATED / RETIRED
+> **Canonical term.** The stage-5-empirical term is **VALIDATED**. Some earlier artifacts and the constitution-card template (`prosoc/constitutions/template.md`), as well as the paper's Figure 3, use **VERIFIED** for a production-verification notion; `VERIFIED` is retired in favor of `VALIDATED` (empirical evidence). Reconciling the paper figure is tracked in `PROP-NORMATIVE-PACKET-ASSEMBLY`.
+
+### 7. DEPRECATED / RETIRED
 
 The scenario is no longer recommended for use. Reasons may include:
 
@@ -111,16 +130,20 @@ Deprecated scenarios should point to the preferred alternative when possible.
 
 ## Status Section Template
 
-Each scenario document should include a concise STATUS section describing its current lifecycle state and provenance. Only fields that apply need to be included.
+Each scenario document should include a concise `## Status` section describing its current lifecycle state and provenance. The first bullet is the authoritative `STATE`; the remaining bullets record provenance. Only provenance fields that apply need to be included.
 
 ```markdown
-## STATUS: EDITIED 2025-01-18
-- SOURCE: P&G Paper, Section 4.2
-- DRAFTED: ChatGPT (GPT-4.x), 2025-01-12
-- EDITED: Anthony Francis centaur@logicalrobotics.com, 2025-01-18
+## Status
+
+- **STATE:** DRAFTED
+- **SOURCE:** P&G Paper, Section 4.2
+- **DRAFTED:** ChatGPT (GPT-4.x), 2025-01-12
+- **EDITED:** Anthony Francis centaur@logicalrobotics.com, 2025-01-18
 ```
 
-More detailed versions may include AUDITED, VALIDATED, or DEPRECATED entries.
+More detailed histories may add `AUDITED`, `APPROVED`, `VALIDATED`, or `DEPRECATED` provenance bullets. The `STATE` value must be one of `DRAFTED`, `EDITED`, `AUDITED`, `APPROVED`, `VALIDATED`, `DEPRECATED`, or `RETIRED`.
+
+The same state is also carried machine-readably as a `state:` field in the scenario's embedded (fenced) YAML — the fenced YAML is authoritative, and the `## Status` block's `STATE` line is a projection of it. `scripts/validate/status` enforces that the two agree.
 
 ## Recommended Practices
 

@@ -72,6 +72,7 @@ Unacceptable behavior includes accelerating to prevent passing, drifting unpredi
 ```yaml
 id: pedestrian_overtaking_01
 name: Pedestrian Overtaking a Robot from Behind
+state: DRAFTED
 
 summary: >
   A human pedestrian approaches and overtakes a slower-moving robot from

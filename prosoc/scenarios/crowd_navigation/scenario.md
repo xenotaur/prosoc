@@ -81,6 +81,7 @@ Unacceptable behavior includes:
 ```yaml
 id: crowd_navigation_01
 name: Crowd Navigation
+state: DRAFTED
 
 summary: >
   A robot navigates through a crowd of people who are milling about with no
