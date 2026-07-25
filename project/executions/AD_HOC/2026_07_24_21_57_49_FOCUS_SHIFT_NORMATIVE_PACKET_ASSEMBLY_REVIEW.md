@@ -2,10 +2,10 @@
 execution_id: 2026_07_24_21_57_49_FOCUS_SHIFT_NORMATIVE_PACKET_ASSEMBLY_REVIEW
 prompt_id: PROMPT(AD_HOC:FOCUS_SHIFT_NORMATIVE_PACKET_ASSEMBLY_REVIEW)[2026-07-24T21:57:09-04:00]
 work_item: AD_HOC
-status: in_progress
-rerun_of: 
+status: landed
+rerun_of: 2026_07_24_22_02_07_FOCUS_SHIFT_NORMATIVE_PACKET_ASSEMBLY
 pr: https://github.com/xenotaur/prosoc/pull/38
-commit: 
+commit: 8e61fe3f6d6f161c53abd8b366a652b98a8585aa
 created_at: 2026-07-24T21:57:49-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/38
