@@ -29,7 +29,7 @@ families, and project a machine-readable `status` field from the fenced YAML
 into the Markdown, enforced by `scripts/validate/status`. Phase 0a is the
 unblocker for the rest and also settles the `VALIDATED` (empirical, per
 `prosoc/scenarios/workflow.md`) vs `VERIFIED` (production, per
-`constitutions/template.md` and the paper) stage-5 naming question. Later
+`prosoc/constitutions/template.md` and the paper) stage-5 naming question. Later
 phases add the family-dispatched audit skills (0b), the assembler engine (1),
 the manifest card family (2), and CI drift checks (3). Phase 4 (signing,
 auto-resolution) is deferred.
