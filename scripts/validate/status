@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
-# Validate scenario lifecycle-state consistency.
+# Validate card lifecycle-state consistency across families.
 #
-# Checks that each scenario's Markdown "## Status" STATE line agrees with the
-# machine-readable `state` field in its distilled scenario.yml. Exits non-zero
-# if any scenario is inconsistent or missing a state.
+# Checks that each card's Markdown "## Status"/"## STATUS" STATE line agrees
+# with the machine-readable `state` field in its distilled *.yml. With no
+# --family it validates every registered family (scenarios, tasks, …). Exits
+# non-zero if any card is inconsistent or missing a state.
 #
 # Common flags (passed through to the module):
-#   --scenario <name>   Restrict to a single scenario
-#   --fix               Project the Markdown STATE line from the YAML state
+#   --family <name>   Restrict to one family (e.g. scenarios, tasks)
+#   --card <name>     Restrict to a single card (requires --family)
+#   --fix             Project the Markdown STATE line from the YAML state
 #
 # Examples:
 #   scripts/validate/status
-#   scripts/validate/status --scenario blind_corner
+#   scripts/validate/status --family tasks
+#   scripts/validate/status --family scenarios --card blind_corner
 #   scripts/validate/status --fix
 
 set -euo pipefail
 
-python -m prosoc.scenarios.validate_status "$@"
+python -m prosoc.utils.cards.validate_status "$@"

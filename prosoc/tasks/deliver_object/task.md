@@ -96,6 +96,7 @@ Evaluation of this task therefore focuses on whether delivery is achieved while 
 ```yaml
 id: deliver.object
 name: Deliver an Object
+state: DRAFTED
 
 summary: >
   The robot transfers a specified object from a source to a destination,

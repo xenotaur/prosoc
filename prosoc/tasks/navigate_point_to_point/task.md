@@ -94,6 +94,7 @@ Evaluation of this task therefore requires assessing how goal achievement is bal
 ```yaml
 id: navigate.point_to_point
 name: Navigate from Start to Goal
+state: DRAFTED
 
 summary: >
   The robot attempts to move from an initial location to a specified destination,

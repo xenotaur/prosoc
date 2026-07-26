@@ -6,6 +6,7 @@
     "required": [
         "id",
         "name",
+        "state",
         "summary",
         "task_type",
         "primary_intent",
@@ -20,6 +21,19 @@
         "name": {
             "type": "string",
             "description": "Human-readable name for the task."
+        },
+        "state": {
+            "type": "string",
+            "enum": [
+                "DRAFTED",
+                "EDITED",
+                "AUDITED",
+                "APPROVED",
+                "VALIDATED",
+                "DEPRECATED",
+                "RETIRED"
+            ],
+            "description": "Machine-readable lifecycle state of the task card (see prosoc/scenarios/workflow.md). Authoritative source for the state; the Markdown ## STATUS block's STATE line is a projection of this value, enforced by scripts/validate/status."
         },
         "summary": {
             "type": "string",

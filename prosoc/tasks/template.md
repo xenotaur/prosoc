@@ -97,6 +97,7 @@ This section is for traceability and discoverability only.
 ```yaml
 id: <canonical_task_id>
 name: <Human-Readable Task Name>
+state: DRAFTED
 
 summary: >
   <One–two sentence abstract description of the task’s intent>

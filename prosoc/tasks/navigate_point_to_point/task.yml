@@ -1,5 +1,6 @@
 id: navigate.point_to_point
 name: Navigate from Start to Goal
+state: DRAFTED
 summary: 'The robot attempts to move from an initial location to a specified destination,
   serving as the baseline navigation intent underlying most social navigation scenarios.
 

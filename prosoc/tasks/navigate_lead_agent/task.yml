@@ -1,5 +1,6 @@
 id: navigate.lead_agent
 name: Lead an Agent
+state: DRAFTED
 summary: 'The robot navigates ahead of a human or other agent, providing a moving
   reference that the agent is expected to follow toward a destination.
 

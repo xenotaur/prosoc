@@ -93,6 +93,7 @@ Evaluation of this task focuses on whether the robot provides a clear, followabl
 ```yaml
 id: navigate.lead_agent
 name: Lead an Agent
+state: DRAFTED
 
 summary: >
   The robot navigates ahead of a human or other agent, providing a moving
