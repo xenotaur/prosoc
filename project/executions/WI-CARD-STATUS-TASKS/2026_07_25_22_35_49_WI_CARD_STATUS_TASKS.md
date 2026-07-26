@@ -2,10 +2,10 @@
 execution_id: 2026_07_25_22_35_49_WI_CARD_STATUS_TASKS
 prompt_id: PROMPT(WI-CARD-STATUS-TASKS:WI_CARD_STATUS_TASKS)[2026-07-25T22:08:39-04:00]
 work_item: WI-CARD-STATUS-TASKS
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/42
-commit: 
+commit: 3fd3f997618f14856455da22ca278a6d567b5553
 created_at: 2026-07-25T22:35:49-04:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CARD-STATUS-TASKS.md
@@ -40,6 +40,8 @@ satisfy the now-required field.
 STATUS` parsing, shim re-export) and `tests/utils/cards/validate_status_test.py`
 (generalized CLI over scenarios + tasks, `--fix`, flat, invalid-state, guards,
 real-repo smoke). Existing `tests/scenarios/*` untouched and green.
+
+CHAIN-NOTE: cycles=1; stops=0; gates=[implement-plan, merge]; friction=validator-polish-review; note="one review round, 4 valid Copilot findings on the generalized validator (trailing-whitespace preservation in --fix, failures->stderr, --card no-match message, test fixture); fixed."
 
 # Validation
 

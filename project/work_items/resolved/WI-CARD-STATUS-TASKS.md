@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #42 (commit 3fd3f99): generalized the status tooling into prosoc/utils/cards/ (family-aware validator + shared helpers, scenarios via shims) and applied the state contract to the tasks family (schema, 4 task cards, template). scripts/validate/status now covers 24 cards (20 scenarios + 4 tasks). Contexts/constitutions/charter are follow-on items."
 blocked_reason: null
 blocked: false
 id: WI-CARD-STATUS-TASKS
 title: Extend the card lifecycle-state contract to the tasks family (Phase 0a)
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY
