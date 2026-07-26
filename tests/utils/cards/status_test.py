@@ -19,16 +19,16 @@ STATUS_BLOCK = """\
 ---
 """
 
-# Uppercase heading with trailing whitespace (Markdown line breaks), as tasks use.
-STATUS_BLOCK_UPPER = """\
-# Task: Example
-
-## STATUS
-- **STATE:** DRAFTED
-- **SOURCE:** somewhere
-
----
-"""
+# Uppercase heading with a STATE line that ends in two trailing spaces — the
+# Markdown line-break style real task cards use. Built with explicit escapes so
+# the trailing spaces live inside the string, not on the source line.
+STATUS_BLOCK_UPPER = (
+    "# Task: Example\n\n"
+    "## STATUS\n"
+    "- **STATE:** DRAFTED  \n"
+    "- **SOURCE:** somewhere\n\n"
+    "---\n"
+)
 
 
 class ParseMarkdownStateTest(unittest.TestCase):
@@ -54,6 +54,12 @@ class ProjectStateTest(unittest.TestCase):
         once = status.project_state_into_markdown(STATUS_BLOCK, "EDITED")
         twice = status.project_state_into_markdown(once, "EDITED")
         self.assertEqual(once, twice)
+
+    def test_projection_preserves_trailing_whitespace(self):
+        # Task cards use two trailing spaces on the STATE bullet; projecting a
+        # new state must swap only the token and keep the trailing whitespace.
+        out = status.project_state_into_markdown(STATUS_BLOCK_UPPER, "APPROVED")
+        self.assertIn("- **STATE:** APPROVED  \n", out)
 
     def test_unknown_state_raises(self):
         with self.assertRaises(ValueError):

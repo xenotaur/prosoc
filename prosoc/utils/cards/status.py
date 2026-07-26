@@ -43,8 +43,14 @@ STATES: tuple[str, ...] = (
 )
 
 # The authoritative STATE line inside a ``## Status`` / ``## STATUS`` block, e.g.
-# ``- **STATE:** DRAFTED``. Tolerates trailing whitespace (Markdown line breaks).
-_STATE_LINE_RE = re.compile(r"^- \*\*STATE:\*\*\s*(?P<state>\S+)\s*$", re.MULTILINE)
+# ``- **STATE:** DRAFTED``. The ``prefix`` and ``suffix`` groups capture the
+# surrounding text (including any trailing whitespace used for Markdown line
+# breaks) so projection can swap only the state token and leave the rest intact.
+# ``[^\S\n]`` is horizontal whitespace only, so ``$`` still anchors to line end.
+_STATE_LINE_RE = re.compile(
+    r"^(?P<prefix>- \*\*STATE:\*\*[^\S\n]*)(?P<state>\S+)(?P<suffix>[^\S\n]*)$",
+    re.MULTILINE,
+)
 
 
 class StatusStateError(ValueError):
@@ -77,7 +83,11 @@ def project_state_into_markdown(md_text: str, state: str) -> str:
         raise ValueError(f"unrecognised lifecycle state: {state!r}")
     if _STATE_LINE_RE.search(md_text) is None:
         raise StatusStateError("no '- **STATE:**' line found to project onto")
-    return _STATE_LINE_RE.sub(f"- **STATE:** {state}", md_text, count=1)
+    # Swap only the state token; keep the prefix and any trailing whitespace
+    # (e.g. the two trailing spaces task cards use for Markdown line breaks).
+    return _STATE_LINE_RE.sub(
+        lambda m: m.group("prefix") + state + m.group("suffix"), md_text, count=1
+    )
 
 
 class ConsistencyResult(NamedTuple):

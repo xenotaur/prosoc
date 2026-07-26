@@ -140,6 +140,18 @@ class GuardsAndDefaultsTest(unittest.TestCase):
                 validate_status.main(["--family", "scenarios", "--root", d]), 1
             )
 
+    def test_card_no_match_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "present", "DRAFTED", "DRAFTED", "scenario")
+            # A --card that matches nothing (while other cards exist) fails.
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "scenarios", "--root", str(root), "--card", "absent"]
+                ),
+                1,
+            )
+
     def test_default_all_families_over_real_repo_is_consistent(self):
         # Integration smoke test: the checked-in corpus (scenarios + tasks) must
         # stay consistent. This is the guard the WI's acceptance depends on.

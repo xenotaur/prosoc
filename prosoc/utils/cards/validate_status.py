@@ -60,14 +60,29 @@ def _label(source, layout: str) -> str:
 
 
 def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bool):
-    """Return (checked_count, failures) after reporting each card in the family."""
+    """Return (checked_count, failures) after reporting each card in the family.
+
+    Progress lines (``ok`` / ``fix``) go to stdout; failures go to stderr.
+    """
     if layout == "flat" and not family.supports_flat:
-        print(f"FAIL {family.name}: flat layout is not supported for this family")
+        print(
+            f"FAIL {family.name}: flat layout is not supported for this family",
+            file=sys.stderr,
+        )
         return 0, 1
 
     sources = family.discover(root, layout)
     if card is not None:
-        sources = [s for s in sources if _label(s, layout) == card]
+        matched = [s for s in sources if _label(s, layout) == card]
+        if not matched:
+            # Distinguish "that card isn't here" from "no cards at all".
+            found = "" if not sources else f" (root has other cards under {root})"
+            print(
+                f"FAIL {family.name}: no card {card!r} found{found}",
+                file=sys.stderr,
+            )
+            return 0, 1
+        sources = matched
 
     if not sources:
         print(f"FAIL {family.name}: no cards found under {root}", file=sys.stderr)
@@ -79,7 +94,7 @@ def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bo
         try:
             result = status.check_source(source.md_path, source.yml_path)
         except status.StatusStateError as exc:
-            print(f"FAIL {name}: {exc}")
+            print(f"FAIL {name}: {exc}", file=sys.stderr)
             failures += 1
             continue
 
@@ -95,7 +110,8 @@ def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bo
             if yaml_state not in status.STATES:
                 print(
                     f"FAIL {name}: cannot fix — YAML state {yaml_state!r} "
-                    "is not a recognised lifecycle state"
+                    "is not a recognised lifecycle state",
+                    file=sys.stderr,
                 )
                 failures += 1
                 continue
@@ -105,7 +121,7 @@ def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bo
             utils.atomic_write(path=source.md_path, content=fixed)
             print(f"fix  {name}: projected Markdown STATE -> {yaml_state}")
         else:
-            print(f"FAIL {name}: {result.detail}")
+            print(f"FAIL {name}: {result.detail}", file=sys.stderr)
             failures += 1
 
     return len(sources), failures
