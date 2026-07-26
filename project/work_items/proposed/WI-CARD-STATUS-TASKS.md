@@ -88,7 +88,7 @@ in `prosoc/scenarios/workflow.md` (states `DRAFTED`, `EDITED`, `AUDITED`,
 
 - Generalize the family-agnostic state helpers into
   `prosoc/utils/cards/status.py`; update the scenarios modules to consume the
-  shared module (no behaviour change).
+  shared module (no behavior change).
 - Make the status validator family-aware (scenarios + tasks) behind
   `scripts/validate/status`.
 - Apply the `state` schema field + fenced-YAML authoring to the **tasks**
@@ -114,7 +114,7 @@ in `prosoc/scenarios/workflow.md` (states `DRAFTED`, `EDITED`, `AUDITED`,
    via the tasks distiller (state line only).
 5. Tests: add `tests/utils/cards/status_test.py` for the shared module; extend
    the validator tests to cover the tasks family. Keep the scenario tests
-   green (they are the guard that the refactor changed no behaviour).
+   green (they are the guard that the refactor changed no behavior).
 6. Add `WI-CARD-STATUS-TASKS` to the `work_items:` list of
    `project/workstreams/proposed/WS-NORMATIVE-PACKET-ASSEMBLY.md`.
 
@@ -150,7 +150,7 @@ in `prosoc/scenarios/workflow.md` (states `DRAFTED`, `EDITED`, `AUDITED`,
 ## Risk Notes
 
 - The refactor touches just-landed scenarios code; the scenario validator
-  behaviour must not change — the existing scenario tests are the guard, and
+  behavior must not change — the existing scenario tests are the guard, and
   `scripts/validate/status` must still report 20/20 scenarios consistent.
 - Tasks use a `## STATUS` heading with trailing-whitespace line breaks; the
   `STATE` regex already tolerates both, but verify parsing on all 4 task cards.
