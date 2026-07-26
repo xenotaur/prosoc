@@ -13,6 +13,7 @@ related_design:
   - project/design/proposals/proposed/normative-packet-assembly/00_proposal.md
 work_items:
   - WI-CARD-STATUS-FOUNDATION
+  - WI-CARD-STATUS-TASKS
 exit_criteria:
   - PROP-NORMATIVE-PACKET-ASSEMBLY is adopted (status adopted)
   - All five card families carry a machine-readable status field with the APPROVED lifecycle state, projected into the Markdown STATUS block and enforced by scripts/validate/status
@@ -77,10 +78,13 @@ consumption, navigation — is blocked on there being a packet to consume.
 
 ## Work Items
 
-- **WI-CARD-STATUS-FOUNDATION** — Phase 0a foundation: resolve the lifecycle
-  enum (insert `APPROVED`; settle `VALIDATED`/`VERIFIED`), define the canonical
-  STATUS-block format and a machine-readable lifecycle-state field, and prove
-  the contract end-to-end on the scenarios family.
+- **WI-CARD-STATUS-FOUNDATION** — Phase 0a foundation (resolved): resolve the
+  lifecycle enum (insert `APPROVED`; settle `VALIDATED`/`VERIFIED`), define the
+  canonical STATUS-block format and a machine-readable lifecycle-state field,
+  and prove the contract end-to-end on the scenarios family.
+- **WI-CARD-STATUS-TASKS** — Phase 0a, tasks family: generalize the status
+  tooling into `prosoc/utils/cards/` (family-aware) and apply the state
+  contract to the four task cards, reusing the foundation contract.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. The expected breakdown follows the
