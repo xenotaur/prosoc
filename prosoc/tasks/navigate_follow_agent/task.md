@@ -94,6 +94,7 @@ Evaluation of this task focuses on whether the robot sustains the intended relat
 ```yaml
 id: navigate.follow_agent
 name: Follow an Agent
+state: DRAFTED
 
 summary: >
   The robot navigates by following a human or other agent, maintaining an
