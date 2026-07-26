@@ -2,10 +2,10 @@
 execution_id: 2026_07_25_21_54_10_WI_CARD_STATUS_TASKS_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_CARD_STATUS_TASKS_REVIEW)[2026-07-25T21:53:26-04:00]
 work_item: AD_HOC
-status: in_progress
-rerun_of: 
+status: landed
+rerun_of: 2026_07_25_22_02_30_WI_CARD_STATUS_TASKS
 pr: https://github.com/xenotaur/prosoc/pull/41
-commit: 
+commit: 5841ff5b21e9cb2e678f6d9d183e0ef5bce20586
 created_at: 2026-07-25T21:54:10-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/41
