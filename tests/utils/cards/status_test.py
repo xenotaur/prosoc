@@ -6,7 +6,6 @@ from pathlib import Path
 
 from prosoc.utils.cards import status
 
-
 STATUS_BLOCK = """\
 # Card: Example
 
