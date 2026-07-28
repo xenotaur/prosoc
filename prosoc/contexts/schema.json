@@ -6,6 +6,7 @@
   "required": [
     "id",
     "name",
+    "state",
     "context_class",
     "primary_robot_role",
     "applies_to_tasks",
@@ -22,6 +23,19 @@
     "name": {
       "type": "string",
       "description": "Human-readable context name."
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "DRAFTED",
+        "EDITED",
+        "AUDITED",
+        "APPROVED",
+        "VALIDATED",
+        "DEPRECATED",
+        "RETIRED"
+      ],
+      "description": "Machine-readable lifecycle state of the context card (see prosoc/scenarios/workflow.md). Authoritative source for the state; the Markdown ## STATUS block's STATE line is a projection of this value, enforced by scripts/validate/status."
     },
     "context_class": {
       "type": "string",

@@ -147,6 +147,7 @@ This aids discoverability without binding to concrete datasets.
 ```yaml
 id: <canonical_context_id>
 name: <Human-Readable Context Name>
+state: DRAFTED
 context_class: core
 
 primary_robot_role: <string>

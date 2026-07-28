@@ -140,6 +140,7 @@ Common tensions include:
 ```yaml
 id: guidance.docent
 name: Guidance and Docent Operation
+state: DRAFTED
 context_class: core
 
 primary_robot_role: guide

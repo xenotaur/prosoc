@@ -139,6 +139,7 @@ Common tensions include:
 ```yaml
 id: baseline.public_navigation
 name: Baseline Public Navigation
+state: DRAFTED
 context_class: core
 
 primary_robot_role: neutral navigator
