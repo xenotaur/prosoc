@@ -14,6 +14,7 @@ related_design:
 work_items:
   - WI-CARD-STATUS-FOUNDATION
   - WI-CARD-STATUS-TASKS
+  - WI-CARD-STATUS-CONTEXTS
 exit_criteria:
   - PROP-NORMATIVE-PACKET-ASSEMBLY is adopted (status adopted)
   - All five card families carry a machine-readable status field with the APPROVED lifecycle state, projected into the Markdown STATUS block and enforced by scripts/validate/status
@@ -82,15 +83,19 @@ consumption, navigation — is blocked on there being a packet to consume.
   lifecycle enum (insert `APPROVED`; settle `VALIDATED`/`VERIFIED`), define the
   canonical STATUS-block format and a machine-readable lifecycle-state field,
   and prove the contract end-to-end on the scenarios family.
-- **WI-CARD-STATUS-TASKS** — Phase 0a, tasks family: generalize the status
-  tooling into `prosoc/utils/cards/` (family-aware) and apply the state
+- **WI-CARD-STATUS-TASKS** — Phase 0a, tasks family (resolved): generalize the
+  status tooling into `prosoc/utils/cards/` (family-aware) and apply the state
   contract to the four task cards, reusing the foundation contract.
+- **WI-CARD-STATUS-CONTEXTS** — Phase 0a, contexts family: register the
+  contexts family with the now-generic tooling and apply the state contract to
+  the four context cards.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. The expected breakdown follows the
 phases in Scope — Phase 0a in particular is planned as family-by-family work
-(the remaining four card families reuse the contract established by
-`WI-CARD-STATUS-FOUNDATION`), which may be one work item or several.
+(with scenarios, tasks, and contexts done or in progress, the remaining
+families are constitutions and the charter), which may be one work item or
+several.
 
 ## Exit Criteria
 
