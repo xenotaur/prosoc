@@ -19,6 +19,7 @@ import sys
 from dataclasses import dataclass
 from typing import Callable
 
+from prosoc.contexts import distill as contexts_distill
 from prosoc.literate import utils
 from prosoc.scenarios import distill as scenarios_distill
 from prosoc.tasks import distill as tasks_distill
@@ -50,6 +51,14 @@ FAMILIES: dict[str, Family] = {
         default_root=pathlib.Path(tasks_distill.__file__).parent,
         supports_flat=False,
         discover=lambda root, layout: tasks_distill.discover_tasks(root),
+    ),
+    "contexts": Family(
+        name="contexts",
+        default_root=pathlib.Path(contexts_distill.__file__).parent,
+        supports_flat=False,
+        # discover_contexts is a generator; wrap in list() so the caller's
+        # len()/`not sources` checks work.
+        discover=lambda root, layout: list(contexts_distill.discover_contexts(root)),
     ),
 }
 

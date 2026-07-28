@@ -141,6 +141,7 @@ Common tensions include:
 ```yaml
 id: emergency.high_urgency
 name: Emergency High-Urgency Operation
+state: DRAFTED
 context_class: core
 
 primary_robot_role: emergency responder

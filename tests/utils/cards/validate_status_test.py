@@ -124,6 +124,38 @@ class TasksFamilyTest(unittest.TestCase):
             )
 
 
+class ContextsFamilyTest(unittest.TestCase):
+    # discover_contexts is a generator; the registry wraps it in list(). These
+    # tests exercise the real contexts family via a temp root and so guard that
+    # the generator-wrapping keeps the validator's len()/`not sources` logic
+    # working (an unwrapped generator would raise or misreport here).
+
+    def test_consistent(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "routine", "DRAFTED", "DRAFTED", "context")
+            self.assertEqual(
+                validate_status.main(["--family", "contexts", "--root", str(root)]), 0
+            )
+
+    def test_inconsistent(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "routine", "DRAFTED", "APPROVED", "context")
+            self.assertEqual(
+                validate_status.main(["--family", "contexts", "--root", str(root)]), 1
+            )
+
+    def test_flat_layout_unsupported_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "contexts", "--root", d, "--layout", "flat"]
+                ),
+                1,
+            )
+
+
 class GuardsAndDefaultsTest(unittest.TestCase):
     def test_root_requires_family(self):
         with tempfile.TemporaryDirectory() as d:

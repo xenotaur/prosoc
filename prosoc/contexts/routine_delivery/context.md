@@ -140,6 +140,7 @@ Common tensions include:
 ```yaml
 id: service.routine_delivery
 name: Routine Service Delivery
+state: DRAFTED
 context_class: core
 
 primary_robot_role: service provider
