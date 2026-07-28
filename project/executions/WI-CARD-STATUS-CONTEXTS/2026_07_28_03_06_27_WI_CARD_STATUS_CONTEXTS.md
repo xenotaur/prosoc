@@ -2,10 +2,10 @@
 execution_id: 2026_07_28_03_06_27_WI_CARD_STATUS_CONTEXTS
 prompt_id: PROMPT(WI-CARD-STATUS-CONTEXTS:WI_CARD_STATUS_CONTEXTS)[2026-07-28T02:39:26-04:00]
 work_item: WI-CARD-STATUS-CONTEXTS
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/45
-commit: 
+commit: e142cbe3bb33c018514cb05007c784d51000f035
 created_at: 2026-07-28T03:06:27-04:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CARD-STATUS-CONTEXTS.md

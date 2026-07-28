@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #45 (commit e142cbe): registered the contexts family with the generic status tooling and applied the state contract to the 4 context cards (schema, cards, template). scripts/validate/status now covers 28 cards (20 scenarios + 4 tasks + 4 contexts). Constitutions and the charter are the remaining Phase 0a families."
 blocked_reason: null
 blocked: false
 id: WI-CARD-STATUS-CONTEXTS
 title: Extend the card lifecycle-state contract to the contexts family (Phase 0a)
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY
