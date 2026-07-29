@@ -101,12 +101,12 @@ consumption, navigation — is blocked on there being a packet to consume.
   document-level `state`, applying the contract to the single multi-principle
   charter document. Merged in PR #49, closing out Phase 0a — all five families
   now carry the machine-readable lifecycle-state contract.
-- **WI-PACKET-ASSEMBLER-ENGINE** — Phase 1, the assembler engine (proposed): a
+- **WI-PACKET-ASSEMBLER-ENGINE** — Phase 1, the assembler engine (resolved): a
   generic `CardLoader`, manifest `resolve`, a fail-closed lifecycle `gate`, and
   `assemble` into a namespaced in-toto / DSSE-shaped provenance envelope
-  (`packet.schema.json`), shipped behind `--allow-unapproved`. The core
-  deliverable the workstream is built toward; unblocked by Phase 0a supplying
-  machine-readable `state`.
+  (`prosoc/packet/schema.json`), shipped behind `--allow-unapproved`. Merged in
+  PR #51 — the core engine the workstream is built toward now exists
+  (`prosoc/packet/` + `scripts/assemble`).
 
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. Phase 0a landed family-by-family (all

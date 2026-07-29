@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: Implemented and merged in PR #51 (commit 308da1f); the Phase 1 engine (prosoc/packet/ + scripts/assemble) produces a namespaced, fail-closed provenance packet from a manifest, with the --allow-unapproved escape hatch stamped into the payload.
 blocked_reason: null
 blocked: false
 id: WI-PACKET-ASSEMBLER-ENGINE
 title: Normative packet assembler engine — resolve, fail-closed gate, generic loader, envelope (Phase 1)
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY
