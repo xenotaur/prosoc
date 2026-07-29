@@ -16,6 +16,7 @@ work_items:
   - WI-CARD-STATUS-TASKS
   - WI-CARD-STATUS-CONTEXTS
   - WI-CARD-STATUS-CONSTITUTIONS
+  - WI-CARD-STATUS-CHARTER
 exit_criteria:
   - PROP-NORMATIVE-PACKET-ASSEMBLY is adopted (status adopted)
   - All five card families carry a machine-readable status field with the APPROVED lifecycle state, projected into the Markdown STATUS block and enforced by scripts/validate/status
@@ -90,17 +91,21 @@ consumption, navigation — is blocked on there being a packet to consume.
 - **WI-CARD-STATUS-CONTEXTS** — Phase 0a, contexts family (resolved): register
   the contexts family with the now-generic tooling and apply the state contract
   to the four context cards.
-- **WI-CARD-STATUS-CONSTITUTIONS** — Phase 0a, constitutions family: add a
-  `root_key` parameter to the shared state helpers and normalize the
+- **WI-CARD-STATUS-CONSTITUTIONS** — Phase 0a, constitutions family (resolved):
+  add a `root_key` parameter to the shared state helpers and normalize the
   constitution STATUS blocks (root-wrapped YAML, heading-style STATUS), then
   apply the state contract to the two constitution cards.
+- **WI-CARD-STATUS-CHARTER** — Phase 0a, charter family (final): register a
+  single-source charter family and teach the charter distiller to emit a
+  document-level `state`, applying the contract to the single multi-principle
+  charter document. Completing it closes out Phase 0a (all five families).
 
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. The expected breakdown follows the
 phases in Scope — Phase 0a in particular is planned as family-by-family work
-(with scenarios, tasks, and contexts done and constitutions planned next, the
-last family is the charter, which needs a different family adapter), which may
-be one work item or several.
+(scenarios, tasks, contexts, and constitutions done, with the charter — the
+final family, which needs a single-source adapter — planned as
+`WI-CARD-STATUS-CHARTER`), which may be one work item or several.
 
 ## Exit Criteria
 
