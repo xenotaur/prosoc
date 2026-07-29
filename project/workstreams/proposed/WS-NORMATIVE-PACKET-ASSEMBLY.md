@@ -98,7 +98,7 @@ consumption, navigation — is blocked on there being a packet to consume.
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. The expected breakdown follows the
 phases in Scope — Phase 0a in particular is planned as family-by-family work
-(with scenarios, tasks, and contexts done and constitutions in progress, the
+(with scenarios, tasks, and contexts done and constitutions planned next, the
 last family is the charter, which needs a different family adapter), which may
 be one work item or several.
 
