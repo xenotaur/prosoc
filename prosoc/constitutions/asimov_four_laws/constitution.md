@@ -1,9 +1,11 @@
 # Constitution Card: Asimov's Four Laws of Robotics
 
-## STATUS: EDITED 2026-01-26
-- SOURCE: Asimov, I. (1985). Robots and Empire.
-- DRAFTED: Anthony Francis centaur@logicalrobotics.com, 2026-01-26
-- EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-26
+## STATUS
+
+- **STATE:** EDITED
+- **SOURCE:** Asimov, I. (1985). Robots and Empire.
+- **DRAFTED:** Anthony Francis centaur@logicalrobotics.com, 2026-01-26
+- **EDITED:** Anthony Francis centaur@logicalrobotics.com, 2026-01-26
 
 ## Overview
 
@@ -25,6 +27,7 @@ robot safety system.
 constitution:
   id: asimov_four_laws
   name: "Asimov's Four Laws of Robotics"
+  state: EDITED
 
   scope:
     domain: general_robot_behavior

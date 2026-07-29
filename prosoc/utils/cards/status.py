@@ -119,20 +119,37 @@ def check_consistency(*, markdown_state: str, yaml_state: str) -> ConsistencyRes
 # -----------------------------------------------------------------------------
 
 
-def read_yaml_state(yml_path: pathlib.Path) -> str:
+def read_yaml_state(yml_path: pathlib.Path, root_key: str | None = None) -> str:
     """Return the ``state`` field from a distilled card ``*.yml``.
 
+    Most families keep ``state`` at the top level. Root-wrapped families (e.g.
+    constitutions, whose payload nests under a ``constitution:`` key) pass
+    ``root_key`` so the state is read from ``data[root_key]["state"]``.
+
     Raises:
-        StatusStateError: if the file has no top-level ``state`` field.
+        StatusStateError: if the expected ``state`` field is absent.
     """
     data = yaml.safe_load(yml_path.read_text(encoding="utf-8"))
+    if root_key is not None:
+        if not isinstance(data, dict) or not isinstance(data.get(root_key), dict):
+            raise StatusStateError(f"{yml_path} has no '{root_key}' mapping")
+        data = data[root_key]
+        where = f"'{root_key}.state'"
+    else:
+        where = "top-level 'state'"
     if not isinstance(data, dict) or "state" not in data:
-        raise StatusStateError(f"{yml_path} has no top-level 'state' field")
+        raise StatusStateError(f"{yml_path} has no {where} field")
     return str(data["state"])
 
 
-def check_source(md_path: pathlib.Path, yml_path: pathlib.Path) -> ConsistencyResult:
-    """Check that a card's Markdown STATE line and YAML ``state`` agree."""
+def check_source(
+    md_path: pathlib.Path, yml_path: pathlib.Path, root_key: str | None = None
+) -> ConsistencyResult:
+    """Check that a card's Markdown STATE line and YAML ``state`` agree.
+
+    ``root_key`` is forwarded to :func:`read_yaml_state` for root-wrapped
+    families (see its docstring).
+    """
     markdown_state = parse_markdown_state(md_path.read_text(encoding="utf-8"))
-    yaml_state = read_yaml_state(yml_path)
+    yaml_state = read_yaml_state(yml_path, root_key=root_key)
     return check_consistency(markdown_state=markdown_state, yaml_state=yaml_state)
