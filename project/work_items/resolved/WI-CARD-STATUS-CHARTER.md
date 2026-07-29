@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: Implemented and merged in PR #49 (commit 592204f); charter now carries a top-level machine-readable state (fenced-YAML-authoritative) enforced by scripts/validate/status, completing Phase 0a across all five families.
 blocked_reason: null
 blocked: false
 id: WI-CARD-STATUS-CHARTER
 title: Extend the card lifecycle-state contract to the charter family (Phase 0a — final family)
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY

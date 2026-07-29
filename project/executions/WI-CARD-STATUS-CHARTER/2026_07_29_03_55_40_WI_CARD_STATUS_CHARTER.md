@@ -2,10 +2,10 @@
 execution_id: 2026_07_29_03_55_40_WI_CARD_STATUS_CHARTER
 prompt_id: PROMPT(WI-CARD-STATUS-CHARTER:WI_CARD_STATUS_CHARTER)[2026-07-29T03:40:52-04:00]
 work_item: WI-CARD-STATUS-CHARTER
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/49
-commit: 
+commit: 592204f478a9b7d7f52dbb14ef71660a258a167d
 created_at: 2026-07-29T03:55:40-04:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CARD-STATUS-CHARTER.md

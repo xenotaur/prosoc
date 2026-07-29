@@ -2,10 +2,10 @@
 execution_id: 2026_07_29_04_01_39_WI_CARD_STATUS_CHARTER_IMPL_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_CARD_STATUS_CHARTER_IMPL_REVIEW)[2026-07-29T04:01:39-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_07_29_03_55_40_WI_CARD_STATUS_CHARTER
 pr: https://github.com/xenotaur/prosoc/pull/49
-commit: 
+commit: 592204f478a9b7d7f52dbb14ef71660a258a167d
 created_at: 2026-07-29T04:01:39-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/49

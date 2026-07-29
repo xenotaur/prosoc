@@ -95,10 +95,11 @@ consumption, navigation — is blocked on there being a packet to consume.
   add a `root_key` parameter to the shared state helpers and normalize the
   constitution STATUS blocks (root-wrapped YAML, heading-style STATUS), then
   apply the state contract to the two constitution cards.
-- **WI-CARD-STATUS-CHARTER** — Phase 0a, charter family (final): register a
+- **WI-CARD-STATUS-CHARTER** — Phase 0a, charter family (resolved): register a
   single-source charter family and teach the charter distiller to emit a
   document-level `state`, applying the contract to the single multi-principle
-  charter document. Completing it closes out Phase 0a (all five families).
+  charter document. Merged in PR #49, closing out Phase 0a — all five families
+  now carry the machine-readable lifecycle-state contract.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. The expected breakdown follows the
