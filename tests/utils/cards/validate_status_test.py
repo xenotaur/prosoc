@@ -246,6 +246,58 @@ class ConstitutionsFamilyTest(unittest.TestCase):
             )
 
 
+def _charter_card(root: Path, md_state: str, yml_state: str) -> None:
+    """Single-source charter: <root>/charter.md and charter.yml (top-level
+    state, sibling of principles)."""
+    (root / "charter.md").write_text(MD.replace("DRAFTED", md_state), encoding="utf-8")
+    (root / "charter.yml").write_text(
+        f"state: {yml_state}\nprinciples:\n- id: P0\n  name: Goal\n",
+        encoding="utf-8",
+    )
+
+
+class CharterFamilyTest(unittest.TestCase):
+    # The charter is a single-source family (charter.md -> charter.yml) whose
+    # state lives at the top level (yaml_root_key=None). discover_charter
+    # returns at most one source; these tests exercise that single-source path.
+
+    def test_consistent(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _charter_card(root, "DRAFTED", "DRAFTED")
+            self.assertEqual(
+                validate_status.main(["--family", "charter", "--root", str(root)]), 0
+            )
+
+    def test_inconsistent(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _charter_card(root, "DRAFTED", "APPROVED")
+            self.assertEqual(
+                validate_status.main(["--family", "charter", "--root", str(root)]), 1
+            )
+
+    def test_empty_root_fails(self):
+        # No charter.md present -> discover_charter returns [] -> "no cards".
+        with tempfile.TemporaryDirectory() as d:
+            self.assertEqual(
+                validate_status.main(["--family", "charter", "--root", d]), 1
+            )
+
+    def test_card_id_is_stem_not_root_dir_name(self):
+        # label_by_stem: --card "charter" must match regardless of the (temp)
+        # root directory's name; the card id is the charter.md stem, not the dir.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _charter_card(root, "DRAFTED", "DRAFTED")
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "charter", "--root", str(root), "--card", "charter"]
+                ),
+                0,
+            )
+
+
 class GuardsAndDefaultsTest(unittest.TestCase):
     def test_root_requires_family(self):
         with tempfile.TemporaryDirectory() as d:

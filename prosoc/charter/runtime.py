@@ -74,6 +74,10 @@ class Charter(pydantic.BaseModel):
     schema validation has already succeeded.
     """
 
+    # Document-level lifecycle state (DRAFTED, EDITED, AUDITED, APPROVED,
+    # VALIDATED, DEPRECATED, RETIRED). Optional here for backward compatibility;
+    # schema.json makes it required in the distilled charter.yml.
+    state: Optional[str] = None
     principles: List[CharterPrinciple]
 
     # ------------------------------------------------------------------
