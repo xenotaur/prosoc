@@ -1,6 +1,7 @@
 constitution:
   id: asimov_four_laws
   name: Asimov's Four Laws of Robotics
+  state: EDITED
   scope:
     domain: general_robot_behavior
     contexts:

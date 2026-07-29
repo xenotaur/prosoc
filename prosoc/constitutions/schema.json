@@ -11,6 +11,7 @@
       "required": [
         "id",
         "name",
+        "state",
         "rules"
       ],
       "properties": {
@@ -19,6 +20,19 @@
         },
         "name": {
           "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "DRAFTED",
+            "EDITED",
+            "AUDITED",
+            "APPROVED",
+            "VALIDATED",
+            "DEPRECATED",
+            "RETIRED"
+          ],
+          "description": "Machine-readable lifecycle state of the constitution card (see prosoc/scenarios/workflow.md). Authoritative source for the state; the Markdown ## STATUS block's STATE line is a projection of this value, enforced by scripts/validate/status."
         },
         "scope": {
           "type": "object",

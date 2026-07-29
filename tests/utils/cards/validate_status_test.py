@@ -156,6 +156,66 @@ class ContextsFamilyTest(unittest.TestCase):
             )
 
 
+def _constitution_card(root: Path, name: str, md_state: str, yml_state: str) -> None:
+    """Constitution card: root-wrapped YAML (state at constitution.state),
+    STATUS block with a bold STATE bullet."""
+    d = root / name
+    d.mkdir()
+    (d / "constitution.md").write_text(
+        MD.replace("DRAFTED", md_state), encoding="utf-8"
+    )
+    (d / "constitution.yml").write_text(
+        f"constitution:\n  id: {name}\n  name: {name}\n  state: {yml_state}\n",
+        encoding="utf-8",
+    )
+
+
+class ConstitutionsFamilyTest(unittest.TestCase):
+    # Constitutions are root-wrapped (state at constitution.state); these tests
+    # exercise the Family's yaml_root_key="constitution" path end to end.
+
+    def test_consistent(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _constitution_card(root, "asimov", "EDITED", "EDITED")
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "constitutions", "--root", str(root)]
+                ),
+                0,
+            )
+
+    def test_inconsistent(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _constitution_card(root, "asimov", "EDITED", "APPROVED")
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "constitutions", "--root", str(root)]
+                ),
+                1,
+            )
+
+    def test_missing_root_wrapper_fails(self):
+        # A top-level (non-root-wrapped) YAML must fail for a root-keyed family.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            cd = root / "asimov"
+            cd.mkdir()
+            (cd / "constitution.md").write_text(
+                MD.replace("DRAFTED", "EDITED"), encoding="utf-8"
+            )
+            (cd / "constitution.yml").write_text(
+                "id: asimov\nname: asimov\nstate: EDITED\n", encoding="utf-8"
+            )
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "constitutions", "--root", str(root)]
+                ),
+                1,
+            )
+
+
 class GuardsAndDefaultsTest(unittest.TestCase):
     def test_root_requires_family(self):
         with tempfile.TemporaryDirectory() as d:

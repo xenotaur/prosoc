@@ -108,6 +108,36 @@ class FileHelpersTest(unittest.TestCase):
             with self.assertRaises(status.StatusStateError):
                 status.read_yaml_state(yml)
 
+    def test_read_yaml_state_root_key(self):
+        # Root-wrapped payload (as constitutions use): state nests under the key.
+        with tempfile.TemporaryDirectory() as d:
+            yml = Path(d) / "constitution.yml"
+            yml.write_text(
+                "constitution:\n  id: x\n  name: X\n  state: EDITED\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                status.read_yaml_state(yml, root_key="constitution"), "EDITED"
+            )
+
+    def test_read_yaml_state_root_key_missing_mapping(self):
+        with tempfile.TemporaryDirectory() as d:
+            yml = Path(d) / "constitution.yml"
+            yml.write_text("id: x\nname: X\nstate: EDITED\n", encoding="utf-8")
+            with self.assertRaises(status.StatusStateError):
+                status.read_yaml_state(yml, root_key="constitution")
+
+    def test_check_source_root_key(self):
+        with tempfile.TemporaryDirectory() as d:
+            md = Path(d) / "constitution.md"
+            yml = Path(d) / "constitution.yml"
+            md.write_text(STATUS_BLOCK.replace("DRAFTED", "EDITED"), encoding="utf-8")
+            yml.write_text(
+                "constitution:\n  id: x\n  name: X\n  state: EDITED\n",
+                encoding="utf-8",
+            )
+            self.assertTrue(status.check_source(md, yml, root_key="constitution").ok)
+
     def test_check_source_consistent(self):
         with tempfile.TemporaryDirectory() as d:
             md = Path(d) / "card.md"

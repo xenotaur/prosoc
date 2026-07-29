@@ -19,6 +19,7 @@ import sys
 from dataclasses import dataclass
 from typing import Callable
 
+from prosoc.constitutions import distill as constitutions_distill
 from prosoc.contexts import distill as contexts_distill
 from prosoc.literate import utils
 from prosoc.scenarios import distill as scenarios_distill
@@ -35,6 +36,9 @@ class Family:
     supports_flat: bool
     # (root, layout) -> list of sources exposing ``md_path`` / ``yml_path``.
     discover: Callable[[pathlib.Path, str], list]
+    # For root-wrapped families whose ``*.yml`` nests the payload (and ``state``)
+    # under a top key (e.g. constitutions -> "constitution"); None = top-level.
+    yaml_root_key: str | None = None
 
 
 FAMILIES: dict[str, Family] = {
@@ -59,6 +63,16 @@ FAMILIES: dict[str, Family] = {
         # discover_contexts is a generator; wrap in list() so the caller's
         # len()/`not sources` checks work.
         discover=lambda root, layout: list(contexts_distill.discover_contexts(root)),
+    ),
+    "constitutions": Family(
+        name="constitutions",
+        default_root=pathlib.Path(constitutions_distill.__file__).parent,
+        supports_flat=False,
+        discover=lambda root, layout: constitutions_distill.discover_constitutions(
+            root, layout
+        ),
+        # constitution.yml is root-wrapped: state lives at constitution.state.
+        yaml_root_key="constitution",
     ),
 }
 
@@ -101,7 +115,9 @@ def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bo
     for source in sources:
         name = f"{family.name}/{_label(source, layout)}"
         try:
-            result = status.check_source(source.md_path, source.yml_path)
+            result = status.check_source(
+                source.md_path, source.yml_path, root_key=family.yaml_root_key
+            )
         except status.StatusStateError as exc:
             print(f"FAIL {name}: {exc}", file=sys.stderr)
             failures += 1
@@ -112,7 +128,9 @@ def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bo
             continue
 
         if fix:
-            yaml_state = status.read_yaml_state(source.yml_path)
+            yaml_state = status.read_yaml_state(
+                source.yml_path, root_key=family.yaml_root_key
+            )
             # Only project from an authoritative state that is itself valid; an
             # unrecognised YAML state is a failure to report, not to fix
             # (projecting it would raise). Keep going so the run still fails.

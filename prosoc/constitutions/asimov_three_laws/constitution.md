@@ -1,9 +1,11 @@
 # Constitution Card: Asimov's Three Laws of Robotics
 
-## STATUS: EDITED 2026-01-26
-- SOURCE: Asimov, I. (1942). Runaround. Astounding Science Fiction.
-- DRAFTED: ChatGPT 5.2, 2026-01-23
-- EDITED: Anthony Francis centaur@logicalrobotics.com, 2026-01-26
+## STATUS
+
+- **STATE:** EDITED
+- **SOURCE:** Asimov, I. (1942). Runaround. Astounding Science Fiction.
+- **DRAFTED:** ChatGPT 5.2, 2026-01-23
+- **EDITED:** Anthony Francis centaur@logicalrobotics.com, 2026-01-26
 
 ## Overview
 
@@ -25,6 +27,7 @@ robot safety system.
 constitution:
   id: asimov_three_laws
   name: "Asimov's Three Laws of Robotics"
+  state: EDITED
 
   scope:
     domain: general_robot_behavior

@@ -1,15 +1,23 @@
 # Constitution Card: <TITLE>
 
-## STATUS: SOURCE | DRAFTED | EDITED | AUDITED | VERIFIED | DEPRECATED | RETIRED
- - SOURCE: <source of the document>
- - DRAFTED: Who drafted the first version, YYYY-MM-DD
- - EDITED: Who edited the document, YYYY-MM-DD
- - AUDITED: Should be a human, YYYY-MM-DD
- - VERIFIED: Verified in production, YYYY-MM-DD
- - DEPRECATED: Replaced by what, YYYY-MM-DD
- - RETIRED: Why not to use, YYYY-MM-DD
- 
- The status block should contain as many lines as necessary to capture the history of the document.
+## STATUS
+
+- **STATE:** DRAFTED
+- **SOURCE:** <source of the document>
+- **DRAFTED:** Who drafted the first version, YYYY-MM-DD
+- **EDITED:** Who edited the document, YYYY-MM-DD
+- **AUDITED:** Automated audit (e.g. an agentic auditor), YYYY-MM-DD
+- **APPROVED:** Human approver, YYYY-MM-DD
+- **VALIDATED:** Supporting empirical evidence, YYYY-MM-DD
+- **DEPRECATED:** Replaced by what, YYYY-MM-DD
+- **RETIRED:** Why not to use, YYYY-MM-DD
+
+The first bullet is the authoritative `STATE`, one of `DRAFTED`, `EDITED`,
+`AUDITED`, `APPROVED`, `VALIDATED`, `DEPRECATED`, or `RETIRED` (see
+`prosoc/scenarios/workflow.md`); the remaining bullets record provenance —
+include as many as apply. The same state is carried machine-readably as
+`state:` inside the fenced `constitution:` YAML below (the authoritative
+source), and `scripts/validate/status` checks that the two agree.
 
 ## Overview
 
@@ -30,6 +38,7 @@ traceability, and amendment over time.
 constitution:
   id: <constitution-id>
   name: <short descriptive name>
+  state: DRAFTED
 
   scope:
     domain: social_robot_navigation
