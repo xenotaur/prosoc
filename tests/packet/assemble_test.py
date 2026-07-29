@@ -108,6 +108,13 @@ class AssembleTest(unittest.TestCase):
         self.assertIn("c1", g["contexts"])
         self.assertNotEqual(g["scenarios"]["s1"]["context"], g["contexts"]["c1"])
 
+    def test_charter_namespaced_under_id(self):
+        # The charter is nested under its id like every other family, so the
+        # guidance shape is uniform (family -> id -> body).
+        env = assemble([_charter()], _manifest())
+        self.assertIn("charter", env["guidance"]["charter"])
+        self.assertIn("principles", env["guidance"]["charter"]["charter"])
+
     def test_state_stripped_from_guidance_kept_in_predicate(self):
         env = assemble([_scenario()], _manifest())
         self.assertNotIn("state", env["guidance"]["scenarios"]["s1"])

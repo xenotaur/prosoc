@@ -119,8 +119,10 @@ def load_card(family: str, card_id: str) -> LoadedCard:
 
     try:
         payload = yaml.safe_load(raw.decode("utf-8"))
-    except yaml.YAMLError as exc:
-        raise ResolveError(f"{family}/{card_id}: invalid YAML: {exc}") from exc
+    except (UnicodeDecodeError, yaml.YAMLError) as exc:
+        raise ResolveError(
+            f"{family}/{card_id}: could not parse card YAML: {exc}"
+        ) from exc
     if not isinstance(payload, dict):
         raise ResolveError(
             f"{family}/{card_id}: expected a top-level mapping in {_rel(yml_path)}"

@@ -162,13 +162,11 @@ def assemble(
     for card in cards:
         by_family.setdefault(card.family, {})[card.id] = card
 
-    # guidance — namespaced by family then id; no deep merge.
+    # guidance — namespaced by family then id (uniform across families,
+    # including the single-source charter); no deep merge.
     guidance: dict = {}
     for card in cards:
-        if card.family == "charter":
-            guidance["charter"] = _guidance_body(card)
-        else:
-            guidance.setdefault(card.family, {})[card.id] = _guidance_body(card)
+        guidance.setdefault(card.family, {})[card.id] = _guidance_body(card)
 
     guidance["principles"] = _principle_union(by_family)
     guidance["tensions"] = _tensions(by_family)

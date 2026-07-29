@@ -1,9 +1,11 @@
 # Unit tests for prosoc.packet.manifest
 
+import tempfile
 import unittest
+from pathlib import Path
 
 from prosoc.packet.errors import ManifestError
-from prosoc.packet.manifest import Member, parse_manifest
+from prosoc.packet.manifest import Member, load_manifest, parse_manifest
 
 
 class ParseManifestTest(unittest.TestCase):
@@ -57,6 +59,29 @@ class ParseManifestTest(unittest.TestCase):
     def test_builder_must_be_string(self):
         with self.assertRaises(ManifestError):
             parse_manifest({"builder": 5, "members": [{"family": "tasks", "id": "x"}]})
+
+
+class LoadManifestTest(unittest.TestCase):
+    def test_missing_file(self):
+        with self.assertRaises(ManifestError):
+            load_manifest(Path("/nonexistent/manifest.yml"))
+
+    def test_invalid_utf8_raises_manifest_error(self):
+        # A non-UTF-8 file must surface as ManifestError, not UnicodeDecodeError.
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "m.yml"
+            p.write_bytes(b"\xff\xfe not utf-8")
+            with self.assertRaises(ManifestError):
+                load_manifest(p)
+
+    def test_roundtrip(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "m.yml"
+            p.write_text(
+                "members:\n  - {family: charter, id: charter}\n", encoding="utf-8"
+            )
+            m = load_manifest(p)
+            self.assertEqual(m.members, (Member("charter", "charter"),))
 
 
 if __name__ == "__main__":

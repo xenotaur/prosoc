@@ -45,8 +45,8 @@ def load_manifest(path: pathlib.Path) -> Manifest:
         raise ManifestError(f"manifest not found: {path}")
     try:
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
-    except yaml.YAMLError as exc:
-        raise ManifestError(f"invalid manifest YAML: {exc}") from exc
+    except (OSError, UnicodeDecodeError, yaml.YAMLError) as exc:
+        raise ManifestError(f"could not read manifest {path}: {exc}") from exc
     return parse_manifest(data)
 
 
