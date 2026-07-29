@@ -67,7 +67,8 @@ FAMILIES: dict[str, Family] = {
     "constitutions": Family(
         name="constitutions",
         default_root=pathlib.Path(constitutions_distill.__file__).parent,
-        supports_flat=False,
+        # discover_constitutions dispatches on layout and handles flat too.
+        supports_flat=True,
         discover=lambda root, layout: constitutions_distill.discover_constitutions(
             root, layout
         ),

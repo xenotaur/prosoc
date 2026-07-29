@@ -65,7 +65,9 @@ def discover_directory_layout(root: pathlib.Path) -> Iterable[ConstitutionSource
 def discover_flat_layout(root: pathlib.Path) -> Iterable[ConstitutionSource]:
     """Discover constitutions using the flat-file layout."""
     for md_path in root.glob("*.md"):
-        if md_path.name in {"README.md", "constitution_template.md"}:
+        # The template is named template.md (constitution_template.md is the
+        # legacy name, kept for safety); neither is a constitution card.
+        if md_path.name in {"README.md", "template.md", "constitution_template.md"}:
             continue
         yield ConstitutionSource(
             md_path=md_path,

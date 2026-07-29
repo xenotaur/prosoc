@@ -170,6 +170,17 @@ def _constitution_card(root: Path, name: str, md_state: str, yml_state: str) -> 
     )
 
 
+def _flat_constitution_card(
+    root: Path, name: str, md_state: str, yml_state: str
+) -> None:
+    """Flat-layout constitution: <root>/<name>.md and <name>.yml (root-wrapped)."""
+    (root / f"{name}.md").write_text(MD.replace("DRAFTED", md_state), encoding="utf-8")
+    (root / f"{name}.yml").write_text(
+        f"constitution:\n  id: {name}\n  name: {name}\n  state: {yml_state}\n",
+        encoding="utf-8",
+    )
+
+
 class ConstitutionsFamilyTest(unittest.TestCase):
     # Constitutions are root-wrapped (state at constitution.state); these tests
     # exercise the Family's yaml_root_key="constitution" path end to end.
@@ -213,6 +224,25 @@ class ConstitutionsFamilyTest(unittest.TestCase):
                     ["--family", "constitutions", "--root", str(root)]
                 ),
                 1,
+            )
+
+    def test_flat_layout(self):
+        # discover_constitutions handles flat layout, so --layout flat is valid.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _flat_constitution_card(root, "asimov", "EDITED", "EDITED")
+            self.assertEqual(
+                validate_status.main(
+                    [
+                        "--family",
+                        "constitutions",
+                        "--root",
+                        str(root),
+                        "--layout",
+                        "flat",
+                    ]
+                ),
+                0,
             )
 
 
