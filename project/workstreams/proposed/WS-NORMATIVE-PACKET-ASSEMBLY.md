@@ -17,6 +17,7 @@ work_items:
   - WI-CARD-STATUS-CONTEXTS
   - WI-CARD-STATUS-CONSTITUTIONS
   - WI-CARD-STATUS-CHARTER
+  - WI-PACKET-ASSEMBLER-ENGINE
 exit_criteria:
   - PROP-NORMATIVE-PACKET-ASSEMBLY is adopted (status adopted)
   - All five card families carry a machine-readable status field with the APPROVED lifecycle state, projected into the Markdown STATUS block and enforced by scripts/validate/status
@@ -100,13 +101,18 @@ consumption, navigation — is blocked on there being a packet to consume.
   document-level `state`, applying the contract to the single multi-principle
   charter document. Merged in PR #49, closing out Phase 0a — all five families
   now carry the machine-readable lifecycle-state contract.
+- **WI-PACKET-ASSEMBLER-ENGINE** — Phase 1, the assembler engine (proposed): a
+  generic `CardLoader`, manifest `resolve`, a fail-closed lifecycle `gate`, and
+  `assemble` into a namespaced in-toto / DSSE-shaped provenance envelope
+  (`packet.schema.json`), shipped behind `--allow-unapproved`. The core
+  deliverable the workstream is built toward; unblocked by Phase 0a supplying
+  machine-readable `state`.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
-and added to `work_items:` as they land. The expected breakdown follows the
-phases in Scope — Phase 0a in particular is planned as family-by-family work
-(scenarios, tasks, contexts, and constitutions done, with the charter — the
-final family, which needs a single-source adapter — planned as
-`WI-CARD-STATUS-CHARTER`), which may be one work item or several.
+and added to `work_items:` as they land. Phase 0a landed family-by-family (all
+five `WI-CARD-STATUS-*` items resolved); Phase 1 begins with
+`WI-PACKET-ASSEMBLER-ENGINE` (the engine), with Phases 0b (audit skills), 2
+(manifest card family), and 3 (CI drift check) still to be planned.
 
 ## Exit Criteria
 
