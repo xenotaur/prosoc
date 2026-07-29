@@ -4,10 +4,23 @@
   "title": "Prosocial Robot Navigation Charter",
   "description": "Schema for the Prosocial Robot Navigation Charter principles (P0–P9).",
   "type": "object",
-  "required": ["principles"],
+  "required": ["state", "principles"],
   "additionalProperties": false,
 
   "properties": {
+    "state": {
+      "type": "string",
+      "description": "Document-level lifecycle state of the charter (see prosoc/scenarios/workflow.md).",
+      "enum": [
+        "DRAFTED",
+        "EDITED",
+        "AUDITED",
+        "APPROVED",
+        "VALIDATED",
+        "DEPRECATED",
+        "RETIRED"
+      ]
+    },
     "principles": {
       "type": "array",
       "description": "Ordered list of prosocial navigation principles.",

@@ -9,6 +9,26 @@
 
 ---
 
+## Status
+
+- **STATE:** DRAFTED
+- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms (Francis et al.); Prosocial Robotics project documents
+- **DRAFTED:** Prosocial Robotics project
+- **EDITED:** Claude (WI-CARD-STATUS-CHARTER), 2026-07-29 — add machine-readable lifecycle state
+
+The charter's lifecycle state is authored in the embedded YAML below (the
+authoritative source), projected into the **STATE** bullet above, and enforced
+by `scripts/validate/status`. It is one of `DRAFTED`, `EDITED`, `AUDITED`,
+`APPROVED`, `VALIDATED`, `DEPRECATED`, or `RETIRED` (see
+`prosoc/scenarios/workflow.md`). The state applies to the charter document as a
+whole, not to individual principles.
+
+```yaml
+state: DRAFTED
+```
+
+---
+
 ## 1. Purpose of This Charter
 
 This document defines a **Charter for Prosocial Robot Navigation**.

@@ -19,6 +19,7 @@ import sys
 from dataclasses import dataclass
 from typing import Callable
 
+from prosoc.charter import distill as charter_distill
 from prosoc.constitutions import distill as constitutions_distill
 from prosoc.contexts import distill as contexts_distill
 from prosoc.literate import utils
@@ -74,6 +75,16 @@ FAMILIES: dict[str, Family] = {
         ),
         # constitution.yml is root-wrapped: state lives at constitution.state.
         yaml_root_key="constitution",
+    ),
+    "charter": Family(
+        name="charter",
+        default_root=pathlib.Path(charter_distill.__file__).parent,
+        # The charter is a single document (charter.md -> charter.yml), not a
+        # directory/flat layout; discover_charter returns at most one source.
+        supports_flat=False,
+        discover=lambda root, layout: charter_distill.discover_charter(root),
+        # charter.yml carries state at the top level (sibling of principles).
+        yaml_root_key=None,
     ),
 }
 

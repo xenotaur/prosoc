@@ -4,8 +4,8 @@ import unittest
 from pathlib import Path
 
 import prosoc
-from prosoc.charter import loader
-from prosoc.literate import compiler, utils
+from prosoc.charter import distill, loader
+from prosoc.literate import utils
 
 
 class TestCharterFilesWellFormed(unittest.TestCase):
@@ -44,14 +44,10 @@ class TestCharterFilesWellFormed(unittest.TestCase):
         Distilling charter.md should reproduce charter.yml exactly.
         This fails if charter.md is edited without regenerating charter.yml.
         """
-        compiled = compiler.compile_file(
+        compiled = distill.distill_charter(
             md_path=self.charter_md,
             schema_path=self.schema_json,
-            root_key="principles",
         )
-
-        compiled_yaml = utils.dump_yaml(compiled)
-        existing_yaml = self.charter_yml.read_text(encoding="utf-8")
 
         compiled_yaml = utils.dump_yaml(compiled)
         existing_yaml = self.charter_yml.read_text(encoding="utf-8")
