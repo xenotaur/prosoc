@@ -2,10 +2,10 @@
 execution_id: 2026_07_29_14_37_36_WI_PACKET_ASSEMBLER_ENGINE
 prompt_id: PROMPT(AD_HOC:WI_PACKET_ASSEMBLER_ENGINE)[2026-07-29T14:37:36-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/50
-commit: 
+commit: ed8038c7fb08f42ae19a578c1b3d02f6a918bda6
 created_at: 2026-07-29T14:37:36-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/50
