@@ -40,6 +40,10 @@ class Family:
     # For root-wrapped families whose ``*.yml`` nests the payload (and ``state``)
     # under a top key (e.g. constitutions -> "constitution"); None = top-level.
     yaml_root_key: str | None = None
+    # Label/``--card`` id by the Markdown file *stem* rather than its parent
+    # directory name. Set for single-source families (e.g. charter) whose card
+    # id must stay stable regardless of the ``--root`` directory's name.
+    label_by_stem: bool = False
 
 
 FAMILIES: dict[str, Family] = {
@@ -85,13 +89,19 @@ FAMILIES: dict[str, Family] = {
         discover=lambda root, layout: charter_distill.discover_charter(root),
         # charter.yml carries state at the top level (sibling of principles).
         yaml_root_key=None,
+        # Single-source: id by the charter.md stem ("charter"), not the root
+        # dir name, so --card/reporting stay stable under any --root.
+        label_by_stem=True,
     ),
 }
 
 
-def _label(source, layout: str) -> str:
-    """Card id for display/filtering: file stem in flat layout, else dir name."""
-    return source.md_path.stem if layout == "flat" else source.md_path.parent.name
+def _label(source, layout: str, family: Family) -> str:
+    """Card id for display/filtering: file stem in flat layout or for
+    single-source families (``label_by_stem``), else the parent directory name."""
+    if layout == "flat" or family.label_by_stem:
+        return source.md_path.stem
+    return source.md_path.parent.name
 
 
 def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bool):
@@ -108,7 +118,7 @@ def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bo
 
     sources = family.discover(root, layout)
     if card is not None:
-        matched = [s for s in sources if _label(s, layout) == card]
+        matched = [s for s in sources if _label(s, layout, family) == card]
         if not matched:
             # Distinguish "that card isn't here" from "no cards at all".
             found = "" if not sources else f" (root has other cards under {root})"
@@ -125,7 +135,7 @@ def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bo
 
     failures = 0
     for source in sources:
-        name = f"{family.name}/{_label(source, layout)}"
+        name = f"{family.name}/{_label(source, layout, family)}"
         try:
             result = status.check_source(
                 source.md_path, source.yml_path, root_key=family.yaml_root_key

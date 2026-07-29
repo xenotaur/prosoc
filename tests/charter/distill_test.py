@@ -162,7 +162,17 @@ def schema_with_state():
     schema["required"] = ["state", "principles"]
     schema["properties"]["state"] = {
         "type": "string",
-        "enum": ["DRAFTED", "EDITED", "AUDITED", "APPROVED", "VALIDATED"],
+        # Mirror the canonical lifecycle states (prosoc/charter/schema.json /
+        # prosoc.utils.cards.status.STATES) so the test schema stays aligned.
+        "enum": [
+            "DRAFTED",
+            "EDITED",
+            "AUDITED",
+            "APPROVED",
+            "VALIDATED",
+            "DEPRECATED",
+            "RETIRED",
+        ],
     }
     return schema
 

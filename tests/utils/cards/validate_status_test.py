@@ -284,6 +284,19 @@ class CharterFamilyTest(unittest.TestCase):
                 validate_status.main(["--family", "charter", "--root", d]), 1
             )
 
+    def test_card_id_is_stem_not_root_dir_name(self):
+        # label_by_stem: --card "charter" must match regardless of the (temp)
+        # root directory's name; the card id is the charter.md stem, not the dir.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _charter_card(root, "DRAFTED", "DRAFTED")
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "charter", "--root", str(root), "--card", "charter"]
+                ),
+                0,
+            )
+
 
 class GuardsAndDefaultsTest(unittest.TestCase):
     def test_root_requires_family(self):
