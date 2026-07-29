@@ -2,10 +2,10 @@
 execution_id: 2026_07_29_00_08_57_WI_CARD_STATUS_CONSTITUTIONS_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_CARD_STATUS_CONSTITUTIONS_REVIEW)[2026-07-29T00:08:31-04:00]
 work_item: AD_HOC
-status: in_progress
-rerun_of: 
+status: landed
+rerun_of: 2026_07_29_00_16_07_WI_CARD_STATUS_CONSTITUTIONS
 pr: https://github.com/xenotaur/prosoc/pull/46
-commit: 
+commit: aca9829a08fa98cd0b814b089aa2c0b0b2ff7e59
 created_at: 2026-07-29T00:08:57-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/46
