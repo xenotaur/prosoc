@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prosocial-robotics.org/schemas/packet.schema.json",
+  "title": "Normative Guidance Packet",
+  "description": "In-toto-style provenance envelope assembled from normative cards.",
+  "type": "object",
+  "required": [
+    "_type",
+    "subject",
+    "predicate_type",
+    "predicate",
+    "guidance",
+    "signatures"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "_type": {
+      "const": "https://in-toto.io/Statement/v1"
+    },
+    "subject": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "digest"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "digest": {
+            "type": "object",
+            "required": ["sha256"],
+            "additionalProperties": false,
+            "properties": {
+              "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        }
+      }
+    },
+    "predicate_type": {
+      "const": "https://prosocial-robotics.org/NormativePacket/v1"
+    },
+    "predicate": {
+      "type": "object",
+      "required": ["builder", "policy", "resolved_cards"],
+      "additionalProperties": false,
+      "properties": {
+        "builder": {
+          "type": "object",
+          "required": ["id"],
+          "additionalProperties": false,
+          "properties": { "id": { "type": "string", "minLength": 1 } }
+        },
+        "policy": {
+          "type": "object",
+          "required": ["gate_threshold", "allow_unapproved", "escape_hatch"],
+          "additionalProperties": false,
+          "properties": {
+            "gate_threshold": { "type": "string", "minLength": 1 },
+            "allow_unapproved": { "type": "boolean" },
+            "escape_hatch": {
+              "oneOf": [
+                { "type": "null" },
+                {
+                  "type": "object",
+                  "required": ["justification", "bypassed_threshold", "cards_below_threshold"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "justification": { "type": "string", "minLength": 1 },
+                    "bypassed_threshold": { "type": "string", "minLength": 1 },
+                    "cards_below_threshold": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": ["family", "id", "state"],
+                        "additionalProperties": false,
+                        "properties": {
+                          "family": { "type": "string" },
+                          "id": { "type": "string" },
+                          "state": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "resolved_cards": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["family", "id", "path", "sha256", "state"],
+            "additionalProperties": false,
+            "properties": {
+              "family": { "type": "string", "minLength": 1 },
+              "id": { "type": "string", "minLength": 1 },
+              "path": { "type": "string", "minLength": 1 },
+              "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "state": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      }
+    },
+    "guidance": {
+      "type": "object",
+      "required": ["principles", "tensions"],
+      "properties": {
+        "principles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "emphasis"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^P[0-9]+$" },
+              "emphasis": {
+                "type": "string",
+                "enum": ["emphasized", "deprioritized", "neutral"]
+              }
+            }
+          }
+        },
+        "tensions": {
+          "type": "object",
+          "required": ["common_tensions", "conflict_resolution"],
+          "properties": {
+            "common_tensions": { "type": "array" },
+            "conflict_resolution": { "type": "array" }
+          }
+        },
+        "notice": { "type": "string" }
+      }
+    },
+    "signatures": {
+      "type": "array",
+      "description": "Reserved DSSE-shaped slot; empty until signing is implemented."
+    }
+  }
+}

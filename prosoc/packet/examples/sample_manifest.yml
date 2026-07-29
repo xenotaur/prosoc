@@ -1,0 +1,13 @@
+# Sample packet manifest (Phase 1).
+#
+# Names member cards by family + directory locator id. The whole corpus is
+# currently DRAFTED, so `scripts/assemble` on this manifest is fail-closed by
+# default and emits nothing; pass --allow-unapproved "<why>" to produce a
+# non-production packet stamped with the escape-hatch marker.
+builder: "prosoc packet assembler (sample)"
+members:
+  - {family: charter, id: charter}
+  - {family: constitutions, id: asimov_three_laws}
+  - {family: scenarios, id: intersection_gesture_wait}
+  - {family: tasks, id: navigate_lead_agent}
+  - {family: contexts, id: high_urgency}
