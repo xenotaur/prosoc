@@ -18,6 +18,7 @@ depends_on:
   - WI-CARD-STATUS-CHARTER
 blocked_by: []
 expected_actions:
+  - create_file
   - edit_file
   - run_tests
   - create_pr
@@ -31,7 +32,7 @@ forbidden_actions:
   - edit_card_normative_content
 acceptance:
   - A generic CardLoader loads all five families named in a manifest into LoadedCard(family, id, path, sha256, state, payload) through the single schema-validation gate; constitutions' root-wrapped and the charter's principles-rooted shapes both load
-  - scripts/assemble emits a namespaced in-toto-style envelope (guidance + predicate, reserved signatures [], subject.digest over the serialized guidance only) that validates against packet.schema.json; state is stripped from guidance and recorded per-card in predicate; principles are the Decision-6 union with emphasis annotations and none dropped
+  - scripts/assemble emits a namespaced in-toto-style envelope (guidance + predicate, reserved signatures [], subject.digest over the serialized guidance only) that validates against prosoc/packet/schema.json; state is stripped from guidance and recorded per-card in predicate; principles are the Decision-6 union with emphasis annotations and none dropped
   - The gate is fail-closed by default (emits nothing when any member is below the APPROVED threshold); --allow-unapproved lowers the floor and stamps predicate.policy.escape_hatch plus a guidance.notice into the payload, not just the build log
   - lrh validate, scripts/lint, scripts/test, and scripts/format --check all pass; scripts/assemble is a python -m wrapper; no normative card content changed
 required_evidence:
@@ -57,7 +58,7 @@ Build the Phase 1 assembler engine from `PROP-NORMATIVE-PACKET-ASSEMBLY`: turn a
 human-authored manifest into a single machine-readable guidance packet via a
 generic `CardLoader`, manifest `resolve`, a fail-closed lifecycle `gate`, and
 `assemble` into a namespaced, in-toto-style provenance envelope validated by
-`packet.schema.json`. Ships behind `--allow-unapproved`. This is the core
+`prosoc/packet/schema.json`. Ships behind `--allow-unapproved`. This is the core
 deliverable the workstream is built toward; Phase 0a (now complete) supplies the
 machine-readable `state` the gate reads uniformly across all five families.
 
@@ -148,7 +149,7 @@ are delivered together rather than sliced.
      serialized `guidance` block only, so a detached `guidance` stays verifiable.
    - `predicate` — auditor-facing: builder identity and, per resolved card, its
      `id`, `family`, `path`, `sha256`, and lifecycle `state`.
-6. **`prosoc/packet/schema.json`** — `packet.schema.json` for the envelope;
+6. **`prosoc/packet/schema.json`** — the packet schema for the envelope;
    `assemble` validates its output against it before writing.
 7. **`scripts/assemble`** — bash wrapper → `python -m prosoc.packet.assemble`
    (or a `prosoc.packet.cli`), taking a manifest path and `--allow-unapproved`
@@ -185,7 +186,7 @@ are delivered together rather than sliced.
   `principles:`-rooted shapes both load.
 - `scripts/assemble` emits a namespaced in-toto-style envelope (`guidance` +
   `predicate`, reserved `signatures: []`, `subject.digest` over the serialized
-  `guidance` only) that validates against `packet.schema.json`; `state` is
+  `guidance` only) that validates against `prosoc/packet/schema.json`; `state` is
   stripped from `guidance` and recorded per-card in `predicate`; principles are
   the Decision-6 union with emphasis annotations and none dropped.
 - The gate is fail-closed by default (emits nothing when any member is below the
