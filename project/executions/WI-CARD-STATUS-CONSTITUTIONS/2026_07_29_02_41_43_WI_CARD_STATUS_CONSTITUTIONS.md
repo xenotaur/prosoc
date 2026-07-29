@@ -2,10 +2,10 @@
 execution_id: 2026_07_29_02_41_43_WI_CARD_STATUS_CONSTITUTIONS
 prompt_id: PROMPT(WI-CARD-STATUS-CONSTITUTIONS:WI_CARD_STATUS_CONSTITUTIONS)[2026-07-29T00:20:01-04:00]
 work_item: WI-CARD-STATUS-CONSTITUTIONS
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/47
-commit: 
+commit: 1680ea4f84497ee0342a98df46b2ae026b8f4556
 created_at: 2026-07-29T02:41:43-04:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CARD-STATUS-CONSTITUTIONS.md

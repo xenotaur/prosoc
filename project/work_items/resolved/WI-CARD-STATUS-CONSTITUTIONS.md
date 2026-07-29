@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: Implemented and merged in PR #47 (commit 1680ea4); constitutions family now carries a machine-readable state field enforced by scripts/validate/status.
 blocked_reason: null
 blocked: false
 id: WI-CARD-STATUS-CONSTITUTIONS
 title: Extend the card lifecycle-state contract to the constitutions family (Phase 0a)
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY
