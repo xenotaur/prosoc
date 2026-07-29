@@ -27,7 +27,7 @@ forbidden_actions:
   - edit_charter_normative_content
   - implement_assembler_engine
 acceptance:
-  - A single-source charter family is registered in the validator (yaml_root_key null, single charter.md->charter.yml source); scripts/validate/status validates scenarios + tasks + contexts + constitutions + charter all consistent
+  - A single-source charter family is registered in the validator (yaml_root_key=None in code, single charter.md->charter.yml source); scripts/validate/status validates scenarios + tasks + contexts + constitutions + charter all consistent
   - charter.md carries a canonical "- **STATE:**" bullet in a Status block, prosoc/charter/schema.json requires a top-level state enum alongside principles, and charter.yml carries a schema-valid top-level state (DRAFTED) with no change to any principle payload
   - lrh validate, scripts/lint, scripts/test, and scripts/validate/status all report 0 errors, and no charter principle (P0-P9) normative content changed
 required_evidence:
