@@ -31,9 +31,11 @@ forbidden_actions:
 acceptance:
   - prosoc-card-audit and prosoc-card-audit-all exist and dispatch correctly across all five card families (scenarios, tasks, contexts, constitutions, charter) via per-family checklists under .claude/skills/_shared/audit_checklists/
   - The charter gets a bespoke audit shape (single multi-principle document, not card-per-directory) and constitutions get a genuinely new checklist (no prior audit.md precedent)
-  - Running the audit against a real card in each family produces a findings-only audit.md, with the card and its STATE left untouched
+  - Running the audit against a real card in each family produces a findings-only audit.md, with the card content and both its lifecycle-state representations (the Markdown STATE line and the YAML state field) left unchanged
   - prosoc-scenario-audit and prosoc-scenario-audit-all are retired with no duplicate skill surface for scenarios
 required_evidence:
+  - lrh_validate
+  - test_output
   - manual_review
 artifacts_expected:
   - .claude/skills/_shared/audit_checklists/scenarios.md
@@ -43,6 +45,9 @@ artifacts_expected:
   - .claude/skills/_shared/audit_checklists/charter.md
   - .claude/skills/prosoc-card-audit/SKILL.md
   - .claude/skills/prosoc-card-audit-all/SKILL.md
+  - .claude/skills/prosoc-scenario-audit/ (removed)
+  - .claude/skills/prosoc-scenario-audit-all/ (removed)
+  - prosoc/scenarios/workflow.md
 ---
 
 # WI-CARD-AUDIT-SKILLS
@@ -170,7 +175,9 @@ skill authoring against the corpus and contract that already exist.
   card-per-directory) and constitutions get a genuinely new checklist (no
   prior `audit.md` precedent).
 - Running the audit against a real card in each family produces a
-  findings-only `audit.md`, with the card and its `STATE` left untouched.
+  findings-only `audit.md`, with the card content and both its lifecycle-state
+  representations (the Markdown `STATE` line and the YAML `state` field) left
+  unchanged.
 - `prosoc-scenario-audit` and `prosoc-scenario-audit-all` are retired with no
   duplicate skill surface for scenarios.
 
