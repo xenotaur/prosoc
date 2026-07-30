@@ -19,11 +19,11 @@ manifest.yml
 
 ```bash
 # Fail-closed by default: emits nothing unless every member is APPROVED.
-scripts/assemble prosoc/packet/examples/sample_manifest.yml
+scripts/assemble prosoc/manifests/sample_packet/manifest.yml
 
 # Development packet: lowers the floor and stamps a non-production marker
 # (predicate.policy.escape_hatch + guidance.notice) into the payload.
-scripts/assemble prosoc/packet/examples/sample_manifest.yml \
+scripts/assemble prosoc/manifests/sample_packet/manifest.yml \
   --allow-unapproved "local eval; corpus not yet human-approved"
 ```
 
@@ -50,9 +50,11 @@ lowers the floor to any live pre-approval state and records the bypass in the
 payload — a development packet is never byte-indistinguishable from a
 production one.
 
-## Scope (Phase 1)
+## Scope
 
-The manifest input here is minimal. Making manifests an auditable **card
-family** (their own `manifest.md` + template + distiller + schema) is Phase 2;
-cryptographic signing and CI packet-drift checks are Phases 3–4. See the
+The manifest a packet is assembled from is itself an auditable **card
+family**, `prosoc/manifests/` (its own `manifest.md` + template + distiller +
+schema, Phase 2) — this engine's `manifest.py` reads any manifest YAML with a
+`members`/`builder` shape, whether from `prosoc/manifests/` or an ad-hoc file.
+Cryptographic signing and CI packet-drift checks are Phases 3–4. See the
 governing proposal for the full plan.

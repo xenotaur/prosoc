@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Distill packet manifests from Markdown to YAML
+#
+# This script compiles all manifest.md files under prosoc/manifests
+# into manifest.yml files using the literate compiler pipeline.
+#
+# Common flags:
+#   --dry-run     Do not write files; report what would change
+#   --show-diffs  Show diffs between existing and generated YAML
+#
+# Examples:
+#   scripts/distill/manifests
+#   scripts/distill/manifests --dry-run --show-diffs
+
+set -euo pipefail
+
+echo "Distilling Prosoc packet manifests..."
+set -x
+
+python -m prosoc.manifests.distill "$@"
+
+# Turn off tracing and print a blank line
+{ set +x; } 2>/dev/null
+echo

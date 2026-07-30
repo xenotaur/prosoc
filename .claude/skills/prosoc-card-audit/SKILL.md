@@ -2,19 +2,21 @@
 name: prosoc-card-audit
 description: >
   Audit an existing prosoc normative card — a scenario, task, context,
-  constitution, or the charter — for prose/YAML consistency, schema and charter
-  compliance, and completeness. Use this skill whenever the user asks to audit,
-  review, check, or validate a card in any of these five families — especially
-  referencing the AUDITED lifecycle stage in workflow.md, or asking to "prep a
-  card for review". Produces a findings-only audit.md next to the card (or
-  prosoc/charter/audit.md for the charter) without modifying the card or
-  promoting its STATE. Family-dispatched successor to prosoc-scenario-audit.
+  constitution, the charter, or a packet manifest — for prose/YAML
+  consistency, schema and charter compliance, and completeness. Use this
+  skill whenever the user asks to audit, review, check, or validate a card in
+  any of these six families — especially referencing the AUDITED lifecycle
+  stage in workflow.md, or asking to "prep a card for review". Produces a
+  findings-only audit.md next to the card (or prosoc/charter/audit.md for the
+  charter) without modifying the card or promoting its STATE.
+  Family-dispatched successor to prosoc-scenario-audit.
 ---
 
 # prosoc-card-audit Skill
 
 This skill produces an audit report for an existing prosoc normative card —
-scenario, task, context, constitution, or the charter — corresponding to the
+scenario, task, context, constitution, the charter, or a packet manifest —
+corresponding to the
 **AUDITED** lifecycle stage described in `prosoc/scenarios/workflow.md`. It
 performs machine-assisted work that a human must review and act on: it writes
 **findings for a human editor**, not fixes, and it never promotes a card's
@@ -33,12 +35,12 @@ scenario-only, per `PROP-NORMATIVE-PACKET-ASSEMBLY` Decision 7).
 
 ## Inputs
 
-The user names a card — by id, directory name, or path — under one of the five
+The user names a card — by id, directory name, or path — under one of the six
 families. Optional inputs:
 
 - **An explicit family name** (`scenarios`, `tasks`, `contexts`,
-  `constitutions`, `charter`), if the card id alone is ambiguous or the user
-  states it directly (e.g. "audit the `navigate_lead_agent` task").
+  `constitutions`, `charter`, `manifests`), if the card id alone is ambiguous
+  or the user states it directly (e.g. "audit the `navigate_lead_agent` task").
 - **`--paper <path>`** (scenarios only) — path to a PDF to check source
   fidelity against, if the scenario's SOURCE field points somewhere other than
   the P&G paper Table 3.
@@ -47,10 +49,11 @@ families. Optional inputs:
 
 If the family isn't stated, resolve it by checking which family directory the
 named id resolves under — `prosoc/scenarios/<id>/`, `prosoc/tasks/<id>/`,
-`prosoc/contexts/<id>/`, `prosoc/constitutions/<id>/`, in that order. If the id
-resolves under more than one family (unlikely, since each family's ids follow
-different conventions — see each checklist's Required Fields), or under none,
-ask the user to state the family explicitly rather than guessing.
+`prosoc/contexts/<id>/`, `prosoc/constitutions/<id>/`, `prosoc/manifests/<id>/`,
+in that order. If the id resolves under more than one family (unlikely, since
+each family's ids follow different conventions — see each checklist's
+Required Fields), or under none, ask the user to state the family explicitly
+rather than guessing.
 
 ---
 
@@ -72,7 +75,7 @@ Load these before auditing:
 4. **`prosoc/<family>/schema.json`** — the JSON schema the card's distilled
    YAML must conform to (see the Card YAML column in Step 1's table for the
    exact per-family filename — `scenario.yml`, `task.yml`, `context.yml`,
-   `constitution.yml`, or `charter.yml`).
+   `constitution.yml`, `charter.yml`, or `manifest.yml`).
 
 5. **`prosoc/scenarios/workflow.md`** — defines the AUDITED stage. The audit
    report's verdict and vocabulary should speak in these terms regardless of
@@ -100,6 +103,7 @@ Work through these steps in order.
 | contexts | `prosoc/contexts/<id>/context.md` | `context.yml` |
 | constitutions | `prosoc/constitutions/<id>/constitution.md` | `constitution.yml` |
 | charter | `prosoc/charter/charter.md` | `charter.yml` (no id) |
+| manifests | `prosoc/manifests/<id>/manifest.md` | `manifest.yml` |
 
 If either file is missing, stop and report — do not proceed with a partial
 audit.
@@ -115,11 +119,12 @@ scripts/distill/tasks --dry-run --show-diffs                       # tasks: whol
 scripts/distill/contexts --dry-run --show-diffs                    # contexts: whole-family, no per-card scoping
 scripts/distill/constitutions --dry-run --show-diffs               # constitutions: whole-family, no per-card scoping
 scripts/distill/charter --dry-run --show-diffs                     # charter: single source, inherently "scoped"
+scripts/distill/manifests --dry-run --show-diffs                   # manifests: whole-family, no per-card scoping
 ```
 
 **Only scenarios supports per-card scoping** (`--scenario <id>`). For tasks,
-contexts, and constitutions, dry-run necessarily re-validates and diffs the
-**whole family**, since their distillers have no per-card flag. Treat only the
+contexts, constitutions, and manifests, dry-run necessarily re-validates and
+diffs the **whole family**, since their distillers have no per-card flag. Treat only the
 diff lines belonging to the card under audit as part of this audit's verdict;
 if the dry-run surfaces drift in a *different* card in the same family, note
 it briefly as an aside for a separate audit of that card — it is out of scope

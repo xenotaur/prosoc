@@ -10,7 +10,7 @@ from prosoc.packet import cli
 from prosoc.packet.assemble import PREDICATE_TYPE
 from prosoc.packet.loader import REPO_ROOT
 
-SAMPLE = REPO_ROOT / "prosoc" / "packet" / "examples" / "sample_manifest.yml"
+SAMPLE = REPO_ROOT / "prosoc" / "manifests" / "sample_packet" / "manifest.yml"
 
 
 def _run(argv):

@@ -1,0 +1,15 @@
+id: sample_packet
+name: Sample Packet
+state: DRAFTED
+builder: prosoc packet assembler (sample)
+members:
+- family: charter
+  id: charter
+- family: constitutions
+  id: asimov_three_laws
+- family: scenarios
+  id: intersection_gesture_wait
+- family: tasks
+  id: navigate_lead_agent
+- family: contexts
+  id: high_urgency
