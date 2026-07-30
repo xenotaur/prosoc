@@ -299,9 +299,10 @@ class CharterFamilyTest(unittest.TestCase):
 
 
 class ManifestsFamilyTest(unittest.TestCase):
-    # manifests is a directory-layout, flat (not root-wrapped) family, like
-    # tasks/contexts — _dir_card's generic id/name/state/summary shape covers
-    # the state-consistency check exercised here.
+    # manifests is a directory-layout family whose state is non-root-wrapped
+    # (yaml_root_key=None), like tasks/contexts — _dir_card's generic
+    # id/name/state/summary shape covers the state-consistency check
+    # exercised here. Does not support --layout flat (see the test below).
 
     def test_consistent(self):
         with tempfile.TemporaryDirectory() as d:
