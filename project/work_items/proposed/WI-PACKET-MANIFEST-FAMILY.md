@@ -98,8 +98,10 @@ the proposal.
 ## Scope
 
 New `prosoc/manifests/` card family plus registrations of that family into
-the two existing generic status/audit systems. No `prosoc/packet/` code
-changes (verified unnecessary — see Required Change 1).
+the two existing generic status/audit systems. No `prosoc/packet/` **engine**
+(Python) changes (verified unnecessary — see Required Change 1); the sample
+manifest and README under `prosoc/packet/` do move/update (Required Change 4,
+Risk Notes).
 
 ## Required Changes
 
