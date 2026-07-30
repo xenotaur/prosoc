@@ -85,7 +85,8 @@ Two corpus facts constrain the design, both re-verified before scoping:
 ### Duplication search
 - In-repo: `.github/workflows/charter.yml` is the closest precedent — a
   path-scoped CI job that dry-run distills the charter and
-  `git diff --exit-code`s the checked-in `charter.yml`. This WI's `--check`
+  `git diff --exit-code`s the checked-in `prosoc/charter/charter.yml`. This
+  WI's `--check`
   is a CLI-level analog (compare-in-process rather than shell `git diff`)
   applied to assembled packets rather than a single family's distilled YAML;
   the workflow structure (path-scoped triggers, checkout/setup-python/install
