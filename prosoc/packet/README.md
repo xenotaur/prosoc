@@ -61,9 +61,11 @@ plan.
 
 ## CI packet-drift check (Phase 3)
 
-`--check` assembles as usual (respecting `--allow-unapproved`/`--format`),
-then byte-compares the rendered packet against a checked-in golden file at
-`<manifest_dir>/packet.golden.yml` instead of printing it:
+`--check` assembles as usual (respecting `--allow-unapproved`), then
+byte-compares the rendered packet against a checked-in golden file at
+`<manifest_dir>/packet.golden.yml` instead of printing it. Goldens are
+always YAML, so `--check` rejects `--format json` (exit 2) rather than
+comparing incompatible serializations:
 
 ```bash
 scripts/assemble prosoc/manifests/sample_packet/manifest.yml \

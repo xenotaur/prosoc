@@ -60,6 +60,14 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
 
+    if args.check and args.format == "json":
+        print(
+            "error: --check compares against a YAML golden file "
+            f"({GOLDEN_FILENAME}); --format json is not supported with --check",
+            file=sys.stderr,
+        )
+        return 2
+
     allow = args.allow_unapproved is not None
     if allow and not args.allow_unapproved.strip():
         print(

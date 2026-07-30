@@ -63,6 +63,21 @@ class CliTest(unittest.TestCase):
         self.assertEqual(out, "")
         self.assertEqual(err, "")
 
+    def test_check_rejects_format_json(self):
+        code, out, err = _run(
+            [
+                str(SAMPLE),
+                "--allow-unapproved",
+                JUSTIFICATION,
+                "--check",
+                "--format",
+                "json",
+            ]
+        )
+        self.assertEqual(code, 2)
+        self.assertEqual(out, "")
+        self.assertIn("--format json", err)
+
 
 class CliCheckTest(unittest.TestCase):
     """--check tests against a scratch manifest dir, so drift/missing cases

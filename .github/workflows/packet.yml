@@ -3,6 +3,15 @@ name: Packet drift check
 on:
   pull_request:
     paths:
+      # Every card family that can be a manifest member (loader.py's
+      # PacketFamily registry) plus the manifest/packet tooling itself —
+      # a member-card edit changes the assembled packet just as much as a
+      # manifest edit does, so it must trip this check too.
+      - "prosoc/charter/**"
+      - "prosoc/constitutions/**"
+      - "prosoc/contexts/**"
+      - "prosoc/scenarios/**"
+      - "prosoc/tasks/**"
       - "prosoc/manifests/**"
       - "prosoc/packet/**"
       - ".github/workflows/packet.yml"
