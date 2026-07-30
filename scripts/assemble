@@ -11,9 +11,10 @@
 #   scripts/assemble <manifest.yml>
 #   scripts/assemble <manifest.yml> --allow-unapproved "why this dev packet"
 #   scripts/assemble <manifest.yml> --format json
+#   scripts/assemble <manifest.yml> --allow-unapproved "..." --check
 #
 # Example:
-#   scripts/assemble prosoc/packet/examples/sample_manifest.yml \
+#   scripts/assemble prosoc/manifests/sample_packet/manifest.yml \
 #     --allow-unapproved "local test on the pre-APPROVED corpus"
 
 set -euo pipefail

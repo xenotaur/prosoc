@@ -1,4 +1,4 @@
-# prosoc.packet — normative packet assembler (Phase 1)
+# prosoc.packet — normative packet assembler (Phase 1–3)
 
 Turns a human-authored **manifest** naming member cards into a single
 machine-readable **guidance packet** for a downstream agent, per
@@ -56,5 +56,46 @@ The manifest a packet is assembled from is itself an auditable **card
 family**, `prosoc/manifests/` (its own `manifest.md` + template + distiller +
 schema, Phase 2) — this engine's `manifest.py` reads any manifest YAML with a
 `members`/`builder` shape, whether from `prosoc/manifests/` or an ad-hoc file.
-Cryptographic signing and CI packet-drift checks are Phases 3–4. See the
-governing proposal for the full plan.
+Cryptographic signing is Phase 4. See the governing proposal for the full
+plan.
+
+## CI packet-drift check (Phase 3)
+
+`--check` assembles as usual (respecting `--allow-unapproved`), then
+byte-compares the rendered packet against a checked-in golden file at
+`<manifest_dir>/packet.golden.yml` instead of printing it. Goldens are
+always YAML, so `--check` rejects `--format json` (exit 2) rather than
+comparing incompatible serializations:
+
+```bash
+scripts/assemble prosoc/manifests/sample_packet/manifest.yml \
+  --allow-unapproved "CI packet-drift check (dev-mode golden; corpus not yet APPROVED)" \
+  --check
+```
+
+- Exact match: exit 0, silent.
+- Drift: exit 1, unified diff on stderr.
+- No golden file yet: exit 1, an error explaining how to create one.
+
+Golden files are **dev-mode only** — the corpus isn't APPROVED yet, so every
+golden is generated with `--allow-unapproved` and a fixed justification
+string: `"CI packet-drift check (dev-mode golden; corpus not yet APPROVED)"`.
+This string must match verbatim between golden generation and
+`.github/workflows/packet.yml` (which reuses it), or every check spuriously
+fails on the `--allow-unapproved` notice text alone.
+
+There is no CLI flag to write or regenerate a golden file — generate one (or
+refresh it after intentional drift) by redirecting a normal run:
+
+```bash
+scripts/assemble prosoc/manifests/sample_packet/manifest.yml \
+  --allow-unapproved "CI packet-drift check (dev-mode golden; corpus not yet APPROVED)" \
+  > prosoc/manifests/sample_packet/packet.golden.yml
+```
+
+`.github/workflows/packet.yml` enumerates every `prosoc/manifests/*/packet.golden.yml`
+and runs `--check` against each — not a CLI `--check-all` mode. Editing *any*
+member card pulled into a manifest (not just the manifest file itself)
+changes the assembled packet and trips the corresponding golden's check; this
+is intentional (it is the drift the check exists to catch) — regenerate the
+golden as part of that change.
