@@ -2,10 +2,10 @@
 execution_id: 2026_07_30_02_10_44_WI_PACKET_MANIFEST_FAMILY
 prompt_id: PROMPT(WI-PACKET-MANIFEST-FAMILY:WI_PACKET_MANIFEST_FAMILY)[2026-07-30T01:39:48-04:00]
 work_item: WI-PACKET-MANIFEST-FAMILY
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/56
-commit: 
+commit: 72293387760b5c717434e3a3ff72f8f6227ab456
 created_at: 2026-07-30T02:10:44-04:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-PACKET-MANIFEST-FAMILY.md

@@ -115,9 +115,10 @@ consumption, navigation — is blocked on there being a packet to consume.
   bespoke charter shape and a new constitutions checklist; retires
   `prosoc-scenario-audit(-all)` into the generic dispatch. Merged in PR #54.
 - **WI-PACKET-MANIFEST-FAMILY** — Phase 2, the manifest as an auditable card
-  family (proposed): a sixth card family (`prosoc/manifests/`) mirroring the
+  family (resolved): a sixth card family (`prosoc/manifests/`) mirroring the
   existing five, registered with `scripts/validate/status` and
   `prosoc-card-audit`; migrates the Phase 1 sample manifest into a real card.
+  Merged in PR #56.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. Phases 0a, 0b, and 1 are done; Phase

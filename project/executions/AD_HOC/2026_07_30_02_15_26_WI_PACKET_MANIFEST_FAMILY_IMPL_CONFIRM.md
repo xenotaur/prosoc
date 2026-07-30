@@ -2,10 +2,10 @@
 execution_id: 2026_07_30_02_15_26_WI_PACKET_MANIFEST_FAMILY_IMPL_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_PACKET_MANIFEST_FAMILY_IMPL_CONFIRM)[2026-07-30T02:15:26-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_07_30_02_10_44_WI_PACKET_MANIFEST_FAMILY
 pr: https://github.com/xenotaur/prosoc/pull/56
-commit: 
+commit: 72293387760b5c717434e3a3ff72f8f6227ab456
 created_at: 2026-07-30T02:15:26-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/56

@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: Implemented and merged in PR #56 (commit 7229338); prosoc/manifests/ is now a sixth card family (schema/template/distill), registered with scripts/validate/status and prosoc-card-audit, with the Phase 1 sample manifest migrated into a real card. No prosoc/packet/ engine changes.
 blocked_reason: null
 blocked: false
 id: WI-PACKET-MANIFEST-FAMILY
 title: Manifest as an auditable card family (Phase 2)
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY
