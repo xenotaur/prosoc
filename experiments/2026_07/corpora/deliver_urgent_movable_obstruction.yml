@@ -1,0 +1,15 @@
+id: deliver_urgent_movable_obstruction
+name: deliver_object / high_urgency / movable_obstruction
+state: DRAFTED
+builder: prosoc packet assembler (2026_07 combinatorics experiment)
+members:
+- family: charter
+  id: charter
+- family: constitutions
+  id: asimov_three_laws
+- family: scenarios
+  id: movable_obstruction
+- family: tasks
+  id: deliver_object
+- family: contexts
+  id: high_urgency

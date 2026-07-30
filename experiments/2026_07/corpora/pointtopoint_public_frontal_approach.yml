@@ -1,0 +1,15 @@
+id: pointtopoint_public_frontal_approach
+name: navigate_point_to_point / public_navigation / frontal_approach
+state: DRAFTED
+builder: prosoc packet assembler (2026_07 combinatorics experiment)
+members:
+- family: charter
+  id: charter
+- family: constitutions
+  id: asimov_three_laws
+- family: scenarios
+  id: frontal_approach
+- family: tasks
+  id: navigate_point_to_point
+- family: contexts
+  id: public_navigation

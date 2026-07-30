@@ -1,0 +1,15 @@
+id: follow_public_following
+name: navigate_follow_agent / public_navigation / following
+state: DRAFTED
+builder: prosoc packet assembler (2026_07 combinatorics experiment)
+members:
+- family: charter
+  id: charter
+- family: constitutions
+  id: asimov_three_laws
+- family: scenarios
+  id: following
+- family: tasks
+  id: navigate_follow_agent
+- family: contexts
+  id: public_navigation

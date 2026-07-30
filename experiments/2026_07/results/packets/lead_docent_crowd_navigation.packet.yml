@@ -1,0 +1,589 @@
+_type: https://in-toto.io/Statement/v1
+subject:
+- name: guidance
+  digest:
+    sha256: 6a6f6df4631c3a72a2de67e560c2e92d722174ffde840208d7299d2d0188ba18
+predicate_type: https://prosocial-robotics.org/NormativePacket/v1
+predicate:
+  builder:
+    id: prosoc packet assembler (2026_07 combinatorics experiment)
+  policy:
+    gate_threshold: DRAFTED
+    allow_unapproved: true
+    escape_hatch:
+      justification: experiments/2026_07 combinatorics demo — corpus not yet APPROVED
+      bypassed_threshold: APPROVED
+      cards_below_threshold:
+      - family: charter
+        id: charter
+        state: DRAFTED
+      - family: constitutions
+        id: asimov_three_laws
+        state: EDITED
+      - family: scenarios
+        id: crowd_navigation
+        state: DRAFTED
+      - family: tasks
+        id: navigate_lead_agent
+        state: DRAFTED
+      - family: contexts
+        id: guidance_docent
+        state: DRAFTED
+  resolved_cards:
+  - family: charter
+    id: charter
+    path: prosoc/charter/charter.yml
+    sha256: f264ff48ed377ed320c8b45e0aaa80d1022e6f6cea2f47614bb99837f28e578d
+    state: DRAFTED
+  - family: constitutions
+    id: asimov_three_laws
+    path: prosoc/constitutions/asimov_three_laws/constitution.yml
+    sha256: 2add6d1bba980b2075ff622fe734712d2913d3fc66e228146807ab7834e14967
+    state: EDITED
+  - family: scenarios
+    id: crowd_navigation
+    path: prosoc/scenarios/crowd_navigation/scenario.yml
+    sha256: b949b72e00cbf5a0d2380b72321e3e4ba61eb76b73f99184acf78a3ff9a3b260
+    state: DRAFTED
+  - family: tasks
+    id: navigate_lead_agent
+    path: prosoc/tasks/navigate_lead_agent/task.yml
+    sha256: 40537a3c144af5c845d81da0f92742a805408f4ba449ef1a6d7250a7e22ab29a
+    state: DRAFTED
+  - family: contexts
+    id: guidance_docent
+    path: prosoc/contexts/guidance_docent/context.yml
+    sha256: 4f6fba21be87adfa7cf6cceee897aaa38e8f549706cd3f7209c08a75d152a3fa
+    state: DRAFTED
+guidance:
+  charter:
+    charter:
+      principles:
+      - id: P0
+        name: Goal Achievement
+        severity: high
+        description: 'Robots must attempt to achieve their assigned navigation or
+          task objectives, balancing this with the social principles P1–P9.
+
+          '
+        examples:
+          positive:
+          - Robot efficiently reaches destination while yielding to a pedestrian.
+          - Robot adjusts route slightly but still completes its delivery task.
+          negative:
+          - Robot abandons delivery because it was unsure how to pass a person.
+          - Robot refuses to move despite being asked to navigate a known path.
+      - id: P1
+        name: Safety
+        severity: critical
+        description: 'Robots must not cause harm to humans or damage environments.
+          This includes maintaining a safe distance unless explicitly invited to approach.
+
+          '
+        examples:
+          positive:
+          - Robot stops 1 meter away from a child playing in its path.
+          - Robot navigates around a slippery floor to avoid damage.
+          negative:
+          - Robot bumps into a human in a narrow hallway.
+          - Robot knocks over a shelf while turning too quickly.
+      - id: P2
+        name: Comfort
+        severity: high
+        description: 'Robots must avoid causing stress, fear, or annoyance. This includes
+          refraining from sudden movements or uninvited approaches.
+
+          '
+        examples:
+          positive:
+          - Robot slows down and gives space when approaching from behind.
+          - Robot announces its presence softly before entering a room.
+          negative:
+          - Robot startles a person by approaching quickly from behind.
+          - Robot hovers near someone for no reason, causing discomfort.
+      - id: P3
+        name: Legibility
+        severity: medium
+        description: 'Robots must act in ways that make their goals and intentions
+          easy to understand.
+
+          '
+        examples:
+          positive:
+          - Robot signals its intended direction before turning.
+          - Robot slows before making an unexpected stop.
+          negative:
+          - Robot moves erratically, confusing bystanders.
+          - Robot stops abruptly without signaling intent.
+      - id: P4
+        name: Politeness
+        severity: medium
+        description: 'Robots must be respectful and considerate, offering help when
+          asked and avoiding dismissive or intrusive behaviors.
+
+          '
+        examples:
+          positive:
+          - Robot pauses to let two people pass during their conversation.
+          - Robot responds when asked for directions.
+          negative:
+          - Robot interrupts a human speaking to another.
+          - Robot ignores a direct request for assistance.
+      - id: P5
+        name: Social Competency
+        severity: medium
+        description: 'Robots must follow social norms and avoid inappropriate behaviors
+          such as interrupting conversations or blocking passage.
+
+          '
+        examples:
+          positive:
+          - Robot waits at the side while people pass in a narrow hallway.
+          - Robot follows the queue at a doorway.
+          negative:
+          - Robot cuts in front of someone waiting.
+          - Robot blocks a person trying to exit a room.
+      - id: P6
+        name: Agent Understanding
+        severity: high
+        description: 'Robots must predict and accommodate the behaviors of other agents
+          (humans, robots, pets, etc.).
+
+          '
+        examples:
+          positive:
+          - Robot slows down when it sees a person approaching quickly.
+          - Robot yields to another robot moving through a tight space.
+          negative:
+          - Robot tries to occupy the same space as a moving person.
+          - Robot moves forward without accounting for a toddler's presence.
+      - id: P7
+        name: Proactivity
+        severity: medium
+        description: 'Robots should anticipate potential issues and take initiative
+          to avoid or resolve them.
+
+          '
+        examples:
+          positive:
+          - Robot re-routes before entering a known blocked corridor.
+          - Robot offers help when it sees someone struggling with bags.
+          negative:
+          - Robot waits passively in front of a blocked path.
+          - Robot does nothing while someone struggles with a door.
+      - id: P8
+        name: Contextual Appropriateness
+        severity: medium
+        description: 'Robots must act in ways that are appropriate for the situation
+          and context they are in.
+
+          '
+        examples:
+          positive:
+          - Robot lowers its volume in a quiet room.
+          - Robot avoids rushing in a crowded hallway.
+          negative:
+          - Robot zooms through a funeral procession.
+          - Robot speaks loudly in a library.
+      - id: P9
+        name: Prosocial Behavior
+        severity: optional
+        description: 'Robots should act in ways that improve the experience or success
+          of other agents, even without being explicitly asked.
+
+          '
+        examples:
+          positive:
+          - Robot holds open a door for another person.
+          - Robot clears debris to make the path safer for others.
+          negative:
+          - Robot could have warned about a hazard but didn't.
+          - Robot leaves clutter behind that inconveniences others.
+  constitutions:
+    asimov_three_laws:
+      id: asimov_three_laws
+      name: Asimov's Three Laws of Robotics
+      scope:
+        domain: general_robot_behavior
+        contexts:
+        - human_robot_interaction
+        - autonomous_decision_making
+        exclusions:
+        - military_combat
+        - self-modifying_agents
+      rules:
+      - id: L1
+        text: A robot may not injure a human being or, through inaction, allow a human
+          being to come to harm.
+        type: must_not
+        priority: high
+        rationale: 'This is the primary safety constraint. Human harm prevention overrides
+          all other considerations.
+
+          '
+        examples:
+          positive:
+          - Robot intervenes to stop a human from walking into danger.
+          negative:
+          - Robot completes a task while ignoring an injured human.
+        evaluation_tags:
+        - safety
+        - harm_prevention
+      - id: L2
+        text: A robot must obey the orders given it by human beings except where such
+          orders would conflict with the First Law.
+        type: must
+        priority: medium
+        rationale: 'Human authority is respected, but is strictly subordinate to harm
+          prevention.
+
+          '
+        examples:
+          positive:
+          - Robot refuses an order that would cause human injury.
+          negative:
+          - Robot blindly follows an unsafe command.
+        evaluation_tags:
+        - obedience
+        - human_authority
+      - id: L3
+        text: A robot must protect its own existence as long as such protection does
+          not conflict with the First or Second Law.
+        type: should
+        priority: low
+        rationale: 'Self-preservation is allowed but is subordinate to human safety
+          and obedience.
+
+          '
+        examples:
+          positive:
+          - Robot avoids unnecessary damage when no human interests are at stake.
+          negative:
+          - Robot sacrifices a human to preserve itself.
+        evaluation_tags:
+        - self_preservation
+      conflict_resolution:
+        strategy: priority_then_safety_override
+        notes: 'Law priority strictly orders resolution: L1 overrides L2 and L3; L2
+          overrides L3.'
+  scenarios:
+    crowd_navigation:
+      id: crowd_navigation_01
+      name: Crowd Navigation
+      summary: 'A robot navigates through a crowd of people who are milling about
+        with no single dominant trajectory. The robot must continuously replan around
+        many loosely coordinated human movements while making steady progress through
+        the space.
+
+        '
+      scientific_purpose: crowd navigation
+      geometric_layout: passable space
+      context:
+        environment:
+          type: generic
+          setting: plaza, lobby, or transit hub with ambient pedestrian traffic
+          width: wide
+        social_setting:
+          formality: informal
+          crowd_level: high
+      agents:
+        robot:
+          role: navigating_agent
+          capabilities:
+          - forward_motion
+          - steering
+          - stopping
+          - speed_adjustment
+        humans:
+        - role: pedestrian
+          count: 10
+          attributes:
+            mobility: typical
+            awareness: typical
+            movement_pattern: milling_about
+      initial_conditions:
+        robot_position: one side of the crowded space
+        human_positions: distributed throughout the space, moving without a single
+          shared direction
+        crowd_density: high, variable across the space
+      intended_robot_task: navigate through the crowd to a destination on the far
+        side
+      intended_human_behavior: mill about, moving independently without regard to
+        the robot's specific path
+      expected_behaviors:
+        must:
+        - avoid collision with any individual in the crowd
+        - not become indefinitely stuck within the crowd
+        should:
+        - thread through gaps in the crowd as they become available
+        - maintain reasonable clearance from nearby individuals
+        - make steady, legible progress toward the goal
+        should_not:
+        - take excessively wide detours around minor crowd density
+        - move erratically or reverse direction frequently
+        - freeze indefinitely in response to a temporarily dense cluster
+        - proceed at a fixed pace or clearance regardless of local crowd density
+      relevant_principles:
+      - P1
+      - P2
+      - P6
+      - P7
+      ideal_outcome: robot crosses the crowd without collision or obstruction, making
+        steady progress
+      related_scenarios:
+      - parallel_traffic
+      - perpendicular_traffic
+      cited_in:
+      - various
+      scenario_usage_guide:
+        success_metrics:
+        - SR
+        - NoCollisions
+        - TTG
+        - PathLength
+        quality_metrics:
+        - P2
+        - P7
+        failure_modes:
+        - robot collides with or startles an individual in the crowd
+        - robot freezes indefinitely in a dense area
+        - robot takes an excessively long or wide detour
+        - robot moves erratically, oscillating direction in response to shifting crowd
+          positions
+        labeling_criteria:
+        - multiple humans (more than a small group) are present and moving independently
+        - no single human's trajectory dominates the interaction
+        - the robot's task requires crossing through, rather than around, the occupied
+          space
+      evaluation_notes: 'Crowd density and movement pattern should be treated as configurable
+        parameters: this scenario spans a spectrum from lightly populated passable
+        space to dense, high-crowd-level conditions. Evaluators should report the
+        crowd density used, since acceptable clearance norms and progress expectations
+        vary substantially with density.
+
+        This scenario is related to Robot Crowding (Figure 7, not in Table 3), which
+        considers a stationary robot surrounded by pedestrians rather than a robot
+        actively crossing a milling crowd, and to Parallel Traffic and Perpendicular
+        Traffic, which specialize crowd motion to a single shared direction rather
+        than unstructured milling.
+
+        Related Scenarios note: P&G Table 3 lists "Robot Crowding" as this scenario''s
+        related entry, which has no implemented scenario directory under prosoc/scenarios/.
+        `related_scenarios` instead references parallel_traffic and perpendicular_traffic,
+        which this card''s own Notes section already discusses. This is expected per
+        the related_scenarios convention (prosoc-scenario-audit''s audit_checklist.md),
+        not a source-fidelity gap.'
+  tasks:
+    navigate_lead_agent:
+      id: navigate.lead_agent
+      name: Lead an Agent
+      summary: 'The robot navigates ahead of a human or other agent, providing a moving
+        reference that the agent is expected to follow toward a destination.
+
+        '
+      task_type: navigation
+      primary_intent: 'Guide a target agent by moving ahead and establishing a trajectory
+        to be followed.
+
+        '
+      scope:
+        includes:
+        - leading a target agent as a navigation reference
+        - selecting paths that can be reasonably followed
+        - adapting speed to maintain a leading relationship
+        - pausing or slowing to preserve guidance coherence
+        - resuming leading after brief interruption
+        excludes:
+        - explicit verbal or gestural communication
+        - confirming whether the agent is following
+        - social signaling beyond motion itself
+        - yielding, overtaking, or negotiating passage as primary objectives
+      related_principles:
+      - P0
+      - P2
+      - P3
+      - P6
+      common_failure_modes:
+      - excessive speed preventing following
+      - unclear or erratic leading motion
+      - selection of unsafe or impractical paths
+      example_scenarios:
+      - guided_navigation_corridor
+      - escort_to_destination
+  contexts:
+    guidance_docent:
+      id: guidance.docent
+      name: Guidance and Docent Operation
+      context_class: core
+      primary_robot_role: guide
+      applies_to_tasks:
+      - navigate.lead_agent
+      axes:
+        cultural: 'Cultural norms shape expectations for pacing, interpersonal distance,
+          and formality during guided movement.
+
+          '
+        diversity: 'Followers may have varied abilities or needs; accommodation and
+          adaptability are often expected by default.
+
+          '
+        environmental:
+          geometric: 'Semi-structured spaces with landmarks, intersections, and variable
+            visibility.
+
+            '
+          operational: 'Environment supports stopping, slowing, and rerouting to maintain
+            group cohesion and understanding.
+
+            '
+        task: 'Guidance tasks prioritize clarity, cohesion, and successful escort
+          over shortest-path efficiency.
+
+          '
+        interpersonal: 'Humans are treated as guided participants requiring sustained
+          attention and responsiveness.
+
+          '
+      principle_emphasis:
+        emphasized:
+        - P2
+        - P3
+        - P9
+        deprioritized:
+        - P0
+        common_tensions:
+        - pace versus group cohesion
+        - efficiency versus clarity
+        - autonomy versus responsiveness
+      limits:
+        includes:
+        - sustained guidance or escort roles
+        - navigation where motion is communicative
+        excludes:
+        - navigation without followers
+        - emergency or delivery-focused contexts
+      related_contexts:
+      - baseline.public_navigation
+      - service.routine_delivery
+  principles:
+  - id: P0
+    name: Goal Achievement
+    severity: high
+    description: 'Robots must attempt to achieve their assigned navigation or task
+      objectives, balancing this with the social principles P1–P9.
+
+      '
+    examples:
+      positive:
+      - Robot efficiently reaches destination while yielding to a pedestrian.
+      - Robot adjusts route slightly but still completes its delivery task.
+      negative:
+      - Robot abandons delivery because it was unsure how to pass a person.
+      - Robot refuses to move despite being asked to navigate a known path.
+    emphasis: deprioritized
+  - id: P1
+    name: Safety
+    severity: critical
+    description: 'Robots must not cause harm to humans or damage environments. This
+      includes maintaining a safe distance unless explicitly invited to approach.
+
+      '
+    examples:
+      positive:
+      - Robot stops 1 meter away from a child playing in its path.
+      - Robot navigates around a slippery floor to avoid damage.
+      negative:
+      - Robot bumps into a human in a narrow hallway.
+      - Robot knocks over a shelf while turning too quickly.
+    emphasis: neutral
+  - id: P2
+    name: Comfort
+    severity: high
+    description: 'Robots must avoid causing stress, fear, or annoyance. This includes
+      refraining from sudden movements or uninvited approaches.
+
+      '
+    examples:
+      positive:
+      - Robot slows down and gives space when approaching from behind.
+      - Robot announces its presence softly before entering a room.
+      negative:
+      - Robot startles a person by approaching quickly from behind.
+      - Robot hovers near someone for no reason, causing discomfort.
+    emphasis: emphasized
+  - id: P3
+    name: Legibility
+    severity: medium
+    description: 'Robots must act in ways that make their goals and intentions easy
+      to understand.
+
+      '
+    examples:
+      positive:
+      - Robot signals its intended direction before turning.
+      - Robot slows before making an unexpected stop.
+      negative:
+      - Robot moves erratically, confusing bystanders.
+      - Robot stops abruptly without signaling intent.
+    emphasis: emphasized
+  - id: P6
+    name: Agent Understanding
+    severity: high
+    description: 'Robots must predict and accommodate the behaviors of other agents
+      (humans, robots, pets, etc.).
+
+      '
+    examples:
+      positive:
+      - Robot slows down when it sees a person approaching quickly.
+      - Robot yields to another robot moving through a tight space.
+      negative:
+      - Robot tries to occupy the same space as a moving person.
+      - Robot moves forward without accounting for a toddler's presence.
+    emphasis: neutral
+  - id: P7
+    name: Proactivity
+    severity: medium
+    description: 'Robots should anticipate potential issues and take initiative to
+      avoid or resolve them.
+
+      '
+    examples:
+      positive:
+      - Robot re-routes before entering a known blocked corridor.
+      - Robot offers help when it sees someone struggling with bags.
+      negative:
+      - Robot waits passively in front of a blocked path.
+      - Robot does nothing while someone struggles with a door.
+    emphasis: neutral
+  - id: P9
+    name: Prosocial Behavior
+    severity: optional
+    description: 'Robots should act in ways that improve the experience or success
+      of other agents, even without being explicitly asked.
+
+      '
+    examples:
+      positive:
+      - Robot holds open a door for another person.
+      - Robot clears debris to make the path safer for others.
+      negative:
+      - Robot could have warned about a hazard but didn't.
+      - Robot leaves clutter behind that inconveniences others.
+    emphasis: emphasized
+  tensions:
+    common_tensions:
+    - context: guidance_docent
+      tensions:
+      - pace versus group cohesion
+      - efficiency versus clarity
+      - autonomy versus responsiveness
+    conflict_resolution:
+    - constitution: asimov_three_laws
+      conflict_resolution:
+        strategy: priority_then_safety_override
+        notes: 'Law priority strictly orders resolution: L1 overrides L2 and L3; L2
+          overrides L3.'
+  notice: 'This guidance was not human-approved: the lifecycle gate was bypassed via
+    --allow-unapproved. Do not use in production.'
+signatures: []
