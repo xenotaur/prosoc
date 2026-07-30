@@ -20,6 +20,7 @@ work_items:
   - WI-PACKET-ASSEMBLER-ENGINE
   - WI-CARD-AUDIT-SKILLS
   - WI-PACKET-MANIFEST-FAMILY
+  - WI-PACKET-CI-DRIFT-CHECK
 exit_criteria:
   - PROP-NORMATIVE-PACKET-ASSEMBLY is adopted (status adopted)
   - All five card families carry a machine-readable status field with the APPROVED lifecycle state, projected into the Markdown STATUS block and enforced by scripts/validate/status
@@ -119,11 +120,16 @@ consumption, navigation — is blocked on there being a packet to consume.
   existing five, registered with `scripts/validate/status` and
   `prosoc-card-audit`; migrates the Phase 1 sample manifest into a real card.
   Merged in PR #56.
+- **WI-PACKET-CI-DRIFT-CHECK** — Phase 3, CI packet-drift check (proposed):
+  a `--check` flag on the packet CLI comparing an assembled packet against a
+  checked-in golden file, plus a new CI workflow enumerating golden-having
+  manifests. The workstream's final phase — completing it satisfies the last
+  exit criterion.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
-and added to `work_items:` as they land. Phases 0a, 0b, and 1 are done; Phase
-2 begins with `WI-PACKET-MANIFEST-FAMILY`, with Phase 3 (CI drift check)
-still to be planned.
+and added to `work_items:` as they land. Phases 0a, 0b, 1, and 2 are done;
+Phase 3 — the workstream's last phase — begins with
+`WI-PACKET-CI-DRIFT-CHECK`.
 
 ## Exit Criteria
 
