@@ -60,7 +60,7 @@ def _tensions(envelope: dict) -> list[str]:
     return out
 
 
-def _write_summary_md(path: Path, rows: list[dict], combos_by_id: dict) -> None:
+def _write_summary_md(path: Path, rows: list[dict]) -> None:
     lines = [
         "# 2026_07 packet combinatorics — summary",
         "",
@@ -161,18 +161,20 @@ def main() -> None:
             }
         )
 
-    combos_by_id = {c.id: c for c in COMBINATIONS}
     results_root.mkdir(parents=True, exist_ok=True)
     (results_root / "summary.json").write_text(
         json.dumps({"combinations": rows, "failures": failures}, indent=2),
         encoding="utf-8",
     )
-    _write_summary_md(results_root / "summary.md", rows, combos_by_id)
+    _write_summary_md(results_root / "summary.md", rows)
 
     print(f"\nAssembled {len(rows)}/{len(COMBINATIONS)} packets.")
     if failures:
         print(f"{len(failures)} FAILED — see results/summary.json")
     print(f"Summary written to {results_root / 'summary.md'}")
+
+    if failures:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
