@@ -5,6 +5,7 @@ import io
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from prosoc.literate import utils
 from prosoc.literate import errors
@@ -128,6 +129,20 @@ class TestAtomicWrite(unittest.TestCase):
 
             self.assertIn("-a: 1", out.getvalue())
             self.assertIn("+a: 2", out.getvalue())
+
+    def test_show_diffs_permission_error_on_existing_file_propagates(self):
+        # An existing-but-unreadable file must not be silently treated as
+        # missing (which would mask a real I/O problem as a misleading
+        # empty-baseline diff) — only FileNotFoundError falls back to empty.
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "existing.yml"
+            path.write_text("a: 1\n", encoding="utf-8")
+
+            with mock.patch.object(
+                Path, "read_text", side_effect=PermissionError("denied")
+            ):
+                with self.assertRaises(PermissionError):
+                    utils.atomic_write(path, "a: 2\n", show_diffs=True, dry_run=True)
 
 
 if __name__ == "__main__":
