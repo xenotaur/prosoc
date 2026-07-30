@@ -43,19 +43,3 @@ All three resolved. Thread-resolution verdict: **green**.
 
 - Run `/lrh-closeout` after merge: land the primary record, leave the WI
   `proposed` (planning artifact), workstream stays open.
-
-# Summary
-
-TODO: Briefly summarize the intended prompt-driven work.
-
-# Result
-
-TODO: Fill in what happened.
-
-# Validation
-
-TODO: List tests or checks run.
-
-# Follow-up
-
-TODO: List deferred work.
