@@ -111,8 +111,10 @@ its SKILL.md Step 6). Always overwrite any existing `audit.md` for a targeted
 card; this run is a fresh point-in-time snapshot, not an incremental update.
 
 Step 2 already guarantees every batched card has its Markdown file, so the
-only thing that can still be missing at this stage is the distilled
-`<family>.yml`. If a card in a batch is missing it, that card is skipped (per
+only thing that can still be missing at this stage is the distilled YAML
+(`scenario.yml`, `task.yml`, `context.yml`, `constitution.yml`, or
+`charter.yml`, per family). If a card in a batch is missing it, that card is
+skipped (per
 `prosoc-card-audit`'s own stop condition) — report it as skipped in the batch
 result, but do not fail the rest of the batch over it.
 
@@ -217,7 +219,7 @@ Tell the user:
 Before reporting completion, verify:
 
 - [ ] Every targeted card either has a freshly written `audit.md` or is
-      reported as explicitly skipped (missing `<family>.yml`)
+      reported as explicitly skipped (missing its distilled YAML)
 - [ ] No card's Markdown, YAML, `schema.json`, `template.md`, `distill.py`, or
       any STATUS/STATE block was modified anywhere in the audited scope
 - [ ] No card's lifecycle STATE was promoted

@@ -8,7 +8,7 @@ name is used the same way in LRH's own repo and in LCATS
 (`xenotaur/LCATS`'s `lcats/project/audits/`, including a `docs/`
 subfolder matching that exact default pattern).
 
-## Not to be confused with scenario audits
+## Not to be confused with card audits
 
 `prosoc` has a second, unrelated "audit" concept: `prosoc/<family>/<name>/audit.md`
 (or `prosoc/charter/audit.md` for the charter) and each family's

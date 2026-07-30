@@ -69,9 +69,10 @@ Load these before auditing:
 3. **`../_shared/pg_scenarios.md`** — Table 3 data for all 18 P&G scenarios.
    **Scenarios only.** Used for source-fidelity checks.
 
-4. **`prosoc/<family>/schema.json`** — the JSON schema the distilled
-   `<family>.yml` must conform to (`charter.yml` for the charter,
-   `<id>.yml`-style filenames for the other four).
+4. **`prosoc/<family>/schema.json`** — the JSON schema the card's distilled
+   YAML must conform to (see the Card YAML column in Step 1's table for the
+   exact per-family filename — `scenario.yml`, `task.yml`, `context.yml`,
+   `constitution.yml`, or `charter.yml`).
 
 5. **`prosoc/scenarios/workflow.md`** — defines the AUDITED stage. The audit
    report's verdict and vocabulary should speak in these terms regardless of
@@ -104,8 +105,9 @@ If either file is missing, stop and report — do not proceed with a partial
 audit.
 
 Read the Markdown in full (prose sections plus the embedded fenced YAML) and
-the distilled `<family>.yml`. Confirm the two are in sync by re-running that
-family's distiller in dry-run mode, from the repository root:
+the card's distilled YAML (per Step 1's table). Confirm the two are in sync
+by re-running that family's distiller in dry-run mode, from the repository
+root:
 
 ```bash
 scripts/distill/scenarios --scenario <id> --dry-run --show-diffs   # scenarios: scoped to this card
@@ -124,9 +126,9 @@ it briefly as an aside for a separate audit of that card — it is out of scope
 here, not something to fold into this one's findings or verdict.
 
 **Do not** run any distiller without `--dry-run`: unscoped or not, a real run
-writes `<family>.yml` — silently violating this skill's promise not to modify
-cards. Do not diff the embedded YAML block against `<family>.yml` as raw
-text — the distiller re-serializes YAML (strips comments, rewraps long
+writes the card's distilled YAML — silently violating this skill's promise
+not to modify cards. Do not diff the embedded YAML block against the
+distilled YAML as raw text — the distiller re-serializes YAML (strips comments, rewraps long
 strings, changes flow style) even when perfectly in sync, so a literal text
 diff always shows noise regardless of whether anything is actually stale. If
 the dry-run reports a diff or a schema validation error for the card under

@@ -32,8 +32,7 @@ audited: 2026-07-29
   motivation — see the Definitions and Glossary's own "Explanation" entry for
   what this section is supposed to do).
 
-### 2. Some principles' YAML `description` states normative content that
-   appears nowhere in the prose — should-fix
+### 2. Some principles' YAML description states content absent from prose — should-fix
 - **Section/field:** `description` vs. Normative Statement (and, where
   present, Explanation)
 - **Issue:** P1's `description` adds "This includes maintaining a safe
