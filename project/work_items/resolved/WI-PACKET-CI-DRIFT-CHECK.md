@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #59 (commit c407b93). Adds --check to the packet CLI, the first checked-in golden packet, and a CI drift-check workflow — completes Phase 3, the final phase of WS-NORMATIVE-PACKET-ASSEMBLY."
 blocked_reason: null
 blocked: false
 id: WI-PACKET-CI-DRIFT-CHECK
 title: CI packet-drift check against checked-in golden packets (Phase 3)
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY
