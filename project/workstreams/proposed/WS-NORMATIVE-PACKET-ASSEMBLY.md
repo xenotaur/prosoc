@@ -11,6 +11,7 @@ related_focus:
 related_roadmap: []
 related_design:
   - project/design/proposals/adopted/normative-packet-assembly/00_proposal.md
+  - project/design/proposals/proposed/normative-card-approval/00_proposal.md
 work_items:
   - WI-CARD-STATUS-FOUNDATION
   - WI-CARD-STATUS-TASKS
@@ -21,6 +22,7 @@ work_items:
   - WI-CARD-AUDIT-SKILLS
   - WI-PACKET-MANIFEST-FAMILY
   - WI-PACKET-CI-DRIFT-CHECK
+  - WI-CARD-APPROVE-SKILLS
 exit_criteria:
   - PROP-NORMATIVE-PACKET-ASSEMBLY is adopted (status adopted)
   - All five card families carry a machine-readable status field with the APPROVED lifecycle state, projected into the Markdown STATUS block and enforced by scripts/validate/status
@@ -120,16 +122,24 @@ consumption, navigation — is blocked on there being a packet to consume.
   existing five, registered with `scripts/validate/status` and
   `prosoc-card-audit`; migrates the Phase 1 sample manifest into a real card.
   Merged in PR #56.
-- **WI-PACKET-CI-DRIFT-CHECK** — Phase 3, CI packet-drift check (proposed):
+- **WI-PACKET-CI-DRIFT-CHECK** — Phase 3, CI packet-drift check (resolved):
   a `--check` flag on the packet CLI comparing an assembled packet against a
   checked-in golden file, plus a new CI workflow enumerating golden-having
-  manifests. The workstream's final phase — completing it satisfies the last
-  exit criterion.
+  manifests. Merged in PR #59, closing out Phase 3.
+- **WI-CARD-APPROVE-SKILLS** — corpus review-queue engine and the
+  `prosoc-card-approve` / `prosoc-card-review` / `prosoc-card-review-all`
+  skill stack (proposed): tooling to rank the corpus by what most needs
+  review and to promote a card's lifecycle state from `AUDITED` to
+  `APPROVED`, settled in `PROP-NORMATIVE-CARD-APPROVAL`. Works toward the
+  second exit criterion below — no card is promoted by this item itself,
+  only the mechanism to do so; a follow-on pilot item promotes the first 5
+  cards.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
-and added to `work_items:` as they land. Phases 0a, 0b, 1, and 2 are done;
-Phase 3 — the workstream's last phase — begins with
-`WI-PACKET-CI-DRIFT-CHECK`.
+and added to `work_items:` as they land. Phases 0a, 0b, 1, 2, and 3 are
+done; the workstream's second exit criterion — corpus approval — remains
+open and is now being worked via `WI-CARD-APPROVE-SKILLS` and its planned
+follow-on pilot item.
 
 ## Exit Criteria
 
@@ -159,6 +169,9 @@ Phase 3 — the workstream's last phase — begins with
 - Governing proposal:
   [`project/design/proposals/adopted/normative-packet-assembly/00_proposal.md`](../../design/proposals/adopted/normative-packet-assembly/00_proposal.md)
   (`PROP-NORMATIVE-PACKET-ASSEMBLY`, adopted 2026-07-30).
+- Governing proposal for the corpus-approval review pass:
+  [`project/design/proposals/proposed/normative-card-approval/00_proposal.md`](../../design/proposals/proposed/normative-card-approval/00_proposal.md)
+  (`PROP-NORMATIVE-CARD-APPROVAL`, proposed 2026-07-30).
 
 ## Open Questions
 
