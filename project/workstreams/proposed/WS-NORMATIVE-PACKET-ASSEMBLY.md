@@ -18,6 +18,7 @@ work_items:
   - WI-CARD-STATUS-CONSTITUTIONS
   - WI-CARD-STATUS-CHARTER
   - WI-PACKET-ASSEMBLER-ENGINE
+  - WI-CARD-AUDIT-SKILLS
 exit_criteria:
   - PROP-NORMATIVE-PACKET-ASSEMBLY is adopted (status adopted)
   - All five card families carry a machine-readable status field with the APPROVED lifecycle state, projected into the Markdown STATUS block and enforced by scripts/validate/status
@@ -107,12 +108,16 @@ consumption, navigation — is blocked on there being a packet to consume.
   (`prosoc/packet/schema.json`), shipped behind `--allow-unapproved`. Merged in
   PR #51 — the core engine the workstream is built toward now exists
   (`prosoc/packet/` + `scripts/assemble`).
+- **WI-CARD-AUDIT-SKILLS** — Phase 0b, family-dispatched audit skills
+  (proposed): `prosoc-card-audit` and `prosoc-card-audit-all` with per-family
+  checklists under `.claude/skills/_shared/audit_checklists/`, including a
+  bespoke charter shape and a new constitutions checklist; retires
+  `prosoc-scenario-audit(-all)` into the generic dispatch.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
-and added to `work_items:` as they land. Phase 0a landed family-by-family (all
-five `WI-CARD-STATUS-*` items resolved); Phase 1 begins with
-`WI-PACKET-ASSEMBLER-ENGINE` (the engine), with Phases 0b (audit skills), 2
-(manifest card family), and 3 (CI drift check) still to be planned.
+and added to `work_items:` as they land. Phase 0a and Phase 1 are done; Phase
+0b begins with `WI-CARD-AUDIT-SKILLS`, with Phases 2 (manifest card family)
+and 3 (CI drift check) still to be planned.
 
 ## Exit Criteria
 
