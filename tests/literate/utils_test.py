@@ -1,11 +1,17 @@
 # Unit tests for prosoc.literate.utils
 
+import contextlib
+import io
 import tempfile
 import unittest
 from pathlib import Path
 
 from prosoc.literate import utils
 from prosoc.literate import errors
+
+
+def _capture_stdout():
+    return contextlib.redirect_stdout(io.StringIO())
 
 
 class TestDumpYaml(unittest.TestCase):
@@ -88,6 +94,40 @@ class TestAtomicWrite(unittest.TestCase):
 
         with self.assertRaises(errors.LiterateIOError):
             utils.atomic_write(bad_path, "key: value\n")
+
+    def test_show_diffs_on_new_file_does_not_raise(self):
+        # A card's very first distill has no prior .yml to diff against;
+        # show_diffs must not crash (regression for a FileNotFoundError bug).
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "new.yml"
+            self.assertFalse(path.exists())
+
+            utils.atomic_write(path, "a: 1\n", show_diffs=True, dry_run=True)
+
+            # dry_run=True: still not written.
+            self.assertFalse(path.exists())
+
+    def test_show_diffs_on_new_file_diffs_against_empty(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "new.yml"
+
+            with _capture_stdout() as out:
+                utils.atomic_write(path, "a: 1\n", show_diffs=True, dry_run=True)
+
+            self.assertIn("+a: 1", out.getvalue())
+
+    def test_show_diffs_on_existing_file_still_works(self):
+        # Guard the non-regression path: an existing file's real content is
+        # still used as the diff baseline, not silently treated as empty.
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "existing.yml"
+            path.write_text("a: 1\n", encoding="utf-8")
+
+            with _capture_stdout() as out:
+                utils.atomic_write(path, "a: 2\n", show_diffs=True, dry_run=True)
+
+            self.assertIn("-a: 1", out.getvalue())
+            self.assertIn("+a: 2", out.getvalue())
 
 
 if __name__ == "__main__":
