@@ -1,0 +1,15 @@
+id: deliver_urgent_crash_cart
+name: deliver_object / high_urgency / crash_cart
+state: DRAFTED
+builder: prosoc packet assembler (2026_07 combinatorics experiment)
+members:
+- family: charter
+  id: charter
+- family: constitutions
+  id: asimov_three_laws
+- family: scenarios
+  id: crash_cart
+- family: tasks
+  id: deliver_object
+- family: contexts
+  id: high_urgency

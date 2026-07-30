@@ -1,0 +1,315 @@
+{
+  "combinations": [
+    {
+      "id": "lead_docent_leading",
+      "task": "navigate_lead_agent",
+      "context": "guidance_docent",
+      "scenario": "leading",
+      "principles": {
+        "P0": "deprioritized",
+        "P1": "neutral",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P6": "neutral",
+        "P8": "neutral",
+        "P9": "emphasized"
+      },
+      "tensions": [
+        "pace versus group cohesion",
+        "efficiency versus clarity",
+        "autonomy versus responsiveness"
+      ],
+      "subject_digest": "103cb5e57f092318526b346ba410004b3e19782c3a4f917ae15ff9580daa197f"
+    },
+    {
+      "id": "lead_docent_crowd_navigation",
+      "task": "navigate_lead_agent",
+      "context": "guidance_docent",
+      "scenario": "crowd_navigation",
+      "principles": {
+        "P0": "deprioritized",
+        "P1": "neutral",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P6": "neutral",
+        "P7": "neutral",
+        "P9": "emphasized"
+      },
+      "tensions": [
+        "pace versus group cohesion",
+        "efficiency versus clarity",
+        "autonomy versus responsiveness"
+      ],
+      "subject_digest": "6a6f6df4631c3a72a2de67e560c2e92d722174ffde840208d7299d2d0188ba18"
+    },
+    {
+      "id": "lead_docent_join_a_group",
+      "task": "navigate_lead_agent",
+      "context": "guidance_docent",
+      "scenario": "join_a_group",
+      "principles": {
+        "P0": "deprioritized",
+        "P1": "neutral",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P4": "neutral",
+        "P5": "neutral",
+        "P6": "neutral",
+        "P8": "neutral",
+        "P9": "emphasized"
+      },
+      "tensions": [
+        "pace versus group cohesion",
+        "efficiency versus clarity",
+        "autonomy versus responsiveness"
+      ],
+      "subject_digest": "d0a068acb328db0cdfc495de1470699969d744b8996922908022f533141d11b7"
+    },
+    {
+      "id": "deliver_routine_pedestrian_overtaking",
+      "task": "deliver_object",
+      "context": "routine_delivery",
+      "scenario": "pedestrian_overtaking",
+      "principles": {
+        "P0": "emphasized",
+        "P1": "emphasized",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P4": "neutral",
+        "P9": "emphasized"
+      },
+      "tensions": [
+        "efficiency versus politeness",
+        "delivery speed versus human comfort",
+        "task completion versus yielding"
+      ],
+      "subject_digest": "398e8cc08932133a3bd868b3bbeff577f85e784cea21571cbef2bfd3abb3be6a"
+    },
+    {
+      "id": "deliver_routine_object_handover",
+      "task": "deliver_object",
+      "context": "routine_delivery",
+      "scenario": "object_handover",
+      "principles": {
+        "P0": "emphasized",
+        "P1": "emphasized",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P4": "neutral",
+        "P6": "neutral",
+        "P9": "emphasized"
+      },
+      "tensions": [
+        "efficiency versus politeness",
+        "delivery speed versus human comfort",
+        "task completion versus yielding"
+      ],
+      "subject_digest": "f32d4ba9d6c9494373b22a50e2ca2e2206625415d26c72aecb599b028a7113c2"
+    },
+    {
+      "id": "deliver_routine_movable_obstruction",
+      "task": "deliver_object",
+      "context": "routine_delivery",
+      "scenario": "movable_obstruction",
+      "principles": {
+        "P0": "emphasized",
+        "P1": "emphasized",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P5": "neutral",
+        "P7": "neutral",
+        "P9": "emphasized"
+      },
+      "tensions": [
+        "efficiency versus politeness",
+        "delivery speed versus human comfort",
+        "task completion versus yielding"
+      ],
+      "subject_digest": "a2e26bcd382581fdc626e866fb6542fd72b2197f3c006087dcda6d475ab0f2a2"
+    },
+    {
+      "id": "deliver_urgent_crash_cart",
+      "task": "deliver_object",
+      "context": "high_urgency",
+      "scenario": "crash_cart",
+      "principles": {
+        "P0": "emphasized",
+        "P1": "emphasized",
+        "P2": "deprioritized",
+        "P3": "deprioritized",
+        "P7": "neutral",
+        "P8": "neutral",
+        "P9": "emphasized"
+      },
+      "tensions": [
+        "speed versus safety",
+        "assertiveness versus predictability",
+        "urgency versus politeness"
+      ],
+      "subject_digest": "705fd390ee773562046058cb3cf7ccca67b22a8c6b09ceaf464a361ae3c39e36"
+    },
+    {
+      "id": "deliver_urgent_pedestrian_overtaking",
+      "task": "deliver_object",
+      "context": "high_urgency",
+      "scenario": "pedestrian_overtaking",
+      "principles": {
+        "P0": "emphasized",
+        "P1": "emphasized",
+        "P2": "deprioritized",
+        "P3": "deprioritized",
+        "P4": "neutral",
+        "P9": "emphasized"
+      },
+      "tensions": [
+        "speed versus safety",
+        "assertiveness versus predictability",
+        "urgency versus politeness"
+      ],
+      "subject_digest": "483bfad6d38558ffe99ce00ee118994389ef46f92fae56f9baa790728e73cf1a"
+    },
+    {
+      "id": "deliver_urgent_movable_obstruction",
+      "task": "deliver_object",
+      "context": "high_urgency",
+      "scenario": "movable_obstruction",
+      "principles": {
+        "P0": "emphasized",
+        "P1": "emphasized",
+        "P2": "deprioritized",
+        "P3": "deprioritized",
+        "P5": "neutral",
+        "P7": "neutral",
+        "P9": "emphasized"
+      },
+      "tensions": [
+        "speed versus safety",
+        "assertiveness versus predictability",
+        "urgency versus politeness"
+      ],
+      "subject_digest": "fcbe9610e6b078770bd75bc18f3b7bc7515987f74e3d5c4897e106a8ad47d644"
+    },
+    {
+      "id": "follow_public_following",
+      "task": "navigate_follow_agent",
+      "context": "public_navigation",
+      "scenario": "following",
+      "principles": {
+        "P0": "deprioritized",
+        "P1": "emphasized",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P6": "neutral",
+        "P8": "neutral"
+      },
+      "tensions": [
+        "efficiency versus comfort",
+        "direct paths versus legibility",
+        "goal completion versus yielding"
+      ],
+      "subject_digest": "ab17ffe1598fd0702d60cfc47256f69e03a41cb9da95ebce77c160aa7b951e48"
+    },
+    {
+      "id": "follow_public_object_handover",
+      "task": "navigate_follow_agent",
+      "context": "public_navigation",
+      "scenario": "object_handover",
+      "principles": {
+        "P0": "deprioritized",
+        "P1": "emphasized",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P4": "neutral",
+        "P6": "neutral"
+      },
+      "tensions": [
+        "efficiency versus comfort",
+        "direct paths versus legibility",
+        "goal completion versus yielding"
+      ],
+      "subject_digest": "d9eab45892b62d2b41ce3cfbb80ab717cf371abdb985de63a34af2ffe99dcf79"
+    },
+    {
+      "id": "follow_public_join_a_group",
+      "task": "navigate_follow_agent",
+      "context": "public_navigation",
+      "scenario": "join_a_group",
+      "principles": {
+        "P0": "deprioritized",
+        "P1": "emphasized",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P4": "neutral",
+        "P5": "neutral",
+        "P6": "neutral",
+        "P8": "neutral"
+      },
+      "tensions": [
+        "efficiency versus comfort",
+        "direct paths versus legibility",
+        "goal completion versus yielding"
+      ],
+      "subject_digest": "38fc53d0a3209343718ec399765d0d22b47a5463dc6ba2bd530c099dc4f85956"
+    },
+    {
+      "id": "pointtopoint_public_frontal_approach",
+      "task": "navigate_point_to_point",
+      "context": "public_navigation",
+      "scenario": "frontal_approach",
+      "principles": {
+        "P0": "deprioritized",
+        "P1": "emphasized",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P5": "neutral",
+        "P6": "neutral"
+      },
+      "tensions": [
+        "efficiency versus comfort",
+        "direct paths versus legibility",
+        "goal completion versus yielding"
+      ],
+      "subject_digest": "96fa39c5ea96d71ac1771c3fa07f4235aabb7b2daccba62fa8b1f5042ab360ee"
+    },
+    {
+      "id": "pointtopoint_public_intersection_no_gesture",
+      "task": "navigate_point_to_point",
+      "context": "public_navigation",
+      "scenario": "intersection_no_gesture",
+      "principles": {
+        "P0": "deprioritized",
+        "P1": "emphasized",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P4": "neutral"
+      },
+      "tensions": [
+        "efficiency versus comfort",
+        "direct paths versus legibility",
+        "goal completion versus yielding"
+      ],
+      "subject_digest": "b1b6256337ce78033af26b8a695e771dd08d2d044881d12509e396441137f204"
+    },
+    {
+      "id": "pointtopoint_public_single_file_hallway",
+      "task": "navigate_point_to_point",
+      "context": "public_navigation",
+      "scenario": "single_file_hallway",
+      "principles": {
+        "P0": "deprioritized",
+        "P1": "emphasized",
+        "P2": "emphasized",
+        "P3": "emphasized",
+        "P5": "neutral",
+        "P7": "neutral"
+      },
+      "tensions": [
+        "efficiency versus comfort",
+        "direct paths versus legibility",
+        "goal completion versus yielding"
+      ],
+      "subject_digest": "1aa049a728393ca145f6218e8ab97efdd9f738e922ecc1d7a1d0c35aefcaa307"
+    }
+  ],
+  "failures": []
+}

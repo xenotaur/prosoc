@@ -1,0 +1,15 @@
+id: lead_docent_crowd_navigation
+name: navigate_lead_agent / guidance_docent / crowd_navigation
+state: DRAFTED
+builder: prosoc packet assembler (2026_07 combinatorics experiment)
+members:
+- family: charter
+  id: charter
+- family: constitutions
+  id: asimov_three_laws
+- family: scenarios
+  id: crowd_navigation
+- family: tasks
+  id: navigate_lead_agent
+- family: contexts
+  id: guidance_docent

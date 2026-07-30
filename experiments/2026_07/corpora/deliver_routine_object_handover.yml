@@ -1,0 +1,15 @@
+id: deliver_routine_object_handover
+name: deliver_object / routine_delivery / object_handover
+state: DRAFTED
+builder: prosoc packet assembler (2026_07 combinatorics experiment)
+members:
+- family: charter
+  id: charter
+- family: constitutions
+  id: asimov_three_laws
+- family: scenarios
+  id: object_handover
+- family: tasks
+  id: deliver_object
+- family: contexts
+  id: routine_delivery

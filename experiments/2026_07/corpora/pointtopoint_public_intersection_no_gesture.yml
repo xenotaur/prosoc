@@ -1,0 +1,15 @@
+id: pointtopoint_public_intersection_no_gesture
+name: navigate_point_to_point / public_navigation / intersection_no_gesture
+state: DRAFTED
+builder: prosoc packet assembler (2026_07 combinatorics experiment)
+members:
+- family: charter
+  id: charter
+- family: constitutions
+  id: asimov_three_laws
+- family: scenarios
+  id: intersection_no_gesture
+- family: tasks
+  id: navigate_point_to_point
+- family: contexts
+  id: public_navigation
