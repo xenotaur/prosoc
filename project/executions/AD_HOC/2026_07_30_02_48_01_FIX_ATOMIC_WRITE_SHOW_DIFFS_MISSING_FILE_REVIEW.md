@@ -2,10 +2,10 @@
 execution_id: 2026_07_30_02_48_01_FIX_ATOMIC_WRITE_SHOW_DIFFS_MISSING_FILE_REVIEW
 prompt_id: PROMPT(AD_HOC:FIX_ATOMIC_WRITE_SHOW_DIFFS_MISSING_FILE_REVIEW)[2026-07-30T02:48:01-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_07_30_02_44_48_FIX_ATOMIC_WRITE_SHOW_DIFFS_MISSING_FILE
 pr: https://github.com/xenotaur/prosoc/pull/57
-commit: 
+commit: a4557460e6ef42225b177e6f0262252eed463301
 created_at: 2026-07-30T02:48:01-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/57

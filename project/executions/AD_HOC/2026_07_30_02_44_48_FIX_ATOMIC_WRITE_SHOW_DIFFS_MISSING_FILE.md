@@ -2,10 +2,10 @@
 execution_id: 2026_07_30_02_44_48_FIX_ATOMIC_WRITE_SHOW_DIFFS_MISSING_FILE
 prompt_id: PROMPT(AD_HOC:FIX_ATOMIC_WRITE_SHOW_DIFFS_MISSING_FILE)[2026-07-30T02:28:41-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/57
-commit: 
+commit: a4557460e6ef42225b177e6f0262252eed463301
 created_at: 2026-07-30T02:44:48-04:00
 agent: claude_app
 instruction_source: user request following WI-PACKET-MANIFEST-FAMILY (PR #56) closeout
