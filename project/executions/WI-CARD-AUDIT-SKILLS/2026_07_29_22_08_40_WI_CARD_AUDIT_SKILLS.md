@@ -2,10 +2,10 @@
 execution_id: 2026_07_29_22_08_40_WI_CARD_AUDIT_SKILLS
 prompt_id: PROMPT(WI-CARD-AUDIT-SKILLS:WI_CARD_AUDIT_SKILLS)[2026-07-29T21:51:00-04:00]
 work_item: WI-CARD-AUDIT-SKILLS
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/54
-commit: 
+commit: cf36b88b424f63201712ccb072fee9a4217d8560
 created_at: 2026-07-29T22:08:40-04:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CARD-AUDIT-SKILLS.md

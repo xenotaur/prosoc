@@ -109,10 +109,10 @@ consumption, navigation — is blocked on there being a packet to consume.
   PR #51 — the core engine the workstream is built toward now exists
   (`prosoc/packet/` + `scripts/assemble`).
 - **WI-CARD-AUDIT-SKILLS** — Phase 0b, family-dispatched audit skills
-  (proposed): `prosoc-card-audit` and `prosoc-card-audit-all` with per-family
+  (resolved): `prosoc-card-audit` and `prosoc-card-audit-all` with per-family
   checklists under `.claude/skills/_shared/audit_checklists/`, including a
   bespoke charter shape and a new constitutions checklist; retires
-  `prosoc-scenario-audit(-all)` into the generic dispatch.
+  `prosoc-scenario-audit(-all)` into the generic dispatch. Merged in PR #54.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. Phase 0a and Phase 1 are done; Phase

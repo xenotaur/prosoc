@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: Implemented and merged in PR #54 (commit cf36b88); prosoc-card-audit and prosoc-card-audit-all replace the retired scenario-specific skills across all five families, with per-family checklists under .claude/skills/_shared/audit_checklists/.
 blocked_reason: null
 blocked: false
 id: WI-CARD-AUDIT-SKILLS
 title: Family-dispatched card audit skills — prosoc-card-audit and prosoc-card-audit-all (Phase 0b)
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY

@@ -2,10 +2,10 @@
 execution_id: 2026_07_29_22_15_54_WI_CARD_AUDIT_SKILLS_IMPL_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_CARD_AUDIT_SKILLS_IMPL_CONFIRM)[2026-07-29T22:15:54-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_07_29_22_08_40_WI_CARD_AUDIT_SKILLS
 pr: https://github.com/xenotaur/prosoc/pull/54
-commit: 
+commit: cf36b88b424f63201712ccb072fee9a4217d8560
 created_at: 2026-07-29T22:15:54-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/54
