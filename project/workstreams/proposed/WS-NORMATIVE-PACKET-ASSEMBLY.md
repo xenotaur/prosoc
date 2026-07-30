@@ -10,7 +10,7 @@ related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY
 related_roadmap: []
 related_design:
-  - project/design/proposals/proposed/normative-packet-assembly/00_proposal.md
+  - project/design/proposals/adopted/normative-packet-assembly/00_proposal.md
 work_items:
   - WI-CARD-STATUS-FOUNDATION
   - WI-CARD-STATUS-TASKS
@@ -157,8 +157,8 @@ Phase 3 — the workstream's last phase — begins with
 ## Relationship to Design
 
 - Governing proposal:
-  [`project/design/proposals/proposed/normative-packet-assembly/00_proposal.md`](../../design/proposals/proposed/normative-packet-assembly/00_proposal.md)
-  (`PROP-NORMATIVE-PACKET-ASSEMBLY`).
+  [`project/design/proposals/adopted/normative-packet-assembly/00_proposal.md`](../../design/proposals/adopted/normative-packet-assembly/00_proposal.md)
+  (`PROP-NORMATIVE-PACKET-ASSEMBLY`, adopted 2026-07-30).
 
 ## Open Questions
 

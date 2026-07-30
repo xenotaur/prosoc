@@ -2,11 +2,20 @@
 id: PROP-NORMATIVE-PACKET-ASSEMBLY
 type: design_proposal
 title: Manifest-Driven Normative Packet Assembly
-status: proposed
+status: adopted
 created_on: 2026-07-23
-updated_on: 2026-07-23
-implementation_status: not_started
-implemented_by: []
+updated_on: 2026-07-30
+implementation_status: implemented
+implemented_by:
+  - WI-CARD-STATUS-FOUNDATION
+  - WI-CARD-STATUS-TASKS
+  - WI-CARD-STATUS-CONTEXTS
+  - WI-CARD-STATUS-CONSTITUTIONS
+  - WI-CARD-STATUS-CHARTER
+  - WI-PACKET-ASSEMBLER-ENGINE
+  - WI-CARD-AUDIT-SKILLS
+  - WI-PACKET-MANIFEST-FAMILY
+  - WI-PACKET-CI-DRIFT-CHECK
 supersedes: []
 superseded_by: null
 related_design:
