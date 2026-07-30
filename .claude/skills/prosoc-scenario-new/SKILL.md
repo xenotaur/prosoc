@@ -42,12 +42,12 @@ Load these before generating the scenario card:
 
 1. **`../_shared/pg_scenarios.md`** — Table 3 data for all 18 P&G scenarios, plus notes
    on which are already implemented. Always read this first to check if the scenario is
-   already implemented and to get canonical metadata. Shared with `prosoc-scenario-audit`;
+   already implemented and to get canonical metadata. Shared with `prosoc-card-audit`;
    do not fork a local copy.
 
 2. **`../_shared/principles.md`** — The P0–P9 principle definitions and common metric IDs.
    Read this to correctly populate `relevant_principles` and `scenario_usage_guide`. Shared
-   with `prosoc-scenario-audit`; do not fork a local copy.
+   with `prosoc-card-audit`; do not fork a local copy.
 
 3. **`references/schema_guide.md`** — Field-by-field guidance for the scenario schema.
    Read this to understand what goes in each YAML field and what to leave blank.

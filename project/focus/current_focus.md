@@ -46,9 +46,9 @@ audit-clean state in the 2026-07-22 corpus-wide audit
 (`prosoc/scenarios/AUDIT_SUMMARY.md`: 20/20 audited, 0 blocking findings).
 Keep it there as edits land:
 
-- Run `/prosoc-scenario-audit` (single) or `/prosoc-scenario-audit-all` (full
-  corpus) after any change to a scenario's prose or YAML, rather than assuming
-  a prior audit still holds.
+- Run `/prosoc-card-audit` (single) or `/prosoc-card-audit-all` (full family
+  or corpus) after any change to a scenario's prose or YAML, rather than
+  assuming a prior audit still holds.
 - Treat `prosoc/scenarios/AUDIT_SUMMARY.md` as a point-in-time index only — it
   does not self-update and must be regenerated after any re-audit.
 
