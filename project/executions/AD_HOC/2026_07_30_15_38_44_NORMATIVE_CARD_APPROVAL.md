@@ -2,10 +2,10 @@
 execution_id: 2026_07_30_15_38_44_NORMATIVE_CARD_APPROVAL
 prompt_id: PROMPT(AD_HOC:NORMATIVE_CARD_APPROVAL)[2026-07-30T13:30:35-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/61
-commit: aaf306c
+commit: 68a49b89f393c67292cb9d3cf5ce92668bea28af
 created_at: 2026-07-30T15:38:44-04:00
 agent: claude_app
 instruction_source: project/design/proposals/proposed/normative-card-approval/00_proposal.md
