@@ -8,15 +8,17 @@ name is used the same way in LRH's own repo and in LCATS
 (`xenotaur/LCATS`'s `lcats/project/audits/`, including a `docs/`
 subfolder matching that exact default pattern).
 
-## Not to be confused with scenario audits
+## Not to be confused with card audits
 
-`prosoc` has a second, unrelated "audit" concept: `prosoc/scenarios/<name>/audit.md`
-and `prosoc/scenarios/AUDIT_SUMMARY.md`, produced by
-`/prosoc-scenario-audit` and `/prosoc-scenario-audit-all`. Those check an
-individual scenario card's prose/YAML consistency, schema and charter
-compliance, and source fidelity — a step in the scenario content lifecycle
+`prosoc` has a second, unrelated "audit" concept: `prosoc/<family>/<name>/audit.md`
+(or `prosoc/charter/audit.md` for the charter) and each family's
+`AUDIT_SUMMARY.md`, produced by `/prosoc-card-audit` and
+`/prosoc-card-audit-all` (family-dispatched across scenarios, tasks,
+contexts, constitutions, and the charter). Those check an individual card's
+prose/YAML consistency, schema and charter compliance, and (for scenarios)
+source fidelity — a step in the card lifecycle
 (`prosoc/scenarios/workflow.md`), not an engineering report. If you're
-looking for scenario-card audit findings, they live there, not here.
+looking for card audit findings, they live there, not here.
 
 ## Contents
 

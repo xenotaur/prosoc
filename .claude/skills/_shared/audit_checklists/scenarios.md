@@ -3,7 +3,7 @@
 This is a verification rubric, companion to `prosoc/scenarios/schema.json` and
 `prosoc/scenarios/template.md`. Where `prosoc-scenario-new`'s `schema_guide.md`
 explains what to put in each field when authoring, this file explains what to check
-when auditing an already-drafted card. Read `../../_shared/principles.md` for the
+when auditing an already-drafted card. Read `../principles.md` for the
 P0–P9 definitions referenced below.
 
 ## Required Fields (schema.json)
@@ -33,7 +33,7 @@ emphasis or detail rather than outright contradictory — still worth a should-f
       violations; `expected_behaviors` only has `must`/`should`/`should_not`)
 - [ ] `relevant_principles` — every entry matches `^P[0-9]+$` and is P0–P9
 - [ ] `relevant_principles` count is roughly 3–5 (0 is likely under-specified; 10 dilutes
-      meaning per `../../_shared/principles.md`) — but a count above 5 is not itself a
+      meaning per `../principles.md`) — but a count above 5 is not itself a
       finding if the card's own prose explicitly discusses each included principle; check
       before flagging as a suggestion
 - [ ] `scenario_usage_guide.quality_metrics` — same P0–P9 constraint
@@ -44,7 +44,7 @@ emphasis or detail rather than outright contradictory — still worth a should-f
       `scenario.yml` `id` field and not a P&G Table 3 citation string. It commonly
       diverges from what P&G Table 3 itself lists as the scenario's "Related
       Scenarios" entry — that divergence is **expected, not a defect**, in three
-      recognized cases (see `../../_shared/pg_scenarios.md` for Table 3 values):
+      recognized cases (see `../pg_scenarios.md` for Table 3 values):
       - Table 3 names a scenario with no implemented directory yet (the most common
         case — most of Table 3's own "Related Scenarios" values point at a Figure-7
         or sibling scenario this corpus hasn't drafted), and the card substitutes an
@@ -61,7 +61,7 @@ emphasis or detail rather than outright contradictory — still worth a should-f
 
 ## Source Fidelity (only if a checkable source exists)
 
-- If SOURCE cites P&G Table 3: compare against `../../_shared/pg_scenarios.md`'s entry
+- If SOURCE cites P&G Table 3: compare against `../pg_scenarios.md`'s entry
   for this scenario — physical description, scientific purpose, geometric layout,
   robot/human roles, task, ideal outcome.
 - If SOURCE cites something else (a paper section, dataset, prior scenario) or

@@ -87,7 +87,7 @@ An EDITED scenario is structurally sound but not yet formally approved.
 
 ### 4. AUDITED
 
-An **automated audit** — an agentic tool such as `/prosoc-scenario-audit` — has examined the scenario and recorded its findings (see the scenario's `audit.md`). An audit checks that the scenario:
+An **automated audit** — an agentic tool such as `/prosoc-card-audit` — has examined the scenario and recorded its findings (see the scenario's `audit.md`). An audit checks that the scenario:
 
 - is internally coherent (prose/YAML consistency)
 - aligns with the Prosocial Navigation Charter
