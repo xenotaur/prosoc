@@ -74,19 +74,3 @@ WI. No normative card content changed.
 - A brief interruption during implementation from a transient Anthropic-side
   model outage affected the safety classifier (Bash/Edit); it did not affect the
   code, which was completed and then validated once tools recovered.
-
-# Summary
-
-TODO: Briefly summarize the intended prompt-driven work.
-
-# Result
-
-TODO: Fill in what happened.
-
-# Validation
-
-TODO: List tests or checks run.
-
-# Follow-up
-
-TODO: List deferred work.

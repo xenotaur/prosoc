@@ -53,19 +53,3 @@ separate later PR.
 # Follow-up
 
 - Implement via a separate PR (`/lrh-implement`).
-
-# Summary
-
-TODO: Briefly summarize the intended prompt-driven work.
-
-# Result
-
-TODO: Fill in what happened.
-
-# Validation
-
-TODO: List tests or checks run.
-
-# Follow-up
-
-TODO: List deferred work.
