@@ -113,13 +113,20 @@ def atomic_write(
         content: Content to write to the file.
         encoding: Encoding to use for writing the file (default: "utf-8").
         dry_run: If True, do not write to the file.
-        show_diffs: If True, show diffs between the old and new content.
+        show_diffs: If True, show diffs between the old and new content. If
+            ``path`` does not exist yet (``FileNotFoundError``), the diff is
+            computed against an empty baseline (the whole of ``content``
+            shown as additions) rather than raising. Other read failures
+            (e.g. a permissions error on an existing file) still propagate.
 
     Raises:
         LiterateIOError on failure.
     """
     if show_diffs:
-        old_text = path.read_text(encoding=encoding)
+        try:
+            old_text = path.read_text(encoding=encoding)
+        except FileNotFoundError:
+            old_text = ""
         diff = unified_diff(
             old_text=old_text,
             new_text=content,
