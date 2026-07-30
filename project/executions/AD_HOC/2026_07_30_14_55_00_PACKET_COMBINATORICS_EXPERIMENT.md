@@ -2,10 +2,10 @@
 execution_id: 2026_07_30_14_55_00_PACKET_COMBINATORICS_EXPERIMENT
 prompt_id: PROMPT(AD_HOC:PACKET_COMBINATORICS_EXPERIMENT)[2026-07-30T14:54:50-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/60
-commit:
+commit: 4451de08e9add4004f6c8ff07b09e2b5881447b8
 created_at: 2026-07-30T14:55:00-04:00
 agent: claude_app
 instruction_source: ad_hoc conversation — dogfooding prosoc.packet and scaffolding experiments/2026_07 to demonstrate packet variation across (task, context, scenario) combinations
@@ -83,6 +83,10 @@ already-shipped Phase 1-3 assembler.
 
 # Follow-up
 
-- Full review-response/confirm-fixes/merge/closeout narrative and the
-  CHAIN-NOTE are recorded in this run's `_CONFIRM` record
+- Full review-response/confirm-fixes narrative recorded in this run's
+  `_CONFIRM` record
   (`rerun_of: 2026_07_30_14_55_00_PACKET_COMBINATORICS_EXPERIMENT`).
+- No work item or workstream involved (AD_HOC, pure dogfooding of
+  already-shipped tooling) — nothing further to resolve.
+
+CHAIN-NOTE: cycles=1; stops=0; gates=[merge]; friction="the _CONFIRM record's commit field (23bfba5) is the pre-merge HEAD verified at confirm time, not the eventual squash-merge commit (4451de0), since the execution-record commit itself landed after the confirm pass was written -- expected under this record-then-commit-records ordering, not a bug"; note="backfill path (no prior /lrh-implement); primary record minted early at review-response per the mint-early-on-required-fix convention, so no closeout-time backfill was needed"
