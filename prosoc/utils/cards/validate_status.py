@@ -23,6 +23,7 @@ from prosoc.charter import distill as charter_distill
 from prosoc.constitutions import distill as constitutions_distill
 from prosoc.contexts import distill as contexts_distill
 from prosoc.literate import utils
+from prosoc.manifests import distill as manifests_distill
 from prosoc.scenarios import distill as scenarios_distill
 from prosoc.tasks import distill as tasks_distill
 from prosoc.utils.cards import status
@@ -92,6 +93,12 @@ FAMILIES: dict[str, Family] = {
         # Single-source: id by the charter.md stem ("charter"), not the root
         # dir name, so --card/reporting stay stable under any --root.
         label_by_stem=True,
+    ),
+    "manifests": Family(
+        name="manifests",
+        default_root=pathlib.Path(manifests_distill.__file__).parent,
+        supports_flat=False,
+        discover=lambda root, layout: manifests_distill.discover_manifests(root),
     ),
 }
 

@@ -1,0 +1,71 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Prosoc Packet Manifest Card",
+    "description": "Schema for a human-authored packet manifest card. A manifest names the member cards a normative packet assembles, resolved by prosoc.packet.resolve and consumed by prosoc.packet.assemble.",
+    "type": "object",
+    "required": [
+        "id",
+        "name",
+        "state",
+        "members"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Canonical, stable identifier for the manifest. Matches the directory name.",
+            "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "name": {
+            "type": "string",
+            "description": "Human-readable name for the manifest."
+        },
+        "state": {
+            "type": "string",
+            "enum": [
+                "DRAFTED",
+                "EDITED",
+                "AUDITED",
+                "APPROVED",
+                "VALIDATED",
+                "DEPRECATED",
+                "RETIRED"
+            ],
+            "description": "Machine-readable lifecycle state of the manifest card (see prosoc/scenarios/workflow.md). Authoritative source for the state; the Markdown ## STATUS block's STATE line is a projection of this value, enforced by scripts/validate/status."
+        },
+        "builder": {
+            "type": "string",
+            "description": "Identity of the entity assembling packets from this manifest, recorded into the packet's predicate.builder.id."
+        },
+        "members": {
+            "type": "array",
+            "description": "Ordered list of member cards a packet assembled from this manifest resolves.",
+            "minItems": 1,
+            "items": {
+                "type": "object",
+                "required": [
+                    "family",
+                    "id"
+                ],
+                "properties": {
+                    "family": {
+                        "type": "string",
+                        "description": "The member card's family. Never 'manifests' — a manifest cannot name another manifest as a member (prosoc.packet's resolve/assemble is not designed for recursive manifests).",
+                        "enum": [
+                            "scenarios",
+                            "tasks",
+                            "contexts",
+                            "constitutions",
+                            "charter"
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "The member card's locator id within its family (its directory name for card-per-directory families, or 'charter' for the single-source charter family)."
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    },
+    "additionalProperties": false
+}

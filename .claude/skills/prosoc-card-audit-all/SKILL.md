@@ -26,8 +26,9 @@ YAML, or STATUS/STATE block, and it never promotes a card's lifecycle stage —
 those remain human decisions, exactly as in `prosoc-card-audit`.
 
 This skill supersedes the retired `prosoc-scenario-audit-all` (its exact
-orchestration logic is preserved here, generalized to five families rather
-than scenarios only, per `PROP-NORMATIVE-PACKET-ASSEMBLY` Decision 7).
+orchestration logic is preserved here, generalized to six families rather
+than scenarios only, per `PROP-NORMATIVE-PACKET-ASSEMBLY` Decision 7 and its
+Phase 2 manifest-family extension).
 
 ---
 
@@ -36,7 +37,7 @@ than scenarios only, per `PROP-NORMATIVE-PACKET-ASSEMBLY` Decision 7).
 Optional:
 
 - **One or more family names** (`scenarios`, `tasks`, `contexts`,
-  `constitutions`, `charter`). If omitted, run across all five.
+  `constitutions`, `charter`, `manifests`). If omitted, run across all six.
 - **A list of card names**, scoped to a single named family — to audit a
   subset instead of that family's full corpus (e.g. re-auditing cards that
   were just edited). Only valid when exactly one family is given; a card-name
@@ -86,6 +87,7 @@ For each target family:
 | contexts | subdirectories of `prosoc/contexts/` containing a `context.md` |
 | constitutions | subdirectories of `prosoc/constitutions/` containing a `constitution.md` |
 | charter | exactly one card: `{family: charter, id: "charter"}` — no directory enumeration |
+| manifests | subdirectories of `prosoc/manifests/` containing a `manifest.md` |
 
 This excludes non-card files at each family's top level (`README.md`,
 `distill.py`, `schema.json`, `template.md`, `AUDIT_SUMMARY.md`,
@@ -175,7 +177,7 @@ Template (adapt the header for a single-family vs. multi-family run):
 
 - **Run date:** <today's date>
 - **Branch:** <branch name>
-- **Scope:** <family name, or "all five families", or a listed subset>
+- **Scope:** <family name, or "all six families", or a listed subset>
 - **Cards audited:** <count> (<count skipped, if any>)
 
 ## Results
