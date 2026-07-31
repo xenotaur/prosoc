@@ -32,7 +32,7 @@ forbidden_actions:
 acceptance:
   - "All 5 pilot cards (charter, asimov_three_laws, intersection_gesture_wait, navigate_lead_agent, high_urgency) reach state: APPROVED in both their fenced YAML and projected Markdown Status/STATUS block"
   - "prosoc/manifests/sample_packet/packet.golden.yml is regenerated via scripts/assemble without --allow-unapproved and contains no escape-hatch notice"
-  - ".github/workflows/packet.yml's CI packet-drift check passes against the regenerated golden file"
+  - ".github/workflows/packet.yml's packet-drift check and tests/packet/cli_test.py's golden-file checks are updated to validate the regenerated production-mode golden file"
   - "lrh validate reports 0 errors after all card and golden-file changes"
 required_evidence:
   - lrh_validate
@@ -45,6 +45,8 @@ artifacts_expected:
   - prosoc/tasks/navigate_lead_agent/task.md
   - prosoc/contexts/high_urgency/context.md
   - prosoc/manifests/sample_packet/packet.golden.yml
+  - .github/workflows/packet.yml
+  - tests/packet/cli_test.py
 ---
 
 # WI-CARD-APPROVAL-PILOT
@@ -94,7 +96,8 @@ have `audit.md` with a passing verdict (charter: `ready_with_fixes`;
 
 - Promote exactly the 5 named pilot cards through `AUDITED` to `APPROVED`.
 - Regenerate `sample_packet`'s golden packet in production mode.
-- Confirm the CI drift check still passes.
+- Update the packet-drift workflow and packet CLI golden-file tests to match
+  the new production-mode golden packet.
 - Does not touch any of the other 27 corpus cards.
 
 ## Required Changes
@@ -110,10 +113,14 @@ have `audit.md` with a passing verdict (charter: `ready_with_fixes`;
    `scripts/assemble` **without** `--allow-unapproved` — this must be the
    first golden packet in the repo produced under the production
    (`APPROVED`-floor) gate rather than the dev-mode escape hatch.
-4. Re-run the CI packet-drift check
+4. Update the packet-drift workflow
    (`.github/workflows/packet.yml`, from the resolved
-   `WI-PACKET-CI-DRIFT-CHECK`) against the regenerated golden file and
-   confirm it passes.
+   `WI-PACKET-CI-DRIFT-CHECK`) and the packet CLI golden-file tests
+   (`tests/packet/cli_test.py`) so they assemble/check `sample_packet`
+   in production mode rather than via the dev-mode `--allow-unapproved`
+   escape hatch.
+5. Re-run the packet-drift workflow logic and packet CLI tests against the
+   regenerated golden file and confirm they pass.
 
 ## Non-Goals
 
@@ -139,7 +146,8 @@ have `audit.md` with a passing verdict (charter: `ready_with_fixes`;
   a valid block per the validator).
 - `sample_packet`'s golden packet is regenerated without
   `--allow-unapproved` and carries no escape-hatch notice.
-- The CI packet-drift check passes against the regenerated golden file.
+- The packet-drift workflow and packet CLI golden-file tests are updated to
+  validate the regenerated production-mode golden file, and both pass.
 - `lrh validate` reports 0 errors after all changes.
 
 ## Validation
@@ -152,6 +160,7 @@ have `audit.md` with a passing verdict (charter: `ready_with_fixes`;
 - `scripts/validate/status --family tasks --card navigate_lead_agent`
 - `scripts/validate/status --family contexts --card high_urgency`
 - `scripts/assemble prosoc/manifests/sample_packet/manifest.yml --check`
+- `python -m unittest tests.packet.cli_test`
 
 ## Risk Notes
 
@@ -175,6 +184,11 @@ have `audit.md` with a passing verdict (charter: `ready_with_fixes`;
   if the fail-closed gate rejects any card unexpectedly, that is a signal
   to investigate the gate logic (out of scope to fix here) before
   re-attempting, not to reach for `--allow-unapproved` as a workaround.
+- Today both `.github/workflows/packet.yml` and
+  `tests/packet/cli_test.py` still assume a dev-mode golden assembled with
+  `--allow-unapproved`; this WI must update those checks in the same change
+  as the regenerated golden file or they will fail/flake on the old
+  expectation.
 
 ## Related Workstream and Designs
 
