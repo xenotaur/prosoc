@@ -2,10 +2,10 @@
 execution_id: 2026_07_30_23_07_40_WI_CARD_APPROVE_SKILLS
 prompt_id: PROMPT(AD_HOC:WI_CARD_APPROVE_SKILLS)[2026-07-30T22:51:34+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/62
-commit: 1177ca3
+commit: 9e5423730cc7284a7347f6166e91b970b76321f1
 created_at: 2026-07-30T23:07:40+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CARD-APPROVE-SKILLS.md
