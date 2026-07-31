@@ -137,12 +137,13 @@ If the user wants one, write Step 5's table plus the run's scope
 
 ### 7. Commit
 
-Stage every card file this session actually changed (each promoted card's
-Markdown + distilled YAML) plus the optional snapshot from Step 6. Do not
-stage anything else — if `git status` shows unrelated changes, stop and
-ask rather than sweeping them in. If no card was promoted this session
-(every card was held or skipped), skip the commit/PR steps entirely and
-report the session's findings without opening a PR for a no-op branch.
+Stage every card file this session actually changed: each promoted card's
+Markdown + distilled YAML, any `audit.md` files created or refreshed while
+reviewing cards, plus the optional snapshot from Step 6. Do not stage
+anything else — if `git status` shows unrelated changes, stop and ask
+rather than sweeping them in. Skip the commit/PR steps only if the session
+left no file changes at all; if cards were held but audit evidence was
+created or refreshed, commit that audit work and open the PR.
 
 ### 8. Push and open the PR
 

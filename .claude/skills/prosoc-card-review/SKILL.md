@@ -71,16 +71,18 @@ Locate the card's `audit.md` (`prosoc/charter/audit.md` for the charter;
 `prosoc/<family>/<id>/audit.md` otherwise).
 
 **Staleness check:** if `audit.md` exists, compare the last commit
-touching the card's Markdown/YAML against the last commit touching
-`audit.md`:
+touching the card's Markdown and distilled YAML against the last commit
+touching `audit.md`:
 
 ```bash
 git log -1 --format=%cI -- prosoc/<family>/<id>/<card-file>.md
+git log -1 --format=%cI -- prosoc/<family>/<id>/<card-file>.yml
 git log -1 --format=%cI -- prosoc/<family>/<id>/audit.md
 ```
 
-If the card file's last-commit timestamp is more recent than `audit.md`'s,
-the audit is stale — the content it assessed has since changed.
+If either card artifact's last-commit timestamp is more recent than
+`audit.md`'s, the audit is stale — the content it assessed has since
+changed.
 
 **If `audit.md` is missing or stale:** invoke `prosoc-card-audit` for this
 card now, without a separate confirm gate — it is non-destructive (writes

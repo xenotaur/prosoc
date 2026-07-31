@@ -257,6 +257,8 @@ def main(argv: list[str] | None = None) -> int:
             f"--order has {len(order_dirs)} direction(s) but --sort has only "
             f"{len(sort_fields)} field(s) -- --order must not be longer than --sort"
         )
+    if args.limit is not None and args.limit < 0:
+        parser.error("--limit must be >= 0")
 
     families = {args.family: FAMILIES[args.family]} if args.family else FAMILIES
     entries = build_queue(families)

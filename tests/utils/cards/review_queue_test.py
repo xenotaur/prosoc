@@ -361,6 +361,10 @@ class CliIntegrationTest(unittest.TestCase):
         entries = json.loads(buf.getvalue())
         self.assertEqual(len(entries), 3)
 
+    def test_main_rejects_negative_limit(self):
+        with self.assertRaises(SystemExit):
+            review_queue.main(["--limit", "-1"])
+
 
 if __name__ == "__main__":
     unittest.main()
