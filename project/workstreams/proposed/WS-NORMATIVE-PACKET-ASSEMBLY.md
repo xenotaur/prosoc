@@ -23,6 +23,7 @@ work_items:
   - WI-PACKET-MANIFEST-FAMILY
   - WI-PACKET-CI-DRIFT-CHECK
   - WI-CARD-APPROVE-SKILLS
+  - WI-CARD-APPROVAL-PILOT
 exit_criteria:
   - PROP-NORMATIVE-PACKET-ASSEMBLY is adopted (status adopted)
   - All five card families carry a machine-readable status field with the APPROVED lifecycle state, projected into the Markdown STATUS block and enforced by scripts/validate/status
@@ -128,18 +129,24 @@ consumption, navigation — is blocked on there being a packet to consume.
   manifests. Merged in PR #59, closing out Phase 3.
 - **WI-CARD-APPROVE-SKILLS** — corpus review-queue engine and the
   `prosoc-card-approve` / `prosoc-card-review` / `prosoc-card-review-all`
-  skill stack (proposed): tooling to rank the corpus by what most needs
-  review and to promote a card's lifecycle state from `AUDITED` to
-  `APPROVED`, settled in `PROP-NORMATIVE-CARD-APPROVAL`. Works toward the
-  second exit criterion below — no card is promoted by this item itself,
-  only the mechanism to do so; a follow-on pilot item promotes the first 5
-  cards.
+  skill stack (proposed; creation PR #62 merged, implementation not yet
+  started): tooling to rank the corpus by what most needs review and to
+  promote a card's lifecycle state from `AUDITED` to `APPROVED`, settled in
+  `PROP-NORMATIVE-CARD-APPROVAL`. Works toward the second exit criterion
+  below — no card is promoted by this item itself, only the mechanism to
+  do so; the pilot item below uses it once implemented.
+- **WI-CARD-APPROVAL-PILOT** — promote the 5 `sample_packet` cards to
+  `APPROVED` (proposed): using the `WI-CARD-APPROVE-SKILLS` tooling,
+  promote charter, `asimov_three_laws`, `intersection_gesture_wait`,
+  `navigate_lead_agent`, and `high_urgency` through `AUDITED` to
+  `APPROVED`, then regenerate `sample_packet`'s golden packet without
+  `--allow-unapproved` — the corpus's first production-mode packet.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. Phases 0a, 0b, 1, 2, and 3 are
 done; the workstream's second exit criterion — corpus approval — remains
-open and is now being worked via `WI-CARD-APPROVE-SKILLS` and its planned
-follow-on pilot item.
+open and is now being worked via `WI-CARD-APPROVE-SKILLS` (created, not yet
+implemented) and `WI-CARD-APPROVAL-PILOT` (proposed).
 
 ## Exit Criteria
 
