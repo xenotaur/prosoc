@@ -109,9 +109,15 @@ def _read_audit(
     if not isinstance(front, dict):
         return False, None, 0, 0, 0
     verdict = front.get("verdict")
-    blocking = int(front.get("blocking") or 0)
-    should_fix = int(front.get("should_fix") or 0)
-    suggestion = int(front.get("suggestion") or 0)
+    try:
+        blocking = int(front.get("blocking") or 0)
+        should_fix = int(front.get("should_fix") or 0)
+        suggestion = int(front.get("suggestion") or 0)
+    except (TypeError, ValueError):
+        # A non-numeric scalar (e.g. blocking: "many") is malformed
+        # frontmatter, same as unparseable YAML -- fail closed to "no
+        # audit" rather than crashing queue generation.
+        return False, None, 0, 0, 0
     return True, verdict, blocking, should_fix, suggestion
 
 
@@ -166,8 +172,11 @@ def sort_queue(
 ) -> list[QueueEntry]:
     """Stable multi-key sort with independent per-field direction.
 
-    ``sort``/``order`` are parallel lists (``order`` may be shorter than
-    ``sort``; missing directions default to ``asc``). A trailing
+    ``sort``/``order`` are parallel lists. ``order`` may be shorter than
+    ``sort`` (missing directions default to ``asc``), but must not be
+    longer -- callers must validate that precondition themselves (``main``
+    does, at the CLI boundary); a too-long ``order`` list is a caller bug,
+    not a value this function will guess how to handle. A trailing
     ``(family, id)`` ascending tiebreak is always appended for determinism.
     Composed as a sequence of single-key stable sorts, most-significant
     key last -- Python's ``list.sort`` stability guarantees this correctly
@@ -243,6 +252,11 @@ def main(argv: list[str] | None = None) -> int:
     for o in order_dirs:
         if o not in ("asc", "desc"):
             parser.error(f"--order: invalid direction {o!r} (choices: asc, desc)")
+    if len(order_dirs) > len(sort_fields):
+        parser.error(
+            f"--order has {len(order_dirs)} direction(s) but --sort has only "
+            f"{len(sort_fields)} field(s) -- --order must not be longer than --sort"
+        )
 
     families = {args.family: FAMILIES[args.family]} if args.family else FAMILIES
     entries = build_queue(families)

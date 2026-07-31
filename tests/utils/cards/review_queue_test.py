@@ -127,6 +127,23 @@ class ReadAuditTest(unittest.TestCase):
             path.write_text("---\n- just\n- a\n- list\n---\n", encoding="utf-8")
             self.assertEqual(review_queue._read_audit(path), (False, None, 0, 0, 0))
 
+    def test_non_numeric_scalar_reports_no_audit_instead_of_raising(self):
+        with tempfile.TemporaryDirectory() as d:
+            path = Path(d) / "audit.md"
+            path.write_text(
+                AUDIT.format(
+                    card="x",
+                    verdict="ready",
+                    blocking="many",
+                    should_fix=0,
+                    suggestion=0,
+                ),
+                encoding="utf-8",
+            )
+            # A non-numeric blocking: value is malformed frontmatter, same
+            # as unparseable YAML -- must fail closed, not raise.
+            self.assertEqual(review_queue._read_audit(path), (False, None, 0, 0, 0))
+
 
 class SeverityTest(unittest.TestCase):
     def test_no_audit_outranks_any_weighted_sum(self):
@@ -268,13 +285,25 @@ class SortQueueTest(unittest.TestCase):
         self.assertEqual(result[0].id, "gap")
 
 
+def _expected_corpus_size() -> int:
+    """Independent oracle for the live corpus's total card count: sums each
+    registered family's raw discovery results directly, rather than
+    reusing build_queue()'s own count -- so the integration tests below
+    still catch a build_queue aggregation bug (a dropped or duplicated
+    card), and don't need updating as the corpus grows or shrinks."""
+    return sum(
+        len(list(family.discover(family.default_root, "directory")))
+        for family in FAMILIES.values()
+    )
+
+
 class CliIntegrationTest(unittest.TestCase):
     def test_default_run_over_real_repo_covers_whole_corpus(self):
         # Integration smoke test against the live corpus: every card family
         # must be discoverable and every card must produce a queue entry,
         # regardless of individual audit/state values.
         entries = review_queue.build_queue()
-        self.assertEqual(len(entries), 32)
+        self.assertEqual(len(entries), _expected_corpus_size())
         families_seen = {e.family for e in entries}
         self.assertEqual(
             families_seen,
@@ -291,7 +320,7 @@ class CliIntegrationTest(unittest.TestCase):
             code = review_queue.main(["--format", "json"])
         self.assertEqual(code, 0)
         entries = json.loads(buf.getvalue())
-        self.assertEqual(len(entries), 32)
+        self.assertEqual(len(entries), _expected_corpus_size())
         severities = [e["severity"] for e in entries]
         self.assertEqual(severities, sorted(severities, reverse=True))
 
@@ -302,6 +331,12 @@ class CliIntegrationTest(unittest.TestCase):
     def test_main_rejects_invalid_order(self):
         with self.assertRaises(SystemExit):
             review_queue.main(["--order", "sideways"])
+
+    def test_main_rejects_order_longer_than_sort(self):
+        # More directions than sort fields would otherwise make sort_queue()
+        # crash via zip(strict=True) instead of failing cleanly here.
+        with self.assertRaises(SystemExit):
+            review_queue.main(["--sort", "severity", "--order", "desc,asc,desc"])
 
     def test_main_family_filter_scopes_output(self):
         import io
