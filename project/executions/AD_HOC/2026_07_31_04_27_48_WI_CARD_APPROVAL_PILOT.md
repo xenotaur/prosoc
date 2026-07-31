@@ -2,10 +2,10 @@
 execution_id: 2026_07_31_04_27_48_WI_CARD_APPROVAL_PILOT
 prompt_id: PROMPT(AD_HOC:WI_CARD_APPROVAL_PILOT)[2026-07-31T00:17:33+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/63
-commit: bb583ec
+commit: e724edcde53c5a73cf1f9975decffd15810a779f
 created_at: 2026-07-31T04:27:48+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CARD-APPROVAL-PILOT.md
