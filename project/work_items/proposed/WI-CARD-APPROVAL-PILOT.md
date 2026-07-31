@@ -30,7 +30,7 @@ forbidden_actions:
   - modify_packet_envelope_shape
   - remove_allow_unapproved_flag
 acceptance:
-  - "All 5 pilot cards (charter, asimov_three_laws, intersection_gesture_wait, navigate_lead_agent, high_urgency) reach state: APPROVED in both their fenced YAML and projected Markdown STATUS block"
+  - "All 5 pilot cards (charter, asimov_three_laws, intersection_gesture_wait, navigate_lead_agent, high_urgency) reach state: APPROVED in both their fenced YAML and projected Markdown Status/STATUS block"
   - "prosoc/manifests/sample_packet/packet.golden.yml is regenerated via scripts/assemble without --allow-unapproved and contains no escape-hatch notice"
   - ".github/workflows/packet.yml's CI packet-drift check passes against the regenerated golden file"
   - "lrh validate reports 0 errors after all card and golden-file changes"
@@ -134,7 +134,9 @@ have `audit.md` with a passing verdict (charter: `ready_with_fixes`;
 ## Acceptance Criteria
 
 - All 5 pilot cards reach `state: APPROVED` in both their fenced YAML and
-  projected Markdown `STATUS` block.
+  projected Markdown Status/STATUS block (heading case varies by family —
+  e.g. charter uses `## Status`, tasks/contexts use `## STATUS`; either is
+  a valid block per the validator).
 - `sample_packet`'s golden packet is regenerated without
   `--allow-unapproved` and carries no escape-hatch notice.
 - The CI packet-drift check passes against the regenerated golden file.
@@ -153,10 +155,18 @@ have `audit.md` with a passing verdict (charter: `ready_with_fixes`;
 
 ## Risk Notes
 
-- This item is hard-blocked on `WI-CARD-APPROVE-SKILLS` landing first — do
-  not attempt manual frontmatter edits as a workaround if that item is
-  delayed; per the governing proposal's Decision 2, unmediated manual edits
-  are exactly the error-prone pattern the tooling was built to avoid.
+- This item's `depends_on: [WI-CARD-APPROVE-SKILLS]` names a real
+  prerequisite: the promotion tooling it uses. (`blocked`/`blocked_reason`
+  stay `false`/`null` per the work-item schema, which reserves those fields
+  for `status: active` items — `depends_on` is the correct field for a
+  `proposed` item's prerequisites.) `WI-CARD-APPROVE-SKILLS`'s creation PR
+  has since merged (#62), so this dependency is satisfied at the planning
+  level; implementing that tooling is still a separate, not-yet-started
+  step this item's own execution depends on. Do not attempt manual
+  frontmatter edits as a workaround if the tooling isn't ready when this
+  item is picked up — per the governing proposal's Decision 2, unmediated
+  manual edits are exactly the error-prone pattern the tooling was built to
+  avoid.
 - 3 of 5 pilot cards carry unresolved `should_fix` audit findings; approving
   them as-is is a deliberate, in-scope choice per the evidence gate, but the
   human approver should read each `audit.md` before confirming, not just
