@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Rank prosoc normative cards by what most needs review.
+#
+# Deterministic scan across all six card families, ranked by severity
+# (audit.md findings; a card missing audit.md entirely ranks highest) and
+# scope (lifecycle steps remaining to APPROVED, default: highest first).
+# Run via ``python -m prosoc.utils.cards.review_queue``.
+#
+# Common flags:
+#   --family <name>       Restrict to one family (e.g. scenarios, tasks)
+#   --sort <fields>        Comma-separated sort fields (default: severity,scope)
+#   --order <asc|desc,...> Comma-separated sort directions, matching --sort
+#   --format table|json    Output format (default: table)
+#   --limit <N>             Show only the top N entries after sorting
+#
+# Examples:
+#   scripts/validate/review-queue
+#   scripts/validate/review-queue --family scenarios
+#   scripts/validate/review-queue --sort severity,scope --order desc,asc
+#   scripts/validate/review-queue --format json --limit 5
+
+set -euo pipefail
+
+python -m prosoc.utils.cards.review_queue "$@"
