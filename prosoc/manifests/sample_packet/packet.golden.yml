@@ -2,59 +2,41 @@ _type: https://in-toto.io/Statement/v1
 subject:
 - name: guidance
   digest:
-    sha256: f070f0530b7da2ac51ea044957d27e56f7c214955fc333441ca560b1a6d6db4a
+    sha256: 1b23787cf8f294451de35274c894d7e26cb3bcc3ee684a7635c76918f64b36fb
 predicate_type: https://prosocial-robotics.org/NormativePacket/v1
 predicate:
   builder:
     id: prosoc packet assembler (sample)
   policy:
-    gate_threshold: DRAFTED
-    allow_unapproved: true
-    escape_hatch:
-      justification: CI packet-drift check (dev-mode golden; corpus not yet APPROVED)
-      bypassed_threshold: APPROVED
-      cards_below_threshold:
-      - family: charter
-        id: charter
-        state: DRAFTED
-      - family: constitutions
-        id: asimov_three_laws
-        state: EDITED
-      - family: scenarios
-        id: intersection_gesture_wait
-        state: DRAFTED
-      - family: tasks
-        id: navigate_lead_agent
-        state: DRAFTED
-      - family: contexts
-        id: high_urgency
-        state: DRAFTED
+    gate_threshold: APPROVED
+    allow_unapproved: false
+    escape_hatch: null
   resolved_cards:
   - family: charter
     id: charter
     path: prosoc/charter/charter.yml
-    sha256: f264ff48ed377ed320c8b45e0aaa80d1022e6f6cea2f47614bb99837f28e578d
-    state: DRAFTED
+    sha256: fcce63c23ea4ebefaeb13b4ae9a8ea4dfeb33c6013411398560ec863efe51b0f
+    state: APPROVED
   - family: constitutions
     id: asimov_three_laws
     path: prosoc/constitutions/asimov_three_laws/constitution.yml
-    sha256: 2add6d1bba980b2075ff622fe734712d2913d3fc66e228146807ab7834e14967
-    state: EDITED
+    sha256: 60842887957217db56c3a9eabf4325010a0baa49f1dffbeef297dc740a0bdf45
+    state: APPROVED
   - family: scenarios
     id: intersection_gesture_wait
     path: prosoc/scenarios/intersection_gesture_wait/scenario.yml
-    sha256: 65aa0574f0262fed670f9e2acfbc5ffea38938024f55bdbc7d1f734a61bdb64a
-    state: DRAFTED
+    sha256: a74ecdf622339b62a01d9f808eb4dfcf17f1d8c3244d6cc3f7f177baca9500e0
+    state: APPROVED
   - family: tasks
     id: navigate_lead_agent
     path: prosoc/tasks/navigate_lead_agent/task.yml
-    sha256: 40537a3c144af5c845d81da0f92742a805408f4ba449ef1a6d7250a7e22ab29a
-    state: DRAFTED
+    sha256: 6aea48b3818cb4be0dc8ea16da17394f4599c8aded608172f417d1ad6a731cfc
+    state: APPROVED
   - family: contexts
     id: high_urgency
     path: prosoc/contexts/high_urgency/context.yml
-    sha256: d399c1b7b1cb184bd0436d7dc41bdcb70ff071dfefa1d7098fda768e08fd7a60
-    state: DRAFTED
+    sha256: 6bc30b6b338a3bfbfbc8d88342130e781e3bce935bd0b77b4b880cb85b700f90
+    state: APPROVED
 guidance:
   charter:
     charter:
@@ -571,6 +553,4 @@ guidance:
         strategy: priority_then_safety_override
         notes: 'Law priority strictly orders resolution: L1 overrides L2 and L3; L2
           overrides L3.'
-  notice: 'This guidance was not human-approved: the lifecycle gate was bypassed via
-    --allow-unapproved. Do not use in production.'
 signatures: []

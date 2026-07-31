@@ -29,8 +29,11 @@ class LoaderTest(unittest.TestCase):
 
     def test_constitution_state_is_root_wrapped(self):
         # constitutions read state from constitution.state, not top level.
+        # asimov_three_laws reached APPROVED in WI-CARD-APPROVAL-PILOT; the
+        # exact value doesn't matter to what this test checks (root-wrapped
+        # reading, not a specific lifecycle stage), but it must track reality.
         card = load_card("constitutions", "asimov_three_laws")
-        self.assertEqual(card.state, "EDITED")
+        self.assertEqual(card.state, "APPROVED")
         self.assertIn("constitution", card.payload)
 
     def test_charter_single_source(self):

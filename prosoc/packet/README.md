@@ -68,30 +68,30 @@ always YAML, so `--check` rejects `--format json` (exit 2) rather than
 comparing incompatible serializations:
 
 ```bash
-scripts/assemble prosoc/manifests/sample_packet/manifest.yml \
-  --allow-unapproved "CI packet-drift check (dev-mode golden; corpus not yet APPROVED)" \
-  --check
+scripts/assemble prosoc/manifests/sample_packet/manifest.yml --check
 ```
 
 - Exact match: exit 0, silent.
 - Drift: exit 1, unified diff on stderr.
 - No golden file yet: exit 1, an error explaining how to create one.
 
-Golden files are **dev-mode only** — the corpus isn't APPROVED yet, so every
-golden is generated with `--allow-unapproved` and a fixed justification
-string: `"CI packet-drift check (dev-mode golden; corpus not yet APPROVED)"`.
-This string must match verbatim between golden generation and
-`.github/workflows/packet.yml` (which reuses it), or every check spuriously
-fails on the `--allow-unapproved` notice text alone.
-
-There is no CLI flag to write or regenerate a golden file — generate one (or
-refresh it after intentional drift) by redirecting a normal run:
+**Generate a golden in the same mode you intend to ship.** There is no CLI
+flag to write or regenerate one — redirect a normal run:
 
 ```bash
 scripts/assemble prosoc/manifests/sample_packet/manifest.yml \
-  --allow-unapproved "CI packet-drift check (dev-mode golden; corpus not yet APPROVED)" \
   > prosoc/manifests/sample_packet/packet.golden.yml
 ```
+
+`sample_packet`'s golden is production-mode (`--allow-unapproved` omitted):
+all five of its members reached `APPROVED` in `WI-CARD-APPROVAL-PILOT`, the
+corpus's first production-mode packet. A manifest whose members are **not**
+all `APPROVED` yet can only produce a dev-mode golden — regenerate with
+`--allow-unapproved "<justification>"` instead, and keep the same
+justification string between golden generation and whatever CI step checks
+it, or the check spuriously fails on the notice text alone. Once every
+member of such a manifest reaches `APPROVED`, regenerate its golden in
+production mode too, the same way this one was.
 
 `.github/workflows/packet.yml` enumerates every `prosoc/manifests/*/packet.golden.yml`
 and runs `--check` against each — not a CLI `--check-all` mode. Editing *any*

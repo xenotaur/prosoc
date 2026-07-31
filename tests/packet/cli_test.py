@@ -15,7 +15,6 @@ from prosoc.packet.loader import REPO_ROOT
 
 SAMPLE = REPO_ROOT / "prosoc" / "manifests" / "sample_packet" / "manifest.yml"
 GOLDEN = REPO_ROOT / "prosoc" / "manifests" / "sample_packet" / "packet.golden.yml"
-JUSTIFICATION = "CI packet-drift check (dev-mode golden; corpus not yet APPROVED)"
 
 
 def _run(argv):
@@ -25,25 +24,70 @@ def _run(argv):
     return code, out.getvalue(), err.getvalue()
 
 
+def _write_unapproved_manifest(tmp_dir: Path) -> Path:
+    """A manifest naming one real card that is guaranteed to stay below the
+    production floor: blind_corner is not part of the WI-CARD-APPROVAL-PILOT
+    promotion, so it remains DRAFTED. sample_packet's own members are now
+    all APPROVED (the pilot's whole point) and can no longer demonstrate the
+    fail-closed gate or the --allow-unapproved escape hatch -- this fixture
+    exercises those paths generically instead."""
+    manifest_path = tmp_dir / "unapproved_manifest.yml"
+    manifest_path.write_text(
+        "builder: test\nmembers:\n- family: scenarios\n  id: blind_corner\n",
+        encoding="utf-8",
+    )
+    return manifest_path
+
+
 class CliTest(unittest.TestCase):
     def test_sample_manifest_exists(self):
         self.assertTrue(SAMPLE.exists())
 
-    def test_fail_closed_default_emits_nothing(self):
-        # The checked-in corpus is pre-APPROVED, so the default gate blocks and
-        # nothing is written to stdout.
-        code, out, err = _run([str(SAMPLE)])
-        self.assertEqual(code, 1)
-        self.assertEqual(out, "")
-        self.assertIn("fail-closed", err)
+    def test_fail_closed_blocks_a_manifest_with_an_unapproved_member(self):
+        with tempfile.TemporaryDirectory() as d:
+            manifest = _write_unapproved_manifest(Path(d))
+            code, out, err = _run([str(manifest)])
+            self.assertEqual(code, 1)
+            self.assertEqual(out, "")
+            self.assertIn("fail-closed", err)
 
-    def test_allow_unapproved_emits_valid_packet(self):
+    def test_sample_packet_default_now_succeeds_since_pilot_approved(self):
+        # The corpus's first production-mode packet: all 5 sample_packet
+        # members reached APPROVED in WI-CARD-APPROVAL-PILOT, so the
+        # default (no --allow-unapproved) gate now passes for real.
+        code, out, err = _run([str(SAMPLE)])
+        self.assertEqual(code, 0)
+        env = yaml.safe_load(out)
+        self.assertEqual(env["predicate"]["policy"]["gate_threshold"], "APPROVED")
+        self.assertFalse(env["predicate"]["policy"]["allow_unapproved"])
+        self.assertIsNone(env["predicate"]["policy"]["escape_hatch"])
+        self.assertNotIn("notice", env["guidance"])
+
+    def test_allow_unapproved_emits_valid_packet_with_hatch_engaged(self):
+        with tempfile.TemporaryDirectory() as d:
+            manifest = _write_unapproved_manifest(Path(d))
+            code, out, err = _run(
+                [str(manifest), "--allow-unapproved", "integration test"]
+            )
+            self.assertEqual(code, 0)
+            env = yaml.safe_load(out)
+            self.assertEqual(env["predicate_type"], PREDICATE_TYPE)
+            self.assertIn("notice", env["guidance"])
+            self.assertTrue(env["predicate"]["policy"]["escape_hatch"])
+
+    def test_allow_unapproved_on_fully_approved_manifest_does_not_engage_hatch(self):
+        # --allow-unapproved only stamps the escape hatch when it is actually
+        # needed (assemble.py: hatch_engaged = allow_unapproved and
+        # bool(sub_approved)) -- passing it against an all-APPROVED manifest
+        # is a no-op on the hatch fields, though allow_unapproved/
+        # gate_threshold still record the flag itself.
         code, out, err = _run([str(SAMPLE), "--allow-unapproved", "integration test"])
         self.assertEqual(code, 0)
         env = yaml.safe_load(out)
-        self.assertEqual(env["predicate_type"], PREDICATE_TYPE)
-        self.assertIn("notice", env["guidance"])
-        self.assertTrue(env["predicate"]["policy"]["escape_hatch"])
+        self.assertTrue(env["predicate"]["policy"]["allow_unapproved"])
+        self.assertEqual(env["predicate"]["policy"]["gate_threshold"], "DRAFTED")
+        self.assertIsNone(env["predicate"]["policy"]["escape_hatch"])
+        self.assertNotIn("notice", env["guidance"])
 
     def test_empty_justification_rejected(self):
         code, _, err = _run([str(SAMPLE), "--allow-unapproved", "   "])
@@ -56,24 +100,16 @@ class CliTest(unittest.TestCase):
         self.assertIn("not found", err)
 
     def test_check_matches_the_checked_in_golden(self):
-        code, out, err = _run(
-            [str(SAMPLE), "--allow-unapproved", JUSTIFICATION, "--check"]
-        )
+        # sample_packet's golden is production-mode (see
+        # prosoc/packet/README.md) -- no --allow-unapproved here, or the
+        # rendered packet's policy fields would no longer match the golden.
+        code, out, err = _run([str(SAMPLE), "--check"])
         self.assertEqual(code, 0)
         self.assertEqual(out, "")
         self.assertEqual(err, "")
 
     def test_check_rejects_format_json(self):
-        code, out, err = _run(
-            [
-                str(SAMPLE),
-                "--allow-unapproved",
-                JUSTIFICATION,
-                "--check",
-                "--format",
-                "json",
-            ]
-        )
+        code, out, err = _run([str(SAMPLE), "--check", "--format", "json"])
         self.assertEqual(code, 2)
         self.assertEqual(out, "")
         self.assertIn("--format json", err)
@@ -92,9 +128,9 @@ class CliCheckTest(unittest.TestCase):
         self.golden = self.tmp / "packet.golden.yml"
 
     def _check(self):
-        return _run(
-            [str(self.manifest), "--allow-unapproved", JUSTIFICATION, "--check"]
-        )
+        # No --allow-unapproved: matches how sample_packet's real golden is
+        # now generated (production mode, all members APPROVED).
+        return _run([str(self.manifest), "--check"])
 
     def test_matching_golden_exits_zero_silently(self):
         shutil.copy(GOLDEN, self.golden)
@@ -109,7 +145,7 @@ class CliCheckTest(unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertEqual(out, "")
         self.assertIn("---", err)
-        self.assertIn("+++", err)
+        self.assertIn(str(self.golden), err)
 
     def test_missing_golden_exits_one_with_clear_error(self):
         code, out, err = self._check()

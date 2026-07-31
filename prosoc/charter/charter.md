@@ -11,7 +11,7 @@
 
 ## Status
 
-- **STATE:** DRAFTED
+- **STATE:** APPROVED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms (Francis et al.); Prosocial Robotics project documents
 - **DRAFTED:** Prosocial Robotics project
 - **EDITED:** Claude (WI-CARD-STATUS-CHARTER), 2026-07-29 — add machine-readable lifecycle state
@@ -24,7 +24,7 @@ by `scripts/validate/status`. It is one of `DRAFTED`, `EDITED`, `AUDITED`,
 whole, not to individual principles.
 
 ```yaml
-state: DRAFTED
+state: APPROVED
 ```
 
 ---

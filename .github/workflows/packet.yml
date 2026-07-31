@@ -42,9 +42,11 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s nullglob
-          # Must match the justification used to generate each committed
-          # packet.golden.yml — see prosoc/packet/README.md.
-          justification="CI packet-drift check (dev-mode golden; corpus not yet APPROVED)"
+          # Production mode: each golden must be regenerated (see
+          # prosoc/packet/README.md) whenever its members' lifecycle state
+          # or content changes. No --allow-unapproved here -- a manifest
+          # with an unapproved member fails this check by design (the
+          # fail-closed gate), not just a byte-diff.
           goldens=(prosoc/manifests/*/packet.golden.yml)
           if [ "${#goldens[@]}" -eq 0 ]; then
             echo "no golden packets found; nothing to check"
@@ -55,7 +57,7 @@ jobs:
             manifest_dir=$(dirname "$golden")
             manifest="$manifest_dir/manifest.yml"
             echo "checking $manifest against $golden"
-            if ! scripts/assemble "$manifest" --allow-unapproved "$justification" --check; then
+            if ! scripts/assemble "$manifest" --check; then
               status=1
             fi
           done

@@ -2,7 +2,7 @@
 
 ## STATUS
 
-- **STATE:** EDITED
+- **STATE:** APPROVED
 - **SOURCE:** Asimov, I. (1942). Runaround. Astounding Science Fiction.
 - **DRAFTED:** ChatGPT 5.2, 2026-01-23
 - **EDITED:** Anthony Francis centaur@logicalrobotics.com, 2026-01-26
@@ -27,7 +27,7 @@ robot safety system.
 constitution:
   id: asimov_three_laws
   name: "Asimov's Three Laws of Robotics"
-  state: EDITED
+  state: APPROVED
 
   scope:
     domain: general_robot_behavior
