@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #64 (commit 6fe3152). Corpus review-queue engine + prosoc-card-approve/-review/-review-all skills built; no card promoted, no normative content touched."
 blocked_reason: null
 blocked: false
 id: WI-CARD-APPROVE-SKILLS
 title: Corpus review-queue engine and prosoc-card-approve / prosoc-card-review / prosoc-card-review-all skills
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY
