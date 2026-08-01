@@ -24,16 +24,41 @@ def _run(argv):
     return code, out.getvalue(), err.getvalue()
 
 
+def _find_below_approved_card() -> tuple[str, str]:
+    """Deterministically locate a real card currently below APPROVED.
+
+    sample_packet's own members are now all APPROVED (the pilot's whole
+    point) and can no longer demonstrate the fail-closed gate or the
+    --allow-unapproved escape hatch. Rather than hard-coding one such card
+    (which future card-approval work could itself promote, silently
+    breaking this fixture), query the live corpus via the same review-queue
+    engine WI-CARD-APPROVE-SKILLS built, and pick the alphabetically-first
+    match for a stable, repeatable choice.
+    """
+    from prosoc.utils.cards.review_queue import build_queue
+
+    candidates = sorted(
+        (e for e in build_queue() if e.scope > 0),
+        key=lambda e: (e.family, e.id),
+    )
+    if not candidates:
+        raise RuntimeError(
+            "no card in the corpus is below APPROVED; this fixture needs "
+            "one to exercise the fail-closed gate and the --allow-unapproved "
+            "escape hatch"
+        )
+    return candidates[0].family, candidates[0].id
+
+
 def _write_unapproved_manifest(tmp_dir: Path) -> Path:
-    """A manifest naming one real card that is guaranteed to stay below the
-    production floor: blind_corner is not part of the WI-CARD-APPROVAL-PILOT
-    promotion, so it remains DRAFTED. sample_packet's own members are now
-    all APPROVED (the pilot's whole point) and can no longer demonstrate the
-    fail-closed gate or the --allow-unapproved escape hatch -- this fixture
-    exercises those paths generically instead."""
+    """A manifest naming a real card that is currently below the production
+    floor (see _find_below_approved_card) -- exercises the fail-closed gate
+    and the --allow-unapproved escape hatch generically, now that
+    sample_packet's real members are all APPROVED."""
+    family, card_id = _find_below_approved_card()
     manifest_path = tmp_dir / "unapproved_manifest.yml"
     manifest_path.write_text(
-        "builder: test\nmembers:\n- family: scenarios\n  id: blind_corner\n",
+        f"builder: test\nmembers:\n- family: {family}\n  id: {card_id}\n",
         encoding="utf-8",
     )
     return manifest_path

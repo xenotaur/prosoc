@@ -5,7 +5,7 @@ work_item: WI-CARD-APPROVAL-PILOT
 status: in_progress
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/65
-commit: 7c563a2
+commit: 
 created_at: 2026-07-31T20:58:37+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CARD-APPROVAL-PILOT.md
