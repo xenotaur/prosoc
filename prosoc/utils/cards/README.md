@@ -10,9 +10,11 @@ the agent-facing operating instructions this doc's steps dispatch to.
 
 ## Why this exists
 
-Every card in the corpus moves through a lifecycle —
-`DRAFTED`/`EDITED` → `AUDITED` → `APPROVED` — defined in
-`prosoc/scenarios/workflow.md`. `AUDITED` is a machine-assisted finding pass
+Every card in the corpus moves through a lifecycle — the full chain is
+`SOURCE → DRAFTED → EDITED → AUDITED → APPROVED → VALIDATED →
+DEPRECATED/RETIRED`, defined in `prosoc/scenarios/workflow.md`; this doc
+and its skills are only concerned with the `DRAFTED`/`EDITED` → `AUDITED` →
+`APPROVED` segment. `AUDITED` is a machine-assisted finding pass
 (`/prosoc-card-audit`); `APPROVED` is a **human accountability attestation**
 and must not be conflated with it. As of `WI-CARD-APPROVAL-PILOT`, only the
 5-card `sample_packet` pilot has reached `APPROVED`; the other 27 cards in
@@ -80,14 +82,16 @@ Ranking, in order of what it means for you:
 
 - **`SEV` (severity)** — weighted sum of the card's `audit.md` finding
   counts (blocking outranks any number of should-fix, should-fix outranks
-  any number of suggestions). A card with **no `audit.md` at all** ranks
-  above every possible weighted sum (`AUDIT: NO` in the table) — it can't
-  even be assessed for promotion yet, so it surfaces first.
+  any number of suggestions). A card with **no `audit.md` at all** gets a
+  large sentinel severity value, intended to outrank any realistic weighted
+  sum (`AUDIT` column reads `NO` in the table) — it can't even be assessed
+  for promotion yet, so it surfaces first.
 - **`SCOPE`** — how many lifecycle steps remain to `APPROVED` (0 means
   already there).
 
-Excerpt of the live queue at time of writing (32 cards total, 5 already
-`APPROVED`):
+Example output — a snapshot taken at time of writing (32 cards total, 5
+already `APPROVED`); run the command yourself for the current state, since
+counts shift as cards are promoted:
 
 ```
 FAMILY         ID                   STATE      SCOPE     SEV AUDIT  VERDICT
@@ -100,7 +104,7 @@ tasks          deliver_object       DRAFTED        3      20 yes    ready_with_f
 charter        charter              APPROVED       0      20 yes    ready_with_fixes
 ```
 
-The four `AUDIT: NO` rows (`asimov_four_laws`, `guidance_docent`,
+The four rows with `AUDIT` = `NO` (`asimov_four_laws`, `guidance_docent`,
 `public_navigation`, `routine_delivery`) sort first for exactly this reason
 — expect `/prosoc-card-review` to kick off a `/prosoc-card-audit` pass on
 each of those before it can offer a promotion recommendation.
