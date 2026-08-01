@@ -49,8 +49,8 @@ bullets — "requesting/accepting/refusing" and "appropriate or authorized"
 merge into one "social authorization or consent" bullet, a reasonable
 consolidation, not an omission). Relationship to Prosocial Navigation
 Principles names P0, P1, P2, P3, P9 in prose, matching `related_principles`
-exactly. Finding 1 (the one remaining prose/YAML discrepancy) is resolved
-above.
+exactly. The one prose/YAML discrepancy found in this pass (Finding 1, see
+above) has been resolved.
 
 ## Schema and Charter Compliance
 
