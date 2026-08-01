@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #65 (commit 0049f6c). Promoted the 5 sample_packet pilot cards to APPROVED and regenerated the golden packet in production mode -- the corpus's first packet produced without the dev-mode escape hatch."
 blocked_reason: null
 blocked: false
 id: WI-CARD-APPROVAL-PILOT
 title: Promote the 5 sample_packet pilot cards to APPROVED and produce the corpus's first APPROVED-mode golden packet
 type: operation
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus:
   - FOCUS-NORMATIVE-PACKET-ASSEMBLY
