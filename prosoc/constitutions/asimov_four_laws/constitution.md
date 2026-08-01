@@ -2,7 +2,7 @@
 
 ## STATUS
 
-- **STATE:** EDITED
+- **STATE:** AUDITED
 - **SOURCE:** Asimov, I. (1985). Robots and Empire.
 - **DRAFTED:** Anthony Francis centaur@logicalrobotics.com, 2026-01-26
 - **EDITED:** Anthony Francis centaur@logicalrobotics.com, 2026-01-26
@@ -27,7 +27,7 @@ robot safety system.
 constitution:
   id: asimov_four_laws
   name: "Asimov's Four Laws of Robotics"
-  state: EDITED
+  state: AUDITED
 
   scope:
     domain: general_robot_behavior
@@ -84,7 +84,7 @@ constitution:
         - human_authority
 
     - id: L3
-      text: "A robot must protect its own existence as long as such protection does not conflict with the Zeroth, First or Second Law."
+      text: "A robot should protect its own existence as long as such protection does not conflict with the Zeroth, First or Second Law."
       type: should
       priority: low
       rationale: >
@@ -113,8 +113,8 @@ This is an example of a constitution that is not intended for use in real-world 
 - Known ambiguities:
   - Definition of "harm" is underspecified.
   - Inaction clause in Law 1 creates interpretive edge cases.
-- - Arguably leads to robots taking over human civilization.
-  Assumptions about environment:
+- Assumptions about environment:
   - Humans are identifiable and distinguishable from non-humans.
 - Ethical tradeoffs:
   - Avoiding catastrophic system-level outcomes can override human authority.
+  - Arguably leads to robots taking over human civilization.
