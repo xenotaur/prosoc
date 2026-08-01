@@ -63,31 +63,127 @@ The framework is meant to *support experimentation*, not constrain it.
 
 ## Repository Structure
 
+Prosoc's normative content lives in six **card families**, each a directory
+of literate (Markdown + embedded YAML) cards that share a common lifecycle,
+plus a **packet assembler** that composes cards from any family into a
+single machine-readable artifact for a downstream agent. See
+[Normative Cards, Lifecycle, and Packet Assembly](#normative-cards-lifecycle-and-packet-assembly)
+below for how these pieces fit together.
+
 ```text
 prosoc/
 ├── prosoc/
-│   └── charter/
-│       ├── charter.md        # Human-readable charter (source of truth)
-│       ├── charter.yml       # Machine-readable charter (generated)
-│       ├── schema.json       # JSON Schema for validation
-│       ├── distill.py        # Markdown → YAML compiler
-│       ├── loader.py         # Runtime loader and validation
-│       └── runtime.py        # Pydantic runtime models
+│   ├── charter/               # The charter: P0–P9 principles (single document)
+│   │   ├── charter.md         #   Human-readable charter (source of truth)
+│   │   ├── charter.yml        #   Machine-readable charter (generated)
+│   │   ├── schema.json        #   JSON Schema for validation
+│   │   ├── distill.py         #   Markdown → YAML compiler
+│   │   ├── loader.py          #   Runtime loader and validation (single gate)
+│   │   └── runtime.py         #   Pydantic runtime models
+│   │
+│   ├── scenarios/              # Card family: concrete social navigation situations
+│   ├── tasks/                  # Card family: abstract robot navigation goals
+│   ├── contexts/                # Card family: situational/environmental settings
+│   ├── constitutions/           # Card family: rule sets sent to a downstream agent
+│   ├── manifests/                # Card family: named member lists for packets
+│   │   └── sample_packet/         #   Example manifest + golden packet
+│   │
+│   ├── packet/                 # Manifest-driven packet assembler (resolve → load →
+│   │                            # gate → assemble); see prosoc/packet/README.md
+│   ├── auditor/                # Agentic card-audit tooling shared by prosoc-card-audit
+│   └── literate/               # Shared Markdown+YAML literate-card infrastructure
 │
 ├── scripts/
-│   ├── distill               # Safely regenerate charter.yml
-│   ├── develop               # Install in editable mode
-│   ├── build                 # Build distribution artifacts
-│   └── publish               # (Future) publish to PyPI
+│   ├── distill/                # Per-family Markdown → YAML compilers
+│   │   └── charter, scenarios, tasks, contexts, constitutions, manifests
+│   ├── validate/               # Per-card and lifecycle-status validators
+│   │   ├── card                #   Schema/prose validation for any card
+│   │   └── status               #   Checks Markdown STATE line vs YAML state field
+│   ├── assemble                # Manifest → guidance packet (the packet assembler CLI)
+│   ├── develop                 # Install in editable mode
+│   ├── build                   # Build distribution artifacts
+│   ├── lint                    # Ruff static analysis
+│   └── publish                 # (Future) publish to PyPI
 │
-├── tests/
-│   └── charter/              # Unit and integration tests for charter tooling
-│
-├── notebooks/                # Research and prototyping notebooks
-├── .github/workflows/        # CI workflows (tests, charter checks, lint)
-├── pyproject.toml            # Packaging and tool configuration
-└── README.md                 # This file
+├── tests/                      # Unit and integration tests, mirroring prosoc/
+├── notebooks/                  # Research and prototyping notebooks
+├── .github/workflows/          # CI workflows (tests, lint, charter check, packet-drift check)
+├── pyproject.toml              # Packaging and tool configuration
+└── README.md                   # This file
 ```
+
+---
+
+## Normative Cards, Lifecycle, and Packet Assembly
+
+Prosoc represents robot-relevant norms as **normative cards**: literate
+documents (Markdown narrative + an embedded, schema-validated YAML block)
+that are human-reviewable and machine-consumable at once. There are six card
+families:
+
+| Family | Directory | Represents |
+|---|---|---|
+| Charter | [`prosoc/charter/`](prosoc/charter/README.md) | The ten prosocial navigation principles (P0–P9); a single document, not a card-per-directory family |
+| Scenarios | [`prosoc/scenarios/`](prosoc/scenarios/README.md) | Concrete, situated social navigation cases |
+| Tasks | [`prosoc/tasks/`](prosoc/tasks/README.md) | Abstract robot navigation goals, independent of scenario or context |
+| Contexts | [`prosoc/contexts/`](prosoc/contexts/README.md) | Situational/environmental settings that shift how principles apply |
+| Constitutions | [`prosoc/constitutions/`](prosoc/constitutions/README.md) | Rule sets (must/must not/should) intended to be sent to or enforced by a downstream agent |
+| Manifests | [`prosoc/manifests/`](prosoc/manifests/README.md) | Human-authored, auditable lists naming which cards a packet should assemble |
+
+Every family (other than the single-document charter) follows the same
+pattern: author a `<name>/card.md` with a narrative and an embedded YAML
+block, run `scripts/distill/<family>` to regenerate the machine-readable
+`.yml`, and validate against that family's `schema.json`. The Markdown is
+always the source of truth; generated files are never hand-edited.
+
+### Lifecycle
+
+Every card carries a lifecycle state, one of `DRAFTED`, `EDITED`, `AUDITED`,
+`APPROVED`, `VALIDATED`, `DEPRECATED`, or `RETIRED` (an optional `SOURCE`
+stage precedes `DRAFTED`):
+
+```
+SOURCE (optional) → DRAFTED → EDITED → AUDITED → APPROVED → VALIDATED (optional) → DEPRECATED / RETIRED
+```
+
+`AUDITED` and `APPROVED` are deliberately distinct: `AUDITED` means an
+**automated** audit — the `prosoc-card-audit` (single card) or
+`prosoc-card-audit-all` (whole family/corpus) skill — has examined the card
+and recorded findings in a sibling `audit.md`; `APPROVED` means a **human**
+has reviewed the card (and its audit findings) and taken accountability for
+its readiness. Downstream production use requires `APPROVED`, not merely
+`AUDITED`. The state is authored once, in the card's embedded YAML (the
+authoritative source), and projected into the Markdown `## STATUS` block's
+`STATE` line; `scripts/validate/status` checks the two agree. See
+[`prosoc/scenarios/workflow.md`](prosoc/scenarios/workflow.md) for the full
+lifecycle definition, which applies uniformly across all six families.
+
+### The Packet Assembler
+
+A **manifest** (a card in the `manifests` family) names a set of member
+cards drawn from any of the other five families. `scripts/assemble` resolves
+those members, schema-validates and hashes each one, applies a **fail-closed
+lifecycle gate** (by default every member must be `APPROVED` or better), and
+composes them into a single machine-readable **guidance packet**: an
+in-toto-style envelope with a `guidance` section for the downstream agent
+and a `predicate` section recording provenance (builder identity, and each
+member's id, family, path, hash, and lifecycle state) for an auditor.
+Principles referenced across a packet's scenario/task/context members are
+unioned and annotated (`emphasized` / `deprioritized` / `neutral`), never
+silently dropped.
+
+Since the card corpus has not yet reached `APPROVED`, `scripts/assemble`
+supports a `--allow-unapproved "<justification>"` escape hatch for
+development packets; it lowers the gate floor and stamps a
+non-production notice directly into the packet payload, so a development
+packet is never byte-indistinguishable from a production one. A CI check
+(`.github/workflows/packet.yml`) byte-compares every manifest's assembled
+packet against a checked-in golden file and fails the build on drift.
+
+See [`prosoc/packet/README.md`](prosoc/packet/README.md) for the full
+pipeline, envelope shape, and CLI usage, and
+[`PROP-NORMATIVE-PACKET-ASSEMBLY`](project/design/proposals/adopted/normative-packet-assembly/00_proposal.md)
+for the design rationale behind these choices.
 
 ---
 
@@ -149,13 +245,13 @@ This is the recommended workflow before committing charter changes.
 
 ## Testing and Continuous Integration
 
-Prosoc uses CI to enforce both **code correctness** and **constitutional consistency**.
+Prosoc uses CI to enforce **code correctness**, **card consistency**, and
+**packet reproducibility**, via four workflows under `.github/workflows/`:
 
-In particular:
-
-* Unit tests validate charter parsing, validation, and runtime loading
-* Guardrail tests ensure `charter.md` and `charter.yml` remain in sync
-* CI fails if the charter is modified without regeneration
+* `tests.yml` — unit tests validate charter parsing, validation, and runtime loading
+* `lint.yml` — Ruff and Black run in check-only mode (never auto-applied)
+* `charter.yml` — guardrail check that `charter.md` and `charter.yml` remain in sync; fails if the charter is modified without regeneration
+* `packet.yml` — guardrail check that every manifest's assembled packet matches its checked-in golden file (`prosoc/manifests/*/packet.golden.yml`); fails on drift in any member card across all six families
 
 To run tests locally:
 
@@ -281,7 +377,8 @@ These settings provide fast feedback during development while preserving full co
 CI is used to enforce **invariants**, not to make decisions on behalf of developers.
 
 In particular:
-* CI verifies that `charter.md` and `charter.yml` are consistent
+* CI verifies that each card family's Markdown source and generated YAML are consistent
+* CI verifies that every manifest's assembled packet matches its checked-in golden file
 * CI fails if generated artifacts are out of sync
 * CI does not modify files or commit changes automatically
 
@@ -291,6 +388,19 @@ If CI fails due to charter inconsistency, the expected resolution is:
 scripts/distill/charter
 git commit
 ```
+
+If CI fails due to packet drift (a manifest or a member card changed without
+regenerating its golden packet), the expected resolution is:
+
+```bash
+scripts/assemble prosoc/manifests/<name>/manifest.yml \
+  --allow-unapproved "CI packet-drift check (dev-mode golden; corpus not yet APPROVED)" \
+  > prosoc/manifests/<name>/packet.golden.yml
+git commit
+```
+
+See [`prosoc/packet/README.md`](prosoc/packet/README.md) for why the
+justification string above must match verbatim.
 
 ---
 
