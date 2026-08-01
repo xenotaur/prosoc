@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFTED
+- **STATE:** APPROVED
 - **SOURCE:** Principles and Guidelines for Social Robot Navigation (Table 3)
 - **DRAFTED:** ChatGPT, 2026-01-06
 - **EDITED:** render_sections.py, 2026-07-20
@@ -69,7 +69,7 @@ Unacceptable behavior includes ignoring the gesture, proceeding into the interse
 ```yaml
 id: intersection_gesture_wait_01
 name: Intersection – Gesture Wait
-state: DRAFTED
+state: APPROVED
 
 summary: >
   A robot and a human pedestrian approach an indoor intersection. The human

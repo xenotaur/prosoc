@@ -1,6 +1,6 @@
 id: intersection_gesture_wait_01
 name: "Intersection \u2013 Gesture Wait"
-state: DRAFTED
+state: APPROVED
 summary: 'A robot and a human pedestrian approach an indoor intersection. The human
   explicitly gestures for the robot to wait. The robot must recognize and comply with
   the gesture, yielding the intersection safely and legibly.

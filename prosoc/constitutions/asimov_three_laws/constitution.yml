@@ -1,7 +1,7 @@
 constitution:
   id: asimov_three_laws
   name: Asimov's Three Laws of Robotics
-  state: EDITED
+  state: APPROVED
   scope:
     domain: general_robot_behavior
     contexts:

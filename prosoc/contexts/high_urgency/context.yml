@@ -1,6 +1,6 @@
 id: emergency.high_urgency
 name: Emergency High-Urgency Operation
-state: DRAFTED
+state: APPROVED
 context_class: core
 primary_robot_role: emergency responder
 applies_to_tasks:

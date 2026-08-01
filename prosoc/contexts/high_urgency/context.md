@@ -1,7 +1,7 @@
 # Context: Emergency High-Urgency Operation
 
 ## STATUS
-- **STATE:** DRAFTED
+- **STATE:** APPROVED
 - **CONTEXT TYPE:** CORE
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; emergency robotics and medical transport literature
 - **CREATED:** 2026-01-11
@@ -141,7 +141,7 @@ Common tensions include:
 ```yaml
 id: emergency.high_urgency
 name: Emergency High-Urgency Operation
-state: DRAFTED
+state: APPROVED
 context_class: core
 
 primary_robot_role: emergency responder

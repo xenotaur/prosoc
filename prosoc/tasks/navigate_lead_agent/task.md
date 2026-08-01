@@ -1,7 +1,7 @@
 # Task: Lead an Agent
 
 ## STATUS
-- **STATE:** DRAFTED  
+- **STATE:** APPROVED  
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot guidance task  
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11  
 - **EDITED:** —  
@@ -93,7 +93,7 @@ Evaluation of this task focuses on whether the robot provides a clear, followabl
 ```yaml
 id: navigate.lead_agent
 name: Lead an Agent
-state: DRAFTED
+state: APPROVED
 
 summary: >
   The robot navigates ahead of a human or other agent, providing a moving
