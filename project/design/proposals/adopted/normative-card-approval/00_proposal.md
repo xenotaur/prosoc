@@ -2,11 +2,13 @@
 id: PROP-NORMATIVE-CARD-APPROVAL
 type: design_proposal
 title: Normative Card Corpus Approval — Human Review Pass to APPROVED
-status: proposed
+status: adopted
 created_on: 2026-07-30
-updated_on: 2026-07-30
-implementation_status: not_started
-implemented_by: []
+updated_on: 2026-08-01
+implementation_status: implemented
+implemented_by:
+  - WI-CARD-APPROVE-SKILLS
+  - WI-CARD-APPROVAL-PILOT
 supersedes: []
 superseded_by: null
 related_design:
