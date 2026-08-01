@@ -2,10 +2,10 @@
 execution_id: 2026_08_01_06_01_15_CARD_REVIEW_WALKTHROUGH_REVIEW
 prompt_id: PROMPT(AD_HOC:CARD_REVIEW_WALKTHROUGH_REVIEW)[2026-08-01T05:57:51+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/66
-commit:
+commit: 4a56879a58a1a246a0db715114a32e5db7d8b27a
 created_at: 2026-08-01T06:01:15+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/66
