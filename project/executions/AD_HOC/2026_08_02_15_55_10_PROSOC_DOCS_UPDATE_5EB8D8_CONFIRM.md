@@ -2,14 +2,14 @@
 execution_id: 2026_08_02_15_55_10_PROSOC_DOCS_UPDATE_5EB8D8_CONFIRM
 prompt_id: PROMPT(AD_HOC:PROSOC_DOCS_UPDATE_5EB8D8_CONFIRM)[2026-08-02T15:19:53-04:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/67
-commit:
+commit: 4799f582ea8c06f4694ce9d40aa0627e287757b9
 created_at: 2026-08-02T15:55:10-04:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/67
-session_transcript: pending
+session_transcript: claude-app:2d071ee7-950f-4423-91dd-905fdadb21a7
 ---
 
 # Summary
