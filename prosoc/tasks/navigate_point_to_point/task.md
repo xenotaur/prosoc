@@ -1,7 +1,7 @@
 # Task: Navigate from Start to Goal
 
 ## STATUS
-- **STATE:** DRAFTED  
+- **STATE:** AUDITED  
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common mobile robot navigation task  
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11  
 - **EDITED:** —  
@@ -81,7 +81,7 @@ Evaluation of this task therefore requires assessing how goal achievement is bal
 
 > **Optional but recommended**
 
-- `frontal_approach_01`
+- `frontal_approach`
 - `intersection_no_gesture`
 - `pedestrian_overtaking`
 
@@ -94,7 +94,7 @@ Evaluation of this task therefore requires assessing how goal achievement is bal
 ```yaml
 id: navigate.point_to_point
 name: Navigate from Start to Goal
-state: DRAFTED
+state: AUDITED
 
 summary: >
   The robot attempts to move from an initial location to a specified destination,
@@ -125,10 +125,11 @@ related_principles:
 common_failure_modes:
   - failure to reach destination
   - excessive delay without justification
-  - abandonment of navigation goal
+  - unjustified abandonment of navigation goal
+  - oscillatory or indecisive motion preventing sustained progress
 
 example_scenarios:
-  - frontal_approach_01
+  - frontal_approach
   - intersection_no_gesture
   - pedestrian_overtaking
 ```

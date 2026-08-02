@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFTED
+- **STATE:** AUDITED
 - **SOURCE:** Principles and Guidelines for Social Robot Navigation (Table 3)
 - **DRAFTED:** ChatGPT, 2026-01-06
 - **EDITED:** render_sections.py, 2026-07-20
@@ -73,7 +73,7 @@ Unacceptable behavior includes aggressively asserting right-of-way, oscillating 
 ```yaml
 id: intersection_no_gesture_01
 name: Intersection – No Gesture
-state: DRAFTED
+state: AUDITED
 
 summary: >
   A robot and a human pedestrian approach and cross an indoor intersection

@@ -1,7 +1,7 @@
 # Task: Deliver an Object
 
 ## STATUS
-- **STATE:** AUDITED  
+- **STATE:** APPROVED  
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot delivery task  
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11  
 - **EDITED:** —  
@@ -96,7 +96,7 @@ Evaluation of this task therefore focuses on whether delivery is achieved while 
 ```yaml
 id: deliver.object
 name: Deliver an Object
-state: AUDITED
+state: APPROVED
 
 summary: >
   The robot transfers a specified object from a source to a destination,

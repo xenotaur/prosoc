@@ -1,7 +1,7 @@
 # Task: Follow an Agent
 
 ## STATUS
-- **STATE:** DRAFTED  
+- **STATE:** AUDITED  
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot navigation task  
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11  
 - **EDITED:** —  
@@ -82,7 +82,7 @@ Evaluation of this task focuses on whether the robot sustains the intended relat
 
 > **Optional but recommended**
 
-- `human_following_corridor`
+- `following`
 - `group_following_open_space`
 
 ---
@@ -94,7 +94,7 @@ Evaluation of this task focuses on whether the robot sustains the intended relat
 ```yaml
 id: navigate.follow_agent
 name: Follow an Agent
-state: DRAFTED
+state: AUDITED
 
 summary: >
   The robot navigates by following a human or other agent, maintaining an
@@ -128,9 +128,10 @@ common_failure_modes:
   - loss of followed agent
   - excessive lag or crowding
   - unstable oscillatory following behavior
+  - unjustified abandonment of following
 
 example_scenarios:
-  - human_following_corridor
+  - following
   - group_following_open_space
 ```
 
