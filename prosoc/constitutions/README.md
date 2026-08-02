@@ -124,6 +124,32 @@ It is **not** intended as a sufficient modern safety system.
 
 ---
 
+## Lifecycle and Status
+
+Each constitution includes a **STATUS** section indicating its lifecycle
+state, authored machine-readably as a `state:` field in the embedded
+`constitution:` YAML (the authoritative source) and projected onto the
+Markdown `## STATUS` block's `STATE` line; `scripts/validate/status` checks
+the two agree. The lifecycle is the same seven-state chain used across all
+six card families — `DRAFTED`, `EDITED`, `AUDITED`, `APPROVED`, `VALIDATED`,
+`DEPRECATED`, `RETIRED` — see
+[`prosoc/scenarios/workflow.md`](../scenarios/workflow.md) for the full
+definition. `AUDITED` denotes a passing automated audit via
+`prosoc-card-audit`; only `APPROVED` constitutions should be treated as ready
+for production use, including sending to a downstream agent or embedding in
+an assembled [packet](../manifests/README.md).
+
+Constitutions are a permitted member family for a packet manifest; see
+[`prosoc/packet/README.md`](../packet/README.md) for how the assembler
+resolves and gates constitution cards alongside the other five families. A
+constitution's `conflict_resolution` strategy and a context's
+`principle_emphasis.common_tensions` are two independent mechanisms that may
+disagree about how to weigh competing principles — the assembler surfaces
+both into a packet without reconciling them, respecting each card's
+interpretive locality.
+
+---
+
 ## Design Principles
 
 Constitution cards are designed to be:
@@ -136,7 +162,7 @@ Constitution cards are designed to be:
 
 ---
 
-## Status
+## Development Status
 
 Constitution support is under active development.
 
