@@ -1,6 +1,6 @@
 id: guidance.docent
 name: Guidance and Docent Operation
-state: DRAFTED
+state: AUDITED
 context_class: core
 primary_robot_role: guide
 applies_to_tasks:
@@ -52,3 +52,4 @@ limits:
 related_contexts:
 - baseline.public_navigation
 - service.routine_delivery
+- guidance.accessibility_sensitive

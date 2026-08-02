@@ -1,7 +1,7 @@
 constitution:
   id: asimov_four_laws
   name: Asimov's Four Laws of Robotics
-  state: EDITED
+  state: AUDITED
   scope:
     domain: general_robot_behavior
     contexts:
@@ -61,8 +61,8 @@ constitution:
     - obedience
     - human_authority
   - id: L3
-    text: A robot must protect its own existence as long as such protection does not
-      conflict with the Zeroth, First or Second Law.
+    text: A robot should protect its own existence as long as such protection does
+      not conflict with the Zeroth, First or Second Law.
     type: should
     priority: low
     rationale: 'Self-preservation is allowed but is subordinate to human safety and

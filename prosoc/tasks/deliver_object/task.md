@@ -1,7 +1,7 @@
 # Task: Deliver an Object
 
 ## STATUS
-- **STATE:** DRAFTED  
+- **STATE:** AUDITED  
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot delivery task  
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11  
 - **EDITED:** —  
@@ -96,7 +96,7 @@ Evaluation of this task therefore focuses on whether delivery is achieved while 
 ```yaml
 id: deliver.object
 name: Deliver an Object
-state: DRAFTED
+state: AUDITED
 
 summary: >
   The robot transfers a specified object from a source to a destination,
@@ -128,7 +128,7 @@ related_principles:
 common_failure_modes:
   - failure to deliver object
   - delivery to incorrect destination
-  - abandonment of delivery task
+  - unjustified abandonment of delivery task
   - excessive delay rendering delivery ineffective
 
 example_scenarios:

@@ -1,7 +1,7 @@
 # Context: Guidance and Docent Operation
 
 ## STATUS
-- **STATE:** DRAFTED
+- **STATE:** AUDITED
 - **CONTEXT TYPE:** CORE
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; museum guide and escort robot literature
 - **CREATED:** 2026-01-11
@@ -140,7 +140,7 @@ Common tensions include:
 ```yaml
 id: guidance.docent
 name: Guidance and Docent Operation
-state: DRAFTED
+state: AUDITED
 context_class: core
 
 primary_robot_role: guide
@@ -192,6 +192,7 @@ limits:
 related_contexts:
   - baseline.public_navigation
   - service.routine_delivery
+  - guidance.accessibility_sensitive
 ```
 
 ---
