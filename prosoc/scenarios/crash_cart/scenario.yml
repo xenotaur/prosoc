@@ -1,6 +1,6 @@
 id: crash_cart_01
 name: Crash Cart
-state: DRAFTED
+state: AUDITED
 summary: 'A robot in a leader role delivers an urgent medical product through an indoor
   environment (e.g., a hospital), moving with elevated pace and priority while signaling
   its urgent status to bystanders, and still avoiding collisions despite the time
