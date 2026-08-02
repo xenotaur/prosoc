@@ -37,8 +37,8 @@ audited: 2026-08-02
 
 ## Source Fidelity
 
-SOURCE cites P&G Table 3. Compared against `../_shared/pg_scenarios.md`'s
-"Intersection No Gesture" entry: Physical Environment (Indoor), Geometric
+SOURCE cites P&G Table 3. Compared against
+`.claude/skills/_shared/pg_scenarios.md`'s "Intersection No Gesture" entry: Physical Environment (Indoor), Geometric
 Layout (Intersection), Scientific Purpose (Pedestrian interaction), Robot
 Task ("Navigate A to B" / "navigate from A to B"), Human Behavior ("Cross
 navigate"), Ideal Outcome ("Both pass, no collision" / "robot and human

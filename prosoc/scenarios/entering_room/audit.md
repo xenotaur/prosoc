@@ -22,7 +22,7 @@ audited: 2026-08-02
 ## Findings
 
 ### 1. P3 (Legibility) not included in `relevant_principles` — suggestion
-- **Section/field:** `relevant_principles` vs. `../principles.md` selection guidance
+- **Section/field:** `relevant_principles` vs. `.claude/skills/_shared/principles.md` selection guidance
 - **Issue:** The scenario's normative core is about the robot recognizing
   and communicating deference at a threshold ("proceed to enter promptly
   once the threshold is clear," avoiding "waiting so far back... entry is
@@ -52,8 +52,8 @@ audited: 2026-08-02
 ## Source Fidelity
 
 SOURCE cites P&G Table 3 and "Robotics at Google (R@G), internal scenario
-reference." Compared against `../_shared/pg_scenarios.md`'s "Entering
-Room" entry: Description ("Robot enters a room occupied by a human"),
+reference." Compared against
+`.claude/skills/_shared/pg_scenarios.md`'s "Entering Room" entry: Description ("Robot enters a room occupied by a human"),
 Physical Environment (Indoor), Geometric Layout (Room and door),
 Scientific Purpose (Pedestrian interaction), Robot Task ("Navigate out to
 in" / "navigate from outside to inside the room"), Human Behavior

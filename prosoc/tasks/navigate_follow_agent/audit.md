@@ -68,7 +68,7 @@ now matches prose exactly (Finding 1, resolved above).
 - The task stays abstract throughout — no environment/agent-count/social
   content leaks into `scope`, `primary_intent`, or the description.
 - `common_failure_modes` entries are task-level.
-- `example_scenarios[0]` (`following_01`) resolves to a real scenario card;
+- `example_scenarios[0]` (`following`) resolves to a real scenario card;
   `example_scenarios[1]` (`group_following_open_space`) does not (see
   Finding 2, tracked not blocking).
 
