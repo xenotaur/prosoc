@@ -1,6 +1,6 @@
 id: parallel_traffic_01
 name: Parallel Traffic
-state: DRAFTED
+state: AUDITED
 summary: 'A robot navigates from A to B while a crowd of pedestrians moves broadly
   in the same direction, forming an emergent pedestrian stream. The robot must merge
   into and hold a stable position within the flow, matching pace and minimizing lateral

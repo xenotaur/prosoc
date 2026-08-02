@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFTED
+- **STATE:** AUDITED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [167]
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
 - **EDITED:** render_sections.py, 2026-07-20
@@ -80,7 +80,7 @@ Unacceptable behavior includes:
 ```yaml
 id: parallel_traffic_01
 name: Parallel Traffic
-state: DRAFTED
+state: AUDITED
 
 summary: >
   A robot navigates from A to B while a crowd of pedestrians moves broadly

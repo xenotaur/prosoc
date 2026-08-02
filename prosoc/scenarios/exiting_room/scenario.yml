@@ -1,6 +1,6 @@
 id: exiting_room_01
 name: Exiting Room
-state: DRAFTED
+state: AUDITED
 summary: 'A robot exits a room through a doorway while a human is simultaneously entering
   the same room through the same doorway. The robot is expected to exit first, but
   must avoid colliding with or blocking the entering human.
