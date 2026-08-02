@@ -192,6 +192,7 @@ limits:
 related_contexts:
   - baseline.public_navigation
   - service.routine_delivery
+  - guidance.accessibility_sensitive
 ```
 
 ---

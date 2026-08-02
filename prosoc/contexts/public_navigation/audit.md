@@ -40,10 +40,9 @@ All required schema fields are present and valid:
 - `related_contexts` (`service.routine_delivery`, `environment.child_centric`,
   `environment.dense_crowd`) — the first resolves to a real context card;
   the latter two are forward references to contexts not yet drafted in the
-  corpus. This mirrors the same pattern already accepted in
-  `guidance_docent`'s audit (`guidance.accessibility_sensitive`), so it is
-  not flagged here either — `related_contexts` appears to be an intentional
-  scaffolding field, not a strict existence-checked reference.
+  corpus. Not flagged here — `related_contexts` appears to be an
+  intentional scaffolding field, not a strict existence-checked reference
+  (tracked in `project/design/backlog.md` rather than treated as a defect).
 
 Prose/YAML cross-checks (Context Summary, Context Axes Instantiated,
 Relationship to Prosocial Navigation Principles, Applicability and Limits)

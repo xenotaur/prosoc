@@ -16,7 +16,7 @@ filled deliberately rather than forgotten.
 
 | Missing id | Referenced by | Noted | Status |
 |---|---|---|---|
-| `guidance.accessibility_sensitive` | `contexts/guidance_docent` (`related_contexts`) | 2026-08-01 | open |
+| `guidance.accessibility_sensitive` | `contexts/guidance_docent` (`related_contexts`; added to YAML 2026-08-02 to match prose, per PR #68 code review) | 2026-08-01 | open |
 | `environment.child_centric` | `contexts/public_navigation` (`related_contexts`) | 2026-08-01 | open |
 | `environment.dense_crowd` | `contexts/public_navigation` (`related_contexts`) | 2026-08-01 | open |
 | `workplace.formalized_service` | `contexts/routine_delivery` (`related_contexts`) | 2026-08-01 | open |
