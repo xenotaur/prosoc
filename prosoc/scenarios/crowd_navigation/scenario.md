@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFTED
+- **STATE:** AUDITED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in various
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
 - **EDITED:** render_sections.py, 2026-07-20
@@ -81,7 +81,7 @@ Unacceptable behavior includes:
 ```yaml
 id: crowd_navigation_01
 name: Crowd Navigation
-state: DRAFTED
+state: AUDITED
 
 summary: >
   A robot navigates through a crowd of people who are milling about with no

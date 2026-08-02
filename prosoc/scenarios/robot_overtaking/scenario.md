@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **SOURCE:** Prompt to ChatGPT 5.2
 - **DRAFTED:** ChatGPT 5.2, 2026-01-02
 - **EDITED:** render_sections.py, 2026-07-19
@@ -66,7 +66,7 @@ Unacceptable behavior includes tailgating, abrupt lateral motion, accelerating a
 ```yaml
 id: robot_overtaking_01
 name: Overtaking a Pedestrian from Behind
-state: AUDITED
+state: APPROVED
 
 summary: >
   A robot approaches a human pedestrian from behind in a shared pathway

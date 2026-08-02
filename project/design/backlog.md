@@ -27,6 +27,7 @@ filled deliberately rather than forgotten.
 | `entering_elevator` (scenario) | `scenarios/entering_room`'s Table 3 entry cites this as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `exiting_room`/`narrow_doorway` instead | 2026-08-02 | open |
 | `exiting_elevator` (scenario) | `scenarios/exiting_room`'s Table 3 entry cites this as its related scenario, same gap as above | 2026-08-02 | open |
 | `ped_obstruct` (scenario, name unconfirmed) | `scenarios/frontal_approach`'s Table 3 entry cites "Ped. Obstruct" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `blind_corner`/`movable_obstruction`/`single_file_hallway` instead | 2026-08-02 | open |
+| `food_delivery` (scenario, name unconfirmed) | `scenarios/crash_cart`'s Table 3 entry cites "Food Delivery" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `object_handover` instead, and its own Notes section discusses both | 2026-08-02 | open |
 
 `entering_elevator`/`exiting_elevator` are additionally two of the P&G
 paper's own Figure 7 scenarios ("doorway variants for elevators") with no
@@ -103,17 +104,25 @@ checking every card's Normative Expectations section against its
 `should`/`should_not` wherever missing. Noted 2026-08-02 (user-directed),
 not yet scoped as a work item.
 
-## Optional principle-selection suggestions (single-card, low priority)
+## Open suggestions on promoted cards (low priority, burndown candidates)
 
-Individual audits sometimes surface an optional "consider adding principle
-X" suggestion that isn't a defect (the current `relevant_principles`
-selection is already valid and within the 3–5 guidance) but is worth a
-human editor's judgment call. Tracked here so they aren't lost once the
-card's own audit.md gets superseded by a later re-audit.
+Standing policy (2026-08-02, user-directed): whenever a card is promoted
+with open suggestion-level findings still on its audit — even ones that
+aren't should-fixes and don't block promotion — record them here, so
+they aren't lost once the card's own `audit.md` gets superseded by a
+later re-audit. This is the source list for a future comprehensive
+backlog-burndown pass across the whole corpus. (The recurring
+must-level-prose-gap pattern above has its own dedicated table since it
+spans many cards with the same root cause; this table is for
+one-off/card-specific suggestions.)
 
 | Card | Suggestion | Noted |
 |---|---|---|
 | `scenarios/entering_room` | Consider adding P3 (Legibility) to `relevant_principles` — the robot's "waiting" intent arguably needs to be legible to the human, a concern distinct from the already-included P4/P5 politeness/social-competency principles | 2026-08-02 |
+| `scenarios/intersection_gesture_proceed` | `expected_behaviors.should`'s "commit promptly to motion after the gesture" has no qualitative anchor for what "prompt" means, which could invite inconsistent labeling across evaluators; optionally clarify in `evaluation_notes` (no numeric threshold) | 2026-08-02 |
+| `scenarios/robot_overtaking` | (1) Card specializes P&G Table 3's "Generic" physical environment to "indoor" without noting it's a deliberate narrowing — optionally add a brief note in `evaluation_notes` or Social Navigation Context. (2) `related_scenarios` lists only `pedestrian_overtaking`, but the Notes section names `frontal_approach` and `single_file_hallway` (both implemented) as natural pairings without adding them as formal cross-references | 2026-08-02 |
+| `scenarios/frontal_approach` | Missing both optional-but-recommended template sections: "Social Navigation Context" (no dedicated section; `context.social_setting` never narrated in prose) and "Normative Expectations" (rich `expected_behaviors` YAML with no prose restatement) | 2026-08-02 |
+| `scenarios/crash_cart` | `agents.humans[0].count: 3` (bystanders) has no prose basis grounding the specific number 3 — unresolved across multiple prior audits; either state an approximate count in prose or note in `evaluation_notes` that it's a reasonable default | 2026-08-02 |
 
 ## Tooling
 

@@ -1,6 +1,6 @@
 id: intersection_gesture_proceed_01
 name: "Intersection \u2013 Gesture Proceed"
-state: AUDITED
+state: APPROVED
 summary: 'A robot and a human pedestrian approach an indoor intersection. The human
   explicitly gestures for the robot to proceed. The robot must recognize the gesture
   and cross the intersection safely, legibly, and without undue delay.

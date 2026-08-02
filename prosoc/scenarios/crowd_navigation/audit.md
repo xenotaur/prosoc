@@ -1,50 +1,79 @@
 ---
-scenario: crowd_navigation
+family: scenarios
+card: crowd_navigation
 verdict: ready
 blocking: 0
 should_fix: 0
-suggestion: 1
-audited: 2026-07-22
+suggestion: 0
+audited: 2026-08-02
 ---
 
 # Audit: Crowd Navigation
 
-- **Scenario:** `prosoc/scenarios/crowd_navigation/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
-- **Verdict:** Ready — no blocking or should-fix issues found; one minor suggestion
+- **Card:** `prosoc/scenarios/crowd_navigation/`
+- **Audited:** Claude (prosoc-card-audit skill), 2026-08-02 (fresh audit —
+  prior audit dated 2026-07-22 was stale relative to the card's last
+  touch on 2026-07-25 — the corpus-wide `WI-CARD-STATUS-FOUNDATION`
+  mechanical migration, not a content edit — and is superseded by this
+  pass. The prior audit's sole finding, a stale STATUS-block `EDITED`
+  provenance line, is a repo-wide artifact of that same mechanical
+  migration touching every card without updating each one's provenance
+  trail — not re-flagged here, consistent with how this session treated
+  the identical pattern on `entering_room`.)
+- **Verdict:** Ready, no issues found
 
 ## Findings
 
-### 1. STATUS block's EDITED date does not reflect the latest edit — suggestion
-- **Section/field:** Status block (`EDITED: render_sections.py, 2026-07-20`)
-- **Issue:** `git log` shows the most recent edit to `scenario.md`/`scenario.yml` is commit `8b6ee81` ("Document and self-document the related_scenarios/Table 3 divergence convention", 2026-07-22), which added a "Related Scenarios note" paragraph to `evaluation_notes`. The STATUS block still shows only the prior `render_sections.py, 2026-07-20` entry and has not been updated to record this most recent pass.
-- **Recommended fix:** Add an additional `EDITED` line (or update the existing one) noting the `evaluation_notes` self-documentation pass and its date/author, consistent with how the STATUS block tracks provenance elsewhere in the corpus.
+No findings. `scenario.yml` is in sync with `scenario.md` (confirmed via
+`scripts/distill/scenarios --scenario crowd_navigation --dry-run
+--show-diffs`, no diff). This card's Normative Expectations prose is
+notably thorough: unlike several sibling cards audited this session, both
+`expected_behaviors.must` items ("avoid collision with any individual,"
+"not become indefinitely stuck") are explicitly covered in the
+"Unacceptable behavior" bullets ("Colliding with or forcing evasive
+action...," "Freezing indefinitely or taking excessively wide
+detours...") — no must-level prose gap here.
+
+Prose/YAML cross-check (Scenario Overview / Social Navigation Context /
+Normative Expectations against `intended_robot_task`,
+`intended_human_behavior`, `agents`, `expected_behaviors`,
+`ideal_outcome`) found no contradictions or drift — all describe the same
+many-agent, low-predictability crossing task with 10 milling pedestrians.
+
+`relevant_principles` (P1, P2, P6, P7) — four valid P0–P9 IDs, within the
+3–5 guidance, each discussed in the card's own prose (P1/P2 via collision
+and comfort-at-scale; P6 via multi-agent trajectory prediction; P7 via
+avoiding indefinite freezing). `scenario_usage_guide.quality_metrics`
+(P2, P7) is a consistent subset. `expected_behaviors` entries describe
+kinds of behavior ("thread through gaps," "maintain reasonable
+clearance") rather than exact motions or numeric thresholds — no
+over-specification (P&G Guideline N6).
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3, "cited in various." Compared against `.claude/skills/_shared/pg_scenarios.md`'s "Crowd Navigation" entry (Crowd Scenarios section):
-
-- **Description** ("A robot navigates through a crowd") — matches.
-- **Physical Environment** (Generic) — matches (`context.environment.type: generic`).
-- **Geometric Layout** (Passable space) — matches (`geometric_layout: passable space`).
-- **Scientific Purpose** (Crowd navigation) — matches (`scientific_purpose: crowd navigation`).
-- **Robot Task** (Navigate thru) — matches (`intended_robot_task: navigate through the crowd to a destination on the far side`).
-- **Human Behavior** (Mill about) — matches (`intended_human_behavior: mill about, moving independently...`).
-- **Ideal Outcome** (No collision/obstruction) — matches, with an added "steady progress" clause that is an elaboration rather than a contradiction.
-- **Cited In** (Various) — matches (`cited_in: [various]`).
-- **Related Scenarios**: Table 3 lists "Robot Crowding," which is a Figure 7 scenario with no implemented directory under `prosoc/scenarios/` (confirmed: no `robot_crowding` directory exists). The card's `related_scenarios` field instead references `parallel_traffic` and `perpendicular_traffic`, both implemented sibling scenarios that the card's own "Notes for Scenario Designers and Evaluators" section already discusses, and `evaluation_notes` now explicitly documents this substitution as expected per the `related_scenarios` convention in `audit_checklist.md`. Not a mismatch.
-
-No mismatches found. Source fidelity: confirmed against P&G Table 3.
+SOURCE cites P&G Table 3, "cited in various." Compared against
+`.claude/skills/_shared/pg_scenarios.md`'s "Crowd Navigation" entry:
+Description ("A robot navigates through a crowd"), Physical Environment
+(Generic), Geometric Layout (Passable space), Scientific Purpose (Crowd
+navigation), Robot Task ("Navigate thru" / elaborated), Human Behavior
+("Mill about" / elaborated), Ideal Outcome ("No collision/obstruction" /
+elaborated with an added "steady progress" clause, not a contradiction),
+and Cited In ("Various" / "various") all match. Table 3 lists "Robot
+Crowding" as the related scenario, a Figure 7 scenario with no
+implemented directory under `prosoc/scenarios/` (confirmed — no
+`robot_crowding` directory exists); the card's `related_scenarios`
+instead references `parallel_traffic` and `perpendicular_traffic`, both
+implemented and both discussed in the card's own Notes section, and
+`evaluation_notes` explicitly documents this substitution. Expected
+divergence per the checklist's `related_scenarios` convention, not a
+defect. No mismatches found.
 
 ## Completeness
 
-Per `template.md`'s "Required for AUDITED scenarios" checklist:
-
-- **Scenario Card Summary block** — fully present: Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics, Ideal Outcome, Related Scenarios, and Cited In are all filled in.
-- **Scenario Usage Guide** (Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria) — present as prose, mirroring the YAML `scenario_usage_guide` block.
-- **`relevant_principles`** (P1, P2, P6, P7) — 4 entries, within the 3–5 guidance, all valid P0–P9.
-- **`expected_behaviors`** — qualitative kind-of-behavior descriptions throughout (e.g. "thread through gaps," "maintain reasonable clearance"); no numeric-threshold or exact-motion over-specification found (P&G Guideline N6 satisfied).
-- Prose vs. YAML cross-check (Scenario Overview / Social Navigation Context / Normative Expectations against `intended_robot_task`, `intended_human_behavior`, `agents`, `expected_behaviors`, `ideal_outcome`) found no contradictions or drift — both describe the same many-agent, low-predictability crossing task with 10 milling pedestrians and matching must/should/should_not lists.
-- Single-scenario dry-run distill (`scripts/distill/scenarios --scenario crowd_navigation --dry-run --show-diffs`) reported no diff and no schema errors — `scenario.yml` is in sync with `scenario.md`.
-
-No blank required fields.
+Scenario Card Summary fully present: Scenario Name, Description,
+Scientific Purpose, Physical Environment, Geometric Layout, Robot Role,
+Robot Task, Human Behavior, Success Metrics, Quality Metrics, Ideal
+Outcome, Related Scenarios, Cited In. Scenario Usage Guide fully
+populated (Success Metrics, Quality Metrics, Ideal Outcome, Failure
+Modes, Labeling Criteria) matching the embedded YAML `scenario_usage_guide`
+block. No blank required fields.

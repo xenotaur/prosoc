@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **SOURCE:** Prompt to ChatGPT 5.2
 - **DRAFTED:** ChatGPT 5.2, 2026-01-02
 - **EDITED:** render_sections.py, 2026-07-19
@@ -41,7 +41,7 @@ This scenario describes a canonical social navigation conflict in which a robot 
 ```yaml
 id: frontal_approach_01
 name: Frontal Approach
-state: AUDITED
+state: APPROVED
 
 summary: >
   A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without
