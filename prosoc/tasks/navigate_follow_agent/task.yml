@@ -1,6 +1,6 @@
 id: navigate.follow_agent
 name: Follow an Agent
-state: AUDITED
+state: APPROVED
 summary: 'The robot navigates by following a human or other agent, maintaining an
   appropriate relative position as the agent moves through the environment.
 
