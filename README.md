@@ -131,10 +131,13 @@ families:
 | Manifests | [`prosoc/manifests/`](prosoc/manifests/README.md) | Human-authored, auditable lists naming which cards a packet should assemble |
 
 Every family (other than the single-document charter) follows the same
-pattern: author a `<name>/card.md` with a narrative and an embedded YAML
-block, run `scripts/distill/<family>` to regenerate the machine-readable
-`.yml`, and validate against that family's `schema.json`. The Markdown is
-always the source of truth; generated files are never hand-edited.
+pattern: author a card as `<name>/<family-singular>.md` (e.g.
+`scenarios/frontal_approach_01/scenario.md`,
+`constitutions/asimov_three_laws/constitution.md`) with a narrative and an
+embedded YAML block, run `scripts/distill/<family>` to regenerate the
+machine-readable `.yml`, and validate against that family's `schema.json`.
+The Markdown is always the source of truth; generated files are never
+hand-edited.
 
 ### Lifecycle
 
@@ -153,8 +156,9 @@ and recorded findings in a sibling `audit.md`; `APPROVED` means a **human**
 has reviewed the card (and its audit findings) and taken accountability for
 its readiness. Downstream production use requires `APPROVED`, not merely
 `AUDITED`. The state is authored once, in the card's embedded YAML (the
-authoritative source), and projected into the Markdown `## STATUS` block's
-`STATE` line; `scripts/validate/status` checks the two agree. See
+authoritative source), and projected into the Markdown status block's
+`STATE` line — spelled `## Status` in scenarios and the charter, `## STATUS`
+elsewhere; `scripts/validate/status` accepts either heading. See
 [`prosoc/scenarios/workflow.md`](prosoc/scenarios/workflow.md) for the full
 lifecycle definition, which applies uniformly across all six families.
 
