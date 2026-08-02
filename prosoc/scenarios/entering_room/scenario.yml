@@ -1,6 +1,6 @@
 id: entering_room_01
 name: Entering Room
-state: AUDITED
+state: APPROVED
 summary: 'A robot approaches a room from outside with the task of entering, while
   a human occupant inside the room is simultaneously heading toward the same doorway
   to exit. The robot must defer to the exiting human before entering.

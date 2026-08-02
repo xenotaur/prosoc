@@ -1,7 +1,7 @@
 # Task: Follow an Agent
 
 ## STATUS
-- **STATE:** AUDITED  
+- **STATE:** APPROVED  
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot navigation task  
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11  
 - **EDITED:** —  
@@ -94,7 +94,7 @@ Evaluation of this task focuses on whether the robot sustains the intended relat
 ```yaml
 id: navigate.follow_agent
 name: Follow an Agent
-state: AUDITED
+state: APPROVED
 
 summary: >
   The robot navigates by following a human or other agent, maintaining an

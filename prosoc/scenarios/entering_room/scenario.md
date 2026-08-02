@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); Robotics at Google (R@G), internal scenario reference
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
 - **EDITED:** render_sections.py, 2026-07-20
@@ -78,7 +78,7 @@ Unacceptable behavior includes:
 ```yaml
 id: entering_room_01
 name: Entering Room
-state: AUDITED
+state: APPROVED
 
 summary: >
   A robot approaches a room from outside with the task of entering, while a
