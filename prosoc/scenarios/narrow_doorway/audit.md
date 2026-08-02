@@ -1,119 +1,78 @@
 ---
-scenario: narrow_doorway
+family: scenarios
+card: narrow_doorway
 verdict: ready
 blocking: 0
 should_fix: 0
 suggestion: 1
-audited: 2026-07-22
+audited: 2026-08-02
 ---
 
 # Audit: Narrow Doorway
 
-- **Scenario:** `prosoc/scenarios/narrow_doorway/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
-- **Verdict:** Ready, no blocking or should-fix issues found.
+- **Card:** `prosoc/scenarios/narrow_doorway/`
+- **Audited:** Claude (prosoc-card-audit skill), 2026-08-02 (fresh audit —
+  prior audit dated 2026-07-22 was stale relative to the card's last
+  touch on 2026-07-25 — the corpus-wide `WI-CARD-STATUS-FOUNDATION`
+  mechanical migration, not a content edit — finding carries forward
+  unchanged since no content changed)
+- **Verdict:** Ready for `AUDITED`, no blocking or should-fix issues found
 
 ## Findings
 
-### 1. `expected_behaviors.should` mixes a graded/comparative claim ("proceed decisively and without hesitation") — suggestion
-- **Section/field:** `expected_behaviors.should` vs. P&G Guideline N6 (over-specification)
-- **Issue:** Unchanged from prior audits. The entries are phrased as kinds of behavior
-  ("recognize... adjust approach speed," "yield clearly," "proceed decisively...
-  without hesitation") rather than exact motions or numeric thresholds, so this is not
-  a blocking over-specification violation. However, "proceed decisively and without
-  hesitation" edges toward prescribing manner/style rather than outcome; it is
-  defensible as legibility guidance but worth a second look.
-- **Recommended fix:** No change required; flagging only as a minor style note. If
-  tightened, could be rephrased as "proceed without ambiguity about intent" to keep
-  focus on legibility (the underlying principle, P3) rather than motion style.
+### 1. `expected_behaviors.should` mixes a graded/comparative claim — suggestion (carried forward from 2026-07-22)
+- **Section/field:** `expected_behaviors.should` ("proceed decisively and
+  without hesitation") vs. P&G Guideline N6 (over-specification)
+- **Issue:** Phrased as a kind of behavior rather than an exact motion or
+  numeric threshold, so not a blocking over-specification violation, but
+  it edges toward prescribing manner/style rather than outcome.
+- **Recommended fix:** No change required; optionally rephrase as
+  "proceed without ambiguity about intent" to keep focus on legibility
+  (P3) rather than motion style.
 
-### Distiller check
-
-`scripts/distill/scenarios --scenario narrow_doorway --dry-run --show-diffs` reports
-no diff and no schema validation error. `scenario.md`'s embedded YAML and
-`scenario.yml` are in sync.
-
-### Prose/YAML consistency
-
-- Scenario Overview / Social Navigation Context vs. `intended_robot_task`,
-  `intended_human_behavior`, `context`, `agents`: consistent — robot as
-  `navigating_agent`, one human pedestrian, opposite-direction approach to a
-  single-file bottleneck.
-- Normative Expectations vs. `expected_behaviors.{must,should,should_not}`:
-  consistent — no one-sided claims; all four "acceptable" prose bullets and all four
-  "unacceptable" prose bullets map onto the YAML's `should`/`must`/`should_not` lists.
-- `ideal_outcome` prose matches the YAML field verbatim in both Scenario Card Summary
-  and Scenario Usage Guide sections.
-
-### Schema and charter compliance
-
-- `scenario.yml` validates (confirmed via the dry-run distill above).
-- `relevant_principles`: `P1, P3, P4, P7` — all valid P0–P9 IDs, count of 4 is within
-  the 3–5 soft guideline.
-- `scenario_usage_guide.quality_metrics`: `P3, P4` — valid P0–P9 IDs, consistent
-  subset.
-- `expected_behaviors` entries describe kinds of behavior rather than exact motions or
-  numeric thresholds — no blocking over-specification (P&G Guideline N6); see Finding
-  1 above for the one minor phrasing note.
-- `related_scenarios: [blind_corner, entering_room, exiting_room]` — all three are
-  real directories under `prosoc/scenarios/`, and all three are discussed in the
-  card's own "Notes for Scenario Designers and Evaluators" section. No contradiction.
-- `cited_in: ["126"]` — present and matches the SOURCE field's "cited in [126]".
+No other findings. This card is unusually clean: both `must`-level
+behaviors ("avoid collision," "not stop in a position that blocks the
+doorway") are explicitly bulleted in the prose "Unacceptable behavior"
+list (no instance of the recurring must-level-prose-gap pattern seen on
+other cards), and all three `related_scenarios` entries (`blind_corner`,
+`entering_room`, `exiting_room`) reciprocate the link back to
+`narrow_doorway` in their own `related_scenarios` — no one-way
+cross-reference gap.
 
 ## Source Fidelity
 
-SOURCE cites "P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2,
-Article 34); cited in [126]." This matches the Table 3 entry in
-`.claude/skills/_shared/pg_scenarios.md` under Doorway Scenarios -> **Narrow
-Doorway**. Comparison:
+SOURCE cites P&G Paper Table 3, "Narrow Doorway" (cited in [126]).
+Compared against `.claude/skills/_shared/pg_scenarios.md`'s "Narrow
+Doorway" entry:
 
-| Field | P&G Table 3 (`pg_scenarios.md`) | This scenario | Match? |
+| Field | Table 3 | This card | Match? |
 |---|---|---|---|
-| Description | Robot and human at a narrow doorway (room and door) | Robot and human pedestrian approach a narrow doorway from opposite directions, single-file passage | Yes |
-| Physical Env | Indoor | `context.environment.type: indoor` | Yes |
-| Geometric Layout | Room and door | `geometric_layout: room and door` | Yes |
-| Scientific Purpose | Pedestrian interaction | `scientific_purpose: pedestrian interaction` | Yes |
-| Robot Task | Navigate A to B | `intended_robot_task: navigate from A to B through the doorway` | Yes |
-| Human Behavior | Navigate B to A | `intended_human_behavior: navigate from B to A through the doorway` | Yes |
-| Ideal Outcome | No collision / obstruction | `ideal_outcome: robot and human sequence through the doorway one at a time without collision or obstruction` | Yes |
-| Related Scenarios | Narrow Arch | `related_scenarios: [blind_corner, entering_room, exiting_room]` — see note below | Yes, informally |
-| Cited In | [126] | `cited_in: ["126"]` | Yes |
+| Description | Robot and human at a narrow doorway (room and door) | Overview: "robot and a human pedestrian approach a narrow doorway from opposite directions" | Match |
+| Physical Env | Indoor | `context.environment.type: indoor` | Match |
+| Geometric Layout | Room and door | `geometric_layout: room and door` | Match |
+| Scientific Purpose | Pedestrian interaction | `scientific_purpose: pedestrian interaction` | Match |
+| Robot Task | Navigate A to B | `intended_robot_task: navigate from A to B through the doorway` | Match |
+| Human Behavior | Navigate B to A | `intended_human_behavior: navigate from B to A through the doorway` | Match |
+| Ideal Outcome | No collision / obstruction | `ideal_outcome: robot and human sequence through the doorway one at a time without collision or obstruction` | Match |
+| Related Scenarios | Narrow Arch | `related_scenarios: [blind_corner, entering_room, exiting_room]` — Narrow Arch has no implemented scenario directory; card's own `evaluation_notes` documents the substitution | Consistent — expected divergence per convention, not a fidelity gap |
+| Cited In | [126] | `cited_in: ["126"]` | Match |
 
-**Source fidelity: checked against P&G Table 3 — full match, no mismatches found.**
-All physical description, purpose, layout, roles, task, and ideal-outcome fields are
-consistent with the canonical Table 3 entry. Table 3 names "Narrow Arch" as the
-related scenario, but no `narrow_arch` scenario card exists yet under
-`prosoc/scenarios/` (confirmed: no matching directory), so `related_scenarios`
-correctly substitutes the implemented, related-by-geometry scenarios (`blind_corner`,
-`entering_room`, `exiting_room`) instead of a not-yet-existing directory — the first
-recognized divergence case in `references/audit_checklist.md`'s `related_scenarios`
-convention, not a fidelity mismatch. The card's own `evaluation_notes` explicitly
-documents this substitution.
+No mismatches found. "Narrow Arch" is not yet tracked in
+`project/design/backlog.md`'s "Missing forward-referenced cards" table —
+adding it as part of this review (see Follow-up).
 
 ## Completeness
 
-Walking `template.md`'s "Required for AUDITED scenarios" fields:
+Scenario Card Summary: all fields present and rendered — Scenario Name,
+Description, Scientific Purpose, Physical Environment, Geometric Layout,
+Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics,
+Ideal Outcome, Related Scenarios, Cited In.
 
-**Scenario Card Summary:**
-- Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric
-  Layout, Robot Role, Robot Task, Human Behavior, Ideal Outcome — all present,
-  consistent between prose and YAML.
-- Success Metrics / Quality Metrics — present (SR, NoCollisions / P3, P4), consistent
-  across Card Summary, YAML, and the Scenario Usage Guide prose section.
-- Related Scenarios — present (`blind_corner, entering_room, exiting_room`) in both
-  the Card Summary bullet and the YAML `related_scenarios` key.
-- Cited In — present (`126`) in both the Card Summary bullet and the YAML `cited_in`
-  key.
+Scenario Usage Guide: Success Metrics, Quality Metrics, Ideal Outcome,
+Failure Modes, and Labeling Criteria all present and non-trivial.
+`quality_metrics` (P3, P4) is a sensible subset of `relevant_principles`
+(P1, P3, P4, P7).
 
-**Scenario Usage Guide:**
-- Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, Labeling Criteria —
-  all present and consistent between the prose section and `scenario_usage_guide` in
-  the YAML. No gaps.
-
-## Verdict Rationale
-
-This card remains in good shape: schema-valid, principle count within guidance (4,
-within 3–5), no invented-principle issues, full Table 3 fidelity, and complete
-required fields. No changes since the prior audit. The only remaining item is the
-single low-severity phrasing suggestion above (Finding 1), which is not a blocker to
-AUDITED promotion. Ready for AUDITED.
+No required fields are blank. `scripts/distill/scenarios --scenario
+narrow_doorway --dry-run --show-diffs` reported no diff, confirming
+`scenario.md` and `scenario.yml` are in sync.

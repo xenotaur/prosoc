@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFTED
+- **STATE:** AUDITED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); Robotics at Google (R@G), internal scenario reference
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
 - **EDITED:** render_sections.py, 2026-07-20
@@ -78,7 +78,7 @@ Unacceptable behavior includes:
 ```yaml
 id: exiting_room_01
 name: Exiting Room
-state: DRAFTED
+state: AUDITED
 
 summary: >
   A robot exits a room through a doorway while a human is simultaneously

@@ -28,6 +28,10 @@ filled deliberately rather than forgotten.
 | `exiting_elevator` (scenario) | `scenarios/exiting_room`'s Table 3 entry cites this as its related scenario, same gap as above | 2026-08-02 | open |
 | `ped_obstruct` (scenario, name unconfirmed) | `scenarios/frontal_approach`'s Table 3 entry cites "Ped. Obstruct" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `blind_corner`/`movable_obstruction`/`single_file_hallway` instead | 2026-08-02 | open |
 | `food_delivery` (scenario, name unconfirmed) | `scenarios/crash_cart`'s Table 3 entry cites "Food Delivery" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `object_handover` instead, and its own Notes section discusses both | 2026-08-02 | open |
+| `leave_group` (scenario, name unconfirmed) | `scenarios/join_a_group`'s Table 3 entry cites "Leaving a Group" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `crowd_navigation` instead | 2026-08-02 | open |
+| `narrow_arch` (scenario, name unconfirmed) | `scenarios/narrow_doorway`'s Table 3 entry cites "Narrow Arch" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `blind_corner`/`entering_room`/`exiting_room` instead | 2026-08-02 | open |
+| `robot_courier` (scenario, name unconfirmed) | `scenarios/object_handover`'s Table 3 entry cites "Robot Courier" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `crash_cart` instead | 2026-08-02 | open |
+| `circular_crossing` (scenario) | `scenarios/parallel_traffic`'s Table 3 entry cites "Circular Crossing" as its related scenario — a Figure 7 variant with no implemented scenario directory; the card's own `related_scenarios` substitutes `perpendicular_traffic`/`crowd_navigation` instead | 2026-08-02 | open |
 
 `entering_elevator`/`exiting_elevator` are additionally two of the P&G
 paper's own Figure 7 scenarios ("doorway variants for elevators") with no
@@ -36,6 +40,38 @@ Table 3 metadata — per `.claude/skills/_shared/pg_scenarios.md`'s
 be extrapolated carefully from the paper's descriptions and Figure 7
 directly, not drafted from a Table 3 row the way most other scenarios in
 this corpus were.
+
+## Potential new scenario cards: narrow-doorway / intersection cross-pollination
+
+Noted 2026-08-02 (user-directed) while reviewing `scenarios/narrow_doorway`:
+the intersection family (`intersection_no_gesture`,
+`intersection_gesture_proceed`, and by implication a not-yet-seen
+"intersection gesture wait" variant) shares the same core structural
+challenge as Narrow Doorway — two agents approaching a shared bottleneck
+that only one can occupy at a time, resolved via gesture or its absence.
+Worth exploring both:
+
+- **Cross-references**: consider whether `narrow_doorway`'s
+  `related_scenarios` should also point to the intersection family (and
+  vice versa), even though the geometric layouts differ (room-and-door
+  vs. open intersection) — the sequencing/right-of-way logic is
+  structurally analogous.
+- **New scenario variants**: the intersection family's gesture-based
+  distinctions (no gesture / gesture-then-proceed) suggest analogous
+  doorway variants not currently in the corpus:
+  - `narrow_doorway_no_gesture` — no explicit signal, right-of-way
+    resolved implicitly (as the current `narrow_doorway` card already
+    models)
+  - `narrow_doorway_gesture_proceed` — one party gestures the other
+    through
+  - `narrow_doorway_gesture_wait` — one party gestures the other to wait
+  - `narrow_doorway_hold_the_door` — a distinct social variant where one
+    party actively holds the door open for the other, rather than merely
+    yielding right-of-way
+
+None of these have Table 3 entries — they'd be corpus-original
+extensions by analogy, similar to how Figure 7 scenarios are handled, not
+drafted from a Table 3 row. Not yet scoped as a work item.
 
 ## APPROVED cards with unresolved should-fix findings
 
@@ -95,6 +131,8 @@ one-off mentions.
 | `scenarios/entering_room` | "avoid collision with the human at the doorway" | 2026-08-02 |
 | `scenarios/intersection_gesture_proceed` | "enter and traverse the intersection safely," "avoid collision with the human" | 2026-08-02 |
 | `scenarios/robot_overtaking` | "avoid colliding with or startling the pedestrian," "maintain a safe and respectful distance during approach and passing" (only loosely paraphrased, not explicitly bulleted) | 2026-08-02 |
+| `scenarios/object_handover` | "avoid collision with the human during approach" — nearest prose item ("startles the human or resembles an unrelated close pass") implies but doesn't name collision risk | 2026-08-02 |
+| `scenarios/parallel_traffic` | "avoid collision with any pedestrian in the stream" — closest prose items address pace/weaving/overtake, not collision directly | 2026-08-02 |
 
 **Task:** once the current `prosoc-card-review-all` pass finishes working
 through the cards the review-queue engine currently surfaces as in scope,
@@ -124,6 +162,8 @@ one-off/card-specific suggestions.)
 | `scenarios/frontal_approach` | Missing both optional-but-recommended template sections: "Social Navigation Context" (no dedicated section; `context.social_setting` never narrated in prose) and "Normative Expectations" (rich `expected_behaviors` YAML with no prose restatement) | 2026-08-02 |
 | `scenarios/crash_cart` | `agents.humans[0].count: 3` (bystanders) has no prose basis grounding the specific number 3 — unresolved across multiple prior audits; either state an approximate count in prose or note in `evaluation_notes` that it's a reasonable default | 2026-08-02 |
 | `scenarios/crowd_navigation` | `related_scenarios` lists `perpendicular_traffic`, but `perpendicular_traffic`'s own `related_scenarios` doesn't reciprocate (only lists `parallel_traffic`/`intersection_no_gesture`) — a one-way reference, inconsistent with the reciprocal-linking pattern every other cross-reference in the corpus follows. Pre-existing on `perpendicular_traffic`'s side, not introduced by `crowd_navigation`'s own promotion; found by independent subagent review on PR #71 | 2026-08-02 |
+| `scenarios/exiting_room` | Consider adding P7 (Proactivity) to `relevant_principles` — the scenario names indefinite hesitation/stand-off as an explicit failure mode and unacceptable behavior, a reasonable match for P7's "deadlock or hesitation is the core challenge" criterion, but P7 isn't listed (P3/P5/P6 partially cover related ground) | 2026-08-02 |
+| `scenarios/join_a_group` | (1) `agents.humans[0].count: 3` duplicates `attributes.group_size: 3` — redundant, could silently desync on a future edit. (2) Normative Expectations prose omits an explicit bullet for the `must`-level "avoid collision with any group member" (only the O-space-crossing `must` is bulleted). (3) `related_scenarios` lists `crowd_navigation`, but `crowd_navigation` doesn't reciprocate — same one-way-reference pattern as the `crowd_navigation`/`perpendicular_traffic` gap above | 2026-08-02 |
 
 ## Tooling
 
