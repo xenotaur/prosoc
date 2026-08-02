@@ -132,7 +132,7 @@ families:
 
 Every family (other than the single-document charter) follows the same
 pattern: author a card as `<name>/<family-singular>.md` (e.g.
-`scenarios/frontal_approach_01/scenario.md`,
+`scenarios/frontal_approach/scenario.md`,
 `constitutions/asimov_three_laws/constitution.md`) with a narrative and an
 embedded YAML block, run `scripts/distill/<family>` to regenerate the
 machine-readable `.yml`, and validate against that family's `schema.json`.
