@@ -75,7 +75,7 @@ a `cited_in`-equivalent field.
 ## Recurring: "Normative Expectations" prose omits `must`-level behaviors
 
 A systemic pattern across scenario cards, first noticed 2026-08-02 and
-confirmed on three cards so far: the YAML `expected_behaviors.must` list
+confirmed on four cards so far: the YAML `expected_behaviors.must` list
 has 2–3 entries, but the prose "Normative Expectations" ("Acceptable robot
 behavior...") section only explicitly bullets the `should` entries plus
 one `must` entry — never all of them. The missing `must` items aren't
