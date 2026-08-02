@@ -61,7 +61,8 @@ Handover" entry (Specialized Scenarios section):
 
 No mismatches found. "Robot Courier" is not yet tracked in
 `project/design/backlog.md`'s "Missing forward-referenced cards" table —
-adding it as part of this review (see Follow-up).
+added to `project/design/backlog.md`'s "Missing forward-referenced cards"
+table as part of this review.
 
 ## Completeness
 
