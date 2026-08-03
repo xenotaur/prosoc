@@ -11,6 +11,7 @@ validation gate (mirroring ``charter/loader.py``).
 
 from __future__ import annotations
 
+import functools
 import hashlib
 import json
 import pathlib
@@ -18,7 +19,7 @@ from dataclasses import dataclass
 
 import yaml
 from jsonschema import ValidationError
-from jsonschema import validate as jsonschema_validate
+from jsonschema.validators import validator_for
 
 from prosoc.charter import distill as charter_distill
 from prosoc.constitutions import distill as constitutions_distill
@@ -31,6 +32,13 @@ from .errors import ManifestError, ResolveError
 
 # Repo root: prosoc/packet/loader.py -> parents[2] == <repo>.
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
+
+
+@functools.lru_cache(maxsize=None)
+def _get_validator(schema_path: pathlib.Path):
+    """Cache the schema validator to avoid recompiling it on every load."""
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    return validator_for(schema)(schema)
 
 
 @dataclass(frozen=True)
@@ -130,10 +138,7 @@ def load_card(family: str, card_id: str) -> LoadedCard:
 
     # Single runtime validation gate.
     try:
-        jsonschema_validate(
-            instance=payload,
-            schema=json.loads(fam.schema_path.read_text(encoding="utf-8")),
-        )
+        _get_validator(fam.schema_path).validate(payload)
     except ValidationError as exc:
         raise ResolveError(
             f"{family}/{card_id}: schema validation failed: {exc.message}"
