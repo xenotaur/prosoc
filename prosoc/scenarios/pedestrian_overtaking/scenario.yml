@@ -1,6 +1,6 @@
 id: pedestrian_overtaking_01
 name: Pedestrian Overtaking a Robot from Behind
-state: DRAFTED
+state: AUDITED
 summary: 'A human pedestrian approaches and overtakes a slower-moving robot from behind
   in a shared pathway. The robot must behave predictably and cooperatively, allowing
   safe and comfortable passing without impeding the pedestrian.

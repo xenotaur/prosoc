@@ -1,6 +1,6 @@
 id: join_a_group_01
 name: Join a Group
-state: AUDITED
+state: APPROVED
 summary: 'A robot navigates across open space toward a standing group of robots or
   people already engaged in conversation, and must approach and settle into the group''s
   spatial formation as a new member, without disrupting the ongoing interaction.
