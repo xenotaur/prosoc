@@ -1,60 +1,62 @@
 ---
 id: FOCUS-NORMATIVE-PACKET-ASSEMBLY
-title: Implement the manifest-driven normative packet assembler
+title: Promote the normative card corpus to APPROVED
 status: active
 related_workstreams:
   - WS-NORMATIVE-PACKET-ASSEMBLY
 related_design:
-  - project/design/proposals/proposed/normative-packet-assembly/00_proposal.md
+  - project/design/proposals/adopted/normative-packet-assembly/00_proposal.md
 ---
 
 # Current Focus
 
-The active focus is implementing the **manifest-driven normative packet
-assembler**: the tooling that composes prosoc's normative cards (charter
-principles, constitutions, tasks, contexts, scenarios) into a single
-machine-readable guidance packet for a downstream agent. The design is settled
-in [`PROP-NORMATIVE-PACKET-ASSEMBLY`](../design/proposals/proposed/normative-packet-assembly/00_proposal.md)
-and the work is governed by
-[`WS-NORMATIVE-PACKET-ASSEMBLY`](../workstreams/proposed/WS-NORMATIVE-PACKET-ASSEMBLY.md).
+The **manifest-driven normative packet assembler** is built: `scripts/assemble`
+resolves a manifest's member cards, schema-validates and hashes each one,
+applies a fail-closed lifecycle gate, and composes them into a single
+machine-readable guidance packet, with a CI drift check
+(`.github/workflows/packet.yml`) keeping checked-in golden packets honest.
+The design is settled in
+[`PROP-NORMATIVE-PACKET-ASSEMBLY`](../design/proposals/adopted/normative-packet-assembly/00_proposal.md)
+(adopted), the work is governed by
+[`WS-NORMATIVE-PACKET-ASSEMBLY`](../workstreams/proposed/WS-NORMATIVE-PACKET-ASSEMBLY.md),
+and prosoc's human-facing docs (top-level `README.md`, all six family
+`README.md`s) were brought up to date with this architecture in PR #67.
+Phases 0a through 3 of the workstream are all complete; only Phase 4
+(signing, `related_contexts`/`example_scenarios` auto-resolution) remains
+deferred.
 
-This is the pivot between two halves of the project: everything below the
-packet — authoring, distillation, schema validation, agent auditing — is built
-and tested, while everything above it — agent consumption, navigation — is
-blocked on there being a packet to consume.
+The active front is now **corpus promotion**: `WS-NORMATIVE-PACKET-ASSEMBLY`'s
+exit criterion #2 requires every card in the corpus to reach `APPROVED`, not
+just the field/mechanism supporting each principle (confirmed with the user
+2026-08-01). As of this writing (live count, not a cached snapshot — re-run
+before trusting this number):
 
-The workstream is phased. The immediate front is **Phase 0a**: insert the
-`APPROVED` lifecycle state, normalize the STATUS blocks across all five card
-families, and project a machine-readable `status` field from the fenced YAML
-into the Markdown, enforced by `scripts/validate/status`. Phase 0a is the
-unblocker for the rest and also settles the `VALIDATED` (empirical, per
-`prosoc/scenarios/workflow.md`) vs `VERIFIED` (production, per
-`prosoc/constitutions/template.md` and the paper) stage-5 naming question. Later
-phases add the family-dispatched audit skills (0b), the assembler engine (1),
-the manifest card family (2), and CI drift checks (3). Phase 4 (signing,
-auto-resolution) is deferred.
+| Family | APPROVED | AUDITED | DRAFTED | Total |
+|---|---|---|---|---|
+| Scenarios | 5 | 3 | 12 | 20 |
+| Tasks | 3 | 1 | 0 | 4 |
+| Contexts | 1 | 3 | 0 | 4 |
+| Constitutions | 1 | 1 | 0 | 2 |
+| Charter | 1 | 0 | 0 | 1 |
+| **Total** | **11** | **8** | **12** | **31** |
 
-Next concrete step: create the first Phase 0a work item via `/lrh-work-item`
-under `WS-NORMATIVE-PACKET-ASSEMBLY`.
+`AUDITED` cards are ready for a human `APPROVED` pass; `DRAFTED` cards still
+need an audit first. Several sessions (PRs #68–#71) have been promoting
+cards in batches of ~5 using `prosoc-card-review-all` /
+`prosoc-card-audit-all`; continue that pattern — the ranked review queue is
+`scripts/validate/review-queue`.
 
-## Background: scenario-corpus maintenance (ongoing)
+Next concrete step: keep running `prosoc-card-review-all` (or
+`prosoc-card-audit` for one card at a time) against the remaining 20
+non-`APPROVED` cards, prioritizing the 8 already `AUDITED` since those are
+closest to done.
 
-The prior focus — keeping the 20-scenario social navigation corpus under
-`prosoc/scenarios/` audit-clean — remains an ongoing background
-responsibility, not the active deliverable. The corpus reached a fully
-audit-clean state in the 2026-07-22 corpus-wide audit
-(`prosoc/scenarios/AUDIT_SUMMARY.md`: 20/20 audited, 0 blocking findings).
-Keep it there as edits land:
+## Scenario-corpus maintenance note
 
-- Run `/prosoc-card-audit` (single) or `/prosoc-card-audit-all` (full family
-  or corpus) after any change to a scenario's prose or YAML, rather than
-  assuming a prior audit still holds.
-- Treat `prosoc/scenarios/AUDIT_SUMMARY.md` as a point-in-time index only — it
-  does not self-update and must be regenerated after any re-audit.
-
-Note that Phase 0a of the packet work will itself touch every scenario card's
-STATUS block, so the two efforts intersect: STATUS normalization is packet
-work, but it should leave each scenario's audit-clean content intact.
+Any edit to a scenario's prose or YAML invalidates its prior audit — re-run
+`/prosoc-card-audit` (single) or `/prosoc-card-audit-all` (family/corpus)
+rather than assuming a stale audit still holds. `prosoc/scenarios/AUDIT_SUMMARY.md`
+is a point-in-time index only; it does not self-update.
 
 ## Scope note
 
