@@ -66,9 +66,9 @@ paper reference, consistent with the prior audit's treatment):
 | Related Scenarios | Down Path | `related_scenarios: [robot_overtaking]` — Down Path has no implemented scenario directory; card's own `evaluation_notes` documents the substitution | Consistent — expected divergence per convention, not a fidelity gap |
 | Cited In | [26] | `cited_in: ["26"]` | Match |
 
-No mismatches found. "Down Path" is not yet tracked in
-`project/design/backlog.md`'s "Missing forward-referenced cards" table —
-adding it as part of this review.
+No mismatches found. "Down Path" has been added to
+`project/design/backlog.md`'s "Missing forward-referenced cards" table
+as part of this review.
 
 ## Completeness
 
