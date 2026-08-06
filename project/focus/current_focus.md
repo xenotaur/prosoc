@@ -25,11 +25,16 @@ Phases 0a through 3 of the workstream are all complete; only Phase 4
 (signing, `related_contexts`/`example_scenarios` auto-resolution) remains
 deferred.
 
-The active front is now **corpus promotion**: `WS-NORMATIVE-PACKET-ASSEMBLY`'s
-exit criterion #2 requires every card in the corpus to reach `APPROVED`, not
-just the field/mechanism supporting each principle (confirmed with the user
-2026-08-01). As of this writing (live count, not a cached snapshot — re-run
-before trusting this number):
+The active front is now **corpus promotion**: getting every card in the
+corpus to `APPROVED`, not just the field/mechanism supporting each
+principle. The user confirmed this scope directly on 2026-08-01 — note that
+`WS-NORMATIVE-PACKET-ASSEMBLY`'s own Exit Criteria section does not yet
+state this explicitly (its bullets cover schema/tooling support for the
+`APPROVED` state, not full-corpus completion), so don't cite a specific
+numbered criterion for it; treat this paragraph, not the WS file, as the
+source for that requirement until the WS file is updated to match. As of
+this writing (live count, not a cached snapshot — re-run before trusting
+this number):
 
 | Family | APPROVED | AUDITED | DRAFTED | Total |
 |---|---|---|---|---|
@@ -54,7 +59,7 @@ closest to done.
 ## Scenario-corpus maintenance note
 
 Any edit to a scenario's prose or YAML invalidates its prior audit — re-run
-`/prosoc-card-audit` (single) or `/prosoc-card-audit-all` (family/corpus)
+`prosoc-card-audit` (single) or `prosoc-card-audit-all` (family/corpus)
 rather than assuming a stale audit still holds. `prosoc/scenarios/AUDIT_SUMMARY.md`
 is a point-in-time index only; it does not self-update.
 
