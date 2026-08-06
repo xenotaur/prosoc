@@ -29,6 +29,11 @@ def _load_schema() -> dict:
 # Load schema once at import time
 _AUDIT_REPORT_SCHEMA = _load_schema()
 
+# Pre-compile the validator for performance
+# jsonschema.validate() is slow as it re-evaluates the schema on every call
+_ValidatorClass = jsonschema.validators.validator_for(_AUDIT_REPORT_SCHEMA)
+_AUDIT_REPORT_VALIDATOR = _ValidatorClass(_AUDIT_REPORT_SCHEMA)
+
 
 def validate_audit_report(report: dict) -> None:
     """
@@ -44,4 +49,4 @@ def validate_audit_report(report: dict) -> None:
     jsonschema.ValidationError
         If the report does not conform to the schema.
     """
-    jsonschema.validate(instance=report, schema=_AUDIT_REPORT_SCHEMA)
+    _AUDIT_REPORT_VALIDATOR.validate(instance=report)
