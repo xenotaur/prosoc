@@ -2,13 +2,13 @@
 execution_id: 2026_08_06_04_53_47_UPDATE_CURRENT_FOCUS_POST_PACKET_ASSEMBLY_CONFIRM
 prompt_id: PROMPT(AD_HOC:UPDATE_CURRENT_FOCUS_POST_PACKET_ASSEMBLY_CONFIRM)[2026-08-06T04:53:40+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/76
-commit:
+commit: 6918e7d18d586cdf6dcff03dcbdec4685e2bfd97
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/76
-session_transcript: pending
+session_transcript: claude-app:2d071ee7-950f-4423-91dd-905fdadb21a7
 created_at: 2026-08-06T04:53:47+00:00
 ---
 
