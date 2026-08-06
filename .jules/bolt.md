@@ -1,0 +1,3 @@
+## 2024-05-18 - jsonschema.validate compiles schema on every call
+**Learning:** In the `prosoc` architecture which heavily uses JSON schema validation in the inner loops of `packet/loader.py` and `packet/assemble.py`, using `jsonschema.validate(instance, schema)` directly recompiles the schema every single time, leading to severe performance bottlenecks during application startup or bulk processing.
+**Action:** Use `jsonschema.validators.validator_for(schema)(schema)` and cache the resulting validator instance (e.g. with `@functools.lru_cache`) instead of passing the raw schema dictionary to `jsonschema.validate`.

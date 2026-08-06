@@ -24,7 +24,6 @@ from prosoc.literate import compiler
 from prosoc.literate import errors
 from prosoc.literate import utils
 
-
 # ---------------------------------------------------------------------
 # Paths and constants
 # ---------------------------------------------------------------------
