@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [161]
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
 - **EDITED:** render_sections.py, 2026-07-19
@@ -79,7 +79,7 @@ Unacceptable behavior includes:
 ```yaml
 id: object_handover_01
 name: Object Handover
-state: AUDITED
+state: APPROVED
 
 summary: >
   A robot in a servant role navigates to a human and hands over an object.

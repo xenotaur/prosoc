@@ -1,6 +1,6 @@
 id: object_handover_01
 name: Object Handover
-state: AUDITED
+state: APPROVED
 summary: 'A robot in a servant role navigates to a human and hands over an object.
   The robot must transition from open navigation to a close-range, comfortable final
   approach, present the object for an easy reach, and recognize when the human has
