@@ -6,7 +6,6 @@ from pathlib import Path
 
 from prosoc.scenarios import status
 
-
 STATUS_BLOCK = """\
 # Scenario: Example
 
