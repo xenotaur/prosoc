@@ -1,110 +1,81 @@
 ---
-scenario: single_file_hallway
+family: scenarios
+card: single_file_hallway
 verdict: ready
 blocking: 0
 should_fix: 0
 suggestion: 1
-audited: 2026-07-22
+audited: 2026-08-02
 ---
 
 # Audit: Single File Hallway
 
-- **Scenario:** `prosoc/scenarios/single_file_hallway/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
-- **Verdict:** Ready — no blocking or should-fix issues found; the prior audit's
-  missing-Normative-Expectations gap has been resolved.
+- **Card:** `prosoc/scenarios/single_file_hallway/`
+- **Audited:** Claude (prosoc-card-audit skill), 2026-08-02 (fresh audit —
+  prior audit dated 2026-07-22 was stale relative to the card's last
+  touch on 2026-07-25 — the corpus-wide `WI-CARD-STATUS-FOUNDATION`
+  mechanical migration, not a content edit — finding carries forward
+  unchanged since no content changed)
+- **Verdict:** Ready for `AUDITED`, no blocking or should-fix issues found
 
 ## Findings
 
-### 1. "Cited In" gap note's phrasing could be clearer that the gap is permanent — suggestion
-- **Section/field:** Scenario Card Summary "Remaining gaps" note vs. Source Fidelity
-- **Issue:** The Card Summary block still carries a self-flagged note: "**Remaining
+### 1. "Cited In" gap note's phrasing could be clearer that the gap is permanent — suggestion (carried forward from 2026-07-22)
+- **Section/field:** Scenario Card Summary "Remaining gaps" note vs.
+  Source Fidelity
+- **Issue:** The Card Summary carries a self-flagged note: "**Remaining
   gaps:** Cited In — should-fill-in-now." Per
-  `../../../.claude/skills/_shared/pg_scenarios.md`, `single_file_hallway` corresponds
-  to the Figure 7 "Narrow Hallway" sketch, which — unlike full Table 3 entries — has no
-  citation-index data available at all ("they do not have full Table 3 metadata"). This
-  is a genuine, permanent gap rather than an oversight: there is no P&G Table 3/Figure 7
-  citation index to draw from, so no future editing pass can "fill in" this field from
-  the available reference material. The current "should-fill-in-now" phrasing reads as
-  an actionable to-do, which overstates what's actually possible.
-- **Recommended fix:** Either reword the gap note to reflect that Cited In is currently
-  unfillable from available sources (e.g. "reasonably blank — no citation index exists
-  for Figure-7-derived scenarios"), or remove the note entirely if the omission is
-  considered acceptable as a permanent, source-driven limitation for this
-  Figure-7-derived scenario.
+  `.claude/skills/_shared/pg_scenarios.md`, `single_file_hallway`
+  corresponds to the Figure 7 "Narrow Hallway" sketch, which — unlike
+  full Table 3 entries — has no citation-index data available at all. This
+  is a genuine, permanent gap, not an oversight: no future editing pass
+  can "fill in" this field from available reference material. The
+  "should-fill-in-now" phrasing reads as an actionable to-do, overstating
+  what's actually possible.
+- **Recommended fix:** Reword the gap note to reflect that Cited In is
+  currently unfillable from available sources, or remove the note
+  entirely as a permanent, source-driven limitation. Not required for
+  `AUDITED`.
+
+No other findings. Both `must`-level behaviors are already explicitly
+stated in the "Normative Expectations" prose (no must-level-prose-gap
+pattern here — this was closed by PR #31, per the 2026-07-22 audit's
+Re-audit Note). Both `related_scenarios` entries (`frontal_approach`,
+`movable_obstruction`) reciprocate the link back to `single_file_hallway`
+— no one-way cross-reference gap.
 
 ## Source Fidelity
 
-SOURCE is explicitly cited as "Principles and Guidelines for Evaluating Social Robot
-Navigation (P&G paper)" — a checkable source in principle. However, per
-`../../../.claude/skills/_shared/pg_scenarios.md`, "Single File Hallway" is **not**
-one of the 18 named entries in P&G Table 3. The reference file's "Additional Scenarios
-(Figure 7, not in Table 3)" section states:
+SOURCE cites "Principles and Guidelines for Evaluating Social Robot
+Navigation (P&G paper)" generically — this scenario is **not** one of
+the 18 named entries in P&G Table 3. Per
+`.claude/skills/_shared/pg_scenarios.md`'s "Additional Scenarios (Figure
+7, not in Table 3)" section, `single_file_hallway` corresponds to the
+**Narrow Hallway** figure, which has no full Table 3 metadata.
 
-> The `single_file_hallway` scenario in the repo corresponds to the **Narrow Hallway**
-> figure [in Figure 7]... If implementing these, note that they do not have full Table
-> 3 metadata and should be extrapolated carefully from the paper's descriptions and
-> Figure 7.
-
-Comparing the card against what's available:
-- **Correspondence to Narrow Hallway (Figure 7):** The card's description — "a hallway
-  that is too narrow for safe and comfortable passing... single-file passage" — is
-  consistent with `pg_scenarios.md`'s one-line gloss: "single-file passage in a narrow
-  corridor." No contradiction found.
-- **No Table 3 metadata to compare against:** Because Narrow Hallway has no full Table
-  3 entry (no Scientific Purpose, Robot Task, Human Behavior, Ideal Outcome, or Cited
-  In fields listed in `pg_scenarios.md` beyond the one-line description), a
-  field-by-field fidelity check like the one possible for Table 3 scenarios cannot be
-  performed for `scientific_purpose`, `intended_robot_task`, `intended_human_behavior`,
-  `ideal_outcome`, or `cited_in`.
-
-**Source fidelity: partially checkable.** The high-level correspondence to the Figure
-7 "Narrow Hallway" concept holds, and the authored fields (scientific_purpose,
-geometric_layout, intended_robot_task, intended_human_behavior, ideal_outcome) remain
-internally plausible and consistent with the Figure 7 gloss and the card's own
-Overview/Discussion prose, but they cannot be verified against Table-3-style ground
-truth because none exists for this scenario. Verifying deeper fidelity would require
-reading the P&G paper's Figure 7 discussion directly (not provided as `--paper` input
-for this audit) — this audit does not fabricate that comparison. In particular,
-`cited_in` has no ground-truth citation index available for this scenario at all (see
-Finding 1) — this is a permanent, source-driven limitation, not a gap this audit
-expects to close on a future pass.
+The card's description ("a hallway too narrow for safe and comfortable
+passing... single-file passage") is consistent with `pg_scenarios.md`'s
+one-line gloss ("single-file passage in a narrow corridor"). No
+contradiction found. A field-by-field fidelity check (as done for
+Table-3-sourced cards) is not possible here since Figure 7 entries carry
+no Scientific Purpose / Robot Task / Human Behavior / Ideal Outcome /
+Cited In ground truth to compare against — this audit does not fabricate
+that comparison. `cited_in` is absent from the YAML entirely (not even a
+placeholder), which is correct given no citation index exists for this
+scenario.
 
 ## Completeness
 
-Per `template.md`'s "Required for AUDITED scenarios" fields:
+Scenario Card Summary: complete except **Cited In**, which is blank and
+self-flagged (Finding 1) — reasonably and permanently blank, given no
+citation data exists for this Figure-7-derived scenario.
 
-- **Scenario Card Summary:** Complete except **Cited In**, which is blank and
-  self-flagged in a "Remaining gaps" note (see Finding 1) — reasonably blank, and
-  permanently so, given no citation data exists for this Figure-7-derived scenario in
-  the available reference material.
-- **Scenario Usage Guide — Success Metrics:** Complete (SR, NoCollisions,
-  DeadlockFree).
-- **Scenario Usage Guide — Quality Metrics:** Complete (P3, P5, P7 — consistent with
-  `relevant_principles` [P1, P3, P5, P7]).
-- **Scenario Usage Guide — Ideal Outcome:** Complete, present both in the YAML
-  `ideal_outcome` field and the Card Summary/Usage Guide prose.
-- **Scenario Usage Guide — Failure Modes:** Complete (three concrete failure modes).
-- **Scenario Usage Guide — Labeling Criteria:** Complete (three concrete,
-  data-recognizable criteria).
+Scenario Usage Guide: Success Metrics (SR, NoCollisions, DeadlockFree),
+Quality Metrics (P3, P5, P7 — consistent with `relevant_principles` [P1,
+P3, P5, P7]), Ideal Outcome, Failure Modes, and Labeling Criteria all
+present and non-trivial.
 
-No required fields are blank aside from the permanently-unfillable Cited In noted
-above. The "Normative Expectations" section (see Re-audit Note below) now covers both
-`expected_behaviors.must` items in prose, closing the prior audit's should-fix finding.
-
-## Re-audit Note
-
-This is a fresh point-in-time re-audit (2026-07-22), reflecting PR #31's addition of a
-new "Normative Expectations" section to `scenario.md`. That section states, in
-prose, this scenario's two safety-critical `expected_behaviors.must` items — "the
-robot must maintain a safe physical distance from the human at all times and must not
-enter the hallway simultaneously with the human once a conflict is recognized" —
-which previously existed only inside the embedded YAML/`scenario.yml` with no prose
-echo anywhere in the card. This closes the prior audit's (2026-07-21) sole should-fix
-finding — the section also restates the `should` and `should_not` lists, giving the
-card a complete Normative Expectations treatment in line with `robot_overtaking`'s
-card structure. `scripts/distill/scenarios --scenario single_file_hallway --dry-run
---show-diffs` reports no diff and no schema errors. The one suggestion from the prior
-audit (the "Cited In" gap note's phrasing) remains open and is carried forward
-unchanged, as it was not addressed by this edit. Verdict is upgraded from
-`ready_with_fixes` to `ready` since no should-fix or blocking findings remain.
+No required fields are blank aside from the permanently-unfillable Cited
+In. `scripts/distill/scenarios --scenario single_file_hallway --dry-run
+--show-diffs` reported no diff, confirming `scenario.md` and
+`scenario.yml` are in sync.

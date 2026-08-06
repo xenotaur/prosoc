@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFTED
+- **STATE:** AUDITED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation (P&G paper)
 - **DRAFTED:** ChatGPT 5.2, 2026-01-16
 - **EDITED:** render_sections.py, 2026-07-19
@@ -55,7 +55,7 @@ Unacceptable behavior includes forcing the human to back up unexpectedly, enteri
 ```yaml
 id: single_file_hallway_01
 name: Single File Hallway
-state: DRAFTED
+state: AUDITED
 
 summary: >
   A robot and a human approach each other in a hallway that is too narrow for safe and comfortable
