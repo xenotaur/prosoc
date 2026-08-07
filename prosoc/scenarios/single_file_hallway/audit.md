@@ -101,7 +101,7 @@ Comparing the card against the source text directly:
 - **Provenance detail corroborated:** The paper states (§4.3, PDF p. 24)
   that "an early draft of this paper was fed into ChatGPT 5.2 to help
   develop the scenarios presented in Section 4.2.1." The card's own
-  `DRAFTED` entry (`scenario.md:7`) independently states "ChatGPT 5.2,
+  `## Status` `DRAFTED` bullet independently states "ChatGPT 5.2,
   2026-01-16" — consistent with the paper's account of its own drafting
   process.
 - **Related scenarios:** The paper pairs this scenario with *Frontal

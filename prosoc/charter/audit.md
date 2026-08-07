@@ -17,16 +17,17 @@ audited: 2026-08-06
 This closes out the should-fix/suggestion findings tracked across the
 2026-07-29 through 2026-08-06 audits. This session's two remaining fixes:
 
-- **P9's Explanation** (`charter.md:359`) no longer names the cross-family
-  scenario `movable_obstruction`; the trade-off it illustrated (P0/P8
-  bounding P9) is now made with a self-contained inline example ("a
-  delivery robot noticing an obstruction it could clear should weigh that
-  against how much delay clearing it would add to its own task and how
-  urgent that task is"). The charter no longer depends on any other
-  family's card content or lifecycle state to be understood on its own.
-- **Section 3's principle list** (`charter.md:77`) now reads "**P8**
-  Contextual Appropriateness" instead of the abbreviated "Context,"
-  matching P8's actual heading, YAML `name`, and
+- **P9's Explanation** (Section 13, "## 13. Principle P9 — Prosocial
+  Behavior") no longer names the cross-family scenario
+  `movable_obstruction`; the trade-off it illustrated (P0/P8 bounding P9)
+  is now made with a self-contained inline example ("a delivery robot
+  noticing an obstruction it could clear should weigh that against how
+  much delay clearing it would add to its own task and how urgent that
+  task is"). The charter no longer depends on any other family's card
+  content or lifecycle state to be understood on its own.
+- **Section 3's principle list** ("## 3. Structure of the Principles") now
+  reads "**P8** Contextual Appropriateness" instead of the abbreviated
+  "Context," matching P8's actual heading, YAML `name`, and
   `.claude/skills/_shared/principles.md`'s summary table.
 
 ## Findings
