@@ -33,6 +33,8 @@ filled deliberately rather than forgotten.
 | `robot_courier` (scenario, name unconfirmed) | `scenarios/object_handover`'s Table 3 entry cites "Robot Courier" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `crash_cart` instead | 2026-08-02 | open |
 | `circular_crossing` (scenario) | `scenarios/parallel_traffic`'s Table 3 entry cites "Circular Crossing" as its related scenario — a Figure 7 variant with no implemented scenario directory; the card's own `related_scenarios` substitutes `perpendicular_traffic`/`crowd_navigation` instead | 2026-08-02 | open |
 | `down_path` (scenario, name unconfirmed) | `scenarios/pedestrian_overtaking`'s Table 3 entry cites "Down Path" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `robot_overtaking` instead | 2026-08-02 | open |
+| `accompany_peer` (scenario) | `scenarios/following`'s Table 3 entry cites "Accompany Peer" as its related scenario — a Figure 7 variant with no implemented scenario directory; the card's own `related_scenarios` substitutes `leading` instead | 2026-08-07 | open |
+| `tour_guide` (scenario, name unconfirmed) | `scenarios/leading`'s Table 3 entry cites "Tour Guide" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `following` instead | 2026-08-07 | open |
 
 `entering_elevator`/`exiting_elevator` are additionally two of the P&G
 paper's own Figure 7 scenarios ("doorway variants for elevators") with no
@@ -137,6 +139,8 @@ one-off mentions.
 | `scenarios/robot_overtaking` | "avoid colliding with or startling the pedestrian," "maintain a safe and respectful distance during approach and passing" (only loosely paraphrased, not explicitly bulleted) | 2026-08-02 |
 | `scenarios/object_handover` | "avoid collision with the human during approach" — nearest prose item ("startles the human or resembles an unrelated close pass") implies but doesn't name collision risk | 2026-08-02 |
 | `scenarios/parallel_traffic` | "avoid collision with any pedestrian in the stream" — closest prose items address pace/weaving/overtake, not collision directly | 2026-08-02 |
+| `scenarios/following` | "avoid collision with the human, other pedestrians, and obstacles" — closest prose item ("cutting through obstacles or other pedestrians to preserve following distance") is about cutting through, not collision directly | 2026-08-07 |
+| `scenarios/leading` | "avoid collision with the human, other pedestrians, and obstacles" — the other `must` item is covered verbatim in prose, but this one is never stated as its own bullet | 2026-08-07 |
 
 **Task:** once the current `prosoc-card-review-all` pass finishes working
 through the cards the review-queue engine currently surfaces as in scope,

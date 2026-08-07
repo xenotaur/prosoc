@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **SOURCE:** The Prosocial Robot Navigation Charter (Francis, submitted to Frontiers), Section 4.2.1 — one of two scenarios developed specifically for that paper to contrast P7: Proactivity and P9: Prosocial Behavior; not derived from the P&G paper, which has no Table 3 or Figure 7 counterpart for this scenario
 - **DRAFTED:** ChatGPT 5.2, 2026-01-16
 - **EDITED:** render_sections.py, 2026-07-19
@@ -49,7 +49,7 @@ Unlike *Frontal Approach*, successful navigation in this scenario may involve **
 ```yaml
 id: movable_obstruction_01
 name: Movable Obstruction
-state: AUDITED
+state: APPROVED
 
 summary: >
   A robot and a human approach each other in a hallway that is partially blocked by a movable obstruction.

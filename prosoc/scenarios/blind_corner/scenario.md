@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFTED
+- **STATE:** AUDITED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [126, 171]
 - **DRAFTED:** Claude (new-scenario skill), 2026-06-19
 - **EDITED:** render_sections.py, 2026-07-20
@@ -80,7 +80,7 @@ Unacceptable behavior includes:
 ```yaml
 id: blind_corner_01
 name: Blind Corner
-state: DRAFTED
+state: AUDITED
 
 summary: >
   A robot and a human pedestrian approach each other from opposite directions and
