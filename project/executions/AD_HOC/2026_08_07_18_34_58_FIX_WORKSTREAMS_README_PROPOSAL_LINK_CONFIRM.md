@@ -2,13 +2,13 @@
 execution_id: 2026_08_07_18_34_58_FIX_WORKSTREAMS_README_PROPOSAL_LINK_CONFIRM
 prompt_id: PROMPT(AD_HOC:FIX_WORKSTREAMS_README_PROPOSAL_LINK_CONFIRM)[2026-08-07T18:34:50+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/80
-commit:
+commit: 33f5fd59d40e9339049c791ed2ad5beedb286169
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/80
-session_transcript: pending
+session_transcript: claude-app:2d071ee7-950f-4423-91dd-905fdadb21a7
 created_at: 2026-08-07T18:34:58+00:00
 ---
 
