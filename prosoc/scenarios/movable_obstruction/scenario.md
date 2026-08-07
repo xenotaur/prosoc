@@ -2,10 +2,11 @@
 
 ## Status
 
-- **STATE:** DRAFTED
-- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation (P&G paper)
+- **STATE:** AUDITED
+- **SOURCE:** The Prosocial Robot Navigation Charter (Francis, submitted to Frontiers), Section 4.2.1 — one of two scenarios developed specifically for that paper to contrast P7: Proactivity and P9: Prosocial Behavior; not derived from the P&G paper, which has no Table 3 or Figure 7 counterpart for this scenario
 - **DRAFTED:** ChatGPT 5.2, 2026-01-16
 - **EDITED:** render_sections.py, 2026-07-19
+- **EDITED:** Claude, 2026-08-06 — correct SOURCE from a generic "P&G paper" attribution: the PRNC paper (§4.2.1, PDF pp. 23-24) states this scenario was "developed for this paper," not sourced from P&G Table 3/Figure 7
 
 ## Scenario Card Summary
 
@@ -47,7 +48,7 @@ Unlike *Frontal Approach*, successful navigation in this scenario may involve **
 ```yaml
 id: movable_obstruction_01
 name: Movable Obstruction
-state: DRAFTED
+state: AUDITED
 
 summary: >
   A robot and a human approach each other in a hallway that is partially blocked by a movable obstruction.

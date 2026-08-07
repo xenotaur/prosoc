@@ -20,7 +20,7 @@ generated `charter.yml`) if this table and the charter ever appear to disagree.
 | P6 | Agent Understanding | Predict and accommodate the behavior of other agents |
 | P7 | Proactivity | Take the initiative to resolve potential deadlocks |
 | P8 | Contextual Appropriateness | Behave properly in the current context |
-| P9 | Prosocial Behavior | Improve the experience or success of other agents, even when not explicitly required |
+| P9 | Prosocial Behavior | Improve others' navigation experience, or preserve/improve shared navigability, without sacrificing own goals or task/context fit |
 
 **Important:** The schema enforces `^P[0-9]+$`, which permits P0–P9 (and, syntactically, higher
 numbers). Only emit P0–P9 — do not invent principle IDs outside this set (e.g. P10+). If a

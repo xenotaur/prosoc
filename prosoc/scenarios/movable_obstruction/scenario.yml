@@ -1,6 +1,6 @@
 id: movable_obstruction_01
 name: Movable Obstruction
-state: DRAFTED
+state: AUDITED
 summary: 'A robot and a human approach each other in a hallway that is partially blocked
   by a movable obstruction. The robot must decide whether to yield, wait, remove the
   obstruction, or report it, balancing task goals with prosocial responsibility.

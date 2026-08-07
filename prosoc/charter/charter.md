@@ -11,10 +11,14 @@
 
 ## Status
 
-- **STATE:** APPROVED
-- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms (Francis et al.); Prosocial Robotics project documents
+- **STATE:** EDITED
+- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms (Francis et al.); Prosocial Robotics project documents; The Prosocial Robot Navigation Charter (Francis, submitted)
 - **DRAFTED:** Prosocial Robotics project
 - **EDITED:** Claude (WI-CARD-STATUS-CHARTER), 2026-07-29 — add machine-readable lifecycle state
+- **EDITED:** Claude, 2026-08-05 — update the prosocial navigation definition (Section 2) and P9 to match the paper's revised definition; reverted from APPROVED pending re-audit
+- **EDITED:** Claude, 2026-08-06 — add "### Explanation" subsections to P4–P8, grounded in and citing Francis et al. (2025); fix the References entry's journal/venue for that paper
+- **EDITED:** Claude, 2026-08-06 — fold P1/P4/P5's YAML-only `description` content (safe-distance, offering-help, interrupting/blocking) into their prose Explanations
+- **EDITED:** Claude, 2026-08-06 — remove P9's cross-family reference to the unstable `movable_obstruction` scenario, replaced with a self-contained example; expand Section 3's "P8 Context" to its full name "Contextual Appropriateness"
 
 The charter's lifecycle state is authored in the embedded YAML below (the
 authoritative source), projected into the **STATE** bullet above, and enforced
@@ -24,7 +28,7 @@ by `scripts/validate/status`. It is one of `DRAFTED`, `EDITED`, `AUDITED`,
 whole, not to individual principles.
 
 ```yaml
-state: APPROVED
+state: EDITED
 ```
 
 ---
@@ -49,7 +53,11 @@ Following the P&G paper, we define **social robot navigation** as:
 
 > A socially navigating robot acts and interacts with humans or other robots, achieving its navigation goals while modifying its behavior so the experience of agents around the robot is not degraded—or is even enhanced.
 
-This charter extends that definition by explicitly including **prosocial behavior**: robots should sometimes act in ways that *actively improve* the experience or success of others, even when doing so is not strictly required for their own task.
+This charter extends that definition by explicitly including **prosocial robot navigation**:
+
+> A prosocially navigating robot acts during or in support of navigation to improve the navigation experiences of other agents or to preserve or improve the navigability of their shared environment, in ways appropriate for its task and context and consistent with achieving its own navigation goals.
+
+Note the two distinct ways a robot can act prosocially: it can *improve* another agent's navigation experience (e.g., giving directions), or it can *preserve or improve* the shared environment's navigability (e.g., not leaving an obstruction, or clearing one). Both are bounded by two conditions that apply throughout this charter rather than being unique to prosociality — appropriateness to the robot's task and context (**P8**), and consistency with the robot's own navigation goals (**P0**) — but prosocial behavior is where getting that balance right matters most, since it is the principle most likely to tempt a robot into acting past its mandate.
 
 ---
 
@@ -66,7 +74,7 @@ The charter consists of **ten principles**, P0–P9:
   - **P5** Social Competency 
   - **P6** Agent Understanding 
   - **P7** Proactivity 
-  - **P8** Context 
+  - **P8** Contextual Appropriateness
 - **P9** introduces *Prosocial Behavior* as an explicit extension
 
 Each principle includes:
@@ -119,7 +127,7 @@ Robots must not cause harm to humans or damage environments.
 
 ### Explanation
 
-Safety is the foundational constraint of social navigation. A robot that harms people or damages shared environments violates not only social norms but basic ethical expectations.
+Safety is the foundational constraint of social navigation. A robot that harms people or damages shared environments violates not only social norms but basic ethical expectations. This includes maintaining a safe distance from people unless explicitly invited to approach — uninvited close proximity is itself a safety-relevant failure mode, not merely a comfort one (see P2).
 
 Safety violations override all other considerations.
 
@@ -202,6 +210,10 @@ examples:
 
 Robots must be respectful and considerate in shared social spaces.
 
+### Explanation
+
+Politeness has two distinct dimensions: *physical* politeness, how a robot moves around people (e.g., not cutting them off), and *communicative* politeness, signaling intent through gesture or speech (e.g., saying "excuse me" or announcing "on your left" when a narrow space forces the robot to enter someone's personal space). Politeness is not purely a human-facing concern — social robots should also be considerate of each other, so one robot's behavior does not prevent another agent from accomplishing its own task (Francis et al., 2025, p. 8). Concretely, this includes offering help when it is asked for rather than ignoring the request, and avoiding behavior that reads as dismissive or intrusive even when it is not physically obstructive.
+
 ```yaml
 id: P4
 name: Politeness
@@ -225,6 +237,10 @@ examples:
 ### Normative Statement
 
 Robots must follow basic social norms governing shared spaces.
+
+### Explanation
+
+Social competency is fundamentally about following *convention* rather than optimizing performance: in the absence of an established norm there is no inherently better choice (e.g., driving on the left versus the right), but identifying and following whichever local norm applies helps prevent conflicts. Some social competencies, like turn-taking, emerge naturally from interaction; others must be deliberately engineered into the robot's behavior. These conventions are not limited to human-robot interactions — norms that make robots easier for *other robots* to interact with are equally in scope (Francis et al., 2025, p. 8). Concretely, this rules out behaviors like interrupting an ongoing conversation or blocking a passage others need to use, even where no single explicit rule names the situation.
 
 ```yaml
 id: P5
@@ -250,6 +266,10 @@ examples:
 
 Robots must predict and accommodate the behavior of other agents.
 
+### Explanation
+
+Understanding other agents means more than detecting them: it requires inferring what they are perceiving, doing, and trying to accomplish — for example, recognizing whether two people are conversing before deciding whether it is appropriate to pass between them. This understanding determines *interaction potential*, the likelihood of the robot entering another agent's personal space, which should sometimes be minimized and sometimes maximized depending on the task. It also lets a robot anticipate *conflicts* — short encounters in which the robot's and another agent's paths would collide without intervention — and adjust its own trajectory before one occurs (Francis et al., 2025, p. 8).
+
 ```yaml
 id: P6
 name: Agent Understanding
@@ -273,6 +293,12 @@ examples:
 ### Normative Statement
 
 Robots should anticipate potential issues and take initiative to avoid or resolve them.
+
+### Explanation
+
+Understanding other agents (P6) is necessary but not sufficient: some situations require the robot to take the initiative, or even to interrupt another agent's task, to resolve a shared problem — for example, at a four-way intersection, delays occur if every driver acts conservatively, so someone must take the lead or signal others to proceed. Deadlocks such as two pedestrians dodging the same way can only be broken if someone takes the lead; a robot that proactively suggests a solution (e.g., inviting a human to enter an elevator first) is more socially adept than one that merely waits (Francis et al., 2025, pp. 8–9).
+
+P7 is about *anticipating and initiating* — future-predicting, deadlock-resolving behavior — which is a distinct concern from P9: Prosocial Behavior's focus on *acting for another agent's benefit*. The two often reinforce each other (proactively helping someone is a common form of both), but a robot can be proactive without being prosocial (e.g., proactively clearing its own path for efficiency) or prosocial without being proactive (e.g., reactively helping only when asked).
 
 ```yaml
 id: P7
@@ -298,6 +324,10 @@ examples:
 
 Robots must adapt their behavior to the social and situational context.
 
+### Explanation
+
+Context does not add a new independent concern; it determines the *relative importance* of every other principle. Francis et al. (2025, p. 9) identify six forms of context that can change which response is correct: *cultural* context (norms vary by culture), *diversity* context (individuals need different accommodations), *environmental* context — split into *geometric* (the shape of the space, e.g., a crowded space narrows the acceptable distance to other agents) and *operational* (how the space is used, e.g., a daycare calls for slower driving than an office with an identical layout) — *task* context (e.g., a hospital robot performing mail delivery weighs politeness against speed differently than the same robot serving as a crash cart), and *interpersonal* context (e.g., whether humans are traveling alone, in a group, or stopped and conversing). The canonical illustration is a crash-cart robot delivering an emergency drug: in that context, politeness is properly subordinate to task success.
+
 ```yaml
 id: P8
 name: Contextual Appropriateness
@@ -320,22 +350,32 @@ examples:
 
 ### Normative Statement
 
-Robots should act in ways that improve the experience or success of other agents, even when not explicitly required.
+Robots should act, during or in support of navigation, to improve the navigation experiences of other agents or to preserve or improve the navigability of their shared environment, in ways appropriate to their task and context and without sacrificing their own navigation goals.
+
+### Explanation
+
+P9 distinguishes two kinds of prosocial act: directly improving another agent's navigation experience (e.g., giving directions, holding a door), and preserving or improving the shared environment's navigability (e.g., not leaving an obstruction behind, or clearing one that's already there). Only the environment clause admits "preserve" — merely not degrading another agent's experience is already required by social navigation generally (P1–P8); P9 is about going beyond that baseline.
+
+P9 is deliberately the lowest-severity principle: it is discretionary, and its normative statement carries its own limits so it cannot be read in isolation from P0 and P8. It should never be read as license to sacrifice the robot's own goals (P0) or to act inappropriately for the task or context (P8) — for example, a delivery robot noticing an obstruction it could clear should weigh that against how much delay clearing it would add to its own task and how urgent that task is, not clear it unconditionally.
 
 ```yaml
 id: P9
 name: Prosocial Behavior
 severity: optional
 description: >
-  Robots should act in ways that improve the experience or success
-  of other agents, even without being explicitly asked.
+  Robots should act, during or in support of navigation, to improve the
+  navigation experiences of other agents or to preserve or improve the
+  navigability of their shared environment, in ways appropriate to their
+  task and context and without sacrificing their own navigation goals.
 examples:
   positive:
     - "Robot holds open a door for another person."
     - "Robot clears debris to make the path safer for others."
+    - "Robot reports a spill to staff rather than removing it, since removal is outside its task."
   negative:
     - "Robot could have warned about a hazard but didn't."
     - "Robot leaves clutter behind that inconveniences others."
+    - "Robot abandons its delivery task to tidy an unrelated room."
 ```
 
 ---
@@ -435,6 +475,6 @@ An **implementation** is any concrete navigation system, planner, controller, or
 
 ## References
 
-- Francis, A., et al. *Principles and Guidelines for Evaluating Social Robot Navigation Algorithms*. IEEE Transactions on Human-Machine Systems.
+- Francis, A., Pérez-D'Arpino, C., et al. (2025). *Principles and Guidelines for Evaluating Social Robot Navigation Algorithms*. ACM Transactions on Human-Robot Interaction, 14(2), Article 34. https://doi.org/10.1145/3700599
 - Dragan, A. D., Lee, K. C. T., & Srinivasa, S. S. (2013). Legibility and predictability of robot motion. *HRI*.
 - Hall, E. T. (1966). *The Hidden Dimension*. Doubleday.

@@ -3,121 +3,141 @@ scenario: movable_obstruction
 verdict: ready
 blocking: 0
 should_fix: 0
-suggestion: 0
-audited: 2026-07-22
+suggestion: 1
+audited: 2026-08-06
 ---
 
 # Audit: Movable Obstruction
 
 - **Scenario:** `prosoc/scenarios/movable_obstruction/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
-- **Verdict:** Ready, no issues found.
+- **Audited:** Claude (prosoc-card-audit skill), 2026-08-06 (`--paper` = the
+  attached PRNC paper PDF)
+- **Verdict:** Ready — no blocking or should-fix issues; unusually high source
+  fidelity now that the true source document is available.
+
+This re-audits the card after its `SOURCE` field was corrected from a
+generic "P&G paper" attribution to the actual originating document — *The
+Prosocial Robot Navigation Charter* (Francis, submitted to Frontiers),
+§4.2.1 — and `state` was bumped `DRAFTED` → `EDITED` to reflect that
+correction (`scenario.md:5,50`). All findings from the 2026-07-22 audit
+remain resolved; this pass adds a direct, paragraph-level source-fidelity
+comparison that was not possible before this paper was available.
 
 ## Findings
 
-No findings this pass. The should-fix carried across the 2026-07-05, 2026-07-20, and
-2026-07-21 audits — the Discussion section's task/context cross-reference using
-invented uppercase IDs (`NAVIGATE_POINT_TO_POINT`, `DELIVER_OBJECT`,
-`ROUTINE_DELIVERY`, `GUIDANCE_DOCENT`, `HIGH_URGENCY`) not connected to any real
-taxonomy — is resolved. The Discussion prose now cites the actual dot-delimited
-lowercase task/context IDs (`navigate.point_to_point`, `deliver.object`,
-`service.routine_delivery`, `guidance.docent`, `emergency.high_urgency`), verified
-against `prosoc/tasks/*/task.yml` and `prosoc/contexts/*/context.yml`:
+### 1. High Urgency's specific behavioral implication isn't spelled out in `evaluation_notes` — suggestion
+- **Section/field:** `evaluation_notes`'s task/context cross-reference
+  (`scenario.md:159-166`) vs. the source paper's context discussion
+- **Issue:** The source paper (§4.2.2, PDF p. 24) gives a specific
+  behavioral implication for each of the three contexts it names for this
+  scenario: Routine Delivery → report to management; Guidance Docent →
+  remove the obstruction; **High Urgency → do neither** ("not take the time
+  to either remove the obstruction or to document it but instead focus on
+  making its delivery in as timely a fashion as possible"). The card's
+  `evaluation_notes` lists all three context IDs as illustrative options but
+  doesn't carry forward this specific High Urgency implication the way it
+  implicitly does for the other two contexts via the Discussion section's
+  general framing.
+- **Recommended fix:** Optionally add one clause to `evaluation_notes`
+  noting that under `emergency.high_urgency`, neither removing nor
+  reporting may be appropriate — the robot should prioritize timely task
+  completion instead. Not required for `AUDITED`: the card doesn't
+  misstate anything, it's simply less specific than the source on this one
+  point.
 
-| Cited ID | Verified against |
-|---|---|
-| `navigate.point_to_point` | `prosoc/tasks/navigate_point_to_point/task.yml` |
-| `deliver.object` | `prosoc/tasks/deliver_object/task.yml` |
-| `service.routine_delivery` | `prosoc/contexts/routine_delivery/context.yml` |
-| `guidance.docent` | `prosoc/contexts/guidance_docent/context.yml` |
-| `emergency.high_urgency` | `prosoc/contexts/high_urgency/context.yml` |
+## Prose/YAML Consistency
 
-All five resolve to real files with matching `id:` values. The cross-reference is
-also now echoed verbatim in `evaluation_notes` ("Task/context cross-reference: ..."),
-making it machine-visible rather than narrative-only in the Discussion section alone
-— satisfying the prior audit's recommended fix ("move the cross-reference into
-`evaluation_notes` so it is machine-visible").
+Unchanged from 2026-07-22 — re-confirmed:
+- Scenario Overview vs. `intended_robot_task`/`intended_human_behavior`/
+  `context`: consistent.
+- Normative Expectations content (Discussion + Scenario Usage Guide prose)
+  vs. `expected_behaviors.{must,should,should_not}`: consistent, no
+  one-sided claims.
+- `ideal_outcome` prose matches the YAML field verbatim in both Scenario
+  Card Summary and Scenario Usage Guide.
 
 ### Distiller check
 
-`scripts/distill/scenarios --scenario movable_obstruction --dry-run --show-diffs`
-reports no diff and no schema validation error. `scenario.md`'s embedded YAML and
-`scenario.yml` are in sync.
+`scripts/distill/scenarios --scenario movable_obstruction --dry-run
+--show-diffs` reports no diff and no schema validation error following the
+`SOURCE`/`state` correction — `scenario.md`'s embedded YAML and
+`scenario.yml` remain in sync.
 
-### Prose/YAML consistency
+## Schema and Charter Compliance
 
-- Scenario Overview vs. `intended_robot_task`/`intended_human_behavior`/`context`:
-  consistent — robot as `navigating_agent` deciding to yield/remove/report the
-  obstruction; human as a single pedestrian approaching from the opposite end.
-- Social Navigation Context vs. `agents`: consistent — one human, `role: pedestrian`,
-  `count: 1`; office hallway, informal/low-crowd social setting.
-- Normative Expectations (Discussion + Scenario Usage Guide prose) vs.
-  `expected_behaviors.{must,should,should_not}`: consistent — no one-sided claims
-  found.
-- `ideal_outcome` prose matches the YAML field verbatim in both Scenario Card Summary
-  and Scenario Usage Guide sections.
-
-### Schema and charter compliance
-
-- `scenario.yml` validates (confirmed via the dry-run distill above; no
-  `additionalProperties` violations, `expected_behaviors` limited to
-  `must`/`should`/`should_not`).
-- `relevant_principles`: `P0, P1, P3, P5, P7, P9` — all valid P0–P9 IDs. Count is 6,
-  above the 3–5 soft guideline, but the Discussion section explicitly names and
-  discusses "Trade-offs between Goal Achievement (P0) and prosocial action," which is
-  the documented exception in `.claude/skills/_shared/principles.md` for prose that
-  explicitly discusses an included principle. Not flagged as a finding.
-- `scenario_usage_guide.quality_metrics`: `P3, P7, P9` — valid P0–P9 IDs, consistent
-  with the subset of `relevant_principles` the Discussion foregrounds.
-- `expected_behaviors` entries describe kinds of behavior ("communicate intent
-  clearly," "remove the obstruction if physically capable," "yield or wait if
-  intervention is inappropriate") rather than exact motions or numeric thresholds —
-  no over-specification (P&G Guideline N6) found.
-- `related_scenarios: [frontal_approach, single_file_hallway]` — both are real
-  directories under `prosoc/scenarios/`, and both are referenced in the card's own
-  prose (Scenario Overview explicitly contrasts this scenario with *Frontal
-  Approach*; Discussion frames it as an extension of *Frontal Approach*). No
-  contradiction with the card's own text.
+Unchanged from 2026-07-22 — `scenario.yml` validates; `relevant_principles`
+(`P0, P1, P3, P5, P7, P9`) are all valid P0–P9 IDs; the above-5 count
+remains justified by the Discussion section's explicit discussion of P0
+trade-offs; `related_scenarios` (`frontal_approach`, `single_file_hallway`)
+reference real directories and are now independently confirmed by the
+source paper's own text, not just by directory existence (see Source
+Fidelity below).
 
 ## Source Fidelity
 
-The SOURCE field cites "Principles and Guidelines for Evaluating Social Robot
-Navigation (P&G paper)" generically, without a specific table or section reference.
-Per `.claude/skills/_shared/pg_scenarios.md` (line 266): "The `movable_obstruction`
-scenario has no direct P&G Table 3 counterpart."
+**SOURCE**, as corrected this session, cites *The Prosocial Robot
+Navigation Charter* (Francis, submitted), §4.2.1. This is now directly
+checkable — the attached PDF is that paper.
 
-**Source fidelity: not checkable against Table 3** — the shared reference data
-explicitly states this scenario has no direct P&G Table 3 counterpart, and the SOURCE
-field does not cite a specific section, page, or figure of the paper that could be
-checked directly instead. This is unchanged from all prior audits and is not a
-defect — the scenario is explicitly framed in its own prose as an original extension
-of *Frontal Approach* motivated by the paper's P7/P9 principle distinction, not a
-direct restatement of a Table 3 entry.
+Comparing the card against the source text (§4.2.1, PDF p. 23; §4.2.2, PDF
+p. 24):
+
+- **Physical setup:** Paper: "a section of hallway in theory wide enough
+  for a human and robot to pass safely and comfortably, but partially
+  blocked by a movable obstruction." Card's `geometric_layout`: "passable
+  space, partially obstructed"; Scenario Description: "a hallway that is
+  partially blocked by a movable obstruction." **Match.**
+- **Core behavioral choice:** Paper: "a robot following P9... might either
+  remove the obstruction (if physically capable of moving it) or report it
+  to management (if not)." Card's `expected_behaviors.should`: "remove the
+  obstruction if physically capable and task-appropriate," "report the
+  obstruction to facility management when appropriate," "yield or wait if
+  intervention is inappropriate." **Match** — the card's third option
+  (yield/wait) corresponds to the paper's own framing that a P7-only robot
+  "would behave as in Single File Hallway" as the fallback.
+- **P0/P9 trade-off:** Paper: "removing the obstruction might not be
+  appropriate behavior if it causes the robot to fail at its task. This is
+  why the entire ... Charter, with its complementary set of principles -
+  including P0: Goal Achievement - is necessary." Card's Discussion:
+  "Trade-offs between Goal Achievement (P0) and prosocial action." **Match.**
+- **Task/context cross-reference:** Paper's worked example uses exactly
+  `navigate_point_to_point` (low P0 priority → prosocially clear the
+  obstruction), `deliver_object` (higher P0 priority → judgment call
+  between removing, reporting, or ignoring), and the contexts
+  `routine_delivery` (report to management), `guidance_docent` (remove
+  it), and `high_urgency` (neither — focus on timely delivery). The card's
+  `evaluation_notes` (`scenario.md:159-166`) names the same task and
+  context IDs, already verified in the 2026-07-22 audit against
+  `prosoc/tasks/*/task.yml` and `prosoc/contexts/*/context.yml` — now also
+  confirmed to be the paper's own worked example, not just plausible IDs.
+  **Match**, with the High Urgency nuance noted in Finding 1.
+- **Related scenarios:** The paper explicitly frames *Movable Obstruction*
+  as extending *Frontal Approach* ("narrowing the corridor... gives the
+  opportunity to test P7 and P9") and pairs it with *Single File Hallway*
+  as a minimal three-scenario set. The card's `related_scenarios`
+  (`frontal_approach`, `single_file_hallway`) match exactly.
+
+**Source fidelity: high, directly confirmed.** Every checkable claim in the
+card matches the source paper's own description of this scenario, with one
+minor enrichment opportunity (Finding 1). This supersedes the 2026-07-22
+audit's "not checkable against Table 3" finding, which was accurate at the
+time but predated the source document actually being available for
+comparison.
 
 ## Completeness
 
-Per `template.md`'s "Required for AUDITED scenarios" fields:
-
-- **Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric
-  Layout, Robot Role, Robot Task, Human Behavior, Ideal Outcome** — present, consistent
-  between prose and YAML.
-- **Success Metrics, Quality Metrics** — present as both YAML fields and prose
-  (Scenario Card Summary and Scenario Usage Guide sections agree: `SR, NoCollisions,
-  ConflictResolved` / `P3, P7, P9`).
-- **Related Scenarios** — present (`frontal_approach`, `single_file_hallway`).
-- **Failure Modes, Labeling Criteria** — present as both YAML and prose, matching.
-- **Cited In** — blank. This is a genuine, reasonably-blank gap rather than an
-  oversight: `movable_obstruction` has no P&G Table 3 or Figure 7 counterpart (per
-  `.claude/skills/_shared/pg_scenarios.md`), so there is no citation index to
-  transcribe. `Cited In` is "if applicable" per `template.md`, and no evidence
-  exists yet of external citation from another scenario's `related_scenarios` or
-  `Cited In` field — should be revisited only if this scenario later gets
-  referenced elsewhere in the corpus.
+Unchanged from 2026-07-22: all Required fields present and consistent.
+`Cited In` remains blank — reasonably so, and for a slightly different
+reason than previously stated: this scenario originates in a paper that is
+itself still `submitted` (not yet published), so there is no external
+literature that could yet cite it. Revisit once the source paper is
+published or another card's `related_scenarios`/`Cited In` references this
+one.
 
 ## Verdict Rationale
 
-All prior should-fix findings are resolved: the task/context cross-reference now uses
-real, verified IDs and is machine-visible in `evaluation_notes`. No contradictions,
-drift, schema violations, or over-specification found. The one remaining gap
-(`Cited In` blank) is reasonably blank per the card's own self-assessment and does not
-block AUDITED. This scenario is ready for AUDITED.
+No blocking or should-fix findings. The `SOURCE` correction closes a real
+defect (misattribution to the P&G paper, which has no counterpart for this
+scenario). Source fidelity is now not just "not contradicted" but
+positively confirmed at a paragraph level against the actual originating
+document. Ready for `AUDITED`.

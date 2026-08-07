@@ -1,4 +1,4 @@
-state: APPROVED
+state: EDITED
 principles:
 - id: P0
   name: Goal Achievement
@@ -127,14 +127,19 @@ principles:
 - id: P9
   name: Prosocial Behavior
   severity: optional
-  description: 'Robots should act in ways that improve the experience or success of
-    other agents, even without being explicitly asked.
+  description: 'Robots should act, during or in support of navigation, to improve
+    the navigation experiences of other agents or to preserve or improve the navigability
+    of their shared environment, in ways appropriate to their task and context and
+    without sacrificing their own navigation goals.
 
     '
   examples:
     positive:
     - Robot holds open a door for another person.
     - Robot clears debris to make the path safer for others.
+    - Robot reports a spill to staff rather than removing it, since removal is outside
+      its task.
     negative:
     - Robot could have warned about a hazard but didn't.
     - Robot leaves clutter behind that inconveniences others.
+    - Robot abandons its delivery task to tidy an unrelated room.

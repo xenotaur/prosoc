@@ -3,108 +3,125 @@ scenario: single_file_hallway
 verdict: ready
 blocking: 0
 should_fix: 0
-suggestion: 1
-audited: 2026-07-22
+suggestion: 0
+audited: 2026-08-06
 ---
 
 # Audit: Single File Hallway
 
 - **Scenario:** `prosoc/scenarios/single_file_hallway/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
-- **Verdict:** Ready — no blocking or should-fix issues found; the prior audit's
-  missing-Normative-Expectations gap has been resolved.
+- **Audited:** Claude (prosoc-card-audit skill), 2026-08-06 (`--paper` = the
+  attached PRNC paper PDF)
+- **Verdict:** Ready, no issues found — source fidelity is directly
+  confirmed, including a near-verbatim match against the paper's own
+  published `expected_behaviors` YAML listing.
+
+This closes out the "Cited In" gap-note phrasing suggestion carried since
+2026-07-22: the note (`scenario.md:32-34`) now reads "reasonably blank —
+this scenario originates in a source paper (§4.2.1) that is itself still
+`submitted` and unpublished, so no external literature yet exists that
+could cite it. Revisit once the source paper is published," replacing the
+prior "should-fill-in-now" phrasing that overstated what was actually
+possible. This was the sole open item carried forward from this session's
+earlier `SOURCE` correction (from a generic "P&G paper" attribution to the
+actual originating document — *The Prosocial Robot Navigation Charter*
+(Francis, submitted to Frontiers), §4.2.1 — with `state` bumped `DRAFTED`
+→ `EDITED`, `scenario.md:5,58`).
 
 ## Findings
 
-### 1. "Cited In" gap note's phrasing could be clearer that the gap is permanent — suggestion
-- **Section/field:** Scenario Card Summary "Remaining gaps" note vs. Source Fidelity
-- **Issue:** The Card Summary block still carries a self-flagged note: "**Remaining
-  gaps:** Cited In — should-fill-in-now." Per
-  `../../../.claude/skills/_shared/pg_scenarios.md`, `single_file_hallway` corresponds
-  to the Figure 7 "Narrow Hallway" sketch, which — unlike full Table 3 entries — has no
-  citation-index data available at all ("they do not have full Table 3 metadata"). This
-  is a genuine, permanent gap rather than an oversight: there is no P&G Table 3/Figure 7
-  citation index to draw from, so no future editing pass can "fill in" this field from
-  the available reference material. The current "should-fill-in-now" phrasing reads as
-  an actionable to-do, which overstates what's actually possible.
-- **Recommended fix:** Either reword the gap note to reflect that Cited In is currently
-  unfillable from available sources (e.g. "reasonably blank — no citation index exists
-  for Figure-7-derived scenarios"), or remove the note entirely if the omission is
-  considered acceptable as a permanent, source-driven limitation for this
-  Figure-7-derived scenario.
+None.
+
+## Prose/YAML Consistency
+
+Unchanged from the prior pass — re-confirmed: Scenario Overview vs.
+`intended_robot_task`/`intended_human_behavior`/`context` consistent;
+Normative Expectations prose vs. `expected_behaviors.{must,should,should_not}`
+consistent (both `must` items stated in prose); `ideal_outcome` prose
+matches the YAML field verbatim. The Cited-In-note reword is prose-only,
+outside the fenced YAML block.
+
+### Distiller check
+
+`scripts/distill/scenarios --scenario single_file_hallway --dry-run
+--show-diffs` reports no diff and no schema validation error — confirmed
+both before and after today's gap-note reword, since that edit touches no
+fenced YAML block. `scenario.md`'s embedded YAML and `scenario.yml` remain
+in sync.
+
+## Schema and Charter Compliance
+
+Unchanged — `scenario.yml` validates; `relevant_principles` (`P1, P3, P5,
+P7`) are all valid P0–P9 IDs, count within the 3–5 guideline;
+`scenario_usage_guide.quality_metrics` (`P3, P5, P7`) consistent;
+`related_scenarios` (`frontal_approach`, `movable_obstruction`) reference
+real directories, independently confirmed by the source paper itself (see
+Source Fidelity).
 
 ## Source Fidelity
 
-SOURCE is explicitly cited as "Principles and Guidelines for Evaluating Social Robot
-Navigation (P&G paper)" — a checkable source in principle. However, per
-`../../../.claude/skills/_shared/pg_scenarios.md`, "Single File Hallway" is **not**
-one of the 18 named entries in P&G Table 3. The reference file's "Additional Scenarios
-(Figure 7, not in Table 3)" section states:
+**SOURCE** cites *The Prosocial Robot Navigation Charter* (Francis,
+submitted), §4.2.1 — corrected this session from a generic, incorrect
+"P&G paper" attribution. This scenario is not extrapolated from P&G's
+Figure 7 at all; the source paper states it and `movable_obstruction` are
+"two scenarios we developed for this paper" (§4.2.1, PDF p. 23).
 
-> The `single_file_hallway` scenario in the repo corresponds to the **Narrow Hallway**
-> figure [in Figure 7]... If implementing these, note that they do not have full Table
-> 3 metadata and should be extrapolated carefully from the paper's descriptions and
-> Figure 7.
+Comparing the card against the source text directly:
 
-Comparing the card against what's available:
-- **Correspondence to Narrow Hallway (Figure 7):** The card's description — "a hallway
-  that is too narrow for safe and comfortable passing... single-file passage" — is
-  consistent with `pg_scenarios.md`'s one-line gloss: "single-file passage in a narrow
-  corridor." No contradiction found.
-- **No Table 3 metadata to compare against:** Because Narrow Hallway has no full Table
-  3 entry (no Scientific Purpose, Robot Task, Human Behavior, Ideal Outcome, or Cited
-  In fields listed in `pg_scenarios.md` beyond the one-line description), a
-  field-by-field fidelity check like the one possible for Table 3 scenarios cannot be
-  performed for `scientific_purpose`, `intended_robot_task`, `intended_human_behavior`,
-  `ideal_outcome`, or `cited_in`.
+- **Physical setup:** Paper: "a section of hallway too narrow for a human
+  and a robot to pass safely and comfortably." Card's `geometric_layout`:
+  "narrow hallway"; Scenario Description: "a hallway that is too narrow for
+  safe and comfortable passing." **Match.**
+- **Core behavior:** Paper: "A robot not following the principle of P7...
+  might enter the hallway at the same time as a human, causing a conflict,
+  whereas a proactive robot will either signal for the human to go first or
+  ask the human to wait." Card's `expected_behaviors.should`: "recognize
+  early that the hallway does not permit passing," "signal intent clearly
+  (e.g., yielding, requesting priority, or other clear signaling),"
+  `should_not`: "enter the hallway and create a stalemate." **Match.**
+- **`expected_behaviors` YAML — near-verbatim match.** The paper's Figure 6
+  (PDF p. 25) prints the actual final, schema-compliant `expected_behaviors`
+  block the authors arrived at after a documented schema-validation failure
+  (Listing 1: an unsupported `may` subtype) and revision (Listings 2→3).
+  Comparing Listing 3 to the card's current YAML (`scenario.md:103-113`):
 
-**Source fidelity: partially checkable.** The high-level correspondence to the Figure
-7 "Narrow Hallway" concept holds, and the authored fields (scientific_purpose,
-geometric_layout, intended_robot_task, intended_human_behavior, ideal_outcome) remain
-internally plausible and consistent with the Figure 7 gloss and the card's own
-Overview/Discussion prose, but they cannot be verified against Table-3-style ground
-truth because none exists for this scenario. Verifying deeper fidelity would require
-reading the P&G paper's Figure 7 discussion directly (not provided as `--paper` input
-for this audit) — this audit does not fabricate that comparison. In particular,
-`cited_in` has no ground-truth citation index available for this scenario at all (see
-Finding 1) — this is a permanent, source-driven limitation, not a gap this audit
-expects to close on a future pass.
+  | Paper (Listing 3) | Card (`scenario.md`) |
+  |---|---|
+  | `must`: maintain a safe physical distance / avoid entering the hallway simultaneously | identical |
+  | `should`: recognize early... / resolve without prolonged deadlock / signal intent clearly (e.g., yielding or requesting priority) | identical, reordered; "signal intent clearly" elaborated to "(e.g., yielding, requesting priority, **or other clear signaling**)" |
+  | `should_not`: force the human to back up unexpectedly / enter the hallway and create a stalemate / rely on last-moment braking | identical |
+
+  This is as close to a direct-quotation fidelity check as this corpus
+  gets — the card's machine-readable payload matches the paper's own
+  published, schema-corrected YAML almost word-for-word.
+- **Provenance detail corroborated:** The paper states (§4.3, PDF p. 24)
+  that "an early draft of this paper was fed into ChatGPT 5.2 to help
+  develop the scenarios presented in Section 4.2.1." The card's own
+  `DRAFTED` entry (`scenario.md:7`) independently states "ChatGPT 5.2,
+  2026-01-16" — consistent with the paper's account of its own drafting
+  process.
+- **Related scenarios:** The paper pairs this scenario with *Frontal
+  Approach* and *Movable Obstruction* as a minimal three-scenario set
+  (§4.2.1, PDF p. 23: "Together, Frontal Approach, Single File Hallway, and
+  Movable Obstruction form a minimal scenario set"). The card's
+  `related_scenarios` (`frontal_approach`, `movable_obstruction`) match
+  exactly.
+
+**Source fidelity: high, directly confirmed** — including a near-verbatim
+match on the machine-readable `expected_behaviors` payload itself, not just
+the descriptive prose.
 
 ## Completeness
 
-Per `template.md`'s "Required for AUDITED scenarios" fields:
-
-- **Scenario Card Summary:** Complete except **Cited In**, which is blank and
-  self-flagged in a "Remaining gaps" note (see Finding 1) — reasonably blank, and
-  permanently so, given no citation data exists for this Figure-7-derived scenario in
-  the available reference material.
-- **Scenario Usage Guide — Success Metrics:** Complete (SR, NoCollisions,
-  DeadlockFree).
-- **Scenario Usage Guide — Quality Metrics:** Complete (P3, P5, P7 — consistent with
-  `relevant_principles` [P1, P3, P5, P7]).
-- **Scenario Usage Guide — Ideal Outcome:** Complete, present both in the YAML
-  `ideal_outcome` field and the Card Summary/Usage Guide prose.
-- **Scenario Usage Guide — Failure Modes:** Complete (three concrete failure modes).
-- **Scenario Usage Guide — Labeling Criteria:** Complete (three concrete,
-  data-recognizable criteria).
-
-No required fields are blank aside from the permanently-unfillable Cited In noted
-above. The "Normative Expectations" section (see Re-audit Note below) now covers both
-`expected_behaviors.must` items in prose, closing the prior audit's should-fix finding.
+All Required fields present and consistent. `Cited In` remains blank, now
+correctly self-documented as reasonably blank (source paper unpublished)
+rather than as an actionable to-do — closing the prior audit's sole
+suggestion.
 
 ## Re-audit Note
 
-This is a fresh point-in-time re-audit (2026-07-22), reflecting PR #31's addition of a
-new "Normative Expectations" section to `scenario.md`. That section states, in
-prose, this scenario's two safety-critical `expected_behaviors.must` items — "the
-robot must maintain a safe physical distance from the human at all times and must not
-enter the hallway simultaneously with the human once a conflict is recognized" —
-which previously existed only inside the embedded YAML/`scenario.yml` with no prose
-echo anywhere in the card. This closes the prior audit's (2026-07-21) sole should-fix
-finding — the section also restates the `should` and `should_not` lists, giving the
-card a complete Normative Expectations treatment in line with `robot_overtaking`'s
-card structure. `scripts/distill/scenarios --scenario single_file_hallway --dry-run
---show-diffs` reports no diff and no schema errors. The one suggestion from the prior
-audit (the "Cited In" gap note's phrasing) remains open and is carried forward
-unchanged, as it was not addressed by this edit. Verdict is upgraded from
-`ready_with_fixes` to `ready` since no should-fix or blocking findings remain.
+Third audit of this card (2026-07-21 → 2026-07-22 closed the
+missing-Normative-Expectations should-fix; 2026-08-06 first pass corrected
+`SOURCE` and rewrote Source Fidelity; this pass closes the remaining
+gap-note-phrasing suggestion). Zero open findings of any severity. Ready
+for `AUDITED`.

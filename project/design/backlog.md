@@ -76,17 +76,20 @@ drafted from a Table 3 row. Not yet scoped as a work item.
 ## APPROVED cards with unresolved should-fix findings
 
 These cards are already `APPROVED` (`scope: 0` — the review-queue engine
-can't offer them for promotion, so `prosoc-card-review-all` will never
-visit them again), but their most recent `audit.md` still carries
+can't offer an `APPROVED` card for promotion, so `prosoc-card-review-all`
+will never revisit it), but their most recent `audit.md` still carries
 should-fix findings from before they were approved. `AUDITED`'s bar is a
 passing verdict (`ready`/`ready_with_fixes`), not zero findings, so this
 isn't a process violation — but the findings themselves were never
-actually fixed, and nothing in the current workflow ever routes back to
-an already-`APPROVED` card to clean them up.
+actually fixed, and nothing in the current workflow ever routes back to an
+already-`APPROVED` card to clean them up. (`charter` was tracked here
+2026-08-02 through 2026-08-06 after reverting from `APPROVED` to `EDITED`
+for an unrelated content update; its should-fix findings were fully
+resolved by 2026-08-06 and its row removed — see `prosoc/charter/audit.md`
+for the current clean-pass report.)
 
-| Card | Findings (from audit.md, 2026-07-29) | Noted | Status |
+| Card | Findings (from audit.md, date noted) | Noted | Status |
 |---|---|---|---|
-| `charter` | 1. Six of ten principles lack a "### Explanation" subsection. 2. Some principles' YAML `description` states content absent from prose. | 2026-08-02 | open |
 | `contexts/high_urgency` | 1. Common tension wording drift. 2. `related_contexts` prose/YAML mismatch. | 2026-08-02 | open |
 | `tasks/navigate_lead_agent` | 1. Common failure mode omitted or softened in YAML. 2. Dangling `example_scenarios` entries. | 2026-08-02 | open |
 
@@ -164,6 +167,7 @@ one-off/card-specific suggestions.)
 | `scenarios/crowd_navigation` | `related_scenarios` lists `perpendicular_traffic`, but `perpendicular_traffic`'s own `related_scenarios` doesn't reciprocate (only lists `parallel_traffic`/`intersection_no_gesture`) — a one-way reference, inconsistent with the reciprocal-linking pattern every other cross-reference in the corpus follows. Pre-existing on `perpendicular_traffic`'s side, not introduced by `crowd_navigation`'s own promotion; found by independent subagent review on PR #71 | 2026-08-02 |
 | `scenarios/exiting_room` | Consider adding P7 (Proactivity) to `relevant_principles` — the scenario names indefinite hesitation/stand-off as an explicit failure mode and unacceptable behavior, a reasonable match for P7's "deadlock or hesitation is the core challenge" criterion, but P7 isn't listed (P3/P5/P6 partially cover related ground) | 2026-08-02 |
 | `scenarios/join_a_group` | (1) `agents.humans[0].count: 3` duplicates `attributes.group_size: 3` — redundant, could silently desync on a future edit. (2) Normative Expectations prose omits an explicit bullet for the `must`-level "avoid collision with any group member" (only the O-space-crossing `must` is bulleted). (3) `related_scenarios` lists `crowd_navigation`, but `crowd_navigation` doesn't reciprocate — same one-way-reference pattern as the `crowd_navigation`/`perpendicular_traffic` gap above | 2026-08-02 |
+| `scenarios/movable_obstruction` | `evaluation_notes`'s task/context cross-reference names all three contexts (`routine_delivery`, `guidance_docent`, `high_urgency`) as illustrative options, but doesn't carry forward the source paper's (Francis, PRNC, §4.2.2) specific behavioral implication for `emergency.high_urgency` — neither remove nor report, just prioritize timely task completion. Optionally add one clause to `evaluation_notes` for that context. Not a defect; the card doesn't misstate anything, just less specific than the source on this one point | 2026-08-06 |
 
 ## Tooling
 
