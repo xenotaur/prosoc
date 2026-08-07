@@ -36,9 +36,14 @@ None.
 ## Prose/YAML Consistency
 
 `scripts/distill/charter --dry-run --show-diffs` reports no differences —
-both changes this session were prose-only (the P9 Explanation edit and the
-Section 3 list-item edit touch no fenced YAML block), so `charter.yml`
-remains exactly in sync. `scripts/validate/status --family charter`
+`charter.yml` is exactly in sync with `charter.md`'s fenced YAML blocks.
+This specific pass's two edits (the P9 Explanation rewrite and the
+Section 3 list-item rename, listed above) are themselves prose-only and
+touch no fenced YAML block; this is narrower than a claim about the PR as
+a whole; the PR's earlier commits *did* change `charter.yml` (P9's
+`description`/`examples`, the `state` field, etc.) — each of those was
+verified in sync via the same dry-run check at the time, per the charter's
+own earlier `EDITED` history. `scripts/validate/status --family charter`
 confirms `state: EDITED` is consistent between the fenced YAML and the
 projected `STATE` bullet.
 

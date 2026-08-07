@@ -19,8 +19,13 @@ This re-audits the card after its `SOURCE` field was corrected from a
 generic "P&G paper" attribution to the actual originating document — *The
 Prosocial Robot Navigation Charter* (Francis, submitted to Frontiers),
 §4.2.1 — and `state` was bumped `DRAFTED` → `EDITED` to reflect that
-correction (`scenario.md:5,50`). All findings from the 2026-07-22 audit
-remain resolved; this pass adds a direct, paragraph-level source-fidelity
+correction (the `## Status` `STATE` bullet and the fenced YAML `state:`
+field, both in `scenario.md`). The card has since been promoted further to
+`AUDITED` (see the STATUS block's `EDITED` history for the dated record of
+each step); specific line numbers for these fields are not cited here
+since they shift as the STATUS block grows. All findings from the
+2026-07-22 audit remain resolved; this pass adds a direct, paragraph-level
+source-fidelity
 comparison that was not possible before this paper was available.
 
 ## Findings

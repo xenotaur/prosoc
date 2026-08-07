@@ -7,6 +7,7 @@
 - **DRAFTED:** ChatGPT 5.2, 2026-01-16
 - **EDITED:** render_sections.py, 2026-07-19
 - **EDITED:** Claude, 2026-08-06 — correct SOURCE from a generic "P&G paper" attribution: the PRNC paper (§4.2.1, PDF pp. 23-24) states this scenario was "developed for this paper," not sourced from P&G Table 3/Figure 7
+- **EDITED:** Claude, 2026-08-07 — reword the "Cited In" remaining-gaps note from "should-fill-in-now" to "reasonably blank," matching the corrected reasoning already applied to `single_file_hallway`: the source paper is unpublished, so no external citations are currently possible
 
 ## Scenario Card Summary
 
@@ -31,7 +32,7 @@
 
 **Remaining gaps:**
 
-- **Cited In** — should-fill-in-now
+- **Cited In** — reasonably blank: this scenario originates in a source paper (§4.2.1) that is itself still `submitted` and unpublished, so no external literature yet exists that could cite it. Revisit once the source paper is published.
 
 ---
 

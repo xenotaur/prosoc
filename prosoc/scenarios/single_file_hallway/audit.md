@@ -17,16 +17,20 @@ audited: 2026-08-06
   published `expected_behaviors` YAML listing.
 
 This closes out the "Cited In" gap-note phrasing suggestion carried since
-2026-07-22: the note (`scenario.md:32-34`) now reads "reasonably blank —
-this scenario originates in a source paper (§4.2.1) that is itself still
-`submitted` and unpublished, so no external literature yet exists that
-could cite it. Revisit once the source paper is published," replacing the
-prior "should-fill-in-now" phrasing that overstated what was actually
-possible. This was the sole open item carried forward from this session's
-earlier `SOURCE` correction (from a generic "P&G paper" attribution to the
-actual originating document — *The Prosocial Robot Navigation Charter*
-(Francis, submitted to Frontiers), §4.2.1 — with `state` bumped `DRAFTED`
-→ `EDITED`, `scenario.md:5,58`).
+2026-07-22: the Scenario Card Summary's "Remaining gaps" note now reads
+"reasonably blank — this scenario originates in a source paper (§4.2.1)
+that is itself still `submitted` and unpublished, so no external
+literature yet exists that could cite it. Revisit once the source paper is
+published," replacing the prior "should-fill-in-now" phrasing that
+overstated what was actually possible. This was the sole open item carried
+forward from this session's earlier `SOURCE` correction (from a generic
+"P&G paper" attribution to the actual originating document — *The
+Prosocial Robot Navigation Charter* (Francis, submitted to Frontiers),
+§4.2.1 — with `state` bumped `DRAFTED` → `EDITED`, per the STATUS block's
+`## Status` `STATE` bullet and fenced YAML `state:` field in
+`scenario.md`; specific line numbers are not cited here since they shift
+as the STATUS block grows — the card has since been promoted further to
+`AUDITED`).
 
 ## Findings
 
