@@ -31,8 +31,8 @@ comparison that was not possible before this paper was available.
 ## Findings
 
 ### 1. High Urgency's specific behavioral implication isn't spelled out in `evaluation_notes` — suggestion
-- **Section/field:** `evaluation_notes`'s task/context cross-reference
-  (`scenario.md:159-166`) vs. the source paper's context discussion
+- **Section/field:** `evaluation_notes`'s task/context cross-reference vs.
+  the source paper's context discussion
 - **Issue:** The source paper (§4.2.2, PDF p. 24) gives a specific
   behavioral implication for each of the three contexts it names for this
   scenario: Routine Delivery → report to management; Guidance Docent →
@@ -111,7 +111,7 @@ p. 24):
   between removing, reporting, or ignoring), and the contexts
   `routine_delivery` (report to management), `guidance_docent` (remove
   it), and `high_urgency` (neither — focus on timely delivery). The card's
-  `evaluation_notes` (`scenario.md:159-166`) names the same task and
+  `evaluation_notes` names the same task and
   context IDs, already verified in the 2026-07-22 audit against
   `prosoc/tasks/*/task.yml` and `prosoc/contexts/*/context.yml` — now also
   confirmed to be the paper's own worked example, not just plausible IDs.

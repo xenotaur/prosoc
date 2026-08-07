@@ -87,7 +87,7 @@ Comparing the card against the source text directly:
   (PDF p. 25) prints the actual final, schema-compliant `expected_behaviors`
   block the authors arrived at after a documented schema-validation failure
   (Listing 1: an unsupported `may` subtype) and revision (Listings 2→3).
-  Comparing Listing 3 to the card's current YAML (`scenario.md:103-113`):
+  Comparing Listing 3 to the card's current `expected_behaviors` YAML:
 
   | Paper (Listing 3) | Card (`scenario.md`) |
   |---|---|

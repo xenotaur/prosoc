@@ -9,7 +9,7 @@ commit:
 created_at: 2026-08-07T04:03:10+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/79
-session_transcript: pending
+session_transcript: claude-app:local_e36545a4-195c-4b68-a9fd-d38b6289eda9
 ---
 
 # Summary
