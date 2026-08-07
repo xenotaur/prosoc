@@ -1,0 +1,10 @@
+{
+  "pr": "https://github.com/xenotaur/prosoc/pull/79",
+  "ceiling": 3,
+  "completed_count": 0,
+  "pending_attempt": {
+    "promoted": false,
+    "reviewers": {"codex": "pending", "copilot": "pending"},
+    "retriggered_at": "2026-08-07T04:07:02Z"
+  }
+}
