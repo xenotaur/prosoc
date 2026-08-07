@@ -11,7 +11,7 @@ related_focus:
 related_roadmap: []
 related_design:
   - project/design/proposals/adopted/normative-packet-assembly/00_proposal.md
-  - project/design/proposals/proposed/normative-card-approval/00_proposal.md
+  - project/design/proposals/adopted/normative-card-approval/00_proposal.md
 work_items:
   - WI-CARD-STATUS-FOUNDATION
   - WI-CARD-STATUS-TASKS
@@ -30,6 +30,7 @@ exit_criteria:
   - prosoc-card-audit and prosoc-card-audit-all skills exist with per-family checklists, including charter-specific handling
   - The assembler produces a deterministic, namespaced provenance-envelope packet from a manifest, with a fail-closed lifecycle gate and an in-payload --allow-unapproved escape hatch
   - Manifests are an auditable card family and packet drift is checked in CI against checked-in golden packets
+  - Every card in the corpus reaches APPROVED (per PROP-NORMATIVE-CARD-APPROVAL's framing of this as the workstream's second exit criterion; confirmed with the user 2026-08-01)
 ---
 
 # Normative Packet Assembly — Implementation
@@ -129,24 +130,28 @@ consumption, navigation — is blocked on there being a packet to consume.
   manifests. Merged in PR #59, closing out Phase 3.
 - **WI-CARD-APPROVE-SKILLS** — corpus review-queue engine and the
   `prosoc-card-approve` / `prosoc-card-review` / `prosoc-card-review-all`
-  skill stack (proposed; creation PR #62 merged, implementation not yet
-  started): tooling to rank the corpus by what most needs review and to
-  promote a card's lifecycle state from `AUDITED` to `APPROVED`, settled in
-  `PROP-NORMATIVE-CARD-APPROVAL`. Works toward the second exit criterion
-  below — no card is promoted by this item itself, only the mechanism to
-  do so; the pilot item below uses it once implemented.
+  skill stack (resolved; merged in PR #64, commit `6fe3152`): tooling to
+  rank the corpus by what most needs review and to promote a card's
+  lifecycle state from `AUDITED` to `APPROVED`, settled in
+  `PROP-NORMATIVE-CARD-APPROVAL`. Works toward the corpus-approval exit
+  criterion below — no card is promoted by this item itself, only the
+  mechanism to do so; the pilot item below is the first to use it.
 - **WI-CARD-APPROVAL-PILOT** — promote the 5 `sample_packet` cards to
-  `APPROVED` (proposed): using the `WI-CARD-APPROVE-SKILLS` tooling,
-  promote charter, `asimov_three_laws`, `intersection_gesture_wait`,
+  `APPROVED` (resolved; merged in PR #65, commit `0049f6c`): promoted
+  charter, `asimov_three_laws`, `intersection_gesture_wait`,
   `navigate_lead_agent`, and `high_urgency` through `AUDITED` to
-  `APPROVED`, then regenerate `sample_packet`'s golden packet without
+  `APPROVED`, then regenerated `sample_packet`'s golden packet without
   `--allow-unapproved` — the corpus's first production-mode packet.
 
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. Phases 0a, 0b, 1, 2, and 3 are
-done; the workstream's second exit criterion — corpus approval — remains
-open and is now being worked via `WI-CARD-APPROVE-SKILLS` (created, not yet
-implemented) and `WI-CARD-APPROVAL-PILOT` (proposed).
+done, and the corpus-approval tooling (`WI-CARD-APPROVE-SKILLS`,
+`WI-CARD-APPROVAL-PILOT`) is built and piloted; the exit criterion itself —
+every card in the corpus reaching `APPROVED` — remains open. 11 of 32 cards
+carried `APPROVED` as of 2026-08-06 — a point-in-time snapshot, not a
+dynamically updated figure; see
+[`FOCUS-NORMATIVE-PACKET-ASSEMBLY`](../../focus/current_focus.md) for the
+latest count. Promotion continues via `prosoc-card-review-all`.
 
 ## Exit Criteria
 
@@ -161,6 +166,11 @@ implemented) and `WI-CARD-APPROVAL-PILOT` (proposed).
   `--allow-unapproved` escape hatch.
 - Manifests are an auditable card family and packet drift is checked in CI
   against checked-in golden packets.
+- Every card in the corpus reaches `APPROVED` (per `PROP-NORMATIVE-CARD-APPROVAL`'s
+  framing of this as the workstream's second exit criterion; confirmed with
+  the user 2026-08-01). Tooling for this (the review-queue engine and
+  `prosoc-card-approve`/`prosoc-card-review`/`prosoc-card-review-all`
+  skills) is built and piloted; the criterion itself is not yet met.
 
 ## Non-Goals
 

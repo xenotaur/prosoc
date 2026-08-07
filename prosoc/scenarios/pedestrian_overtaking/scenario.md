@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** DRAFTED
+- **STATE:** APPROVED
 - **SOURCE:** Prompt to ChatGPT 5.2
 - **DRAFTED:** ChatGPT 5.2, 2026-01-02
 - **EDITED:** render_sections.py, 2026-07-19
@@ -72,7 +72,7 @@ Unacceptable behavior includes accelerating to prevent passing, drifting unpredi
 ```yaml
 id: pedestrian_overtaking_01
 name: Pedestrian Overtaking a Robot from Behind
-state: DRAFTED
+state: APPROVED
 
 summary: >
   A human pedestrian approaches and overtakes a slower-moving robot from
