@@ -148,9 +148,10 @@ and added to `work_items:` as they land. Phases 0a, 0b, 1, 2, and 3 are
 done, and the corpus-approval tooling (`WI-CARD-APPROVE-SKILLS`,
 `WI-CARD-APPROVAL-PILOT`) is built and piloted; the exit criterion itself —
 every card in the corpus reaching `APPROVED` — remains open. 11 of 32 cards
-carry `APPROVED` as of 2026-08-06 (live count in
-[`FOCUS-NORMATIVE-PACKET-ASSEMBLY`](../../focus/current_focus.md));
-promotion continues via `prosoc-card-review-all`.
+carried `APPROVED` as of 2026-08-06 — a point-in-time snapshot, not a
+dynamically updated figure; see
+[`FOCUS-NORMATIVE-PACKET-ASSEMBLY`](../../focus/current_focus.md) for the
+latest count. Promotion continues via `prosoc-card-review-all`.
 
 ## Exit Criteria
 
