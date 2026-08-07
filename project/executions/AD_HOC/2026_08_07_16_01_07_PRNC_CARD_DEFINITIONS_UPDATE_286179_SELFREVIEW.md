@@ -2,10 +2,10 @@
 execution_id: 2026_08_07_16_01_07_PRNC_CARD_DEFINITIONS_UPDATE_286179_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:PRNC_CARD_DEFINITIONS_UPDATE_286179_SELFREVIEW)[2026-08-07T16:00:52+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/79
-commit:
+commit: 15cc7563e3763951e2beaf9aed9da2fdd0102d88
 created_at: 2026-08-07T16:01:07+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/79
