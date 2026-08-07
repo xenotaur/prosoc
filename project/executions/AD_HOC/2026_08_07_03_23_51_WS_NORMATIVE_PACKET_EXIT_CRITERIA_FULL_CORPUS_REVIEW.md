@@ -2,13 +2,13 @@
 execution_id: 2026_08_07_03_23_51_WS_NORMATIVE_PACKET_EXIT_CRITERIA_FULL_CORPUS_REVIEW
 prompt_id: PROMPT(AD_HOC:WS_NORMATIVE_PACKET_EXIT_CRITERIA_FULL_CORPUS_REVIEW)[2026-08-07T03:09:00+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/78
-commit:
+commit: 2a76600cef6fa6df9a0734fca62f09de132ffb6e
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/78
-session_transcript: pending
+session_transcript: claude-app:2d071ee7-950f-4423-91dd-905fdadb21a7
 created_at: 2026-08-07T03:23:51+00:00
 ---
 
