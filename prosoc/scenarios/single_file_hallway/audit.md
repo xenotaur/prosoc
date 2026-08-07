@@ -26,11 +26,13 @@ overstated what was actually possible. This was the sole open item carried
 forward from this session's earlier `SOURCE` correction (from a generic
 "P&G paper" attribution to the actual originating document — *The
 Prosocial Robot Navigation Charter* (Francis, submitted to Frontiers),
-§4.2.1 — with `state` bumped `DRAFTED` → `EDITED`, per the STATUS block's
-`## Status` `STATE` bullet and fenced YAML `state:` field in
-`scenario.md`; specific line numbers are not cited here since they shift
-as the STATUS block grows — the card has since been promoted further to
-`AUDITED`).
+§4.2.1 — landing alongside the card's promotion `DRAFTED` → `AUDITED`, a
+single sanctioned transition per `prosoc-card-approve`'s own design;
+`EDITED` is an optional intermediate stage, not a required one, and here
+exists only as a dated `EDITED` bullet in the STATUS block's edit history,
+not as a separately git-committed `state:` value — the `SOURCE` correction
+and the promotion both landed in this PR's first commit. Specific line
+numbers are not cited here since they shift as the STATUS block grows).
 
 ## Findings
 

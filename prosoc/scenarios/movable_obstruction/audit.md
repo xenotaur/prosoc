@@ -18,12 +18,14 @@ audited: 2026-08-06
 This re-audits the card after its `SOURCE` field was corrected from a
 generic "P&G paper" attribution to the actual originating document — *The
 Prosocial Robot Navigation Charter* (Francis, submitted to Frontiers),
-§4.2.1 — and `state` was bumped `DRAFTED` → `EDITED` to reflect that
-correction (the `## Status` `STATE` bullet and the fenced YAML `state:`
-field, both in `scenario.md`). The card has since been promoted further to
-`AUDITED` (see the STATUS block's `EDITED` history for the dated record of
-each step); specific line numbers for these fields are not cited here
-since they shift as the STATUS block grows. All findings from the
+§4.2.1 — and the card was promoted `DRAFTED` → `AUDITED` (a single
+sanctioned transition per `prosoc-card-approve`'s own design; `EDITED` is
+an optional intermediate stage, not a required one, and here exists only
+as dated `EDITED` bullets in the STATUS block's edit history, not as a
+separately git-committed `state:` value — the `SOURCE` correction and the
+promotion both landed in this PR's first commit). Specific line numbers
+for the STATE fields are not cited here since they shift as the STATUS
+block grows. All findings from the
 2026-07-22 audit remain resolved; this pass adds a direct, paragraph-level
 source-fidelity
 comparison that was not possible before this paper was available.
