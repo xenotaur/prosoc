@@ -75,4 +75,4 @@ touches are still `DRAFTED`.
 - [`proposed/WS-NORMATIVE-PACKET-ASSEMBLY.md`](proposed/WS-NORMATIVE-PACKET-ASSEMBLY.md)
   — implementation of the manifest-driven normative packet assembler
   (governed by
-  [`../design/proposals/proposed/normative-packet-assembly/00_proposal.md`](../design/proposals/proposed/normative-packet-assembly/00_proposal.md)).
+  [`../design/proposals/adopted/normative-packet-assembly/00_proposal.md`](../design/proposals/adopted/normative-packet-assembly/00_proposal.md)).
