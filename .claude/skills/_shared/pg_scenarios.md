@@ -262,5 +262,16 @@ Figure 7 illustrates several scenarios not listed as named entries in Table 3:
 If implementing these, note that they do not have full Table 3 metadata and should be
 extrapolated carefully from the paper's descriptions and Figure 7.
 
-The `single_file_hallway` scenario in the repo corresponds to the Narrow Hallway figure.
-The `movable_obstruction` scenario has no direct P&G Table 3 counterpart.
+**Correction (2026-08-06):** `single_file_hallway` and `movable_obstruction` were
+previously described here as extrapolated from this P&G Figure 7 material (the former
+guessed to correspond to the Narrow Hallway sketch, the latter noted as having no
+Table 3 counterpart). Per the companion paper *The Prosocial Robot Navigation
+Charter* (Francis, submitted to Frontiers), Section 4.2.1, both scenarios were in
+fact "developed for this paper" specifically to contrast P7: Proactivity and P9:
+Prosocial Behavior — they are original to that paper, not derived from or
+extrapolated from any P&G Table 3 entry or Figure 7 sketch. The prior guess that
+`single_file_hallway` corresponds to Figure 7's "Narrow Hallway" sketch is
+superseded by this ground truth; any thematic resemblance is coincidental. See
+`prosoc/scenarios/single_file_hallway/scenario.md` and
+`prosoc/scenarios/movable_obstruction/scenario.md`'s `SOURCE` fields, corrected to
+match.

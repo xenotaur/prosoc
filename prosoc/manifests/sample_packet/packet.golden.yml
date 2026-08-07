@@ -2,7 +2,7 @@ _type: https://in-toto.io/Statement/v1
 subject:
 - name: guidance
   digest:
-    sha256: 1b23787cf8f294451de35274c894d7e26cb3bcc3ee684a7635c76918f64b36fb
+    sha256: 2e1ce187c6aa5c15987b130226726fc234676e65cfadb73abcfa279bdd2d0cb8
 predicate_type: https://prosocial-robotics.org/NormativePacket/v1
 predicate:
   builder:
@@ -15,7 +15,7 @@ predicate:
   - family: charter
     id: charter
     path: prosoc/charter/charter.yml
-    sha256: fcce63c23ea4ebefaeb13b4ae9a8ea4dfeb33c6013411398560ec863efe51b0f
+    sha256: dd888adedc24abd17eeecd997e139c9a5df44bef9721af601db9ffb353c35dbf
     state: APPROVED
   - family: constitutions
     id: asimov_three_laws
@@ -170,17 +170,22 @@ guidance:
       - id: P9
         name: Prosocial Behavior
         severity: optional
-        description: 'Robots should act in ways that improve the experience or success
-          of other agents, even without being explicitly asked.
+        description: 'Robots should act, during or in support of navigation, to improve
+          the navigation experiences of other agents or to preserve or improve the
+          navigability of their shared environment, in ways appropriate to their task
+          and context and without sacrificing their own navigation goals.
 
           '
         examples:
           positive:
           - Robot holds open a door for another person.
           - Robot clears debris to make the path safer for others.
+          - Robot reports a spill to staff rather than removing it, since removal
+            is outside its task.
           negative:
           - Robot could have warned about a hazard but didn't.
           - Robot leaves clutter behind that inconveniences others.
+          - Robot abandons its delivery task to tidy an unrelated room.
   constitutions:
     asimov_three_laws:
       id: asimov_three_laws
@@ -528,17 +533,22 @@ guidance:
   - id: P9
     name: Prosocial Behavior
     severity: optional
-    description: 'Robots should act in ways that improve the experience or success
-      of other agents, even without being explicitly asked.
+    description: 'Robots should act, during or in support of navigation, to improve
+      the navigation experiences of other agents or to preserve or improve the navigability
+      of their shared environment, in ways appropriate to their task and context and
+      without sacrificing their own navigation goals.
 
       '
     examples:
       positive:
       - Robot holds open a door for another person.
       - Robot clears debris to make the path safer for others.
+      - Robot reports a spill to staff rather than removing it, since removal is outside
+        its task.
       negative:
       - Robot could have warned about a hazard but didn't.
       - Robot leaves clutter behind that inconveniences others.
+      - Robot abandons its delivery task to tidy an unrelated room.
     emphasis: emphasized
   tensions:
     common_tensions:
