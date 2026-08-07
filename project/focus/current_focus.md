@@ -27,14 +27,17 @@ deferred.
 
 The active front is now **corpus promotion**: getting every card in the
 corpus to `APPROVED`, not just the field/mechanism supporting each
-principle. The user confirmed this scope directly on 2026-08-01 — note that
-`WS-NORMATIVE-PACKET-ASSEMBLY`'s own Exit Criteria section does not yet
-state this explicitly (its bullets cover schema/tooling support for the
-`APPROVED` state, not full-corpus completion), so don't cite a specific
-numbered criterion for it; treat this paragraph, not the WS file, as the
-source for that requirement until the WS file is updated to match. As of
-this writing (live count, not a cached snapshot — re-run before trusting
-this number):
+principle. This is now stated explicitly as
+`WS-NORMATIVE-PACKET-ASSEMBLY`'s sixth Exit Criteria bullet (added after the
+user's 2026-08-01 chat confirmation and
+[`PROP-NORMATIVE-CARD-APPROVAL`](../design/proposals/adopted/normative-card-approval/00_proposal.md)'s
+own framing of it as "the workstream's second exit criterion"). Tooling for
+the promotion itself — a ranked review-queue engine plus
+`prosoc-card-approve`/`prosoc-card-review`/`prosoc-card-review-all` — is
+built and piloted (`WI-CARD-APPROVE-SKILLS`, `WI-CARD-APPROVAL-PILOT`, both
+resolved); the criterion itself is not yet met. As of this writing (live
+count across all **six** families, including `manifests` — not a cached
+snapshot, re-run before trusting this number):
 
 | Family | APPROVED | AUDITED | DRAFTED | Total |
 |---|---|---|---|---|
@@ -43,7 +46,8 @@ this number):
 | Contexts | 1 | 3 | 0 | 4 |
 | Constitutions | 1 | 1 | 0 | 2 |
 | Charter | 1 | 0 | 0 | 1 |
-| **Total** | **11** | **8** | **12** | **31** |
+| Manifests | 0 | 0 | 1 | 1 |
+| **Total** | **11** | **8** | **13** | **32** |
 
 `AUDITED` cards are ready for a human `APPROVED` pass; `DRAFTED` cards still
 need an audit first. Several sessions (PRs #68–#71) have been promoting
@@ -52,7 +56,7 @@ cards in batches of ~5 using `prosoc-card-review-all` /
 `scripts/validate/review-queue`.
 
 Next concrete step: keep running `prosoc-card-review-all` (or
-`prosoc-card-audit` for one card at a time) against the remaining 20
+`prosoc-card-audit` for one card at a time) against the remaining 21
 non-`APPROVED` cards, prioritizing the 8 already `AUDITED` since those are
 closest to done.
 
