@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **SOURCE:** P&G Paper, Table 3 (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [126]
 - **DRAFTED:** Claude (new-scenario skill), 2026-07-05
 - **EDITED:** render_sections.py, 2026-07-20
@@ -78,7 +78,7 @@ Unacceptable behavior includes:
 ```yaml
 id: narrow_doorway_01
 name: Narrow Doorway
-state: AUDITED
+state: APPROVED
 
 summary: >
   A robot and a human pedestrian approach a narrow doorway from opposite
