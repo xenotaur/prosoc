@@ -201,7 +201,7 @@ machinery already domain-agnostic — `prosoc/literate/`,
 `prosoc/packet/resolve.py`, and all of `prosoc/auditor/` have zero
 family-specific branching. The one genuinely domain-coupled piece is
 `prosoc/packet/assemble.py`'s principle-union composition
-(`_principle_union`, lines 64-107; `_tensions`, lines 110-128), plus the required
+(`_principle_union`, lines 64-107; `_tensions`, lines 110-126), plus the required
 `guidance.principles`/`guidance.tensions` fields it bakes into
 `prosoc/packet/schema.json:108-136` — that's the part any second consumer
 would need to replace, not reuse. `prosoc/manifests/schema.json:50-59`
