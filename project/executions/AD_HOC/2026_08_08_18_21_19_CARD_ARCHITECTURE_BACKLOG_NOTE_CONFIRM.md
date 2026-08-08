@@ -2,13 +2,13 @@
 execution_id: 2026_08_08_18_21_19_CARD_ARCHITECTURE_BACKLOG_NOTE_CONFIRM
 prompt_id: PROMPT(AD_HOC:CARD_ARCHITECTURE_BACKLOG_NOTE_CONFIRM)[2026-08-08T18:16:05+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/82
-commit: 
+commit: 07b02af
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/82
-session_transcript: pending
+session_transcript: claude-app:f087f2be-5992-4711-b12b-40cebb7e8305
 created_at: 2026-08-08T18:21:19+00:00
 ---
 
