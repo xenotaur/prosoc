@@ -184,3 +184,63 @@ one-off/card-specific suggestions.)
   automatically when they notice one, and consult it rather than relying on
   ad-hoc notes in individual audit reports. Noted 2026-08-01, not yet
   scoped as a work item.
+
+## LRH card-architecture reuse assessment — not yet warranted
+
+**Noted:** 2026-08-03 (user-directed design session), assessing whether
+`prosoc/packet/` + `prosoc/literate/` + `prosoc/utils/cards/` +
+`prosoc/auditor/` could be split out as a reusable library for a second
+consumer — specifically `LogicalRoboticsHarness`, whose own
+`project/principles/`/`project/guardrails/` governance is growing as
+agent-harness support (Claude Code, Codex, Antigravity) and
+`/lrh-execute` autonomy/review-cycle structure deepen.
+
+**Idea:** A full engine survey found most of prosoc's normative-card
+machinery already domain-agnostic — `prosoc/literate/`,
+`prosoc/packet/gate.py`, `prosoc/packet/manifest.py`,
+`prosoc/packet/resolve.py`, and all of `prosoc/auditor/` have zero
+family-specific branching. The one genuinely domain-coupled piece is
+`prosoc/packet/assemble.py:64-107`'s principle-union composition
+(`_principle_union`/`_tensions`), plus the required
+`guidance.principles`/`guidance.tensions` fields it bakes into
+`prosoc/packet/schema.json:108-136` — that's the part any second consumer
+would need to replace, not reuse. `prosoc/manifests/schema.json:50-59`
+also closed-enums prosoc's own five family names directly, a second sharp
+coupling point.
+
+LRH was audited as the candidate second consumer. Its current
+`project/principles/`+`project/guardrails/` content is small (7 files, 53
+guidance units, 194 lines) and structurally unconsumed by any LRH
+tooling — `src/lrh/assist/snapshot_cli.py` only treats it as opaque
+frontmatter-plus-prose, and a same-named `src/lrh/guardrails/` Python
+package that looks like it should enforce these rules is an unconnected
+no-op skeleton. LRH's real emerging complexity — autonomy/review-cycle
+gating for `/lrh-execute` — is already served by its own working,
+self-amending `project/memory/decisions/DEC-*.md` decision-record pattern
+and per-assistant `kind:`-tagged policy files, unrelated to this
+architecture. Harness differentiation (Claude/Codex/Antigravity) is real
+but lives at LRH's skill-installer layer (`src/lrh/skills/installer.py`),
+not in guidance content.
+
+Checked against best-practice sources: one worked example (prosoc itself)
+is short of the usual Rule-of-Three threshold for safely abstracting a
+shared interface (Fowler/Roberts); `assemble.py`'s own
+`if card.family == "constitutions"` branching is already a live instance
+of Sandi Metz's "wrong abstraction" warning sign — *"if you find yourself
+passing parameters and adding conditional paths through shared code, the
+abstraction is incorrect"* (sandimetz.com, 2016) — worth fixing on its own
+terms regardless of any extraction.
+
+**Status:** Not proposing extraction now. Revisit at a future backlog
+burndown if LRH's needs firm up — full trigger list recorded in
+`logical_robotics_harness/project/design/backlog.md` § "Card-architecture
+reuse assessment (prosoc) — not yet warranted". Independently of that:
+worth unifying `prosoc/packet/loader.py`'s `FAMILIES` dict with
+`prosoc/utils/cards/validate_status.py`'s separate, duplicate `Family`/
+`FAMILIES` dict — that's a real duplication today and doesn't need a
+second consumer to justify fixing.
+
+**Related:** `prosoc/packet/assemble.py`, `prosoc/packet/loader.py:69-80`,
+`prosoc/packet/schema.json:108-136`, `prosoc/manifests/schema.json:50-59`,
+`prosoc/utils/cards/validate_status.py`; mirrored entry in
+`logical_robotics_harness/project/design/backlog.md`.
