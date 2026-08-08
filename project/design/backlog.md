@@ -211,16 +211,18 @@ coupling point.
 LRH was audited as the candidate second consumer. Its current
 `project/principles/`+`project/guardrails/` content is small (7 files, 53
 guidance units, 194 lines) and structurally unconsumed by any LRH
-tooling — `src/lrh/assist/snapshot_cli.py` only treats it as opaque
-frontmatter-plus-prose, and a same-named `src/lrh/guardrails/` Python
-package that looks like it should enforce these rules is an unconnected
-no-op skeleton. LRH's real emerging complexity — autonomy/review-cycle
-gating for `/lrh-execute` — is already served by its own working,
-self-amending `project/memory/decisions/DEC-*.md` decision-record pattern
-and per-assistant `kind:`-tagged policy files, unrelated to this
-architecture. Harness differentiation (Claude/Codex/Antigravity) is real
-but lives at LRH's skill-installer layer (`src/lrh/skills/installer.py`),
-not in guidance content.
+tooling — `src/lrh/assist/snapshot_cli.py`'s `summarize_file()` only
+treats it as opaque frontmatter-plus-prose, and a same-named
+`src/lrh/guardrails/` Python package that looks like it should enforce
+these rules is an unconnected no-op skeleton. LRH's real emerging
+complexity — autonomy/review-cycle gating for `/lrh-execute` — is already
+served by its own working, self-amending `project/memory/decisions/DEC-*.md`
+decision-record pattern and per-assistant `kind:`-tagged policy files,
+unrelated to this architecture. Harness differentiation is real and
+shipped for Claude/Codex (`src/lrh/skills/installer.py`'s `SkillTarget`
+enum and per-target renderers), with Antigravity tracked separately as
+proposed, not-yet-shipped work — but either way it lives at LRH's
+skill-installer layer, not in guidance content.
 
 Checked against best-practice sources: one worked example (prosoc itself)
 is short of the usual Rule-of-Three threshold for safely abstracting a
