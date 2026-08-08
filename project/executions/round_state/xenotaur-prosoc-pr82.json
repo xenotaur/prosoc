@@ -3,9 +3,9 @@
   "ceiling": 3,
   "completed_count": 2,
   "pending_attempt": {
-    "promoted": true,
-    "reviewers": {"codex": "skipped_fleet_policy", "copilot": "submitted"},
-    "retriggered_at": "2026-08-08T18:22:13Z"
+    "promoted": false,
+    "reviewers": {"codex": "skipped_fleet_policy", "copilot": "pending"},
+    "retriggered_at": "2026-08-08T18:26:28Z"
   },
-  "note": "batch2: verifying the _CONFIRM record commit 7d07b77"
+  "note": "batch3: verifying commit-field fix (58f3baa)"
 }
