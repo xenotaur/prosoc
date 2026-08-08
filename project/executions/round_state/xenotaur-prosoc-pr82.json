@@ -1,10 +1,10 @@
 {
   "pr": "https://github.com/xenotaur/prosoc/pull/82",
   "ceiling": 3,
-  "completed_count": 1,
+  "completed_count": 2,
   "pending_attempt": {
-    "promoted": false,
-    "reviewers": {"codex": "skipped_fleet_policy", "copilot": "pending"},
+    "promoted": true,
+    "reviewers": {"codex": "skipped_fleet_policy", "copilot": "submitted"},
     "retriggered_at": "2026-08-08T18:22:13Z"
   },
   "note": "batch2: verifying the _CONFIRM record commit 7d07b77"
