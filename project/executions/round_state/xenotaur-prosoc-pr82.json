@@ -2,10 +2,6 @@
   "pr": "https://github.com/xenotaur/prosoc/pull/82",
   "ceiling": 3,
   "completed_count": 1,
-  "pending_attempt": {
-    "promoted": true,
-    "reviewers": {"codex": "skipped_fleet_policy", "copilot": "submitted"},
-    "retriggered_at": "2026-08-08T18:17:42Z"
-  },
-  "note": "codex retrigger permanently disabled per fleet-wide human policy (session 2026-08-08, PR #517)"
+  "pending_attempt": null,
+  "note": "batch1 settled: copilot clean-with-suppressed-comment on 0bd6b81, addressed via PR-description fix + reply (no new commit needed). codex not configured on this repo at all."
 }
