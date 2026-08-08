@@ -5,7 +5,7 @@ work_item: AD_HOC
 status: in_progress
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/82
-commit: 0bd6b81
+commit: 
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/82
 session_transcript: pending
