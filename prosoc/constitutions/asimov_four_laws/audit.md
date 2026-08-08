@@ -46,7 +46,7 @@ audited: 2026-08-08
   `scripts/distill/constitutions --dry-run --show-diffs` confirmed no
   diff. `asimov_three_laws` carrying the same unresolved claims is
   logged separately in `project/design/backlog.md`'s "APPROVED cards
-  with unresolved should-fix findings" table.
+  with unresolved findings" table.
 
 ## Prose/YAML Consistency
 
