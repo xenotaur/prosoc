@@ -210,7 +210,7 @@ coupling point.
 
 LRH was audited as the candidate second consumer. Its current
 `project/principles/`+`project/guardrails/` content is small (7 files, 53
-guidance units, 194 lines) and structurally unconsumed by any LRH
+guidance units, 188 lines per `wc -l`) and structurally unconsumed by any LRH
 tooling — `src/lrh/assist/snapshot_cli.py`'s `summarize_file()` only
 treats it as opaque frontmatter-plus-prose, and a same-named
 `src/lrh/guardrails/` Python package that looks like it should enforce
