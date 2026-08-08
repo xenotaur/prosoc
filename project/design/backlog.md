@@ -77,20 +77,23 @@ None of these have Table 3 entries — they'd be corpus-original
 extensions by analogy, similar to how Figure 7 scenarios are handled, not
 drafted from a Table 3 row. Not yet scoped as a work item.
 
-## APPROVED cards with unresolved should-fix findings
+## APPROVED cards with unresolved findings
 
 These cards are already `APPROVED` (`scope: 0` — the review-queue engine
 can't offer an `APPROVED` card for promotion, so `prosoc-card-review-all`
-will never revisit it), but their most recent `audit.md` still carries
-should-fix findings from before they were approved. `AUDITED`'s bar is a
-passing verdict (`ready`/`ready_with_fixes`), not zero findings, so this
-isn't a process violation — but the findings themselves were never
-actually fixed, and nothing in the current workflow ever routes back to an
-already-`APPROVED` card to clean them up. (`charter` was tracked here
-2026-08-02 through 2026-08-06 after reverting from `APPROVED` to `EDITED`
-for an unrelated content update; its should-fix findings were fully
-resolved by 2026-08-06 and its row removed — see `prosoc/charter/audit.md`
-for the current clean-pass report.)
+will never revisit it), but each carries an unresolved finding from
+before or after approval — most commonly a should-fix from the
+pre-approval `audit.md`, but not exclusively: any finding severity
+belongs here as long as the underlying problem is the same — nothing in
+the current workflow ever routes back to an already-`APPROVED` card to
+resolve open findings, regardless of whether they're should-fix or
+suggestion level. `AUDITED`'s bar is a passing verdict
+(`ready`/`ready_with_fixes`), not zero findings, so a should-fix finding
+surviving to `APPROVED` isn't itself a process violation. (`charter` was
+tracked here 2026-08-02 through 2026-08-06 after reverting from
+`APPROVED` to `EDITED` for an unrelated content update; its should-fix
+findings were fully resolved by 2026-08-06 and its row removed — see
+`prosoc/charter/audit.md` for the current clean-pass report.)
 
 | Card | Findings (from audit.md, date noted) | Noted | Status |
 |---|---|---|---|
