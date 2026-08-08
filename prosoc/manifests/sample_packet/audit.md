@@ -3,7 +3,7 @@ family: manifests
 card: sample_packet
 verdict: ready
 blocking: 0
-should_fix: 1
+should_fix: 0
 suggestion: 0
 audited: 2026-08-07
 ---
@@ -18,11 +18,13 @@ audited: 2026-08-07
   `APPROVED`, and PR #79 regenerated `packet.golden.yml` to reflect the
   charter's final `APPROVED` promotion without updating this card's own
   prose)
-- **Verdict:** Ready for `AUDITED` once the should-fix below is applied.
+- **Verdict:** Ready for `AUDITED` — the should-fix identified below was
+  fixed in this same review pass (`manifest.md`'s Description reworded to
+  match current assembler behavior); no should-fix findings remain open.
 
 ## Findings
 
-### 1. Manifest Description misdescribes current assembler behavior — should-fix
+### 1. Manifest Description misdescribed current assembler behavior — should-fix, fixed in this pass
 - **Section/field:** `## Manifest Description` prose vs. live
   `scripts/assemble` behavior
 - **Issue:** The Description reads: "The whole corpus is currently
@@ -41,7 +43,7 @@ audited: 2026-08-07
   matches `packet.golden.yml` exactly (byte-for-byte, exit 0) — the
   golden file was itself regenerated in PR #79 when the charter reached
   `APPROVED`, but the Description prose wasn't updated at the same time.
-- **Recommended fix:** Reword the Description to state that all five
+- **Fix applied:** Reworded the Description to state that all five
   members are currently `APPROVED` and `scripts/assemble` succeeds by
   default without the escape hatch, while still documenting
   `--allow-unapproved` as available for future non-production use if any
