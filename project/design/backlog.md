@@ -200,8 +200,8 @@ machinery already domain-agnostic — `prosoc/literate/`,
 `prosoc/packet/gate.py`, `prosoc/packet/manifest.py`,
 `prosoc/packet/resolve.py`, and all of `prosoc/auditor/` have zero
 family-specific branching. The one genuinely domain-coupled piece is
-`prosoc/packet/assemble.py:64-107`'s principle-union composition
-(`_principle_union`/`_tensions`), plus the required
+`prosoc/packet/assemble.py`'s principle-union composition
+(`_principle_union`, lines 64-107; `_tensions`, lines 110-128), plus the required
 `guidance.principles`/`guidance.tensions` fields it bakes into
 `prosoc/packet/schema.json:108-136` — that's the part any second consumer
 would need to replace, not reuse. `prosoc/manifests/schema.json:50-59`
@@ -234,15 +234,15 @@ abstraction is incorrect"* (sandimetz.com, 2016) — worth fixing on its own
 terms regardless of any extraction.
 
 **Status:** Not proposing extraction now. Revisit at a future backlog
-burndown if LRH's needs firm up — full trigger list recorded in
-`logical_robotics_harness/project/design/backlog.md` § "Card-architecture
-reuse assessment (prosoc) — not yet warranted". Independently of that:
-worth unifying `prosoc/packet/loader.py`'s `FAMILIES` dict with
-`prosoc/utils/cards/validate_status.py`'s separate, duplicate `Family`/
-`FAMILIES` dict — that's a real duplication today and doesn't need a
-second consumer to justify fixing.
+burndown if LRH's needs firm up — full trigger list recorded in the
+sibling `logical_robotics_harness` repo's own `project/design/backlog.md`
+§ "Card-architecture reuse assessment (prosoc) — not yet warranted".
+Independently of that: worth unifying `prosoc/packet/loader.py`'s
+`FAMILIES` dict with `prosoc/utils/cards/validate_status.py`'s separate,
+duplicate `Family`/`FAMILIES` dict — that's a real duplication today and
+doesn't need a second consumer to justify fixing.
 
 **Related:** `prosoc/packet/assemble.py`, `prosoc/packet/loader.py:69-80`,
 `prosoc/packet/schema.json:108-136`, `prosoc/manifests/schema.json:50-59`,
-`prosoc/utils/cards/validate_status.py`; mirrored entry in
-`logical_robotics_harness/project/design/backlog.md`.
+`prosoc/utils/cards/validate_status.py`; mirrored entry in the sibling
+`logical_robotics_harness` repo's own `project/design/backlog.md`.
