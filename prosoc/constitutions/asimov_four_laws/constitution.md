@@ -2,7 +2,7 @@
 
 ## STATUS
 
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **SOURCE:** Asimov, I. (1985). Robots and Empire.
 - **DRAFTED:** Anthony Francis centaur@logicalrobotics.com, 2026-01-26
 - **EDITED:** Anthony Francis centaur@logicalrobotics.com, 2026-01-26
@@ -27,7 +27,7 @@ robot safety system.
 constitution:
   id: asimov_four_laws
   name: "Asimov's Four Laws of Robotics"
-  state: AUDITED
+  state: APPROVED
 
   scope:
     domain: general_robot_behavior
@@ -118,3 +118,27 @@ This is an example of a constitution that is not intended for use in real-world 
 - Ethical tradeoffs:
   - Avoiding catastrophic system-level outcomes can override human authority.
   - Arguably leads to robots taking over human civilization.
+- Contested scope claims (`scope.exclusions`, identified 2026-08-08):
+  - `military_combat`: it is debatable whether this domain is genuinely
+    out of scope, or whether the Laws simply apply there and forbid
+    lethal action — a combat robot restricted to nonlethal means could
+    still comply, which would make this a strong in-scope constraint
+    rather than grounds for exclusion.
+  - `self-modifying_agents`: it is debatable whether self-modification is
+    inherently incompatible with a fixed rule hierarchy. Douglas
+    Hofstadter's *Gödel, Escher, Bach* (1979) argues, via an analogy to
+    Gödel's incompleteness theorems for formal systems, that
+    self-referential systems retain something about themselves they
+    cannot alter from within — this is a philosophical position, not a
+    formal proof about software agents, but it suggests a self-modifying
+    agent could still carry an immutable constitutional core, making a
+    blanket exclusion of the whole category broader than the underlying
+    concern warrants.
+  - Neither claim is a factual error in the source material — both are
+    genuinely open questions about how to scope a "canonical historical
+    baseline" constitution, left here rather than resolved, consistent
+    with this card's stated purpose as a flawed illustration rather than
+    a maximally-defensible modern constitution. The identical exclusions
+    appear on the sibling `asimov_three_laws` card
+    (`prosoc/constitutions/asimov_three_laws/constitution.md`), tracked
+    separately in `project/design/backlog.md`.

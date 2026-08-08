@@ -1,6 +1,6 @@
 id: following_01
 name: Following
-state: AUDITED
+state: APPROVED
 summary: 'A robot in a servant role follows a human who leads their own navigation
   through a walking space, freely choosing pace, direction, and path. The robot must
   maintain an appropriate following distance and trajectory through turns, stops,
