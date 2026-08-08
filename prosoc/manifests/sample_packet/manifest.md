@@ -1,7 +1,7 @@
 # Manifest: Sample Packet
 
 ## STATUS
-- **STATE:** DRAFTED
+- **STATE:** AUDITED
 - **SOURCE:** WI-PACKET-MANIFEST-FAMILY, migrated from prosoc/packet/examples/sample_manifest.yml (Phase 1)
 - **DRAFTED:** Claude (WI-PACKET-MANIFEST-FAMILY), 2026-07-30
 - **EDITED:** —
@@ -24,10 +24,12 @@
 ## Manifest Description
 
 A demonstration manifest exercising the assembler engine end to end: one
-member from each of the five content card families. The whole corpus is
-currently `DRAFTED`, so `scripts/assemble` on this manifest is fail-closed by
-default and emits nothing; pass `--allow-unapproved "<why>"` to produce a
-non-production packet stamped with the escape-hatch marker.
+member from each of the five content card families. All five members are
+currently `APPROVED`, so `scripts/assemble` on this manifest succeeds by
+default and emits a production packet; if any member is later reverted
+below `APPROVED`, `scripts/assemble` fail-closes and emits nothing unless
+`--allow-unapproved "<why>"` is passed to produce a non-production packet
+stamped with the escape-hatch marker.
 
 ---
 
@@ -54,7 +56,7 @@ non-production packet stamped with the escape-hatch marker.
 ```yaml
 id: sample_packet
 name: Sample Packet
-state: DRAFTED
+state: AUDITED
 
 builder: "prosoc packet assembler (sample)"
 

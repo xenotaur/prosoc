@@ -1,6 +1,6 @@
 id: blind_corner_01
 name: Blind Corner
-state: DRAFTED
+state: AUDITED
 summary: 'A robot and a human pedestrian approach each other from opposite directions
   and meet at an indoor blind corner, where neither can see the other until they are
   in close proximity. The robot must detect the human at short range and resolve the

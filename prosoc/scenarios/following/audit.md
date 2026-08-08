@@ -1,47 +1,93 @@
 ---
-scenario: following
+family: scenarios
+card: following
 verdict: ready
 blocking: 0
 should_fix: 0
-suggestion: 0
-audited: 2026-07-22
+suggestion: 1
+audited: 2026-08-07
 ---
 
 # Audit: Following
 
-- **Scenario:** `prosoc/scenarios/following/`
-- **Audited:** Claude (prosoc-scenario-audit skill), 2026-07-22
-- **Verdict:** Ready for AUDITED, no issues found
+- **Card:** `prosoc/scenarios/following/`
+- **Audited:** Claude (prosoc-card-audit skill), 2026-08-07 (fresh audit —
+  prior audit dated 2026-07-22 was stale relative to the card's last
+  touch on 2026-07-25 — the corpus-wide `WI-CARD-STATUS-FOUNDATION`
+  mechanical migration, not a content edit — this pass adds the
+  must-level-prose-gap finding and resolves the Table 3 erratum question)
+- **Verdict:** Ready for `AUDITED`, no blocking or should-fix issues found
 
 ## Findings
 
-No findings. Prose and YAML are consistent throughout: the Scenario Overview, Social Navigation Context, and Normative Expectations sections match `intended_robot_task`, `intended_human_behavior`, `agents` (robot role `servant`, one human with role `leader`), `expected_behaviors.{must,should,should_not}`, and `ideal_outcome` with no contradictions, drift, or one-sided claims. `relevant_principles` (P1, P2, P6, P8) and `scenario_usage_guide.quality_metrics` (P2, P6) are valid P0–P9 entries, within the recommended 3–5 range. `expected_behaviors` entries describe kinds of behavior (e.g. "maintain a socially comfortable following distance") rather than exact motions or numeric thresholds — no over-specification per P&G Guideline N6.
+### 1. "Normative Expectations" prose omits a `must`-level item — suggestion
+- **Section/field:** `expected_behaviors.must` ("avoid collision with the
+  human, other pedestrians, and obstacles", "not lose track of the human
+  during turns or brief occlusions") vs. the prose "Unacceptable
+  behavior" list
+- **Issue:** The second `must` item is covered ("Following at a distance
+  so far that the robot loses the human at a turn or in a crowd"), but
+  the first ("avoid collision") is never stated as its own bullet — the
+  closest prose item ("Cutting through obstacles or other pedestrians to
+  preserve following distance") is about cutting through, not collision
+  directly. Matches the recurring must-level-prose-gap pattern already
+  tracked in `project/design/backlog.md`.
+- **Recommended fix:** Add an explicit "Colliding with the human, other
+  pedestrians, or obstacles while following" bullet to Unacceptable
+  behavior. Not required for `AUDITED`; deferred to the dedicated
+  backlog-burndown pass.
+
+No other findings. `related_scenarios: [leading]` reciprocates — `leading`'s
+own `related_scenarios` lists `following` back. No one-way
+cross-reference gap.
 
 ## Source Fidelity
 
-SOURCE cites P&G Paper Table 3, cited in [50]. Compared against `.claude/skills/_shared/pg_scenarios.md`'s "Following" entry (Interpersonal Scenarios section):
+SOURCE cites P&G Paper Table 3, "Following" entry (cited in [50]).
+Compared against `.claude/skills/_shared/pg_scenarios.md`:
 
 | Field | Table 3 | This card | Match? |
 |---|---|---|---|
-| Description | A robot follows a person | Robot in servant role follows a leading human | Match |
+| Description | A robot follows a person | Overview: "robot in a servant role follows a human who leads their own navigation" | Match |
 | Physical Env | Generic | `context.environment.type: generic` | Match |
 | Geometric Layout | Walking space | `geometric_layout: walking space` | Match |
 | Scientific Purpose | Joint navigation | `scientific_purpose: joint navigation` | Match |
 | Robot Role | Servant | `agents.robot.role: servant` | Match |
-| Robot Task | Follow lead robot | `intended_robot_task: follow the lead human` | Divergence, explicitly addressed — see below |
-| Human Behavior | Lead human | `intended_human_behavior: lead, navigating freely through the space...` | Match |
+| Robot Task | Follow lead robot | `intended_robot_task: follow the lead human` | Erratum — resolved below |
+| Human Behavior | Lead human | `intended_human_behavior: lead, navigating freely...` | Match |
 | Ideal Outcome | Robot follows person | `ideal_outcome: robot follows the person continuously...` | Match |
-| Related Scenarios | Accompany Peer | `related_scenarios: [leading]` in YAML; Accompany Peer discussed in prose ("Notes for Scenario Designers and Evaluators") but not machine-readable, since it is a Figure-7 concept with no implemented scenario directory of its own | Consistent — `leading` is the corpus-internal, implemented sibling (directory exists under `prosoc/scenarios/leading/`); Accompany Peer remains prose-only because it isn't an implemented scenario |
+| Related Scenarios | Accompany Peer | `related_scenarios: [leading]` — Accompany Peer has no implemented scenario directory; card's own `evaluation_notes` documents the substitution | Consistent — expected divergence per convention, not a fidelity gap |
 | Cited In | [50] | `cited_in: ["50"]` | Match |
 
-The "Follow lead robot" vs. "follow the lead human" divergence is unchanged from prior audits: the card's `evaluation_notes` includes an explicit "Ambiguity note" stating that "Follow lead robot" appears to be a transcription slip in Table 3 given the Description field ("A robot follows a person"), and that the card follows the Description's reading. This remains a reasonable, transparently-documented interpretive call, not a fabricated fidelity claim.
+**Robot Task erratum — confirmed by the user directly (2026-08-07), who
+is the P&G paper's lead author.** Table 3 as transcribed literally reads
+"Follow lead robot" for this scenario's Robot Task field, which
+contradicts the scenario's own Description ("A robot follows a person")
+and Human Behavior ("Lead human") — a robot cannot simultaneously be the
+one following and the one being followed within the same row. The user
+confirmed this is a genuine erratum in the source paper and should be
+read as "Follow lead human." The card's `intended_robot_task: follow the
+lead human` already reflects this correct reading; the `evaluation_notes`
+"Ambiguity note" should be updated to state this is a confirmed erratum
+rather than an unverified suspicion, but this is optional polish, not a
+fidelity defect — the card's own interpretive call was already correct.
 
-All other fields, including `related_scenarios` and `cited_in`, match cleanly.
+"Accompany Peer" is not yet tracked in `project/design/backlog.md`'s
+"Missing forward-referenced cards" table — adding it as part of this
+review.
 
 ## Completeness
 
-Scenario Card Summary: all fields present and rendered — Scenario Name, Description, Scientific Purpose, Physical Environment, Geometric Layout, Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics, Ideal Outcome, Related Scenarios (`leading`), and Cited In (`50`).
+Scenario Card Summary: all fields present and rendered — Scenario Name,
+Description, Scientific Purpose, Physical Environment, Geometric Layout,
+Robot Role, Robot Task, Human Behavior, Success Metrics, Quality Metrics,
+Ideal Outcome, Related Scenarios (`leading`), Cited In (`50`).
 
-Scenario Usage Guide: Success Metrics, Quality Metrics, Ideal Outcome, Failure Modes, and Labeling Criteria are all present and non-trivial.
+Scenario Usage Guide: Success Metrics, Quality Metrics, Ideal Outcome,
+Failure Modes, and Labeling Criteria all present and non-trivial.
+`quality_metrics` (P2, P6) is a sensible subset of `relevant_principles`
+(P1, P2, P6, P8).
 
-No required fields are blank. The dry-run distiller check (`scripts/distill/scenarios --scenario following --dry-run --show-diffs`) reported no diff and no schema validation errors, confirming `scenario.md` and `scenario.yml` are in sync.
+No required fields are blank. `scripts/distill/scenarios --scenario
+following --dry-run --show-diffs` reported no diff, confirming
+`scenario.md` and `scenario.yml` are in sync.
