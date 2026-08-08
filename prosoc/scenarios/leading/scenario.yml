@@ -1,6 +1,6 @@
 id: leading_01
 name: Leading
-state: AUDITED
+state: APPROVED
 summary: 'A robot in a leader role guides a human through a walking space, choosing
   the path and pace, while the human''s task is to follow. The robot must move legibly,
   match its pace to the human''s ability, and monitor whether the human remains present

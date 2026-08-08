@@ -1,6 +1,6 @@
 id: guidance.docent
 name: Guidance and Docent Operation
-state: AUDITED
+state: APPROVED
 context_class: core
 primary_robot_role: guide
 applies_to_tasks:
