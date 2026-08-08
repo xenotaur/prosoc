@@ -1,10 +1,10 @@
 {
   "pr": "https://github.com/xenotaur/prosoc/pull/82",
   "ceiling": 3,
-  "completed_count": 0,
+  "completed_count": 1,
   "pending_attempt": {
-    "promoted": false,
-    "reviewers": {"codex": "skipped_fleet_policy", "copilot": "pending"},
+    "promoted": true,
+    "reviewers": {"codex": "skipped_fleet_policy", "copilot": "submitted"},
     "retriggered_at": "2026-08-08T18:17:42Z"
   },
   "note": "codex retrigger permanently disabled per fleet-wide human policy (session 2026-08-08, PR #517)"
