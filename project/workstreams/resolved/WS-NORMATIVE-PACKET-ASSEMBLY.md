@@ -2,8 +2,8 @@
 id: WS-NORMATIVE-PACKET-ASSEMBLY
 kind: planning_node
 title: Normative Packet Assembly — Implementation
-status: proposed
-stage: designed
+status: resolved
+stage: closed
 origin: follow_up
 summary: Implement the manifest-driven normative packet assembler defined in PROP-NORMATIVE-PACKET-ASSEMBLY, from lifecycle/status normalization through the assembler engine, manifest card family, and CI drift checks.
 related_focus:
@@ -146,12 +146,9 @@ consumption, navigation — is blocked on there being a packet to consume.
 Further work items are created via `/lrh-work-item` as each phase is planned
 and added to `work_items:` as they land. Phases 0a, 0b, 1, 2, and 3 are
 done, and the corpus-approval tooling (`WI-CARD-APPROVE-SKILLS`,
-`WI-CARD-APPROVAL-PILOT`) is built and piloted; the exit criterion itself —
-every card in the corpus reaching `APPROVED` — remains open. 11 of 32 cards
-carried `APPROVED` as of 2026-08-06 — a point-in-time snapshot, not a
-dynamically updated figure; see
-[`FOCUS-NORMATIVE-PACKET-ASSEMBLY`](../../focus/current_focus.md) for the
-latest count. Promotion continues via `prosoc-card-review-all`.
+`WI-CARD-APPROVAL-PILOT`) is built and piloted. The final exit criterion —
+every card in the corpus reaching `APPROVED` — was met in PR #84
+(2026-08-09): 32 of 32 cards carry `APPROVED`, closing out the workstream.
 
 ## Exit Criteria
 
@@ -168,9 +165,7 @@ latest count. Promotion continues via `prosoc-card-review-all`.
   against checked-in golden packets.
 - Every card in the corpus reaches `APPROVED` (per `PROP-NORMATIVE-CARD-APPROVAL`'s
   framing of this as the workstream's second exit criterion; confirmed with
-  the user 2026-08-01). Tooling for this (the review-queue engine and
-  `prosoc-card-approve`/`prosoc-card-review`/`prosoc-card-review-all`
-  skills) is built and piloted; the criterion itself is not yet met.
+  the user 2026-08-01). Met in PR #84 (2026-08-09): 32 of 32 cards `APPROVED`.
 
 ## Non-Goals
 
@@ -187,8 +182,8 @@ latest count. Promotion continues via `prosoc-card-review-all`.
   [`project/design/proposals/adopted/normative-packet-assembly/00_proposal.md`](../../design/proposals/adopted/normative-packet-assembly/00_proposal.md)
   (`PROP-NORMATIVE-PACKET-ASSEMBLY`, adopted 2026-07-30).
 - Governing proposal for the corpus-approval review pass:
-  [`project/design/proposals/proposed/normative-card-approval/00_proposal.md`](../../design/proposals/proposed/normative-card-approval/00_proposal.md)
-  (`PROP-NORMATIVE-CARD-APPROVAL`, proposed 2026-07-30).
+  [`project/design/proposals/adopted/normative-card-approval/00_proposal.md`](../../design/proposals/adopted/normative-card-approval/00_proposal.md)
+  (`PROP-NORMATIVE-CARD-APPROVAL`, adopted).
 
 ## Open Questions
 
