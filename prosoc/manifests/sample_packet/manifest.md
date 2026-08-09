@@ -1,7 +1,7 @@
 # Manifest: Sample Packet
 
 ## STATUS
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **SOURCE:** WI-PACKET-MANIFEST-FAMILY, migrated from prosoc/packet/examples/sample_manifest.yml (Phase 1)
 - **DRAFTED:** Claude (WI-PACKET-MANIFEST-FAMILY), 2026-07-30
 - **EDITED:** —
@@ -56,7 +56,7 @@ stamped with the escape-hatch marker.
 ```yaml
 id: sample_packet
 name: Sample Packet
-state: AUDITED
+state: APPROVED
 
 builder: "prosoc packet assembler (sample)"
 

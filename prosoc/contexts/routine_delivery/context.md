@@ -1,7 +1,7 @@
 # Context: Routine Service Delivery
 
 ## STATUS
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **CONTEXT TYPE:** CORE
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; service robot literature
 - **CREATED:** 2026-01-11
@@ -140,7 +140,7 @@ Common tensions include:
 ```yaml
 id: service.routine_delivery
 name: Routine Service Delivery
-state: AUDITED
+state: APPROVED
 context_class: core
 
 primary_robot_role: service provider

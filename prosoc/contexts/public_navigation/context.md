@@ -1,7 +1,7 @@
 # Context: Baseline Public Navigation
 
 ## STATUS
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **CONTEXT TYPE:** CORE
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; general public-space navigation literature
 - **CREATED:** 2026-01-11
@@ -139,7 +139,7 @@ Common tensions include:
 ```yaml
 id: baseline.public_navigation
 name: Baseline Public Navigation
-state: AUDITED
+state: APPROVED
 context_class: core
 
 primary_robot_role: neutral navigator

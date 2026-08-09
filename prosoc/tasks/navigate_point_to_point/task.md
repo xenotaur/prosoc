@@ -1,7 +1,7 @@
 # Task: Navigate from Start to Goal
 
 ## STATUS
-- **STATE:** AUDITED  
+- **STATE:** APPROVED  
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common mobile robot navigation task  
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11  
 - **EDITED:** —  
@@ -94,7 +94,7 @@ Evaluation of this task therefore requires assessing how goal achievement is bal
 ```yaml
 id: navigate.point_to_point
 name: Navigate from Start to Goal
-state: AUDITED
+state: APPROVED
 
 summary: >
   The robot attempts to move from an initial location to a specified destination,

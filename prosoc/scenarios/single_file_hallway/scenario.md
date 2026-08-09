@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** AUDITED
+- **STATE:** APPROVED
 - **SOURCE:** The Prosocial Robot Navigation Charter (Francis, submitted to Frontiers), Section 4.2.1 — one of two scenarios developed specifically for that paper to contrast P7: Proactivity and P9: Prosocial Behavior; not derived from the P&G paper's Table 3 or Figure 7 despite a superficial thematic resemblance to Figure 7's "Narrow Hallway" sketch
 - **DRAFTED:** ChatGPT 5.2, 2026-01-16
 - **EDITED:** render_sections.py, 2026-07-19
@@ -57,7 +57,7 @@ Unacceptable behavior includes forcing the human to back up unexpectedly, enteri
 ```yaml
 id: single_file_hallway_01
 name: Single File Hallway
-state: AUDITED
+state: APPROVED
 
 summary: >
   A robot and a human approach each other in a hallway that is too narrow for safe and comfortable
