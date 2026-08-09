@@ -9,7 +9,6 @@ from prosoc.charter import distill
 from prosoc.literate import compiler
 from prosoc.literate import errors
 
-
 VALID_MARKDOWN = """
 # Test Charter
 
