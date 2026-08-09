@@ -2,13 +2,13 @@
 execution_id: 2026_08_09_08_34_17_NCA_PRNC_PACKAGE_LAYOUT_CONFIRM
 prompt_id: PROMPT(AD_HOC:NCA_PRNC_PACKAGE_LAYOUT_CONFIRM)[2026-08-09T08:34:09+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_08_09_05_05_56_NCA_PRNC_PACKAGE_LAYOUT
 pr: https://github.com/xenotaur/prosoc/pull/85
-commit: 
+commit: a3d308c
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/85
-session_transcript: pending
+session_transcript: claude-app:f087f2be-5992-4711-b12b-40cebb7e8305
 created_at: 2026-08-09T08:34:17+00:00
 ---
 
