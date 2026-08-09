@@ -1,6 +1,6 @@
 id: sample_packet
 name: Sample Packet
-state: AUDITED
+state: APPROVED
 builder: prosoc packet assembler (sample)
 members:
 - family: charter

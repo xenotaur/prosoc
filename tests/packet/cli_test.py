@@ -1,15 +1,17 @@
 # Integration tests for prosoc.packet.cli against the sample manifest.
 
 import contextlib
+import dataclasses
 import io
 import shutil
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 import yaml
 
-from prosoc.packet import cli
+from prosoc.packet import cli, loader
 from prosoc.packet.assemble import PREDICATE_TYPE
 from prosoc.packet.loader import REPO_ROOT
 
@@ -24,44 +26,43 @@ def _run(argv):
     return code, out.getvalue(), err.getvalue()
 
 
-def _find_below_approved_card() -> tuple[str, str]:
-    """Deterministically locate a real card currently below APPROVED.
-
-    sample_packet's own members are now all APPROVED (the pilot's whole
-    point) and can no longer demonstrate the fail-closed gate or the
-    --allow-unapproved escape hatch. Rather than hard-coding one such card
-    (which future card-approval work could itself promote, silently
-    breaking this fixture), query the live corpus via the same review-queue
-    engine WI-CARD-APPROVE-SKILLS built, and pick the alphabetically-first
-    match for a stable, repeatable choice.
-    """
-    from prosoc.utils.cards.review_queue import build_queue
-
-    candidates = sorted(
-        (e for e in build_queue() if e.scope > 0),
-        key=lambda e: (e.family, e.id),
-    )
-    if not candidates:
-        raise RuntimeError(
-            "no card in the corpus is below APPROVED; this fixture needs "
-            "one to exercise the fail-closed gate and the --allow-unapproved "
-            "escape hatch"
-        )
-    return candidates[0].family, candidates[0].id
-
-
 def _write_unapproved_manifest(tmp_dir: Path) -> Path:
-    """A manifest naming a real card that is currently below the production
-    floor (see _find_below_approved_card) -- exercises the fail-closed gate
-    and the --allow-unapproved escape hatch generically, now that
-    sample_packet's real members are all APPROVED."""
-    family, card_id = _find_below_approved_card()
+    """A manifest naming a synthetic scenario card held below the production
+    floor. Pair with `patch_scenarios_root(tmp_dir)` to make the card
+    resolvable.
+
+    The whole real corpus is now APPROVED (WS-NORMATIVE-PACKET-ASSEMBLY's
+    full-corpus exit criterion), so no real card can any longer demonstrate
+    the fail-closed gate or the --allow-unapproved escape hatch -- unlike a
+    single promoted card, this isn't something a future edit could
+    accidentally fix by regressing a card's state. Synthesize a
+    schema-minimal card instead: it lives outside the repo tree and is only
+    resolvable while `patch_scenarios_root(tmp_dir)` is active, so it can
+    never leak into or be confused with the real corpus.
+    """
+    scenario_dir = tmp_dir / "scratch_unapproved"
+    scenario_dir.mkdir()
+    (scenario_dir / "scenario.yml").write_text(
+        "id: scratch_unapproved\n"
+        "name: Scratch Unapproved\n"
+        "state: DRAFTED\n"
+        "summary: Synthetic fixture card for packet CLI gate tests.\n",
+        encoding="utf-8",
+    )
     manifest_path = tmp_dir / "unapproved_manifest.yml"
     manifest_path.write_text(
-        f"builder: test\nmembers:\n- family: {family}\n  id: {card_id}\n",
+        "builder: test\nmembers:\n- family: scenarios\n  id: scratch_unapproved\n",
         encoding="utf-8",
     )
     return manifest_path
+
+
+def patch_scenarios_root(tmp_dir: Path):
+    """Point the scenarios family's root at tmp_dir for the duration of a
+    `with` block, so a synthetic card written there resolves through the
+    real loader/schema machinery without touching the checked-in corpus."""
+    patched = dataclasses.replace(loader.FAMILIES["scenarios"], root=tmp_dir)
+    return mock.patch.dict(loader.FAMILIES, {"scenarios": patched})
 
 
 class CliTest(unittest.TestCase):
@@ -70,8 +71,10 @@ class CliTest(unittest.TestCase):
 
     def test_fail_closed_blocks_a_manifest_with_an_unapproved_member(self):
         with tempfile.TemporaryDirectory() as d:
-            manifest = _write_unapproved_manifest(Path(d))
-            code, out, err = _run([str(manifest)])
+            tmp_dir = Path(d)
+            manifest = _write_unapproved_manifest(tmp_dir)
+            with patch_scenarios_root(tmp_dir):
+                code, out, err = _run([str(manifest)])
             self.assertEqual(code, 1)
             self.assertEqual(out, "")
             self.assertIn("fail-closed", err)
@@ -90,10 +93,12 @@ class CliTest(unittest.TestCase):
 
     def test_allow_unapproved_emits_valid_packet_with_hatch_engaged(self):
         with tempfile.TemporaryDirectory() as d:
-            manifest = _write_unapproved_manifest(Path(d))
-            code, out, err = _run(
-                [str(manifest), "--allow-unapproved", "integration test"]
-            )
+            tmp_dir = Path(d)
+            manifest = _write_unapproved_manifest(tmp_dir)
+            with patch_scenarios_root(tmp_dir):
+                code, out, err = _run(
+                    [str(manifest), "--allow-unapproved", "integration test"]
+                )
             self.assertEqual(code, 0)
             env = yaml.safe_load(out)
             self.assertEqual(env["predicate_type"], PREDICATE_TYPE)

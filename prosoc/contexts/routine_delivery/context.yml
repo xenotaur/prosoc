@@ -1,6 +1,6 @@
 id: service.routine_delivery
 name: Routine Service Delivery
-state: AUDITED
+state: APPROVED
 context_class: core
 primary_robot_role: service provider
 applies_to_tasks:
