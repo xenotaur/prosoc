@@ -23,8 +23,8 @@ scripts/assemble prosoc/manifests/sample_packet/manifest.yml
 
 # Development packet: lowers the floor and stamps a non-production marker
 # (predicate.policy.escape_hatch + guidance.notice) into the payload.
-scripts/assemble prosoc/manifests/sample_packet/manifest.yml \
-  --allow-unapproved "local eval; corpus not yet human-approved"
+scripts/assemble prosoc/manifests/<name>/manifest.yml \
+  --allow-unapproved "local eval; member card not yet human-approved"
 ```
 
 ## Envelope shape

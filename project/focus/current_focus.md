@@ -1,7 +1,7 @@
 ---
 id: FOCUS-NORMATIVE-PACKET-ASSEMBLY
 title: Promote the normative card corpus to APPROVED
-status: active
+status: completed
 related_workstreams:
   - WS-NORMATIVE-PACKET-ASSEMBLY
 related_design:
@@ -10,62 +10,44 @@ related_design:
 
 # Current Focus
 
-The **manifest-driven normative packet assembler** is built: `scripts/assemble`
-resolves a manifest's member cards, schema-validates and hashes each one,
-applies a fail-closed lifecycle gate, and composes them into a single
-machine-readable guidance packet, with a CI drift check
-(`.github/workflows/packet.yml`) keeping checked-in golden packets honest.
-The design is settled in
+**This focus is complete.** The **manifest-driven normative packet
+assembler** is built: `scripts/assemble` resolves a manifest's member
+cards, schema-validates and hashes each one, applies a fail-closed
+lifecycle gate, and composes them into a single machine-readable
+guidance packet, with a CI drift check (`.github/workflows/packet.yml`)
+keeping checked-in golden packets honest. The design is settled in
 [`PROP-NORMATIVE-PACKET-ASSEMBLY`](../design/proposals/adopted/normative-packet-assembly/00_proposal.md)
-(adopted), the work is governed by
-[`WS-NORMATIVE-PACKET-ASSEMBLY`](../workstreams/proposed/WS-NORMATIVE-PACKET-ASSEMBLY.md),
-and prosoc's human-facing docs (top-level `README.md`, all six family
-`README.md`s) were brought up to date with this architecture in PR #67.
-Phases 0a through 3 of the workstream are all complete; only Phase 4
-(signing, `related_contexts`/`example_scenarios` auto-resolution) remains
-deferred.
+(adopted), the work was governed by
+[`WS-NORMATIVE-PACKET-ASSEMBLY`](../workstreams/resolved/WS-NORMATIVE-PACKET-ASSEMBLY.md)
+(closed 2026-08-09), and prosoc's human-facing docs (top-level `README.md`,
+all six family `README.md`s) were brought up to date with this
+architecture in PR #67.
 
-The active front is now **corpus promotion**: getting every card in the
-corpus to `APPROVED`, not just the field/mechanism supporting each
-principle. This is now stated explicitly as
-`WS-NORMATIVE-PACKET-ASSEMBLY`'s sixth Exit Criteria bullet (added after the
-user's 2026-08-01 chat confirmation and
-[`PROP-NORMATIVE-CARD-APPROVAL`](../design/proposals/adopted/normative-card-approval/00_proposal.md)'s
-own framing of it as "the workstream's second exit criterion"). Tooling for
-the promotion itself — a ranked review-queue engine plus
-`prosoc-card-approve`/`prosoc-card-review`/`prosoc-card-review-all` — is
-built and piloted (`WI-CARD-APPROVE-SKILLS`, `WI-CARD-APPROVAL-PILOT`, both
-resolved); the criterion itself is not yet met. As of this writing (live
-count across all **six** families, including `manifests` — not a cached
-snapshot, re-run before trusting this number):
+The workstream's final exit criterion — every card in the corpus
+reaching `APPROVED`, not just the field/mechanism supporting it — was
+met in PR #84 (2026-08-09): all 32 cards across all six families
+(`scenarios`, `tasks`, `contexts`, `constitutions`, `charter`,
+`manifests`) are now `APPROVED`. `scripts/assemble` no longer needs
+`--allow-unapproved` to produce a production packet from any current
+manifest; the escape hatch remains available for any future
+not-yet-`APPROVED` card.
 
-| Family | APPROVED | AUDITED | DRAFTED | Total |
-|---|---|---|---|---|
-| Scenarios | 5 | 3 | 12 | 20 |
-| Tasks | 3 | 1 | 0 | 4 |
-| Contexts | 1 | 3 | 0 | 4 |
-| Constitutions | 1 | 1 | 0 | 2 |
-| Charter | 1 | 0 | 0 | 1 |
-| Manifests | 0 | 0 | 1 | 1 |
-| **Total** | **11** | **8** | **13** | **32** |
-
-`AUDITED` cards are ready for a human `APPROVED` pass; `DRAFTED` cards still
-need an audit first. Several sessions (PRs #68–#71) have been promoting
-cards in batches of ~5 using `prosoc-card-review-all` /
-`prosoc-card-audit-all`; continue that pattern — the ranked review queue is
-`scripts/validate/review-queue`.
-
-Next concrete step: keep running `prosoc-card-review-all` (or
-`prosoc-card-audit` for one card at a time) against the remaining 21
-non-`APPROVED` cards, prioritizing the 8 already `AUDITED` since those are
-closest to done.
+**No new focus has been chosen yet.** Per `WS-NORMATIVE-PACKET-ASSEMBLY`'s
+own Purpose section, the packet was "the pivot between two halves of the
+project: everything below it — authoring, distillation, schema
+validation, agent auditing — is built and tested, and everything above
+it — agent consumption, navigation — is blocked on there being a packet
+to consume." That's now unblocked, but which front to open next is an
+open decision, not made here.
 
 ## Scenario-corpus maintenance note
 
 Any edit to a scenario's prose or YAML invalidates its prior audit — re-run
 `prosoc-card-audit` (single) or `prosoc-card-audit-all` (family/corpus)
 rather than assuming a stale audit still holds. `prosoc/scenarios/AUDIT_SUMMARY.md`
-is a point-in-time index only; it does not self-update.
+is a point-in-time index only; it does not self-update. This applies even
+though every card currently carries `APPROVED` — a later content edit to
+an `APPROVED` card still invalidates its audit the same way.
 
 ## Scope note
 

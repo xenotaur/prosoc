@@ -176,9 +176,11 @@ Principles referenced across a packet's scenario/task/context members are
 unioned and annotated (`emphasized` / `deprioritized` / `neutral`), never
 silently dropped.
 
-Since the card corpus has not yet reached `APPROVED`, `scripts/assemble`
-supports a `--allow-unapproved "<justification>"` escape hatch for
-development packets; it lowers the gate floor and stamps a
+The entire card corpus reached `APPROVED` in PR #84 (2026-08-09), so
+every current manifest assembles a production packet by default.
+`scripts/assemble` still supports a `--allow-unapproved "<justification>"`
+escape hatch for development packets built against any future
+not-yet-`APPROVED` card; it lowers the gate floor and stamps a
 non-production notice directly into the packet payload, so a development
 packet is never byte-indistinguishable from a production one. A CI check
 (`.github/workflows/packet.yml`) byte-compares every manifest's assembled
@@ -398,13 +400,13 @@ regenerating its golden packet), the expected resolution is:
 
 ```bash
 scripts/assemble prosoc/manifests/<name>/manifest.yml \
-  --allow-unapproved "CI packet-drift check (dev-mode golden; corpus not yet APPROVED)" \
+  --allow-unapproved "CI packet-drift check (dev-mode golden; member card not yet APPROVED)" \
   > prosoc/manifests/<name>/packet.golden.yml
 git commit
 ```
 
-See [`prosoc/packet/README.md`](prosoc/packet/README.md) for why the
-justification string above must match verbatim.
+See [`prosoc/packet/README.md`](prosoc/packet/README.md) for more on the
+`--allow-unapproved` escape hatch.
 
 ---
 
