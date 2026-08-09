@@ -28,7 +28,8 @@ def _run(argv):
 
 def _write_unapproved_manifest(tmp_dir: Path) -> Path:
     """A manifest naming a synthetic scenario card held below the production
-    floor, plus a context manager that makes it resolvable.
+    floor. Pair with `patch_scenarios_root(tmp_dir)` to make the card
+    resolvable.
 
     The whole real corpus is now APPROVED (WS-NORMATIVE-PACKET-ASSEMBLY's
     full-corpus exit criterion), so no real card can any longer demonstrate
