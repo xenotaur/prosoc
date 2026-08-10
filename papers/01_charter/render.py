@@ -24,9 +24,10 @@ PANDOC_HORIZONTAL_RULE = "\\begin{center}\\rule{0.5\\linewidth}{0.5pt}\\end{cent
 
 
 def apply_fragment_fixups(fragment: str) -> str:
-    fragment = fragment.replace(
-        "\\begin{lstlisting}",
-        "\\begin{lstlisting}[style=literatecard]",
+    fragment = re.sub(
+        r"\\begin\{lstlisting\}(?:\[[^\]]*\])?",
+        r"\\begin{lstlisting}[style=literatecard]",
+        fragment,
     )
     fragment = re.sub(
         rf"\n*{re.escape(PANDOC_HORIZONTAL_RULE)}\n*",
@@ -84,6 +85,7 @@ def render_fragment(key: str, source: Path) -> Path:
         "markdown",
         "-t",
         "latex",
+        # Pandoc 3.10 deprecates --listings in favor of this spelling.
         "--syntax-highlighting=idiomatic",
     ]
 
