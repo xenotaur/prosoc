@@ -1,0 +1,3 @@
+## 2024-05-24 - Schema Recompilation Bottleneck
+**Learning:** `jsonschema.validate(instance, schema)` recompiles the schema validator from scratch on every single call. When used in hot paths (like iterating over rows or packets) combined with parsing the schema from disk via `json.loads(Path.read_text())`, this introduces significant CPU overhead.
+**Action:** Use `jsonschema.validators.validator_for(schema)(schema)` and cache the compiled validator instance with `@functools.lru_cache` (especially when reading the schema from disk). Use `.validate(instance)` on the cached compiled validator object instead of the top-level generic function.

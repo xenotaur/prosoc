@@ -24,7 +24,6 @@ import jsonschema
 
 from prosoc.literate import errors
 
-
 YAML_FENCE_LANGUAGE = "yaml"
 
 _YAML_BLOCK_RE = re.compile(
@@ -138,7 +137,13 @@ def validate_document(
         LiterateSchemaError: if validation fails.
     """
     try:
-        jsonschema.validate(instance=document, schema=schema)
+        # Pre-compile the validator to avoid parsing the schema multiple times.
+        # This function isn't called in a tight loop with the exact same
+        # schema dict reference often enough to warrant manual LRU caching here,
+        # but avoiding `jsonschema.validate`'s full initialisation overhead
+        # is still a fast, measurable win.
+        validator = jsonschema.validators.validator_for(schema)(schema)
+        validator.validate(instance=document)
     except jsonschema.exceptions.ValidationError as e:
         raise errors.LiterateSchemaError("Document failed schema validation") from e
 
