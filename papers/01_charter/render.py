@@ -10,7 +10,6 @@ import subprocess
 import sys
 from pathlib import Path
 
-
 PAPER_DIR = Path(__file__).resolve().parent
 REPO_ROOT = PAPER_DIR.parents[1]
 
@@ -21,9 +20,7 @@ BUILD_DIR = REPO_ROOT / "build" / "papers" / "01_charter"
 FRAGMENTS_DIR = BUILD_DIR / "fragments"
 OUTPUT_FILE = BUILD_DIR / "rendered.tex"
 
-PANDOC_HORIZONTAL_RULE = (
-    "\\begin{center}\\rule{0.5\\linewidth}{0.5pt}\\end{center}"
-)
+PANDOC_HORIZONTAL_RULE = "\\begin{center}\\rule{0.5\\linewidth}{0.5pt}\\end{center}"
 
 
 def apply_fragment_fixups(fragment: str) -> str:
@@ -57,9 +54,7 @@ def load_sources() -> list[tuple[str, Path]]:
 
         parts = line.split(maxsplit=1)
         if len(parts) != 2:
-            raise ValueError(
-                f"{SOURCES_FILE}:{line_number}: expected 'KEY path'"
-            )
+            raise ValueError(f"{SOURCES_FILE}:{line_number}: expected 'KEY path'")
 
         key, relative_path = parts
         source = REPO_ROOT / relative_path
@@ -78,8 +73,10 @@ def render_fragment(key: str, source: Path) -> Path:
     filename = f"{key.lower()}.tex"
     output = FRAGMENTS_DIR / filename
 
-    print(f"Rendering {source.relative_to(REPO_ROOT)} -> "
-          f"{output.relative_to(REPO_ROOT)}")
+    print(
+        f"Rendering {source.relative_to(REPO_ROOT)} -> "
+        f"{output.relative_to(REPO_ROOT)}"
+    )
 
     pandoc_args = [
         "pandoc",
@@ -152,8 +149,7 @@ def main() -> int:
     unresolved = sorted(set(re.findall(r"@@[A-Z0-9_]+@@", rendered)))
     if unresolved:
         raise ValueError(
-            "Unresolved placeholders in template: "
-            + ", ".join(unresolved)
+            "Unresolved placeholders in template: " + ", ".join(unresolved)
         )
 
     OUTPUT_FILE.write_text(rendered, encoding="utf-8")
