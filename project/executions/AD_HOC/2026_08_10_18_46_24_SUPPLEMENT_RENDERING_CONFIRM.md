@@ -2,10 +2,10 @@
 execution_id: 2026_08_10_18_46_24_SUPPLEMENT_RENDERING_CONFIRM
 prompt_id: PROMPT(AD_HOC:SUPPLEMENT_RENDERING_CONFIRM)[2026-08-10T18:46:16+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/87
-commit: b023ed909bd19a24a229c151791eb5ccd204bc7c
+commit: 5f72d36c65d8937a82d072ff966ef34f18b3f54a
 created_at: 2026-08-10T18:46:24+00:00
 agent: Codex
 instruction_source: https://github.com/xenotaur/prosoc/pull/87
