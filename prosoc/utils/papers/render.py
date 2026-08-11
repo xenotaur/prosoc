@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 PANDOC_HORIZONTAL_RULE = "\\begin{center}\\rule{0.5\\linewidth}{0.5pt}\\end{center}"
+SOURCE_KEY_RE = re.compile(r"^[A-Z][A-Z0-9_]*$")
 
 Runner = Callable[..., Any]
 
@@ -38,6 +39,7 @@ def apply_fragment_fixups(fragment: str) -> str:
 def load_sources(sources_file: Path, repo_root: Path) -> list[tuple[str, Path]]:
     """Load ``KEY path`` source entries from a paper sources manifest."""
     sources: list[tuple[str, Path]] = []
+    resolved_repo_root = repo_root.resolve()
 
     for line_number, raw_line in enumerate(
         sources_file.read_text(encoding="utf-8").splitlines(), start=1
@@ -52,12 +54,30 @@ def load_sources(sources_file: Path, repo_root: Path) -> list[tuple[str, Path]]:
             raise ValueError(f"{sources_file}:{line_number}: expected 'KEY path'")
 
         key, relative_path = parts
-        source = repo_root / relative_path
+        if SOURCE_KEY_RE.fullmatch(key) is None:
+            raise ValueError(f"{sources_file}:{line_number}: invalid source key: {key}")
+
+        source_path = Path(relative_path)
+        if source_path.is_absolute() or ".." in source_path.parts:
+            raise ValueError(
+                f"{sources_file}:{line_number}: source path must stay under "
+                f"repository root: {relative_path}"
+            )
+
+        source = repo_root / source_path
 
         if not source.is_file():
             raise FileNotFoundError(
                 f"{sources_file}:{line_number}: source does not exist: {source}"
             )
+
+        try:
+            source.resolve().relative_to(resolved_repo_root)
+        except ValueError as exc:
+            raise ValueError(
+                f"{sources_file}:{line_number}: source path escapes repository "
+                f"root: {relative_path}"
+            ) from exc
 
         sources.append((key, source))
 
@@ -66,6 +86,9 @@ def load_sources(sources_file: Path, repo_root: Path) -> list[tuple[str, Path]]:
 
 def build_pandoc_args(key: str, source: Path, *, pandoc: str = "pandoc") -> list[str]:
     """Build the Pandoc command for one source fragment."""
+    if SOURCE_KEY_RE.fullmatch(key) is None:
+        raise ValueError(f"invalid source key: {key}")
+
     pandoc_args = [
         pandoc,
         "-f",
@@ -99,6 +122,9 @@ def render_fragment(
     log: Callable[[str], None] | None = print,
 ) -> Path:
     """Render one Markdown source to a fixed-up LaTeX fragment file."""
+    if SOURCE_KEY_RE.fullmatch(key) is None:
+        raise ValueError(f"invalid source key: {key}")
+
     output = fragments_dir / f"{key.lower()}.tex"
 
     if log is not None:

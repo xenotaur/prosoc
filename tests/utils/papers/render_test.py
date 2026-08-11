@@ -79,6 +79,56 @@ class TestSources(unittest.TestCase):
             with self.assertRaisesRegex(FileNotFoundError, "source does not exist"):
                 render.load_sources(sources_file, root)
 
+    def test_rejects_invalid_source_key(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source.md"
+            source.write_text("# Source\n", encoding="utf-8")
+            sources_file = root / "sources.txt"
+            sources_file.write_text("BAD-KEY source.md\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "invalid source key"):
+                render.load_sources(sources_file, root)
+
+    def test_rejects_absolute_source_path(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            source = root / "source.md"
+            source.write_text("# Source\n", encoding="utf-8")
+            sources_file = root / "sources.txt"
+            sources_file.write_text(f"CHARTER {source}\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "source path must stay"):
+                render.load_sources(sources_file, root)
+
+    def test_rejects_parent_traversal_source_path(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            outside = root.parent / "outside.md"
+            outside.write_text("# Outside\n", encoding="utf-8")
+            sources_file = root / "sources.txt"
+            sources_file.write_text("CHARTER ../outside.md\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "source path must stay"):
+                render.load_sources(sources_file, root)
+
+    def test_rejects_symlink_source_path_that_escapes_repo_root(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            outside = root.parent / "outside.md"
+            outside.write_text("# Outside\n", encoding="utf-8")
+            link = root / "linked.md"
+            try:
+                link.symlink_to(outside)
+            except OSError as exc:
+                self.skipTest(f"symlinks unavailable: {exc}")
+
+            sources_file = root / "sources.txt"
+            sources_file.write_text("CHARTER linked.md\n", encoding="utf-8")
+
+            with self.assertRaisesRegex(ValueError, "escapes repository root"):
+                render.load_sources(sources_file, root)
+
 
 class TestPandocArgs(unittest.TestCase):
 
@@ -97,6 +147,10 @@ class TestPandocArgs(unittest.TestCase):
 
         self.assertIn("--shift-heading-level-by=1", args)
         self.assertEqual(args[-1], str(source))
+
+    def test_rejects_invalid_key_before_building_args(self):
+        with self.assertRaisesRegex(ValueError, "invalid source key"):
+            render.build_pandoc_args("../BAD", Path("source.md"))
 
 
 class TestTemplateSubstitution(unittest.TestCase):
