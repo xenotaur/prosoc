@@ -1,0 +1,1 @@
+"""Paper-rendering helpers."""
