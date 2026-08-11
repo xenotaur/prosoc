@@ -2,10 +2,10 @@
 execution_id: 2026_08_10_23_36_43_WI_PAPER_RENDERER_TESTABLE_CORE_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_PAPER_RENDERER_TESTABLE_CORE_CONFIRM)[2026-08-10T22:54:38+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_08_10_22_48_12_WI_PAPER_RENDERER_TESTABLE_CORE
 pr: https://github.com/xenotaur/prosoc/pull/88
-commit: bfa598adc044c8577bf1232dad88dfaa136be568
+commit: c3874e514404b9653ea83e2a084e66eff170ce60
 created_at: 2026-08-10T23:36:43+00:00
 agent: codex_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/88
