@@ -2,10 +2,10 @@
 execution_id: 2026_08_11_22_25_29_WI_PAPER_RENDERER_TESTABLE_CORE
 prompt_id: PROMPT(WI-PAPER-RENDERER-TESTABLE-CORE:WI_PAPER_RENDERER_TESTABLE_CORE)[2026-08-11T22:13:20+00:00]
 work_item: WI-PAPER-RENDERER-TESTABLE-CORE
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/89
-commit: 65f034026213de65d2f14fdd33cb157c32e4f645
+commit: ad0acda284c2652d26d1fb8e7d41080bdb1fcf60
 created_at: 2026-08-11T22:25:29+00:00
 agent: codex_app
 instruction_source: project/work_items/proposed/WI-PAPER-RENDERER-TESTABLE-CORE.md

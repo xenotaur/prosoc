@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #89 (commit ad0acda284c2652d26d1fb8e7d41080bdb1fcf60)"
 blocked_reason: null
 blocked: false
 id: WI-PAPER-RENDERER-TESTABLE-CORE
 title: Extract testable paper renderer core
 type: deliverable
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus: []
 related_roadmap: []
