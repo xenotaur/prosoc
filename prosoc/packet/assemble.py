@@ -16,12 +16,13 @@ DSSE-shaped ``signatures: []`` slot, split into two audiences:
 from __future__ import annotations
 
 import copy
+import functools
 import hashlib
 import json
 import pathlib
 
 from jsonschema import ValidationError
-from jsonschema import validate as jsonschema_validate
+from jsonschema.validators import validator_for
 
 from . import gate as gate_mod
 from .errors import AssembleError
@@ -37,6 +38,14 @@ NON_PRODUCTION_NOTICE = (
     "This guidance was not human-approved: the lifecycle gate was bypassed via "
     "--allow-unapproved. Do not use in production."
 )
+
+
+@functools.lru_cache(maxsize=None)
+def _get_envelope_validator():
+    """Cache the schema validator to avoid recompiling it on every validate_envelope call."""
+    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+    return validator_for(schema)(schema)
+
 
 _EMPHASIS_RANK = {"emphasized": 2, "deprioritized": 1, "neutral": 0}
 
@@ -234,10 +243,7 @@ def validate_envelope(envelope: dict) -> None:
         AssembleError: the envelope does not conform to the schema.
     """
     try:
-        jsonschema_validate(
-            instance=envelope,
-            schema=json.loads(SCHEMA_PATH.read_text(encoding="utf-8")),
-        )
+        _get_envelope_validator().validate(envelope)
     except ValidationError as exc:
         raise AssembleError(
             f"assembled packet failed schema validation: {exc.message}"

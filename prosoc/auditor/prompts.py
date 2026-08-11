@@ -11,9 +11,7 @@ import json
 from textwrap import dedent
 from typing import Any, Dict, Optional, Tuple
 
-
-SYSTEM_PROMPT = dedent(
-    """
+SYSTEM_PROMPT = dedent("""
     You are a meticulous technical auditor.
 
     Your task is to audit a structured normative specification by checking
@@ -25,12 +23,10 @@ SYSTEM_PROMPT = dedent(
 
     If an issue cannot be clearly justified using quoted or paraphrased
     evidence from the provided materials, do not report it.
-    """
-).strip()
+    """).strip()
 
 
-USER_PROMPT_TEMPLATE = dedent(
-    """
+USER_PROMPT_TEMPLATE = dedent("""
     You are auditing a Prosoc Normative Card.
 
     Your task has three phases:
@@ -105,8 +101,7 @@ USER_PROMPT_TEMPLATE = dedent(
 
     Do not include fields that are not in the schema.
     Do not omit required fields.
-    """
-).strip()
+    """).strip()
 
 
 def build_audit_prompt(
