@@ -36,8 +36,8 @@ dev = [
     "twine",
 ]
 
-[tool.setuptools]
-packages = ["prosoc"]
+[tool.setuptools.packages.find]
+include = ["prosoc*"]
 
 [tool.setuptools.package-data]
 "prosoc.charter" = [
