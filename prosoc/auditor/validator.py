@@ -11,9 +11,9 @@ import json
 import jsonschema
 
 
-def _load_schema() -> dict:
+def _load_validator():
     """
-    Load and validate the audit report JSON schema from disk.
+    Load and compile the audit report JSON schema from disk.
     """
     schema_path = Path(__file__).parent / "schema.json"
 
@@ -23,11 +23,12 @@ def _load_schema() -> dict:
     # Validate the schema itself (raises if invalid)
     jsonschema.validators.Draft7Validator.check_schema(schema)
 
-    return schema
+    # Compile the validator
+    return jsonschema.validators.validator_for(schema)(schema)
 
 
-# Load schema once at import time
-_AUDIT_REPORT_SCHEMA = _load_schema()
+# Load and compile schema once at import time
+_AUDIT_REPORT_VALIDATOR = _load_validator()
 
 
 def validate_audit_report(report: dict) -> None:
@@ -44,4 +45,4 @@ def validate_audit_report(report: dict) -> None:
     jsonschema.ValidationError
         If the report does not conform to the schema.
     """
-    jsonschema.validate(instance=report, schema=_AUDIT_REPORT_SCHEMA)
+    _AUDIT_REPORT_VALIDATOR.validate(instance=report)
