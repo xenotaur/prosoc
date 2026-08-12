@@ -12,4 +12,3 @@ Current entries:
 - `01_charter/` - Supplementary Material renderer for the Frontiers in Robotics
   paper "The Prosocial Robot Navigation Charter: A Framework Based on Normative
   Cards" by Anthony Francis.
-

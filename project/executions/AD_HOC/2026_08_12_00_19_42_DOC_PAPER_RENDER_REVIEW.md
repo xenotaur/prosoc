@@ -3,7 +3,7 @@ execution_id: 2026_08_12_00_19_42_DOC_PAPER_RENDER_REVIEW
 prompt_id: PROMPT(AD_HOC:DOC_PAPER_RENDER_REVIEW)[2026-08-11T23:31:51+00:00]
 work_item: AD_HOC
 status: in_progress
-rerun_of: 
+rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/90
 commit: 3efbd99cc5714e9b4515f2994f1c86119cc0f4ef
 agent: codex_app
@@ -52,7 +52,9 @@ triggering any additional GitHub review agents.
   unrelated Python format findings.
 - `scripts/lint` - all checks passed.
 - `scripts/test` - 259 tests ran and passed.
-- `git diff --check` - passed.
+- `git diff --check` - passed for the review-fix working diff; a later
+  PR-wide self-review found unrelated whitespace in already-added PR files,
+  which was cleaned before landing.
 - `lrh validate` - 0 errors, 0 warnings before creating this record.
 
 # Follow-up

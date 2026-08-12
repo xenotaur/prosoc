@@ -36,4 +36,3 @@ capture reviewed renderings for comparison and reproducibility.
 Implementation note: `render.py` is intentionally a thin shim over
 `prosoc.utils.papers.render`, preserving this paper's command path while keeping
 the reusable rendering logic unit tested.
-
