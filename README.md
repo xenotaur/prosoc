@@ -107,10 +107,17 @@ prosoc/
 │
 ├── tests/                      # Unit and integration tests, mirroring prosoc/
 ├── notebooks/                  # Research and prototyping notebooks
+├── docs/                       # User-facing guides and reference material
+├── papers/                     # Paper-specific supplement sources and renderers
 ├── .github/workflows/          # CI workflows (tests, lint, charter check, packet-drift check)
 ├── pyproject.toml              # Packaging and tool configuration
 └── README.md                   # This file
 ```
+
+Paper-specific supplement renderers live under `papers/`. See
+[`docs/paper-supplements.md`](docs/paper-supplements.md) for the general
+procedure and [`papers/README.md`](papers/README.md) for current paper
+artifacts.
 
 ---
 
@@ -435,5 +442,4 @@ See the project documents and charter for detailed references and context.
 This software is provided for research purposes only.
 
 Robotic systems operating in real-world environments should undergo extensive safety testing, validation, and regulatory review before deployment.
-
 
