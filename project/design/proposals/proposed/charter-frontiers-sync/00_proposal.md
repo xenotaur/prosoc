@@ -4,7 +4,7 @@ type: design_proposal
 title: Reconciling the Prosoc Charter with the Frontiers Paper
 status: proposed
 created_on: 2026-08-12
-updated_on: 2026-08-12
+updated_on: 2026-08-13
 implementation_status: not_started
 implemented_by: []
 supersedes: []
@@ -21,9 +21,9 @@ This proposal captures the reconciliation decisions between `prosoc/charter/char
 (Francis, submitted — frozen, no longer editable). The paper is now the
 external reference point but the charter is the only artifact that can
 change; each principle P0–P9 (plus the Section 2 prosocial-navigation
-definition) is reviewed and a decision recorded, either resolved here or
-flagged as an Open Question for further per-principle review before a
-work item implements the edits.
+definition) is reviewed and a decision recorded. All decisions are now
+finalized — Section 2, P0–P9, the MUST/SHOULD modal-verb convention, and
+the severity ladder — and the proposal is ready for a follow-on work item.
 
 ## Background / Motivation
 
@@ -48,8 +48,9 @@ difference:
    statement vs. Explanation).
 5. A case where the paper deliberately narrowed a principle's scope after
    P0 was introduced, and the charter should follow that narrowing (P9).
-6. Principles needing closer, not-yet-final review (P2/P3/P4 wording,
-   P7).
+6. Principles where neither version wins outright and a merged wording
+   was drafted, combining charter content with paper phrasing (P2, P3,
+   P4, P7).
 
 This project's standing norm is that genuinely contested content
 judgment calls get surfaced for human decision rather than resolved
@@ -129,10 +130,13 @@ Rationale: the paper explicitly frames MUST/SHOULD as RFC 2119/8174-style
 vocabulary carrying real normative weight (paper §3.2.2, §3.3.4); the
 charter's blanket-MUST pattern undercuts that design intent.
 
-**Open Question:** what is the exact severity→modal rule, and does every
-principle's current `severity` value survive the audit unchanged, or do
-some need to be re-leveled as part of this pass? Deferred to the
-per-principle walkthrough that follows this proposal.
+**Severity audit outcome:** the severity ladder (P1 `critical`; P0, P2,
+P6 `high`; P3, P4, P5, P7, P8 `medium`; P9 `optional`) was reviewed
+against the modal-verb decision above and confirmed as-is — no
+re-leveling. `severity` and the MUST/SHOULD modal are deliberately
+decoupled: `severity` continues to rank principles against each other for
+conflict resolution, while the modal verb is now uniformly MUST-for-P1,
+SHOULD-elsewhere regardless of a principle's severity tier.
 
 ### Decision: P6 — Agent Understanding, wording
 Paper: "should be aware of and predict the behavior of nearby agents..."
@@ -169,22 +173,60 @@ present in the Section 2 prosocial-navigation *definition* (unchanged —
 see above), which is the right place for it now that P0/P8 exist as
 separate principles.
 
-### Decision: P2, P3, P4 — wording synchronization
-Paper and charter differ in wording for all three (e.g. "anxiety or
-distress" vs. "stress, fear, or annoyance" for P2; "goals" vs. "goals and
-intentions" for P3; scope of "in its presence" vs. "in shared social
-spaces" for P4) beyond the shared modal-verb pattern.
-**Open Question:** not yet decided — needs line-by-line review, one
-principle at a time, deferred to the walkthrough following this
-proposal.
+### Decision: P2 — Comfort, wording
+Paper: "should not cause anxiety or distress in nearby navigating
+pedestrians." Charter: "must avoid causing stress, fear, or annoyance"
+(unscoped audience).
+**Chosen (merged):** *"Robots must avoid causing stress, fear, or
+annoyance in nearby humans."*
+Rationale: keeps the charter's existing three-item emotion list — "fear"
+and "anxiety" were judged too close to synonyms to justify adding
+"anxiety" separately, and "anxiety" carries psychological-diagnosis
+overtones "fear" avoids. Adopts the paper's move of naming an audience,
+but generalized to "nearby humans" rather than the paper's narrower
+"navigating pedestrians," since P2's own Explanation is not limited to
+people who are themselves navigating (a stationary bystander can be
+discomforted too).
+
+### Decision: P3 — Legibility, wording
+Paper: "should navigate in such a way that the robot's goals are clear
+from its behavior" (goals only). Charter: "must act in ways that make
+their goals and intentions easy to understand" (goals + intentions).
+**Chosen (merged):** *"Robots must act in ways that make their goals and
+intentions clear from their behavior."*
+Rationale: keeps the charter's broader "goals and intentions" (the
+paper's "goals" is a subset). Adopts the paper's "clear from its
+behavior" framing over the vaguer "easy to understand" — ties legibility
+to observable behavior specifically, consistent with the Dragan et al.
+(2013) legibility citation already in the charter's References.
+
+### Decision: P4 — Politeness, wording
+Paper: "should act in a way that shows respect for other navigating
+agents in its presence" (narrow, generic). Charter: "must be respectful
+and considerate in shared social spaces," with a richer YAML description
+(offering help, avoiding dismissive behavior) added in the 2026-08-06
+sync.
+**Chosen (merged):** *"Robots must be respectful and considerate toward
+other agents in shared social spaces."*
+Rationale: keeps the charter's broader "shared social spaces" (the
+paper's "in its presence" is narrower) and its richer description/
+Explanation content from the 2026-08-06 sync. Adds explicit "other
+agents" as the object, borrowed from the paper, making explicit what was
+previously only implicit in the Explanation (including robot-robot
+politeness).
 
 ### Decision: P7 — Proactivity, scope
 Charter: "anticipate potential issues and take initiative to avoid or
 resolve them" (broader — any potential issue, avoid-or-resolve). Paper:
 "proactively act to resolve conflicts before they happen" (narrower —
 conflicts only, resolve-only).
-**Open Question:** not yet decided — needs closer review, deferred to the
-walkthrough following this proposal.
+**Chosen (merged):** *"Robots should proactively anticipate potential
+issues or conflicts and take initiative to avoid or resolve them."*
+Rationale: keeps the charter's broader "avoid or resolve" — the paper's
+preventive-only "before they happen" framing doesn't fit the charter's
+own deadlock-breaking example (resolving an already-occurring conflict,
+not preventing one). Adds "proactively" and names "conflicts" explicitly
+alongside the broader "issues," both borrowed from the paper.
 
 ## Non-Goals
 
@@ -192,8 +234,6 @@ walkthrough following this proposal.
   record only; implementation happens in a follow-on work item.
 - Does not edit the Frontiers paper — it is submitted and frozen; the
   charter is the sole artifact that changes going forward.
-- Does not finalize P2/P3/P4 wording or P7's scope — those remain Open
-  Questions pending a closer per-principle walkthrough.
 - Does not re-open Section 2's prosocial-navigation definition or P0 —
   both are already in sync between charter and paper.
 - Does not re-derive or re-litigate the 2026-08-05/06 prior sync — this
@@ -201,16 +241,21 @@ walkthrough following this proposal.
 
 ## Implementation Plan
 
-Small scope, single work item once all decisions (including the three
-remaining Open Questions) are finalized:
+Small scope, single work item. All decisions above are finalized:
 
-1. Finish the per-principle walkthrough for P2/P3/P4 wording, P7 scope,
-   and the severity→modal audit for all ten principles — update this
-   proposal's Design Decisions section with the outcomes.
-2. Create a work item (`/lrh-work-item`) to implement the resulting
-   charter edits: P1, P5, P6 (modal only), P8, P9, plus whatever P2/P3/P4/P7
-   changes and severity re-leveling the walkthrough settles on.
-3. The work item reverts the charter from APPROVED to EDITED for the
+1. Create a work item (`/lrh-work-item`) to implement the resulting
+   charter edits:
+   - P1: broaden Safety scope (other robots, self-damage).
+   - P2, P3, P4, P7: adopt the merged normative-statement wording above.
+   - P5: restore the "where feasible" hedge.
+   - Modal verbs: MUST for P1 only, SHOULD for P0 and P2–P9 across every
+     principle's normative statement and YAML `description`.
+   - P6: modal only (MUST → SHOULD); wording unchanged.
+   - P8: inline the six-context taxonomy into the normative statement.
+   - P9: trim the task/context/goals qualifier from the normative
+     statement (Section 2's definition keeps it, unchanged).
+   - Severity fields: no change (audit confirmed the existing ladder).
+2. The work item reverts the charter from APPROVED to EDITED for the
    content update, per the precedent set by the 2026-08-05 edit, and
    carries it back through AUDITED → APPROVED.
 
