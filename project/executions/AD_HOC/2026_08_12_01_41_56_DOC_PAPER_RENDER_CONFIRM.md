@@ -2,10 +2,10 @@
 execution_id: 2026_08_12_01_41_56_DOC_PAPER_RENDER_CONFIRM
 prompt_id: PROMPT(AD_HOC:DOC_PAPER_RENDER_CONFIRM)[2026-08-12T01:17:02+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_08_12_00_19_42_DOC_PAPER_RENDER_REVIEW
 pr: https://github.com/xenotaur/prosoc/pull/90
-commit: 7e542229df16ac6ebebb30c56f9578fdeaad97bb
+commit: a35233577b2cc3f5cce9d7163e284f4b41c50721
 agent: codex_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/90
 session_transcript: pending
