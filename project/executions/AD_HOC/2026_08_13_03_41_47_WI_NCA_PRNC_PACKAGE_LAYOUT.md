@@ -2,13 +2,13 @@
 execution_id: 2026_08_13_03_41_47_WI_NCA_PRNC_PACKAGE_LAYOUT
 prompt_id: PROMPT(AD_HOC:WI_NCA_PRNC_PACKAGE_LAYOUT)[2026-08-13T03:40:44+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/91
-commit: 
+commit: cfb1420
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/91
-session_transcript: pending
+session_transcript: claude-app:f087f2be-5992-4711-b12b-40cebb7e8305
 created_at: 2026-08-13T03:41:47+00:00
 ---
 
