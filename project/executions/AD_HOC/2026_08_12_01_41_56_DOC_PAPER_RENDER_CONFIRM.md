@@ -8,7 +8,7 @@ pr: https://github.com/xenotaur/prosoc/pull/90
 commit: a35233577b2cc3f5cce9d7163e284f4b41c50721
 agent: codex_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/90
-session_transcript: pending
+session_transcript: codex-app:019fec8f-fa7f-76a0-a7aa-eb76cccb002a
 created_at: 2026-08-12T01:41:56+00:00
 ---
 
@@ -54,7 +54,7 @@ single satisfied review thread, and avoided triggering any GitHub review agents.
 
 # Follow-up
 
-- Update `session_transcript: pending` when a durable transcript pointer is
-  available.
+- Transcript pointer filled after `lrh-codex-export` verified this Codex app
+  thread.
 - Re-check CI and review-landed state after this confirm-record commit is
   pushed.

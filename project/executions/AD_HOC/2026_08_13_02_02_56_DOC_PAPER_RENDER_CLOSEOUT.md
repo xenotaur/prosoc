@@ -8,7 +8,7 @@ pr: https://github.com/xenotaur/prosoc/pull/90
 commit: a35233577b2cc3f5cce9d7163e284f4b41c50721
 agent: codex_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/90
-session_transcript: pending
+session_transcript: codex-app:019fec8f-fa7f-76a0-a7aa-eb76cccb002a
 created_at: 2026-08-13T02:02:56+00:00
 ---
 
@@ -40,5 +40,5 @@ Backfilled closeout state for the ad hoc PR #90 docs/golden-render landing.
 
 # Follow-up
 
-- Update `session_transcript: pending` for the Codex app records when a
-  durable task/thread pointer is available.
+- Transcript pointer filled after `lrh-codex-export` verified this Codex app
+  thread.

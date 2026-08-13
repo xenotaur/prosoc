@@ -8,7 +8,7 @@ pr: https://github.com/xenotaur/prosoc/pull/90
 commit: a35233577b2cc3f5cce9d7163e284f4b41c50721
 agent: codex_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/90
-session_transcript: pending
+session_transcript: codex-app:019fec8f-fa7f-76a0-a7aa-eb76cccb002a
 created_at: 2026-08-12T00:19:42+00:00
 ---
 
@@ -59,7 +59,7 @@ triggering any additional GitHub review agents.
 
 # Follow-up
 
-- Update `session_transcript: pending` when a durable transcript pointer is
-  available.
+- Transcript pointer filled after `lrh-codex-export` verified this Codex app
+  thread.
 - Resolve the unrelated repo-wide Black format drift separately from this
   LaTeX review-response PR.
