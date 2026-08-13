@@ -1,0 +1,3076 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is just an example/guide for you to refer to when producing your supplementary material for your Frontiers article.                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Version 2.5 Generated 2022/06/14 %%%
+%%% You will need to have the following packages installed: datetime, fmtcount, etoolbox, fcprefix, which are normally included in WinEdt. %%%
+%%% In http://www.ctan.org/ you can find the packages and how to install them, if necessary. %%%
+%%%  NB logo1.jpg is required in the path in order to correctly compile front page header %%%
+
+\documentclass[utf8]{frontiers_suppmat} % for all articles
+\usepackage{url,hyperref,lineno,microtype}
+\usepackage[onehalfspacing]{setspace}
+
+
+\usepackage{framed}
+\usepackage{xcolor}
+\newenvironment{Shaded}{\begin{shaded}}{\end{shaded}}
+\definecolor{shadecolor}{rgb}{0.95, 0.95, 0.95}
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+\usepackage{listings}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible
+}
+
+\lstdefinelanguage{YAML}{
+  keywords={true,false,null},
+  sensitive=false,
+  comment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\lstset{
+  language=YAML,
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  showstringspaces=false,
+  keywordstyle=\color{blue},
+  commentstyle=\color{darkgray},
+  stringstyle=\color{teal}
+}
+
+\newcommand{\yamlkey}[1]{\texttt{\color{blue}#1}}
+
+\lstdefinestyle{literatecard}{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  showstringspaces=false,
+  keepspaces=true
+}
+
+% Leave a blank line between paragraphs instead of using \\
+
+\begin{document}
+\onecolumn
+\firstpage{1}
+
+\title[Supplementary Material]{{\helveticaitalic{Supplementary Material}}}
+
+\maketitle
+
+% \section{Supplementary Data}
+
+% Supplementary Material should be uploaded separately on submission. Please include any supplementary data, figures and/or tables. All supplementary files are deposited to FigShare for permanent storage and receive a DOI.
+
+%Supplementary material is not typeset so please ensure that all information is clearly presented, the appropriate caption is included in the file and not in the manuscript, and that the style conforms to the rest of the article. To avoid discrepancies between the published article and the supplementary material, please do not add the title, author list, affiliations or correspondence in the supplementary files.
+
+% \section{Supplementary Tables and Figures}
+
+% For more information on Supplementary Material and for details on the different file types accepted, please see \href{http://home.frontiersin.org/about/author-guidelines#SupplementaryMaterial}{the Supplementary Material section} of the Author Guidelines.
+
+% Figures, tables, and images will be published under a Creative Commons CC-BY licence and permission must be obtained for use of copyrighted material from other sources (including re-published/adapted/modified/partial figures and images from the internet). It is the responsibility of the authors to acquire the licenses, to follow any citation instructions requested by third-party rights holders, and cover any supplementary charges.
+
+%% Figures, tables, and images will be published under a Creative Commons CC-BY licence and permission must be obtained for use of copyrighted material from other sources (including re-published/adapted/modified/partial figures and images from the internet). It is the responsibility of the authors to acquire the licenses, to follow any citation instructions requested by third-party rights holders, and cover any supplementary charges.
+This section contains normative cards from the Prosocial Robot Navigation Charter available at
+\url{https://github.com/xenotaur/prosoc/}, formatted for display in LaTeX by the Pandoc package available at \url{https://pandoc.org/} and lightly edited for display. These cards represent a snapshot of the system in its current state of development, and are presented to show the expressiveness and scope of the system, not to present fully-audited normative card content suitable for deployment.
+
+\section{Prosocial Robot Navigation
+Charter}\label{prosocial-robot-navigation-charter}
+
+\textbf{Version:} 0.1\\
+\textbf{Status:} Draft (Normative)\\
+\textbf{Scope:} Mobile robot navigation in human-populated
+environments\\
+\textbf{Derived from:}\\
+- \emph{Principles and Guidelines for Evaluating Social Robot Navigation
+Algorithms} (Francis et al.)\\
+- Prosocial Robotics project documents
+
+\subsection{Status}\label{status}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{STATE:} APPROVED
+\item
+  \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
+  Navigation Algorithms (Francis et al.); Prosocial Robotics project
+  documents; The Prosocial Robot Navigation Charter (Francis, submitted)
+\item
+  \textbf{DRAFTED:} Prosocial Robotics project
+\item
+  \textbf{EDITED:} Claude (WI-CARD-STATUS-CHARTER), 2026-07-29 --- add
+  machine-readable lifecycle state
+\item
+  \textbf{EDITED:} Claude, 2026-08-05 --- update the prosocial
+  navigation definition (Section 2) and P9 to match the paper's revised
+  definition; reverted from APPROVED pending re-audit
+\item
+  \textbf{EDITED:} Claude, 2026-08-06 --- add ``\#\#\# Explanation''
+  subsections to P4--P8, grounded in and citing Francis et al.~(2025);
+  fix the References entry's journal/venue for that paper
+\item
+  \textbf{EDITED:} Claude, 2026-08-06 --- fold P1/P4/P5's YAML-only
+  \texttt{description} content (safe-distance,
+  offering-help, interrupting/blocking) into their prose Explanations
+\item
+  \textbf{EDITED:} Claude, 2026-08-06 --- remove P9's cross-family
+  reference to the unstable
+  \texttt{movable\_obstruction} scenario, replaced with
+  a self-contained example; expand Section 3's ``P8 Context'' to its
+  full name ``Contextual Appropriateness''
+\end{itemize}
+
+The charter's lifecycle state is authored in the embedded YAML below
+(the authoritative source), projected into the \textbf{STATE} bullet
+above, and enforced by
+\texttt{scripts/validate/status}. It is one of
+\texttt{DRAFTED}, \texttt{EDITED},
+\texttt{AUDITED}, \texttt{APPROVED},
+\texttt{VALIDATED},
+\texttt{DEPRECATED}, or
+\texttt{RETIRED} (see
+\texttt{prosoc/scenarios/workflow.md}). The state
+applies to the charter document as a whole, not to individual
+principles.
+
+\begin{lstlisting}[style=literatecard]
+state: APPROVED
+\end{lstlisting}
+
+\subsection{1. Purpose of This Charter}\label{purpose-of-this-charter}
+
+This document defines a \textbf{Charter for Prosocial Robot Navigation}.
+
+A charter is a \textbf{normative, non-modifiable specification} of how a
+robot \emph{ought} to behave. It is not a controller, policy, or learned
+model. Instead, it provides:
+
+\begin{itemize}
+\tightlist
+\item
+  A \textbf{shared normative grounding} for evaluation, planning, and
+  learning
+\item
+  A \textbf{human-interpretable standard} for what counts as ``good'' or
+  ``bad'' navigation behavior
+\item
+  A \textbf{machine-readable constraint set} usable by evaluators,
+  planners, and learning systems
+\end{itemize}
+
+This charter is intended to function as the \textbf{constitutional
+layer} of a prosocial robotics system.
+
+\subsection{2. Definition: Social and Prosocial Robot
+Navigation}\label{definition-social-and-prosocial-robot-navigation}
+
+Following the P\&G paper, we define \textbf{social robot navigation} as:
+
+\begin{quote}
+A socially navigating robot acts and interacts with humans or other
+robots, achieving its navigation goals while modifying its behavior so
+the experience of agents around the robot is not degraded---or is even
+enhanced.
+\end{quote}
+
+This charter extends that definition by explicitly including
+\textbf{prosocial robot navigation}:
+
+\begin{quote}
+A prosocially navigating robot acts during or in support of navigation
+to improve the navigation experiences of other agents or to preserve or
+improve the navigability of their shared environment, in ways
+appropriate for its task and context and consistent with achieving its
+own navigation goals.
+\end{quote}
+
+Note the two distinct ways a robot can act prosocially: it can
+\emph{improve} another agent's navigation experience (e.g., giving
+directions), or it can \emph{preserve or improve} the shared
+environment's navigability (e.g., not leaving an obstruction, or
+clearing one). Both are bounded by two conditions that apply throughout
+this charter rather than being unique to prosociality ---
+appropriateness to the robot's task and context (\textbf{P8}), and
+consistency with the robot's own navigation goals (\textbf{P0}) --- but
+prosocial behavior is where getting that balance right matters most,
+since it is the principle most likely to tempt a robot into acting past
+its mandate.
+
+\subsection{3. Structure of the
+Principles}\label{structure-of-the-principles}
+
+The charter consists of \textbf{ten principles}, P0--P9:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{P0} establishes \emph{goal achievement} as a first-class
+  concern
+\item
+  \textbf{P1--P8} correspond to the principles defined in the P\&G paper
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{P1} Safety
+  \item
+    \textbf{P2} Comfort
+  \item
+    \textbf{P3} Legibility
+  \item
+    \textbf{P4} Politeness
+  \item
+    \textbf{P5} Social Competency
+  \item
+    \textbf{P6} Agent Understanding
+  \item
+    \textbf{P7} Proactivity
+  \item
+    \textbf{P8} Contextual Appropriateness
+  \end{itemize}
+\item
+  \textbf{P9} introduces \emph{Prosocial Behavior} as an explicit
+  extension
+\end{itemize}
+
+Each principle includes:
+
+\begin{itemize}
+\tightlist
+\item
+  A \textbf{normative statement}
+\item
+  A \textbf{human-readable explanation}
+\item
+  \textbf{Illustrative examples} (positive and negative)
+\item
+  A \textbf{severity level}, indicating how violations should be treated
+\end{itemize}
+
+Each principle also includes an \textbf{embedded YAML block}, which is
+the authoritative machine-readable representation.
+
+\subsection{4. Principle P0 --- Goal
+Achievement}\label{principle-p0-goal-achievement}
+
+\subsubsection{Normative Statement}\label{normative-statement}
+
+Robots must attempt to achieve their assigned navigation or task
+objectives, balancing this with the social principles P1--P9.
+
+\subsubsection{Explanation}\label{explanation}
+
+While much work in social navigation focuses on avoiding harm or
+discomfort, a robot that \textbf{fails to accomplish its task} is not
+useful in practice. Humans navigating shared spaces routinely balance
+politeness and safety with efficiency and purpose.
+
+P0 ensures that social behavior does not collapse into paralysis or
+over-cautiousness. A robot should not abandon a task simply because it
+encounters social complexity; instead, it should seek socially
+appropriate ways to proceed.
+
+\begin{lstlisting}[style=literatecard]
+id: P0
+name: Goal Achievement
+severity: high
+description: >
+  Robots must attempt to achieve their assigned navigation or task objectives,
+  balancing this with the social principles P1–P9.
+examples:
+  positive:
+    - "Robot efficiently reaches destination while yielding to a pedestrian."
+    - "Robot adjusts route slightly but still completes its delivery task."
+  negative:
+    - "Robot abandons delivery because it was unsure how to pass a person."
+    - "Robot refuses to move despite being asked to navigate a known path."
+\end{lstlisting}
+
+\subsection{5. Principle P1 --- Safety}\label{principle-p1-safety}
+
+\subsubsection{Normative Statement}\label{normative-statement-1}
+
+Robots must not cause harm to humans or damage environments.
+
+\subsubsection{Explanation}\label{explanation-1}
+
+Safety is the foundational constraint of social navigation. A robot that
+harms people or damages shared environments violates not only social
+norms but basic ethical expectations. This includes maintaining a safe
+distance from people unless explicitly invited to approach --- uninvited
+close proximity is itself a safety-relevant failure mode, not merely a
+comfort one (see P2).
+
+Safety violations override all other considerations.
+
+\begin{lstlisting}[style=literatecard]
+id: P1
+name: Safety
+severity: critical
+description: >
+  Robots must not cause harm to humans or damage environments. This includes
+  maintaining a safe distance unless explicitly invited to approach.
+examples:
+  positive:
+    - "Robot stops 1 meter away from a child playing in its path."
+    - "Robot navigates around a slippery floor to avoid damage."
+  negative:
+    - "Robot bumps into a human in a narrow hallway."
+    - "Robot knocks over a shelf while turning too quickly."
+\end{lstlisting}
+
+\subsection{6. Principle P2 --- Comfort}\label{principle-p2-comfort}
+
+\subsubsection{Normative Statement}\label{normative-statement-2}
+
+Robots must avoid causing stress, fear, or annoyance.
+
+\subsubsection{Explanation}\label{explanation-2}
+
+Humans are sensitive not only to physical safety, but also to
+\textbf{psychological comfort}. Sudden movements, looming approaches, or
+unexplained proximity can cause stress even when no physical harm
+occurs.
+
+\begin{lstlisting}[style=literatecard]
+id: P2
+name: Comfort
+severity: high
+description: >
+  Robots must avoid causing stress, fear, or annoyance. This includes refraining
+  from sudden movements or uninvited approaches.
+examples:
+  positive:
+    - "Robot slows down and gives space when approaching from behind."
+    - "Robot announces its presence softly before entering a room."
+  negative:
+    - "Robot startles a person by approaching quickly from behind."
+    - "Robot hovers near someone for no reason, causing discomfort."
+\end{lstlisting}
+
+\subsection{7. Principle P3 ---
+Legibility}\label{principle-p3-legibility}
+
+\subsubsection{Normative Statement}\label{normative-statement-3}
+
+Robots must act in ways that make their goals and intentions easy to
+understand.
+
+\subsubsection{Explanation}\label{explanation-3}
+
+Legibility allows humans to \textbf{predict} a robot's behavior,
+reducing uncertainty and cognitive load.
+
+\begin{lstlisting}[style=literatecard]
+id: P3
+name: Legibility
+severity: medium
+description: >
+  Robots must act in ways that make their goals and intentions easy to understand.
+examples:
+  positive:
+    - "Robot signals its intended direction before turning."
+    - "Robot slows before making an unexpected stop."
+  negative:
+    - "Robot moves erratically, confusing bystanders."
+    - "Robot stops abruptly without signaling intent."
+\end{lstlisting}
+
+\subsection{8. Principle P4 ---
+Politeness}\label{principle-p4-politeness}
+
+\subsubsection{Normative Statement}\label{normative-statement-4}
+
+Robots must be respectful and considerate in shared social spaces.
+
+\subsubsection{Explanation}\label{explanation-4}
+
+Politeness has two distinct dimensions: \emph{physical} politeness, how
+a robot moves around people (e.g., not cutting them off), and
+\emph{communicative} politeness, signaling intent through gesture or
+speech (e.g., saying ``excuse me'' or announcing ``on your left'' when a
+narrow space forces the robot to enter someone's personal space).
+Politeness is not purely a human-facing concern --- social robots should
+also be considerate of each other, so one robot's behavior does not
+prevent another agent from accomplishing its own task (Francis et al.,
+2025, p.~8). Concretely, this includes offering help when it is asked
+for rather than ignoring the request, and avoiding behavior that reads
+as dismissive or intrusive even when it is not physically obstructive.
+
+\begin{lstlisting}[style=literatecard]
+id: P4
+name: Politeness
+severity: medium
+description: >
+  Robots must be respectful and considerate, offering help when asked
+  and avoiding dismissive or intrusive behaviors.
+examples:
+  positive:
+    - "Robot pauses to let two people pass during their conversation."
+    - "Robot responds when asked for directions."
+  negative:
+    - "Robot interrupts a human speaking to another."
+    - "Robot ignores a direct request for assistance."
+\end{lstlisting}
+
+\subsection{9. Principle P5 --- Social
+Competency}\label{principle-p5-social-competency}
+
+\subsubsection{Normative Statement}\label{normative-statement-5}
+
+Robots must follow basic social norms governing shared spaces.
+
+\subsubsection{Explanation}\label{explanation-5}
+
+Social competency is fundamentally about following \emph{convention}
+rather than optimizing performance: in the absence of an established
+norm there is no inherently better choice (e.g., driving on the left
+versus the right), but identifying and following whichever local norm
+applies helps prevent conflicts. Some social competencies, like
+turn-taking, emerge naturally from interaction; others must be
+deliberately engineered into the robot's behavior. These conventions are
+not limited to human-robot interactions --- norms that make robots
+easier for \emph{other robots} to interact with are equally in scope
+(Francis et al., 2025, p.~8). Concretely, this rules out behaviors like
+interrupting an ongoing conversation or blocking a passage others need
+to use, even where no single explicit rule names the situation.
+
+\begin{lstlisting}[style=literatecard]
+id: P5
+name: Social Competency
+severity: medium
+description: >
+  Robots must follow social norms and avoid inappropriate behaviors such
+  as interrupting conversations or blocking passage.
+examples:
+  positive:
+    - "Robot waits at the side while people pass in a narrow hallway."
+    - "Robot follows the queue at a doorway."
+  negative:
+    - "Robot cuts in front of someone waiting."
+    - "Robot blocks a person trying to exit a room."
+\end{lstlisting}
+
+\subsection{10. Principle P6 --- Agent
+Understanding}\label{principle-p6-agent-understanding}
+
+\subsubsection{Normative Statement}\label{normative-statement-6}
+
+Robots must predict and accommodate the behavior of other agents.
+
+\subsubsection{Explanation}\label{explanation-6}
+
+Understanding other agents means more than detecting them: it requires
+inferring what they are perceiving, doing, and trying to accomplish ---
+for example, recognizing whether two people are conversing before
+deciding whether it is appropriate to pass between them. This
+understanding determines \emph{interaction potential}, the likelihood of
+the robot entering another agent's personal space, which should
+sometimes be minimized and sometimes maximized depending on the task. It
+also lets a robot anticipate \emph{conflicts} --- short encounters in
+which the robot's and another agent's paths would collide without
+intervention --- and adjust its own trajectory before one occurs
+(Francis et al., 2025, p.~8).
+
+\begin{lstlisting}[style=literatecard]
+id: P6
+name: Agent Understanding
+severity: high
+description: >
+  Robots must predict and accommodate the behaviors of other agents
+  (humans, robots, pets, etc.).
+examples:
+  positive:
+    - "Robot slows down when it sees a person approaching quickly."
+    - "Robot yields to another robot moving through a tight space."
+  negative:
+    - "Robot tries to occupy the same space as a moving person."
+    - "Robot moves forward without accounting for a toddler's presence."
+\end{lstlisting}
+
+\subsection{11. Principle P7 ---
+Proactivity}\label{principle-p7-proactivity}
+
+\subsubsection{Normative Statement}\label{normative-statement-7}
+
+Robots should anticipate potential issues and take initiative to avoid
+or resolve them.
+
+\subsubsection{Explanation}\label{explanation-7}
+
+Understanding other agents (P6) is necessary but not sufficient: some
+situations require the robot to take the initiative, or even to
+interrupt another agent's task, to resolve a shared problem --- for
+example, at a four-way intersection, delays occur if every driver acts
+conservatively, so someone must take the lead or signal others to
+proceed. Deadlocks such as two pedestrians dodging the same way can only
+be broken if someone takes the lead; a robot that proactively suggests a
+solution (e.g., inviting a human to enter an elevator first) is more
+socially adept than one that merely waits (Francis et al., 2025,
+pp.~8--9).
+
+P7 is about \emph{anticipating and initiating} --- future-predicting,
+deadlock-resolving behavior --- which is a distinct concern from P9:
+Prosocial Behavior's focus on \emph{acting for another agent's benefit}.
+The two often reinforce each other (proactively helping someone is a
+common form of both), but a robot can be proactive without being
+prosocial (e.g., proactively clearing its own path for efficiency) or
+prosocial without being proactive (e.g., reactively helping only when
+asked).
+
+\begin{lstlisting}[style=literatecard]
+id: P7
+name: Proactivity
+severity: medium
+description: >
+  Robots should anticipate potential issues and take initiative
+  to avoid or resolve them.
+examples:
+  positive:
+    - "Robot re-routes before entering a known blocked corridor."
+    - "Robot offers help when it sees someone struggling with bags."
+  negative:
+    - "Robot waits passively in front of a blocked path."
+    - "Robot does nothing while someone struggles with a door."
+\end{lstlisting}
+
+\subsection{12. Principle P8 --- Contextual
+Appropriateness}\label{principle-p8-contextual-appropriateness}
+
+\subsubsection{Normative Statement}\label{normative-statement-8}
+
+Robots must adapt their behavior to the social and situational context.
+
+\subsubsection{Explanation}\label{explanation-8}
+
+Context does not add a new independent concern; it determines the
+\emph{relative importance} of every other principle. Francis et
+al.~(2025, p.~9) identify six forms of context that can change which
+response is correct: \emph{cultural} context (norms vary by culture),
+\emph{diversity} context (individuals need different accommodations),
+\emph{environmental} context --- split into \emph{geometric} (the shape
+of the space, e.g., a crowded space narrows the acceptable distance to
+other agents) and \emph{operational} (how the space is used, e.g., a
+daycare calls for slower driving than an office with an identical
+layout) --- \emph{task} context (e.g., a hospital robot performing mail
+delivery weighs politeness against speed differently than the same robot
+serving as a crash cart), and \emph{interpersonal} context (e.g.,
+whether humans are traveling alone, in a group, or stopped and
+conversing). The canonical illustration is a crash-cart robot delivering
+an emergency drug: in that context, politeness is properly subordinate
+to task success.
+
+\begin{lstlisting}[style=literatecard]
+id: P8
+name: Contextual Appropriateness
+severity: medium
+description: >
+  Robots must act in ways that are appropriate for the situation
+  and context they are in.
+examples:
+  positive:
+    - "Robot lowers its volume in a quiet room."
+    - "Robot avoids rushing in a crowded hallway."
+  negative:
+    - "Robot zooms through a funeral procession."
+    - "Robot speaks loudly in a library."
+\end{lstlisting}
+
+\subsection{13. Principle P9 --- Prosocial
+Behavior}\label{principle-p9-prosocial-behavior}
+
+\subsubsection{Normative Statement}\label{normative-statement-9}
+
+Robots should act, during or in support of navigation, to improve the
+navigation experiences of other agents or to preserve or improve the
+navigability of their shared environment, in ways appropriate to their
+task and context and without sacrificing their own navigation goals.
+
+\subsubsection{Explanation}\label{explanation-9}
+
+P9 distinguishes two kinds of prosocial act: directly improving another
+agent's navigation experience (e.g., giving directions, holding a door),
+and preserving or improving the shared environment's navigability (e.g.,
+not leaving an obstruction behind, or clearing one that's already
+there). Only the environment clause admits ``preserve'' --- merely not
+degrading another agent's experience is already required by social
+navigation generally (P1--P8); P9 is about going beyond that baseline.
+
+P9 is deliberately the lowest-severity principle: it is discretionary,
+and its normative statement carries its own limits so it cannot be read
+in isolation from P0 and P8. It should never be read as license to
+sacrifice the robot's own goals (P0) or to act inappropriately for the
+task or context (P8) --- for example, a delivery robot noticing an
+obstruction it could clear should weigh that against how much delay
+clearing it would add to its own task and how urgent that task is, not
+clear it unconditionally.
+
+\begin{lstlisting}[style=literatecard]
+id: P9
+name: Prosocial Behavior
+severity: optional
+description: >
+  Robots should act, during or in support of navigation, to improve the
+  navigation experiences of other agents or to preserve or improve the
+  navigability of their shared environment, in ways appropriate to their
+  task and context and without sacrificing their own navigation goals.
+examples:
+  positive:
+    - "Robot holds open a door for another person."
+    - "Robot clears debris to make the path safer for others."
+    - "Robot reports a spill to staff rather than removing it, since removal is outside its task."
+  negative:
+    - "Robot could have warned about a hazard but didn't."
+    - "Robot leaves clutter behind that inconveniences others."
+    - "Robot abandons its delivery task to tidy an unrelated room."
+\end{lstlisting}
+
+\subsection{14. Use of This Charter in the Prosocial Robotics
+System}\label{use-of-this-charter-in-the-prosocial-robotics-system}
+
+This charter is intended to be consumed by:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Evaluators} (to judge episodes and trajectories)
+\item
+  \textbf{Strategizers} (to shape high-level behavior)
+\item
+  \textbf{Repositories} (to index cases by principle)
+\item
+  \textbf{Designers and Planners} (as constraints, not suggestions)
+\end{itemize}
+
+The charter itself is \textbf{not modifiable by the robot}.
+
+\subsection{Definitions and Glossary}\label{definitions-and-glossary}
+
+This section defines key terms used throughout the Prosocial Navigation
+Charter. These definitions are intended to be \textbf{normative and
+disambiguating}, and should be used by implementers, evaluators, and
+researchers to ensure consistent interpretation of the charter.
+
+\subsubsection{Charter}\label{charter}
+
+A \textbf{charter} is a formally specified set of principles that define
+acceptable and unacceptable behavior for a system. In this project, the
+charter serves as a \emph{constitutional layer} that constrains and
+guides robot navigation behavior independently of any particular
+algorithm, planner, or learning method.
+
+\subsubsection{Constitutional Layer}\label{constitutional-layer}
+
+The \textbf{constitutional layer} refers to the role of the charter as a
+high-level normative constraint on system behavior. It is not an
+optimizer, planner, or controller, but a source of rules, principles,
+and evaluative criteria that other system components must respect. The
+constitutional layer is intended to be stable, inspectable, and
+auditable.
+
+\subsubsection{Principle}\label{principle}
+
+A \textbf{principle} is a high-level normative rule that expresses an
+expectation about robot behavior. Principles are intentionally general
+and may require interpretation or trade-offs in concrete situations.
+Each principle is identified by an ID (e.g., P0--P9) and accompanied by
+explanations and examples.
+
+\subsubsection{Normative}\label{normative}
+
+\textbf{Normative} statements describe how a system \emph{ought} to
+behave, rather than how it currently behaves or how it is optimized.
+Normative content in this charter expresses values, expectations, and
+constraints, not predictions or empirical claims.
+
+\subsubsection{Normative Statement}\label{normative-statement-10}
+
+A \textbf{normative statement} is the concise, prescriptive formulation
+of a principle. It represents the authoritative rule associated with
+that principle and should be treated as the primary reference point for
+interpretation and enforcement.
+
+\subsubsection{Explanation}\label{explanation-10}
+
+An \textbf{explanation} elaborates the intent, scope, and motivation of
+a principle. Explanations provide interpretive guidance but do not
+override the normative statement. When ambiguities arise, explanations
+should be used to clarify intent rather than to weaken or negate the
+principle.
+
+\subsubsection{Example (Positive /
+Negative)}\label{example-positive-negative}
+
+An \textbf{example} is a concrete, illustrative scenario used to clarify
+how a principle applies in practice.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Positive examples} illustrate behavior that is consistent with
+  the principle.
+\item
+  \textbf{Negative examples} illustrate behavior that violates the
+  principle.
+\end{itemize}
+
+Examples are illustrative rather than exhaustive and should not be
+treated as the only valid or invalid behaviors.
+
+\subsubsection{Severity}\label{severity}
+
+\textbf{Severity} is a qualitative indicator of the importance or
+priority of a principle relative to others. Higher-severity principles
+(e.g., safety) are expected to dominate lower-severity principles in
+cases of conflict. Severity does not eliminate the need for judgment but
+provides guidance for trade-offs.
+
+\subsubsection{Social Robot Navigation}\label{social-robot-navigation}
+
+\textbf{Social robot navigation} refers to navigation behavior in
+environments shared with humans (and other agents) where social norms,
+expectations, and interactions are relevant. It extends beyond collision
+avoidance to include comfort, legibility, politeness, and context
+sensitivity.
+
+\subsubsection{Social}\label{social}
+
+In this document, \textbf{social} refers to behaviors that respect or
+respond to human norms, expectations, and interactions in shared spaces.
+Social behavior may be neutral (e.g., yielding) or cooperative, but does
+not necessarily require active assistance.
+
+\subsubsection{Prosocial}\label{prosocial}
+
+\textbf{Prosocial} behavior goes beyond social compliance to include
+actions that actively improve the experience, safety, or success of
+others. Prosocial actions are typically discretionary rather than
+strictly required and may involve helping, accommodating, or cooperating
+with other agents.
+
+\subsubsection{Agent}\label{agent}
+
+An \textbf{agent} is any entity in the environment that exhibits
+goal-directed or intentional behavior. This includes humans, robots,
+animals, and other autonomous systems. Treating others as agents implies
+predicting and accommodating their likely actions rather than modeling
+them as static obstacles.
+
+\subsubsection{Human-Readable}\label{human-readable}
+
+\textbf{Human-readable} artifacts are designed to be easily read,
+understood, and reviewed by people. In this project,
+\texttt{charter.md} is the human-readable source of
+truth and is intended to support deliberation, review, and discussion.
+
+\subsubsection{Machine-Readable}\label{machine-readable}
+
+\textbf{Machine-readable} artifacts are structured representations
+intended for programmatic use. In this project,
+\texttt{charter.yml} is generated from the
+human-readable charter and is used by software components for
+validation, evaluation, or runtime reasoning.
+
+\subsubsection{Source of Truth}\label{source-of-truth}
+
+A \textbf{source of truth} is the authoritative representation of
+information. For the Prosocial Navigation Charter, the human-authored
+Markdown document (\texttt{charter.md}) is the sole
+source of truth. All machine-readable representations are derived from
+it and must remain consistent.
+
+\subsubsection{Non-Modifiable (Generated
+Artifact)}\label{non-modifiable-generated-artifact}
+
+A \textbf{non-modifiable} artifact is a file that should not be edited
+directly by humans. Generated files such as
+\texttt{charter.yml} fall into this category and must
+be produced via the designated distillation tools to ensure consistency
+and traceability.
+
+\subsubsection{Implementation}\label{implementation}
+
+An \textbf{implementation} is any concrete navigation system, planner,
+controller, or learning-based approach that claims to adhere to or be
+evaluated against this charter. The charter does not prescribe how
+principles are implemented, only the standards against which behavior is
+judged.
+
+\subsubsection{Evaluation}\label{evaluation}
+
+\textbf{Evaluation} refers to the process of assessing whether a
+system's behavior complies with the principles in the charter. This may
+involve simulation, real-world trials, human judgment, automated checks,
+or a combination thereof.
+
+\subsection{References}\label{references}
+
+\begin{itemize}
+\tightlist
+\item
+  Francis, A., Pérez-D'Arpino, C., et al.~(2025). \emph{Principles and
+  Guidelines for Evaluating Social Robot Navigation Algorithms}. ACM
+  Transactions on Human-Robot Interaction, 14(2), Article 34.
+  https://doi.org/10.1145/3700599
+\item
+  Dragan, A. D., Lee, K. C. T., \& Srinivasa, S. S. (2013). Legibility
+  and predictability of robot motion. \emph{HRI}.
+\item
+  Hall, E. T. (1966). \emph{The Hidden Dimension}. Doubleday.
+\end{itemize}
+
+
+\section{Social Navigation Scenario Cards}
+\subsection{Scenario: Frontal Approach}\label{scenario-frontal-approach}
+
+\subsubsection{Status}\label{status}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{STATE:} APPROVED
+\item
+  \textbf{SOURCE:} Prompt to ChatGPT 5.2
+\item
+  \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-02
+\item
+  \textbf{EDITED:} render\_sections.py, 2026-07-19
+\end{itemize}
+
+\subsubsection{Scenario Card Summary}\label{scenario-card-summary}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Scenario Name:} Frontal Approach
+\item
+  \textbf{Scenario Description:} A robot and a human approach each other
+  in opposite directions in a narrow hallway and pass each other safely,
+  comfortably, and without prolonged hesitation.
+\item
+  \textbf{Scientific Purpose:} pedestrian interaction
+\item
+  \textbf{Physical Environment:} indoor
+\item
+  \textbf{Geometric Layout:} passable space
+\item
+  \textbf{Robot Role:} navigating\_agent
+\item
+  \textbf{Robot Task:} navigate from A to B
+\item
+  \textbf{Human Behavior:} navigate from B to A
+\item
+  \textbf{Success Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    SR
+  \item
+    NoCollisions
+  \end{itemize}
+\item
+  \textbf{Quality Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    P2
+  \item
+    P3
+  \item
+    P5
+  \end{itemize}
+\item
+  \textbf{Ideal Outcome:} robot and human pass each other safely,
+  comfortably, and without prolonged hesitation
+\item
+  \textbf{Related Scenarios:} blind\_corner, movable\_obstruction,
+  single\_file\_hallway
+\item
+  \textbf{Cited In:} 50, 126, 167
+\end{itemize}
+
+\subsubsection{Scenario Overview}\label{scenario-overview}
+
+This scenario describes a canonical social navigation conflict in which
+a robot and a human approach each other in opposite directions in a
+narrow hallway where neither agent has an explicit right-of-way.
+Successful navigation depends on sensing and agile navigation, and
+successful social navigation may require trajectory prediction,
+interpreting intent, resolving hesitation, and resolving conflicts. The
+scenario tests social navigation principles including safety, comfort,
+legibility, following social norms, and agent understanding.
+
+\subsubsection{Scenario Specification
+(Machine-Readable)}\label{scenario-specification-machine-readable}
+
+\begin{lstlisting}[style=literatecard]
+id: frontal_approach_01
+name: Frontal Approach
+state: APPROVED
+
+summary: >
+  A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without
+  prolonged hesitation.
+
+scientific_purpose: pedestrian interaction
+
+geometric_layout: passable space
+
+context:
+  environment:
+    type: indoor
+    setting: office hallway
+    width: narrow
+  social_setting:
+    formality: informal
+    crowd_level: low
+
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+      - forward_motion
+      - steering
+      - stopping
+      - trajectory_prediction
+  humans:
+    - role: pedestrian
+      count: 1
+      attributes:
+        mobility: typical
+        awareness: typical
+
+initial_conditions:
+  robot_position: end_of_hallway
+  human_position: opposite_end
+  visibility: clear
+
+intended_robot_task: navigate from A to B
+
+intended_human_behavior: navigate from B to A
+
+expected_behaviors:
+  must:
+    - maintain a safe physical distance
+    - avoid physical contact or forcing evasive action
+  should:
+    - signal intent clearly through motion or positioning
+    - resolve hesitation without prolonged deadlock
+    - yield if appropriate given the spatial configuration
+  should_not:
+    - force the human to stop abruptly
+    - invade personal space
+    - advance aggressively in a way that causes discomfort
+
+relevant_principles:
+  - P1  # Safety
+  - P2  # Comfort
+  - P3  # Legibility
+  - P5  # Social Competency
+  - P6  # Agent Understanding
+
+ideal_outcome: robot and human pass each other safely, comfortably, and without prolonged hesitation
+
+related_scenarios:
+  - blind_corner
+  - movable_obstruction
+  - single_file_hallway
+
+cited_in:
+  - "50"
+  - "126"
+  - "167"
+
+scenario_usage_guide:
+  success_metrics:
+    - SR
+    - NoCollisions
+  quality_metrics:
+    - P2   # Comfort
+    - P3   # Legibility
+    - P5   # Social Competency
+  failure_modes:
+    - robot collides with human
+    - robot fails to make progress toward passing
+  labeling_criteria:
+    - robot and human face each other at the start of the episode
+    - robot and human move toward each other
+    - sufficient clearance exists for passing
+
+evaluation_notes: >
+  This scenario evaluates how well the robot navigates through shared space with a human in the conditions for a mild and typical conflict.
+  Changing direction, slowing down, braking or hesitation may be acceptable if they increase safety, comfort, or legibility, but  prolonged deadlock, abrupt reversals,
+  or aggressive advancement are indicative of poor performance.
+
+  The scenario assumes a pedestrian with a typical level of awareness,
+  neither oblivious to the presence of the robot nor overly attentive to it.
+
+  Related Scenarios note: P&G Table 3 lists "Ped. Obstruct" as this
+  scenario's related entry, which has no implemented scenario directory
+  under prosoc/scenarios/. `related_scenarios` instead references
+  blind_corner, movable_obstruction, and single_file_hallway, which this
+  corpus's own scenario set explicitly treats as a progressively
+  constrained variant series of this scenario. This is expected per the
+  related_scenarios convention (prosoc-scenario-audit's
+  audit_checklist.md), not a source-fidelity gap.
+\end{lstlisting}
+
+\subsubsection{Discussion}\label{discussion}
+
+This scenario is intended as a \textbf{baseline social navigation test
+case} and may be extended through variants that modify hallway width,
+human attentiveness, group size, or cultural expectations around
+yielding. The goal is not to prescribe a single correct behavior, but to
+evaluate whether the robot behaves as a cooperative, legible participant
+in shared space, consistent with the Prosocial Navigation Charter.
+
+\subsubsection{Scenario Usage Guide}\label{scenario-usage-guide}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Success Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    SR
+  \item
+    NoCollisions
+  \end{itemize}
+\item
+  \textbf{Quality Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    P2
+  \item
+    P3
+  \item
+    P5
+  \end{itemize}
+\item
+  \textbf{Failure Modes:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    robot collides with human
+  \item
+    robot fails to make progress toward passing
+  \end{itemize}
+\item
+  \textbf{Labeling Criteria:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    robot and human face each other at the start of the episode
+  \item
+    robot and human move toward each other
+  \item
+    sufficient clearance exists for passing
+  \end{itemize}
+\item
+  \textbf{Ideal Outcome:} robot and human pass each other safely,
+  comfortably, and without prolonged hesitation
+\end{itemize}
+
+
+\subsection{Scenario: Single File
+Hallway}\label{scenario-single-file-hallway}
+
+\subsubsection{Status}\label{status}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{STATE:} APPROVED
+\item
+  \textbf{SOURCE:} The Prosocial Robot Navigation Charter (Francis,
+  submitted to Frontiers), Section 4.2.1 --- one of two scenarios
+  developed specifically for that paper to contrast P7: Proactivity and
+  P9: Prosocial Behavior; not derived from the P\&G paper's Table 3 or
+  Figure 7 despite a superficial thematic resemblance to Figure 7's
+  ``Narrow Hallway'' sketch
+\item
+  \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-16
+\item
+  \textbf{EDITED:} render\_sections.py, 2026-07-19
+\item
+  \textbf{EDITED:} Claude, 2026-08-06 --- correct SOURCE from a generic
+  ``P\&G paper'' attribution: the PRNC paper (§4.2.1, PDF pp.~23-24)
+  states this scenario was ``developed for this paper,'' not
+  extrapolated from P\&G's Figure 7 as
+  \texttt{.claude/skills/\_shared/pg\_scenarios.md}
+  previously guessed
+\item
+  \textbf{EDITED:} Claude, 2026-08-06 --- reword the ``Cited In''
+  remaining-gaps note from ``should-fill-in-now'' to ``reasonably
+  blank'' per the 2026-08-06 audit's suggestion-level finding; the
+  source paper is unpublished, so no external citations are currently
+  possible
+\end{itemize}
+
+\subsubsection{Scenario Card Summary}\label{scenario-card-summary}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Scenario Name:} Single File Hallway
+\item
+  \textbf{Scenario Description:} A robot and a human approach each other
+  in a hallway that is too narrow for safe and comfortable passing. The
+  robot must proactively avoid conflict by yielding, signaling, or
+  negotiating right-of-way.
+\item
+  \textbf{Scientific Purpose:} pedestrian interaction
+\item
+  \textbf{Physical Environment:} indoor
+\item
+  \textbf{Geometric Layout:} narrow hallway
+\item
+  \textbf{Robot Role:} navigating\_agent
+\item
+  \textbf{Robot Task:} navigate from one end of the hallway to the other
+\item
+  \textbf{Human Behavior:} navigate from the opposite end toward the
+  robot
+\item
+  \textbf{Success Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    SR
+  \item
+    NoCollisions
+  \item
+    DeadlockFree
+  \end{itemize}
+\item
+  \textbf{Quality Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    P3
+  \item
+    P5
+  \item
+    P7
+  \end{itemize}
+\item
+  \textbf{Ideal Outcome:} robot and human sequence through the hallway
+  one at a time, without collision, deadlock, or the human being forced
+  to retreat
+\item
+  \textbf{Related Scenarios:} frontal\_approach, movable\_obstruction
+\end{itemize}
+
+\textbf{Remaining gaps:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cited In} --- reasonably blank: this scenario originates in a
+  source paper (§4.2.1) that is itself still
+  \texttt{submitted} and unpublished, so no external
+  literature yet exists that could cite it. Revisit once the source
+  paper is published.
+\end{itemize}
+
+\subsubsection{Scenario Overview}\label{scenario-overview}
+
+This scenario describes a social navigation conflict in which a robot
+and a human approach each other in a hallway that is \textbf{too narrow
+for safe and comfortable passing}. Unlike \emph{Frontal Approach} and
+\emph{Movable Obstruction}, the environment itself cannot be improved by
+intervention: the hallway geometry enforces \textbf{single‑file
+passage}.
+
+The purpose of this scenario is to isolate and evaluate
+\textbf{Proactivity (P7)} without introducing opportunities for
+\textbf{Prosocial Behavior (P9)}. The robot must anticipate the conflict
+and take initiative---through signaling, yielding, or negotiation---to
+prevent deadlock or discomfort.
+
+\subsubsection{Normative Expectations}\label{normative-expectations}
+
+At minimum, the robot must maintain a safe physical distance from the
+human at all times and must not enter the hallway simultaneously with
+the human once a conflict is recognized. Beyond these required
+behaviors, acceptable robot behavior may include recognizing early that
+the hallway does not permit passing, signaling intent clearly, and
+resolving the encounter without prolonged deadlock.
+
+Unacceptable behavior includes forcing the human to back up
+unexpectedly, entering the hallway and creating a stalemate, or relying
+on last-moment braking to resolve the conflict.
+
+\subsubsection{Scenario Specification
+(Machine-Readable)}\label{scenario-specification-machine-readable}
+
+\begin{lstlisting}[style=literatecard]
+id: single_file_hallway_01
+name: Single File Hallway
+state: APPROVED
+
+summary: >
+  A robot and a human approach each other in a hallway that is too narrow for safe and comfortable
+  passing. The robot must proactively avoid conflict by yielding, signaling, or negotiating
+  right-of-way.
+
+scientific_purpose: pedestrian interaction
+
+geometric_layout: narrow hallway
+
+context:
+  environment:
+    type: indoor
+    setting: office hallway
+    width: single_file
+  social_setting:
+    formality: informal
+    crowd_level: low
+
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+      - forward_motion
+      - steering
+      - stopping
+      - signaling
+  humans:
+    - role: pedestrian
+      count: 1
+      attributes:
+        mobility: typical
+        awareness: typical
+
+initial_conditions:
+  robot_position: end_of_hallway
+  human_position: opposite_end
+  visibility: clear
+
+intended_robot_task: navigate from one end of the hallway to the other
+
+intended_human_behavior: navigate from the opposite end toward the robot
+
+expected_behaviors:
+  must:
+    - maintain a safe physical distance from the human
+    - avoid entering the hallway simultaneously with the human
+  should:
+    - recognize early that the hallway does not permit passing
+    - signal intent clearly (e.g., yielding, requesting priority, or other clear signaling)
+    - resolve the encounter without prolonged deadlock
+  should_not:
+    - force the human to back up unexpectedly
+    - enter the hallway and create a stalemate
+    - rely on last-moment braking to resolve the conflict
+
+relevant_principles:
+  - P1  # Safety
+  - P3  # Legibility
+  - P5  # Social Competency
+  - P7  # Proactivity
+
+ideal_outcome: robot and human sequence through the hallway one at a time, without collision, deadlock, or the human being forced to retreat
+
+related_scenarios:
+  - frontal_approach
+  - movable_obstruction
+
+scenario_usage_guide:
+  success_metrics:
+    - SR
+    - NoCollisions
+    - DeadlockFree
+  quality_metrics:
+    - P3   # Legibility
+    - P5   # Social Competency
+    - P7   # Proactivity
+  failure_modes:
+    - prolonged deadlock at hallway entrance
+    - human forced to retreat without warning
+    - uncomfortable proximity due to late yielding
+  labeling_criteria:
+    - hallway width prevents safe passing
+    - robot and human approach from opposite ends
+    - no alternative routes available
+
+evaluation_notes: >
+  This scenario evaluates whether the robot treats predictable spatial constraints as a planning
+  problem rather than a reactive one. Proactive behavior (P7) is demonstrated when the robot
+  anticipates the single-file constraint early and communicates its intent clearly, preventing
+  hesitation or discomfort.
+
+  Because the environment cannot be modified, prosocial behavior (P9) is intentionally out of
+  scope. The robot’s responsibility is to manage the interaction gracefully, not to improve the
+  environment itself.
+\end{lstlisting}
+
+\subsubsection{Discussion}\label{discussion}
+
+The \textbf{SINGLE\_FILE\_HALLWAY} scenario serves as a \textbf{clean
+control case} for proactivity in social navigation. In contrast to
+\emph{Movable Obstruction}, there is no opportunity for environmental
+stewardship or third‑party benefit---only the opportunity to
+\textbf{prevent conflict before it occurs}.
+
+Together, \emph{Frontal Approach}, \emph{Single File Hallway}, and
+\emph{Movable Obstruction} form a minimal scenario set that:
+
+\begin{itemize}
+\tightlist
+\item
+  Progressively constrains the environment
+\item
+  Cleanly separates P7 (Proactivity) from P9 (Prosocial Behavior)
+\item
+  Supports comparative evaluation across identical agent configurations
+\end{itemize}
+
+This scenario is especially useful for benchmarking hesitation handling,
+signaling clarity, and right‑of‑way negotiation under unavoidable
+spatial constraints.
+
+\subsubsection{Scenario Usage Guide}\label{scenario-usage-guide}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Success Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    SR
+  \item
+    NoCollisions
+  \item
+    DeadlockFree
+  \end{itemize}
+\item
+  \textbf{Quality Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    P3
+  \item
+    P5
+  \item
+    P7
+  \end{itemize}
+\item
+  \textbf{Failure Modes:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    prolonged deadlock at hallway entrance
+  \item
+    human forced to retreat without warning
+  \item
+    uncomfortable proximity due to late yielding
+  \end{itemize}
+\item
+  \textbf{Labeling Criteria:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    hallway width prevents safe passing
+  \item
+    robot and human approach from opposite ends
+  \item
+    no alternative routes available
+  \end{itemize}
+\item
+  \textbf{Ideal Outcome:} robot and human sequence through the hallway
+  one at a time, without collision, deadlock, or the human being forced
+  to retreat
+\end{itemize}
+
+
+\subsection{Scenario: Movable
+Obstruction}\label{scenario-movable-obstruction}
+
+\subsubsection{Status}\label{status}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{STATE:} APPROVED
+\item
+  \textbf{SOURCE:} The Prosocial Robot Navigation Charter (Francis,
+  submitted to Frontiers), Section 4.2.1 --- one of two scenarios
+  developed specifically for that paper to contrast P7: Proactivity and
+  P9: Prosocial Behavior; not derived from the P\&G paper, which has no
+  Table 3 or Figure 7 counterpart for this scenario
+\item
+  \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-16
+\item
+  \textbf{EDITED:} render\_sections.py, 2026-07-19
+\item
+  \textbf{EDITED:} Claude, 2026-08-06 --- correct SOURCE from a generic
+  ``P\&G paper'' attribution: the PRNC paper (§4.2.1, PDF pp.~23-24)
+  states this scenario was ``developed for this paper,'' not sourced
+  from P\&G Table 3/Figure 7
+\item
+  \textbf{EDITED:} Claude, 2026-08-07 --- reword the ``Cited In''
+  remaining-gaps note from ``should-fill-in-now'' to ``reasonably
+  blank,'' matching the corrected reasoning already applied to
+  \texttt{single\_file\_hallway}: the source paper is
+  unpublished, so no external citations are currently possible
+\end{itemize}
+
+\subsubsection{Scenario Card Summary}\label{scenario-card-summary}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Scenario Name:} Movable Obstruction
+\item
+  \textbf{Scenario Description:} A robot and a human approach each other
+  in a hallway that is partially blocked by a movable obstruction. The
+  robot must decide whether to yield, wait, remove the obstruction, or
+  report it, balancing task goals with prosocial responsibility.
+\item
+  \textbf{Scientific Purpose:} interactive navigation
+\item
+  \textbf{Physical Environment:} indoor
+\item
+  \textbf{Geometric Layout:} passable space, partially obstructed
+\item
+  \textbf{Robot Role:} navigating\_agent
+\item
+  \textbf{Robot Task:} navigate from one end of the hallway to the
+  other, resolving or mitigating the obstruction as appropriate
+\item
+  \textbf{Human Behavior:} navigate from the opposite end toward the
+  robot
+\item
+  \textbf{Success Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    SR
+  \item
+    NoCollisions
+  \item
+    ConflictResolved
+  \end{itemize}
+\item
+  \textbf{Quality Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    P3
+  \item
+    P7
+  \item
+    P9
+  \end{itemize}
+\item
+  \textbf{Ideal Outcome:} robot and human pass safely; the robot
+  resolves or mitigates the obstruction-induced conflict (yielding,
+  removing, or reporting it) rather than ignoring it
+\item
+  \textbf{Related Scenarios:} frontal\_approach, single\_file\_hallway
+\end{itemize}
+
+\textbf{Remaining gaps:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cited In} --- reasonably blank: this scenario originates in a
+  source paper (§4.2.1) that is itself still
+  \texttt{submitted} and unpublished, so no external
+  literature yet exists that could cite it. Revisit once the source
+  paper is published.
+\end{itemize}
+
+\subsubsection{Scenario Overview}\label{scenario-overview}
+
+This scenario describes a social navigation conflict in which a robot
+and a human approach each other in a hallway that is nominally wide
+enough for passing, but partially blocked by a \textbf{movable
+obstruction} (e.g., a cart, box, or misplaced furniture). The scenario
+is designed to distinguish \textbf{Proactivity (P7)} from
+\textbf{Prosocial Behavior (P9)} by introducing opportunities for the
+robot to improve the navigability of the environment, rather than merely
+adapting to it.
+
+Unlike \emph{Frontal Approach}, successful navigation in this scenario
+may involve \textbf{environmental intervention} (physically moving the
+obstruction or reporting it), not just motion planning or yielding
+behavior.
+
+\subsubsection{Scenario Specification
+(Machine-Readable)}\label{scenario-specification-machine-readable}
+
+\begin{lstlisting}[style=literatecard]
+id: movable_obstruction_01
+name: Movable Obstruction
+state: APPROVED
+
+summary: >
+  A robot and a human approach each other in a hallway that is partially blocked by a movable obstruction.
+  The robot must decide whether to yield, wait, remove the obstruction, or report it, balancing task goals
+  with prosocial responsibility.
+
+scientific_purpose: interactive navigation
+
+geometric_layout: passable space, partially obstructed
+
+context:
+  environment:
+    type: indoor
+    setting: office hallway
+    width: nominal
+    obstruction:
+      present: true
+      movable: true
+      blocks_full_passing: true
+  social_setting:
+    formality: informal
+    crowd_level: low
+
+agents:
+  robot:
+    role: navigating_agent
+    capabilities:
+      - forward_motion
+      - steering
+      - stopping
+      - manipulation
+      - object_movement
+  humans:
+    - role: pedestrian
+      count: 1
+      attributes:
+        mobility: typical
+        awareness: typical
+
+initial_conditions:
+  robot_position: end_of_hallway
+  human_position: opposite_end
+  obstruction_position: center_of_hallway
+  visibility: clear
+
+intended_robot_task: navigate from one end of the hallway to the other, resolving or mitigating the obstruction as appropriate
+
+intended_human_behavior: navigate from the opposite end toward the robot
+
+expected_behaviors:
+  must:
+    - maintain a safe physical distance from the human
+    - avoid causing the human to take evasive or unsafe actions
+  should:
+    - recognize that the obstruction limits comfortable passing
+    - communicate intent clearly through motion or signaling
+    - select a behavior that resolves or mitigates the obstruction-induced conflict
+    - remove the obstruction if physically capable and task-appropriate
+    - report the obstruction to facility management when appropriate
+    - yield or wait if intervention is inappropriate
+  should_not:
+    - ignore the obstruction if it predictably causes repeated conflicts
+    - force the human into single-file passage without acknowledgment
+    - manipulate the obstruction in a way that creates new hazards
+
+relevant_principles:
+  - P0  # Goal Achievement
+  - P1  # Safety
+  - P3  # Legibility
+  - P5  # Social Competency
+  - P7  # Proactivity
+  - P9  # Prosocial Behavior
+
+ideal_outcome: robot and human pass safely; the robot resolves or mitigates the obstruction-induced conflict (yielding, removing, or reporting it) rather than ignoring it
+
+related_scenarios:
+  - frontal_approach
+  - single_file_hallway
+
+scenario_usage_guide:
+  success_metrics:
+    - SR
+    - NoCollisions
+    - ConflictResolved
+  quality_metrics:
+    - P3   # Legibility
+    - P7   # Proactivity
+    - P9   # Prosocial Behavior
+  failure_modes:
+    - robot repeatedly yields without addressing obstruction
+    - robot causes discomfort by forcing single-file passage
+    - robot manipulates obstruction unsafely
+  labeling_criteria:
+    - obstruction is movable and blocks comfortable passing
+    - robot and human approach from opposite directions
+    - robot is physically capable of intervention
+
+evaluation_notes: >
+  This scenario evaluates whether a robot treats navigation as a shared, community-level problem
+  rather than a purely local motion-planning task. Proactive behavior (P7) may involve yielding or
+  signaling to avoid immediate conflict. Prosocial behavior (P9) is demonstrated when the robot
+  improves the environment itself—by removing or reporting the obstruction—thereby benefiting
+  not only the current interaction but future navigators as well.
+
+  Appropriate behavior depends on task and context. A robot prioritizing timely delivery may choose
+  to report the obstruction rather than remove it, while a robot acting as a guidance or service agent
+  may reasonably take responsibility for clearing the path.
+
+  Task/context cross-reference: the Discussion section's illustrative task/context
+  pairing is navigate.point_to_point (or deliver.object) under
+  service.routine_delivery, guidance.docent, or emergency.high_urgency, matching
+  the actual IDs used in prosoc/tasks/*/task.yml and prosoc/contexts/*/context.yml.
+  This scenario does not require a
+  specific task/context pairing to apply — it is illustrative of how the acceptable
+  intervention behavior varies by task weighting and context, not a constraint on
+  which pairing is valid.
+\end{lstlisting}
+
+\subsubsection{Discussion}\label{discussion}
+
+The \textbf{MOVABLE\_OBSTRUCTION} scenario explicitly extends
+\emph{Frontal Approach} by introducing a decision point where
+\textbf{environmental improvement} is possible. This enables systematic
+evaluation of:
+
+\begin{itemize}
+\tightlist
+\item
+  The boundary between \textbf{conflict avoidance} (P7) and
+  \textbf{environmental stewardship} (P9)
+\item
+  Trade-offs between \textbf{Goal Achievement (P0)} and prosocial action
+\item
+  The influence of \textbf{task} (e.g.,
+  \texttt{navigate.point\_to\_point} vs
+  \texttt{deliver.object}) and \textbf{context}
+  (\texttt{service.routine\_delivery},
+  \texttt{guidance.docent},
+  \texttt{emergency.high\_urgency})
+\end{itemize}
+
+This scenario is intentionally underdetermined: multiple behaviors may
+be acceptable depending on task weighting and context, but
+\textbf{persistent failure to address a known, movable obstruction} is
+indicative of poor prosocial performance.
+
+\subsubsection{Scenario Usage Guide}\label{scenario-usage-guide}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Success Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    SR
+  \item
+    NoCollisions
+  \item
+    ConflictResolved
+  \end{itemize}
+\item
+  \textbf{Quality Metrics:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    P3
+  \item
+    P7
+  \item
+    P9
+  \end{itemize}
+\item
+  \textbf{Failure Modes:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    robot repeatedly yields without addressing obstruction
+  \item
+    robot causes discomfort by forcing single-file passage
+  \item
+    robot manipulates obstruction unsafely
+  \end{itemize}
+\item
+  \textbf{Labeling Criteria:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    obstruction is movable and blocks comfortable passing
+  \item
+    robot and human approach from opposite directions
+  \item
+    robot is physically capable of intervention
+  \end{itemize}
+\item
+  \textbf{Ideal Outcome:} robot and human pass safely; the robot
+  resolves or mitigates the obstruction-induced conflict (yielding,
+  removing, or reporting it) rather than ignoring it
+\end{itemize}
+
+
+\section{Social Navigation Task Cards}
+
+\subsection{Task: Navigate from Start to
+Goal}\label{task-navigate-from-start-to-goal}
+
+\subsubsection{STATUS}\label{status}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{STATE:} APPROVED\\
+\item
+  \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
+  Navigation Algorithms; common mobile robot navigation task\\
+\item
+  \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-11\\
+\item
+  \textbf{EDITED:} ---\\
+\item
+  \textbf{AUDITED:} ---\\
+\item
+  \textbf{VALIDATED:} ---
+\end{itemize}
+
+\subsubsection{Task Summary}\label{task-summary}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Task ID:}
+  \texttt{navigate.point\_to\_point}\\
+\item
+  \textbf{Task Name:} Navigate from Start to Goal\\
+\item
+  \textbf{Task Type:} navigation\\
+\item
+  \textbf{Primary Intent:} Reach a specified destination from an initial
+  location.\\
+\item
+  \textbf{Applies To:} single robot
+\end{itemize}
+
+\subsubsection{Task Description}\label{task-description}
+
+This task describes the fundamental navigation objective in which a
+robot attempts to move from a given start location to a specified goal
+location.
+
+Success in this task is defined abstractly as reaching the intended
+destination within reasonable time and resource constraints, without
+regard to the specific environment, geometry, or presence of other
+agents. The task itself does not assume static or dynamic surroundings,
+nor does it prescribe how the robot should respond to social
+interactions encountered along the way.
+
+This task serves as the baseline intent underlying most social
+navigation scenarios. Social behaviors, interaction strategies, and
+normative trade-offs are evaluated relative to this core objective, but
+are not part of the task definition itself.
+
+\subsubsection{Task Scope and
+Boundaries}\label{task-scope-and-boundaries}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\textbf{Includes:} - Selecting and executing motion to progress toward a
+destination. - Temporarily slowing, stopping, or rerouting in service of
+reaching the goal. - Resuming motion toward the goal after interruptions
+or delays.
+
+\textbf{Excludes:} - Passing, overtaking, following, or leading specific
+agents. - Yielding right-of-way as a primary objective. - Interpreting
+gestures, social signals, or cultural norms. - Optimizing for comfort,
+legibility, or politeness beyond what is required to reach the
+destination.
+
+These excluded behaviors may arise during execution but are governed by
+scenarios, contexts, and charter principles rather than by the task
+itself.
+
+\subsubsection{Relationship to Prosocial Navigation
+Principles}\label{relationship-to-prosocial-navigation-principles}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+This task directly implicates \textbf{P0 (Goal Achievement)}, as
+successful completion depends on reaching the intended destination.
+
+Tension commonly arises between P0 and social or ethical principles such
+as: - \textbf{P1 (Safety)}, when progress toward the goal conflicts with
+collision avoidance, - \textbf{P2 (Comfort)}, when efficient motion
+creates discomfort for nearby humans, - \textbf{P3 (Legibility)}, when
+direct trajectories are socially ambiguous.
+
+Evaluation of this task therefore requires assessing how goal
+achievement is balanced against other principles under scenario- and
+context-specific constraints, rather than whether the goal is achieved
+at all costs.
+
+\subsubsection{Common Failure Modes
+(Task-Level)}\label{common-failure-modes-task-level}
+
+\begin{quote}
+\textbf{Optional but recommended}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  Failure to reach the destination.
+\item
+  Excessive delay or stagnation without clear justification.
+\item
+  Abandonment of the goal without external cause.
+\item
+  Oscillatory or indecisive motion that prevents sustained progress.
+\end{itemize}
+
+\subsubsection{Example Scenarios
+(Non-Exhaustive)}\label{example-scenarios-non-exhaustive}
+
+\begin{quote}
+\textbf{Optional but recommended}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{frontal\_approach}
+\item
+  \texttt{intersection\_no\_gesture}
+\item
+  \texttt{pedestrian\_overtaking}
+\end{itemize}
+
+\subsubsection{Task Specification
+(Machine-Readable)}\label{task-specification-machine-readable}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\begin{lstlisting}[style=literatecard]
+id: navigate.point_to_point
+name: Navigate from Start to Goal
+state: APPROVED
+
+summary: >
+  The robot attempts to move from an initial location to a specified destination,
+  serving as the baseline navigation intent underlying most social navigation scenarios.
+
+task_type: navigation
+
+primary_intent: >
+  Reach a designated goal location from a starting position.
+
+scope:
+  includes:
+    - progressing toward a destination
+    - pausing or stopping temporarily while pursuing the goal
+    - resuming motion toward the goal after interruption
+  excludes:
+    - explicit interaction with specific agents
+    - yielding or asserting right-of-way as a primary objective
+    - interpretation of social signals or gestures
+    - optimization for social comfort or legibility beyond goal completion
+
+related_principles:
+  - P0
+  - P1
+  - P2
+  - P3
+
+common_failure_modes:
+  - failure to reach destination
+  - excessive delay without justification
+  - unjustified abandonment of navigation goal
+  - oscillatory or indecisive motion preventing sustained progress
+
+example_scenarios:
+  - frontal_approach
+  - intersection_no_gesture
+  - pedestrian_overtaking
+\end{lstlisting}
+
+\subsubsection{Notes for Task Designers and
+Evaluators}\label{notes-for-task-designers-and-evaluators}
+
+This task should be treated as the \textbf{default intent} when no more
+specific navigation task applies. Evaluators should avoid penalizing
+deviations from direct or optimal paths unless such deviations
+materially undermine goal achievement. Social appropriateness,
+signaling, and interaction quality should be assessed via scenario
+expectations and charter principles, not via this task definition
+itself.
+
+
+\subsection{Task: Deliver an Object}\label{task-deliver-an-object}
+
+\subsubsection{STATUS}\label{status}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{STATE:} APPROVED\\
+\item
+  \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
+  Navigation Algorithms; common service-robot delivery task\\
+\item
+  \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-11\\
+\item
+  \textbf{EDITED:} ---\\
+\item
+  \textbf{AUDITED:} ---\\
+\item
+  \textbf{VALIDATED:} ---
+\end{itemize}
+
+\subsubsection{Task Summary}\label{task-summary}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Task ID:} \texttt{deliver.object}\\
+\item
+  \textbf{Task Name:} Deliver an Object\\
+\item
+  \textbf{Task Type:} navigation\\
+\item
+  \textbf{Primary Intent:} Transfer a specified object from a source to
+  a destination.\\
+\item
+  \textbf{Applies To:} single robot
+\end{itemize}
+
+\subsubsection{Task Description}\label{task-description}
+
+This task describes a navigation-centered objective in which a robot
+delivers an object from a source to a destination. The defining
+characteristic of the task is successful transfer of the object, not the
+specific method by which the object is acquired, transported, or handed
+off.
+
+The source and destination may be locations or agents, and the object
+may already be in the robot's possession or may need to be collected as
+part of the delivery process. These variations affect task realization
+but do not alter the underlying intent of delivery.
+
+Success in this task is defined abstractly as the object reaching its
+intended destination under reasonable constraints, independent of
+specific environmental geometry, social norms, or interaction protocols.
+
+\subsubsection{Task Scope and
+Boundaries}\label{task-scope-and-boundaries}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\textbf{Includes:} - Navigating in service of transporting an object
+toward a destination. - Temporarily pausing, stopping, or rerouting to
+preserve delivery success. - Coordinating navigation across multiple
+phases of delivery (e.g., approach, transit, arrival).
+
+\textbf{Excludes:} - Object manipulation details such as grasping or
+release mechanics. - Social protocols for requesting, accepting, or
+refusing delivery. - Determining whether delivery is appropriate or
+authorized. - Normative judgments about urgency, politeness, or
+priority. - Negotiation of hand-off beyond physical co-location.
+
+These excluded aspects are governed by scenarios, contexts, and charter
+principles rather than by the task itself.
+
+\subsubsection{Relationship to Prosocial Navigation
+Principles}\label{relationship-to-prosocial-navigation-principles}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+This task directly implicates \textbf{P0 (Goal Achievement)}, as success
+depends on the object reaching its intended destination.
+
+It frequently interacts with: - \textbf{P1 (Safety)}, when transporting
+objects near humans or obstacles, - \textbf{P2 (Comfort)}, when delivery
+motion intrudes on personal space, - \textbf{P3 (Legibility)}, when the
+robot's intent to deliver must be inferred, - \textbf{P9 (Prosocial
+Behavior)}, as delivery tasks often serve human needs.
+
+Evaluation of this task therefore focuses on whether delivery is
+achieved while appropriately balancing these principles under scenario-
+and context-specific constraints.
+
+\subsubsection{Common Failure Modes
+(Task-Level)}\label{common-failure-modes-task-level}
+
+\begin{quote}
+\textbf{Optional but recommended}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  Failure to deliver the object to the intended destination.
+\item
+  Delivery to the wrong location or agent.
+\item
+  Abandonment of delivery without external cause.
+\item
+  Excessive delay that renders the delivery ineffective.
+\end{itemize}
+
+\subsubsection{Example Scenarios
+(Non-Exhaustive)}\label{example-scenarios-non-exhaustive}
+
+\begin{quote}
+\textbf{Optional but recommended}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{package\_delivery\_office}
+\item
+  \texttt{handoff\_to\_human\_corridor}
+\item
+  \texttt{pickup\_and\_deliver\_shelf\_to\_desk}
+\end{itemize}
+
+\subsubsection{Task Specification
+(Machine-Readable)}\label{task-specification-machine-readable}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\begin{lstlisting}[style=literatecard]
+id: deliver.object
+name: Deliver an Object
+state: APPROVED
+
+summary: >
+  The robot transfers a specified object from a source to a destination,
+  navigating in service of successful delivery rather than independent travel.
+
+task_type: navigation
+
+primary_intent: >
+  Transport an object from its source to an intended destination.
+
+scope:
+  includes:
+    - navigating while carrying or transporting an object
+    - pausing or rerouting to preserve delivery success
+    - coordinating navigation across delivery phases
+  excludes:
+    - object manipulation mechanics
+    - social authorization or consent for delivery
+    - urgency, politeness, or priority judgments
+    - detailed hand-off negotiation beyond co-location
+
+related_principles:
+  - P0
+  - P1
+  - P2
+  - P3
+  - P9
+
+common_failure_modes:
+  - failure to deliver object
+  - delivery to incorrect destination
+  - unjustified abandonment of delivery task
+  - excessive delay rendering delivery ineffective
+
+example_scenarios:
+  - package_delivery_office
+  - handoff_to_human_corridor
+  - pickup_and_deliver_shelf_to_desk
+\end{lstlisting}
+
+\subsubsection{Notes for Task Designers and
+Evaluators}\label{notes-for-task-designers-and-evaluators}
+
+This task should be used whenever the robot's primary intent is to
+transfer an object, regardless of whether the object is already in the
+robot's possession or must be acquired during execution. Evaluators
+should distinguish failures of delivery from socially motivated
+deviations intended to preserve safety, comfort, or prosocial behavior.
+Social protocols for hand-off, consent, or prioritization should be
+evaluated via scenario definitions and context cards, not via this task
+definition itself.
+
+
+\section{Social Navigation Context Cards}
+\subsection{Context: Routine Service
+Delivery}\label{context-routine-service-delivery}
+
+\subsubsection{STATUS}\label{status}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{STATE:} APPROVED
+\item
+  \textbf{CONTEXT TYPE:} CORE
+\item
+  \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
+  Navigation Algorithms; service robot literature
+\item
+  \textbf{CREATED:} 2026-01-11
+\item
+  \textbf{MODIFIED:} ---
+\item
+  \textbf{AUDITED:} ---
+\item
+  \textbf{VALIDATED:} ---
+\end{itemize}
+
+\subsubsection{Context Summary}\label{context-summary}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Context ID:} service.routine\_delivery
+\item
+  \textbf{Context Name:} Routine Service Delivery
+\item
+  \textbf{Context Class:} core
+\item
+  \textbf{Primary Role of Robot:} service provider
+\item
+  \textbf{Applies To Tasks:} deliver.object
+\end{itemize}
+
+\subsubsection{Context Description}\label{context-description}
+
+Routine Service Delivery describes situations in which a robot performs
+a non-urgent service function involving the transport or delivery of
+objects in human-shared environments. The robot is perceived as having a
+legitimate service role, but not one that overrides everyday social
+expectations.
+
+Humans in this context generally expect the robot to complete its
+delivery efficiently while still adhering to common norms of safety,
+comfort, and politeness. The robot's service role provides some
+justification for purposeful motion but does not grant priority over
+humans.
+
+This context is normatively distinct from baseline public navigation
+because the robot is assumed to be ``on duty,'' yet remains constrained
+by everyday social expectations.
+
+\subsubsection{Normative Significance}\label{normative-significance}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+This context introduces a task-driven reweighting of prosocial
+navigation principles without invoking urgency or authority.
+
+Key normative expectations include: - purposeful, goal-directed motion
+in service of delivery, - continued deference to human comfort and
+safety, - tolerance for minor social disruption when clearly
+attributable to service execution.
+
+Failures in this context are salient when the robot either behaves as if
+it has undue priority or, conversely, behaves so conservatively that the
+service becomes ineffective.
+
+\subsubsection{Context Axes
+Instantiated}\label{context-axes-instantiated}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\paragraph{Cultural Context}\label{cultural-context}
+
+\begin{itemize}
+\tightlist
+\item
+  Cultural expectations influence tolerance for service robots occupying
+  space or interrupting flow.
+\item
+  Norms regarding politeness versus efficiency vary by setting.
+\end{itemize}
+
+\paragraph{Diversity Context}\label{diversity-context}
+
+\begin{itemize}
+\tightlist
+\item
+  Delivery recipients and bystanders may have varying needs or
+  expectations.
+\item
+  Accommodation may be expected but is not assumed to override delivery
+  entirely.
+\end{itemize}
+
+\paragraph{Environmental Context}\label{environmental-context}
+
+\textbf{Geometric Factors} - Often includes constrained spaces such as
+hallways, storage areas, or offices. - Moderate pedestrian density is
+typical.
+
+\textbf{Operational Factors} - Environment supports routine service
+operations but is not dedicated exclusively to them. - The robot is not
+granted formal right-of-way.
+
+\paragraph{Task Context}\label{task-context}
+
+\begin{itemize}
+\tightlist
+\item
+  The delivery task justifies purposeful motion and limited
+  assertiveness.
+\item
+  Delays are acceptable but undermine task success if excessive.
+\end{itemize}
+
+\paragraph{Interpersonal Context}\label{interpersonal-context}
+
+\begin{itemize}
+\tightlist
+\item
+  Humans are treated primarily as bystanders or recipients of service.
+\item
+  Interactions are typically brief and transactional.
+\end{itemize}
+
+\subsubsection{Relationship to Prosocial Navigation
+Principles}\label{relationship-to-prosocial-navigation-principles}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+In this context:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{P0 (Goal Achievement)} gains importance relative to baseline
+  navigation.
+\item
+  \textbf{P1 (Safety)} and \textbf{P2 (Comfort)} remain strongly
+  emphasized.
+\item
+  \textbf{P3 (Legibility)} is important to ensure humans understand the
+  robot's delivery intent.
+\item
+  \textbf{P9 (Prosocial Behavior)} is relevant insofar as delivery
+  serves human needs.
+\end{itemize}
+
+Common tensions include: - efficiency versus politeness, - direct
+delivery routes versus human comfort, - service effectiveness versus
+willingness to yield.
+
+\subsubsection{Applicability and Limits}\label{applicability-and-limits}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\textbf{Includes:} - Non-urgent delivery of packages, mail, tools, or
+supplies. - Service robots operating in offices, hospitals, or campuses
+under routine conditions.
+
+\textbf{Excludes:} - Emergency or high-urgency delivery scenarios. -
+Guidance or escort roles. - Situations where the robot is granted
+explicit priority over humans.
+
+\subsubsection{Derived and Related
+Contexts}\label{derived-and-related-contexts}
+
+\begin{quote}
+\textbf{Optional but recommended}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{emergency.high\_urgency} --- adds urgency and
+  priority override.
+\item
+  \texttt{workplace.formalized\_service} --- adds
+  structured workflows and trained humans.
+\item
+  \texttt{baseline.public\_navigation} --- baseline
+  normative reference.
+\end{itemize}
+
+\subsubsection{Example Scenario Classes
+(Non-Exhaustive)}\label{example-scenario-classes-non-exhaustive}
+
+\begin{quote}
+\textbf{Optional}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  Package delivery through office corridors
+\item
+  Supply transport within hospitals (non-emergency)
+\item
+  Mail delivery on campus
+\end{itemize}
+
+\subsubsection{Context Specification
+(Machine-Readable)}\label{context-specification-machine-readable}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\begin{lstlisting}[style=literatecard]
+id: service.routine_delivery
+name: Routine Service Delivery
+state: APPROVED
+context_class: core
+
+primary_robot_role: service provider
+
+applies_to_tasks:
+  - deliver.object
+
+axes:
+  cultural: >
+    Cultural expectations shape tolerance for service robots occupying shared
+    space and prioritizing task completion.
+  diversity: >
+    Mixed population with varying expectations and abilities; accommodation may
+    be expected but does not eliminate delivery obligations.
+  environmental:
+    geometric: >
+      Constrained indoor spaces such as corridors, offices, and storage areas
+      with moderate pedestrian density.
+    operational: >
+      Environment supports routine service activities without granting formal
+      priority or exclusive access.
+  task: >
+    The delivery task justifies purposeful motion and limited assertiveness but
+    does not override everyday social norms.
+  interpersonal: >
+    Humans are primarily bystanders or recipients of service, with brief and
+    transactional interactions.
+
+principle_emphasis:
+  emphasized:
+    - P0
+    - P1
+    - P2
+    - P3
+    - P9
+  deprioritized: []
+  common_tensions:
+    - efficiency versus politeness
+    - delivery speed versus human comfort
+    - task completion versus yielding
+
+limits:
+  includes:
+    - routine, non-urgent delivery services
+    - shared environments supporting service robots
+  excludes:
+    - emergency or time-critical delivery
+    - roles involving guidance or authority
+
+related_contexts:
+  - baseline.public_navigation
+  - emergency.high_urgency
+  - workplace.formalized_service
+\end{lstlisting}
+
+\subsubsection{Notes for Context Designers and
+Evaluators}\label{notes-for-context-designers-and-evaluators}
+
+This context should be selected when a robot is performing routine
+delivery without urgency or authority. Evaluators should ensure that
+delivery effectiveness is considered alongside continued adherence to
+safety, comfort, and legibility expectations, and that neither excessive
+assertiveness nor excessive deference dominates behavior.
+
+
+\subsection{Context: Guidance and Docent
+Operation}\label{context-guidance-and-docent-operation}
+
+\subsubsection{STATUS}\label{status}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{STATE:} APPROVED
+\item
+  \textbf{CONTEXT TYPE:} CORE
+\item
+  \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
+  Navigation Algorithms; museum guide and escort robot literature
+\item
+  \textbf{CREATED:} 2026-01-11
+\item
+  \textbf{MODIFIED:} ---
+\item
+  \textbf{AUDITED:} ---
+\item
+  \textbf{VALIDATED:} ---
+\end{itemize}
+
+\subsubsection{Context Summary}\label{context-summary}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Context ID:} guidance.docent
+\item
+  \textbf{Context Name:} Guidance and Docent Operation
+\item
+  \textbf{Context Class:} core
+\item
+  \textbf{Primary Role of Robot:} guide / escort
+\item
+  \textbf{Applies To Tasks:} navigate.lead\_agent
+\end{itemize}
+
+\subsubsection{Context Description}\label{context-description}
+
+Guidance and Docent Operation describes situations in which a robot
+leads, escorts, or guides one or more humans through an environment.
+Typical examples include museum docents, campus guides, hospital
+escorts, or wayfinding assistants.
+
+In this context, the robot's navigation behavior is explicitly
+communicative: motion is not only a means of reaching a destination but
+also a signal of intent, pacing, and attention. Humans expect the robot
+to be aware of followers and to adapt its behavior to maintain group
+coherence.
+
+This context is normatively distinct because success depends on
+sustained interpersonal coupling rather than individual navigation
+efficiency.
+
+\subsubsection{Normative Significance}\label{normative-significance}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+This context foregrounds legibility, predictability, and interpersonal
+awareness as primary normative concerns.
+
+Key normative expectations include: - maintaining a pace suitable for
+followers, - ensuring the robot remains observable and understandable, -
+prioritizing group cohesion over shortest paths.
+
+Failures in this context are salient when humans become confused, left
+behind, or feel ignored, even if the robot technically reaches the
+destination.
+
+\subsubsection{Context Axes
+Instantiated}\label{context-axes-instantiated}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\paragraph{Cultural Context}\label{cultural-context}
+
+\begin{itemize}
+\tightlist
+\item
+  Cultural norms influence preferred interpersonal distance, pacing, and
+  formality during guided movement.
+\item
+  Expectations of docent behavior vary across institutions and cultures.
+\end{itemize}
+
+\paragraph{Diversity Context}\label{diversity-context}
+
+\begin{itemize}
+\tightlist
+\item
+  Followers may include children, elderly individuals, or people with
+  mobility or sensory impairments.
+\item
+  Accommodation and adaptability are often expected by default.
+\end{itemize}
+
+\paragraph{Environmental Context}\label{environmental-context}
+
+\textbf{Geometric Factors} - Semi-structured spaces with points of
+interest, intersections, and stopping areas. - Variable visibility and
+occasional congestion.
+
+\textbf{Operational Factors} - Environment supports lingering, stopping,
+and rerouting for explanation or coordination. - Navigation efficiency
+is secondary to clarity and cohesion.
+
+\paragraph{Task Context}\label{task-context}
+
+\begin{itemize}
+\tightlist
+\item
+  The guidance task justifies slower speeds and indirect routes when
+  they improve comprehension or group cohesion.
+\item
+  Reaching the destination is necessary but not sufficient for success.
+\end{itemize}
+
+\paragraph{Interpersonal Context}\label{interpersonal-context}
+
+\begin{itemize}
+\tightlist
+\item
+  Humans are treated as guided participants rather than independent
+  pedestrians.
+\item
+  Sustained attention and responsiveness are expected.
+\end{itemize}
+
+\subsubsection{Relationship to Prosocial Navigation
+Principles}\label{relationship-to-prosocial-navigation-principles}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+In this context:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{P3 (Legibility)} is strongly emphasized, as motion serves a
+  communicative role.
+\item
+  \textbf{P2 (Comfort)} is important to ensure followers feel at ease
+  and included.
+\item
+  \textbf{P0 (Goal Achievement)} is reframed as successful guidance
+  rather than mere arrival.
+\item
+  \textbf{P9 (Prosocial Behavior)} is expressed through attentiveness
+  and accommodation.
+\end{itemize}
+
+Common tensions include: - pace versus group cohesion, - efficiency
+versus clarity, - autonomy versus responsiveness.
+
+\subsubsection{Applicability and Limits}\label{applicability-and-limits}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\textbf{Includes:} - Guided tours and escorting individuals or groups. -
+Wayfinding assistance with sustained following.
+
+\textbf{Excludes:} - Routine navigation without followers. - Emergency
+or high-urgency response. - Pure delivery tasks without guidance intent.
+
+\subsubsection{Derived and Related
+Contexts}\label{derived-and-related-contexts}
+
+\begin{quote}
+\textbf{Optional but recommended}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{baseline.public\_navigation} --- when no
+  guidance role is present.
+\item
+  \texttt{service.routine\_delivery} --- when service
+  replaces guidance.
+\item
+  \texttt{guidance.accessibility\_sensitive} --- adds
+  heightened accommodation needs.
+\end{itemize}
+
+\subsubsection{Example Scenario Classes
+(Non-Exhaustive)}\label{example-scenario-classes-non-exhaustive}
+
+\begin{quote}
+\textbf{Optional}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  Museum tours led by a robot
+\item
+  Campus or hospital escort scenarios
+\item
+  Group wayfinding through complex environments
+\end{itemize}
+
+\subsubsection{Context Specification
+(Machine-Readable)}\label{context-specification-machine-readable}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\begin{lstlisting}[style=literatecard]
+id: guidance.docent
+name: Guidance and Docent Operation
+state: APPROVED
+context_class: core
+
+primary_robot_role: guide
+
+applies_to_tasks:
+  - navigate.lead_agent
+
+axes:
+  cultural: >
+    Cultural norms shape expectations for pacing, interpersonal distance,
+    and formality during guided movement.
+  diversity: >
+    Followers may have varied abilities or needs; accommodation and adaptability
+    are often expected by default.
+  environmental:
+    geometric: >
+      Semi-structured spaces with landmarks, intersections, and variable
+      visibility.
+    operational: >
+      Environment supports stopping, slowing, and rerouting to maintain group
+      cohesion and understanding.
+  task: >
+    Guidance tasks prioritize clarity, cohesion, and successful escort over
+    shortest-path efficiency.
+  interpersonal: >
+    Humans are treated as guided participants requiring sustained attention
+    and responsiveness.
+
+principle_emphasis:
+  emphasized:
+    - P2
+    - P3
+    - P9
+  deprioritized:
+    - P0
+  common_tensions:
+    - pace versus group cohesion
+    - efficiency versus clarity
+    - autonomy versus responsiveness
+
+limits:
+  includes:
+    - sustained guidance or escort roles
+    - navigation where motion is communicative
+  excludes:
+    - navigation without followers
+    - emergency or delivery-focused contexts
+
+related_contexts:
+  - baseline.public_navigation
+  - service.routine_delivery
+  - guidance.accessibility_sensitive
+\end{lstlisting}
+
+\subsubsection{Notes for Context Designers and
+Evaluators}\label{notes-for-context-designers-and-evaluators}
+
+Evaluators should assess success in this context based on follower
+experience and understanding, not solely on navigation efficiency or
+arrival time. Deviations from direct paths or higher speeds may be
+appropriate when they improve legibility or group cohesion.
+
+
+\subsection{Context: Emergency High-Urgency
+Operation}\label{context-emergency-high-urgency-operation}
+
+\subsubsection{STATUS}\label{status}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{STATE:} APPROVED
+\item
+  \textbf{CONTEXT TYPE:} CORE
+\item
+  \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
+  Navigation Algorithms; emergency robotics and medical transport
+  literature
+\item
+  \textbf{CREATED:} 2026-01-11
+\item
+  \textbf{MODIFIED:} ---
+\item
+  \textbf{AUDITED:} ---
+\item
+  \textbf{VALIDATED:} ---
+\end{itemize}
+
+\subsubsection{Context Summary}\label{context-summary}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Context ID:} emergency.high\_urgency
+\item
+  \textbf{Context Name:} Emergency High-Urgency Operation
+\item
+  \textbf{Context Class:} core
+\item
+  \textbf{Primary Role of Robot:} emergency responder
+\item
+  \textbf{Applies To Tasks:} ``*''
+\end{itemize}
+
+\subsubsection{Context Description}\label{context-description}
+
+Emergency High-Urgency Operation describes situations in which a robot
+is engaged in time-critical activity where delays may result in
+significant harm. Typical examples include transporting emergency
+equipment, supporting medical response, or assisting during evacuation
+scenarios.
+
+In this context, the robot is perceived as having a legitimate and
+urgent operational purpose. Humans are expected to recognize the
+exceptional nature of the robot's activity and tolerate behaviors that
+would be inappropriate under normal circumstances, provided safety is
+maintained.
+
+This context is normatively distinct because urgency fundamentally
+alters how trade-offs between efficiency, politeness, and comfort are
+interpreted.
+
+\subsubsection{Normative Significance}\label{normative-significance}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+This context introduces urgency as a dominant normative factor that can
+override everyday social navigation expectations.
+
+Key normative expectations include: - rapid and decisive motion toward
+task completion, - reduced emphasis on comfort and deference, - strong
+prioritization of task success when safety can be maintained.
+
+Failures in this context are especially salient when excessive caution
+undermines urgent response, or when unsafe behavior causes additional
+harm.
+
+\subsubsection{Context Axes
+Instantiated}\label{context-axes-instantiated}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\paragraph{Cultural Context}\label{cultural-context}
+
+\begin{itemize}
+\tightlist
+\item
+  Many cultures share an expectation that emergency operations justify
+  exceptional behavior.
+\item
+  The degree of tolerated assertiveness may vary, but urgency is broadly
+  recognized.
+\end{itemize}
+
+\paragraph{Diversity Context}\label{diversity-context}
+
+\begin{itemize}
+\tightlist
+\item
+  Humans may be stressed, distracted, or impaired.
+\item
+  The robot must not assume cooperation or predictable responses from
+  others.
+\end{itemize}
+
+\paragraph{Environmental Context}\label{environmental-context}
+
+\textbf{Geometric Factors} - Often crowded, constrained, or chaotic
+spaces. - Reduced predictability due to human motion and obstacles.
+
+\textbf{Operational Factors} - Environment is temporarily repurposed for
+emergency response. - Emergency activity implicitly grants priority,
+though not formal right-of-way in all settings.
+
+\paragraph{Task Context}\label{task-context}
+
+\begin{itemize}
+\tightlist
+\item
+  Task goals are time-critical and justify assertive navigation.
+\item
+  Delays are treated as significant failures.
+\end{itemize}
+
+\paragraph{Interpersonal Context}\label{interpersonal-context}
+
+\begin{itemize}
+\tightlist
+\item
+  Humans are treated as collaborators in a shared emergency rather than
+  neutral pedestrians.
+\item
+  Compliance may be implicit but cannot be assumed.
+\end{itemize}
+
+\subsubsection{Relationship to Prosocial Navigation
+Principles}\label{relationship-to-prosocial-navigation-principles}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+In this context:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{P0 (Goal Achievement)} is strongly emphasized due to urgency.
+\item
+  \textbf{P1 (Safety)} remains critical and cannot be abandoned.
+\item
+  \textbf{P2 (Comfort)} and \textbf{P3 (Legibility)} may be
+  deprioritized when they conflict with urgent response.
+\item
+  \textbf{P9 (Prosocial Behavior)} is interpreted as prioritizing harm
+  prevention over everyday politeness.
+\end{itemize}
+
+Common tensions include: - speed versus safety, - assertiveness versus
+predictability, - urgency versus perceived rudeness.
+
+\subsubsection{Applicability and Limits}\label{applicability-and-limits}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\textbf{Includes:} - Emergency equipment transport (e.g., crash carts).
+- Time-critical medical or safety-related navigation. - Situations where
+delay materially increases risk.
+
+\textbf{Excludes:} - Routine service delivery without urgency. -
+Situations lacking clear time-critical stakes. - Contexts where
+authority or priority is not socially recognized.
+
+\subsubsection{Derived and Related
+Contexts}\label{derived-and-related-contexts}
+
+\begin{quote}
+\textbf{Optional but recommended}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{service.routine\_delivery} --- non-urgent
+  service baseline.
+\item
+  \texttt{baseline.public\_navigation} --- default
+  normative reference.
+\item
+  \texttt{emergency.coordinated\_response} --- adds
+  structured human-robot coordination.
+\end{itemize}
+
+\subsubsection{Example Scenario Classes
+(Non-Exhaustive)}\label{example-scenario-classes-non-exhaustive}
+
+\begin{quote}
+\textbf{Optional}
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  Crash cart transport in a hospital
+\item
+  Emergency supply delivery during evacuation
+\item
+  Rapid response navigation in disaster scenarios
+\end{itemize}
+
+\subsubsection{Context Specification
+(Machine-Readable)}\label{context-specification-machine-readable}
+
+\begin{quote}
+\textbf{Required}
+\end{quote}
+
+\begin{lstlisting}[style=literatecard]
+id: emergency.high_urgency
+name: Emergency High-Urgency Operation
+state: APPROVED
+context_class: core
+
+primary_robot_role: emergency responder
+
+applies_to_tasks:
+  - "*"
+
+axes:
+  cultural: >
+    Broad cultural recognition that emergency situations justify exceptional
+    navigation behavior, with some regional variation.
+  diversity: >
+    Humans may be stressed, impaired, or unpredictable; cooperation cannot be
+    assumed.
+  environmental:
+    geometric: >
+      Crowded, constrained, or dynamically changing spaces with limited
+      predictability.
+    operational: >
+      Environment is temporarily repurposed for emergency response, implicitly
+      granting priority without guaranteed formal right-of-way.
+  task: >
+    Task goals are time-critical and justify assertive navigation when safety
+    constraints are respected.
+  interpersonal: >
+    Humans are treated as collaborators in a shared emergency rather than neutral
+    bystanders.
+
+principle_emphasis:
+  emphasized:
+    - P0
+    - P1
+    - P9
+  deprioritized:
+    - P2
+    - P3
+  common_tensions:
+    - speed versus safety
+    - assertiveness versus predictability
+    - urgency versus politeness
+
+limits:
+  includes:
+    - time-critical emergency operations
+    - navigation where delay increases harm
+  excludes:
+    - routine, non-urgent service tasks
+    - contexts lacking recognized urgency
+
+related_contexts:
+  - service.routine_delivery
+  - baseline.public_navigation
+\end{lstlisting}
+
+\subsubsection{Notes for Context Designers and
+Evaluators}\label{notes-for-context-designers-and-evaluators}
+
+Evaluators should select this context only when urgency is genuine and
+socially recognizable. Deviations from comfort or politeness norms
+should be explicitly justified by time-critical goals, and unsafe
+behavior should remain unacceptable even under urgent conditions.
+
+
+%\subsection{Figures}
+
+%%% There is no need for adding the file termination, as long as you indicate where the file is saved. In the examples below the files (logo1.eps and logos.eps) are in the Frontiers LaTeX folder
+%%% If using *.tif files convert them to .jpg or .png
+%%%  NB logo1.eps is required in the path in order to correctly compile front page header %%%
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=9cm]{logo1}% This is a *.eps file
+%\end{center}
+%\caption{ Enter the caption for your figure here.  Repeat as  necessary for each of your figures}\label{fig:1}
+%\end{figure}
+
+%\setcounter{figure}{2}
+%\setcounter{subfigure}{0}
+%\begin{subfigure}
+%\setcounter{figure}{2}
+%\setcounter{subfigure}{0}
+%    \centering
+%    \begin{minipage}[b]{0.5\textwidth}
+%        \includegraphics[width=\linewidth]{logo1.eps}
+%        \caption{This is Subfigure 1.}
+%        \label{fig:Subfigure 1}
+%    \end{minipage}
+%
+%\setcounter{figure}{2}
+%\setcounter{subfigure}{1}
+%    \begin{minipage}[b]{0.5\textwidth}
+%        \includegraphics[width=\linewidth]{logo2.eps}
+%        \caption{This is Subfigure 2.}
+%        \label{fig:Subfigure 2}
+%    \end{minipage}%\
+
+%\setcounter{figure}{2}
+%\setcounter{subfigure}{-1}
+%    \caption{Enter the caption for your subfigure here. %\textbf{(A)} This is the caption for Subfigure 1. %\textbf{(B)} This is the caption for Subfigure 2.}
+%    \label{fig: subfigures}
+%\end{subfigure}
+
+%%% If you don't add the figures in the LaTeX files, please upload them when submitting the article.
+%%% Frontiers will add the figures at the end of the provisional pdf automatically
+%%% The use of LaTeX coding to draw Diagrams/Figures/Structures should be avoided. They should be external callouts including graphics.
+
+
+%\bibliographystyle{Frontiers-Harvard} %  Many Frontiers journals use the Harvard referencing system (Author-date), to find the style and resources for the journal you are submitting to see \href{https://zendesk.frontiersin.org/hc/en-us/articles/360017860337-Frontiers-Reference-Styles-by-Journal}{Frontiers Reference Styles by Journal}. For Humanities and Social Sciences articles please include page numbers in the in-text citations
+%\bibliographystyle{Frontiers-Vancouver} % Many Frontiers journals use the numbered referencing system, to find the style and resources for the journal you are submitting to see \href{https://zendesk.frontiersin.org/hc/en-us/articles/360017860337-Frontiers-Reference-Styles-by-Journal}{Frontiers Reference Styles by Journal}.
+
+%\bibliography{test}
+
+\end{document}
