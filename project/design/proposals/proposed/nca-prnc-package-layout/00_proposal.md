@@ -22,9 +22,11 @@ Restructures `prosoc`'s Python package from a flat layout that mixes engine code
 
 ## Background / Motivation
 
-`prosoc/packet/loader.py`'s own module docstring already calls itself a "generic card loader," and `PROP-NORMATIVE-PACKET-ASSEMBLY` (adopted) built the packet engine on the premise that composition logic is separable from the five card families it composes (`prosoc/packet/loader.py:69-79`'s `FAMILIES` registry; the corpus has six families total, but `manifests` isn't a packet member — it's the packet definition itself, excluded by design). That separation currently exists only in the code's *behavior*, not in the repo's *layout* — `prosoc/packet/`, `prosoc/literate/`, and `prosoc/auditor/` (the genuinely reusable parts) sit as siblings to `prosoc/scenarios/`, `prosoc/tasks/`, `prosoc/charter/`, etc. (the PRNC-specific parts) with no structural marker distinguishing them, and `pyproject.toml`'s `[tool.setuptools] packages = ["prosoc"]` doesn't even declare the subpackages correctly — the last built wheel (`dist/prosoc-0.1.0-py3-none-any.whl`, Dec 2025) contains only `prosoc/__init__.py`, nothing else.
+`prosoc/packet/loader.py`'s own module docstring already calls itself a "generic card loader," and `PROP-NORMATIVE-PACKET-ASSEMBLY` (adopted) built the packet engine on the premise that composition logic is separable from the five card families it composes (`prosoc/packet/loader.py:69-79`'s `FAMILIES` registry; the corpus has six families total, but `manifests` isn't a packet member — it's the packet definition itself, excluded by design). That separation currently exists only in the code's *behavior*, not in the repo's *layout* — `prosoc/packet/`, `prosoc/literate/`, and `prosoc/auditor/` (the genuinely reusable parts) sit as siblings to `prosoc/scenarios/`, `prosoc/tasks/`, `prosoc/charter/`, etc. (the PRNC-specific parts) with no structural marker distinguishing them. Packaging is half-fixed as of this writing: `pyproject.toml`'s code-discovery declaration was corrected independently (`[tool.setuptools.packages.find] include = ["prosoc*"]`, landed alongside the paper-supplement renderer work below) — verified by a fresh local build, which now correctly packages all 40 `.py` files — but `package-data` still only declares `prosoc.charter`'s three files; none of the other five families' `schema.json`/`template.md`/content, nor `packet/schema.json`/`auditor/schema.json`, ship in any wheel build today.
 
 This needs addressing now, deliberately in a narrow way: not because prosoc is ready to be reused by a second domain (a separate, earlier design conversation this same session concluded that extraction is premature — no second consumer exists to pressure-test a plugin API), but because the *layout* question is independent of that one and much cheaper to resolve. It's fully reversible, requires no external consumer to justify it, and makes the actual, already-established generic/domain boundary (documented in the earlier session's file-by-file audit) visible in the repo's own structure instead of just in prose.
+
+This proposal was deliberately drafted (and its implementation deferred) while `papers/01_charter/` — a renderer for the Frontiers in Robotics paper's supplementary material, with a golden-file regression test — was landing on a real submission deadline (`WI-PAPER-RENDERER-TESTABLE-CORE`, PRs #89–90). That work added `prosoc/utils/papers/render.py` (generic Markdown→LaTeX rendering, no PRNC-specific imports — covered by the existing "`utils/` moves wholesale into `nca/utils/`" rule, no new decision needed) and, at the repo root, `papers/01_charter/sources.txt` + `render.py`, which hardcode the current flat `prosoc/...` paths this proposal relocates. Accounted for in the Implementation Plan below.
 
 ## Prior Art Check
 
@@ -46,7 +48,7 @@ This needs addressing now, deliberately in a narrow way: not because prosoc is r
 
 Options considered:
 - Four independent top-level packages (`prosoc`, `prnc`, `constitutions`, `manifests`) as siblings under `src/`.
-- One top-level package (`prosoc`) with `nca`/`prnc`/`constitutions`/`manifests`/`experiments` as subpackages.
+- One top-level package (`prosoc`) with `nca`/`prnc`/`constitutions`/`manifests` as subpackages.
 
 **Chosen: one top-level package.** Matches the overwhelming majority of real Python packages and the sibling-repo precedent (`src/lrh/`). Avoids name-collision risk for generic words like `constitutions`/`manifests` (documented failure mode: ZeroCM/zcm#186, carpedm20/emoji#49). Positions correctly for a possible future split into separately-installable distributions via PEP 420 namespace packages (the `google-cloud-storage`/`google-cloud-bigquery` pattern under `google.cloud`), which requires the shared-prefix structure this decision establishes.
 
@@ -56,7 +58,7 @@ Options considered:
 - Move everything currently called "code" into `nca/`.
 - Move only verified domain-agnostic modules; leave PRNC-specific glue code (`distill.py` per family) with its data; flag the two still-coupled engine files inline rather than silently relabeling them.
 
-**Chosen: the narrower scope.** Freshly re-verified this session: `prosoc/constitutions/schema.json` has zero navigation/robot/social references (`grep` confirmed), but `prosoc/packet/loader.py:23-27` hardcodes imports of all five families' `distill` modules, and `prosoc/packet/assemble.py:53,64-107,110-126` hardcodes PRNC's principle-union composition. Calling these files `nca` unchanged would misrepresent their actual state. `packet/` stays one directory under `nca/` (splitting `loader.py`'s generic `CardLoader` class from its coupled `FAMILIES` registry is the refactor `PROP-NORMATIVE-PACKET-ASSEMBLY`'s own follow-on work already anticipates, not a layout question) but its two coupled files are documented as such, not hidden.
+**Chosen: the narrower scope.** Freshly re-verified this session: `prosoc/constitutions/schema.json` has zero navigation/robot/social references (`grep` confirmed), but `prosoc/packet/loader.py:23-27` hardcodes imports of all five families' `distill` modules, `prosoc/packet/assemble.py:53,64-107,110-126` hardcodes PRNC's principle-union composition, and `prosoc/packet/schema.json:108-136`'s `guidance` object requires `principles[].id` matching PRNC's `^P[0-9]+$` charter-ID convention and an `emphasis` enum matching PRNC's context-emphasis vocabulary — the wire-format consequence of that same coupling. Calling these files `nca` unchanged would misrepresent their actual state. `packet/` stays one directory under `nca/` (splitting `loader.py`'s generic `CardLoader` class from its coupled `FAMILIES` registry is the refactor `PROP-NORMATIVE-PACKET-ASSEMBLY`'s own follow-on work already anticipates, not a layout question) but its three coupled artifacts are documented as such, not hidden.
 
 ### Decision 3: Constitutions — split schema from content, or keep together
 
@@ -90,7 +92,7 @@ Options considered:
 ## Non-Goals
 
 - Does not extract NCA into a separate library or repository — that's a materially different, larger decision this same design session's earlier conversation already concluded is premature (no second consumer exists to pressure-test a plugin API). This proposal is a same-repo layout change only.
-- Does not fix `packet/loader.py`'s hardcoded `FAMILIES` registry or `packet/assemble.py`'s PRNC-specific principle-union logic (`_guidance_body`/`_principle_union`/`_tensions`). Both move under `nca/packet/` as-is, documented as still domain-coupled. Fixing them is separate follow-on work.
+- Does not fix `packet/loader.py`'s hardcoded `FAMILIES` registry, `packet/assemble.py`'s PRNC-specific principle-union logic (`_guidance_body`/`_principle_union`/`_tensions`), or `packet/schema.json`'s `guidance.principles`/`guidance.tensions` required fields (the wire-format consequence of the same coupling). All three move under `nca/packet/` as-is, documented as still domain-coupled. Fixing them is separate follow-on work.
 - Does not introduce PyPI extras, optional-dependencies, or a multi-package split. Single wheel only.
 - Does not split `constitutions/`'s schema from its content (Decision 3).
 - Does not change any card content, schema, or normative meaning — this is a pure file-location and import-path change.
@@ -100,13 +102,14 @@ Options considered:
 
 Single PR (Decision 6). Within it, sequenced so each intermediate step stays internally consistent even though only the final state is testable end-to-end:
 
-1. `git mv` engine code into `src/prosoc/nca/{literate,auditor,packet,utils}/`.
-2. `git mv` each family's data + glue code into its new home: `src/prosoc/prnc/{charter,scenarios,tasks,contexts}/`, `src/prosoc/constitutions/`, `src/prosoc/manifests/`; `git mv` `utils/experiments/` to `src/prosoc/experiments/`.
+1. `git mv` engine code into `src/prosoc/nca/{literate,auditor,packet,utils}/` — `utils/` moves wholesale, including its `experiments/` subdirectory (`utils/experiments/mutator.py`), which is not carved out separately: it operates on the generic literate card format with no PRNC-specific field references found, so it rides along with the rest of `utils/` rather than getting its own top-level bucket on the strength of its current directory name alone. This also avoids a naming collision with the pre-existing, unrelated top-level `<root>/experiments/` (dated research-run archives — corpora, audit results, assembled packets — not part of the `prosoc` package at all, and out of scope for this move).
+2. `git mv` each family's data + glue code into its new home: `src/prosoc/prnc/{charter,scenarios,tasks,contexts}/`, `src/prosoc/constitutions/`, `src/prosoc/manifests/`.
 3. Fix the enumerated breakage: `packet/loader.py:23-27` import paths (4 of 5 change; `constitutions` doesn't move under `prnc`), `packet/loader.py:33` `REPO_ROOT` (`parents[2]` → `parents[4]`), `utils/cards/validate_status.py:22-28` (same import fix, its own separate `FAMILIES` dict).
 4. Rewrite `pyproject.toml`: `package-dir`, `packages.find.where`, `include-package-data`, per-subpackage `package-data` globs — mirroring `LogicalRoboticsHarness`'s `pyproject.toml:52-61`.
 5. Update `tests/` (mirrors `prosoc/` 1:1) — directory structure and import paths.
 6. Update `.github/workflows/packet.yml:10-16`, `charter.yml:6` path triggers; `scripts/distill/*`, `scripts/validate/*` module paths; `.claude/skills/_shared/audit_checklists/*.md` (6 files) path references.
-7. `lrh validate` + full test suite green before opening the PR.
+7. Update `papers/01_charter/sources.txt`'s nine hardcoded `prosoc/...` source paths to their new `src/prosoc/prnc/...` locations; verify `papers/01_charter/render.py`'s `sys.path.insert(0, str(REPO_ROOT))` (`REPO_ROOT = PAPER_DIR.parents[1]`) still resolves an importable `prosoc` package under the new src-layout — relying on a proper `pip install -e .` per the rewritten `pyproject.toml` rather than the raw path hack, if that's cleaner. Re-run the renderer and diff against `papers/01_charter/golden/rendered.tex` to confirm byte-identical output.
+8. `lrh validate` + full test suite green before opening the PR.
 
 No workstream or separate work item — this proposal's implementation is the one bounded PR above; a companion `/lrh-work-item` is offered at the end of this run, not a workstream.
 
@@ -114,3 +117,4 @@ No workstream or separate work item — this proposal's implementation is the on
 
 - `project/design/proposals/adopted/normative-packet-assembly/00_proposal.md` — establishes the packet engine this proposal relocates without modifying its behavior.
 - `LogicalRoboticsHarness`'s `pyproject.toml` (sibling repo) — the packaging-config precedent this proposal's `pyproject.toml` rewrite follows.
+- `project/work_items/resolved/WI-PAPER-RENDERER-TESTABLE-CORE.md` — landed independently while this proposal's implementation was deliberately deferred for the paper submission; its `papers/01_charter/` output is a new consumer of the paths this proposal moves, accounted for in Implementation Plan step 7.
