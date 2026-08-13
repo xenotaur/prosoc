@@ -14,6 +14,8 @@ related_design:
   - prosoc/charter/audit.md
 ---
 
+# Reconciling the Prosoc Charter with the Frontiers Paper
+
 ## Summary
 
 This proposal captures the reconciliation decisions between `prosoc/charter/charter.md`
