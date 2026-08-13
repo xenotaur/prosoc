@@ -46,8 +46,9 @@ FRONTAL_APPROACH        prosoc/scenarios/frontal_approach/scenario.md
 NAVIGATE_POINT_TO_POINT prosoc/tasks/navigate_point_to_point/task.md
 ```
 
-The key must be uppercase with underscores. It maps to a `@@KEY@@` placeholder
-in `template.tex` and to a fragment file named `key.lower() + ".tex"` under
+The key must start with an uppercase letter and may then contain uppercase
+letters, digits, and underscores. It maps to a `@@KEY@@` placeholder in
+`template.tex` and to a fragment file named `key.lower() + ".tex"` under
 `build/papers/<paper-id>/fragments/`.
 
 ## Template
