@@ -113,30 +113,40 @@ can be infeasible or contradictory across contexts. Dropping the hedge
 removed the escape valve the Explanation itself depends on.
 
 ### Decision: Modal-verb convention (MUST vs. SHOULD) across all principles
-Paper's §3.4.2 list uses MUST only for P1 (severity: critical) and SHOULD
-for every other principle (P0, P2–P9), including P6 (severity: high) and
-P8 (severity: medium). The charter currently uses MUST for P0, P1, P2,
-P3, P4, P5, P6, P8, and SHOULD only for P7 and P9 — a blanket-MUST
-pattern that also does not consistently track its own `severity` field
-(P3/P4/P5/P8 are all `severity: medium`, yet P7 — also `severity:
-medium` — already uses "should" while the other three use "must").
-**Chosen: MUST for P1 only; SHOULD for P0 and P2–P9**, matching the
-paper's convention. This also requires an explicit audit of the
-charter's `severity` field per principle, since the current mapping is
-internally inconsistent independent of what the paper says — a
-consistent severity→modal rule (e.g. critical/high → MUST, medium →
-SHOULD, optional → MAY/SHOULD) should be adopted and applied uniformly.
+**Correction (2026-08-13):** an earlier draft of this decision claimed the
+paper uses MUST only for P1. That was a misreading — the paper's §3.4.2
+text for P0 reads "Robots **must** attempt to achieve their assigned
+navigation or task objectives..." — P0 is MUST in the paper too. The
+decision below reflects the corrected reading.
+
+Paper's §3.4.2 list uses MUST for P0 and P1 and SHOULD for every other
+principle (P2–P9), including P2 and P6 (severity: high) and P8
+(severity: medium) — so the paper's modal choice does not track its own
+severity tiers at all (P0 and P2 are both `high` but get different
+modals). The charter currently uses MUST for P0, P1, P2, P3, P4, P5, P6,
+P8, and SHOULD only for P7 and P9 — a blanket-MUST pattern that also does
+not consistently track its own `severity` field (P3/P4/P5/P8 are all
+`severity: medium`, yet P7 — also `severity: medium` — already uses
+"should" while the other three use "must").
+**Chosen: MUST for P0 and P1; SHOULD for P2–P9**, matching the paper's
+actual convention. This also requires an explicit audit of the charter's
+`severity` field per principle, since the current mapping is internally
+inconsistent independent of what the paper says.
 Rationale: the paper explicitly frames MUST/SHOULD as RFC 2119/8174-style
 vocabulary carrying real normative weight (paper §3.2.2, §3.3.4); the
-charter's blanket-MUST pattern undercuts that design intent.
+charter's blanket-MUST pattern undercuts that design intent. P0 keeping
+MUST (rather than being reconsidered as SHOULD) also matches the
+charter's own Explanation for P0, which frames goal achievement as
+equally load-bearing to safety in preventing "paralysis or
+over-cautiousness."
 
 **Severity audit outcome:** the severity ladder (P1 `critical`; P0, P2,
 P6 `high`; P3, P4, P5, P7, P8 `medium`; P9 `optional`) was reviewed
 against the modal-verb decision above and confirmed as-is — no
 re-leveling. `severity` and the MUST/SHOULD modal are deliberately
 decoupled: `severity` continues to rank principles against each other for
-conflict resolution, while the modal verb is now uniformly MUST-for-P1,
-SHOULD-elsewhere regardless of a principle's severity tier.
+conflict resolution, while the modal verb is now MUST-for-P0-and-P1,
+SHOULD-elsewhere, independent of a principle's severity tier.
 
 ### Decision: P6 — Agent Understanding, wording
 Paper: "should be aware of and predict the behavior of nearby agents..."
@@ -248,7 +258,7 @@ Small scope, single work item. All decisions above are finalized:
    - P1: broaden Safety scope (other robots, self-damage).
    - P2, P3, P4, P7: adopt the merged normative-statement wording above.
    - P5: restore the "where feasible" hedge.
-   - Modal verbs: MUST for P1 only, SHOULD for P0 and P2–P9 across every
+   - Modal verbs: MUST for P0 and P1, SHOULD for P2–P9 across every
      principle's normative statement and YAML `description`.
    - P6: modal only (MUST → SHOULD); wording unchanged.
    - P8: inline the six-context taxonomy into the normative statement.
