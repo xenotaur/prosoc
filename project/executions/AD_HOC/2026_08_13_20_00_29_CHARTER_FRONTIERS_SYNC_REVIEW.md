@@ -2,10 +2,10 @@
 execution_id: 2026_08_13_20_00_29_CHARTER_FRONTIERS_SYNC_REVIEW
 prompt_id: PROMPT(AD_HOC:CHARTER_FRONTIERS_SYNC_REVIEW)[2026-08-13T07:13:00+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_08_13_03_47_46_CHARTER_FRONTIERS_SYNC
 pr: https://github.com/xenotaur/prosoc/pull/92
-commit: 
+commit: f9241ac8d014ac6b33f8c7992e435477363ecedb
 created_at: 2026-08-13T20:00:29+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/92
