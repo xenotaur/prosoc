@@ -72,26 +72,30 @@ below for how these pieces fit together.
 
 ```text
 prosoc/
-├── prosoc/
-│   ├── charter/               # The charter: P0–P9 principles (single document)
-│   │   ├── charter.md         #   Human-readable charter (source of truth)
-│   │   ├── charter.yml        #   Machine-readable charter (generated)
-│   │   ├── schema.json        #   JSON Schema for validation
-│   │   ├── distill.py         #   Markdown → YAML compiler
-│   │   ├── loader.py          #   Runtime loader and validation (single gate)
-│   │   └── runtime.py         #   Pydantic runtime models
-│   │
-│   ├── scenarios/              # Card family: concrete social navigation situations
-│   ├── tasks/                  # Card family: abstract robot navigation goals
-│   ├── contexts/                # Card family: situational/environmental settings
-│   ├── constitutions/           # Card family: rule sets sent to a downstream agent
-│   ├── manifests/                # Card family: named member lists for packets
-│   │   └── sample_packet/         #   Example manifest + golden packet
-│   │
-│   ├── packet/                 # Manifest-driven packet assembler (resolve → load →
-│   │                            # gate → assemble); see prosoc/packet/README.md
-│   ├── auditor/                # Agentic card-audit tooling shared by prosoc-card-audit
-│   └── literate/               # Shared Markdown+YAML literate-card infrastructure
+├── src/
+│   └── prosoc/
+│       ├── nca/                    # Verified, domain-agnostic engine
+│       │   ├── literate/           #   Shared Markdown+YAML literate-card infrastructure
+│       │   ├── auditor/            #   Agentic card-audit tooling shared by prosoc-card-audit
+│       │   ├── packet/             #   Manifest-driven packet assembler (resolve → load →
+│       │   │                       #   gate → assemble); see nca/packet/README.md
+│       │   └── utils/              #   Shared card/status/secrets/experiments helpers
+│       │
+│       ├── prnc/                   # PRNC-specific card families and glue code
+│       │   ├── charter/            #   The charter: P0–P9 principles (single document)
+│       │   │   ├── charter.md      #     Human-readable charter (source of truth)
+│       │   │   ├── charter.yml     #     Machine-readable charter (generated)
+│       │   │   ├── schema.json     #     JSON Schema for validation
+│       │   │   ├── distill.py      #     Markdown → YAML compiler
+│       │   │   ├── loader.py       #     Runtime loader and validation (single gate)
+│       │   │   └── runtime.py      #     Pydantic runtime models
+│       │   ├── scenarios/          #   Card family: concrete social navigation situations
+│       │   ├── tasks/              #   Card family: abstract robot navigation goals
+│       │   └── contexts/           #   Card family: situational/environmental settings
+│       │
+│       ├── constitutions/          # Card family: rule sets sent to a downstream agent
+│       └── manifests/              # Card family: named member lists for packets
+│           └── sample_packet/      #   Example manifest + golden packet
 │
 ├── scripts/
 │   ├── distill/                # Per-family Markdown → YAML compilers
@@ -105,7 +109,7 @@ prosoc/
 │   ├── lint                    # Ruff static analysis
 │   └── publish                 # (Future) publish to PyPI
 │
-├── tests/                      # Unit and integration tests, mirroring prosoc/
+├── tests/                      # Unit and integration tests, mirroring src/prosoc/
 ├── notebooks/                  # Research and prototyping notebooks
 ├── docs/                       # User-facing guides and reference material
 ├── papers/                     # Paper-specific supplement sources and renderers
@@ -130,12 +134,12 @@ families:
 
 | Family | Directory | Represents |
 |---|---|---|
-| Charter | [`prosoc/charter/`](prosoc/charter/README.md) | The ten prosocial navigation principles (P0–P9); a single document, not a card-per-directory family |
-| Scenarios | [`prosoc/scenarios/`](prosoc/scenarios/README.md) | Concrete, situated social navigation cases |
-| Tasks | [`prosoc/tasks/`](prosoc/tasks/README.md) | Abstract robot navigation goals, independent of scenario or context |
-| Contexts | [`prosoc/contexts/`](prosoc/contexts/README.md) | Situational/environmental settings that shift how principles apply |
-| Constitutions | [`prosoc/constitutions/`](prosoc/constitutions/README.md) | Rule sets (must/must not/should) intended to be sent to or enforced by a downstream agent |
-| Manifests | [`prosoc/manifests/`](prosoc/manifests/README.md) | Human-authored, auditable lists naming which cards a packet should assemble |
+| Charter | [`src/prosoc/prnc/charter/`](src/prosoc/prnc/charter/README.md) | The ten prosocial navigation principles (P0–P9); a single document, not a card-per-directory family |
+| Scenarios | [`src/prosoc/prnc/scenarios/`](src/prosoc/prnc/scenarios/README.md) | Concrete, situated social navigation cases |
+| Tasks | [`src/prosoc/prnc/tasks/`](src/prosoc/prnc/tasks/README.md) | Abstract robot navigation goals, independent of scenario or context |
+| Contexts | [`src/prosoc/prnc/contexts/`](src/prosoc/prnc/contexts/README.md) | Situational/environmental settings that shift how principles apply |
+| Constitutions | [`src/prosoc/constitutions/`](src/prosoc/constitutions/README.md) | Rule sets (must/must not/should) intended to be sent to or enforced by a downstream agent |
+| Manifests | [`src/prosoc/manifests/`](src/prosoc/manifests/README.md) | Human-authored, auditable lists naming which cards a packet should assemble |
 
 Every family (other than the single-document charter) follows the same
 pattern: author a card as `<name>/<family-singular>.md` (e.g.
@@ -166,7 +170,7 @@ its readiness. Downstream production use requires `APPROVED`, not merely
 authoritative source), and projected into the Markdown status block's
 `STATE` line — spelled `## Status` in scenarios and the charter, `## STATUS`
 elsewhere; `scripts/validate/status` accepts either heading. See
-[`prosoc/scenarios/workflow.md`](prosoc/scenarios/workflow.md) for the full
+[`src/prosoc/prnc/scenarios/workflow.md`](src/prosoc/prnc/scenarios/workflow.md) for the full
 lifecycle definition, which applies uniformly across all six families.
 
 ### The Packet Assembler
@@ -193,7 +197,7 @@ packet is never byte-indistinguishable from a production one. A CI check
 (`.github/workflows/packet.yml`) byte-compares every manifest's assembled
 packet against a checked-in golden file and fails the build on drift.
 
-See [`prosoc/packet/README.md`](prosoc/packet/README.md) for the full
+See [`src/prosoc/nca/packet/README.md`](src/prosoc/nca/packet/README.md) for the full
 pipeline, envelope shape, and CLI usage, and
 [`PROP-NORMATIVE-PACKET-ASSEMBLY`](project/design/proposals/adopted/normative-packet-assembly/00_proposal.md)
 for the design rationale behind these choices.
@@ -232,7 +236,7 @@ pip install .[dev]
 
 ### Distilling the Charter
 
-After modifying `prosoc/charter/charter.md`, regenerate the machine-readable charter with:
+After modifying `src/prosoc/prnc/charter/charter.md`, regenerate the machine-readable charter with:
 
 ```bash
 scripts/distill/charter
@@ -264,7 +268,7 @@ Prosoc uses CI to enforce **code correctness**, **card consistency**, and
 * `tests.yml` — unit tests validate charter parsing, validation, and runtime loading
 * `lint.yml` — Ruff and Black run in check-only mode (never auto-applied)
 * `charter.yml` — guardrail check that `charter.md` and `charter.yml` remain in sync; fails if the charter is modified without regeneration
-* `packet.yml` — guardrail check that every manifest's assembled packet matches its checked-in golden file (`prosoc/manifests/*/packet.golden.yml`); fails on drift in any member card across all six families
+* `packet.yml` — guardrail check that every manifest's assembled packet matches its checked-in golden file (`src/prosoc/manifests/*/packet.golden.yml`); fails on drift in any member card across all six families
 
 To run tests locally:
 
@@ -406,13 +410,13 @@ If CI fails due to packet drift (a manifest or a member card changed without
 regenerating its golden packet), the expected resolution is:
 
 ```bash
-scripts/assemble prosoc/manifests/<name>/manifest.yml \
+scripts/assemble src/prosoc/manifests/<name>/manifest.yml \
   --allow-unapproved "CI packet-drift check (dev-mode golden; member card not yet APPROVED)" \
-  > prosoc/manifests/<name>/packet.golden.yml
+  > src/prosoc/manifests/<name>/packet.golden.yml
 git commit
 ```
 
-See [`prosoc/packet/README.md`](prosoc/packet/README.md) for more on the
+See [`src/prosoc/nca/packet/README.md`](src/prosoc/nca/packet/README.md) for more on the
 `--allow-unapproved` escape hatch.
 
 ---

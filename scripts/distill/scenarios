@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Distill social navigation scenarios from Markdown to YAML
 #
-# This script compiles all scenario.md files under prosoc/scenarios
+# This script compiles all scenario.md files under src/prosoc/prnc/scenarios
 # into scenario.yml files using the literate compiler pipeline.
 #
 # Supported layouts:
@@ -22,7 +22,7 @@ set -euo pipefail
 echo "Distilling Prosoc social navigation scenarios..."
 set -x
 
-python -m prosoc.scenarios.distill "$@"
+python -m prosoc.prnc.scenarios.distill "$@"
 
 # Turn off tracing and print a blank line
 { set +x; } 2>/dev/null

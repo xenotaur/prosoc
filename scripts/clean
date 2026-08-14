@@ -2,7 +2,7 @@
 echo "Cleaning prosoc build..."
 set -x
 
-rm -rf build dist prosoc.egg-info
+rm -rf build dist prosoc.egg-info src/prosoc.egg-info
 
 # Turn off logging and print a blank line
 { set +x; } 2>/dev/null

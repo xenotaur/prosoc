@@ -1,10 +1,10 @@
 # Prosoc Charter Audit Checklist
 
-This is a verification rubric, companion to `prosoc/charter/schema.json`. Unlike
-every other family, the charter is a **single document** (`prosoc/charter/charter.md`
+This is a verification rubric, companion to `src/prosoc/prnc/charter/schema.json`. Unlike
+every other family, the charter is a **single document** (`src/prosoc/prnc/charter/charter.md`
 -> `charter.yml`) holding ten principles, not a card-per-directory family — this
 checklist audits the whole document collectively in one pass, not principle by
-principle, and its output is one `prosoc/charter/audit.md`, not a per-principle file.
+principle, and its output is one `src/prosoc/prnc/charter/audit.md`, not a per-principle file.
 
 ## Structural Shape (unique to this family)
 
@@ -14,7 +14,7 @@ principle, and its output is one `prosoc/charter/audit.md`, not a per-principle 
 - [ ] `principles` contains exactly ten entries, `id` values `P0`–`P9`, no
       duplicates, no gaps
 - [ ] `state` is authored in the fenced YAML `## Status` block (fenced-YAML-
-      authoritative, per `prosoc/scenarios/workflow.md`'s foundation contract), not
+      authoritative, per `src/prosoc/prnc/scenarios/workflow.md`'s foundation contract), not
       inferred from the descriptive `**Status:** Draft (Normative)` top-matter line
 
 ## Required Fields (schema.json, per principle)
@@ -37,7 +37,7 @@ principle, and its output is one `prosoc/charter/audit.md`, not a per-principle 
 
 Flag a **contradiction** when a principle's prose Normative Statement and its YAML
 `description` diverge in substance (re-distill via
-`python -m prosoc.charter.distill --dry-run --show-diffs` and treat any reported diff
+`python -m prosoc.prnc.charter.distill --dry-run --show-diffs` and treat any reported diff
 as blocking — a tooling-freshness issue, not a prose/YAML content judgment call).
 
 ## Schema Compliance

@@ -1,10 +1,10 @@
 # Prosoc Manifest Audit Checklist
 
-This is a verification rubric, companion to `prosoc/manifests/schema.json`
-and `prosoc/manifests/template.md`. Unlike the five content families, a
+This is a verification rubric, companion to `src/prosoc/manifests/schema.json`
+and `src/prosoc/manifests/template.md`. Unlike the five content families, a
 manifest's primary risk is not prose/YAML content drift — it is
 **resolvability**: whether every member the manifest names actually exists
-and is loadable by `prosoc.packet.resolve`. Read `../principles.md` only if a
+and is loadable by `prosoc.nca.packet.resolve`. Read `../principles.md` only if a
 member's family-specific checks require it (a manifest itself has no
 principle-reference fields).
 
@@ -36,7 +36,7 @@ member count doesn't match `len(members)`.
 - [ ] `manifest.yml` validates against `schema.json` (no `additionalProperties`
       violations; each `members[]` entry has only `family`/`id`)
 - [ ] `members[].family` is never `manifests` — a manifest naming another
-      manifest as a member would make `prosoc.packet.resolve` recursive in a
+      manifest as a member would make `prosoc.nca.packet.resolve` recursive in a
       way the engine is not designed for (`schema.json`'s `enum` already
       excludes it structurally; treat any occurrence as **blocking**, not a
       should-fix, since it cannot be resolved correctly)
@@ -48,7 +48,7 @@ For each `members[]` entry, verify the referenced card actually exists and
 loads:
 
 - [ ] The family is one of the five registered content families
-      (`prosoc.packet.loader.FAMILIES`)
+      (`prosoc.nca.packet.loader.FAMILIES`)
 - [ ] The card resolves under that family — for card-per-directory families
       (`scenarios`, `tasks`, `contexts`, `constitutions`), a directory named
       `id` exists with the family's card file; for `charter`, `id` is
@@ -61,7 +61,7 @@ loads:
       gate is the enforcement point for member state, not the manifest audit
 
 A dangling member (family/id that does not resolve) is a **blocking**
-finding — `prosoc.packet.resolve` will raise a `ResolveError` at assembly
+finding — `prosoc.nca.packet.resolve` will raise a `ResolveError` at assembly
 time, so an unresolvable manifest cannot produce a packet at all.
 
 ## Completeness (template.md "Required" sections)

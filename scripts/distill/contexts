@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Distill social navigation context cards from Markdown to YAML
 #
-# This script compiles all context.md files under prosoc/contexts
+# This script compiles all context.md files under src/prosoc/prnc/contexts
 # into context.yml files using the literate compiler pipeline.
 #
 # Supported layouts:
@@ -22,7 +22,7 @@ set -euo pipefail
 echo "Distilling Prosoc social navigation context cards..."
 set -x
 
-python -m prosoc.contexts.distill "$@"
+python -m prosoc.prnc.contexts.distill "$@"
 
 # Turn off tracing and print a blank line
 { set +x; } 2>/dev/null

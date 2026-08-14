@@ -19,4 +19,4 @@
 
 set -euo pipefail
 
-python -m prosoc.utils.cards.validate_status "$@"
+python -m prosoc.nca.utils.cards.validate_status "$@"

@@ -3,7 +3,7 @@ name: Charter consistency check
 on:
   pull_request:
     paths:
-      - "prosoc/charter/**"
+      - "src/prosoc/prnc/charter/**"
       - "scripts/distill/charter"
       - ".github/workflows/charter.yml"
   push:
@@ -27,7 +27,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt || true
-          pip install pyyaml jsonschema
+          pip install -e .
 
       - name: Run charter distillation (dry-run)
         run: |
@@ -35,4 +35,4 @@ jobs:
 
       - name: Check that charter.yml is up to date
         run: |
-          git diff --exit-code prosoc/charter/charter.yml
+          git diff --exit-code src/prosoc/prnc/charter/charter.yml
