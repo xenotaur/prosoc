@@ -25,8 +25,8 @@ jobs:
 
       - name: Ruff lint (check only)
         run: |
-          ruff check prosoc tests
+          ruff check src tests
 
       - name: Black formatting check
         run: |
-          black --check prosoc tests
+          black --check src tests
