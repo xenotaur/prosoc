@@ -5,7 +5,7 @@ work_item: AD_HOC
 status: in_progress
 rerun_of: 2026_08_13_03_47_46_CHARTER_FRONTIERS_SYNC
 pr: https://github.com/xenotaur/prosoc/pull/92
-commit: b9b1ae0
+commit: 
 created_at: 2026-08-13T20:00:29+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/92
