@@ -11,7 +11,6 @@ import json
 from textwrap import dedent
 from typing import Any, Dict, Optional, Tuple
 
-
 SYSTEM_PROMPT = dedent(
     """
     You are a meticulous technical auditor.

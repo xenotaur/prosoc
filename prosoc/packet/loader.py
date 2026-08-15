@@ -51,7 +51,13 @@ class PacketFamily:
     def yml_path(self, card_id: str) -> pathlib.Path:
         if self.single:
             return self.root / self.card_filename
-        return self.root / card_id / self.card_filename
+
+        # Prevent path traversal
+        path = (self.root / card_id / self.card_filename).resolve()
+        if not path.is_relative_to(self.root.resolve()):
+            raise ValueError(f"Path traversal detected: {card_id}")
+
+        return path
 
 
 def _family(name, module, card_filename, *, single=False, yaml_root_key=None):
@@ -110,7 +116,11 @@ def load_card(family: str, card_id: str) -> LoadedCard:
             f"unknown family {family!r}; known families: {sorted(FAMILIES)}"
         )
 
-    yml_path = fam.yml_path(card_id)
+    try:
+        yml_path = fam.yml_path(card_id)
+    except ValueError as exc:
+        raise ResolveError(f"{family}/{card_id}: invalid card ID") from exc
+
     if not yml_path.exists():
         raise ResolveError(f"{family}/{card_id}: no card at {_rel(yml_path)}")
 
