@@ -16,12 +16,13 @@ DSSE-shaped ``signatures: []`` slot, split into two audiences:
 from __future__ import annotations
 
 import copy
+import functools
 import hashlib
 import json
 import pathlib
 
 from jsonschema import ValidationError
-from jsonschema import validate as jsonschema_validate
+from jsonschema.validators import validator_for
 
 from . import gate as gate_mod
 from .errors import AssembleError
@@ -227,17 +228,23 @@ def assemble(
     return envelope
 
 
+@functools.cache
+def _get_validator(schema_path: pathlib.Path):
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    return validator_for(schema)(schema)
+
+
 def validate_envelope(envelope: dict) -> None:
     """Validate an assembled envelope against ``packet.schema.json``.
 
     Raises:
         AssembleError: the envelope does not conform to the schema.
     """
+    # [Performance] Use cached pre-compiled validator to avoid recompiling the schema
+    # on every validation call in loops or hot paths.
     try:
-        jsonschema_validate(
-            instance=envelope,
-            schema=json.loads(SCHEMA_PATH.read_text(encoding="utf-8")),
-        )
+        validator = _get_validator(SCHEMA_PATH)
+        validator.validate(instance=envelope)
     except ValidationError as exc:
         raise AssembleError(
             f"assembled packet failed schema validation: {exc.message}"
