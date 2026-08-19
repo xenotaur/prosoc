@@ -7,6 +7,9 @@ Each subdirectory is scoped to one publication or submission. Paper directories
 may contain templates, source manifests, reproducibility scripts, and golden
 outputs used to document or regenerate submitted material.
 
+For the general rendering workflow, see
+[`docs/paper-supplements.md`](../docs/paper-supplements.md).
+
 Current entries:
 
 - `01_charter/` - Supplementary Material renderer for the Frontiers in Robotics
