@@ -2,11 +2,12 @@
 id: PROP-NCA-PRNC-PACKAGE-LAYOUT
 type: design_proposal
 title: Separate NCA Engine from PRNC Data in prosoc's Package Layout
-status: proposed
+status: adopted
 created_on: 2026-08-09
 updated_on: 2026-08-09
-implementation_status: not_started
-implemented_by: []
+implementation_status: implemented
+implemented_by:
+  - WI-NCA-PRNC-PACKAGE-LAYOUT
 supersedes: []
 superseded_by: null
 related_design:

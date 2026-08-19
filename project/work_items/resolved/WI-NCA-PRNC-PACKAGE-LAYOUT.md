@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #95 (commit a9ea0c3), squashed."
 blocked_reason: null
 blocked: false
 id: WI-NCA-PRNC-PACKAGE-LAYOUT
 title: Restructure prosoc into src/prosoc/{nca,prnc,constitutions,manifests}
 type: deliverable
-status: proposed
+status: resolved
 owner: anthony
 contributors:
   - anthony

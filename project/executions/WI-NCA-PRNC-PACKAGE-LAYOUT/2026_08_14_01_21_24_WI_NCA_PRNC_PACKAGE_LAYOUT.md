@@ -2,10 +2,10 @@
 execution_id: 2026_08_14_01_21_24_WI_NCA_PRNC_PACKAGE_LAYOUT
 prompt_id: PROMPT(WI-NCA-PRNC-PACKAGE-LAYOUT:WI_NCA_PRNC_PACKAGE_LAYOUT)[2026-08-14T01:21:10+00:00]
 work_item: WI-NCA-PRNC-PACKAGE-LAYOUT
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/95
-commit: 011ebb9cd59326d36ef804ae45a98dbe4ac16643
+commit: a9ea0c35c59e4907a60d552b673add3147533533
 created_at: 2026-08-14T01:21:24+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-NCA-PRNC-PACKAGE-LAYOUT.md
