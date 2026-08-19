@@ -2,10 +2,10 @@
 execution_id: 2026_08_19_04_42_38_WI_CHARTER_FRONTIERS_SYNC_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_FRONTIERS_SYNC_SELFREVIEW)[2026-08-19T04:42:22+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_08_13_06_51_07_WI_CHARTER_FRONTIERS_SYNC
 pr: https://github.com/xenotaur/prosoc/pull/94
-commit: 3996aceb6b9b2e68446809907be79e61b1f3c447
+commit: d8a164a56655c42af612f1196f0d88445a3c6f9f
 created_at: 2026-08-19T04:42:38+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/94
