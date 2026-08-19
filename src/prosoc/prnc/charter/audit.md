@@ -81,8 +81,10 @@ per this WI's Non-Goals).
   since the Explanation still explicitly cross-references both ("It
   should never be read as license to sacrifice the robot's own goals
   (P0) or to act inappropriately for the task or context (P8)").
-- Coverage against `../principles.md`'s summary table: content-wise
-  consistent (see Finding 1 for the path-staleness-only issue).
+- Coverage against `.claude/skills/_shared/principles.md`'s summary
+  table: content-wise consistent (see Finding 1 for that file's own
+  path-staleness-only issue, unrelated to this audit's own reference to
+  it).
 
 ## Completeness
 

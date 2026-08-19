@@ -360,7 +360,7 @@ Robots should act, during or in support of navigation, to improve the navigation
 
 P9 distinguishes two kinds of prosocial act: directly improving another agent's navigation experience (e.g., giving directions, holding a door), and preserving or improving the shared environment's navigability (e.g., not leaving an obstruction behind, or clearing one that's already there). Only the environment clause admits "preserve" — merely not degrading another agent's experience is already required by social navigation generally (P1–P8); P9 is about going beyond that baseline.
 
-P9 is deliberately the lowest-severity principle: it is discretionary, and its normative statement carries its own limits so it cannot be read in isolation from P0 and P8. It should never be read as license to sacrifice the robot's own goals (P0) or to act inappropriately for the task or context (P8) — for example, a delivery robot noticing an obstruction it could clear should weigh that against how much delay clearing it would add to its own task and how urgent that task is, not clear it unconditionally.
+P9 is deliberately the lowest-severity principle: it is discretionary, and even though its normative statement no longer restates the limit explicitly, P9 still cannot be read in isolation from P0 and P8 — that bound is expressed here, in this Explanation, rather than in the statement itself. It should never be read as license to sacrifice the robot's own goals (P0) or to act inappropriately for the task or context (P8) — for example, a delivery robot noticing an obstruction it could clear should weigh that against how much delay clearing it would add to its own task and how urgent that task is, not clear it unconditionally.
 
 ```yaml
 id: P9
