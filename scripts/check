@@ -2,5 +2,5 @@
 set -euo pipefail
 
 scripts/lint
-black --check prosoc tests
+black --check src tests
 scripts/test

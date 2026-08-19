@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ruff check prosoc tests "$@"
+ruff check src tests "$@"

@@ -1,7 +1,7 @@
 # Prosoc Constitution Audit Checklist
 
-This is a verification rubric, companion to `prosoc/constitutions/schema.json` and
-`prosoc/constitutions/template.md`. It explains what to check when auditing an
+This is a verification rubric, companion to `src/prosoc/constitutions/schema.json` and
+`src/prosoc/constitutions/template.md`. It explains what to check when auditing an
 already-drafted constitution card. Unlike scenarios/tasks/contexts, no prior
 `audit.md` precedent exists for constitutions — this checklist is new, grounded
 directly in the schema and template. Read `../principles.md` for the P0–P9
@@ -14,7 +14,7 @@ a top-level mapping. Before checking anything else:
 
 - [ ] The fenced YAML block's top-level (and only) key is `constitution`
 - [ ] `constitution.yml` mirrors the same root-wrapped shape (confirm with
-      `prosoc.utils.cards.status.read_yaml_state(path, root_key="constitution")` if
+      `prosoc.nca.utils.cards.status.read_yaml_state(path, root_key="constitution")` if
       in doubt, rather than assuming top-level `state`)
 
 ## Required Fields (schema.json, inside `constitution:`)
@@ -73,7 +73,7 @@ contradiction between rules**, not prose/YAML drift:
 - [ ] `id`, `name`, `state` present in the fenced YAML
 - [ ] At least one rule with `id`/`text`/`type`/`priority`
 - [ ] STATUS block present with a `- **STATE:**` first bullet (see
-      `prosoc/scenarios/workflow.md`'s Status Section Template)
+      `src/prosoc/prnc/scenarios/workflow.md`'s Status Section Template)
 
 Optional-but-recommended (`scope`, `rules[].rationale`/`.examples`/`.evaluation_tags`,
 `conflict_resolution`, `## Discussion`): if blank, decide reasonably blank vs. should

@@ -1,7 +1,7 @@
 # Prosoc Task Audit Checklist
 
-This is a verification rubric, companion to `prosoc/tasks/schema.json` and
-`prosoc/tasks/template.md`. It explains what to check when auditing an
+This is a verification rubric, companion to `src/prosoc/prnc/tasks/schema.json` and
+`src/prosoc/prnc/tasks/template.md`. It explains what to check when auditing an
 already-drafted task card. Read `../principles.md` for the P0–P9 definitions
 referenced below.
 
@@ -64,7 +64,7 @@ filled in now (inferable from the Task Description already written).
 `example_scenarios` entries are scenario **directory names** for discoverability —
 check they aren't obviously malformed (e.g. not a full path, not the scenario's
 `scenario.yml` `id`). A dangling `example_scenarios` entry (no matching directory
-under `prosoc/scenarios/`) is a **should-fix**, not blocking: task cards predate full
+under `src/prosoc/prnc/scenarios/`) is a **should-fix**, not blocking: task cards predate full
 scenario coverage, and this corpus is known to have several dangling entries tracked
 as separate corpus work (see `PROP-NORMATIVE-PACKET-ASSEMBLY`'s Non-Goals) — do not
 treat a dangling entry alone as reason for a `not_ready` verdict.

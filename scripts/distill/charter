@@ -13,4 +13,4 @@
 set -euo pipefail
 
 echo "Running Prosoc charter distillation..."
-python -m prosoc.charter.distill "$@"
+python -m prosoc.prnc.charter.distill "$@"

@@ -14,9 +14,9 @@
 #   scripts/assemble <manifest.yml> --allow-unapproved "..." --check
 #
 # Example:
-#   scripts/assemble prosoc/manifests/sample_packet/manifest.yml \
+#   scripts/assemble src/prosoc/manifests/sample_packet/manifest.yml \
 #     --allow-unapproved "local test on the pre-APPROVED corpus"
 
 set -euo pipefail
 
-python -m prosoc.packet.cli "$@"
+python -m prosoc.nca.packet.cli "$@"

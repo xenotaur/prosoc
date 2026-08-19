@@ -1,7 +1,7 @@
 # Prosoc Scenario Audit Checklist
 
-This is a verification rubric, companion to `prosoc/scenarios/schema.json` and
-`prosoc/scenarios/template.md`. Where `prosoc-scenario-new`'s `schema_guide.md`
+This is a verification rubric, companion to `src/prosoc/prnc/scenarios/schema.json` and
+`src/prosoc/prnc/scenarios/template.md`. Where `prosoc-scenario-new`'s `schema_guide.md`
 explains what to put in each field when authoring, this file explains what to check
 when auditing an already-drafted card. Read `../principles.md` for the
 P0–P9 definitions referenced below.
@@ -57,7 +57,7 @@ emphasis or detail rather than outright contradictory — still worth a should-f
         claim that no relationship exists.
       Do not flag any of these as a should-fix "source-fidelity mismatch." Only flag
       `related_scenarios` if it references a directory that doesn't exist under
-      `prosoc/scenarios/`, or if it clearly contradicts the card's own prose.
+      `src/prosoc/prnc/scenarios/`, or if it clearly contradicts the card's own prose.
 
 ## Source Fidelity (only if a checkable source exists)
 

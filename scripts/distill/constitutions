@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Distill social navigation constitutions from Markdown to YAML
 #
-# This script compiles all constitution.md files under prosoc/constitutions
+# This script compiles all constitution.md files under src/prosoc/constitutions
 # into constitution.yml files using the literate compiler pipeline.
 #
 # Supported layouts:

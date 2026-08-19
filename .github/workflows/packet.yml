@@ -7,13 +7,13 @@ on:
       # PacketFamily registry) plus the manifest/packet tooling itself —
       # a member-card edit changes the assembled packet just as much as a
       # manifest edit does, so it must trip this check too.
-      - "prosoc/charter/**"
-      - "prosoc/constitutions/**"
-      - "prosoc/contexts/**"
-      - "prosoc/scenarios/**"
-      - "prosoc/tasks/**"
-      - "prosoc/manifests/**"
-      - "prosoc/packet/**"
+      - "src/prosoc/prnc/charter/**"
+      - "src/prosoc/constitutions/**"
+      - "src/prosoc/prnc/contexts/**"
+      - "src/prosoc/prnc/scenarios/**"
+      - "src/prosoc/prnc/tasks/**"
+      - "src/prosoc/manifests/**"
+      - "src/prosoc/nca/packet/**"
       - ".github/workflows/packet.yml"
   push:
     branches:
@@ -36,18 +36,18 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt || true
-          pip install pyyaml jsonschema
+          pip install -e .
 
       - name: Check every golden-having manifest for packet drift
         run: |
           set -euo pipefail
           shopt -s nullglob
           # Production mode: each golden must be regenerated (see
-          # prosoc/packet/README.md) whenever its members' lifecycle state
-          # or content changes. No --allow-unapproved here -- a manifest
-          # with an unapproved member fails this check by design (the
-          # fail-closed gate), not just a byte-diff.
-          goldens=(prosoc/manifests/*/packet.golden.yml)
+          # src/prosoc/nca/packet/README.md) whenever its members' lifecycle
+          # state or content changes. No --allow-unapproved here -- a
+          # manifest with an unapproved member fails this check by design
+          # (the fail-closed gate), not just a byte-diff.
+          goldens=(src/prosoc/manifests/*/packet.golden.yml)
           if [ "${#goldens[@]}" -eq 0 ]; then
             echo "no golden packets found; nothing to check"
             exit 0

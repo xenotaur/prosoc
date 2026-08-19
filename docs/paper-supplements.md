@@ -3,7 +3,7 @@
 Prosoc can render paper-specific LaTeX supplements from the normative card
 corpus. The workflow is intentionally lightweight: each paper owns its source
 manifest, LaTeX template, and command shim, while shared rendering behavior
-lives in `prosoc.utils.papers.render`.
+lives in `prosoc.nca.utils.papers.render`.
 
 The first use of this pattern is the Frontiers supplementary material in
 `papers/01_charter/`.
@@ -41,9 +41,9 @@ supplement. Each non-comment line contains a placeholder key and a repository
 relative Markdown path:
 
 ```text
-CHARTER                 prosoc/charter/charter.md
-FRONTAL_APPROACH        prosoc/scenarios/frontal_approach/scenario.md
-NAVIGATE_POINT_TO_POINT prosoc/tasks/navigate_point_to_point/task.md
+CHARTER                 src/prosoc/prnc/charter/charter.md
+FRONTAL_APPROACH        src/prosoc/prnc/scenarios/frontal_approach/scenario.md
+NAVIGATE_POINT_TO_POINT src/prosoc/prnc/tasks/navigate_point_to_point/task.md
 ```
 
 The key must start with an uppercase letter and may then contain uppercase
@@ -71,7 +71,7 @@ behavior.
 
 Each paper keeps a small executable command at `papers/<paper-id>/render.py`.
 The shim sets the repository root, paper directory, and build directory, then
-calls `prosoc.utils.papers.render.main`.
+calls `prosoc.nca.utils.papers.render.main`.
 
 Run paper renderers from the repository root:
 
@@ -93,7 +93,7 @@ build/papers/01_charter/fragments/
 
 ## Shared Rendering Behavior
 
-`prosoc.utils.papers.render` provides the reusable mechanics:
+`prosoc.nca.utils.papers.render` provides the reusable mechanics:
 
 - reads and validates `sources.txt`;
 - runs Pandoc once for each Markdown source;
@@ -129,7 +129,7 @@ should remain unchanged unless the history itself is being corrected.
 For renderer changes, run the focused unit tests:
 
 ```bash
-python -m unittest tests.utils.papers.render_test
+python -m unittest tests.nca.utils.papers.render_test
 ```
 
 For repository validation, run the usual project checks:
@@ -140,6 +140,6 @@ scripts/test
 lrh validate
 ```
 
-`scripts/format --check --diff` checks Python formatting across `prosoc/` and
+`scripts/format --check --diff` checks Python formatting across `src/` and
 `tests/`; use the repository's pinned tooling when resolving Python formatting
 drift.

@@ -36,15 +36,24 @@ dev = [
     "twine",
 ]
 
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
 [tool.setuptools.packages.find]
+where = ["src"]
 include = ["prosoc*"]
 
 [tool.setuptools.package-data]
-"prosoc.charter" = [
-    "charter.md",
-    "charter.yml",
-    "schema.json",
-]
+"prosoc.nca.packet" = ["README.md", "schema.json"]
+"prosoc.nca.auditor" = ["schema.json"]
+"prosoc.nca.utils.cards" = ["README.md"]
+"prosoc.prnc.charter" = ["*.md", "*.yml", "*.json"]
+"prosoc.prnc.scenarios" = ["*.md", "*.json", "*/*.md", "*/*.yml"]
+"prosoc.prnc.tasks" = ["*.md", "*.json", "*/*.md", "*/*.yml"]
+"prosoc.prnc.contexts" = ["*.md", "*.json", "*/*.md", "*/*.yml"]
+"prosoc.constitutions" = ["*.md", "*.json", "*/*.md", "*/*.yml"]
+"prosoc.manifests" = ["*.md", "*.json", "*/*.md", "*/*.yml"]
 
 [tool.black]
 line-length = 88

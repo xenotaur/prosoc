@@ -4,7 +4,7 @@
 # Deterministic scan across all six card families, ranked by severity
 # (audit.md findings; a card missing audit.md entirely ranks highest) and
 # scope (lifecycle steps remaining to APPROVED, default: highest first).
-# Run via ``python -m prosoc.utils.cards.review_queue``.
+# Run via ``python -m prosoc.nca.utils.cards.review_queue``.
 #
 # Common flags:
 #   --family <name>       Restrict to one family (e.g. scenarios, tasks)
@@ -21,4 +21,4 @@
 
 set -euo pipefail
 
-python -m prosoc.utils.cards.review_queue "$@"
+python -m prosoc.nca.utils.cards.review_queue "$@"

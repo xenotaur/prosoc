@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Distill packet manifests from Markdown to YAML
 #
-# This script compiles all manifest.md files under prosoc/manifests
+# This script compiles all manifest.md files under src/prosoc/manifests
 # into manifest.yml files using the literate compiler pipeline.
 #
 # Common flags:

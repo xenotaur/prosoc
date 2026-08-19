@@ -1,7 +1,7 @@
 # Prosoc Context Audit Checklist
 
-This is a verification rubric, companion to `prosoc/contexts/schema.json` and
-`prosoc/contexts/template.md`. It explains what to check when auditing an
+This is a verification rubric, companion to `src/prosoc/prnc/contexts/schema.json` and
+`src/prosoc/prnc/contexts/template.md`. It explains what to check when auditing an
 already-drafted context card. Read `../principles.md` for the P0–P9 definitions
 referenced below.
 
