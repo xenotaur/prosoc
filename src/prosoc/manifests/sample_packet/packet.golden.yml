@@ -2,7 +2,7 @@ _type: https://in-toto.io/Statement/v1
 subject:
 - name: guidance
   digest:
-    sha256: 2e1ce187c6aa5c15987b130226726fc234676e65cfadb73abcfa279bdd2d0cb8
+    sha256: d342773daeb35725d79ddab8bee36d22ffc4af67d910a285fef38404ad36f184
 predicate_type: https://prosocial-robotics.org/NormativePacket/v1
 predicate:
   builder:
@@ -15,7 +15,7 @@ predicate:
   - family: charter
     id: charter
     path: src/prosoc/prnc/charter/charter.yml
-    sha256: dd888adedc24abd17eeecd997e139c9a5df44bef9721af601db9ffb353c35dbf
+    sha256: 502eadaae68f498a6e5075c1c4b06416ce77b94df2cad92f9e1462b69787bf37
     state: APPROVED
   - family: constitutions
     id: asimov_three_laws
@@ -58,8 +58,9 @@ guidance:
       - id: P1
         name: Safety
         severity: critical
-        description: 'Robots must not cause harm to humans or damage environments.
-          This includes maintaining a safe distance unless explicitly invited to approach.
+        description: 'Robots must not cause harm to humans, or damage to other robots,
+          environments, or themselves. This includes maintaining a safe distance unless
+          explicitly invited to approach.
 
           '
         examples:
@@ -72,8 +73,8 @@ guidance:
       - id: P2
         name: Comfort
         severity: high
-        description: 'Robots must avoid causing stress, fear, or annoyance. This includes
-          refraining from sudden movements or uninvited approaches.
+        description: 'Robots should avoid causing stress, fear, or annoyance in nearby
+          humans. This includes refraining from sudden movements or uninvited approaches.
 
           '
         examples:
@@ -86,8 +87,8 @@ guidance:
       - id: P3
         name: Legibility
         severity: medium
-        description: 'Robots must act in ways that make their goals and intentions
-          easy to understand.
+        description: 'Robots should act in ways that make their goals and intentions
+          clear from their behavior.
 
           '
         examples:
@@ -100,8 +101,8 @@ guidance:
       - id: P4
         name: Politeness
         severity: medium
-        description: 'Robots must be respectful and considerate, offering help when
-          asked and avoiding dismissive or intrusive behaviors.
+        description: 'Robots should be respectful and considerate toward other agents,
+          offering help when asked and avoiding dismissive or intrusive behaviors.
 
           '
         examples:
@@ -114,8 +115,8 @@ guidance:
       - id: P5
         name: Social Competency
         severity: medium
-        description: 'Robots must follow social norms and avoid inappropriate behaviors
-          such as interrupting conversations or blocking passage.
+        description: 'Robots should follow social norms where feasible, avoiding inappropriate
+          behaviors such as interrupting conversations or blocking passage.
 
           '
         examples:
@@ -128,8 +129,8 @@ guidance:
       - id: P6
         name: Agent Understanding
         severity: high
-        description: 'Robots must predict and accommodate the behaviors of other agents
-          (humans, robots, pets, etc.).
+        description: 'Robots should predict and accommodate the behaviors of other
+          agents (humans, robots, pets, etc.).
 
           '
         examples:
@@ -142,8 +143,8 @@ guidance:
       - id: P7
         name: Proactivity
         severity: medium
-        description: 'Robots should anticipate potential issues and take initiative
-          to avoid or resolve them.
+        description: 'Robots should proactively anticipate potential issues or conflicts
+          and take initiative to avoid or resolve them.
 
           '
         examples:
@@ -156,8 +157,8 @@ guidance:
       - id: P8
         name: Contextual Appropriateness
         severity: medium
-        description: 'Robots must act in ways that are appropriate for the situation
-          and context they are in.
+        description: 'Robots should act appropriately given their task, environmental
+          (geometric and operational), cultural, diversity, and interpersonal context.
 
           '
         examples:
@@ -172,8 +173,7 @@ guidance:
         severity: optional
         description: 'Robots should act, during or in support of navigation, to improve
           the navigation experiences of other agents or to preserve or improve the
-          navigability of their shared environment, in ways appropriate to their task
-          and context and without sacrificing their own navigation goals.
+          navigability of their shared environment.
 
           '
         examples:
@@ -458,8 +458,9 @@ guidance:
   - id: P1
     name: Safety
     severity: critical
-    description: 'Robots must not cause harm to humans or damage environments. This
-      includes maintaining a safe distance unless explicitly invited to approach.
+    description: 'Robots must not cause harm to humans, or damage to other robots,
+      environments, or themselves. This includes maintaining a safe distance unless
+      explicitly invited to approach.
 
       '
     examples:
@@ -473,8 +474,8 @@ guidance:
   - id: P2
     name: Comfort
     severity: high
-    description: 'Robots must avoid causing stress, fear, or annoyance. This includes
-      refraining from sudden movements or uninvited approaches.
+    description: 'Robots should avoid causing stress, fear, or annoyance in nearby
+      humans. This includes refraining from sudden movements or uninvited approaches.
 
       '
     examples:
@@ -488,8 +489,8 @@ guidance:
   - id: P3
     name: Legibility
     severity: medium
-    description: 'Robots must act in ways that make their goals and intentions easy
-      to understand.
+    description: 'Robots should act in ways that make their goals and intentions clear
+      from their behavior.
 
       '
     examples:
@@ -503,8 +504,8 @@ guidance:
   - id: P4
     name: Politeness
     severity: medium
-    description: 'Robots must be respectful and considerate, offering help when asked
-      and avoiding dismissive or intrusive behaviors.
+    description: 'Robots should be respectful and considerate toward other agents,
+      offering help when asked and avoiding dismissive or intrusive behaviors.
 
       '
     examples:
@@ -518,7 +519,7 @@ guidance:
   - id: P6
     name: Agent Understanding
     severity: high
-    description: 'Robots must predict and accommodate the behaviors of other agents
+    description: 'Robots should predict and accommodate the behaviors of other agents
       (humans, robots, pets, etc.).
 
       '
@@ -535,8 +536,7 @@ guidance:
     severity: optional
     description: 'Robots should act, during or in support of navigation, to improve
       the navigation experiences of other agents or to preserve or improve the navigability
-      of their shared environment, in ways appropriate to their task and context and
-      without sacrificing their own navigation goals.
+      of their shared environment.
 
       '
     examples:

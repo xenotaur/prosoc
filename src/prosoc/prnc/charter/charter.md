@@ -19,6 +19,7 @@
 - **EDITED:** Claude, 2026-08-06 — add "### Explanation" subsections to P4–P8, grounded in and citing Francis et al. (2025); fix the References entry's journal/venue for that paper
 - **EDITED:** Claude, 2026-08-06 — fold P1/P4/P5's YAML-only `description` content (safe-distance, offering-help, interrupting/blocking) into their prose Explanations
 - **EDITED:** Claude, 2026-08-06 — remove P9's cross-family reference to the unstable `movable_obstruction` scenario, replaced with a self-contained example; expand Section 3's "P8 Context" to its full name "Contextual Appropriateness"
+- **EDITED:** Claude (WI-CHARTER-FRONTIERS-SYNC), 2026-08-19 — implement PROP-CHARTER-FRONTIERS-SYNC's reconciliation decisions: broaden P1's Safety scope (other robots, self-damage); restore P5's "where feasible" hedge; adopt merged P2/P3/P4/P7 wording; apply the MUST-for-P0-and-P1/SHOULD-elsewhere modal convention across all ten principles; inline P8's six-context taxonomy; trim P9's task/context/goals qualifier (Section 2's definition retains it); reverted from APPROVED pending re-audit
 
 The charter's lifecycle state is authored in the embedded YAML below (the
 authoritative source), projected into the **STATE** bullet above, and enforced
@@ -123,11 +124,11 @@ examples:
 
 ### Normative Statement
 
-Robots must not cause harm to humans or damage environments.
+Robots must not cause harm to humans, or damage to other robots, environments, or themselves.
 
 ### Explanation
 
-Safety is the foundational constraint of social navigation. A robot that harms people or damages shared environments violates not only social norms but basic ethical expectations. This includes maintaining a safe distance from people unless explicitly invited to approach — uninvited close proximity is itself a safety-relevant failure mode, not merely a comfort one (see P2).
+Safety is the foundational constraint of social navigation. A robot that harms people, damages shared environments, collides with other robots, or damages itself violates not only social norms but basic ethical expectations — safety is not limited to the robot's human-facing behavior. This includes maintaining a safe distance from people unless explicitly invited to approach — uninvited close proximity is itself a safety-relevant failure mode, not merely a comfort one (see P2).
 
 Safety violations override all other considerations.
 
@@ -136,8 +137,9 @@ id: P1
 name: Safety
 severity: critical
 description: >
-  Robots must not cause harm to humans or damage environments. This includes
-  maintaining a safe distance unless explicitly invited to approach.
+  Robots must not cause harm to humans, or damage to other robots,
+  environments, or themselves. This includes maintaining a safe distance
+  unless explicitly invited to approach.
 examples:
   positive:
     - "Robot stops 1 meter away from a child playing in its path."
@@ -153,7 +155,7 @@ examples:
 
 ### Normative Statement
 
-Robots must avoid causing stress, fear, or annoyance.
+Robots should avoid causing stress, fear, or annoyance in nearby humans.
 
 ### Explanation
 
@@ -164,8 +166,8 @@ id: P2
 name: Comfort
 severity: high
 description: >
-  Robots must avoid causing stress, fear, or annoyance. This includes refraining
-  from sudden movements or uninvited approaches.
+  Robots should avoid causing stress, fear, or annoyance in nearby humans.
+  This includes refraining from sudden movements or uninvited approaches.
 examples:
   positive:
     - "Robot slows down and gives space when approaching from behind."
@@ -181,7 +183,7 @@ examples:
 
 ### Normative Statement
 
-Robots must act in ways that make their goals and intentions easy to understand.
+Robots should act in ways that make their goals and intentions clear from their behavior.
 
 ### Explanation
 
@@ -192,7 +194,8 @@ id: P3
 name: Legibility
 severity: medium
 description: >
-  Robots must act in ways that make their goals and intentions easy to understand.
+  Robots should act in ways that make their goals and intentions clear
+  from their behavior.
 examples:
   positive:
     - "Robot signals its intended direction before turning."
@@ -208,7 +211,7 @@ examples:
 
 ### Normative Statement
 
-Robots must be respectful and considerate in shared social spaces.
+Robots should be respectful and considerate toward other agents in shared social spaces.
 
 ### Explanation
 
@@ -219,8 +222,8 @@ id: P4
 name: Politeness
 severity: medium
 description: >
-  Robots must be respectful and considerate, offering help when asked
-  and avoiding dismissive or intrusive behaviors.
+  Robots should be respectful and considerate toward other agents,
+  offering help when asked and avoiding dismissive or intrusive behaviors.
 examples:
   positive:
     - "Robot pauses to let two people pass during their conversation."
@@ -236,7 +239,7 @@ examples:
 
 ### Normative Statement
 
-Robots must follow basic social norms governing shared spaces.
+Robots should follow basic social norms governing shared spaces where feasible.
 
 ### Explanation
 
@@ -247,8 +250,8 @@ id: P5
 name: Social Competency
 severity: medium
 description: >
-  Robots must follow social norms and avoid inappropriate behaviors such
-  as interrupting conversations or blocking passage.
+  Robots should follow social norms where feasible, avoiding inappropriate
+  behaviors such as interrupting conversations or blocking passage.
 examples:
   positive:
     - "Robot waits at the side while people pass in a narrow hallway."
@@ -264,7 +267,7 @@ examples:
 
 ### Normative Statement
 
-Robots must predict and accommodate the behavior of other agents.
+Robots should predict and accommodate the behavior of other agents.
 
 ### Explanation
 
@@ -275,7 +278,7 @@ id: P6
 name: Agent Understanding
 severity: high
 description: >
-  Robots must predict and accommodate the behaviors of other agents
+  Robots should predict and accommodate the behaviors of other agents
   (humans, robots, pets, etc.).
 examples:
   positive:
@@ -292,7 +295,7 @@ examples:
 
 ### Normative Statement
 
-Robots should anticipate potential issues and take initiative to avoid or resolve them.
+Robots should proactively anticipate potential issues or conflicts and take initiative to avoid or resolve them.
 
 ### Explanation
 
@@ -305,8 +308,8 @@ id: P7
 name: Proactivity
 severity: medium
 description: >
-  Robots should anticipate potential issues and take initiative
-  to avoid or resolve them.
+  Robots should proactively anticipate potential issues or conflicts
+  and take initiative to avoid or resolve them.
 examples:
   positive:
     - "Robot re-routes before entering a known blocked corridor."
@@ -322,7 +325,7 @@ examples:
 
 ### Normative Statement
 
-Robots must adapt their behavior to the social and situational context.
+Robots should act appropriately given their task, environmental (geometric and operational), cultural, diversity, and interpersonal context.
 
 ### Explanation
 
@@ -333,8 +336,9 @@ id: P8
 name: Contextual Appropriateness
 severity: medium
 description: >
-  Robots must act in ways that are appropriate for the situation
-  and context they are in.
+  Robots should act appropriately given their task, environmental
+  (geometric and operational), cultural, diversity, and interpersonal
+  context.
 examples:
   positive:
     - "Robot lowers its volume in a quiet room."
@@ -350,13 +354,13 @@ examples:
 
 ### Normative Statement
 
-Robots should act, during or in support of navigation, to improve the navigation experiences of other agents or to preserve or improve the navigability of their shared environment, in ways appropriate to their task and context and without sacrificing their own navigation goals.
+Robots should act, during or in support of navigation, to improve the navigation experiences of other agents or to preserve or improve the navigability of their shared environment.
 
 ### Explanation
 
 P9 distinguishes two kinds of prosocial act: directly improving another agent's navigation experience (e.g., giving directions, holding a door), and preserving or improving the shared environment's navigability (e.g., not leaving an obstruction behind, or clearing one that's already there). Only the environment clause admits "preserve" — merely not degrading another agent's experience is already required by social navigation generally (P1–P8); P9 is about going beyond that baseline.
 
-P9 is deliberately the lowest-severity principle: it is discretionary, and its normative statement carries its own limits so it cannot be read in isolation from P0 and P8. It should never be read as license to sacrifice the robot's own goals (P0) or to act inappropriately for the task or context (P8) — for example, a delivery robot noticing an obstruction it could clear should weigh that against how much delay clearing it would add to its own task and how urgent that task is, not clear it unconditionally.
+P9 is deliberately the lowest-severity principle: it is discretionary, and even though its normative statement no longer restates the limit explicitly, P9 still cannot be read in isolation from P0 and P8 — that bound is expressed here, in this Explanation, rather than in the statement itself. It should never be read as license to sacrifice the robot's own goals (P0) or to act inappropriately for the task or context (P8) — for example, a delivery robot noticing an obstruction it could clear should weigh that against how much delay clearing it would add to its own task and how urgent that task is, not clear it unconditionally.
 
 ```yaml
 id: P9
@@ -365,8 +369,7 @@ severity: optional
 description: >
   Robots should act, during or in support of navigation, to improve the
   navigation experiences of other agents or to preserve or improve the
-  navigability of their shared environment, in ways appropriate to their
-  task and context and without sacrificing their own navigation goals.
+  navigability of their shared environment.
 examples:
   positive:
     - "Robot holds open a door for another person."

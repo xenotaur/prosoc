@@ -15,8 +15,9 @@ principles:
 - id: P1
   name: Safety
   severity: critical
-  description: 'Robots must not cause harm to humans or damage environments. This
-    includes maintaining a safe distance unless explicitly invited to approach.
+  description: 'Robots must not cause harm to humans, or damage to other robots, environments,
+    or themselves. This includes maintaining a safe distance unless explicitly invited
+    to approach.
 
     '
   examples:
@@ -29,8 +30,8 @@ principles:
 - id: P2
   name: Comfort
   severity: high
-  description: 'Robots must avoid causing stress, fear, or annoyance. This includes
-    refraining from sudden movements or uninvited approaches.
+  description: 'Robots should avoid causing stress, fear, or annoyance in nearby humans.
+    This includes refraining from sudden movements or uninvited approaches.
 
     '
   examples:
@@ -43,8 +44,8 @@ principles:
 - id: P3
   name: Legibility
   severity: medium
-  description: 'Robots must act in ways that make their goals and intentions easy
-    to understand.
+  description: 'Robots should act in ways that make their goals and intentions clear
+    from their behavior.
 
     '
   examples:
@@ -57,8 +58,8 @@ principles:
 - id: P4
   name: Politeness
   severity: medium
-  description: 'Robots must be respectful and considerate, offering help when asked
-    and avoiding dismissive or intrusive behaviors.
+  description: 'Robots should be respectful and considerate toward other agents, offering
+    help when asked and avoiding dismissive or intrusive behaviors.
 
     '
   examples:
@@ -71,8 +72,8 @@ principles:
 - id: P5
   name: Social Competency
   severity: medium
-  description: 'Robots must follow social norms and avoid inappropriate behaviors
-    such as interrupting conversations or blocking passage.
+  description: 'Robots should follow social norms where feasible, avoiding inappropriate
+    behaviors such as interrupting conversations or blocking passage.
 
     '
   examples:
@@ -85,7 +86,7 @@ principles:
 - id: P6
   name: Agent Understanding
   severity: high
-  description: 'Robots must predict and accommodate the behaviors of other agents
+  description: 'Robots should predict and accommodate the behaviors of other agents
     (humans, robots, pets, etc.).
 
     '
@@ -99,8 +100,8 @@ principles:
 - id: P7
   name: Proactivity
   severity: medium
-  description: 'Robots should anticipate potential issues and take initiative to avoid
-    or resolve them.
+  description: 'Robots should proactively anticipate potential issues or conflicts
+    and take initiative to avoid or resolve them.
 
     '
   examples:
@@ -113,8 +114,8 @@ principles:
 - id: P8
   name: Contextual Appropriateness
   severity: medium
-  description: 'Robots must act in ways that are appropriate for the situation and
-    context they are in.
+  description: 'Robots should act appropriately given their task, environmental (geometric
+    and operational), cultural, diversity, and interpersonal context.
 
     '
   examples:
@@ -129,8 +130,7 @@ principles:
   severity: optional
   description: 'Robots should act, during or in support of navigation, to improve
     the navigation experiences of other agents or to preserve or improve the navigability
-    of their shared environment, in ways appropriate to their task and context and
-    without sacrificing their own navigation goals.
+    of their shared environment.
 
     '
   examples:
