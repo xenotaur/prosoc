@@ -2,10 +2,10 @@
 execution_id: 2026_08_14_18_03_36_WI_NCA_PRNC_PACKAGE_LAYOUT_IMPL_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_NCA_PRNC_PACKAGE_LAYOUT_IMPL_CONFIRM)[2026-08-14T02:20:24+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_08_14_01_21_24_WI_NCA_PRNC_PACKAGE_LAYOUT
 pr: https://github.com/xenotaur/prosoc/pull/95
-commit: dcbf297c2e0576bc60f2be89b23b71abad7e1b3f
+commit: a9ea0c35c59e4907a60d552b673add3147533533
 created_at: 2026-08-14T18:03:36+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/95

@@ -2,10 +2,11 @@
 execution_id: 2026_08_14_01_18_39_WI_NCA_PRNC_PACKAGE_LAYOUT_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_NCA_PRNC_PACKAGE_LAYOUT_SELFREVIEW)[2026-08-14T01:18:33+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
-pr: 
-commit: 
+pr: https://github.com/xenotaur/prosoc/pull/95
+commit: a9ea0c35c59e4907a60d552b673add3147533533
+session_transcript: claude-app:f087f2be-5992-4711-b12b-40cebb7e8305
 created_at: 2026-08-14T01:18:39+00:00
 ---
 
