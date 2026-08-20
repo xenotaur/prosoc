@@ -96,14 +96,14 @@ Use the same family→path mapping already applied to `_shared/audit_checklists/
 ## Acceptance Criteria
 
 - Each of the 9 listed files has zero remaining `prosoc/<family>/...` or `prosoc.<family>` stale references.
-- `grep -rn '\bprosoc/\(charter\|scenarios\|tasks\|contexts\|constitutions\|manifests\|packet\|literate\|auditor\|utils\)\b' .claude/skills/` returns no matches outside card-content directories or historical records (there should be none, since skill docs don't embed card content).
+- `grep -rEn '\bprosoc/(charter|scenarios|tasks|contexts|constitutions|manifests|packet|literate|auditor|utils)\b' .claude/skills/` returns no matches outside card-content directories or historical records (there should be none, since skill docs don't embed card content).
 - `lrh validate` reports 0 errors.
 
 ## Validation
 
 - `lrh validate`
-- `grep -rn 'prosoc\.\(literate\|auditor\|packet\|utils\|charter\|scenarios\|tasks\|contexts\)\b' .claude/skills/` (expect no matches)
-- `grep -rn '\bprosoc/\(charter\|scenarios\|tasks\|contexts\|constitutions\|manifests\|packet\|literate\|auditor\|utils\)\b' .claude/skills/` (expect no matches)
+- `grep -rEn 'prosoc\.(literate|auditor|packet|utils|charter|scenarios|tasks|contexts)\b' .claude/skills/` (expect no matches)
+- `grep -rEn '\bprosoc/(charter|scenarios|tasks|contexts|constitutions|manifests|packet|literate|auditor|utils)\b' .claude/skills/` (expect no matches)
 
 ## Risk Notes
 
