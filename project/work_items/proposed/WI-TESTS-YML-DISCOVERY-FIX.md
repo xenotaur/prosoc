@@ -23,7 +23,6 @@ expected_actions:
 forbidden_actions:
   - force_push
   - delete_branch
-  - modify_ci_pipeline
 acceptance:
   - .github/workflows/tests.yml's `run:` step invokes `python -m unittest discover tests "*_test.py" -v` (or equivalent), matching scripts/test's own working invocation
   - The workflow's next CI run reports the true test count (259+ as of this writing), not "Ran 0 tests in 0.000s"
