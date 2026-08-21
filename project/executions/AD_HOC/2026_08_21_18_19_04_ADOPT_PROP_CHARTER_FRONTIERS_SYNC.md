@@ -2,10 +2,10 @@
 execution_id: 2026_08_21_18_19_04_ADOPT_PROP_CHARTER_FRONTIERS_SYNC
 prompt_id: PROMPT(AD_HOC:ADOPT_PROP_CHARTER_FRONTIERS_SYNC)[2026-08-21T18:16:18+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/100
-commit: 
+commit: fd52b463ee4810594172e976aa63de9d0e45a92c
 created_at: 2026-08-21T18:19:04+00:00
 agent: claude_app
 instruction_source: project/design/proposals/proposed/charter-frontiers-sync/00_proposal.md
