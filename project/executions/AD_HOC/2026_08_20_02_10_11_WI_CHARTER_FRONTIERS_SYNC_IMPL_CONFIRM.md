@@ -2,10 +2,10 @@
 execution_id: 2026_08_20_02_10_11_WI_CHARTER_FRONTIERS_SYNC_IMPL_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_FRONTIERS_SYNC_IMPL_CONFIRM)[2026-08-20T01:03:30+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_08_19_22_19_50_WI_CHARTER_FRONTIERS_SYNC
 pr: https://github.com/xenotaur/prosoc/pull/97
-commit: a263395
+commit: 5c1a22ff6e05384c8a9c7b3e4e899c83135572c2
 created_at: 2026-08-20T02:10:11+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/97

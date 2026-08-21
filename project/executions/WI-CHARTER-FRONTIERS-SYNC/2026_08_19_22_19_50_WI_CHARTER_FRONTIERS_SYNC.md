@@ -2,10 +2,10 @@
 execution_id: 2026_08_19_22_19_50_WI_CHARTER_FRONTIERS_SYNC
 prompt_id: PROMPT(WI-CHARTER-FRONTIERS-SYNC:WI_CHARTER_FRONTIERS_SYNC)[2026-08-19T19:49:46+00:00]
 work_item: WI-CHARTER-FRONTIERS-SYNC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/97
-commit: 
+commit: 5c1a22ff6e05384c8a9c7b3e4e899c83135572c2
 created_at: 2026-08-19T22:19:50+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CHARTER-FRONTIERS-SYNC.md

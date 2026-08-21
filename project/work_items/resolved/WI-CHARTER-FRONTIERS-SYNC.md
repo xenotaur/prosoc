@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: Implemented and merged in PR #97 (commit 5c1a22f)
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-FRONTIERS-SYNC
 title: Reconcile prosoc Charter principle wording with the Frontiers paper
 type: operation
-status: proposed
+status: resolved
 assigned_agents: []
 related_focus: []
 related_roadmap: []
