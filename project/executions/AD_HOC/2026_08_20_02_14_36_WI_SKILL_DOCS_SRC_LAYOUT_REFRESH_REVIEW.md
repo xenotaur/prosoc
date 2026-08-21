@@ -2,14 +2,14 @@
 execution_id: 2026_08_20_02_14_36_WI_SKILL_DOCS_SRC_LAYOUT_REFRESH_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_SKILL_DOCS_SRC_LAYOUT_REFRESH_REVIEW)[2026-08-20T02:12:51+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_08_20_00_13_37_WI_SKILL_DOCS_SRC_LAYOUT_REFRESH
 pr: https://github.com/xenotaur/prosoc/pull/99
-commit: 6ffbeb3
+commit: df41656572510124117694477434c9d7cc8c7f12
 created_at: 2026-08-20T02:14:36+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/99
-session_transcript: pending
+session_transcript: claude-app:9686211b-8ac8-4bcd-bd8f-8b198c484df2
 ---
 
 # Summary
