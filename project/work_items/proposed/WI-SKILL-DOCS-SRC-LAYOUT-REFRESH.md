@@ -96,14 +96,14 @@ Use the same family→path mapping already applied to `_shared/audit_checklists/
 ## Acceptance Criteria
 
 - Each of the 9 listed files has zero remaining `prosoc/<family>/...` or `prosoc.<family>` stale references.
-- `grep -rEn '\bprosoc/(charter|scenarios|tasks|contexts|constitutions|manifests|packet|literate|auditor|utils)\b' .claude/skills/` returns no matches outside card-content directories or historical records (there should be none, since skill docs don't embed card content).
+- `grep -rEn '\bprosoc/(charter|scenarios|tasks|contexts|constitutions|manifests|packet|literate|auditor|utils)\b' .claude/skills/ | grep -v 'src/prosoc/'` returns no matches outside card-content directories or historical records (there should be none, since skill docs don't embed card content). The `grep -v 'src/prosoc/'` filter is required because `constitutions` and `manifests` stay top-level under `src/prosoc/` — without it, the bare word-boundary match also fires on the already-correct `src/prosoc/constitutions/...`/`src/prosoc/manifests/...` paths (e.g. in `.claude/skills/_shared/audit_checklists/constitutions.md`/`manifests.md`, already migrated by `WI-NCA-PRNC-PACKAGE-LAYOUT`), producing false positives the check could never actually clear.
 - `lrh validate` reports 0 errors.
 
 ## Validation
 
 - `lrh validate`
 - `grep -rEn 'prosoc\.(literate|auditor|packet|utils|charter|scenarios|tasks|contexts)\b' .claude/skills/` (expect no matches)
-- `grep -rEn '\bprosoc/(charter|scenarios|tasks|contexts|constitutions|manifests|packet|literate|auditor|utils)\b' .claude/skills/` (expect no matches)
+- `grep -rEn '\bprosoc/(charter|scenarios|tasks|contexts|constitutions|manifests|packet|literate|auditor|utils)\b' .claude/skills/ | grep -v 'src/prosoc/'` (expect no matches; the `-v` filter excludes already-correct `src/prosoc/constitutions/...`/`src/prosoc/manifests/...` references from the bare word-boundary match)
 
 ## Risk Notes
 
