@@ -2,16 +2,17 @@
 id: PROP-CHARTER-FRONTIERS-SYNC
 type: design_proposal
 title: Reconciling the Prosoc Charter with the Frontiers Paper
-status: proposed
+status: adopted
 created_on: 2026-08-12
-updated_on: 2026-08-13
-implementation_status: not_started
-implemented_by: []
+updated_on: 2026-08-21
+implementation_status: implemented
+implemented_by:
+  - WI-CHARTER-FRONTIERS-SYNC
 supersedes: []
 superseded_by: null
 related_design:
-  - prosoc/charter/charter.md
-  - prosoc/charter/audit.md
+  - src/prosoc/prnc/charter/charter.md
+  - src/prosoc/prnc/charter/audit.md
 ---
 
 # Reconciling the Prosoc Charter with the Frontiers Paper
