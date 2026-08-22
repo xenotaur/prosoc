@@ -7,8 +7,8 @@ description: >
   skill whenever the user asks to audit, review, check, or validate a card in
   any of these six families — especially referencing the AUDITED lifecycle
   stage in workflow.md, or asking to "prep a card for review". Produces a
-  findings-only audit.md next to the card (or prosoc/charter/audit.md for the
-  charter) without modifying the card or promoting its STATE.
+  findings-only audit.md next to the card (or src/prosoc/prnc/charter/audit.md
+  for the charter) without modifying the card or promoting its STATE.
   Family-dispatched successor to prosoc-scenario-audit.
 ---
 
@@ -17,7 +17,7 @@ description: >
 This skill produces an audit report for an existing prosoc normative card —
 scenario, task, context, constitution, the charter, or a packet manifest —
 corresponding to the
-**AUDITED** lifecycle stage described in `prosoc/scenarios/workflow.md`. It
+**AUDITED** lifecycle stage described in `src/prosoc/prnc/scenarios/workflow.md`. It
 performs machine-assisted work that a human must review and act on: it writes
 **findings for a human editor**, not fixes, and it never promotes a card's
 STATE. Promotion to EDITED or AUDITED remains a human decision — this skill's
@@ -48,8 +48,9 @@ families. Optional inputs:
   sufficient.
 
 If the family isn't stated, resolve it by checking which family directory the
-named id resolves under — `prosoc/scenarios/<id>/`, `prosoc/tasks/<id>/`,
-`prosoc/contexts/<id>/`, `prosoc/constitutions/<id>/`, `prosoc/manifests/<id>/`,
+named id resolves under — `src/prosoc/prnc/scenarios/<id>/`,
+`src/prosoc/prnc/tasks/<id>/`, `src/prosoc/prnc/contexts/<id>/`,
+`src/prosoc/constitutions/<id>/`, `src/prosoc/manifests/<id>/`,
 in that order. If the id resolves under more than one family (unlikely, since
 each family's ids follow different conventions — see each checklist's
 Required Fields), or under none, ask the user to state the family explicitly
@@ -72,18 +73,20 @@ Load these before auditing:
 3. **`../_shared/pg_scenarios.md`** — Table 3 data for all 18 P&G scenarios.
    **Scenarios only.** Used for source-fidelity checks.
 
-4. **`prosoc/<family>/schema.json`** — the JSON schema the card's distilled
+4. **`src/prosoc/prnc/<family>/schema.json`** (or `src/prosoc/<family>/schema.json`
+   for constitutions/manifests) — the JSON schema the card's distilled
    YAML must conform to (see the Card YAML column in Step 1's table for the
    exact per-family filename — `scenario.yml`, `task.yml`, `context.yml`,
    `constitution.yml`, `charter.yml`, or `manifest.yml`).
 
-5. **`prosoc/scenarios/workflow.md`** — defines the AUDITED stage. The audit
+5. **`src/prosoc/prnc/scenarios/workflow.md`** — defines the AUDITED stage. The audit
    report's verdict and vocabulary should speak in these terms regardless of
    family (an audit "asserts... internally coherent, aligns with the...
    Charter, reasonably captures a social navigation situation, is suitable
    for use" — it does not imply empirical validation).
 
-6. **`prosoc/<family>/template.md`** — marks which sections/fields are
+6. **`src/prosoc/prnc/<family>/template.md`** (or `src/prosoc/<family>/template.md`
+   for constitutions/manifests) — marks which sections/fields are
    "Required" (or, for the charter, defines its structural sections). Use
    this as the completeness checklist, alongside the family checklist's own
    Completeness section.
@@ -98,12 +101,12 @@ Work through these steps in order.
 
 | Family | Card path | Card YAML |
 |---|---|---|
-| scenarios | `prosoc/scenarios/<id>/scenario.md` | `scenario.yml` |
-| tasks | `prosoc/tasks/<id>/task.md` | `task.yml` |
-| contexts | `prosoc/contexts/<id>/context.md` | `context.yml` |
-| constitutions | `prosoc/constitutions/<id>/constitution.md` | `constitution.yml` |
-| charter | `prosoc/charter/charter.md` | `charter.yml` (no id) |
-| manifests | `prosoc/manifests/<id>/manifest.md` | `manifest.yml` |
+| scenarios | `src/prosoc/prnc/scenarios/<id>/scenario.md` | `scenario.yml` |
+| tasks | `src/prosoc/prnc/tasks/<id>/task.md` | `task.yml` |
+| contexts | `src/prosoc/prnc/contexts/<id>/context.md` | `context.yml` |
+| constitutions | `src/prosoc/constitutions/<id>/constitution.md` | `constitution.yml` |
+| charter | `src/prosoc/prnc/charter/charter.md` | `charter.yml` (no id) |
+| manifests | `src/prosoc/manifests/<id>/manifest.md` | `manifest.yml` |
 
 If either file is missing, stop and report — do not proceed with a partial
 audit.
@@ -187,8 +190,9 @@ blank required field/section, judge and state which of these it is:
 
 ### 6. Write the audit report
 
-Output path is family-dependent: `prosoc/<family>/<id>/audit.md` for the
-four card-per-directory families, or `prosoc/charter/audit.md` for the
+Output path is family-dependent: `src/prosoc/prnc/<family>/<id>/audit.md`
+for scenarios/tasks/contexts, `src/prosoc/<family>/<id>/audit.md` for
+constitutions/manifests, or `src/prosoc/prnc/charter/audit.md` for the
 charter (no id, one document).
 
 Start with a small structured frontmatter block — this is what lets tooling
@@ -209,7 +213,9 @@ audited: <today's date, YYYY-MM-DD>
 
 # Audit: <Card Name>
 
-- **Card:** `prosoc/<family>/<id>/` (or `prosoc/charter/` for the charter)
+- **Card:** `src/prosoc/prnc/<family>/<id>/` for scenarios/tasks/contexts,
+  `src/prosoc/<family>/<id>/` for constitutions/manifests (or
+  `src/prosoc/prnc/charter/` for the charter)
 - **Audited:** Claude (prosoc-card-audit skill), <today's date>
 - **Verdict:** <one line, e.g. "Ready for AUDITED with minor fixes" |
   "Not ready — N blocking issues" | "Ready, no issues found">

@@ -2,11 +2,11 @@
 
 ## The Ten Principles (P0–P9)
 
-This project's charter (`prosoc/charter/charter.md`, distilled to `prosoc/charter/charter.yml`)
+This project's charter (`src/prosoc/prnc/charter/charter.md`, distilled to `src/prosoc/prnc/charter/charter.yml`)
 defines **ten** principles, P0–P9. P1–P8 are the eight principles from the P&G paper (Francis et
 al., 2025, "Principles and Guidelines for Evaluating Social Robot Navigation Algorithms", THRI
 Vol. 14 No. 2); P0 and P9 are this project's own explicit extensions beyond the P&G paper.
-`prosoc/charter/charter.md` is the sole source of truth for this list — verify against it (or its
+`src/prosoc/prnc/charter/charter.md` is the sole source of truth for this list — verify against it (or its
 generated `charter.yml`) if this table and the charter ever appear to disagree.
 
 | ID | Name | Description |

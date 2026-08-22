@@ -6,7 +6,7 @@ description: >
   a social navigation scenario — especially when they name a scenario (e.g. "blind
   corner", "entering room", "following", "crowd navigation"), reference the P&G paper,
   or provide a new paper and ask for a scenario from it. Produces a DRAFTED scenario.md
-  and scenario.yml under prosoc/scenarios/<name>/. Also use when the user asks to
+  and scenario.yml under src/prosoc/prnc/scenarios/<name>/. Also use when the user asks to
   "fill in" missing scenarios or "implement scenarios from the paper".
 ---
 
@@ -52,10 +52,10 @@ Load these before generating the scenario card:
 3. **`references/schema_guide.md`** — Field-by-field guidance for the scenario schema.
    Read this to understand what goes in each YAML field and what to leave blank.
 
-4. **`prosoc/scenarios/scenario_template.md`** — The canonical output template. Read this
+4. **`src/prosoc/prnc/scenarios/template.md`** — The canonical output template. Read this
    to understand the required Markdown structure and section ordering.
 
-5. **`prosoc/scenarios/schema.json`** — The JSON schema enforced by the distiller. Refer
+5. **`src/prosoc/prnc/scenarios/schema.json`** — The JSON schema enforced by the distiller. Refer
    to this if you are uncertain whether a field or value is valid.
 
 ---
@@ -66,7 +66,7 @@ Work through these steps in order.
 
 ### 1. Check for existing implementation
 
-List `prosoc/scenarios/` and check whether a directory for this scenario already exists.
+List `src/prosoc/prnc/scenarios/` and check whether a directory for this scenario already exists.
 If it does, report this to the user and ask whether to overwrite or extend. Do not
 silently overwrite existing work.
 
@@ -109,8 +109,8 @@ The scenario id should be `<snake_case>_01`.
 
 ### 5. Write the scenario card
 
-Create `prosoc/scenarios/<scenario-id>/scenario.md` following the structure in
-`prosoc/scenarios/scenario_template.md`. The file must include:
+Create `src/prosoc/prnc/scenarios/<scenario-id>/scenario.md` following the structure in
+`src/prosoc/prnc/scenarios/template.md`. The file must include:
 
 **STATUS section** (at the top, after the title):
 ```markdown
@@ -132,7 +132,7 @@ Create `prosoc/scenarios/<scenario-id>/scenario.md` following the structure in
 7. `## Notes for Scenario Designers and Evaluators` — variants, caveats, comparison notes
 
 The fenced YAML block must start with ` ```yaml ` and end with ` ``` ` and contain
-the complete scenario specification conforming to `prosoc/scenarios/schema.json`.
+the complete scenario specification conforming to `src/prosoc/prnc/scenarios/schema.json`.
 
 ### 6. Run the distiller
 
