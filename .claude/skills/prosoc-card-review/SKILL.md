@@ -76,9 +76,11 @@ touching the card's Markdown and distilled YAML against the last commit
 touching `audit.md`:
 
 ```bash
-git log -1 --format=%cI -- prosoc/<family>/<id>/<card-file>.md
-git log -1 --format=%cI -- prosoc/<family>/<id>/<card-file>.yml
-git log -1 --format=%cI -- prosoc/<family>/<id>/audit.md
+# <family> root is src/prosoc/prnc/<family>/ for scenarios/tasks/contexts,
+# or src/prosoc/<family>/ for constitutions/manifests
+git log -1 --format=%cI -- src/prosoc/prnc/<family>/<id>/<card-file>.md
+git log -1 --format=%cI -- src/prosoc/prnc/<family>/<id>/<card-file>.yml
+git log -1 --format=%cI -- src/prosoc/prnc/<family>/<id>/audit.md
 ```
 
 If either card artifact's last-commit timestamp is more recent than
