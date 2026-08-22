@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #101 (commit 8b9096c), squashed."
 blocked_reason: null
 blocked: false
 id: WI-TESTS-YML-DISCOVERY-FIX
 title: Fix tests.yml CI workflow to actually discover and run the test suite
 type: operation
-status: proposed
+status: resolved
 owner: anthony
 contributors:
   - anthony

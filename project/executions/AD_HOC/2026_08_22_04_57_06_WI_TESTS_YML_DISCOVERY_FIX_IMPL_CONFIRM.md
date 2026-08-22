@@ -2,10 +2,10 @@
 execution_id: 2026_08_22_04_57_06_WI_TESTS_YML_DISCOVERY_FIX_IMPL_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_TESTS_YML_DISCOVERY_FIX_IMPL_CONFIRM)[2026-08-22T04:56:30+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_08_21_21_55_35_WI_TESTS_YML_DISCOVERY_FIX_IMPL
 pr: https://github.com/xenotaur/prosoc/pull/101
-commit: 
+commit: 8b9096cd11b16b9d2d8c8eb9f6dbdcfa3b7e1dad
 created_at: 2026-08-22T04:57:06+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/101

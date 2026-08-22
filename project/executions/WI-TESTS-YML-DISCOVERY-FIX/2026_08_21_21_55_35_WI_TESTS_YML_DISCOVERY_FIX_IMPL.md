@@ -2,10 +2,10 @@
 execution_id: 2026_08_21_21_55_35_WI_TESTS_YML_DISCOVERY_FIX_IMPL
 prompt_id: PROMPT(WI-TESTS-YML-DISCOVERY-FIX:WI_TESTS_YML_DISCOVERY_FIX_IMPL)[2026-08-21T20:36:59+00:00]
 work_item: WI-TESTS-YML-DISCOVERY-FIX
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/101
-commit: 9781055
+commit: 8b9096cd11b16b9d2d8c8eb9f6dbdcfa3b7e1dad
 created_at: 2026-08-21T21:55:35+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-TESTS-YML-DISCOVERY-FIX.md
