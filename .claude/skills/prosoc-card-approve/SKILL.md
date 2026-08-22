@@ -16,7 +16,7 @@ description: >
 # prosoc-card-approve Skill
 
 This skill performs the mechanical half of promoting a prosoc normative
-card's lifecycle state one step, per `prosoc/scenarios/workflow.md` and
+card's lifecycle state one step, per `src/prosoc/prnc/scenarios/workflow.md` and
 `PROP-NORMATIVE-CARD-APPROVAL` Decision 2. It is a state-transition
 primitive: it edits exactly the `state:` field (plus the files a state
 change requires to stay consistent), asks for explicit human confirmation
@@ -59,8 +59,9 @@ six families, the same resolution `prosoc-card-audit` uses:
 
 If the family isn't stated, resolve it the same way `prosoc-card-audit`
 does: check which family directory the named id resolves under
-(`prosoc/scenarios/<id>/`, `prosoc/tasks/<id>/`, `prosoc/contexts/<id>/`,
-`prosoc/constitutions/<id>/`, `prosoc/manifests/<id>/`, in that order). If
+(`src/prosoc/prnc/scenarios/<id>/`, `src/prosoc/prnc/tasks/<id>/`,
+`src/prosoc/prnc/contexts/<id>/`, `src/prosoc/constitutions/<id>/`,
+`src/prosoc/manifests/<id>/`, in that order). If
 ambiguous or unresolvable, ask the user to state the family explicitly.
 
 ---
@@ -69,9 +70,10 @@ ambiguous or unresolvable, ask the user to state the family explicitly.
 
 Load these before promoting:
 
-1. **`prosoc/scenarios/workflow.md`** — the lifecycle definition and the
+1. **`src/prosoc/prnc/scenarios/workflow.md`** — the lifecycle definition and the
    evidence-gate rationale for each stage (§4 `AUDITED`, §5 `APPROVED`).
-2. **`prosoc/<family>/schema.json`** — the JSON schema the card's distilled
+2. **`src/prosoc/prnc/<family>/schema.json`** (or `src/prosoc/<family>/schema.json`
+   for constitutions/manifests) — the JSON schema the card's distilled
    YAML must conform to (used only to confirm the target `state` value is
    schema-valid before writing it; this skill does not re-run a full
    schema validation pass).
@@ -84,12 +86,12 @@ Load these before promoting:
 
 | Family | Card path | Card YAML | Distiller (regenerate, not `--dry-run`) |
 |---|---|---|---|
-| scenarios | `prosoc/scenarios/<id>/scenario.md` | `scenario.yml` | `scripts/distill/scenarios --scenario <id>` |
-| tasks | `prosoc/tasks/<id>/task.md` | `task.yml` | `scripts/distill/tasks` (whole family, no per-card scoping) |
-| contexts | `prosoc/contexts/<id>/context.md` | `context.yml` | `scripts/distill/contexts` (whole family) |
-| constitutions | `prosoc/constitutions/<id>/constitution.md` | `constitution.yml` | `scripts/distill/constitutions` (whole family) |
-| charter | `prosoc/charter/charter.md` | `charter.yml` (no id) | `scripts/distill/charter` |
-| manifests | `prosoc/manifests/<id>/manifest.md` | `manifest.yml` | `scripts/distill/manifests` (whole family) |
+| scenarios | `src/prosoc/prnc/scenarios/<id>/scenario.md` | `scenario.yml` | `scripts/distill/scenarios --scenario <id>` |
+| tasks | `src/prosoc/prnc/tasks/<id>/task.md` | `task.yml` | `scripts/distill/tasks` (whole family, no per-card scoping) |
+| contexts | `src/prosoc/prnc/contexts/<id>/context.md` | `context.yml` | `scripts/distill/contexts` (whole family) |
+| constitutions | `src/prosoc/constitutions/<id>/constitution.md` | `constitution.yml` | `scripts/distill/constitutions` (whole family) |
+| charter | `src/prosoc/prnc/charter/charter.md` | `charter.yml` (no id) | `scripts/distill/charter` |
+| manifests | `src/prosoc/manifests/<id>/manifest.md` | `manifest.yml` | `scripts/distill/manifests` (whole family) |
 
 If either file is missing, stop and report — do not proceed.
 
@@ -108,8 +110,9 @@ skip `AUDITED`").
 
 ### 3. Evidence gate
 
-**For `→AUDITED`:** locate `audit.md` next to the card (`prosoc/charter/audit.md`
-for the charter; `prosoc/<family>/<id>/audit.md` otherwise). If it does not
+**For `→AUDITED`:** locate `audit.md` next to the card (`src/prosoc/prnc/charter/audit.md`
+for the charter; `src/prosoc/prnc/<family>/<id>/audit.md` for scenarios/tasks/contexts,
+or `src/prosoc/<family>/<id>/audit.md` for constitutions/manifests). If it does not
 exist, stop and report — recommend running `prosoc-card-audit` first. If it
 exists, read its frontmatter `verdict:` field. If `not_ready`, stop and
 report the blocking findings — do not promote. If `ready` or

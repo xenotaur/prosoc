@@ -47,7 +47,7 @@ If invoked by `prosoc-card-review-all`, the caller supplies the
 
 Load before reviewing:
 
-1. **`prosoc/scenarios/workflow.md`** — lifecycle definitions, especially
+1. **`src/prosoc/prnc/scenarios/workflow.md`** — lifecycle definitions, especially
    §4 (`AUDITED`) and §5 (`APPROVED`).
 2. **`../_shared/principles.md`** — the P0–P9 principle definitions, needed
    to form an independent judgment about a card's charter alignment.
@@ -67,17 +67,20 @@ of that skill). Read the card's Markdown and distilled YAML in full.
 
 ### 2. Ensure current audit evidence exists
 
-Locate the card's `audit.md` (`prosoc/charter/audit.md` for the charter;
-`prosoc/<family>/<id>/audit.md` otherwise).
+Locate the card's `audit.md` (`src/prosoc/prnc/charter/audit.md` for the charter;
+`src/prosoc/prnc/<family>/<id>/audit.md` for scenarios/tasks/contexts, or
+`src/prosoc/<family>/<id>/audit.md` for constitutions/manifests).
 
 **Staleness check:** if `audit.md` exists, compare the last commit
 touching the card's Markdown and distilled YAML against the last commit
 touching `audit.md`:
 
 ```bash
-git log -1 --format=%cI -- prosoc/<family>/<id>/<card-file>.md
-git log -1 --format=%cI -- prosoc/<family>/<id>/<card-file>.yml
-git log -1 --format=%cI -- prosoc/<family>/<id>/audit.md
+# <family> root is src/prosoc/prnc/<family>/ for scenarios/tasks/contexts,
+# or src/prosoc/<family>/ for constitutions/manifests
+git log -1 --format=%cI -- src/prosoc/prnc/<family>/<id>/<card-file>.md
+git log -1 --format=%cI -- src/prosoc/prnc/<family>/<id>/<card-file>.yml
+git log -1 --format=%cI -- src/prosoc/prnc/<family>/<id>/audit.md
 ```
 
 If either card artifact's last-commit timestamp is more recent than

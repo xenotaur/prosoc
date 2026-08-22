@@ -272,6 +272,6 @@ Prosocial Behavior — they are original to that paper, not derived from or
 extrapolated from any P&G Table 3 entry or Figure 7 sketch. The prior guess that
 `single_file_hallway` corresponds to Figure 7's "Narrow Hallway" sketch is
 superseded by this ground truth; any thematic resemblance is coincidental. See
-`prosoc/scenarios/single_file_hallway/scenario.md` and
-`prosoc/scenarios/movable_obstruction/scenario.md`'s `SOURCE` fields, corrected to
+`src/prosoc/prnc/scenarios/single_file_hallway/scenario.md` and
+`src/prosoc/prnc/scenarios/movable_obstruction/scenario.md`'s `SOURCE` fields, corrected to
 match.

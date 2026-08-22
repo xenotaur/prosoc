@@ -82,12 +82,12 @@ For each target family:
 
 | Family | Enumeration |
 |---|---|
-| scenarios | subdirectories of `prosoc/scenarios/` containing a `scenario.md` |
-| tasks | subdirectories of `prosoc/tasks/` containing a `task.md` |
-| contexts | subdirectories of `prosoc/contexts/` containing a `context.md` |
-| constitutions | subdirectories of `prosoc/constitutions/` containing a `constitution.md` |
+| scenarios | subdirectories of `src/prosoc/prnc/scenarios/` containing a `scenario.md` |
+| tasks | subdirectories of `src/prosoc/prnc/tasks/` containing a `task.md` |
+| contexts | subdirectories of `src/prosoc/prnc/contexts/` containing a `context.md` |
+| constitutions | subdirectories of `src/prosoc/constitutions/` containing a `constitution.md` |
 | charter | exactly one card: `{family: charter, id: "charter"}` — no directory enumeration |
-| manifests | subdirectories of `prosoc/manifests/` containing a `manifest.md` |
+| manifests | subdirectories of `src/prosoc/manifests/` containing a `manifest.md` |
 
 This excludes non-card files at each family's top level (`README.md`,
 `distill.py`, `schema.json`, `template.md`, `AUDIT_SUMMARY.md`,

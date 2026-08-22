@@ -1,6 +1,6 @@
 # Prosoc Scenario Schema Field Guide
 
-This is a human-readable companion to `prosoc/scenarios/schema.json`. Use it when mapping
+This is a human-readable companion to `src/prosoc/prnc/scenarios/schema.json`. Use it when mapping
 source paper content to scenario card fields.
 
 ## Required Fields

@@ -17,7 +17,7 @@ description: >
 
 This skill orchestrates `prosoc-card-review` across the corpus (or a
 family within it), using the deterministic review-queue engine
-(`prosoc/utils/cards/review_queue.py`, exposed via
+(`src/prosoc/nca/utils/cards/review_queue.py`, exposed via
 `scripts/validate/review-queue`) to decide review order instead of leaving
 it to ad-hoc human judgment. It does not reimplement or fork any part of
 `prosoc-card-review`'s logic — it dispatches to it, one card at a time, and
@@ -53,7 +53,7 @@ Optional:
 This skill does not duplicate `prosoc-card-review`'s reference material —
 each dispatched review loads that skill's own reference set. Load directly:
 
-1. **`prosoc/utils/cards/review_queue.py`** module docstring / `scripts/validate/review-queue`
+1. **`src/prosoc/nca/utils/cards/review_queue.py`** module docstring / `scripts/validate/review-queue`
    `--help` — the engine's field meanings (`severity`, `scope`, `has_audit`),
    needed to present the queue meaningfully at Step 3.
 
