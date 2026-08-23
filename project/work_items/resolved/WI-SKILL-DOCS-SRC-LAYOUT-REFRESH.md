@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #103 (commit 0f68ee6), squashed."
 blocked_reason: null
 blocked: false
 id: WI-SKILL-DOCS-SRC-LAYOUT-REFRESH
 title: Refresh stale flat-layout paths in prosoc skill docs after the src/-layout migration
 type: operation
-status: proposed
+status: resolved
 owner: anthony
 contributors:
   - anthony

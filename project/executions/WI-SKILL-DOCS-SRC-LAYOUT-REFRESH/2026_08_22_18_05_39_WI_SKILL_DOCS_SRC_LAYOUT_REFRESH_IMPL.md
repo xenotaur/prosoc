@@ -2,14 +2,14 @@
 execution_id: 2026_08_22_18_05_39_WI_SKILL_DOCS_SRC_LAYOUT_REFRESH_IMPL
 prompt_id: PROMPT(WI-SKILL-DOCS-SRC-LAYOUT-REFRESH:WI_SKILL_DOCS_SRC_LAYOUT_REFRESH_IMPL)[2026-08-22T17:52:22+00:00]
 work_item: WI-SKILL-DOCS-SRC-LAYOUT-REFRESH
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/103
-commit: 
+commit: 0f68ee6eb707b9e5579e498c78355d58e1f13469
 created_at: 2026-08-22T18:05:39+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-SKILL-DOCS-SRC-LAYOUT-REFRESH.md
-session_transcript: pending
+session_transcript: claude-app:9686211b-8ac8-4bcd-bd8f-8b198c484df2
 ---
 
 # Summary
