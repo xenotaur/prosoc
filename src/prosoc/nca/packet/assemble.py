@@ -20,8 +20,8 @@ import hashlib
 import json
 import pathlib
 
+import jsonschema
 from jsonschema import ValidationError
-from jsonschema import validate as jsonschema_validate
 
 from . import gate as gate_mod
 from .errors import AssembleError
@@ -32,6 +32,20 @@ SCHEMA_PATH = pathlib.Path(__file__).parent / "schema.json"
 
 STATEMENT_TYPE = "https://in-toto.io/Statement/v1"
 PREDICATE_TYPE = "https://prosocial-robotics.org/NormativePacket/v1"
+
+# ⚡ Bolt: Lazy-load and cache the envelope schema validator to avoid
+# re-reading the schema and recompiling the validator on every assembly.
+_ENVELOPE_VALIDATOR: jsonschema.protocols.Validator | None = None
+
+
+def _get_envelope_validator() -> jsonschema.protocols.Validator:
+    global _ENVELOPE_VALIDATOR
+    if _ENVELOPE_VALIDATOR is None:
+        schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+        validator_cls = jsonschema.validators.validator_for(schema)
+        _ENVELOPE_VALIDATOR = validator_cls(schema)
+    return _ENVELOPE_VALIDATOR
+
 
 NON_PRODUCTION_NOTICE = (
     "This guidance was not human-approved: the lifecycle gate was bypassed via "
@@ -234,10 +248,8 @@ def validate_envelope(envelope: dict) -> None:
         AssembleError: the envelope does not conform to the schema.
     """
     try:
-        jsonschema_validate(
-            instance=envelope,
-            schema=json.loads(SCHEMA_PATH.read_text(encoding="utf-8")),
-        )
+        validator = _get_envelope_validator()
+        validator.validate(instance=envelope)
     except ValidationError as exc:
         raise AssembleError(
             f"assembled packet failed schema validation: {exc.message}"

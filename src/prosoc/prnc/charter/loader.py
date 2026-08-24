@@ -21,7 +21,6 @@ from jsonschema import validate as jsonschema_validate
 
 from prosoc.prnc.charter import runtime
 
-
 # -----------------------------------------------------------------------------
 # Paths
 # -----------------------------------------------------------------------------

@@ -21,7 +21,6 @@ from typing import Iterable, NamedTuple
 from prosoc.nca.literate import compiler
 from prosoc.nca.literate import utils
 
-
 # -----------------------------------------------------------------------------
 # Constants
 # -----------------------------------------------------------------------------

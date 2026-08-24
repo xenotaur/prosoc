@@ -8,7 +8,6 @@ from pathlib import Path
 from prosoc.nca.literate import compiler
 from prosoc.nca.literate import errors
 
-
 VALID_MARKDOWN = """
 # Example Document
 
