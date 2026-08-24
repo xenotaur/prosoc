@@ -7,7 +7,6 @@ from pathlib import Path
 
 from prosoc.manifests import distill
 
-
 VALID_MANIFEST_MD = """
 # Manifest: Test Manifest
 

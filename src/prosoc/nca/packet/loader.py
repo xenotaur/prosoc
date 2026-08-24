@@ -17,8 +17,8 @@ import pathlib
 from dataclasses import dataclass
 
 import yaml
+import jsonschema
 from jsonschema import ValidationError
-from jsonschema import validate as jsonschema_validate
 
 from prosoc.constitutions import distill as constitutions_distill
 from prosoc.prnc.charter import distill as charter_distill
@@ -79,6 +79,20 @@ FAMILIES: dict[str, PacketFamily] = {
     "charter": _family("charter", charter_distill, "charter.yml", single=True),
 }
 
+# ⚡ Bolt: Cache jsonschema validators to avoid recompilation overhead.
+# Repeated calls to jsonschema.validate() recompile the schema every time,
+# which can become a bottleneck when loading many cards.
+_SCHEMA_VALIDATORS: dict[str, jsonschema.protocols.Validator] = {}
+
+
+def _get_validator(fam: PacketFamily) -> jsonschema.protocols.Validator:
+    """Get or compile a validator for a given card family."""
+    if fam.name not in _SCHEMA_VALIDATORS:
+        schema = json.loads(fam.schema_path.read_text(encoding="utf-8"))
+        validator_cls = jsonschema.validators.validator_for(schema)
+        _SCHEMA_VALIDATORS[fam.name] = validator_cls(schema)
+    return _SCHEMA_VALIDATORS[fam.name]
+
 
 @dataclass(frozen=True)
 class LoadedCard:
@@ -130,10 +144,8 @@ def load_card(family: str, card_id: str) -> LoadedCard:
 
     # Single runtime validation gate.
     try:
-        jsonschema_validate(
-            instance=payload,
-            schema=json.loads(fam.schema_path.read_text(encoding="utf-8")),
-        )
+        validator = _get_validator(fam)
+        validator.validate(instance=payload)
     except ValidationError as exc:
         raise ResolveError(
             f"{family}/{card_id}: schema validation failed: {exc.message}"
