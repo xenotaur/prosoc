@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #105 (commit 3459e46), squashed."
 blocked_reason: null
 blocked: false
 id: WI-DECLARE-OPENAI-DOTENV-DEPS
 title: Declare openai and python-dotenv as pyproject.toml dependencies
 type: operation
-status: proposed
+status: resolved
 owner: anthony
 contributors:
   - anthony
