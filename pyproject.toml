@@ -26,6 +26,8 @@ dependencies = [
     "pyyaml",
     "jsonschema",
     "pydantic",
+    "openai",
+    "python-dotenv",
 ]
 
 [project.optional-dependencies]
