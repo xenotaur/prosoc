@@ -2,14 +2,14 @@
 execution_id: 2026_08_22_17_48_14_WI_DECLARE_OPENAI_DOTENV_DEPS
 prompt_id: PROMPT(AD_HOC:WI_DECLARE_OPENAI_DOTENV_DEPS)[2026-08-22T17:46:53+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 
 pr: https://github.com/xenotaur/prosoc/pull/102
-commit: 
+commit: c893ef6bc3533d6a24ae39ff37a62c42e5bb87e9
 created_at: 2026-08-22T17:48:14+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-DECLARE-OPENAI-DOTENV-DEPS.md
-session_transcript: pending
+session_transcript: claude-app:9686211b-8ac8-4bcd-bd8f-8b198c484df2
 ---
 
 # Summary
