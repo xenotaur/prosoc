@@ -24,7 +24,6 @@ from prosoc.nca.literate import errors
 from prosoc.nca.literate import utils
 from prosoc.prnc.scenarios import distill
 
-
 # -----------------------------------------------------------------------------
 # Constants
 # -----------------------------------------------------------------------------

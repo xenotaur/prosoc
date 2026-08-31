@@ -17,7 +17,6 @@ from prosoc.nca.auditor import validator
 from prosoc.nca.auditor import prompts
 from prosoc.nca.literate import compiler
 
-
 _SCHEMA_PATH = Path(__file__).parent / "schema.json"
 with _SCHEMA_PATH.open("r", encoding="utf-8") as f:
     AUDIT_REPORT_SCHEMA = json.load(f)

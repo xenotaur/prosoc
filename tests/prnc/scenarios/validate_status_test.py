@@ -6,7 +6,6 @@ from pathlib import Path
 
 from prosoc.prnc.scenarios import validate_status
 
-
 MD_DRAFTED = """\
 # Scenario: Example
 
