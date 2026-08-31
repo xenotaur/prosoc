@@ -13,14 +13,14 @@ IMPORTANT:
 - `runtime.py` assumes all data has already passed this gate.
 """
 
+import functools
 import json
 import pathlib
 
 import yaml
-from jsonschema import validate as jsonschema_validate
+import jsonschema
 
 from prosoc.prnc.charter import runtime
-
 
 # -----------------------------------------------------------------------------
 # Paths
@@ -34,6 +34,17 @@ DEFAULT_SCHEMA_JSON = CHARTER_DIR / "schema.json"
 # -----------------------------------------------------------------------------
 # Loader API
 # -----------------------------------------------------------------------------
+
+
+@functools.lru_cache(maxsize=None)
+def _get_validator(schema_path: pathlib.Path):
+    """
+    Optimization: Pre-compile and cache the jsonschema validator to avoid
+    recompiling the schema on every validation.
+    """
+    with schema_path.open("r", encoding="utf-8") as f:
+        schema = json.load(f)
+    return jsonschema.validators.validator_for(schema)(schema)
 
 
 def load_charter(
@@ -66,12 +77,9 @@ def load_charter(
     with charter_path.open("r", encoding="utf-8") as f:
         raw_charter = yaml.safe_load(f)
 
-    # Load JSON Schema
-    with schema_path.open("r", encoding="utf-8") as f:
-        schema = json.load(f)
-
     # Validate against schema (normative gate)
-    jsonschema_validate(instance=raw_charter, schema=schema)
+    validator = _get_validator(schema_path)
+    validator.validate(instance=raw_charter)
 
     # Instantiate runtime representation (ergonomic layer)
     return runtime.Charter(**raw_charter)

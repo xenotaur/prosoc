@@ -6,7 +6,6 @@ from pathlib import Path
 
 from prosoc.nca.utils.cards import validate_status
 
-
 MD = """\
 # Card: Example
 

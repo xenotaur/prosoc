@@ -9,7 +9,6 @@ from jsonschema import ValidationError as SchemaValidationError
 from prosoc.prnc.charter import loader
 from prosoc.prnc.charter.runtime import Charter
 
-
 VALID_CHARTER = {
     "principles": [
         {
