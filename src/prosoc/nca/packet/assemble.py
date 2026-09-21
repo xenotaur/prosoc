@@ -17,11 +17,12 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import functools
 import json
 import pathlib
 
+import jsonschema
 from jsonschema import ValidationError
-from jsonschema import validate as jsonschema_validate
 
 from . import gate as gate_mod
 from .errors import AssembleError
@@ -227,6 +228,14 @@ def assemble(
     return envelope
 
 
+@functools.lru_cache(maxsize=1)
+def _get_validator() -> jsonschema.protocols.Validator:
+    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+    validator_cls = jsonschema.validators.validator_for(schema)
+    validator_cls.check_schema(schema)
+    return validator_cls(schema)
+
+
 def validate_envelope(envelope: dict) -> None:
     """Validate an assembled envelope against ``packet.schema.json``.
 
@@ -234,10 +243,7 @@ def validate_envelope(envelope: dict) -> None:
         AssembleError: the envelope does not conform to the schema.
     """
     try:
-        jsonschema_validate(
-            instance=envelope,
-            schema=json.loads(SCHEMA_PATH.read_text(encoding="utf-8")),
-        )
+        _get_validator().validate(instance=envelope)
     except ValidationError as exc:
         raise AssembleError(
             f"assembled packet failed schema validation: {exc.message}"

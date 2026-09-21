@@ -1,0 +1,3 @@
+## 2024-05-19 - Avoid Top-Level jsonschema.validate in Hot Paths
+**Learning:** Calling `jsonschema.validate(instance, schema)` is unexpectedly slow in loops or repetitive hot paths (like parsing cards and configurations) because it dynamically builds a Validator class and compiles the schema every single time.
+**Action:** When validating against a static or rarely changing schema, use `jsonschema.validators.validator_for(schema)(schema)` to pre-compile the validator instance once, cache it using `@functools.lru_cache`, and call `validator.validate(instance)` to significantly improve performance.

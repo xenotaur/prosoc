@@ -11,14 +11,15 @@ validation gate (mirroring ``charter/loader.py``).
 
 from __future__ import annotations
 
+import functools
 import hashlib
 import json
 import pathlib
 from dataclasses import dataclass
 
+import jsonschema
 import yaml
 from jsonschema import ValidationError
-from jsonschema import validate as jsonschema_validate
 
 from prosoc.constitutions import distill as constitutions_distill
 from prosoc.prnc.charter import distill as charter_distill
@@ -80,6 +81,16 @@ FAMILIES: dict[str, PacketFamily] = {
 }
 
 
+@functools.lru_cache(maxsize=10)
+def _get_validator_for_schema(
+    schema_path: pathlib.Path,
+) -> jsonschema.protocols.Validator:
+    schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    validator_cls = jsonschema.validators.validator_for(schema)
+    validator_cls.check_schema(schema)
+    return validator_cls(schema)
+
+
 @dataclass(frozen=True)
 class LoadedCard:
     """A resolved, schema-valid card ready to embed in a packet.
@@ -130,10 +141,7 @@ def load_card(family: str, card_id: str) -> LoadedCard:
 
     # Single runtime validation gate.
     try:
-        jsonschema_validate(
-            instance=payload,
-            schema=json.loads(fam.schema_path.read_text(encoding="utf-8")),
-        )
+        _get_validator_for_schema(fam.schema_path).validate(instance=payload)
     except ValidationError as exc:
         raise ResolveError(
             f"{family}/{card_id}: schema validation failed: {exc.message}"
