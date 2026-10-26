@@ -134,8 +134,10 @@ Checked exactly against the current tree, no corrections needed:
   lines, not collapsed prose) and "such as:" (no instance of it renders as
   a collapsed list-intro anywhere in the current golden file). A
   regression test keyed to the literal string `\textbf{Includes:} -` would
-  miss the unbolded cases; key detection off "label ending in a colon
-  immediately followed by a hyphen-prefixed run-on" instead.
+  miss the unbolded cases, and a rule requiring a colon would in turn miss
+  the colonless `Geometric Factors`/`Operational Factors` cases just
+  above; key detection off "a bold or plain label (colon-terminated or
+  not) immediately followed by a hyphen-prefixed run-on" instead.
 
 ## Additional findings (not in the original handoff)
 

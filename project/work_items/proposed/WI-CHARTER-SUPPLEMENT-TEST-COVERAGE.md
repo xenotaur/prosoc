@@ -42,11 +42,16 @@ already exists — don't duplicate it.
 - Recommendation: No action.
 
 ## Scope
-- List-collapse regression test keyed on "label ending in colon + an
-  immediately-following hyphen-prefixed run-on", not a literal bolded
-  string, so it also catches the unbolded cases.
-- Heading-number-once test asserting generated LaTeX contains each charter
-  heading's number exactly once.
+- List-collapse regression test keyed on "a bold or plain label
+  (colon-terminated or not) immediately followed by a hyphen-prefixed
+  run-on", not a literal bolded string and not requiring a colon, so it
+  also catches the unbolded `include:`/`tensions include:` cases and the
+  colonless `Geometric Factors`/`Operational Factors` cases.
+- Heading-number test asserting generated LaTeX contains *no* authored
+  heading-number prefix (the Lua filter strips it before LaTeX emission,
+  so the `.tex` source itself never carries a number — only the Frontiers
+  class's automatic counter does, applied at compile time) and that the
+  compiled PDF text shows each heading's number exactly once.
 - YAML semantic round-trip test: extract fenced YAML from source, extract
   and normalize the corresponding rendered listing, parse both, compare
   structures.

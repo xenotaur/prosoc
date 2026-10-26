@@ -10,6 +10,7 @@ related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on:
   - WI-CHARTER-SUPPLEMENT-PDF-BUILD
+  - WI-CHARTER-SUPPLEMENT-GOLDEN-REGEN
 blocked_by: []
 expected_actions: [create_file, edit_file, create_pr]
 forbidden_actions: [force_push, delete_branch, merge_pr]
@@ -30,9 +31,12 @@ relevant changes.
 ## Problem / Context
 `.github/workflows/charter.yml` only runs charter distillation and a YAML
 diff check; its `paths:` trigger doesn't include `papers/**`, and nothing
-renders or compiles the supplement. This item depends on
-WI-CHARTER-SUPPLEMENT-PDF-BUILD existing, since there's nothing to invoke
-in CI otherwise.
+renders or compiles the supplement. This item depends on WI-CHARTER-SUPPLEMENT-PDF-BUILD existing, since
+there's nothing to invoke in CI otherwise, and on
+WI-CHARTER-SUPPLEMENT-GOLDEN-REGEN landing first: PDF-BUILD does not
+regenerate the already-stale golden file, so a workflow that enables the
+golden-diff check any earlier would fail immediately against known-stale
+golden content, not a new regression.
 
 ### Duplication search
 - In-repo: `.github/workflows/charter.yml` exists but doesn't cover this;
@@ -49,9 +53,11 @@ in CI otherwise.
   `src/prosoc/nca/utils/papers/render.py`, its tests, and relevant
   validation/build-environment files.
 - Install/check the pinned Pandoc version; run source validation; run
-  renderer tests; render the supplement; fail on a golden diff; compile
-  and inspect the PDF when licensed assets are available; upload the
-  generated PDF and diagnostics as workflow artifacts.
+  renderer tests; render the supplement; fail on a golden diff (this
+  check must not be enabled/enforced until WI-CHARTER-SUPPLEMENT-GOLDEN-REGEN
+  has landed a non-stale golden file); compile and inspect the PDF when
+  licensed assets are available; upload the generated PDF and diagnostics
+  as workflow artifacts.
 - Report clearly (not silently skip) when the PDF stage cannot run due to
   missing assets.
 

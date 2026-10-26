@@ -9,6 +9,8 @@ status: proposed
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on:
+  - WI-CHARTER-SUPPLEMENT-SOURCE-FIXES
+  - WI-CHARTER-LIFECYCLE-DISPLAY-FIX
   - WI-CHARTER-SUPPLEMENT-RENDERER-FIXES
   - WI-CHARTER-SUPPLEMENT-TEST-COVERAGE
   - WI-CHARTER-SUPPLEMENT-PDF-BUILD
@@ -78,7 +80,13 @@ human-reviewed diff, not a mechanical regeneration.
 - `lrh validate`
 
 ## Dependencies / Order
-Do not start before WI-CHARTER-SUPPLEMENT-RENDERER-FIXES,
+Do not start before WI-CHARTER-SUPPLEMENT-SOURCE-FIXES,
+WI-CHARTER-LIFECYCLE-DISPLAY-FIX, WI-CHARTER-SUPPLEMENT-RENDERER-FIXES,
 WI-CHARTER-SUPPLEMENT-TEST-COVERAGE, and WI-CHARTER-SUPPLEMENT-PDF-BUILD
 all land — regenerating against unfixed output would re-bake the defects
-into golden.
+into golden. SOURCE-FIXES and LIFECYCLE-DISPLAY-FIX both edit Markdown
+that's embedded directly in the golden output (the collapsed lists are
+fixed only by SOURCE-FIXES), so without them as explicit prerequisites
+the remaining three dependencies alone cannot guarantee the new
+list-collapse checks pass or prevent baking those defects back into
+golden.

@@ -136,5 +136,5 @@ See frontmatter `exit_criteria`.
 ## Open Questions
 
 - Whether the PDF build entry point is a new `render.py` flag or a
-  separate `scripts/build/paper-supplement` script — left to
+  separate `scripts/build-paper-supplement` script — left to
   `WI-CHARTER-SUPPLEMENT-PDF-BUILD`'s implementation.

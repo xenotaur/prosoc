@@ -18,7 +18,7 @@ acceptance:
 required_evidence: [manual_review, lrh_validate, test_output]
 artifacts_expected:
   - papers/01_charter/render.py
-  - scripts/build/paper-supplement
+  - scripts/build-paper-supplement
   - docs/paper-supplements.md
 ---
 
@@ -43,7 +43,7 @@ a documented `--listings`-spelling deprecation.
 - Recommendation: No action.
 
 ## Scope
-- Add `render.py --pdf`/`--check` (or a new `scripts/build/paper-supplement`
+- Add `render.py --pdf`/`--check` (or a new `scripts/build-paper-supplement`
   entrypoint) that validates sources, renders fragments/`rendered.tex`,
   runs the semantic/LaTeX checks from WI-CHARTER-SUPPLEMENT-TEST-COVERAGE,
   compiles the PDF with fail-fast `pdflatex` flags and outline fonts
@@ -55,7 +55,7 @@ a documented `--listings`-spelling deprecation.
   be supplied locally, and their licensing status.
 
 ## Required Changes
-1. `papers/01_charter/render.py` (or new `scripts/build/paper-supplement`).
+1. `papers/01_charter/render.py` (or new `scripts/build-paper-supplement`).
 2. `docs/paper-supplements.md` — document the new build/check command.
 
 ## Non-Goals

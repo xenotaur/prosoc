@@ -77,7 +77,10 @@ edits.
 7. `papers/01_charter/README.md:37` — correct the import path.
 
 ## Non-Goals
-- Does not touch any card's `state:` field or STATUS block.
+- Does not touch any card's lifecycle state — the `state:` field or the
+  `STATE:`/`AUDITED:`/`APPROVED:` provenance bullets. (This does not
+  prohibit the `frontal_approach/scenario.md:6` `SOURCE:` reword this item
+  requires, which is a different field in the same `## STATUS` block.)
 - Does not change renderer/template code (see WI-CHARTER-SUPPLEMENT-RENDERER-FIXES).
 - Does not regenerate the golden file (see WI-CHARTER-SUPPLEMENT-GOLDEN-REGEN).
 

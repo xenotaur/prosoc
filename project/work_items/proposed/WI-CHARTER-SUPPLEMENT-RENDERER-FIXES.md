@@ -13,7 +13,8 @@ blocked_by: []
 expected_actions: [create_file, edit_file, run_tests, create_pr]
 forbidden_actions: [force_push, delete_branch, merge_pr, modify_ci_pipeline]
 acceptance:
-  - "Generated LaTeX contains each charter heading's number exactly once"
+  - "Generated LaTeX contains no authored heading-number prefix (prefix-free numbered heading commands)"
+  - "Compiled PDF text shows each heading's number exactly once (the Frontiers class's automatic number)"
   - "Unicode dash/quote characters inside lstlisting blocks survive a real pdflatex+pdftotext round trip"
   - "lrh validate / scripts/test pass"
 required_evidence: [manual_review, lrh_validate, test_output]
@@ -46,8 +47,11 @@ those blocks. See `project/audits/2026-10-26_charter_supplement_pipeline_audit.m
 ## Scope
 - Add a small Pandoc Lua filter, scoped to the charter render path, that
   strips a leading authored `N. ` from heading text before LaTeX emission.
-- Add `literate=` Unicode mappings (en dash, em dash, non-breaking hyphen,
-  curly double quotes) to the `literatecard` style.
+- Add `literate=` Unicode mappings to the `literatecard` style for en
+  dash, em dash, non-breaking hyphen, curly double quotes, and the curly
+  apostrophe `’` (U+2019) — already present inside the fenced YAML at
+  `single_file_hallway/scenario.md:154` — and cover all of these in the
+  PDF round-trip checks.
 - Normalize `Context ID:`/`Applies To Tasks:` prose to code spans (coordinate
   with WI-CHARTER-SUPPLEMENT-SOURCE-FIXES if it already touches these lines).
 
@@ -63,7 +67,12 @@ those blocks. See `project/audits/2026-10-26_charter_supplement_pipeline_audit.m
 - Does not regenerate the golden file (see WI-CHARTER-SUPPLEMENT-GOLDEN-REGEN).
 
 ## Acceptance Criteria
-- Generated LaTeX for the charter contains each heading's number exactly once.
+- Generated LaTeX for the charter contains no authored heading-number
+  prefix — the Lua filter strips it before LaTeX emission, so the
+  `.tex` source is prefix-free; only the Frontiers class's automatic
+  counter (applied at compile time) numbers the heading.
+- The compiled PDF text shows each heading's number exactly once (the
+  class's automatic number, not a doubled authored-plus-automatic count).
 - Unicode dash/quote characters in `lstlisting` blocks survive a real
   `pdflatex` compile + `pdftotext` extraction (not just `.tex` inspection).
 - `lrh validate` / `scripts/test` pass.
