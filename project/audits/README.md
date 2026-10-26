@@ -27,3 +27,9 @@ looking for card audit findings, they live there, not here.
   `prosoc/scenarios/<name>/audit.md` findings were resolved by PR #21/#22's
   section renderer, and what gaps remain for a human to fill in, gathered
   in one place to speed up the follow-up editing pass.
+- [`2026-10-26_charter_supplement_pipeline_audit.md`](2026-10-26_charter_supplement_pipeline_audit.md):
+  verification of an external handoff's 13 claimed defects in the
+  `papers/01_charter` Frontiers supplementary-material pipeline, against
+  the actual repo — confirms most claims, corrects the lifecycle-state
+  claim (the charter's `APPROVED` is legitimately earned, not stale), and
+  folds in additional findings from a second-opinion pass.
