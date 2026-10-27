@@ -25,7 +25,7 @@ The charter's lifecycle state is authored in the embedded YAML below (the
 authoritative source), projected into the **STATE** bullet above, and enforced
 by `scripts/validate/status`. It is one of `DRAFTED`, `EDITED`, `AUDITED`,
 `APPROVED`, `VALIDATED`, `DEPRECATED`, or `RETIRED` (see
-`prosoc/scenarios/workflow.md`). The state applies to the charter document as a
+`src/prosoc/prnc/scenarios/workflow.md`). The state applies to the charter document as a
 whole, not to individual principles.
 
 ```yaml

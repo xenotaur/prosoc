@@ -15,11 +15,11 @@
 
 > **Required**
 
-- **Context ID:** service.routine_delivery
+- **Context ID:** `service.routine_delivery`
 - **Context Name:** Routine Service Delivery
 - **Context Class:** core
 - **Primary Role of Robot:** service provider
-- **Applies To Tasks:** deliver.object
+- **Applies To Tasks:** `deliver.object`
 
 ---
 
@@ -40,6 +40,7 @@ This context is normatively distinct from baseline public navigation because the
 This context introduces a task-driven reweighting of prosocial navigation principles without invoking urgency or authority.
 
 Key normative expectations include:
+
 - purposeful, goal-directed motion in service of delivery,
 - continued deference to human comfort and safety,
 - tolerance for minor social disruption when clearly attributable to service execution.
@@ -63,10 +64,12 @@ Failures in this context are salient when the robot either behaves as if it has 
 ### Environmental Context
 
 **Geometric Factors**
+
 - Often includes constrained spaces such as hallways, storage areas, or offices.
 - Moderate pedestrian density is typical.
 
 **Operational Factors**
+
 - Environment supports routine service operations but is not dedicated exclusively to them.
 - The robot is not granted formal right-of-way.
 
@@ -92,6 +95,7 @@ In this context:
 - **P9 (Prosocial Behavior)** is relevant insofar as delivery serves human needs.
 
 Common tensions include:
+
 - efficiency versus politeness,
 - direct delivery routes versus human comfort,
 - service effectiveness versus willingness to yield.
@@ -103,10 +107,12 @@ Common tensions include:
 > **Required**
 
 **Includes:**
+
 - Non-urgent delivery of packages, mail, tools, or supplies.
 - Service robots operating in offices, hospitals, or campuses under routine conditions.
 
 **Excludes:**
+
 - Emergency or high-urgency delivery scenarios.
 - Guidance or escort roles.
 - Situations where the robot is granted explicit priority over humans.

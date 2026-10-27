@@ -37,11 +37,13 @@ This task serves as the baseline intent underlying most social navigation scenar
 > **Required**
 
 **Includes:**
+
 - Selecting and executing motion to progress toward a destination.
 - Temporarily slowing, stopping, or rerouting in service of reaching the goal.
 - Resuming motion toward the goal after interruptions or delays.
 
 **Excludes:**
+
 - Passing, overtaking, following, or leading specific agents.
 - Yielding right-of-way as a primary objective.
 - Interpreting gestures, social signals, or cultural norms.
@@ -58,6 +60,7 @@ These excluded behaviors may arise during execution but are governed by scenario
 This task directly implicates **P0 (Goal Achievement)**, as successful completion depends on reaching the intended destination.
 
 Tension commonly arises between P0 and social or ethical principles such as:
+
 - **P1 (Safety)**, when progress toward the goal conflicts with collision avoidance,
 - **P2 (Comfort)**, when efficient motion creates discomfort for nearby humans,
 - **P3 (Legibility)**, when direct trajectories are socially ambiguous.

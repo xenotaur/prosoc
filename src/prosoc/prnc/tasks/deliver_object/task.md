@@ -37,11 +37,13 @@ Success in this task is defined abstractly as the object reaching its intended d
 > **Required**
 
 **Includes:**
+
 - Navigating in service of transporting an object toward a destination.
 - Temporarily pausing, stopping, or rerouting to preserve delivery success.
 - Coordinating navigation across multiple phases of delivery (e.g., approach, transit, arrival).
 
 **Excludes:**
+
 - Object manipulation details such as grasping or release mechanics.
 - Social protocols for requesting, accepting, or refusing delivery.
 - Determining whether delivery is appropriate or authorized.
@@ -59,6 +61,7 @@ These excluded aspects are governed by scenarios, contexts, and charter principl
 This task directly implicates **P0 (Goal Achievement)**, as success depends on the object reaching its intended destination.
 
 It frequently interacts with:
+
 - **P1 (Safety)**, when transporting objects near humans or obstacles,
 - **P2 (Comfort)**, when delivery motion intrudes on personal space,
 - **P3 (Legibility)**, when the robot’s intent to deliver must be inferred,

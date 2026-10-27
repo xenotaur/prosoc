@@ -3,9 +3,10 @@
 ## Status
 
 - **STATE:** APPROVED
-- **SOURCE:** Prompt to ChatGPT 5.2
+- **SOURCE:** Original scenario concept, LLM-assisted drafting (ChatGPT 5.2); a common pedestrian-interaction benchmark pattern, not derived from a specific external citation
 - **DRAFTED:** ChatGPT 5.2, 2026-01-02
 - **EDITED:** render_sections.py, 2026-07-19
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-SOURCE-FIXES), 2026-10-27 — reword the SOURCE entry for publication (was an internal-tooling attribution string, "Prompt to ChatGPT 5.2")
 
 ## Scenario Card Summary
 
@@ -142,7 +143,7 @@ evaluation_notes: >
 
   Related Scenarios note: P&G Table 3 lists "Ped. Obstruct" as this
   scenario's related entry, which has no implemented scenario directory
-  under prosoc/scenarios/. `related_scenarios` instead references
+  under src/prosoc/prnc/scenarios/. `related_scenarios` instead references
   blind_corner, movable_obstruction, and single_file_hallway, which this
   corpus's own scenario set explicitly treats as a progressively
   constrained variant series of this scenario. This is expected per the

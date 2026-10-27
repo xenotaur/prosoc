@@ -15,11 +15,11 @@
 
 > **Required**
 
-- **Context ID:** emergency.high_urgency
+- **Context ID:** `emergency.high_urgency`
 - **Context Name:** Emergency High-Urgency Operation
 - **Context Class:** core
 - **Primary Role of Robot:** emergency responder
-- **Applies To Tasks:** "*"
+- **Applies To Tasks:** `*`
 
 ---
 
@@ -40,6 +40,7 @@ This context is normatively distinct because urgency fundamentally alters how tr
 This context introduces urgency as a dominant normative factor that can override everyday social navigation expectations.
 
 Key normative expectations include:
+
 - rapid and decisive motion toward task completion,
 - reduced emphasis on comfort and deference,
 - strong prioritization of task success when safety can be maintained.
@@ -63,10 +64,12 @@ Failures in this context are especially salient when excessive caution undermine
 ### Environmental Context
 
 **Geometric Factors**
+
 - Often crowded, constrained, or chaotic spaces.
 - Reduced predictability due to human motion and obstacles.
 
 **Operational Factors**
+
 - Environment is temporarily repurposed for emergency response.
 - Emergency activity implicitly grants priority, though not formal right-of-way in all settings.
 
@@ -92,6 +95,7 @@ In this context:
 - **P9 (Prosocial Behavior)** is interpreted as prioritizing harm prevention over everyday politeness.
 
 Common tensions include:
+
 - speed versus safety,
 - assertiveness versus predictability,
 - urgency versus perceived rudeness.
@@ -103,11 +107,13 @@ Common tensions include:
 > **Required**
 
 **Includes:**
+
 - Emergency equipment transport (e.g., crash carts).
 - Time-critical medical or safety-related navigation.
 - Situations where delay materially increases risk.
 
 **Excludes:**
+
 - Routine service delivery without urgency.
 - Situations lacking clear time-critical stakes.
 - Contexts where authority or priority is not socially recognized.
