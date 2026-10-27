@@ -1,7 +1,7 @@
 # Prosocial Robot Navigation Charter
 
 **Version:** 0.1  
-**Status:** Draft (Normative)  
+**Status:** Approved (Normative)  
 **Scope:** Mobile robot navigation in human-populated environments  
 **Derived from:**  
 - *Principles and Guidelines for Evaluating Social Robot Navigation Algorithms* (Francis et al.)  
@@ -19,7 +19,9 @@
 - **EDITED:** Claude, 2026-08-06 — add "### Explanation" subsections to P4–P8, grounded in and citing Francis et al. (2025); fix the References entry's journal/venue for that paper
 - **EDITED:** Claude, 2026-08-06 — fold P1/P4/P5's YAML-only `description` content (safe-distance, offering-help, interrupting/blocking) into their prose Explanations
 - **EDITED:** Claude, 2026-08-06 — remove P9's cross-family reference to the unstable `movable_obstruction` scenario, replaced with a self-contained example; expand Section 3's "P8 Context" to its full name "Contextual Appropriateness"
+- **APPROVED:** Claude, 2026-08-07 (PR #79) — re-audited and promoted EDITED → AUDITED → APPROVED, closing out the 2026-08-05 revert
 - **EDITED:** Claude (WI-CHARTER-FRONTIERS-SYNC), 2026-08-19 — implement PROP-CHARTER-FRONTIERS-SYNC's reconciliation decisions: broaden P1's Safety scope (other robots, self-damage); restore P5's "where feasible" hedge; adopt merged P2/P3/P4/P7 wording; apply the MUST-for-P0-and-P1/SHOULD-elsewhere modal convention across all ten principles; inline P8's six-context taxonomy; trim P9's task/context/goals qualifier (Section 2's definition retains it); reverted from APPROVED pending re-audit
+- **APPROVED:** Claude, 2026-08-19 (PR #97) — re-audited and promoted EDITED → AUDITED → APPROVED, closing out the 2026-08-19 revert
 
 The charter's lifecycle state is authored in the embedded YAML below (the
 authoritative source), projected into the **STATE** bullet above, and enforced
