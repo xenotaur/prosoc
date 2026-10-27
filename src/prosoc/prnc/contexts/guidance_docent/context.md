@@ -15,11 +15,11 @@
 
 > **Required**
 
-- **Context ID:** guidance.docent
+- **Context ID:** `guidance.docent`
 - **Context Name:** Guidance and Docent Operation
 - **Context Class:** core
 - **Primary Role of Robot:** guide / escort
-- **Applies To Tasks:** navigate.lead_agent
+- **Applies To Tasks:** `navigate.lead_agent`
 
 ---
 
@@ -40,6 +40,7 @@ This context is normatively distinct because success depends on sustained interp
 This context foregrounds legibility, predictability, and interpersonal awareness as primary normative concerns.
 
 Key normative expectations include:
+
 - maintaining a pace suitable for followers,
 - ensuring the robot remains observable and understandable,
 - prioritizing group cohesion over shortest paths.
@@ -63,10 +64,12 @@ Failures in this context are salient when humans become confused, left behind, o
 ### Environmental Context
 
 **Geometric Factors**
+
 - Semi-structured spaces with points of interest, intersections, and stopping areas.
 - Variable visibility and occasional congestion.
 
 **Operational Factors**
+
 - Environment supports lingering, stopping, and rerouting for explanation or coordination.
 - Navigation efficiency is secondary to clarity and cohesion.
 
@@ -92,6 +95,7 @@ In this context:
 - **P9 (Prosocial Behavior)** is expressed through attentiveness and accommodation.
 
 Common tensions include:
+
 - pace versus group cohesion,
 - efficiency versus clarity,
 - autonomy versus responsiveness.
@@ -103,10 +107,12 @@ Common tensions include:
 > **Required**
 
 **Includes:**
+
 - Guided tours and escorting individuals or groups.
 - Wayfinding assistance with sustained following.
 
 **Excludes:**
+
 - Routine navigation without followers.
 - Emergency or high-urgency response.
 - Pure delivery tasks without guidance intent.
