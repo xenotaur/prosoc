@@ -2,14 +2,14 @@
 execution_id: 2026_10_26_08_18_09_WI_CHARTER_SUPPLEMENT_SOURCE_FIXES
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_SOURCE_FIXES)[2026-10-26T08:17:36+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
-pr:
-commit:
+pr: https://github.com/xenotaur/prosoc/pull/111
+commit: c2004309242cc73a3caffcccc3bc7eada5beffd0
 created_at: 2026-10-26T08:18:09+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CHARTER-SUPPLEMENT-SOURCE-FIXES.md
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary

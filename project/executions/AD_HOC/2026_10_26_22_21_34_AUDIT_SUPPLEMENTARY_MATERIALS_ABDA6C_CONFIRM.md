@@ -2,10 +2,10 @@
 execution_id: 2026_10_26_22_21_34_AUDIT_SUPPLEMENTARY_MATERIALS_ABDA6C_CONFIRM
 prompt_id: PROMPT(AD_HOC:AUDIT_SUPPLEMENTARY_MATERIALS_ABDA6C_CONFIRM)[2026-10-26T21:53:47+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/111
-commit:
+commit: c2004309242cc73a3caffcccc3bc7eada5beffd0
 created_at: 2026-10-26T22:21:34+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/111 (confirm-fixes pass)
