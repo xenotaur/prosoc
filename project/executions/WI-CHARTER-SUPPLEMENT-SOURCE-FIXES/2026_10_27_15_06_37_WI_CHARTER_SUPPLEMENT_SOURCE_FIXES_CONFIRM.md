@@ -2,10 +2,10 @@
 execution_id: 2026_10_27_15_06_37_WI_CHARTER_SUPPLEMENT_SOURCE_FIXES_CONFIRM
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-SOURCE-FIXES:WI_CHARTER_SUPPLEMENT_SOURCE_FIXES_CONFIRM)[2026-10-27T06:43:16+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-SOURCE-FIXES
-status: in_progress
+status: landed
 rerun_of: 2026_10_27_06_40_09_WI_CHARTER_SUPPLEMENT_SOURCE_FIXES
 pr: https://github.com/xenotaur/prosoc/pull/112
-commit: 36599e2
+commit: 906890aa1be2626ae2e886047e63ff09f21802b1
 created_at: 2026-10-27T15:06:37+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/112 (confirm-fixes pass)

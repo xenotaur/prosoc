@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #112 (commit 906890aa1be2626ae2e886047e63ff09f21802b1)."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-SOURCE-FIXES
 title: "Fix text-level defects in the charter supplement's 9 source cards"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on: []

@@ -2,10 +2,10 @@
 execution_id: 2026_10_27_15_25_12_WI_CHARTER_SUPPLEMENT_SOURCE_FIXES_SELFREVIEW
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-SOURCE-FIXES:WI_CHARTER_SUPPLEMENT_SOURCE_FIXES_SELFREVIEW)[2026-10-27T15:25:02+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-SOURCE-FIXES
-status: in_progress
+status: landed
 rerun_of: 2026_10_27_06_40_09_WI_CHARTER_SUPPLEMENT_SOURCE_FIXES
 pr: https://github.com/xenotaur/prosoc/pull/112
-commit:
+commit: 906890aa1be2626ae2e886047e63ff09f21802b1
 created_at: 2026-10-27T15:25:12+00:00
 agent: claude_app
 instruction_source: 'PR-mode substitute self-review of PR #112 at commit ebce865 (REVIEW-LANDED for the confirm-fixes amendment)'
