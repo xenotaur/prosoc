@@ -16,6 +16,14 @@ representations agree. It is shared across card families (scenarios, tasks, …)
 CLI wrapper that applies these checks per family, and its ``--fix`` mode
 projects the authoritative YAML ``state`` back onto the Markdown ``STATE`` line.
 
+Two additional, independent checks live here too: :func:`check_audit_evidence`
+(does an ``AUDITED``/``APPROVED`` card have a sibling ``audit.md`` with a
+``ready``/``ready_with_fixes`` verdict — the real signal, not the optional
+``AUDITED:`` provenance bullet) and :func:`check_charter_status_line`
+(charter-only: does the charter's free-text ``**Status:**`` header agree with
+its ``STATE``). Neither is addressed by ``--fix``, which only ever projects
+the YAML ``state`` onto the Markdown ``STATE`` line.
+
 The canonical state vocabulary is defined here and mirrored by each family's
 ``schema.json`` and by ``src/prosoc/prnc/scenarios/workflow.md`` (the lifecycle
 definition of record).
@@ -153,3 +161,107 @@ def check_source(
     markdown_state = parse_markdown_state(md_path.read_text(encoding="utf-8"))
     yaml_state = read_yaml_state(yml_path, root_key=root_key)
     return check_consistency(markdown_state=markdown_state, yaml_state=yaml_state)
+
+
+# -----------------------------------------------------------------------------
+# Audit-evidence check: does an AUDITED/APPROVED card actually have a sibling
+# ``audit.md`` with an acceptable verdict? (used by
+# prosoc.nca.utils.cards.validate_status)
+# -----------------------------------------------------------------------------
+
+# Frontmatter-only verdicts that constitute acceptable audit evidence for an
+# AUDITED/APPROVED card. "blocking" or any other verdict is not acceptable.
+_ACCEPTABLE_AUDIT_VERDICTS = ("ready", "ready_with_fixes")
+
+# ``audit.md``'s leading YAML frontmatter block (``---`` ... ``---``).
+_FRONTMATTER_RE = re.compile(r"\A---\n(?P<yaml>.*?)\n---", re.DOTALL)
+
+
+def read_audit_verdict(audit_path: pathlib.Path) -> str | None:
+    """Return the ``verdict:`` value from an ``audit.md``'s frontmatter.
+
+    Returns ``None`` if the file has no parseable frontmatter or no
+    ``verdict`` key — the caller treats that the same as a missing file.
+    """
+    match = _FRONTMATTER_RE.match(audit_path.read_text(encoding="utf-8"))
+    if match is None:
+        return None
+    data = yaml.safe_load(match.group("yaml"))
+    if not isinstance(data, dict) or "verdict" not in data:
+        return None
+    return str(data["verdict"])
+
+
+def check_audit_evidence(md_path: pathlib.Path, state: str) -> ConsistencyResult:
+    """Check that a card at ``AUDITED``/``APPROVED`` has real audit evidence.
+
+    The optional ``- **AUDITED:**`` provenance bullet in a card's
+    ``## Status`` block is *not* evidence (``workflow.md`` makes it an
+    optional addition to the history, not a required field) — the real
+    signal is a sibling ``audit.md`` (next to ``md_path``) with a verdict
+    of ``ready`` or ``ready_with_fixes``. Cards below ``AUDITED`` have
+    nothing to check here.
+    """
+    if state not in ("AUDITED", "APPROVED"):
+        return ConsistencyResult(True, f"audit evidence not required at {state}")
+    audit_path = md_path.parent / "audit.md"
+    if not audit_path.exists():
+        return ConsistencyResult(
+            False, f"{state} card has no sibling audit.md at {audit_path}"
+        )
+    verdict = read_audit_verdict(audit_path)
+    if verdict not in _ACCEPTABLE_AUDIT_VERDICTS:
+        return ConsistencyResult(
+            False,
+            f"{audit_path} has no acceptable verdict for {state} "
+            f"(found {verdict!r}, need one of {_ACCEPTABLE_AUDIT_VERDICTS})",
+        )
+    return ConsistencyResult(
+        True, f"audit.md verdict {verdict!r} acceptable for {state}"
+    )
+
+
+# -----------------------------------------------------------------------------
+# Charter-only check: does the free-text ``**Status:**`` header line (a
+# separate field from the ``## Status`` block's ``**STATE:**`` bullet) agree
+# with the authoritative state? Only the charter has this redundant field.
+# -----------------------------------------------------------------------------
+
+_CHARTER_STATUS_LINE_RE = re.compile(
+    r"^\*\*Status:\*\*[^\S\n]*(?P<value>[^\n]+?)[^\S\n]*$", re.MULTILINE
+)
+
+# The free-text header's human-friendly label sometimes differs from the
+# STATE token itself — observed convention: "Draft (Normative)" for
+# DRAFTED, not "Drafted". Every other state's label is just its lowercased
+# token (e.g. "approved" for APPROVED), which is what's actually exercised
+# in the real corpus today.
+_STATUS_LINE_LABELS: dict[str, str] = {"DRAFTED": "draft"}
+
+
+def parse_charter_status_line(md_text: str) -> str | None:
+    """Return the free-text value of the charter's top-level ``**Status:**``
+    line, or ``None`` if the line isn't present (nothing to check)."""
+    match = _CHARTER_STATUS_LINE_RE.search(md_text)
+    return match.group("value") if match is not None else None
+
+
+def check_charter_status_line(md_text: str, state: str) -> ConsistencyResult:
+    """Check the charter's free-text ``**Status:**`` line against ``state``.
+
+    Case-insensitive substring match against the state's human-friendly
+    label (see :data:`_STATUS_LINE_LABELS`) — the field is free text, not a
+    controlled vocabulary, so this isn't a vocabulary-exact comparison. A
+    card with no such line (any non-charter family) has nothing to check.
+    """
+    value = parse_charter_status_line(md_text)
+    if value is None:
+        return ConsistencyResult(True, "no free-text Status: line present")
+    label = _STATUS_LINE_LABELS.get(state, state.lower())
+    if label not in value.lower():
+        return ConsistencyResult(
+            False, f"free-text Status: {value!r} does not reflect STATE {state!r}"
+        )
+    return ConsistencyResult(
+        True, f"free-text Status: {value!r} matches STATE {state!r}"
+    )

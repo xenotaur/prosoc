@@ -159,6 +159,121 @@ class FileHelpersTest(unittest.TestCase):
             self.assertFalse(status.check_source(md, yml).ok)
 
 
+AUDIT_MD = """\
+---
+family: scenarios
+card: example
+verdict: {verdict}
+blocking: 0
+should_fix: 0
+suggestion: 0
+audited: 2026-01-01
+---
+
+# Audit: Example
+"""
+
+
+class ReadAuditVerdictTest(unittest.TestCase):
+    def test_reads_verdict(self):
+        with tempfile.TemporaryDirectory() as d:
+            audit = Path(d) / "audit.md"
+            audit.write_text(AUDIT_MD.format(verdict="ready"), encoding="utf-8")
+            self.assertEqual(status.read_audit_verdict(audit), "ready")
+
+    def test_missing_verdict_key_returns_none(self):
+        with tempfile.TemporaryDirectory() as d:
+            audit = Path(d) / "audit.md"
+            audit.write_text("---\nfamily: scenarios\n---\n", encoding="utf-8")
+            self.assertIsNone(status.read_audit_verdict(audit))
+
+    def test_no_frontmatter_returns_none(self):
+        with tempfile.TemporaryDirectory() as d:
+            audit = Path(d) / "audit.md"
+            audit.write_text(
+                "# Audit: Example\n\nNo frontmatter here.\n", encoding="utf-8"
+            )
+            self.assertIsNone(status.read_audit_verdict(audit))
+
+
+class CheckAuditEvidenceTest(unittest.TestCase):
+    def test_below_audited_requires_nothing(self):
+        with tempfile.TemporaryDirectory() as d:
+            md = Path(d) / "card.md"
+            md.write_text("placeholder", encoding="utf-8")
+            for state in ("DRAFTED", "EDITED"):
+                self.assertTrue(status.check_audit_evidence(md, state).ok)
+
+    def test_approved_with_ready_audit_passes(self):
+        with tempfile.TemporaryDirectory() as d:
+            md = Path(d) / "card.md"
+            md.write_text("placeholder", encoding="utf-8")
+            (Path(d) / "audit.md").write_text(
+                AUDIT_MD.format(verdict="ready"), encoding="utf-8"
+            )
+            self.assertTrue(status.check_audit_evidence(md, "APPROVED").ok)
+
+    def test_audited_with_ready_with_fixes_passes(self):
+        with tempfile.TemporaryDirectory() as d:
+            md = Path(d) / "card.md"
+            md.write_text("placeholder", encoding="utf-8")
+            (Path(d) / "audit.md").write_text(
+                AUDIT_MD.format(verdict="ready_with_fixes"), encoding="utf-8"
+            )
+            self.assertTrue(status.check_audit_evidence(md, "AUDITED").ok)
+
+    def test_approved_missing_audit_md_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            md = Path(d) / "card.md"
+            md.write_text("placeholder", encoding="utf-8")
+            result = status.check_audit_evidence(md, "APPROVED")
+            self.assertFalse(result.ok)
+            self.assertIn("no sibling audit.md", result.detail)
+
+    def test_approved_with_blocking_verdict_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            md = Path(d) / "card.md"
+            md.write_text("placeholder", encoding="utf-8")
+            (Path(d) / "audit.md").write_text(
+                AUDIT_MD.format(verdict="blocking"), encoding="utf-8"
+            )
+            result = status.check_audit_evidence(md, "APPROVED")
+            self.assertFalse(result.ok)
+            self.assertIn("no acceptable verdict", result.detail)
+
+
+CHARTER_HEADER = (
+    "# Charter\n\n**Version:** 0.1  \n**Status:** {status}  \n**Scope:** x  \n"
+)
+
+
+class CheckCharterStatusLineTest(unittest.TestCase):
+    def test_parses_status_line(self):
+        text = CHARTER_HEADER.format(status="Approved (Normative)")
+        self.assertEqual(status.parse_charter_status_line(text), "Approved (Normative)")
+
+    def test_no_status_line_returns_none(self):
+        self.assertIsNone(status.parse_charter_status_line("# Charter\n\nNo field.\n"))
+
+    def test_matching_status_passes(self):
+        text = CHARTER_HEADER.format(status="Approved (Normative)")
+        self.assertTrue(status.check_charter_status_line(text, "APPROVED").ok)
+
+    def test_stale_status_fails(self):
+        text = CHARTER_HEADER.format(status="Draft (Normative)")
+        result = status.check_charter_status_line(text, "APPROVED")
+        self.assertFalse(result.ok)
+        self.assertIn("does not reflect STATE", result.detail)
+
+    def test_absent_status_line_passes_trivially(self):
+        # A non-charter card has no such line; nothing to check.
+        self.assertTrue(
+            status.check_charter_status_line(
+                "# Scenario: X\n\nNo field.\n", "APPROVED"
+            ).ok
+        )
+
+
 class ScenariosShimTest(unittest.TestCase):
     """The scenarios re-export shim exposes the same objects as the shared module."""
 

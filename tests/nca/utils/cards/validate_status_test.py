@@ -332,6 +332,135 @@ class ManifestsFamilyTest(unittest.TestCase):
             )
 
 
+def _write_audit(root: Path, name: str, verdict: str) -> None:
+    (root / name / "audit.md").write_text(
+        f"---\nfamily: scenarios\ncard: {name}\nverdict: {verdict}\n---\n",
+        encoding="utf-8",
+    )
+
+
+class AuditEvidenceCheckTest(unittest.TestCase):
+    # Integration coverage for status.check_audit_evidence, wired through
+    # the family loop (_check_extras) rather than called directly.
+
+    def test_approved_with_ready_audit_passes(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "good", "APPROVED", "APPROVED", "scenario")
+            _write_audit(root, "good", "ready")
+            self.assertEqual(
+                validate_status.main(["--family", "scenarios", "--root", str(root)]), 0
+            )
+
+    def test_approved_missing_audit_md_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "bad", "APPROVED", "APPROVED", "scenario")
+            # No audit.md written — STATE/YAML agree, but there's no evidence.
+            self.assertEqual(
+                validate_status.main(["--family", "scenarios", "--root", str(root)]), 1
+            )
+
+    def test_approved_with_unacceptable_verdict_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "bad", "APPROVED", "APPROVED", "scenario")
+            _write_audit(root, "bad", "blocking")
+            self.assertEqual(
+                validate_status.main(["--family", "scenarios", "--root", str(root)]), 1
+            )
+
+    def test_drafted_requires_no_audit_md(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "good", "DRAFTED", "DRAFTED", "scenario")
+            self.assertEqual(
+                validate_status.main(["--family", "scenarios", "--root", str(root)]), 0
+            )
+
+    def test_fix_flag_does_not_suppress_an_existing_audit_gap(self):
+        # The audit-evidence check is evaluated against the Markdown's
+        # current on-disk STATE, independently of --fix (which only ever
+        # projects the YAML state onto an *inconsistent* STATE line, never
+        # vets evidence). A card already displaying APPROVED with no
+        # audit.md must fail whether or not --fix is passed.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "bad", "APPROVED", "APPROVED", "scenario")
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "scenarios", "--root", str(root), "--fix"]
+                ),
+                1,
+            )
+
+    def test_fix_projecting_into_approved_is_evaluated_pre_fix(self):
+        # Documents the chosen, deliberate scope boundary: the audit-evidence
+        # check runs against the STATE as it stands on disk *before* this
+        # invocation's --fix rewrite, not the post-fix projected value. A
+        # card moving from a pre-AUDITED state to APPROVED via --fix is
+        # therefore not held to the audit-evidence bar in the same run that
+        # performs the projection (mirrors the pre-existing
+        # test_fix_projects_then_passes contract in ScenariosFamilyTest,
+        # which this check must not break).
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "bad", "DRAFTED", "APPROVED", "scenario")
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "scenarios", "--root", str(root), "--fix"]
+                ),
+                0,
+            )
+
+
+class CharterStatusLineCheckTest(unittest.TestCase):
+    # Integration coverage for status.check_charter_status_line, wired
+    # through the family loop for the charter family specifically.
+
+    def _charter_card_with_header(
+        self, root: Path, header_status: str, state: str
+    ) -> None:
+        md = (
+            f"# Charter\n\n**Version:** 0.1  \n**Status:** {header_status}  \n"
+            f"**Scope:** x  \n\n## Status\n\n- **STATE:** {state}\n\n---\n"
+        )
+        (root / "charter.md").write_text(md, encoding="utf-8")
+        (root / "charter.yml").write_text(
+            f"state: {state}\nprinciples:\n- id: P0\n  name: Goal\n",
+            encoding="utf-8",
+        )
+
+    def test_matching_header_passes(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            self._charter_card_with_header(root, "Draft (Normative)", "DRAFTED")
+            self.assertEqual(
+                validate_status.main(["--family", "charter", "--root", str(root)]), 0
+            )
+
+    def test_stale_header_fails_even_when_state_consistent(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            # STATE/YAML agree (both DRAFTED), but the free-text header
+            # still claims APPROVED -- the STATE-vs-YAML check alone would
+            # pass this; the new check must still catch it.
+            self._charter_card_with_header(root, "Approved (Normative)", "DRAFTED")
+            self.assertEqual(
+                validate_status.main(["--family", "charter", "--root", str(root)]), 1
+            )
+
+    def test_non_charter_family_unaffected_by_header_check(self):
+        # A scenario card has no free-text Status: header at all; confirm
+        # the charter-only check doesn't spuriously fire for other families.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "good", "DRAFTED", "DRAFTED", "scenario")
+            self.assertEqual(
+                validate_status.main(["--family", "scenarios", "--root", str(root)]), 0
+            )
+
+
 class GuardsAndDefaultsTest(unittest.TestCase):
     def test_root_requires_family(self):
         with tempfile.TemporaryDirectory() as d:

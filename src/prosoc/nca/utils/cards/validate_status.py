@@ -1,8 +1,12 @@
 """CLI: validate card lifecycle-state consistency across families.
 
 Checks that each card's Markdown ``## Status`` / ``## STATUS`` STATE line agrees
-with the machine-readable ``state`` field in its distilled ``*.yml``. Exits
-non-zero if any card is inconsistent or missing a state.
+with the machine-readable ``state`` field in its distilled ``*.yml``. Also
+checks (see ``prosoc.nca.utils.cards.status``) that an ``AUDITED``/``APPROVED``
+card has real audit evidence (a sibling ``audit.md`` with an acceptable
+verdict, not the optional ``AUDITED:`` provenance bullet) and, for the
+charter specifically, that its free-text ``**Status:**`` header agrees with
+its ``STATE``. Exits non-zero if any card fails any of these checks.
 
 Family-aware: with no ``--family`` it validates every registered family
 (scenarios, tasks, …) over their default repo roots. ``--family NAME`` restricts
@@ -111,6 +115,38 @@ def _label(source, layout: str, family: Family) -> str:
     return source.md_path.parent.name
 
 
+def _check_extras(family: Family, source) -> list[str]:
+    """Run the audit-evidence check (all families) and the charter-only
+    Status:-line check. Returns a failure-detail string per failing check
+    (empty if both pass).
+
+    Evaluated against the Markdown's *current* STATE line (as it stands on
+    disk when this runs, before any ``--fix`` rewrite in this same
+    invocation) — these are display-accuracy checks, not an extension of
+    the STATE-vs-YAML consistency check above, and ``--fix`` never
+    addresses them (it only ever projects the YAML state onto the Markdown
+    STATE line).
+    """
+    try:
+        md_text = source.md_path.read_text(encoding="utf-8")
+        markdown_state = status.parse_markdown_state(md_text)
+    except status.StatusStateError:
+        # No STATE line at all; the primary check already reports this.
+        return []
+
+    problems = []
+    audit_result = status.check_audit_evidence(source.md_path, markdown_state)
+    if not audit_result.ok:
+        problems.append(audit_result.detail)
+
+    if family.name == "charter":
+        charter_result = status.check_charter_status_line(md_text, markdown_state)
+        if not charter_result.ok:
+            problems.append(charter_result.detail)
+
+    return problems
+
+
 def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bool):
     """Return (checked_count, failures) after reporting each card in the family.
 
@@ -152,11 +188,13 @@ def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bo
             failures += 1
             continue
 
-        if result.ok:
+        extra_problems = _check_extras(family, source)
+
+        if result.ok and not extra_problems:
             print(f"ok   {name}: {result.detail}")
             continue
 
-        if fix:
+        if not result.ok and fix:
             yaml_state = status.read_yaml_state(
                 source.yml_path, root_key=family.yaml_root_key
             )
@@ -176,8 +214,15 @@ def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bo
             )
             utils.atomic_write(path=source.md_path, content=fixed)
             print(f"fix  {name}: projected Markdown STATE -> {yaml_state}")
+            # --fix only ever projects the STATE line; it never addresses an
+            # audit-evidence or charter Status:-line gap, so those still fail.
+            if extra_problems:
+                print(f"FAIL {name}: {'; '.join(extra_problems)}", file=sys.stderr)
+                failures += 1
         else:
-            print(f"FAIL {name}: {result.detail}", file=sys.stderr)
+            details = [] if result.ok else [result.detail]
+            details.extend(extra_problems)
+            print(f"FAIL {name}: {'; '.join(details)}", file=sys.stderr)
             failures += 1
 
     return len(sources), failures
