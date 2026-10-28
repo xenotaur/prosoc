@@ -2,10 +2,10 @@
 execution_id: 2026_10_27_23_49_20_WI_CHARTER_LIFECYCLE_DISPLAY_FIX
 prompt_id: PROMPT(WI-CHARTER-LIFECYCLE-DISPLAY-FIX:WI_CHARTER_LIFECYCLE_DISPLAY_FIX)[2026-10-27T23:37:54+00:00]
 work_item: WI-CHARTER-LIFECYCLE-DISPLAY-FIX
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/113
-commit:
+commit: 84bc040f12e6832c139c9e745d9abfc4091879b5
 created_at: 2026-10-27T23:49:20+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CHARTER-LIFECYCLE-DISPLAY-FIX.md

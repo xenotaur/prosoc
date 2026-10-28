@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #113 (commit 84bc040f12e6832c139c9e745d9abfc4091879b5)."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-LIFECYCLE-DISPLAY-FIX
 title: "Fix the charter's stale Status: header and missing re-approval history"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 related_design:
