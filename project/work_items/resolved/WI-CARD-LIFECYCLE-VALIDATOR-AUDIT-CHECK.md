@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #114 (commit 0bc6200e0c953781b1dbb653f5ea7e14e4885aee)."
 blocked_reason: null
 blocked: false
 id: WI-CARD-LIFECYCLE-VALIDATOR-AUDIT-CHECK
 title: "Validate lifecycle state against audit.md evidence, not the AUDITED: bullet"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on: []

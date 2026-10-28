@@ -2,10 +2,10 @@
 execution_id: 2026_10_28_07_26_14_WI_CARD_LIFECYCLE_VALIDATOR_AUDIT_CHECK_CONFIRM
 prompt_id: PROMPT(WI-CARD-LIFECYCLE-VALIDATOR-AUDIT-CHECK:WI_CARD_LIFECYCLE_VALIDATOR_AUDIT_CHECK_CONFIRM)[2026-10-28T06:28:39+00:00]
 work_item: WI-CARD-LIFECYCLE-VALIDATOR-AUDIT-CHECK
-status: in_progress
+status: landed
 rerun_of: 2026_10_28_06_26_28_WI_CARD_LIFECYCLE_VALIDATOR_AUDIT_CHECK
 pr: https://github.com/xenotaur/prosoc/pull/114
-commit: 508ce010b597683acf0e04696bfa6627e4a43590
+commit: 0bc6200e0c953781b1dbb653f5ea7e14e4885aee
 created_at: 2026-10-28T07:26:14+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/114 (confirm-fixes pass, empty-thread case)
