@@ -2,10 +2,10 @@
 execution_id: 2026_10_28_19_36_29_WI_CHARTER_SUPPLEMENT_RENDERER_FIXES_CONFIRM
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-RENDERER-FIXES:WI_CHARTER_SUPPLEMENT_RENDERER_FIXES_CONFIRM)[2026-10-28T19:36:29+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-RENDERER-FIXES
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/115
-commit: 47a9f419d44696e684ff0a4271c0690839c5517e
+commit: 8e1a84a800de87c28179a9700b87896207e694db
 created_at: 2026-10-28T19:36:29+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/115 (confirm-fixes pass, empty-thread case)

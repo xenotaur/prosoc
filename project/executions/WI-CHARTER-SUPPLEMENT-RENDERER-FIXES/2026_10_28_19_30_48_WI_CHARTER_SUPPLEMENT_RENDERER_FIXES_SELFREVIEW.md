@@ -2,10 +2,10 @@
 execution_id: 2026_10_28_19_30_48_WI_CHARTER_SUPPLEMENT_RENDERER_FIXES_SELFREVIEW
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-RENDERER-FIXES:WI_CHARTER_SUPPLEMENT_RENDERER_FIXES_SELFREVIEW)[2026-10-28T19:30:48+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-RENDERER-FIXES
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/115
-commit: 47a9f419d44696e684ff0a4271c0690839c5517e
+commit: 8e1a84a800de87c28179a9700b87896207e694db
 created_at: 2026-10-28T19:30:48+00:00
 agent: claude_app
 instruction_source: diff-mode review of the WI-CHARTER-SUPPLEMENT-RENDERER-FIXES implementation, run late (after push) per /lrh-implement Step 7.5 -- a process slip, caught and corrected before Step 4 landing

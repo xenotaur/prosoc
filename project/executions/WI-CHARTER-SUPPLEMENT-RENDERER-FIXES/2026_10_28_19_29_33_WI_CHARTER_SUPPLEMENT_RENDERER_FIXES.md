@@ -2,10 +2,10 @@
 execution_id: 2026_10_28_19_29_33_WI_CHARTER_SUPPLEMENT_RENDERER_FIXES
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-RENDERER-FIXES:WI_CHARTER_SUPPLEMENT_RENDERER_FIXES)[2026-10-28T19:03:09+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-RENDERER-FIXES
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/115
-commit: 837a11c90aba854763adbb1caf962bd2582b1cd3
+commit: 8e1a84a800de87c28179a9700b87896207e694db
 created_at: 2026-10-28T19:29:33+00:00
 agent: claude_app
 instruction_source: user /lrh-execute WS-CHARTER-SUPPLEMENT-PIPELINE invocation, resolved to WI-CHARTER-SUPPLEMENT-RENDERER-FIXES

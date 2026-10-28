@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #115 (commit 8e1a84a800de87c28179a9700b87896207e694db). The real pdflatex+pdftotext round-trip verification is deferred to WI-CHARTER-SUPPLEMENT-RENDERER-PDF-VERIFICATION."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-RENDERER-FIXES
 title: "Fix charter heading double-numbering and Unicode loss in the renderer/template"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on: []
