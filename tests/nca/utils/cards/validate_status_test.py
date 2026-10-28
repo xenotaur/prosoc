@@ -67,13 +67,13 @@ class ScenariosFamilyTest(unittest.TestCase):
             )
 
     def test_flat_layout_approved_with_audit_md_passes(self):
-        # Regression: a flat-layout card's required audit.md must not be
-        # discovered as a second "card" (which would fail validation
-        # spuriously, since audit.md has no STATE bullet of its own).
+        # Regression: a flat-layout card's required <stem>.audit.md must
+        # not be discovered as a second "card" (which would fail
+        # validation spuriously, since it has no STATE bullet of its own).
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             _flat_card(root, "flat", "APPROVED", "APPROVED")
-            (root / "audit.md").write_text(
+            (root / "flat.audit.md").write_text(
                 "---\nverdict: ready\n---\n", encoding="utf-8"
             )
             self.assertEqual(
@@ -81,6 +81,27 @@ class ScenariosFamilyTest(unittest.TestCase):
                     ["--family", "scenarios", "--root", str(root), "--layout", "flat"]
                 ),
                 0,
+            )
+
+    def test_flat_layout_does_not_accept_another_cards_audit_md(self):
+        # Regression: in flat layout every card shares the same root
+        # directory, so a bare sibling audit.md must not silently "prove"
+        # audit evidence for every card in that root -- only a card's own
+        # <stem>.audit.md counts.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _flat_card(root, "card_a", "APPROVED", "APPROVED")
+            _flat_card(root, "card_b", "APPROVED", "APPROVED")
+            (root / "card_a.audit.md").write_text(
+                "---\nverdict: ready\n---\n", encoding="utf-8"
+            )
+            # card_b has no audit evidence of its own -- must fail even
+            # though card_a's audit.md sits in the same shared root.
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "scenarios", "--root", str(root), "--layout", "flat"]
+                ),
+                1,
             )
 
     def test_fix_projects_then_passes(self):
@@ -263,12 +284,13 @@ class ConstitutionsFamilyTest(unittest.TestCase):
             )
 
     def test_flat_layout_approved_with_audit_md_passes(self):
-        # Same flat-layout audit.md discovery regression as scenarios, for
-        # the constitutions family's own discover_flat_layout.
+        # Same flat-layout <stem>.audit.md discovery regression as
+        # scenarios, for the constitutions family's own
+        # discover_flat_layout.
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             _flat_constitution_card(root, "asimov", "APPROVED", "APPROVED")
-            (root / "audit.md").write_text(
+            (root / "asimov.audit.md").write_text(
                 "---\nverdict: ready\n---\n", encoding="utf-8"
             )
             self.assertEqual(
@@ -283,6 +305,31 @@ class ConstitutionsFamilyTest(unittest.TestCase):
                     ]
                 ),
                 0,
+            )
+
+    def test_flat_layout_does_not_accept_another_cards_audit_md(self):
+        # Same shared-root regression as scenarios: card_b has no audit
+        # evidence of its own and must fail even though card_a's audit.md
+        # sits in the same shared flat root.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _flat_constitution_card(root, "card_a", "APPROVED", "APPROVED")
+            _flat_constitution_card(root, "card_b", "APPROVED", "APPROVED")
+            (root / "card_a.audit.md").write_text(
+                "---\nverdict: ready\n---\n", encoding="utf-8"
+            )
+            self.assertEqual(
+                validate_status.main(
+                    [
+                        "--family",
+                        "constitutions",
+                        "--root",
+                        str(root),
+                        "--layout",
+                        "flat",
+                    ]
+                ),
+                1,
             )
 
 

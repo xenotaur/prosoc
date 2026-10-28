@@ -3,10 +3,11 @@
 Checks that each card's Markdown ``## Status`` / ``## STATUS`` STATE line agrees
 with the machine-readable ``state`` field in its distilled ``*.yml``. Also
 checks (see ``prosoc.nca.utils.cards.status``) that an ``AUDITED``/``APPROVED``
-card has real audit evidence (a sibling ``audit.md`` with an acceptable
-verdict, not the optional ``AUDITED:`` provenance bullet) and, for the
-charter specifically, that its free-text ``**Status:**`` header agrees with
-its ``STATE``. Exits non-zero if any card fails any of these checks.
+card has real audit evidence (``audit.md`` in directory layout, or a
+card-specific ``<stem>.audit.md`` in flat layout, with an acceptable verdict —
+not the optional ``AUDITED:`` provenance bullet) and, for the charter
+specifically, that its free-text ``**Status:**`` header agrees with its
+``STATE``. Exits non-zero if any card fails any of these checks.
 
 Family-aware: with no ``--family`` it validates every registered family
 (scenarios, tasks, …) over their default repo roots. ``--family NAME`` restricts
@@ -115,7 +116,7 @@ def _label(source, layout: str, family: Family) -> str:
     return source.md_path.parent.name
 
 
-def _check_extras(family: Family, source) -> list[str]:
+def _check_extras(family: Family, source, layout: str) -> list[str]:
     """Run the audit-evidence check (all families) and the charter-only
     Status:-line check. Returns a failure-detail string per failing check
     (empty if both pass).
@@ -135,7 +136,9 @@ def _check_extras(family: Family, source) -> list[str]:
         return []
 
     problems = []
-    audit_result = status.check_audit_evidence(source.md_path, markdown_state)
+    audit_result = status.check_audit_evidence(
+        source.md_path, markdown_state, layout=layout
+    )
     if not audit_result.ok:
         problems.append(audit_result.detail)
 
@@ -188,7 +191,7 @@ def _check_family(family: Family, root: pathlib.Path, layout: str, card, fix: bo
             failures += 1
             continue
 
-        extra_problems = _check_extras(family, source)
+        extra_problems = _check_extras(family, source, layout)
 
         if result.ok and not extra_problems:
             print(f"ok   {name}: {result.detail}")

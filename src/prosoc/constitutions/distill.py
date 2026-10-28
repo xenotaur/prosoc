@@ -74,6 +74,10 @@ def discover_flat_layout(root: pathlib.Path) -> Iterable[ConstitutionSource]:
             "audit.md",
         }:
             continue
+        # A card's own flat-layout audit evidence (<stem>.audit.md) is not a
+        # card itself (see prosoc.nca.utils.cards.status.check_audit_evidence).
+        if md_path.name.endswith(".audit.md"):
+            continue
         yield ConstitutionSource(
             md_path=md_path,
             yml_path=md_path.with_suffix(".yml"),

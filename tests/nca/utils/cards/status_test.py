@@ -237,7 +237,45 @@ class CheckAuditEvidenceTest(unittest.TestCase):
             md.write_text("placeholder", encoding="utf-8")
             result = status.check_audit_evidence(md, "APPROVED")
             self.assertFalse(result.ok)
-            self.assertIn("no sibling audit.md", result.detail)
+            self.assertIn("no audit evidence", result.detail)
+
+    def test_flat_layout_uses_card_specific_audit_file(self):
+        with tempfile.TemporaryDirectory() as d:
+            md = Path(d) / "card_b.md"
+            md.write_text("placeholder", encoding="utf-8")
+            (Path(d) / "card_b.audit.md").write_text(
+                AUDIT_MD.format(verdict="ready"), encoding="utf-8"
+            )
+            result = status.check_audit_evidence(md, "APPROVED", layout="flat")
+            self.assertTrue(result.ok)
+
+    def test_flat_layout_does_not_accept_another_cards_shared_audit_md(self):
+        # Regression: a bare sibling `audit.md` in a flat root must not
+        # "prove" audit evidence for every card sharing that root -- only
+        # this card's own <stem>.audit.md counts in flat layout.
+        with tempfile.TemporaryDirectory() as d:
+            md_a = Path(d) / "card_a.md"
+            md_a.write_text("placeholder", encoding="utf-8")
+            md_b = Path(d) / "card_b.md"
+            md_b.write_text("placeholder", encoding="utf-8")
+            (Path(d) / "card_a.audit.md").write_text(
+                AUDIT_MD.format(verdict="ready"), encoding="utf-8"
+            )
+            result_a = status.check_audit_evidence(md_a, "APPROVED", layout="flat")
+            result_b = status.check_audit_evidence(md_b, "APPROVED", layout="flat")
+            self.assertTrue(result_a.ok)
+            self.assertFalse(result_b.ok)
+            self.assertIn("no audit evidence", result_b.detail)
+
+    def test_directory_layout_is_the_default(self):
+        with tempfile.TemporaryDirectory() as d:
+            md = Path(d) / "card.md"
+            md.write_text("placeholder", encoding="utf-8")
+            (Path(d) / "audit.md").write_text(
+                AUDIT_MD.format(verdict="ready"), encoding="utf-8"
+            )
+            # No explicit layout= passed: directory-layout sibling lookup.
+            self.assertTrue(status.check_audit_evidence(md, "APPROVED").ok)
 
     def test_approved_with_malformed_audit_yaml_fails_without_raising(self):
         with tempfile.TemporaryDirectory() as d:

@@ -198,22 +198,35 @@ def read_audit_verdict(audit_path: pathlib.Path) -> str | None:
     return str(data["verdict"])
 
 
-def check_audit_evidence(md_path: pathlib.Path, state: str) -> ConsistencyResult:
+def check_audit_evidence(
+    md_path: pathlib.Path, state: str, *, layout: str = "directory"
+) -> ConsistencyResult:
     """Check that a card at ``AUDITED``/``APPROVED`` has real audit evidence.
 
     The optional ``- **AUDITED:**`` provenance bullet in a card's
     ``## Status`` block is *not* evidence (``workflow.md`` makes it an
     optional addition to the history, not a required field) — the real
-    signal is a sibling ``audit.md`` (next to ``md_path``) with a verdict
-    of ``ready`` or ``ready_with_fixes``. Cards below ``AUDITED`` have
-    nothing to check here.
+    signal is an audit file with a verdict of ``ready`` or
+    ``ready_with_fixes``. Cards below ``AUDITED`` have nothing to check
+    here.
+
+    In directory layout each card has its own subdirectory, so a sibling
+    ``audit.md`` unambiguously belongs to it. In flat layout every card in
+    a root shares the same parent directory — a bare sibling ``audit.md``
+    would silently "prove" audit evidence for every card in that root, not
+    just the one being checked — so flat-layout cards use a card-specific
+    ``<stem>.audit.md`` instead, mirroring the ``<stem>.yml`` distillation
+    convention already used for flat layout.
     """
     if state not in ("AUDITED", "APPROVED"):
         return ConsistencyResult(True, f"audit evidence not required at {state}")
-    audit_path = md_path.parent / "audit.md"
+    if layout == "flat":
+        audit_path = md_path.parent / f"{md_path.stem}.audit.md"
+    else:
+        audit_path = md_path.parent / "audit.md"
     if not audit_path.exists():
         return ConsistencyResult(
-            False, f"{state} card has no sibling audit.md at {audit_path}"
+            False, f"{state} card has no audit evidence at {audit_path}"
         )
     verdict = read_audit_verdict(audit_path)
     if verdict not in _ACCEPTABLE_AUDIT_VERDICTS:
