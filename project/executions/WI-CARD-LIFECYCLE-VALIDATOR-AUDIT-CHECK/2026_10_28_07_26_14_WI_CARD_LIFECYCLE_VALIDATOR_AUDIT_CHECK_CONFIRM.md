@@ -5,7 +5,7 @@ work_item: WI-CARD-LIFECYCLE-VALIDATOR-AUDIT-CHECK
 status: in_progress
 rerun_of: 2026_10_28_06_26_28_WI_CARD_LIFECYCLE_VALIDATOR_AUDIT_CHECK
 pr: https://github.com/xenotaur/prosoc/pull/114
-commit: a13fc3f2c2e36c5d5cea9bd69ca541d761f833f3
+commit: 508ce010b597683acf0e04696bfa6627e4a43590
 created_at: 2026-10-28T07:26:14+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/114 (confirm-fixes pass, empty-thread case)
@@ -52,8 +52,27 @@ across 4 test files. Full validation re-run clean at that commit:
 warnings), full-corpus `scripts/validate/status` 32/32 consistent.
 Branch-rules check confirmed no `required_status_checks` rule on `main`
 (count 0), so CI is read via the unfiltered `gh pr checks` form.
-Thread-resolution verdict: **Green** — all 3 threads resolved, no
-outstanding findings.
+Thread-resolution verdict for the hosted review: **Green** — all 3
+threads resolved, no outstanding findings.
+
+A dispatched substitute self-review (PR-mode, since no automatic
+reviewer had looked at the fixed-up final diff) then found one further,
+previously-unflagged real issue: `check_audit_evidence` resolved audit
+evidence as `md_path.parent / "audit.md"` for every layout, but in flat
+layout every card in a root shares the same parent directory — a single
+`audit.md` anywhere in a flat root silently "proved" audit evidence for
+every AUDITED/APPROVED card there, defeating the check's purpose for
+that mode. I independently re-verified this myself (reproduced the
+false-pass empirically) before accepting it, then fixed it in commit
+`508ce01`: flat-layout cards now use a card-specific `<stem>.audit.md`
+(mirroring the `<stem>.yml` distillation convention), with the new
+filename excluded from flat-layout card discovery and regression tests
+added across `status_test.py`, `validate_status_test.py` (both
+scenarios and constitutions), and `distill_test.py`. The real corpus (32
+cards) uses directory layout exclusively today, so this was latent, not
+actively wrong in production, but flat layout is a supported, documented
+CLI mode and shipping with this hole would have defeated the check's own
+stated purpose.
 
 # Validation
 
@@ -63,7 +82,16 @@ outstanding findings.
   `PRRT_kwDOQo6kns6xAccz` (finding 1) and `PRRT_kwDOQo6kns6xAcdf`
   (finding 3) explicitly; `PRRT_kwDOQo6kns6xAcdQ` (finding 2) was
   already resolved by Copilot's bot.
-- `PYTHONPATH="$(pwd)/src" scripts/test` — 290 tests, OK.
+- Substitute self-review (PR-mode, cold-context subagent dispatch): ran
+  the full diff review against `main`, independently re-ran
+  `scripts/test`/`scripts/lint`/`lrh validate`/`scripts/validate/status`
+  itself, confirmed all 3 hosted-review fixes genuinely correct, and
+  surfaced the flat-layout shared-audit.md finding above.
+- I independently reproduced the flat-layout finding myself (two
+  APPROVED flat cards sharing one root, one audit.md — the
+  unaudited card's `check_audit_evidence` call returned `ok=True`)
+  before accepting it and fixing it.
+- `PYTHONPATH="$(pwd)/src" scripts/test` — 296 tests, OK (at `508ce01`).
 - `scripts/lint` — all checks passed.
 - `lrh validate` — 0 errors, 20 warnings (pre-existing, unrelated).
 - `PYTHONPATH="$(pwd)/src" scripts/validate/status` — 32/32 cards
@@ -74,6 +102,4 @@ outstanding findings.
 # Follow-up
 
 Step 8 (readiness report) still needs to re-fetch CI against commit
-`a13fc3f` and check for an automatic reviewer response (or dispatch a
-substitute `/lrh-self-review --pr` pass) before the final
-merge-readiness verdict.
+`508ce01` before the final merge-readiness verdict.
