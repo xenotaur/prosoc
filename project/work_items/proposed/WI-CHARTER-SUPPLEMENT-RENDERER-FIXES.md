@@ -14,8 +14,8 @@ expected_actions: [create_file, edit_file, run_tests, create_pr]
 forbidden_actions: [force_push, delete_branch, merge_pr, modify_ci_pipeline]
 acceptance:
   - "Generated LaTeX contains no authored heading-number prefix (prefix-free numbered heading commands)"
-  - "Compiled PDF text shows each heading's number exactly once (the Frontiers class's automatic number)"
-  - "Unicode dash/quote characters inside lstlisting blocks survive a real pdflatex+pdftotext round trip"
+  - "literatecard lstlisting style's literate= table covers en dash, em dash, non-breaking hyphen, curly double quotes, and the curly apostrophe, verified against pandoc's generated .tex output"
+  - "The real pdflatex+pdftotext round-trip check is deferred to WI-CHARTER-SUPPLEMENT-RENDERER-PDF-VERIFICATION (no pdflatex available in this landing session's sandbox; see Risk Notes)"
   - "lrh validate / scripts/test pass"
 required_evidence: [manual_review, lrh_validate, test_output]
 artifacts_expected:
@@ -71,19 +71,27 @@ those blocks. See `project/audits/2026-10-26_charter_supplement_pipeline_audit.m
   prefix — the Lua filter strips it before LaTeX emission, so the
   `.tex` source is prefix-free; only the Frontiers class's automatic
   counter (applied at compile time) numbers the heading.
-- The compiled PDF text shows each heading's number exactly once (the
-  class's automatic number, not a doubled authored-plus-automatic count).
-- Unicode dash/quote characters in `lstlisting` blocks survive a real
-  `pdflatex` compile + `pdftotext` extraction (not just `.tex` inspection).
+- The `literatecard` `lstlisting` style's `literate=` table covers en
+  dash, em dash, non-breaking hyphen, curly double quotes, and the
+  curly apostrophe, verified by inspecting pandoc's generated `.tex`
+  output directly (not a real `pdflatex` compile — see Risk Notes).
 - `lrh validate` / `scripts/test` pass.
 
 ## Validation
 - `scripts/test`
 - `lrh validate`
 - `papers/01_charter/render.py`
-- manual `pdflatex` + `pdftotext -layout` spot check (documented in the PR)
+- Direct inspection of pandoc's generated `.tex` output for the Lua
+  filter's heading-prefix stripping and the `literate=` mappings.
 
 ## Risk Notes
 - A PDF toolchain may not be available in every sandbox (confirmed absent
-  in two of the audit's own sessions) — the manual verification step needs
-  an environment that has `pdflatex` with outline fonts installed.
+  in two of the audit's own sessions, and in this WI's own landing
+  session — a `brew install --cask basictex` attempt failed because the
+  cask's installer requires interactive `sudo`, unavailable here). Per
+  explicit user decision, the real `pdflatex`+`pdftotext` round-trip
+  check (the compiled PDF showing each heading's number exactly once,
+  and the Unicode characters surviving the round trip) is deferred to
+  `WI-CHARTER-SUPPLEMENT-RENDERER-PDF-VERIFICATION`, filed as a
+  follow-up, rather than blocking this WI or the rest of the workstream
+  on TeX-toolchain availability.
