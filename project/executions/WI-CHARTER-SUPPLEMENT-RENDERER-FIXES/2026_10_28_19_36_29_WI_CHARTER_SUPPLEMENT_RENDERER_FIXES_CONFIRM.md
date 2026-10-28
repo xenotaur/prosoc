@@ -5,7 +5,7 @@ work_item: WI-CHARTER-SUPPLEMENT-RENDERER-FIXES
 status: in_progress
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/115
-commit: 216268041d6ffe6b58d9dd08d78f495d04c7fa88
+commit: 47a9f419d44696e684ff0a4271c0690839c5517e
 created_at: 2026-10-28T19:36:29+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/115 (confirm-fixes pass, empty-thread case)
@@ -22,8 +22,8 @@ caught and addressed the one real finding before this point.
 # Result
 
 Authoritative check (`lrh github threads --mode raw --state all`)
-found 0 threads total at commit `2162680` (the final pushed commit,
-after the self-review's documentation fix). Branch-rules check
+found 0 threads total (the final pushed code commit is `47a9f41`,
+the self-review's documentation fix). Branch-rules check
 confirmed no `required_status_checks` rule on `main` (count 0), so CI
 is read via the unfiltered `gh pr checks` form: `lint` and `test` both
 `SUCCESS`/`passing` at this commit. Thread-resolution verdict:
