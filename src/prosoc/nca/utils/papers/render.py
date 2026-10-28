@@ -84,7 +84,13 @@ def load_sources(sources_file: Path, repo_root: Path) -> list[tuple[str, Path]]:
     return sources
 
 
-def build_pandoc_args(key: str, source: Path, *, pandoc: str = "pandoc") -> list[str]:
+def build_pandoc_args(
+    key: str,
+    source: Path,
+    *,
+    pandoc: str = "pandoc",
+    lua_filter: Path | None = None,
+) -> list[str]:
     """Build the Pandoc command for one source fragment."""
     if SOURCE_KEY_RE.fullmatch(key) is None:
         raise ValueError(f"invalid source key: {key}")
@@ -104,6 +110,12 @@ def build_pandoc_args(key: str, source: Path, *, pandoc: str = "pandoc") -> list
     # Markdown heading hierarchy down by one.
     if key != "CHARTER":
         pandoc_args.append("--shift-heading-level-by=1")
+    elif lua_filter is not None:
+        # The charter's Markdown headings are hand-numbered (e.g. "## 1.
+        # Purpose..."); the Frontiers class numbers them again at compile
+        # time. Scoped to the charter only -- other cards' headings aren't
+        # authored-numbered (see strip_heading_numbers.lua).
+        pandoc_args.append(f"--lua-filter={lua_filter}")
 
     # Always append the source path. If Pandoc is invoked without an input file,
     # it reads stdin and can appear to hang.
@@ -119,6 +131,7 @@ def render_fragment(
     fragments_dir: Path,
     runner: Runner = subprocess.run,
     pandoc: str = "pandoc",
+    lua_filter: Path | None = None,
     log: Callable[[str], None] | None = print,
 ) -> Path:
     """Render one Markdown source to a fixed-up LaTeX fragment file."""
@@ -134,7 +147,7 @@ def render_fragment(
         )
 
     completed = runner(
-        build_pandoc_args(key, source, pandoc=pandoc),
+        build_pandoc_args(key, source, pandoc=pandoc, lua_filter=lua_filter),
         cwd=repo_root,
         stdin=subprocess.DEVNULL,
         stdout=subprocess.PIPE,
@@ -208,6 +221,12 @@ def render_paper(
 
     rendered = template_file.read_text(encoding="utf-8")
 
+    # Paper-specific Lua filter for the charter's authored heading numbers
+    # (see build_pandoc_args); optional so papers without one are unaffected.
+    lua_filter = paper_dir / "strip_heading_numbers.lua"
+    if not lua_filter.is_file():
+        lua_filter = None
+
     for key, source in sources:
         fragment_path = render_fragment(
             key,
@@ -216,6 +235,7 @@ def render_paper(
             fragments_dir=fragments_dir,
             runner=runner,
             pandoc=pandoc,
+            lua_filter=lua_filter,
             log=log,
         )
         fragment = fragment_path.read_text(encoding="utf-8")

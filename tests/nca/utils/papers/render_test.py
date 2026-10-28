@@ -1,3 +1,4 @@
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -5,6 +6,9 @@ from pathlib import Path
 from types import SimpleNamespace
 
 from prosoc.nca.utils.papers import render
+
+REPO_ROOT = Path(__file__).resolve().parents[4]
+LUA_FILTER = REPO_ROOT / "papers" / "01_charter" / "strip_heading_numbers.lua"
 
 
 class TestFragmentFixups(unittest.TestCase):
@@ -152,6 +156,33 @@ class TestPandocArgs(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "invalid source key"):
             render.build_pandoc_args("../BAD", Path("source.md"))
 
+    def test_charter_adds_lua_filter_when_given(self):
+        source = Path("prosoc/charter/charter.md")
+        lua_filter = Path("papers/01_charter/strip_heading_numbers.lua")
+
+        args = render.build_pandoc_args("CHARTER", source, lua_filter=lua_filter)
+
+        self.assertIn(f"--lua-filter={lua_filter}", args)
+        self.assertNotIn("--shift-heading-level-by=1", args)
+
+    def test_charter_omits_lua_filter_when_not_given(self):
+        source = Path("prosoc/charter/charter.md")
+
+        args = render.build_pandoc_args("CHARTER", source)
+
+        self.assertFalse(any(a.startswith("--lua-filter=") for a in args))
+
+    def test_non_charter_never_gets_lua_filter_even_if_given(self):
+        source = Path("prosoc/scenarios/frontal_approach/scenario.md")
+        lua_filter = Path("papers/01_charter/strip_heading_numbers.lua")
+
+        args = render.build_pandoc_args(
+            "FRONTAL_APPROACH", source, lua_filter=lua_filter
+        )
+
+        self.assertFalse(any(a.startswith("--lua-filter=") for a in args))
+        self.assertIn("--shift-heading-level-by=1", args)
+
 
 class TestTemplateSubstitution(unittest.TestCase):
 
@@ -186,6 +217,55 @@ class TestTemplateSubstitution(unittest.TestCase):
     def test_rejects_unresolved_placeholders(self):
         with self.assertRaisesRegex(ValueError, "Unresolved placeholders"):
             render.check_unresolved_placeholders("@@MISSING@@")
+
+
+class TestLuaFilterIntegration(unittest.TestCase):
+    """Runs the real pandoc + strip_heading_numbers.lua, not a fake runner --
+    covers what the fake-runner unit tests above can't: that the filter file
+    actually parses as Lua and does the right thing to real pandoc output."""
+
+    def setUp(self):
+        if shutil.which("pandoc") is None:
+            self.skipTest("pandoc is not installed")
+        if not LUA_FILTER.is_file():
+            self.skipTest(f"lua filter not found at {LUA_FILTER}")
+
+    def test_strips_authored_number_from_numbered_heading(self):
+        result = subprocess.run(
+            ["pandoc", "-f", "markdown", "-t", "latex", f"--lua-filter={LUA_FILTER}"],
+            input="## 1. Purpose of This Charter\n",
+            stdout=subprocess.PIPE,
+            text=True,
+            check=True,
+        )
+
+        self.assertIn("\\subsection{Purpose of This Charter}", result.stdout)
+        self.assertNotIn("1. Purpose", result.stdout)
+
+    def test_leaves_unnumbered_heading_unchanged(self):
+        result = subprocess.run(
+            ["pandoc", "-f", "markdown", "-t", "latex", f"--lua-filter={LUA_FILTER}"],
+            input="### Normative Statement\n",
+            stdout=subprocess.PIPE,
+            text=True,
+            check=True,
+        )
+
+        self.assertIn("\\subsubsection{Normative Statement}", result.stdout)
+
+    def test_leaves_dotted_sub_number_unchanged(self):
+        # Only a bare "N." token followed by a space is stripped -- a
+        # dotted sub-number like "4.1" is a single token ("4.1", no
+        # trailing-only period) and must not be touched.
+        result = subprocess.run(
+            ["pandoc", "-f", "markdown", "-t", "latex", f"--lua-filter={LUA_FILTER}"],
+            input="## 4.1 Sub-numbered Heading\n",
+            stdout=subprocess.PIPE,
+            text=True,
+            check=True,
+        )
+
+        self.assertIn("4.1 Sub-numbered Heading", result.stdout)
 
 
 class TestRendering(unittest.TestCase):
@@ -265,6 +345,80 @@ class TestRendering(unittest.TestCase):
                 output.read_text(encoding="utf-8"),
                 "A\nfragment CHARTER\n\nB\nfragment CARD\n\n",
             )
+
+    def test_render_paper_passes_lua_filter_only_for_charter_when_present(self):
+        calls = {}
+
+        def fake_runner(args, **kwargs):
+            key = Path(args[-1]).stem.upper()
+            calls[key] = args
+            return SimpleNamespace(stdout=f"fragment {key}\n")
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            paper_dir = root / "papers" / "01_charter"
+            paper_dir.mkdir(parents=True)
+            build_dir = root / "build" / "papers" / "01_charter"
+
+            charter = root / "charter.md"
+            card = root / "card.md"
+            charter.write_text("# Charter\n", encoding="utf-8")
+            card.write_text("# Card\n", encoding="utf-8")
+            (paper_dir / "sources.txt").write_text(
+                f"CHARTER {charter.relative_to(root)}\n"
+                f"CARD {card.relative_to(root)}\n",
+                encoding="utf-8",
+            )
+            (paper_dir / "template.tex").write_text(
+                "A\n@@CHARTER@@\nB\n@@CARD@@\n",
+                encoding="utf-8",
+            )
+            lua_filter = paper_dir / "strip_heading_numbers.lua"
+            lua_filter.write_text("-- test stub\n", encoding="utf-8")
+
+            render.render_paper(
+                repo_root=root,
+                paper_dir=paper_dir,
+                build_dir=build_dir,
+                runner=fake_runner,
+                require_pandoc=False,
+                log=None,
+            )
+
+            self.assertIn(f"--lua-filter={lua_filter}", calls["CHARTER"])
+            self.assertFalse(any(a.startswith("--lua-filter=") for a in calls["CARD"]))
+
+    def test_render_paper_omits_lua_filter_when_file_absent(self):
+        def fake_runner(args, **kwargs):
+            key = Path(args[-1]).stem.upper()
+            return SimpleNamespace(stdout=f"fragment {key}\n")
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            paper_dir = root / "papers" / "01_charter"
+            paper_dir.mkdir(parents=True)
+            build_dir = root / "build" / "papers" / "01_charter"
+
+            charter = root / "charter.md"
+            charter.write_text("# Charter\n", encoding="utf-8")
+            (paper_dir / "sources.txt").write_text(
+                f"CHARTER {charter.relative_to(root)}\n",
+                encoding="utf-8",
+            )
+            (paper_dir / "template.tex").write_text("@@CHARTER@@\n", encoding="utf-8")
+            # No strip_heading_numbers.lua written -- must not raise or add
+            # a --lua-filter flag pointing at a nonexistent file.
+
+            output = render.render_paper(
+                repo_root=root,
+                paper_dir=paper_dir,
+                build_dir=build_dir,
+                runner=fake_runner,
+                require_pandoc=False,
+                log=None,
+            )
+
+            self.assertEqual(output.read_text(encoding="utf-8"), "fragment CHARTER\n\n")
 
 
 if __name__ == "__main__":
