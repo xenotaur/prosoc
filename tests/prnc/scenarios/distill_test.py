@@ -80,6 +80,35 @@ class TestDiscoverFlatLayout(unittest.TestCase):
 
             self.assertEqual(sources, [])
 
+    def test_audit_md_excluded_from_discovery(self):
+        # audit.md is required evidence for an AUDITED/APPROVED card
+        # (WI-CARD-LIFECYCLE-VALIDATOR-AUDIT-CHECK), not a scenario card
+        # itself -- discovery must not pick it up as one (it has no STATE
+        # bullet and would otherwise fail validation spuriously).
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _make_flat_scenario(root, "leading_01")
+            (root / "audit.md").write_text("# Audit\n", encoding="utf-8")
+
+            sources = list(distill.discover_flat_layout(root))
+
+            self.assertEqual(len(sources), 1)
+            self.assertEqual(sources[0].md_path, root / "leading_01.md")
+
+    def test_card_specific_audit_md_excluded_from_discovery(self):
+        # A flat-layout card's own <stem>.audit.md (used by
+        # status.check_audit_evidence to avoid the shared-root ambiguity a
+        # bare audit.md would have) is likewise not a card itself.
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            _make_flat_scenario(root, "leading_01")
+            (root / "leading_01.audit.md").write_text("# Audit\n", encoding="utf-8")
+
+            sources = list(distill.discover_flat_layout(root))
+
+            self.assertEqual(len(sources), 1)
+            self.assertEqual(sources[0].md_path, root / "leading_01.md")
+
 
 class TestDistillAllScenarioScoping(unittest.TestCase):
 

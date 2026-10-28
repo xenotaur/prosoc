@@ -59,6 +59,13 @@ class ValidateStatusCliTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             _make_scenario(root, "bad", "DRAFTED", "APPROVED")
+            # An APPROVED card needs a sibling audit.md with an acceptable
+            # verdict (see WI-CARD-LIFECYCLE-VALIDATOR-AUDIT-CHECK) for the
+            # follow-up check below to pass once --fix projects it there.
+            (root / "bad" / "audit.md").write_text(
+                "---\nfamily: scenarios\ncard: bad\nverdict: ready\n---\n",
+                encoding="utf-8",
+            )
             # --fix rewrites the Markdown STATE line from the YAML state.
             self.assertEqual(validate_status.main(["--root", str(root), "--fix"]), 0)
             md = (root / "bad" / "scenario.md").read_text(encoding="utf-8")

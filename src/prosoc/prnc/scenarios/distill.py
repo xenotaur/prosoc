@@ -81,7 +81,11 @@ def discover_flat_layout(
     matches it exactly.
     """
     for md_path in root.glob("*.md"):
-        if md_path.name in {"README.md", "scenario_template.md"}:
+        if md_path.name in {"README.md", "scenario_template.md", "audit.md"}:
+            continue
+        # A card's own flat-layout audit evidence (<stem>.audit.md) is not a
+        # card itself (see prosoc.nca.utils.cards.status.check_audit_evidence).
+        if md_path.name.endswith(".audit.md"):
             continue
         if scenario is not None and md_path.stem != scenario:
             continue
