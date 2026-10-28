@@ -180,13 +180,19 @@ _FRONTMATTER_RE = re.compile(r"\A---\n(?P<yaml>.*?)\n---", re.DOTALL)
 def read_audit_verdict(audit_path: pathlib.Path) -> str | None:
     """Return the ``verdict:`` value from an ``audit.md``'s frontmatter.
 
-    Returns ``None`` if the file has no parseable frontmatter or no
-    ``verdict`` key — the caller treats that the same as a missing file.
+    Returns ``None`` if the file has no parseable frontmatter, malformed
+    YAML, or no ``verdict`` key — the caller treats all three the same as
+    a missing/unacceptable file, never raising. A single malformed
+    ``audit.md`` must fail only its own card's check, not abort an entire
+    corpus scan.
     """
     match = _FRONTMATTER_RE.match(audit_path.read_text(encoding="utf-8"))
     if match is None:
         return None
-    data = yaml.safe_load(match.group("yaml"))
+    try:
+        data = yaml.safe_load(match.group("yaml"))
+    except yaml.YAMLError:
+        return None
     if not isinstance(data, dict) or "verdict" not in data:
         return None
     return str(data["verdict"])
@@ -249,16 +255,22 @@ def parse_charter_status_line(md_text: str) -> str | None:
 def check_charter_status_line(md_text: str, state: str) -> ConsistencyResult:
     """Check the charter's free-text ``**Status:**`` line against ``state``.
 
-    Case-insensitive substring match against the state's human-friendly
-    label (see :data:`_STATUS_LINE_LABELS`) — the field is free text, not a
-    controlled vocabulary, so this isn't a vocabulary-exact comparison. A
-    card with no such line (any non-charter family) has nothing to check.
+    Case-insensitive match against the state's human-friendly label (see
+    :data:`_STATUS_LINE_LABELS`), anchored to the *start* of the value and
+    requiring a non-letter boundary right after it (end of string, or a
+    descriptive suffix like " (Normative)") — the field is free text, not
+    a controlled vocabulary, so this isn't a vocabulary-exact comparison,
+    but a bare substring-anywhere search would wrongly accept contradictory
+    headers: "Unapproved (Normative)" and "Draft (not approved)" both
+    contain "approved" as a substring. A card with no such line (any
+    non-charter family) has nothing to check.
     """
     value = parse_charter_status_line(md_text)
     if value is None:
         return ConsistencyResult(True, "no free-text Status: line present")
     label = _STATUS_LINE_LABELS.get(state, state.lower())
-    if label not in value.lower():
+    normalized = value.strip().lower()
+    if re.match(rf"^{re.escape(label)}(?![a-z])", normalized) is None:
         return ConsistencyResult(
             False, f"free-text Status: {value!r} does not reflect STATE {state!r}"
         )

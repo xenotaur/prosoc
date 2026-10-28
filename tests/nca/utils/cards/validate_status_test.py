@@ -66,6 +66,23 @@ class ScenariosFamilyTest(unittest.TestCase):
                 0,
             )
 
+    def test_flat_layout_approved_with_audit_md_passes(self):
+        # Regression: a flat-layout card's required audit.md must not be
+        # discovered as a second "card" (which would fail validation
+        # spuriously, since audit.md has no STATE bullet of its own).
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _flat_card(root, "flat", "APPROVED", "APPROVED")
+            (root / "audit.md").write_text(
+                "---\nverdict: ready\n---\n", encoding="utf-8"
+            )
+            self.assertEqual(
+                validate_status.main(
+                    ["--family", "scenarios", "--root", str(root), "--layout", "flat"]
+                ),
+                0,
+            )
+
     def test_fix_projects_then_passes(self):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
@@ -245,6 +262,29 @@ class ConstitutionsFamilyTest(unittest.TestCase):
                 0,
             )
 
+    def test_flat_layout_approved_with_audit_md_passes(self):
+        # Same flat-layout audit.md discovery regression as scenarios, for
+        # the constitutions family's own discover_flat_layout.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _flat_constitution_card(root, "asimov", "APPROVED", "APPROVED")
+            (root / "audit.md").write_text(
+                "---\nverdict: ready\n---\n", encoding="utf-8"
+            )
+            self.assertEqual(
+                validate_status.main(
+                    [
+                        "--family",
+                        "constitutions",
+                        "--root",
+                        str(root),
+                        "--layout",
+                        "flat",
+                    ]
+                ),
+                0,
+            )
+
 
 def _charter_card(root: Path, md_state: str, yml_state: str) -> None:
     """Single-source charter: <root>/charter.md and charter.yml (top-level
@@ -376,6 +416,22 @@ class AuditEvidenceCheckTest(unittest.TestCase):
             _dir_card(root, "good", "DRAFTED", "DRAFTED", "scenario")
             self.assertEqual(
                 validate_status.main(["--family", "scenarios", "--root", str(root)]), 0
+            )
+
+    def test_malformed_audit_yaml_fails_without_aborting_the_scan(self):
+        # One card's malformed audit.md must not raise and abort the whole
+        # corpus scan -- it fails only its own card; the other card is
+        # still checked and reported.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _dir_card(root, "bad", "APPROVED", "APPROVED", "scenario")
+            (root / "bad" / "audit.md").write_text(
+                "---\nverdict: [ready\n---\n", encoding="utf-8"
+            )
+            _dir_card(root, "good", "APPROVED", "APPROVED", "scenario")
+            _write_audit(root, "good", "ready")
+            self.assertEqual(
+                validate_status.main(["--family", "scenarios", "--root", str(root)]), 1
             )
 
     def test_fix_flag_does_not_suppress_an_existing_audit_gap(self):

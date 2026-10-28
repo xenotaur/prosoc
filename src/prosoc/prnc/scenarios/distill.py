@@ -81,7 +81,7 @@ def discover_flat_layout(
     matches it exactly.
     """
     for md_path in root.glob("*.md"):
-        if md_path.name in {"README.md", "scenario_template.md"}:
+        if md_path.name in {"README.md", "scenario_template.md", "audit.md"}:
             continue
         if scenario is not None and md_path.stem != scenario:
             continue

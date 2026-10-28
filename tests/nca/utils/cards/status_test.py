@@ -195,6 +195,15 @@ class ReadAuditVerdictTest(unittest.TestCase):
             )
             self.assertIsNone(status.read_audit_verdict(audit))
 
+    def test_malformed_yaml_returns_none_does_not_raise(self):
+        # Malformed YAML (unclosed bracket) must not raise yaml.YAMLError --
+        # one bad audit.md must fail only its own card's check, not abort
+        # an entire corpus scan.
+        with tempfile.TemporaryDirectory() as d:
+            audit = Path(d) / "audit.md"
+            audit.write_text("---\nverdict: [ready\n---\n", encoding="utf-8")
+            self.assertIsNone(status.read_audit_verdict(audit))
+
 
 class CheckAuditEvidenceTest(unittest.TestCase):
     def test_below_audited_requires_nothing(self):
@@ -229,6 +238,16 @@ class CheckAuditEvidenceTest(unittest.TestCase):
             result = status.check_audit_evidence(md, "APPROVED")
             self.assertFalse(result.ok)
             self.assertIn("no sibling audit.md", result.detail)
+
+    def test_approved_with_malformed_audit_yaml_fails_without_raising(self):
+        with tempfile.TemporaryDirectory() as d:
+            md = Path(d) / "card.md"
+            md.write_text("placeholder", encoding="utf-8")
+            (Path(d) / "audit.md").write_text(
+                "---\nverdict: [ready\n---\n", encoding="utf-8"
+            )
+            result = status.check_audit_evidence(md, "APPROVED")
+            self.assertFalse(result.ok)
 
     def test_approved_with_blocking_verdict_fails(self):
         with tempfile.TemporaryDirectory() as d:
@@ -272,6 +291,24 @@ class CheckCharterStatusLineTest(unittest.TestCase):
                 "# Scenario: X\n\nNo field.\n", "APPROVED"
             ).ok
         )
+
+    def test_unapproved_does_not_satisfy_approved(self):
+        # A bare substring search would wrongly accept this: "approved" is
+        # a substring of "unapproved". The actual lifecycle label must be
+        # anchored at the start of the value, not found anywhere in it.
+        text = CHARTER_HEADER.format(status="Unapproved (Normative)")
+        result = status.check_charter_status_line(text, "APPROVED")
+        self.assertFalse(result.ok)
+
+    def test_draft_not_approved_does_not_satisfy_approved(self):
+        text = CHARTER_HEADER.format(status="Draft (not approved)")
+        result = status.check_charter_status_line(text, "APPROVED")
+        self.assertFalse(result.ok)
+
+    def test_unaudited_does_not_satisfy_audited(self):
+        text = CHARTER_HEADER.format(status="Unaudited (Normative)")
+        result = status.check_charter_status_line(text, "AUDITED")
+        self.assertFalse(result.ok)
 
 
 class ScenariosShimTest(unittest.TestCase):
