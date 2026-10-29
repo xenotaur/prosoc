@@ -2,10 +2,11 @@
 execution_id: 2026_10_28_22_10_51_WI_CHARTER_SUPPLEMENT_TEST_COVERAGE
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-TEST-COVERAGE:WI_CHARTER_SUPPLEMENT_TEST_COVERAGE)[2026-10-28T20:44:22+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-TEST-COVERAGE
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/116
-commit:
+commit: e170c7d649037899657cde30384bd3022f8184a8
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 created_at: 2026-10-28T22:10:51+00:00
 ---
 

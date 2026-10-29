@@ -2,14 +2,14 @@
 execution_id: 2026_10_29_01_10_00_WI_CHARTER_SUPPLEMENT_TEST_COVERAGE_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_TEST_COVERAGE_CONFIRM)[2026-10-29T00:52:37+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_10_28_22_10_51_WI_CHARTER_SUPPLEMENT_TEST_COVERAGE
 pr: https://github.com/xenotaur/prosoc/pull/116
-commit:
+commit: e170c7d649037899657cde30384bd3022f8184a8
 created_at: 2026-10-29T01:10:00+00:00
 agent: claude-code
 instruction_source: https://github.com/xenotaur/prosoc/pull/116
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary

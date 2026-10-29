@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: 'Implemented and merged in PR #116 (commit e170c7d649037899657cde30384bd3022f8184a8)'
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-TEST-COVERAGE
 title: "Add regression tests for the charter supplement's known defect classes"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on: []
