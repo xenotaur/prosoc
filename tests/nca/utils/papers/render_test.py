@@ -1,3 +1,4 @@
+import re
 import shutil
 import subprocess
 import tempfile
@@ -266,6 +267,147 @@ class TestLuaFilterIntegration(unittest.TestCase):
         )
 
         self.assertIn("4.1 Sub-numbered Heading", result.stdout)
+
+
+# (pandoc source key, source path relative to REPO_ROOT, label substrings
+# expected to introduce a Markdown list in the real source) -- every card
+# actually affected by the collapsed-list defect found in the 2026-10-26
+# charter supplement pipeline audit.
+_LIST_COLLAPSE_CASES = [
+    (
+        "NAVIGATE_POINT_TO_POINT",
+        "src/prosoc/prnc/tasks/navigate_point_to_point/task.md",
+        ["Includes:", "Excludes:"],
+    ),
+    (
+        "DELIVER_OBJECT",
+        "src/prosoc/prnc/tasks/deliver_object/task.md",
+        ["Includes:", "Excludes:", "It frequently interacts with:"],
+    ),
+    (
+        "ROUTINE_DELIVERY",
+        "src/prosoc/prnc/contexts/routine_delivery/context.md",
+        [
+            "Includes:",
+            "Excludes:",
+            "Key normative expectations include:",
+            "Geometric Factors",
+            "Operational Factors",
+            "Common tensions include:",
+        ],
+    ),
+    (
+        "GUIDANCE_DOCENT",
+        "src/prosoc/prnc/contexts/guidance_docent/context.md",
+        [
+            "Includes:",
+            "Excludes:",
+            "Key normative expectations include:",
+            "Geometric Factors",
+            "Operational Factors",
+            "Common tensions include:",
+        ],
+    ),
+    (
+        "HIGH_URGENCY",
+        "src/prosoc/prnc/contexts/high_urgency/context.md",
+        [
+            "Includes:",
+            "Excludes:",
+            "Key normative expectations include:",
+            "Geometric Factors",
+            "Operational Factors",
+            "Common tensions include:",
+        ],
+    ),
+]
+
+
+class TestListCollapseRegression(unittest.TestCase):
+    """Regression coverage for the collapsed-list defect found in the
+    2026-10-26 charter supplement pipeline audit: a bold or plain label
+    immediately followed by a Markdown list, with no blank line between
+    them, rendered as run-on prose ("Includes: - item one - item two")
+    instead of a proper LaTeX list -- fixed at the source level by
+    WI-CHARTER-SUPPLEMENT-SOURCE-FIXES. Runs real pandoc against the real
+    source cards, since the defect was in the source text, not in this
+    module's own fixup logic."""
+
+    def setUp(self):
+        if shutil.which("pandoc") is None:
+            self.skipTest("pandoc is not installed")
+
+    def test_no_collapsed_list_after_known_labels(self):
+        for key, relative_path, labels in _LIST_COLLAPSE_CASES:
+            with tempfile.TemporaryDirectory() as td:
+                fragments_dir = Path(td)
+                output = render.render_fragment(
+                    key,
+                    REPO_ROOT / relative_path,
+                    repo_root=REPO_ROOT,
+                    fragments_dir=fragments_dir,
+                    log=None,
+                )
+                text = output.read_text(encoding="utf-8")
+
+            for label in labels:
+                with self.subTest(key=key, label=label):
+                    idx = text.find(label)
+                    self.assertNotEqual(idx, -1, f"{key}: label {label!r} not found")
+                    after = text[idx + len(label) :]
+                    match = re.search(r"\\begin\{itemize\}", after)
+                    self.assertIsNotNone(
+                        match, f"{key}: no itemize list follows {label!r}"
+                    )
+                    between = after[: match.start()].strip()
+                    # A bolded label (e.g. "\textbf{Includes:}") leaves one
+                    # closing brace in `between`; strip it before asserting
+                    # nothing else (i.e. no collapsed run-on text) remains.
+                    if between.startswith("}"):
+                        between = between[1:].strip()
+                    self.assertEqual(
+                        between,
+                        "",
+                        f"{key}: {label!r} not immediately followed by a clean "
+                        f"list (found collapsed run-on text: {between!r})",
+                    )
+
+
+class TestHeadingNumberRegression(unittest.TestCase):
+    """Regression coverage for the double-numbered-heading defect: every
+    heading in the real charter.md must render with no authored
+    heading-number prefix, checked across the whole document rather than
+    a few synthetic examples (TestLuaFilterIntegration covers the filter's
+    own logic in isolation)."""
+
+    def setUp(self):
+        if shutil.which("pandoc") is None:
+            self.skipTest("pandoc is not installed")
+        if not LUA_FILTER.is_file():
+            self.skipTest(f"lua filter not found at {LUA_FILTER}")
+
+    def test_no_charter_heading_keeps_authored_number(self):
+        with tempfile.TemporaryDirectory() as td:
+            fragments_dir = Path(td)
+            output = render.render_fragment(
+                "CHARTER",
+                REPO_ROOT / "src/prosoc/prnc/charter/charter.md",
+                repo_root=REPO_ROOT,
+                fragments_dir=fragments_dir,
+                lua_filter=LUA_FILTER,
+                log=None,
+            )
+            text = output.read_text(encoding="utf-8")
+
+        headings = re.findall(r"\\subsection\{([^}]*)\}", text)
+        self.assertGreater(len(headings), 0, "no \\subsection{...} headings found")
+        for heading in headings:
+            with self.subTest(heading=heading):
+                self.assertNotRegex(
+                    heading,
+                    r"^\d+\.\s",
+                    f"heading {heading!r} still carries an authored number prefix",
+                )
 
 
 class TestRendering(unittest.TestCase):
