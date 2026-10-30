@@ -2,10 +2,11 @@
 execution_id: 2026_10_30_07_08_42_WI_CHARTER_SUPPLEMENT_PDF_BUILD_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_PDF_BUILD_SELFREVIEW)[2026-10-30T07:08:36+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_10_29_15_41_54_WI_CHARTER_SUPPLEMENT_PDF_BUILD
 pr: https://github.com/xenotaur/prosoc/pull/117
-commit:
+commit: 1e3e7f8b38fe5d47af199d72353b9bd1faa26ef7
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 created_at: 2026-10-30T07:08:42+00:00
 ---
 

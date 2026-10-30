@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: 'Implemented and merged in PR #117 (commit 1e3e7f8b38fe5d47af199d72353b9bd1faa26ef7)'
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-PDF-BUILD
 title: "Add a reproducible PDF build entry point for the charter supplement"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on: []
