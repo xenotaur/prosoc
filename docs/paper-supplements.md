@@ -108,6 +108,47 @@ The renderer applies deterministic publication fixups that make the generated
 LaTeX match reviewed supplement formatting, including list-style code blocks
 and removal of Pandoc horizontal-rule output.
 
+## PDF Build
+
+`render.py --pdf` compiles a reviewable PDF from current sources, validating
+every prerequisite up front rather than letting a missing tool or version
+mismatch surface as an opaque pdflatex log:
+
+```bash
+papers/01_charter/render.py --pdf
+```
+
+In order, the command:
+
+1. Checks the installed Pandoc version against the pinned version
+   (`PANDOC_PINNED_VERSION` in `prosoc.nca.utils.papers.render`) and fails
+   clearly on drift -- the pipeline is only reproducible against a pinned
+   version; the 2026-10-26 charter supplement pipeline audit observed
+   3.10.1 and 2.9.2 across two sandboxes.
+2. Checks that `pdflatex` and `pdftotext` are installed and on `PATH`.
+3. Checks (via `kpsewhich`) that the Frontiers `frontiers_suppmat` class
+   file is on the TeX search path. **This publisher asset is not committed
+   to the repository pending a licensing answer** -- supply it locally and
+   add its directory to `TEXINPUTS` before running `--pdf`.
+4. Runs the semantic/LaTeX regression suite
+   (`tests.nca.utils.papers.render_test`,
+   `tests.nca.utils.papers.paper_semantics_test`).
+5. Renders `rendered.tex` as above.
+6. Compiles it with `pdflatex -interaction=nonstopmode -halt-on-error`,
+   which stops on a hard LaTeX error (e.g. invalid UTF-8) instead of
+   silently producing a corrupted PDF.
+7. Extracts the compiled PDF's text with `pdftotext -layout` and checks it
+   for known glyph-loss corruption (`KNOWN_PDF_TEXT_CORRUPTIONS`) --
+   `template.tex` loads `lmodern` (outline/scalable fonts) specifically so
+   this extraction is reliable; the class's default bitmap Computer Modern
+   fonts were confirmed to drop dashes and quotes from extracted text in
+   the same audit.
+
+On success it reports the Pandoc version, TeX engine version, PDF path, and
+page count. Any missing tool, version mismatch, failing regression check, or
+compile/text-extraction failure stops the command with a clear, specific
+error rather than a partial or silently corrupted result.
+
 ## Golden Comparison
 
 After rendering, compare the generated supplement with the reviewed golden
