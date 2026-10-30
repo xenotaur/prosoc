@@ -441,12 +441,17 @@ def extract_pdf_text(
     """Extract PDF text with ``-layout``, using outline fonts (the template
     loads lmodern) so dashes and quotes survive extraction instead of being
     dropped by default bitmap CM fonts (see the 2026-10-26 audit)."""
-    completed = runner(
-        [pdftotext, "-layout", str(pdf_file), "-"],
-        stdout=subprocess.PIPE,
-        check=True,
-        text=True,
-    )
+    try:
+        completed = runner(
+            [pdftotext, "-layout", str(pdf_file), "-"],
+            stdout=subprocess.PIPE,
+            check=True,
+            text=True,
+        )
+    except subprocess.CalledProcessError as exc:
+        raise RuntimeError(
+            f"{pdftotext} failed extracting text from {pdf_file}"
+        ) from exc
     return completed.stdout
 
 

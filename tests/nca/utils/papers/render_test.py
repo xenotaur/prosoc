@@ -730,6 +730,13 @@ class TestExtractPdfText(unittest.TestCase):
         self.assertEqual(text, "extracted text")
         self.assertIn("-layout", calls[0])
 
+    def test_wraps_failed_invocation_with_clear_message(self):
+        def failing_runner(args, **kwargs):
+            raise subprocess.CalledProcessError(1, args)
+
+        with self.assertRaisesRegex(RuntimeError, "pdftotext failed extracting"):
+            render.extract_pdf_text(Path("out.pdf"), runner=failing_runner)
+
 
 class TestPdfPageCount(unittest.TestCase):
 
