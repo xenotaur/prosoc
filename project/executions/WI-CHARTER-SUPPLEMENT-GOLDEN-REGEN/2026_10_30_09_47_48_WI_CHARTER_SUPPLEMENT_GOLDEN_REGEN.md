@@ -38,10 +38,11 @@ Summary of the categorization:
   two closing re-approval history bullets (LIFECYCLE-DISPLAY-FIX), all
   14 double-numbered-heading strips (RENDERER-FIXES), 4 stale
   pre-restructure path fixes, one internal SOURCE: attribution reword,
-  two leaked internal-tooling path removals, 16
-  collapsed-list-to-itemize conversions (24 new \begin{itemize} blocks)
-  across 5 cards, and several context/task IDs now rendering as
-  \texttt{...} (all SOURCE-FIXES).
+  one leaked internal-tooling path removal plus two page-citation
+  removals from edit-history prose, 24
+  collapsed-list-to-itemize conversions (24 new \begin{itemize} blocks,
+  a clean 1:1) across 5 cards, and several context/task IDs now
+  rendering as \texttt{...} (all SOURCE-FIXES).
 - **Content-drift hunks** (already-merged PR #97 / WI-CHARTER-FRONTIERS-SYNC
   content golden never captured): P1 Safety's broadened scope, P2-P8's
   must->should modal convention, P8's six-context-taxonomy rewrite, P9's
@@ -55,10 +56,18 @@ golden file.
 A diff-mode `/lrh-self-review` pass (see
 `project/executions/AD_HOC/2026_10_30_09_46_23_WI_CHARTER_SUPPLEMENT_GOLDEN_REGEN_SELFREVIEW.md`)
 found and fixed one should-fix issue before this push: the categorization
-undercounted the collapsed-list conversions as "10" when the actual count
-is 16 locations / 24 itemize blocks -- a documentation-only correction,
-independently re-verified via `grep -c '^+\\begin{itemize}'` against the
-diff; no bucket-correctness or content error.
+undercounted the collapsed-list conversions as "10" -- but the fix itself
+undercounted again, landing on "16 locations / 24 itemize blocks" instead
+of the correct 24 locations / 24 blocks (clean 1:1; the two self-review
+rounds' own `grep -c` re-verification confirmed the "24 blocks" half but
+not the locations-per-label breakdown). A PR-mode substitute self-review
+(see
+`project/executions/AD_HOC/2026_10_31_10_52_08_WI_CHARTER_SUPPLEMENT_GOLDEN_REGEN_SELFREVIEW.md`)
+caught and this session independently re-verified the final correction;
+also tightened "two leaked internal-tooling path removals" to
+distinguish the one actual path reference from two page-citation
+removals. All documentation-only; no bucket-correctness or content
+error at any point.
 
 `golden/original.tex` is confirmed untouched. No editorial/content-review
 question from the audit's "Not independently re-verified" section was
