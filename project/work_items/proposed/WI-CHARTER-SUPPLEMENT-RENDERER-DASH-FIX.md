@@ -15,7 +15,7 @@ forbidden_actions: [force_push, delete_branch, merge_pr, implement_lifecycle_sta
 acceptance:
   - "A real pdflatex + pdftotext -layout round trip shows en dash and em dash surviving correctly inside lstlisting blocks (not corrupted to '{' or '|')"
   - "papers/01_charter/template.tex loads a font encoding under which \\textendash/\\textemdash (used by the literatecard literate= mapping) produce PDF text with correct ToUnicode mappings"
-  - "papers/01_charter/golden/rendered.tex is regenerated only after a human reviews the resulting diff, if the fix changes Pandoc's .tex output at all"
+  - "papers/01_charter/golden/rendered.tex is regenerated with human review of the resulting diff (expected: the new preamble line only, no card-content changes)"
   - "scripts/test and lrh validate pass"
 required_evidence: [manual_review, test_output]
 artifacts_expected:
@@ -69,11 +69,15 @@ apostrophe case survived.
   added for the analogous "outline fonts, not bitmap" reason.
 - Re-run the real `pdflatex` + `pdftotext -layout` round trip and
   confirm both previously-corrupted characters now extract correctly.
-- Confirm the fix doesn't change Pandoc's `.tex` output (it shouldn't
-  -- `fontenc` only affects PDF-level font/glyph selection, not
-  `.tex` source generation) via `diff` against the current golden file;
-  regenerate the golden file only if it does, with human review of the
-  diff.
+- Expect `papers/01_charter/golden/rendered.tex` to require
+  regeneration: `render_paper()` copies `template.tex`'s preamble
+  verbatim into the assembled `.tex` and only substitutes card
+  placeholders (`src/prosoc/nca/utils/papers/render.py:248-276`), so
+  adding a `\usepackage` line to `template.tex` changes the generated
+  preamble even though no card fragment content is affected.
+  Regenerate the golden file with human review of the diff, confirming
+  only the expected preamble-line addition appears and no card content
+  changed.
 
 ## Non-Goals
 - Does not change the `literate=` character mappings themselves --
@@ -89,8 +93,8 @@ apostrophe case survived.
   `lstlisting` blocks.
 - `papers/01_charter/template.tex` loads the font encoding needed for
   `\textendash`/`\textemdash` to produce correct PDF text.
-- Golden file regenerated (with human review) only if the fix changes
-  it.
+- Golden file regenerated, with human review confirming the diff is
+  only the expected new preamble line.
 - `scripts/test` / `lrh validate` pass.
 
 ## Validation
