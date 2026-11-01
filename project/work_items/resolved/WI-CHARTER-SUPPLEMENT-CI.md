@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #119 (commit d6084d1f8da4ba3e817d239d7f6414c20599e9c9)."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-CI
 title: "Add CI coverage for the charter supplement pipeline"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on:

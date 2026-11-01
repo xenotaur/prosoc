@@ -2,14 +2,14 @@
 execution_id: 2026_11_01_05_27_59_WI_CHARTER_SUPPLEMENT_CI
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-CI:WI_CHARTER_SUPPLEMENT_CI)[2026-11-01T03:49:05+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-CI
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/119
-commit:
+commit: d6084d1f8da4ba3e817d239d7f6414c20599e9c9
 created_at: 2026-11-01T05:27:59+00:00
 agent: claude-code
 instruction_source: project/work_items/proposed/WI-CHARTER-SUPPLEMENT-CI.md
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary

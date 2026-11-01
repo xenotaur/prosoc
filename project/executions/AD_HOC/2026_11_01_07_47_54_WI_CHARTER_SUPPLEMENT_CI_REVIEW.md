@@ -2,14 +2,14 @@
 execution_id: 2026_11_01_07_47_54_WI_CHARTER_SUPPLEMENT_CI_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_CI_REVIEW)[2026-11-01T07:47:10+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_01_05_27_59_WI_CHARTER_SUPPLEMENT_CI
 pr: https://github.com/xenotaur/prosoc/pull/119
-commit:
+commit: d6084d1f8da4ba3e817d239d7f6414c20599e9c9
 created_at: 2026-11-01T07:47:54+00:00
 agent: claude-code
 instruction_source: https://github.com/xenotaur/prosoc/pull/119
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary
