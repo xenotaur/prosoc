@@ -72,24 +72,39 @@ exceptions.
 - CI (pre-push read): `lint`/`test` SUCCESS; no required-check
   protection on this repo
 
-Step 8 (post-push), HEAD `83d813228f9208de5de3541a9582a047fbfcba48`:
-- CI: no required-check protection on this repo; unfiltered `gh pr
-  checks` -- `test` SUCCESS, `lint` SUCCESS (both terminal, confirmed
-  via a bounded poll).
+Step 8 (post-push), first checked at HEAD
+`83d813228f9208de5de3541a9582a047fbfcba48`: CI green, 0 unresolved
+threads -- but recording that result (this record itself) required a
+new commit, moving HEAD again. `git commit --amend` was blocked by the
+auto-mode destructive-action classifier (no explanation given); per
+documented prior practice, did not attempt a workaround and pushed the
+write-up as a normal new commit instead (`382b296`), then re-ran both
+checks against the real final HEAD rather than trusting the
+already-recorded ones:
+
+Final re-check, HEAD `382b296cf13a1473d7a63896b57769f7ce8d5a02`
+(confirmed via `gh pr view ... --json headRefOid`, matching this
+branch's pushed tip; the diff from `83d8132` to `382b296` is this one
+execution-record file only, confirmed via `git diff --stat`):
+- CI: `gh pr checks` -- `test` SUCCESS, `lint` SUCCESS (both terminal,
+  confirmed via a bounded poll). No required-check protection on this
+  repo.
 - REVIEW-LANDED re-check: `lrh github threads --mode raw --state all`
-  -- both threads now `isResolved: true`, 0 unresolved. The one review
+  -- both threads `isResolved: true`, 0 of 2 unresolved. The one review
   on record (`copilot-pull-request-reviewer[bot]`, `COMMENTED`,
   2026-11-01T09:51:28Z) is against an earlier commit
   (`b9db814876a76a18723b81d7ad255b9ca498782f`); no new review has
   landed against this HEAD, but the authoritative 0-unresolved-threads
   signal plus sufficient elapsed time since push (CI ran to
-  completion) satisfies REVIEW-LANDED here -- no new findings surfaced.
+  completion on a doc-only diff) satisfies REVIEW-LANDED here -- no new
+  findings surfaced.
 
 **Final merge-readiness verdict: GREEN.** Thread-resolution green (Step
-6) + CI green + REVIEW-LANDED satisfied, all against the same HEAD.
+6) + CI green + REVIEW-LANDED satisfied, all re-verified against the
+actual final HEAD `382b296`.
 
 ```
-lrh vcs merge https://github.com/xenotaur/prosoc/pull/120 --match-head-commit 83d813228f9208de5de3541a9582a047fbfcba48 --squash
+lrh vcs merge https://github.com/xenotaur/prosoc/pull/120 --match-head-commit 382b296cf13a1473d7a63896b57769f7ce8d5a02 --squash
 ```
 
 # Follow-up
