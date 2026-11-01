@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Verified via a real pdflatex+pdftotext round trip: heading numbering is correct (152/152 headings, each numbered once); Unicode survival inside lstlisting blocks fails for en dash and em dash (passes for curly apostrophe; 3 characters unverifiable due to zero occurrences in current content). Filed WI-CHARTER-SUPPLEMENT-RENDERER-DASH-FIX for the confirmed gap (merged PR #121, commit f4e3e7927840b57b01027477f7494e66a5facd82)."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-RENDERER-PDF-VERIFICATION
 title: "Verify charter renderer heading-numbering and Unicode fixes via a real pdflatex+pdftotext round trip"
 type: evaluation
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on:
