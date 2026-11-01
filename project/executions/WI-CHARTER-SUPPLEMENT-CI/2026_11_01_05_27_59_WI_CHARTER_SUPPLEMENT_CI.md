@@ -44,16 +44,22 @@ missing-`pdflatex` state, verified the `actions/upload-artifact` SHA pin
 live against GitHub's API, and ran the full pipeline locally confirming
 the golden file is genuinely non-stale.
 
-**Verification caveat:** this WI's own Validation section requires "a
-test PR run of the new workflow" -- that real CI run happens once PR #119
-is open; its result will be reported in the PR description and in the
-`_CONFIRM` record, not here.
+**Real test-PR run (this WI's own Validation requirement):** the new
+workflow ran on PR #119 itself immediately after the first push --
+run 41277094772, conclusion `success`. Pandoc 3.10.1 installed and
+matched the pin; the renderer/semantic test suite passed; render +
+golden-diff check passed with no drift; the PDF stage correctly did
+not complete (`pdflatex` unavailable on the runner, as expected) and
+reported this via a GitHub Actions `::notice::` rather than failing or
+silently skipping -- exactly the designed behavior. Reported in the PR
+description.
 
 # Validation
 
 - `lrh validate` -- 0 errors, 20 pre-existing unrelated warnings
 - Diff-mode self-review: 0 findings, full local pipeline run clean
-- Pending: the new workflow's actual run on PR #119 itself
+- Real workflow run on PR #119 (run 41277094772): success, behaved as
+  designed on every stage (see above)
 
 # Follow-up
 
