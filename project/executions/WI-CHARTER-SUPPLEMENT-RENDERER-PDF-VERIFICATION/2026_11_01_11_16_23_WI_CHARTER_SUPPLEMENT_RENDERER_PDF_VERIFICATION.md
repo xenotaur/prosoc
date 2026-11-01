@@ -4,7 +4,7 @@ prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-RENDERER-PDF-VERIFICATION:WI_CHARTER_SUP
 work_item: WI-CHARTER-SUPPLEMENT-RENDERER-PDF-VERIFICATION
 status: in_progress
 rerun_of:
-pr:
+pr: https://github.com/xenotaur/prosoc/pull/122
 commit:
 created_at: 2026-11-01T11:16:23+00:00
 agent: claude-code
