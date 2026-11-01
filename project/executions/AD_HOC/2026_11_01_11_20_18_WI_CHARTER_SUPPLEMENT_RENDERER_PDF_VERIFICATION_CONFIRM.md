@@ -2,10 +2,10 @@
 execution_id: 2026_11_01_11_20_18_WI_CHARTER_SUPPLEMENT_RENDERER_PDF_VERIFICATION_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_RENDERER_PDF_VERIFICATION_CONFIRM)[2026-11-01T11:20:08+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_01_11_16_23_WI_CHARTER_SUPPLEMENT_RENDERER_PDF_VERIFICATION
 pr: https://github.com/xenotaur/prosoc/pull/122
-commit:
+commit: 5901c46e43ebef8c6a4af4199ee243cc63e6822b
 created_at: 2026-11-01T11:20:18+00:00
 agent: claude-code
 instruction_source: https://github.com/xenotaur/prosoc/pull/122
