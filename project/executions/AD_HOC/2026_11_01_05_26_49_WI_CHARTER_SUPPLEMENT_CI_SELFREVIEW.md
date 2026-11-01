@@ -3,8 +3,8 @@ execution_id: 2026_11_01_05_26_49_WI_CHARTER_SUPPLEMENT_CI_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_CI_SELFREVIEW)[2026-11-01T05:26:43+00:00]
 work_item: AD_HOC
 status: in_progress
-rerun_of:
-pr:
+rerun_of: 2026_11_01_05_27_59_WI_CHARTER_SUPPLEMENT_CI
+pr: https://github.com/xenotaur/prosoc/pull/119
 commit:
 created_at: 2026-11-01T05:26:49+00:00
 ---
