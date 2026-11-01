@@ -65,6 +65,38 @@ per explicit user decision, to unblock the rest of the workstream.
 - If either check fails, file a new work item for the gap rather than
   silently reporting a pass.
 
+## Required Changes
+1. In an environment with `pdflatex`, `pdftotext`, `kpsewhich`, and the
+   Frontiers `frontiers_suppmat.cls` class file all available, run
+   `PYTHONPATH="$(pwd)/src" papers/01_charter/render.py --pdf` to drive
+   the full `build_pdf()` pipeline in
+   `src/prosoc/nca/utils/papers/render.py` (pandoc-version check,
+   tool/class-file prerequisite checks, semantic checks, render,
+   `pdflatex` compile, `pdftotext -layout` text extraction, and
+   `check_pdf_text_regressions`).
+2. Inspect the extracted PDF text and the compiled
+   `build/papers/01_charter/rendered.pdf` (per
+   `docs/paper-supplements.md`'s "PDF Build" section) and confirm each
+   heading's number appears exactly once -- not doubled by the Frontiers
+   class's own automatic numbering on top of the Lua-filter output from
+   `WI-CHARTER-SUPPLEMENT-RENDERER-FIXES`.
+3. Confirm the specific Unicode characters this WI's Acceptance Criteria
+   names (en dash, em dash, non-breaking hyphen, curly double quotes,
+   curly apostrophe) survive inside every `lstlisting` block in the
+   extracted text -- not just the corruptions `KNOWN_PDF_TEXT_CORRUPTIONS`
+   in `render.py` already enumerates, since `check_pdf_text_regressions`
+   only catches those; a manual text read is still required for
+   characters it doesn't yet know to check.
+4. Record the environment used (OS, `pdflatex`/`pdftotext` versions, and
+   the Frontiers class file's source/licensing status) in the execution
+   record -- `WI-CHARTER-SUPPLEMENT-CI`'s own CI workflow confirmed this
+   tooling is still unavailable on its `ubuntu-latest` runner as of
+   2026-11-01, so this WI cannot be run on that CI runner and needs a
+   different environment.
+5. If either check fails, file a new `WI-*` work item describing the gap
+   rather than silently reporting a pass; do not attempt a
+   renderer/template fix within this WI's own scope (see Non-Goals).
+
 ## Non-Goals
 - Does not re-implement or modify the renderer, template, or Lua filter
   — this is verification only, of work already landed.
