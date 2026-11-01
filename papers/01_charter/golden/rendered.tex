@@ -8,6 +8,11 @@
 %%%  NB logo1.jpg is required in the path in order to correctly compile front page header %%%
 
 \documentclass[utf8]{frontiers_suppmat} % for all articles
+% Outline (scalable) fonts, not the class's default bitmap Computer Modern --
+% pdftotext silently drops dashes and quotes extracted from bitmap-font text
+% (confirmed in the 2026-10-26 charter supplement pipeline audit), which
+% would make any PDF-text regression check unreliable.
+\usepackage{lmodern}
 \usepackage{url,hyperref,lineno,microtype}
 \usepackage[onehalfspacing]{setspace}
 
@@ -56,7 +61,14 @@
   frame=single,
   columns=fullflexible,
   showstringspaces=false,
-  keepspaces=true
+  keepspaces=true,
+  literate=
+    {–}{{\textendash}}1
+    {—}{{\textemdash}}1
+    {‑}{{-}}1
+    {“}{{\textquotedblleft}}1
+    {”}{{\textquotedblright}}1
+    {’}{{\textquoteright}}1
 }
 
 % Leave a blank line between paragraphs instead of using \\
@@ -89,7 +101,7 @@ This section contains normative cards from the Prosocial Robot Navigation Charte
 Charter}\label{prosocial-robot-navigation-charter}
 
 \textbf{Version:} 0.1\\
-\textbf{Status:} Draft (Normative)\\
+\textbf{Status:} Approved (Normative)\\
 \textbf{Scope:} Mobile robot navigation in human-populated
 environments\\
 \textbf{Derived from:}\\
@@ -130,6 +142,23 @@ Algorithms} (Francis et al.)\\
   \texttt{movable\_obstruction} scenario, replaced with
   a self-contained example; expand Section 3's ``P8 Context'' to its
   full name ``Contextual Appropriateness''
+\item
+  \textbf{APPROVED:} Claude, 2026-08-07 (PR \#79) --- re-audited and
+  promoted EDITED → AUDITED → APPROVED, closing out the 2026-08-05
+  revert
+\item
+  \textbf{EDITED:} Claude (WI-CHARTER-FRONTIERS-SYNC), 2026-08-19 ---
+  implement PROP-CHARTER-FRONTIERS-SYNC's reconciliation decisions:
+  broaden P1's Safety scope (other robots, self-damage); restore P5's
+  ``where feasible'' hedge; adopt merged P2/P3/P4/P7 wording; apply the
+  MUST-for-P0-and-P1/SHOULD-elsewhere modal convention across all ten
+  principles; inline P8's six-context taxonomy; trim P9's
+  task/context/goals qualifier (Section 2's definition retains it);
+  reverted from APPROVED pending re-audit
+\item
+  \textbf{APPROVED:} Claude, 2026-08-19 (PR \#97) --- re-audited and
+  promoted EDITED → AUDITED → APPROVED, closing out the 2026-08-19
+  revert
 \end{itemize}
 
 The charter's lifecycle state is authored in the embedded YAML below
@@ -141,15 +170,15 @@ above, and enforced by
 \texttt{VALIDATED},
 \texttt{DEPRECATED}, or
 \texttt{RETIRED} (see
-\texttt{prosoc/scenarios/workflow.md}). The state
-applies to the charter document as a whole, not to individual
+\texttt{src/prosoc/prnc/scenarios/workflow.md}). The
+state applies to the charter document as a whole, not to individual
 principles.
 
 \begin{lstlisting}[style=literatecard]
 state: APPROVED
 \end{lstlisting}
 
-\subsection{1. Purpose of This Charter}\label{purpose-of-this-charter}
+\subsection{Purpose of This Charter}\label{purpose-of-this-charter}
 
 This document defines a \textbf{Charter for Prosocial Robot Navigation}.
 
@@ -173,7 +202,7 @@ model. Instead, it provides:
 This charter is intended to function as the \textbf{constitutional
 layer} of a prosocial robotics system.
 
-\subsection{2. Definition: Social and Prosocial Robot
+\subsection{Definition: Social and Prosocial Robot
 Navigation}\label{definition-social-and-prosocial-robot-navigation}
 
 Following the P\&G paper, we define \textbf{social robot navigation} as:
@@ -208,7 +237,7 @@ prosocial behavior is where getting that balance right matters most,
 since it is the principle most likely to tempt a robot into acting past
 its mandate.
 
-\subsection{3. Structure of the
+\subsection{Structure of the
 Principles}\label{structure-of-the-principles}
 
 The charter consists of \textbf{ten principles}, P0--P9:
@@ -262,7 +291,7 @@ Each principle includes:
 Each principle also includes an \textbf{embedded YAML block}, which is
 the authoritative machine-readable representation.
 
-\subsection{4. Principle P0 --- Goal
+\subsection{Principle P0 --- Goal
 Achievement}\label{principle-p0-goal-achievement}
 
 \subsubsection{Normative Statement}\label{normative-statement}
@@ -298,20 +327,22 @@ examples:
     - "Robot refuses to move despite being asked to navigate a known path."
 \end{lstlisting}
 
-\subsection{5. Principle P1 --- Safety}\label{principle-p1-safety}
+\subsection{Principle P1 --- Safety}\label{principle-p1-safety}
 
 \subsubsection{Normative Statement}\label{normative-statement-1}
 
-Robots must not cause harm to humans or damage environments.
+Robots must not cause harm to humans, or damage to other robots,
+environments, or themselves.
 
 \subsubsection{Explanation}\label{explanation-1}
 
 Safety is the foundational constraint of social navigation. A robot that
-harms people or damages shared environments violates not only social
-norms but basic ethical expectations. This includes maintaining a safe
-distance from people unless explicitly invited to approach --- uninvited
-close proximity is itself a safety-relevant failure mode, not merely a
-comfort one (see P2).
+harms people, damages shared environments, collides with other robots,
+or damages itself violates not only social norms but basic ethical
+expectations --- safety is not limited to the robot's human-facing
+behavior. This includes maintaining a safe distance from people unless
+explicitly invited to approach --- uninvited close proximity is itself a
+safety-relevant failure mode, not merely a comfort one (see P2).
 
 Safety violations override all other considerations.
 
@@ -320,8 +351,9 @@ id: P1
 name: Safety
 severity: critical
 description: >
-  Robots must not cause harm to humans or damage environments. This includes
-  maintaining a safe distance unless explicitly invited to approach.
+  Robots must not cause harm to humans, or damage to other robots,
+  environments, or themselves. This includes maintaining a safe distance
+  unless explicitly invited to approach.
 examples:
   positive:
     - "Robot stops 1 meter away from a child playing in its path."
@@ -331,11 +363,11 @@ examples:
     - "Robot knocks over a shelf while turning too quickly."
 \end{lstlisting}
 
-\subsection{6. Principle P2 --- Comfort}\label{principle-p2-comfort}
+\subsection{Principle P2 --- Comfort}\label{principle-p2-comfort}
 
 \subsubsection{Normative Statement}\label{normative-statement-2}
 
-Robots must avoid causing stress, fear, or annoyance.
+Robots should avoid causing stress, fear, or annoyance in nearby humans.
 
 \subsubsection{Explanation}\label{explanation-2}
 
@@ -349,8 +381,8 @@ id: P2
 name: Comfort
 severity: high
 description: >
-  Robots must avoid causing stress, fear, or annoyance. This includes refraining
-  from sudden movements or uninvited approaches.
+  Robots should avoid causing stress, fear, or annoyance in nearby humans.
+  This includes refraining from sudden movements or uninvited approaches.
 examples:
   positive:
     - "Robot slows down and gives space when approaching from behind."
@@ -360,13 +392,12 @@ examples:
     - "Robot hovers near someone for no reason, causing discomfort."
 \end{lstlisting}
 
-\subsection{7. Principle P3 ---
-Legibility}\label{principle-p3-legibility}
+\subsection{Principle P3 --- Legibility}\label{principle-p3-legibility}
 
 \subsubsection{Normative Statement}\label{normative-statement-3}
 
-Robots must act in ways that make their goals and intentions easy to
-understand.
+Robots should act in ways that make their goals and intentions clear
+from their behavior.
 
 \subsubsection{Explanation}\label{explanation-3}
 
@@ -378,7 +409,8 @@ id: P3
 name: Legibility
 severity: medium
 description: >
-  Robots must act in ways that make their goals and intentions easy to understand.
+  Robots should act in ways that make their goals and intentions clear
+  from their behavior.
 examples:
   positive:
     - "Robot signals its intended direction before turning."
@@ -388,12 +420,12 @@ examples:
     - "Robot stops abruptly without signaling intent."
 \end{lstlisting}
 
-\subsection{8. Principle P4 ---
-Politeness}\label{principle-p4-politeness}
+\subsection{Principle P4 --- Politeness}\label{principle-p4-politeness}
 
 \subsubsection{Normative Statement}\label{normative-statement-4}
 
-Robots must be respectful and considerate in shared social spaces.
+Robots should be respectful and considerate toward other agents in
+shared social spaces.
 
 \subsubsection{Explanation}\label{explanation-4}
 
@@ -414,8 +446,8 @@ id: P4
 name: Politeness
 severity: medium
 description: >
-  Robots must be respectful and considerate, offering help when asked
-  and avoiding dismissive or intrusive behaviors.
+  Robots should be respectful and considerate toward other agents,
+  offering help when asked and avoiding dismissive or intrusive behaviors.
 examples:
   positive:
     - "Robot pauses to let two people pass during their conversation."
@@ -425,12 +457,13 @@ examples:
     - "Robot ignores a direct request for assistance."
 \end{lstlisting}
 
-\subsection{9. Principle P5 --- Social
+\subsection{Principle P5 --- Social
 Competency}\label{principle-p5-social-competency}
 
 \subsubsection{Normative Statement}\label{normative-statement-5}
 
-Robots must follow basic social norms governing shared spaces.
+Robots should follow basic social norms governing shared spaces where
+feasible.
 
 \subsubsection{Explanation}\label{explanation-5}
 
@@ -452,8 +485,8 @@ id: P5
 name: Social Competency
 severity: medium
 description: >
-  Robots must follow social norms and avoid inappropriate behaviors such
-  as interrupting conversations or blocking passage.
+  Robots should follow social norms where feasible, avoiding inappropriate
+  behaviors such as interrupting conversations or blocking passage.
 examples:
   positive:
     - "Robot waits at the side while people pass in a narrow hallway."
@@ -463,12 +496,12 @@ examples:
     - "Robot blocks a person trying to exit a room."
 \end{lstlisting}
 
-\subsection{10. Principle P6 --- Agent
+\subsection{Principle P6 --- Agent
 Understanding}\label{principle-p6-agent-understanding}
 
 \subsubsection{Normative Statement}\label{normative-statement-6}
 
-Robots must predict and accommodate the behavior of other agents.
+Robots should predict and accommodate the behavior of other agents.
 
 \subsubsection{Explanation}\label{explanation-6}
 
@@ -489,7 +522,7 @@ id: P6
 name: Agent Understanding
 severity: high
 description: >
-  Robots must predict and accommodate the behaviors of other agents
+  Robots should predict and accommodate the behaviors of other agents
   (humans, robots, pets, etc.).
 examples:
   positive:
@@ -500,13 +533,13 @@ examples:
     - "Robot moves forward without accounting for a toddler's presence."
 \end{lstlisting}
 
-\subsection{11. Principle P7 ---
+\subsection{Principle P7 ---
 Proactivity}\label{principle-p7-proactivity}
 
 \subsubsection{Normative Statement}\label{normative-statement-7}
 
-Robots should anticipate potential issues and take initiative to avoid
-or resolve them.
+Robots should proactively anticipate potential issues or conflicts and
+take initiative to avoid or resolve them.
 
 \subsubsection{Explanation}\label{explanation-7}
 
@@ -535,8 +568,8 @@ id: P7
 name: Proactivity
 severity: medium
 description: >
-  Robots should anticipate potential issues and take initiative
-  to avoid or resolve them.
+  Robots should proactively anticipate potential issues or conflicts
+  and take initiative to avoid or resolve them.
 examples:
   positive:
     - "Robot re-routes before entering a known blocked corridor."
@@ -546,12 +579,14 @@ examples:
     - "Robot does nothing while someone struggles with a door."
 \end{lstlisting}
 
-\subsection{12. Principle P8 --- Contextual
+\subsection{Principle P8 --- Contextual
 Appropriateness}\label{principle-p8-contextual-appropriateness}
 
 \subsubsection{Normative Statement}\label{normative-statement-8}
 
-Robots must adapt their behavior to the social and situational context.
+Robots should act appropriately given their task, environmental
+(geometric and operational), cultural, diversity, and interpersonal
+context.
 
 \subsubsection{Explanation}\label{explanation-8}
 
@@ -577,8 +612,9 @@ id: P8
 name: Contextual Appropriateness
 severity: medium
 description: >
-  Robots must act in ways that are appropriate for the situation
-  and context they are in.
+  Robots should act appropriately given their task, environmental
+  (geometric and operational), cultural, diversity, and interpersonal
+  context.
 examples:
   positive:
     - "Robot lowers its volume in a quiet room."
@@ -588,15 +624,14 @@ examples:
     - "Robot speaks loudly in a library."
 \end{lstlisting}
 
-\subsection{13. Principle P9 --- Prosocial
+\subsection{Principle P9 --- Prosocial
 Behavior}\label{principle-p9-prosocial-behavior}
 
 \subsubsection{Normative Statement}\label{normative-statement-9}
 
 Robots should act, during or in support of navigation, to improve the
 navigation experiences of other agents or to preserve or improve the
-navigability of their shared environment, in ways appropriate to their
-task and context and without sacrificing their own navigation goals.
+navigability of their shared environment.
 
 \subsubsection{Explanation}\label{explanation-9}
 
@@ -609,13 +644,14 @@ degrading another agent's experience is already required by social
 navigation generally (P1--P8); P9 is about going beyond that baseline.
 
 P9 is deliberately the lowest-severity principle: it is discretionary,
-and its normative statement carries its own limits so it cannot be read
-in isolation from P0 and P8. It should never be read as license to
-sacrifice the robot's own goals (P0) or to act inappropriately for the
-task or context (P8) --- for example, a delivery robot noticing an
-obstruction it could clear should weigh that against how much delay
-clearing it would add to its own task and how urgent that task is, not
-clear it unconditionally.
+and even though its normative statement no longer restates the limit
+explicitly, P9 still cannot be read in isolation from P0 and P8 --- that
+bound is expressed here, in this Explanation, rather than in the
+statement itself. It should never be read as license to sacrifice the
+robot's own goals (P0) or to act inappropriately for the task or context
+(P8) --- for example, a delivery robot noticing an obstruction it could
+clear should weigh that against how much delay clearing it would add to
+its own task and how urgent that task is, not clear it unconditionally.
 
 \begin{lstlisting}[style=literatecard]
 id: P9
@@ -624,8 +660,7 @@ severity: optional
 description: >
   Robots should act, during or in support of navigation, to improve the
   navigation experiences of other agents or to preserve or improve the
-  navigability of their shared environment, in ways appropriate to their
-  task and context and without sacrificing their own navigation goals.
+  navigability of their shared environment.
 examples:
   positive:
     - "Robot holds open a door for another person."
@@ -637,7 +672,7 @@ examples:
     - "Robot abandons its delivery task to tidy an unrelated room."
 \end{lstlisting}
 
-\subsection{14. Use of This Charter in the Prosocial Robotics
+\subsection{Use of This Charter in the Prosocial Robotics
 System}\label{use-of-this-charter-in-the-prosocial-robotics-system}
 
 This charter is intended to be consumed by:
@@ -842,11 +877,17 @@ or a combination thereof.
 \item
   \textbf{STATE:} APPROVED
 \item
-  \textbf{SOURCE:} Prompt to ChatGPT 5.2
+  \textbf{SOURCE:} Original scenario concept, LLM-assisted drafting
+  (ChatGPT 5.2); a common pedestrian-interaction benchmark pattern, not
+  derived from a specific external citation
 \item
   \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-02
 \item
   \textbf{EDITED:} render\_sections.py, 2026-07-19
+\item
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-SOURCE-FIXES),
+  2026-10-27 --- reword the SOURCE entry for publication (was an
+  internal-tooling attribution string, ``Prompt to ChatGPT 5.2'')
 \end{itemize}
 
 \subsubsection{Scenario Card Summary}\label{scenario-card-summary}
@@ -1021,7 +1062,7 @@ evaluation_notes: >
 
   Related Scenarios note: P&G Table 3 lists "Ped. Obstruct" as this
   scenario's related entry, which has no implemented scenario directory
-  under prosoc/scenarios/. `related_scenarios` instead references
+  under src/prosoc/prnc/scenarios/. `related_scenarios` instead references
   blind_corner, movable_obstruction, and single_file_hallway, which this
   corpus's own scenario set explicitly treats as a progressively
   constrained variant series of this scenario. This is expected per the
@@ -1114,11 +1155,10 @@ Hallway}\label{scenario-single-file-hallway}
   \textbf{EDITED:} render\_sections.py, 2026-07-19
 \item
   \textbf{EDITED:} Claude, 2026-08-06 --- correct SOURCE from a generic
-  ``P\&G paper'' attribution: the PRNC paper (§4.2.1, PDF pp.~23-24)
-  states this scenario was ``developed for this paper,'' not
-  extrapolated from P\&G's Figure 7 as
-  \texttt{.claude/skills/\_shared/pg\_scenarios.md}
-  previously guessed
+  ``P\&G paper'' attribution: the PRNC paper (§4.2.1) states this
+  scenario was ``developed for this paper,'' not extrapolated from
+  P\&G's Figure 7 as previously guessed in internal scenario-sourcing
+  notes
 \item
   \textbf{EDITED:} Claude, 2026-08-06 --- reword the ``Cited In''
   remaining-gaps note from ``should-fill-in-now'' to ``reasonably
@@ -1432,9 +1472,9 @@ Obstruction}\label{scenario-movable-obstruction}
   \textbf{EDITED:} render\_sections.py, 2026-07-19
 \item
   \textbf{EDITED:} Claude, 2026-08-06 --- correct SOURCE from a generic
-  ``P\&G paper'' attribution: the PRNC paper (§4.2.1, PDF pp.~23-24)
-  states this scenario was ``developed for this paper,'' not sourced
-  from P\&G Table 3/Figure 7
+  ``P\&G paper'' attribution: the PRNC paper (§4.2.1) states this
+  scenario was ``developed for this paper,'' not sourced from P\&G Table
+  3/Figure 7
 \item
   \textbf{EDITED:} Claude, 2026-08-07 --- reword the ``Cited In''
   remaining-gaps note from ``should-fill-in-now'' to ``reasonably
@@ -1646,7 +1686,7 @@ evaluation_notes: >
   Task/context cross-reference: the Discussion section's illustrative task/context
   pairing is navigate.point_to_point (or deliver.object) under
   service.routine_delivery, guidance.docent, or emergency.high_urgency, matching
-  the actual IDs used in prosoc/tasks/*/task.yml and prosoc/contexts/*/context.yml.
+  the actual IDs used in src/prosoc/prnc/tasks/*/task.yml and src/prosoc/prnc/contexts/*/context.yml.
   This scenario does not require a
   specific task/context pairing to apply — it is illustrative of how the acceptable
   intervention behavior varies by task weighting and context, not a constraint on
@@ -1811,16 +1851,33 @@ Boundaries}\label{task-scope-and-boundaries}
 \textbf{Required}
 \end{quote}
 
-\textbf{Includes:} - Selecting and executing motion to progress toward a
-destination. - Temporarily slowing, stopping, or rerouting in service of
-reaching the goal. - Resuming motion toward the goal after interruptions
-or delays.
+\textbf{Includes:}
 
-\textbf{Excludes:} - Passing, overtaking, following, or leading specific
-agents. - Yielding right-of-way as a primary objective. - Interpreting
-gestures, social signals, or cultural norms. - Optimizing for comfort,
-legibility, or politeness beyond what is required to reach the
-destination.
+\begin{itemize}
+\tightlist
+\item
+  Selecting and executing motion to progress toward a destination.
+\item
+  Temporarily slowing, stopping, or rerouting in service of reaching the
+  goal.
+\item
+  Resuming motion toward the goal after interruptions or delays.
+\end{itemize}
+
+\textbf{Excludes:}
+
+\begin{itemize}
+\tightlist
+\item
+  Passing, overtaking, following, or leading specific agents.
+\item
+  Yielding right-of-way as a primary objective.
+\item
+  Interpreting gestures, social signals, or cultural norms.
+\item
+  Optimizing for comfort, legibility, or politeness beyond what is
+  required to reach the destination.
+\end{itemize}
 
 These excluded behaviors may arise during execution but are governed by
 scenarios, contexts, and charter principles rather than by the task
@@ -1837,10 +1894,20 @@ This task directly implicates \textbf{P0 (Goal Achievement)}, as
 successful completion depends on reaching the intended destination.
 
 Tension commonly arises between P0 and social or ethical principles such
-as: - \textbf{P1 (Safety)}, when progress toward the goal conflicts with
-collision avoidance, - \textbf{P2 (Comfort)}, when efficient motion
-creates discomfort for nearby humans, - \textbf{P3 (Legibility)}, when
-direct trajectories are socially ambiguous.
+as:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{P1 (Safety)}, when progress toward the goal conflicts with
+  collision avoidance,
+\item
+  \textbf{P2 (Comfort)}, when efficient motion creates discomfort for
+  nearby humans,
+\item
+  \textbf{P3 (Legibility)}, when direct trajectories are socially
+  ambiguous.
+\end{itemize}
 
 Evaluation of this task therefore requires assessing how goal
 achievement is balanced against other principles under scenario- and
@@ -2011,16 +2078,35 @@ Boundaries}\label{task-scope-and-boundaries}
 \textbf{Required}
 \end{quote}
 
-\textbf{Includes:} - Navigating in service of transporting an object
-toward a destination. - Temporarily pausing, stopping, or rerouting to
-preserve delivery success. - Coordinating navigation across multiple
-phases of delivery (e.g., approach, transit, arrival).
+\textbf{Includes:}
 
-\textbf{Excludes:} - Object manipulation details such as grasping or
-release mechanics. - Social protocols for requesting, accepting, or
-refusing delivery. - Determining whether delivery is appropriate or
-authorized. - Normative judgments about urgency, politeness, or
-priority. - Negotiation of hand-off beyond physical co-location.
+\begin{itemize}
+\tightlist
+\item
+  Navigating in service of transporting an object toward a destination.
+\item
+  Temporarily pausing, stopping, or rerouting to preserve delivery
+  success.
+\item
+  Coordinating navigation across multiple phases of delivery (e.g.,
+  approach, transit, arrival).
+\end{itemize}
+
+\textbf{Excludes:}
+
+\begin{itemize}
+\tightlist
+\item
+  Object manipulation details such as grasping or release mechanics.
+\item
+  Social protocols for requesting, accepting, or refusing delivery.
+\item
+  Determining whether delivery is appropriate or authorized.
+\item
+  Normative judgments about urgency, politeness, or priority.
+\item
+  Negotiation of hand-off beyond physical co-location.
+\end{itemize}
 
 These excluded aspects are governed by scenarios, contexts, and charter
 principles rather than by the task itself.
@@ -2035,11 +2121,23 @@ Principles}\label{relationship-to-prosocial-navigation-principles}
 This task directly implicates \textbf{P0 (Goal Achievement)}, as success
 depends on the object reaching its intended destination.
 
-It frequently interacts with: - \textbf{P1 (Safety)}, when transporting
-objects near humans or obstacles, - \textbf{P2 (Comfort)}, when delivery
-motion intrudes on personal space, - \textbf{P3 (Legibility)}, when the
-robot's intent to deliver must be inferred, - \textbf{P9 (Prosocial
-Behavior)}, as delivery tasks often serve human needs.
+It frequently interacts with:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{P1 (Safety)}, when transporting objects near humans or
+  obstacles,
+\item
+  \textbf{P2 (Comfort)}, when delivery motion intrudes on personal
+  space,
+\item
+  \textbf{P3 (Legibility)}, when the robot's intent to deliver must be
+  inferred,
+\item
+  \textbf{P9 (Prosocial Behavior)}, as delivery tasks often serve human
+  needs.
+\end{itemize}
 
 Evaluation of this task therefore focuses on whether delivery is
 achieved while appropriately balancing these principles under scenario-
@@ -2179,7 +2277,8 @@ Delivery}\label{context-routine-service-delivery}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Context ID:} service.routine\_delivery
+  \textbf{Context ID:}
+  \texttt{service.routine\_delivery}
 \item
   \textbf{Context Name:} Routine Service Delivery
 \item
@@ -2187,7 +2286,7 @@ Delivery}\label{context-routine-service-delivery}
 \item
   \textbf{Primary Role of Robot:} service provider
 \item
-  \textbf{Applies To Tasks:} deliver.object
+  \textbf{Applies To Tasks:} \texttt{deliver.object}
 \end{itemize}
 
 \subsubsection{Context Description}\label{context-description}
@@ -2217,10 +2316,18 @@ by everyday social expectations.
 This context introduces a task-driven reweighting of prosocial
 navigation principles without invoking urgency or authority.
 
-Key normative expectations include: - purposeful, goal-directed motion
-in service of delivery, - continued deference to human comfort and
-safety, - tolerance for minor social disruption when clearly
-attributable to service execution.
+Key normative expectations include:
+
+\begin{itemize}
+\tightlist
+\item
+  purposeful, goal-directed motion in service of delivery,
+\item
+  continued deference to human comfort and safety,
+\item
+  tolerance for minor social disruption when clearly attributable to
+  service execution.
+\end{itemize}
 
 Failures in this context are salient when the robot either behaves as if
 it has undue priority or, conversely, behaves so conservatively that the
@@ -2258,13 +2365,27 @@ Instantiated}\label{context-axes-instantiated}
 
 \paragraph{Environmental Context}\label{environmental-context}
 
-\textbf{Geometric Factors} - Often includes constrained spaces such as
-hallways, storage areas, or offices. - Moderate pedestrian density is
-typical.
+\textbf{Geometric Factors}
 
-\textbf{Operational Factors} - Environment supports routine service
-operations but is not dedicated exclusively to them. - The robot is not
-granted formal right-of-way.
+\begin{itemize}
+\tightlist
+\item
+  Often includes constrained spaces such as hallways, storage areas, or
+  offices.
+\item
+  Moderate pedestrian density is typical.
+\end{itemize}
+
+\textbf{Operational Factors}
+
+\begin{itemize}
+\tightlist
+\item
+  Environment supports routine service operations but is not dedicated
+  exclusively to them.
+\item
+  The robot is not granted formal right-of-way.
+\end{itemize}
 
 \paragraph{Task Context}\label{task-context}
 
@@ -2312,9 +2433,17 @@ In this context:
   serves human needs.
 \end{itemize}
 
-Common tensions include: - efficiency versus politeness, - direct
-delivery routes versus human comfort, - service effectiveness versus
-willingness to yield.
+Common tensions include:
+
+\begin{itemize}
+\tightlist
+\item
+  efficiency versus politeness,
+\item
+  direct delivery routes versus human comfort,
+\item
+  service effectiveness versus willingness to yield.
+\end{itemize}
 
 \subsubsection{Applicability and Limits}\label{applicability-and-limits}
 
@@ -2322,13 +2451,28 @@ willingness to yield.
 \textbf{Required}
 \end{quote}
 
-\textbf{Includes:} - Non-urgent delivery of packages, mail, tools, or
-supplies. - Service robots operating in offices, hospitals, or campuses
-under routine conditions.
+\textbf{Includes:}
 
-\textbf{Excludes:} - Emergency or high-urgency delivery scenarios. -
-Guidance or escort roles. - Situations where the robot is granted
-explicit priority over humans.
+\begin{itemize}
+\tightlist
+\item
+  Non-urgent delivery of packages, mail, tools, or supplies.
+\item
+  Service robots operating in offices, hospitals, or campuses under
+  routine conditions.
+\end{itemize}
+
+\textbf{Excludes:}
+
+\begin{itemize}
+\tightlist
+\item
+  Emergency or high-urgency delivery scenarios.
+\item
+  Guidance or escort roles.
+\item
+  Situations where the robot is granted explicit priority over humans.
+\end{itemize}
 
 \subsubsection{Derived and Related
 Contexts}\label{derived-and-related-contexts}
@@ -2476,7 +2620,7 @@ Operation}\label{context-guidance-and-docent-operation}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Context ID:} guidance.docent
+  \textbf{Context ID:} \texttt{guidance.docent}
 \item
   \textbf{Context Name:} Guidance and Docent Operation
 \item
@@ -2484,7 +2628,8 @@ Operation}\label{context-guidance-and-docent-operation}
 \item
   \textbf{Primary Role of Robot:} guide / escort
 \item
-  \textbf{Applies To Tasks:} navigate.lead\_agent
+  \textbf{Applies To Tasks:}
+  \texttt{navigate.lead\_agent}
 \end{itemize}
 
 \subsubsection{Context Description}\label{context-description}
@@ -2513,9 +2658,17 @@ efficiency.
 This context foregrounds legibility, predictability, and interpersonal
 awareness as primary normative concerns.
 
-Key normative expectations include: - maintaining a pace suitable for
-followers, - ensuring the robot remains observable and understandable, -
-prioritizing group cohesion over shortest paths.
+Key normative expectations include:
+
+\begin{itemize}
+\tightlist
+\item
+  maintaining a pace suitable for followers,
+\item
+  ensuring the robot remains observable and understandable,
+\item
+  prioritizing group cohesion over shortest paths.
+\end{itemize}
 
 Failures in this context are salient when humans become confused, left
 behind, or feel ignored, even if the robot technically reaches the
@@ -2552,13 +2705,27 @@ Instantiated}\label{context-axes-instantiated}
 
 \paragraph{Environmental Context}\label{environmental-context}
 
-\textbf{Geometric Factors} - Semi-structured spaces with points of
-interest, intersections, and stopping areas. - Variable visibility and
-occasional congestion.
+\textbf{Geometric Factors}
 
-\textbf{Operational Factors} - Environment supports lingering, stopping,
-and rerouting for explanation or coordination. - Navigation efficiency
-is secondary to clarity and cohesion.
+\begin{itemize}
+\tightlist
+\item
+  Semi-structured spaces with points of interest, intersections, and
+  stopping areas.
+\item
+  Variable visibility and occasional congestion.
+\end{itemize}
+
+\textbf{Operational Factors}
+
+\begin{itemize}
+\tightlist
+\item
+  Environment supports lingering, stopping, and rerouting for
+  explanation or coordination.
+\item
+  Navigation efficiency is secondary to clarity and cohesion.
+\end{itemize}
 
 \paragraph{Task Context}\label{task-context}
 
@@ -2607,8 +2774,17 @@ In this context:
   and accommodation.
 \end{itemize}
 
-Common tensions include: - pace versus group cohesion, - efficiency
-versus clarity, - autonomy versus responsiveness.
+Common tensions include:
+
+\begin{itemize}
+\tightlist
+\item
+  pace versus group cohesion,
+\item
+  efficiency versus clarity,
+\item
+  autonomy versus responsiveness.
+\end{itemize}
 
 \subsubsection{Applicability and Limits}\label{applicability-and-limits}
 
@@ -2616,11 +2792,27 @@ versus clarity, - autonomy versus responsiveness.
 \textbf{Required}
 \end{quote}
 
-\textbf{Includes:} - Guided tours and escorting individuals or groups. -
-Wayfinding assistance with sustained following.
+\textbf{Includes:}
 
-\textbf{Excludes:} - Routine navigation without followers. - Emergency
-or high-urgency response. - Pure delivery tasks without guidance intent.
+\begin{itemize}
+\tightlist
+\item
+  Guided tours and escorting individuals or groups.
+\item
+  Wayfinding assistance with sustained following.
+\end{itemize}
+
+\textbf{Excludes:}
+
+\begin{itemize}
+\tightlist
+\item
+  Routine navigation without followers.
+\item
+  Emergency or high-urgency response.
+\item
+  Pure delivery tasks without guidance intent.
+\end{itemize}
 
 \subsubsection{Derived and Related
 Contexts}\label{derived-and-related-contexts}
@@ -2767,7 +2959,7 @@ Operation}\label{context-emergency-high-urgency-operation}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Context ID:} emergency.high\_urgency
+  \textbf{Context ID:} \texttt{emergency.high\_urgency}
 \item
   \textbf{Context Name:} Emergency High-Urgency Operation
 \item
@@ -2775,7 +2967,7 @@ Operation}\label{context-emergency-high-urgency-operation}
 \item
   \textbf{Primary Role of Robot:} emergency responder
 \item
-  \textbf{Applies To Tasks:} ``*''
+  \textbf{Applies To Tasks:} \texttt{*}
 \end{itemize}
 
 \subsubsection{Context Description}\label{context-description}
@@ -2805,9 +2997,17 @@ interpreted.
 This context introduces urgency as a dominant normative factor that can
 override everyday social navigation expectations.
 
-Key normative expectations include: - rapid and decisive motion toward
-task completion, - reduced emphasis on comfort and deference, - strong
-prioritization of task success when safety can be maintained.
+Key normative expectations include:
+
+\begin{itemize}
+\tightlist
+\item
+  rapid and decisive motion toward task completion,
+\item
+  reduced emphasis on comfort and deference,
+\item
+  strong prioritization of task success when safety can be maintained.
+\end{itemize}
 
 Failures in this context are especially salient when excessive caution
 undermines urgent response, or when unsafe behavior causes additional
@@ -2845,12 +3045,26 @@ Instantiated}\label{context-axes-instantiated}
 
 \paragraph{Environmental Context}\label{environmental-context}
 
-\textbf{Geometric Factors} - Often crowded, constrained, or chaotic
-spaces. - Reduced predictability due to human motion and obstacles.
+\textbf{Geometric Factors}
 
-\textbf{Operational Factors} - Environment is temporarily repurposed for
-emergency response. - Emergency activity implicitly grants priority,
-though not formal right-of-way in all settings.
+\begin{itemize}
+\tightlist
+\item
+  Often crowded, constrained, or chaotic spaces.
+\item
+  Reduced predictability due to human motion and obstacles.
+\end{itemize}
+
+\textbf{Operational Factors}
+
+\begin{itemize}
+\tightlist
+\item
+  Environment is temporarily repurposed for emergency response.
+\item
+  Emergency activity implicitly grants priority, though not formal
+  right-of-way in all settings.
+\end{itemize}
 
 \paragraph{Task Context}\label{task-context}
 
@@ -2896,8 +3110,17 @@ In this context:
   prevention over everyday politeness.
 \end{itemize}
 
-Common tensions include: - speed versus safety, - assertiveness versus
-predictability, - urgency versus perceived rudeness.
+Common tensions include:
+
+\begin{itemize}
+\tightlist
+\item
+  speed versus safety,
+\item
+  assertiveness versus predictability,
+\item
+  urgency versus perceived rudeness.
+\end{itemize}
 
 \subsubsection{Applicability and Limits}\label{applicability-and-limits}
 
@@ -2905,13 +3128,29 @@ predictability, - urgency versus perceived rudeness.
 \textbf{Required}
 \end{quote}
 
-\textbf{Includes:} - Emergency equipment transport (e.g., crash carts).
-- Time-critical medical or safety-related navigation. - Situations where
-delay materially increases risk.
+\textbf{Includes:}
 
-\textbf{Excludes:} - Routine service delivery without urgency. -
-Situations lacking clear time-critical stakes. - Contexts where
-authority or priority is not socially recognized.
+\begin{itemize}
+\tightlist
+\item
+  Emergency equipment transport (e.g., crash carts).
+\item
+  Time-critical medical or safety-related navigation.
+\item
+  Situations where delay materially increases risk.
+\end{itemize}
+
+\textbf{Excludes:}
+
+\begin{itemize}
+\tightlist
+\item
+  Routine service delivery without urgency.
+\item
+  Situations lacking clear time-critical stakes.
+\item
+  Contexts where authority or priority is not socially recognized.
+\end{itemize}
 
 \subsubsection{Derived and Related
 Contexts}\label{derived-and-related-contexts}
