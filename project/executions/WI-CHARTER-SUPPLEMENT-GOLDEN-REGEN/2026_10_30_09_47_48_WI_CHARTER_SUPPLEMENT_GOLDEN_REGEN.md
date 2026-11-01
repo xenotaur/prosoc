@@ -2,14 +2,14 @@
 execution_id: 2026_10_30_09_47_48_WI_CHARTER_SUPPLEMENT_GOLDEN_REGEN
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-GOLDEN-REGEN:WI_CHARTER_SUPPLEMENT_GOLDEN_REGEN)[2026-10-30T09:30:03+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-GOLDEN-REGEN
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/118
-commit:
+commit: afe9aea15ab884c77287308cb6db9faf89ccb19c
 created_at: 2026-10-30T09:47:48+00:00
 agent: claude-code
 instruction_source: project/work_items/proposed/WI-CHARTER-SUPPLEMENT-GOLDEN-REGEN.md
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary

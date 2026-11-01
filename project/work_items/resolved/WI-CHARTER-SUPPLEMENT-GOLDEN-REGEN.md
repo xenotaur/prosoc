@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: 'Implemented and merged in PR #118 (commit afe9aea15ab884c77287308cb6db9faf89ccb19c)'
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-GOLDEN-REGEN
 title: "Regenerate the charter supplement's golden rendering, with reviewed content diff"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on:

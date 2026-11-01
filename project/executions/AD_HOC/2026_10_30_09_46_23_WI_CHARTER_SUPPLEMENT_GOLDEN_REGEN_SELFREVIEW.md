@@ -2,10 +2,11 @@
 execution_id: 2026_10_30_09_46_23_WI_CHARTER_SUPPLEMENT_GOLDEN_REGEN_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_GOLDEN_REGEN_SELFREVIEW)[2026-10-30T09:46:17+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_10_30_09_47_48_WI_CHARTER_SUPPLEMENT_GOLDEN_REGEN
 pr: https://github.com/xenotaur/prosoc/pull/118
-commit:
+commit: afe9aea15ab884c77287308cb6db9faf89ccb19c
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 created_at: 2026-10-30T09:46:23+00:00
 ---
 
