@@ -1,0 +1,116 @@
+name: Charter supplement pipeline
+
+on:
+  pull_request:
+    paths:
+      - "papers/01_charter/**"
+      - "src/prosoc/prnc/charter/charter.md"
+      - "src/prosoc/prnc/scenarios/frontal_approach/scenario.md"
+      - "src/prosoc/prnc/scenarios/single_file_hallway/scenario.md"
+      - "src/prosoc/prnc/scenarios/movable_obstruction/scenario.md"
+      - "src/prosoc/prnc/tasks/navigate_point_to_point/task.md"
+      - "src/prosoc/prnc/tasks/deliver_object/task.md"
+      - "src/prosoc/prnc/contexts/routine_delivery/context.md"
+      - "src/prosoc/prnc/contexts/guidance_docent/context.md"
+      - "src/prosoc/prnc/contexts/high_urgency/context.md"
+      - "src/prosoc/nca/utils/papers/**"
+      - "tests/nca/utils/papers/**"
+      - "pyproject.toml"
+      - ".github/workflows/charter-supplement.yml"
+  push:
+    branches:
+      - main
+
+jobs:
+  charter-supplement:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || true
+          pip install -e .
+
+      # Pandoc is pinned explicitly rather than trusting whatever version
+      # the runner image ships -- the pipeline is only reproducible
+      # against PANDOC_PINNED_VERSION in
+      # prosoc.nca.utils.papers.render (see the 2026-10-26 charter
+      # supplement pipeline audit). Installing the exact pinned .deb
+      # (rather than relying on apt) keeps this in sync with that
+      # constant without hardcoding the version twice.
+      - name: Install pinned Pandoc
+        run: |
+          PANDOC_VERSION=$(PYTHONPATH="$(pwd)/src" python -c "from prosoc.nca.utils.papers.render import PANDOC_PINNED_VERSION; print(PANDOC_PINNED_VERSION)")
+          curl -fsSL -o /tmp/pandoc.deb "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
+          sudo dpkg -i /tmp/pandoc.deb
+          pandoc --version
+
+      - name: Check pinned Pandoc version
+        run: |
+          PYTHONPATH="$(pwd)/src" python -c "from prosoc.nca.utils.papers.render import check_pandoc_version; check_pandoc_version()"
+
+      - name: Run charter supplement renderer tests
+        run: |
+          PYTHONPATH="$(pwd)/src" python -m unittest tests.nca.utils.papers.render_test tests.nca.utils.papers.paper_semantics_test -v
+
+      - name: Render charter supplement
+        run: |
+          PYTHONPATH="$(pwd)/src" papers/01_charter/render.py
+
+      # Fails the job on a real diff -- never silently accepted. Only
+      # meaningful because Pandoc is pinned above; an unpinned version
+      # would make this check flaky (see the audit's reproducibility
+      # finding).
+      - name: Check for golden-file drift
+        run: |
+          diff -u papers/01_charter/golden/rendered.tex build/papers/01_charter/rendered.tex
+
+      # Check prerequisites separately from attempting the build, so only
+      # their *absence* is ever non-blocking -- a real pdflatex/pdftotext
+      # failure or a detected PDF-text corruption regression must still
+      # fail the job once prerequisites are confirmed present, per this
+      # WI's own acceptance criteria ("CI fails on ... PDF-stage
+      # failures, not silently"). Checking here with plain shell tools
+      # (not by inspecting render.py --pdf's exit code) keeps that
+      # distinction independent of how render.py happens to report a
+      # given failure.
+      - name: Check PDF build prerequisites
+        id: pdf_prereqs
+        run: |
+          if command -v pdflatex >/dev/null 2>&1 \
+             && command -v pdftotext >/dev/null 2>&1 \
+             && command -v kpsewhich >/dev/null 2>&1 \
+             && kpsewhich frontiers_suppmat.cls >/dev/null 2>&1; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::PDF stage skipped -- pdflatex, pdftotext, kpsewhich, or the Frontiers frontiers_suppmat.cls class file (a publisher asset not committed to this repository, licensing not confirmed -- see WI-CHARTER-SUPPLEMENT-PDF-BUILD's Risk Notes) is unavailable on this runner. This is expected until those are supplied locally; see docs/paper-supplements.md's 'PDF Build' section. Reported clearly rather than skipped silently."
+          fi
+
+      # Prerequisites are confirmed present at this point -- any failure
+      # here is a real build or inspection failure (a bad compile, or a
+      # detected text-corruption regression) and must fail the job, not
+      # be swallowed as a missing-prerequisite case.
+      - name: Build PDF
+        if: steps.pdf_prereqs.outputs.available == 'true'
+        run: |
+          PYTHONPATH="$(pwd)/src" papers/01_charter/render.py --pdf
+
+      - name: Upload PDF and diagnostics
+        if: steps.pdf_prereqs.outputs.available == 'true'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: charter-supplement-pdf
+          path: |
+            build/papers/01_charter/rendered.pdf
+            build/papers/01_charter/*.log
+          if-no-files-found: ignore
