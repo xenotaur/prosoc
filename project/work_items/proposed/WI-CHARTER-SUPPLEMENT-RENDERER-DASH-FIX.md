@@ -63,21 +63,25 @@ apostrophe case survived.
 - Recommendation: Proceed.
 
 ## Scope
-- Add `\usepackage[T1]{fontenc}` (and `\usepackage{textcomp}` if T1
-  alone doesn't fix it) to `papers/01_charter/template.tex`, near the
-  existing `\usepackage{lmodern}` line (`template.tex:9-13`), which was
-  added for the analogous "outline fonts, not bitmap" reason.
-- Re-run the real `pdflatex` + `pdftotext -layout` round trip and
-  confirm both previously-corrupted characters now extract correctly.
-- Expect `papers/01_charter/golden/rendered.tex` to require
-  regeneration: `render_paper()` copies `template.tex`'s preamble
-  verbatim into the assembled `.tex` and only substitutes card
-  placeholders (`src/prosoc/nca/utils/papers/render.py:248-276`), so
-  adding a `\usepackage` line to `template.tex` changes the generated
-  preamble even though no card fragment content is affected.
-  Regenerate the golden file with human review of the diff, confirming
-  only the expected preamble-line addition appears and no card content
-  changed.
+Add the missing font encoding to `papers/01_charter/template.tex` so
+`\textendash`/`\textemdash` produce correct PDF text, and regenerate
+the golden file to match.
+
+## Required Changes
+1. Add `\usepackage[T1]{fontenc}` (and `\usepackage{textcomp}` if T1
+   alone doesn't fix it) to `papers/01_charter/template.tex`, near the
+   existing `\usepackage{lmodern}` line (`template.tex:9-13`), which
+   was added for the analogous "outline fonts, not bitmap" reason.
+2. Re-run the real `pdflatex` + `pdftotext -layout` round trip and
+   confirm both previously-corrupted characters (en dash, em dash) now
+   extract correctly inside `lstlisting` blocks.
+3. Regenerate `papers/01_charter/golden/rendered.tex` with human
+   review of the diff -- `render_paper()` copies `template.tex`'s
+   preamble verbatim into the assembled `.tex`
+   (`src/prosoc/nca/utils/papers/render.py:248-276`), so this new
+   `\usepackage` line will appear in the golden diff; confirm only
+   that line changed, with no card-content differences.
+4. Run `scripts/test` and `lrh validate`.
 
 ## Non-Goals
 - Does not change the `literate=` character mappings themselves --
