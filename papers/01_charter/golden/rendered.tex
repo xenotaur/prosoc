@@ -8,6 +8,12 @@
 %%%  NB logo1.jpg is required in the path in order to correctly compile front page header %%%
 
 \documentclass[utf8]{frontiers_suppmat} % for all articles
+% T1 font encoding -- without it, \textendash/\textemdash (used by the
+% literatecard style's literate= mapping) fall back to OT1-encoded glyphs
+% whose PDF ToUnicode mapping is wrong, corrupting en/em dash in extracted
+% PDF text (confirmed via a real pdflatex+pdftotext round trip,
+% WI-CHARTER-SUPPLEMENT-RENDERER-DASH-FIX).
+\usepackage[T1]{fontenc}
 % Outline (scalable) fonts, not the class's default bitmap Computer Modern --
 % pdftotext silently drops dashes and quotes extracted from bitmap-font text
 % (confirmed in the 2026-10-26 charter supplement pipeline audit), which
