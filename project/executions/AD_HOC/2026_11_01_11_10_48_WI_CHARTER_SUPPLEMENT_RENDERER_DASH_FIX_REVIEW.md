@@ -2,10 +2,10 @@
 execution_id: 2026_11_01_11_10_48_WI_CHARTER_SUPPLEMENT_RENDERER_DASH_FIX_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_RENDERER_DASH_FIX_REVIEW)[2026-11-01T11:10:30+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/121
-commit:
+commit: f4e3e7927840b57b01027477f7494e66a5facd82
 created_at: 2026-11-01T11:10:48+00:00
 agent: claude-code
 instruction_source: https://github.com/xenotaur/prosoc/pull/121
