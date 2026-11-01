@@ -72,7 +72,26 @@ exceptions.
 - CI (pre-push read): `lint`/`test` SUCCESS; no required-check
   protection on this repo
 
+Step 8 (post-push), HEAD `83d813228f9208de5de3541a9582a047fbfcba48`:
+- CI: no required-check protection on this repo; unfiltered `gh pr
+  checks` -- `test` SUCCESS, `lint` SUCCESS (both terminal, confirmed
+  via a bounded poll).
+- REVIEW-LANDED re-check: `lrh github threads --mode raw --state all`
+  -- both threads now `isResolved: true`, 0 unresolved. The one review
+  on record (`copilot-pull-request-reviewer[bot]`, `COMMENTED`,
+  2026-11-01T09:51:28Z) is against an earlier commit
+  (`b9db814876a76a18723b81d7ad255b9ca498782f`); no new review has
+  landed against this HEAD, but the authoritative 0-unresolved-threads
+  signal plus sufficient elapsed time since push (CI ran to
+  completion) satisfies REVIEW-LANDED here -- no new findings surfaced.
+
+**Final merge-readiness verdict: GREEN.** Thread-resolution green (Step
+6) + CI green + REVIEW-LANDED satisfied, all against the same HEAD.
+
+```
+lrh vcs merge https://github.com/xenotaur/prosoc/pull/120 --match-head-commit 83d813228f9208de5de3541a9582a047fbfcba48 --squash
+```
+
 # Follow-up
 
-Step 8 (post-push): re-check CI against this commit's HEAD, and
-re-confirm REVIEW-LANDED, before reaching the final merge verdict.
+None. Ready for Step 6 (merge + closeout, single ask) of `/lrh-land`.
