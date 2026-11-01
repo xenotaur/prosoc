@@ -74,33 +74,39 @@ jobs:
         run: |
           diff -u papers/01_charter/golden/rendered.tex build/papers/01_charter/rendered.tex
 
-      # Best-effort: pdflatex, pdftotext, and the Frontiers
-      # frontiers_suppmat.cls class file (a publisher asset not
-      # committed to this repository -- see
-      # WI-CHARTER-SUPPLEMENT-PDF-BUILD's Risk Notes) are not installed
-      # on this runner, so render.py --pdf is expected to fail clearly
-      # here, not silently -- see its own fail-fast error messages.
-      # Captured via `set +e` rather than `continue-on-error` so later
-      # steps can branch on the exact exit code, not just success/failure.
-      - name: Attempt PDF build (best-effort)
-        id: pdf_build
+      # Check prerequisites separately from attempting the build, so only
+      # their *absence* is ever non-blocking -- a real pdflatex/pdftotext
+      # failure or a detected PDF-text corruption regression must still
+      # fail the job once prerequisites are confirmed present, per this
+      # WI's own acceptance criteria ("CI fails on ... PDF-stage
+      # failures, not silently"). Checking here with plain shell tools
+      # (not by inspecting render.py --pdf's exit code) keeps that
+      # distinction independent of how render.py happens to report a
+      # given failure.
+      - name: Check PDF build prerequisites
+        id: pdf_prereqs
         run: |
-          set +e
-          PYTHONPATH="$(pwd)/src" papers/01_charter/render.py --pdf
-          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
-          set -e
-
-      - name: Report PDF stage result
-        if: always()
-        run: |
-          if [ "${{ steps.pdf_build.outputs.exit_code }}" = "0" ]; then
-            echo "PDF stage succeeded."
+          if command -v pdflatex >/dev/null 2>&1 \
+             && command -v pdftotext >/dev/null 2>&1 \
+             && command -v kpsewhich >/dev/null 2>&1 \
+             && kpsewhich frontiers_suppmat.cls >/dev/null 2>&1; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
           else
-            echo "::notice::PDF stage did not complete -- a required tool, Pandoc/TeX version, or asset (pdflatex, pdftotext, or the uncommitted Frontiers frontiers_suppmat.cls class file) is unavailable on this runner. This is expected until those are supplied locally; see docs/paper-supplements.md's 'PDF Build' section. Reported clearly rather than skipped silently."
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::PDF stage skipped -- pdflatex, pdftotext, kpsewhich, or the Frontiers frontiers_suppmat.cls class file (a publisher asset not committed to this repository, licensing not confirmed -- see WI-CHARTER-SUPPLEMENT-PDF-BUILD's Risk Notes) is unavailable on this runner. This is expected until those are supplied locally; see docs/paper-supplements.md's 'PDF Build' section. Reported clearly rather than skipped silently."
           fi
 
+      # Prerequisites are confirmed present at this point -- any failure
+      # here is a real build or inspection failure (a bad compile, or a
+      # detected text-corruption regression) and must fail the job, not
+      # be swallowed as a missing-prerequisite case.
+      - name: Build PDF
+        if: steps.pdf_prereqs.outputs.available == 'true'
+        run: |
+          PYTHONPATH="$(pwd)/src" papers/01_charter/render.py --pdf
+
       - name: Upload PDF and diagnostics
-        if: steps.pdf_build.outputs.exit_code == '0'
+        if: steps.pdf_prereqs.outputs.available == 'true'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: charter-supplement-pdf
