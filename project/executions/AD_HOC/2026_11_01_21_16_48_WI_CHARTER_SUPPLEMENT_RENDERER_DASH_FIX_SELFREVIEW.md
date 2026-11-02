@@ -2,10 +2,10 @@
 execution_id: 2026_11_01_21_16_48_WI_CHARTER_SUPPLEMENT_RENDERER_DASH_FIX_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_RENDERER_DASH_FIX_SELFREVIEW)[2026-11-01T21:16:41+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/124
-commit:
+commit: 9a701396fdb6e7325f254266048013d75a1a96f0
 created_at: 2026-11-01T21:16:48+00:00
 agent: claude-code
 instruction_source: https://github.com/xenotaur/prosoc/pull/124

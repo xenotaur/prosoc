@@ -1,11 +1,21 @@
 ---
-resolution: null
+resolution: >-
+  Fixed via PR #124 (commit 9a701396fdb6e7325f254266048013d75a1a96f0):
+  added \usepackage[T1]{fontenc} to papers/01_charter/template.tex,
+  immediately after \documentclass and before \usepackage{lmodern}.
+  Re-ran the real pdflatex + pdftotext -layout round trip: en dash
+  count 7 -> 8 (+1), em dash count 72 -> 75 (+3), each delta matching
+  the previously-corrupted occurrence count exactly, with no other
+  count changes. Regenerated papers/01_charter/golden/rendered.tex;
+  diff reviewed and approved by the human as exactly the new 6-line
+  preamble block, no card-content changes. scripts/test (338/338),
+  scripts/lint, and lrh validate (0 errors) all passed.
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-RENDERER-DASH-FIX
 title: "Fix PDF-text corruption of en/em dash inside charter supplement lstlisting blocks (missing T1 font encoding)"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PIPELINE
 depends_on: []

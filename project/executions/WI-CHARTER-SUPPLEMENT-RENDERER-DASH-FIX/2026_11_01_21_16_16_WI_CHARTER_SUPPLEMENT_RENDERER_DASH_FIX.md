@@ -2,10 +2,10 @@
 execution_id: 2026_11_01_21_16_16_WI_CHARTER_SUPPLEMENT_RENDERER_DASH_FIX
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-RENDERER-DASH-FIX:WI_CHARTER_SUPPLEMENT_RENDERER_DASH_FIX)[2026-11-01T11:35:23+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-RENDERER-DASH-FIX
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/124
-commit:
+commit: 9a701396fdb6e7325f254266048013d75a1a96f0
 created_at: 2026-11-01T21:16:16+00:00
 agent: claude-code
 instruction_source: WS-CHARTER-SUPPLEMENT-PIPELINE
