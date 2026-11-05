@@ -2,8 +2,8 @@
 id: WS-CHARTER-SUPPLEMENT-PIPELINE
 kind: planning_node
 title: "Charter Supplementary-Material Pipeline Repair"
-status: proposed
-stage: planned
+status: resolved
+stage: closed
 origin: ad_hoc
 summary: "Repair and harden the Frontiers charter-supplement rendering pipeline (papers/01_charter): fix source-card and renderer defects, add regression tests, build a reproducible PDF build entry point, wire CI, and regenerate the golden file -- grounded in a dual-pass audit of an external handoff's claims."
 related_focus: []
