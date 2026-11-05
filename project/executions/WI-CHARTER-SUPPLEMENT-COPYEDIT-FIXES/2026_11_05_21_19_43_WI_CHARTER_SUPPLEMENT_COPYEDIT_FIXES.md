@@ -2,14 +2,14 @@
 execution_id: 2026_11_05_21_19_43_WI_CHARTER_SUPPLEMENT_COPYEDIT_FIXES
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES:WI_CHARTER_SUPPLEMENT_COPYEDIT_FIXES)[2026-11-05T21:05:24+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/129
-commit:
+commit: 53775c6a029708505187d13fe89cdb6ab0175864
 created_at: 2026-11-05T21:19:43+00:00
 agent: claude-code
 instruction_source: project/work_items/proposed/WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES.md
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary

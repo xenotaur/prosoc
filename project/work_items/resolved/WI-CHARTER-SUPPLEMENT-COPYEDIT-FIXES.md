@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #129 (commit 53775c6a029708505187d13fe89cdb6ab0175864) -- fixed a malformed quote-mark pair, labeled an unlabeled P&G citation-index list, updated stale submitted/unpublished wording to in press in 3 locations, narrowed an overbroad citation claim, completed the Dragan et al. reference with its full conference name/pages/DOI, defined P&G at its first use, and applied 5 grammar fixes; added a check_stale_supplement_wording regression check (with whitespace-normalization added during review-response) so these fixes can't silently regress."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES
 title: "Copyedit the charter supplement's source cards: quote marks, Cited In labeling, stale submission language, grammar, and citation completeness"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PROOFREADING
 depends_on: []
