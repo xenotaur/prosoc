@@ -21,6 +21,11 @@
 \usepackage{lmodern}
 \usepackage{url,hyperref,lineno,microtype}
 \usepackage[onehalfspacing]{setspace}
+% graphicx (already loaded by frontiers_suppmat.cls for the front-page logo,
+% loaded again explicitly here so this file doesn't depend on that class
+% internal) -- provides \scalebox, used below to fix the en/em dash glyphs
+% WI-CHARTER-SUPPLEMENT-LISTING-DASH-GLYPH-FIX found still visually wrong.
+\usepackage{graphicx}
 
 
 \usepackage{framed}
@@ -61,6 +66,28 @@
 
 \newcommand{\yamlkey}[1]{\texttt{\color{blue}#1}}
 
+% WI-CHARTER-SUPPLEMENT-LISTING-DASH-GLYPH-FIX: \textendash/\textemdash
+% inside this monospace (\ttfamily) context are the FONT's own correctly
+% T1-encoded en/em dash glyphs -- pdftotext already extracts them as the
+% right Unicode codepoint (U+2013/U+2014) -- but Latin Modern Mono draws
+% those glyphs visually as short as a hyphen (confirmed directly: an
+% isolated pdflatex+pdftoppm comparison against the same characters in
+% body prose, where they render correctly long). This is a genuine
+% monospace-font design limitation, not a mapping bug -- the same short
+% rendering was independently confirmed in TeX Gyre Cursor, a different
+% monospace face with its own distinct T1 endash/emdash glyphs. DejaVu
+% Sans Mono renders a visually longer mark, but its TeX Live T1 encoding
+% vector substitutes /hyphen for /endash at that slot (confirmed via the
+% font's own .enc file), so it extracts as a plain hyphen -- not usable.
+% \dashstretch keeps the real \textendash/\textemdash glyph (so the
+% correct ToUnicode mapping is untouched -- \scalebox only scales how an
+% already-selected glyph is drawn, not which glyph or character it is)
+% and stretches it horizontally so it visually reads as a true dash
+% instead of a hyphen. Verified via a real pdflatex+pdftoppm round trip,
+% inside an actual framed, line-wrapped lstlisting, with no overlap or
+% alignment artifacts.
+\newcommand{\dashstretch}[1]{\scalebox{1.8}[1]{#1}}
+
 \lstdefinestyle{literatecard}{
   basicstyle=\ttfamily\small,
   breaklines=true,
@@ -69,8 +96,8 @@
   showstringspaces=false,
   keepspaces=true,
   literate=
-    {–}{{\textendash}}1
-    {—}{{\textemdash}}1
+    {–}{{\dashstretch{\textendash}}}1
+    {—}{{\dashstretch{\textemdash}}}1
     {‑}{{-}}1
     {“}{{\textquotedblleft}}1
     {”}{{\textquotedblright}}1

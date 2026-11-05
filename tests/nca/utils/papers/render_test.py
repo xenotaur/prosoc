@@ -971,5 +971,174 @@ class TestPdfBuildRealEnvironment(unittest.TestCase):
         self.assertEqual(result, 1)
 
 
+def _read_pgm(path):
+    """Parse a binary (P5) PGM file into (width, height, bytes). Avoids an
+    image-library dependency (PIL/Pillow is not part of this project's
+    environment) -- the PGM format is a trivial, uncompressed, single-byte-
+    per-pixel grayscale format that a few lines of pure Python can read
+    directly, which is all WI-CHARTER-SUPPLEMENT-LISTING-DASH-GLYPH-FIX's
+    glyph-width check needs."""
+    with open(path, "rb") as f:
+        data = f.read()
+    if not data.startswith(b"P5"):
+        raise ValueError(f"{path} is not a binary PGM (P5) file")
+    # Header: "P5\n<width> <height>\n<maxval>\n" (whitespace-separated
+    # tokens, comments starting with '#' are rare from pdftoppm and not
+    # handled here since pdftoppm doesn't emit them).
+    tokens = []
+    pos = 2
+    while len(tokens) < 3:
+        while data[pos] in b" \t\r\n":
+            pos += 1
+        start = pos
+        while data[pos] not in b" \t\r\n":
+            pos += 1
+        tokens.append(data[start:pos])
+    pos += 1  # the single whitespace byte after maxval
+    width, height, _maxval = (int(t) for t in tokens)
+    pixels = data[pos:pos + width * height]
+    return width, height, pixels
+
+
+def _darkest_row_run_length(width, height, pixels, *, threshold=128):
+    """Return the widest contiguous run of dark pixels (value < threshold)
+    found in any single row -- i.e. the pixel width of the widest glyph
+    stroke on the page. The test pages this is used on are otherwise
+    blank, so the longest dark run is the dash glyph itself."""
+    longest = 0
+    for row in range(height):
+        start = row * width
+        run = 0
+        for col in range(width):
+            if pixels[start + col] < threshold:
+                run += 1
+                longest = max(longest, run)
+            else:
+                run = 0
+    return longest
+
+
+class TestListingDashGlyphVisualWidth(unittest.TestCase):
+    """WI-CHARTER-SUPPLEMENT-LISTING-DASH-GLYPH-FIX: pdftotext-based
+    extraction alone cannot catch a glyph that is visually wrong but
+    correctly ToUnicode-tagged -- that defect class is exactly how
+    WI-CHARTER-SUPPLEMENT-RENDERER-DASH-FIX's own fix went unnoticed for a
+    full review cycle. This test renders the literatecard style's actual
+    mapped en-dash output (via \\dashstretch, defined in
+    papers/01_charter/template.tex) to a raster image and asserts its
+    drawn stroke is meaningfully wider than a plain hyphen rendered in the
+    same style -- a real image-based signal, not text extraction.
+
+    Reuses template.tex's own preamble (everything from it up to
+    \\begin{document}, with only the \\documentclass line swapped to
+    `article`) rather than a hand-duplicated copy, so this test cannot
+    silently drift from the real style definition. Needs no Frontiers
+    class file or TEXINPUTS setup -- the swapped \\documentclass makes
+    that publisher asset unnecessary here."""
+
+    def setUp(self):
+        for tool in ("pdflatex", "pdftoppm"):
+            if shutil.which(tool) is None:
+                self.skipTest(
+                    f"{tool} is not installed; dash-glyph visual check not exercised"
+                )
+
+    def test_mapped_en_dash_renders_wider_than_a_hyphen(self):
+        template_path = REPO_ROOT / "papers" / "01_charter" / "template.tex"
+        template_text = template_path.read_text(encoding="utf-8")
+        preamble, _, _ = template_text.partition("\\begin{document}")
+        preamble = re.sub(
+            r"\\documentclass\[[^\]]*\]\{frontiers_suppmat\}",
+            "\\\\documentclass{article}",
+            preamble,
+            count=1,
+        )
+        self.assertIn(
+            "\\documentclass{article}",
+            preamble,
+            "expected to replace template.tex's frontiers_suppmat "
+            "\\documentclass line -- template.tex's preamble format may "
+            "have changed",
+        )
+
+        doc = (
+            preamble
+            + "\\begin{document}\n"
+            + "\\thispagestyle{empty}\n"
+            + "\\begin{lstlisting}[style=literatecard,frame=none]\n"
+            + "-\n"
+            + "\\end{lstlisting}\n"
+            + "\\clearpage\n"
+            + "\\thispagestyle{empty}\n"
+            + "\\begin{lstlisting}[style=literatecard,frame=none]\n"
+            + "\N{EN DASH}\n"
+            + "\\end{lstlisting}\n"
+            + "\\end{document}\n"
+        )
+
+        with tempfile.TemporaryDirectory() as td:
+            build_dir = Path(td)
+            tex_file = build_dir / "dashwidth.tex"
+            tex_file.write_text(doc, encoding="utf-8")
+            try:
+                subprocess.run(
+                    [
+                        "pdflatex",
+                        "-interaction=nonstopmode",
+                        "-halt-on-error",
+                        f"-output-directory={build_dir}",
+                        str(tex_file),
+                    ],
+                    cwd=build_dir,
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                )
+            except subprocess.CalledProcessError as exc:
+                self.fail(
+                    "pdflatex failed compiling the dash-width reproduction:\n"
+                    f"{exc.stdout}\n{exc.stderr}"
+                )
+
+            pdf_file = build_dir / "dashwidth.pdf"
+            hyphen_pgm = build_dir / "hyphen"
+            endash_pgm = build_dir / "endash"
+            # `-gray` alone makes pdftoppm emit a grayscale PGM file (there
+            # is no separate `-pgm` flag -- the output format follows from
+            # `-gray`/`-png`/etc.).
+            try:
+                subprocess.run(
+                    ["pdftoppm", "-gray", "-r", "300", "-f", "1", "-l", "1",
+                     str(pdf_file), str(hyphen_pgm)],
+                    check=True, capture_output=True, text=True,
+                )
+                subprocess.run(
+                    ["pdftoppm", "-gray", "-r", "300", "-f", "2", "-l", "2",
+                     str(pdf_file), str(endash_pgm)],
+                    check=True, capture_output=True, text=True,
+                )
+            except subprocess.CalledProcessError as exc:
+                self.fail(
+                    "pdftoppm failed rendering the dash-width reproduction:\n"
+                    f"{exc.stdout}\n{exc.stderr}"
+                )
+
+            hyphen_file = next(build_dir.glob("hyphen*.pgm"))
+            endash_file = next(build_dir.glob("endash*.pgm"))
+            hyphen_width = _darkest_row_run_length(*_read_pgm(hyphen_file))
+            endash_width = _darkest_row_run_length(*_read_pgm(endash_file))
+
+        self.assertGreater(
+            endash_width,
+            hyphen_width * 1.4,
+            "the literatecard style's mapped en dash should render a "
+            f"visibly wider stroke than a plain hyphen (measured "
+            f"{endash_width}px vs {hyphen_width}px at 300 DPI) -- this is "
+            "the regression WI-CHARTER-SUPPLEMENT-LISTING-DASH-GLYPH-FIX "
+            "fixed: a visually-short dash that pdftotext-based checks "
+            "cannot detect because its ToUnicode mapping is correct",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
