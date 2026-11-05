@@ -792,6 +792,21 @@ class TestStaleSupplementWording(unittest.TestCase):
     def test_clean_text_has_no_findings(self):
         self.assertEqual(render.check_stale_supplement_wording("clean prose"), [])
 
+    def test_detects_phrase_wrapped_across_a_pdftotext_line_break(self):
+        # pdftotext -layout preserves the PDF's own line wraps and padding
+        # (reported by Copilot review on PR #129): a multi-word stale
+        # substring can straddle a line break, with extra indentation
+        # spacing on the wrapped continuation line.
+        wrapped = (
+            "...this scenario originates in a source paper that is itself\n"
+            "  still submitted and unpublished, so no external literature yet exists\n"
+            "    that could cite it. Revisit once published..."
+        )
+
+        findings = render.check_stale_supplement_wording(wrapped)
+
+        self.assertIn("no external literature yet exists that could cite it", findings)
+
 
 class TestBuildPdf(unittest.TestCase):
     """Orchestration tests with every external tool faked -- real tool

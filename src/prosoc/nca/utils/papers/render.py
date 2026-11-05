@@ -487,14 +487,22 @@ def check_pdf_text_regressions(pdf_text: str) -> list[str]:
     return [bad for bad in KNOWN_PDF_TEXT_CORRUPTIONS if bad in pdf_text]
 
 
+_WHITESPACE_RUN_RE = re.compile(r"\s+")
+
+
 def check_stale_supplement_wording(pdf_text: str) -> list[str]:
     """Return any known-stale wording substrings found in extracted PDF text.
 
     Guards against WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES's content fixes
     (a malformed quote-mark pair, an unlabeled citation-index list, and
     stale "submitted"/"unpublished" language) silently regressing back to
-    their pre-fix wording."""
-    return [bad for bad in KNOWN_STALE_SUPPLEMENT_WORDING if bad in pdf_text]
+    their pre-fix wording. Whitespace is normalized to single spaces first:
+    ``pdftotext -layout`` preserves the PDF's original line breaks and
+    padding, so a multi-word substring can otherwise straddle a line wrap
+    (or a run of justified-text padding) and silently evade a plain
+    substring search."""
+    normalized = _WHITESPACE_RUN_RE.sub(" ", pdf_text)
+    return [bad for bad in KNOWN_STALE_SUPPLEMENT_WORDING if bad in normalized]
 
 
 def build_pdf(
