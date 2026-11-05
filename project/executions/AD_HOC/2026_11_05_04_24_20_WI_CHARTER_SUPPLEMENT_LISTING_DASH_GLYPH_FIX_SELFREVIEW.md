@@ -2,10 +2,10 @@
 execution_id: 2026_11_05_04_24_20_WI_CHARTER_SUPPLEMENT_LISTING_DASH_GLYPH_FIX_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_LISTING_DASH_GLYPH_FIX_SELFREVIEW)[2026-11-05T04:24:16+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/127
-commit:
+commit: 5883fbacd09fda4f451ed4c1c8700782c36c26ec
 created_at: 2026-11-05T04:24:20+00:00
 agent: claude-code
 instruction_source: WI-CHARTER-SUPPLEMENT-LISTING-DASH-GLYPH-FIX

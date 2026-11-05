@@ -2,14 +2,14 @@
 execution_id: 2026_11_05_06_09_23_WI_CHARTER_SUPPLEMENT_LISTING_DASH_GLYPH_FIX_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_LISTING_DASH_GLYPH_FIX_CONFIRM)[2026-11-05T06:09:17+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_05_04_26_13_WI_CHARTER_SUPPLEMENT_LISTING_DASH_GLYPH_FIX
 pr: https://github.com/xenotaur/prosoc/pull/127
-commit:
+commit: 5883fbacd09fda4f451ed4c1c8700782c36c26ec
 created_at: 2026-11-05T06:09:23+00:00
 agent: claude-code
 instruction_source: https://github.com/xenotaur/prosoc/pull/127
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary

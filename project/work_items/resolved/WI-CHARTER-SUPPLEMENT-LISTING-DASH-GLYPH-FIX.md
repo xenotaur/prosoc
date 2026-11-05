@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #127 (commit 5883fbacd09fda4f451ed4c1c8700782c36c26ec) -- the literatecard lstlisting style's en/em dash glyphs now render at correct visual width via \\dashstretch, verified by a real pdflatex+pdftoppm round trip and a new image-based regression test (TestListingDashGlyphVisualWidth); pdftotext's ToUnicode mapping from WI-CHARTER-SUPPLEMENT-RENDERER-DASH-FIX is unaffected."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-LISTING-DASH-GLYPH-FIX
 title: "Fix visually-incorrect en/em dash glyphs inside charter supplement lstlisting blocks (ToUnicode mapping is correct, the drawn glyph isn't)"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PROOFREADING
 depends_on: []

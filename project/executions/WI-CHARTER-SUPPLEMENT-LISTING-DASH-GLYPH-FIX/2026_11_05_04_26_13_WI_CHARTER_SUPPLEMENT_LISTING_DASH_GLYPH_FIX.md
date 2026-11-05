@@ -2,10 +2,10 @@
 execution_id: 2026_11_05_04_26_13_WI_CHARTER_SUPPLEMENT_LISTING_DASH_GLYPH_FIX
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-LISTING-DASH-GLYPH-FIX:WI_CHARTER_SUPPLEMENT_LISTING_DASH_GLYPH_FIX)[2026-11-05T04:07:43+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-LISTING-DASH-GLYPH-FIX
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/127
-commit:
+commit: 5883fbacd09fda4f451ed4c1c8700782c36c26ec
 created_at: 2026-11-05T04:26:13+00:00
 agent: claude-code
 instruction_source: WS-CHARTER-SUPPLEMENT-PROOFREADING
