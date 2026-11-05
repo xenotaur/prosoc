@@ -4,7 +4,7 @@ prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_LISTING_DASH_GLYPH_FIX_SELFREVIEW
 work_item: AD_HOC
 status: in_progress
 rerun_of:
-pr:
+pr: https://github.com/xenotaur/prosoc/pull/127
 commit:
 created_at: 2026-11-05T04:24:20+00:00
 agent: claude-code
