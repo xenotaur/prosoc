@@ -4,7 +4,7 @@
 - **STATE:** APPROVED  
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot delivery task  
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11  
-- **EDITED:** —  
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — standardize "hand-off" to "handoff" (noun) for consistency with the rest of the corpus, matching `object_handover` and `crash_cart`'s existing usage  
 - **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-01  
 - **VALIDATED:** —  
 
@@ -48,7 +48,7 @@ Success in this task is defined abstractly as the object reaching its intended d
 - Social protocols for requesting, accepting, or refusing delivery.
 - Determining whether delivery is appropriate or authorized.
 - Normative judgments about urgency, politeness, or priority.
-- Negotiation of hand-off beyond physical co-location.
+- Negotiation of handoff beyond physical co-location.
 
 These excluded aspects are governed by scenarios, contexts, and charter principles rather than by the task itself.
 
@@ -119,7 +119,7 @@ scope:
     - object manipulation mechanics
     - social authorization or consent for delivery
     - urgency, politeness, or priority judgments
-    - detailed hand-off negotiation beyond co-location
+    - detailed handoff negotiation beyond co-location
 
 related_principles:
   - P0
@@ -144,4 +144,4 @@ example_scenarios:
 
 ## Notes for Task Designers and Evaluators
 
-This task should be used whenever the robot’s primary intent is to transfer an object, regardless of whether the object is already in the robot’s possession or must be acquired during execution. Evaluators should distinguish failures of delivery from socially motivated deviations intended to preserve safety, comfort, or prosocial behavior. Social protocols for hand-off, consent, or prioritization should be evaluated via scenario definitions and context cards, not via this task definition itself.
+This task should be used whenever the robot’s primary intent is to transfer an object, regardless of whether the object is already in the robot’s possession or must be acquired during execution. Evaluators should distinguish failures of delivery from socially motivated deviations intended to preserve safety, comfort, or prosocial behavior. Social protocols for handoff, consent, or prioritization should be evaluated via scenario definitions and context cards, not via this task definition itself.
