@@ -6,7 +6,7 @@
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; emergency robotics and medical transport literature
 - **CREATED:** 2026-01-11
 - **MODIFIED:** —
-- **AUDITED:** —
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-07-29
 - **VALIDATED:** —
 
 ---
