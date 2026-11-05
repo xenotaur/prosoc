@@ -6,7 +6,7 @@
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; museum guide and escort robot literature
 - **CREATED:** 2026-01-11
 - **MODIFIED:** —
-- **AUDITED:** —
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02
 - **VALIDATED:** —
 
 ---

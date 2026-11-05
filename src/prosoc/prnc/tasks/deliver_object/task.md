@@ -5,7 +5,7 @@
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot delivery task  
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11  
 - **EDITED:** —  
-- **AUDITED:** —  
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-01  
 - **VALIDATED:** —  
 
 ---
