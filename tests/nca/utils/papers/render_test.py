@@ -996,7 +996,7 @@ def _read_pgm(path):
         tokens.append(data[start:pos])
     pos += 1  # the single whitespace byte after maxval
     width, height, _maxval = (int(t) for t in tokens)
-    pixels = data[pos:pos + width * height]
+    pixels = data[pos : pos + width * height]
     return width, height, pixels
 
 
@@ -1108,14 +1108,38 @@ class TestListingDashGlyphVisualWidth(unittest.TestCase):
             # `-gray`/`-png`/etc.).
             try:
                 subprocess.run(
-                    ["pdftoppm", "-gray", "-r", "300", "-f", "1", "-l", "1",
-                     str(pdf_file), str(hyphen_pgm)],
-                    check=True, capture_output=True, text=True,
+                    [
+                        "pdftoppm",
+                        "-gray",
+                        "-r",
+                        "300",
+                        "-f",
+                        "1",
+                        "-l",
+                        "1",
+                        str(pdf_file),
+                        str(hyphen_pgm),
+                    ],
+                    check=True,
+                    capture_output=True,
+                    text=True,
                 )
                 subprocess.run(
-                    ["pdftoppm", "-gray", "-r", "300", "-f", "2", "-l", "2",
-                     str(pdf_file), str(endash_pgm)],
-                    check=True, capture_output=True, text=True,
+                    [
+                        "pdftoppm",
+                        "-gray",
+                        "-r",
+                        "300",
+                        "-f",
+                        "2",
+                        "-l",
+                        "2",
+                        str(pdf_file),
+                        str(endash_pgm),
+                    ],
+                    check=True,
+                    capture_output=True,
+                    text=True,
                 )
             except subprocess.CalledProcessError as exc:
                 self.fail(
