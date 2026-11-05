@@ -3,11 +3,12 @@
 ## Status
 
 - **STATE:** APPROVED
-- **SOURCE:** The Prosocial Robot Navigation Charter (Francis, submitted to Frontiers), Section 4.2.1 — one of two scenarios developed specifically for that paper to contrast P7: Proactivity and P9: Prosocial Behavior; not derived from the P&G paper, which has no Table 3 or Figure 7 counterpart for this scenario
+- **SOURCE:** The Prosocial Robot Navigation Charter (Francis, in press at Frontiers), Section 4.2.1 — one of two scenarios developed specifically for that paper to contrast P7: Proactivity and P9: Prosocial Behavior; not derived from the P&G paper, which has no Table 3 or Figure 7 counterpart for this scenario
 - **DRAFTED:** ChatGPT 5.2, 2026-01-16
 - **EDITED:** render_sections.py, 2026-07-19
 - **EDITED:** Claude, 2026-08-06 — correct SOURCE from a generic "P&G paper" attribution: the PRNC paper (§4.2.1) states this scenario was "developed for this paper," not sourced from P&G Table 3/Figure 7
 - **EDITED:** Claude, 2026-08-07 — reword the "Cited In" remaining-gaps note from "should-fill-in-now" to "reasonably blank," matching the corrected reasoning already applied to `single_file_hallway`: the source paper is unpublished, so no external citations are currently possible
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — update stale publication-status wording to reflect the source paper now being in press; narrow an absolute claim about external citations to a supportable statement
 
 ## Scenario Card Summary
 
@@ -32,7 +33,7 @@
 
 **Remaining gaps:**
 
-- **Cited In** — reasonably blank: this scenario originates in a source paper (§4.2.1) that is itself still `submitted` and unpublished, so no external literature yet exists that could cite it. Revisit once the source paper is published.
+- **Cited In** — reasonably blank: this scenario originates in a source paper (§4.2.1) that is itself still in press and not yet widely available, so no external citations are currently recorded for this scenario. Revisit once the source paper is published.
 
 ---
 

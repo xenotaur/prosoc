@@ -766,6 +766,33 @@ class TestPdfTextRegressions(unittest.TestCase):
         self.assertEqual(render.check_pdf_text_regressions("clean prose"), [])
 
 
+class TestStaleSupplementWording(unittest.TestCase):
+
+    def test_detects_stale_submitted_wording(self):
+        stale = "...The Prosocial Robot Navigation Charter (Francis, submitted)..."
+
+        findings = render.check_stale_supplement_wording(stale)
+
+        self.assertIn("Francis, submitted)", findings)
+
+    def test_detects_unlabeled_cited_in_list(self):
+        stale = "...\nCited In: 50, 126, 167\n..."
+
+        findings = render.check_stale_supplement_wording(stale)
+
+        self.assertIn("Cited In: 50, 126, 167", findings)
+
+    def test_detects_malformed_quote_pair(self):
+        stale = "...`related_scenarios` instead references blind_corner..."
+
+        findings = render.check_stale_supplement_wording(stale)
+
+        self.assertIn("`related_scenarios` instead references", findings)
+
+    def test_clean_text_has_no_findings(self):
+        self.assertEqual(render.check_stale_supplement_wording("clean prose"), [])
+
+
 class TestBuildPdf(unittest.TestCase):
     """Orchestration tests with every external tool faked -- real tool
     availability (pdflatex/kpsewhich) is irrelevant here; only the pipeline

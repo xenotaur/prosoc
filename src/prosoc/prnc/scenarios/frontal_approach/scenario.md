@@ -7,6 +7,7 @@
 - **DRAFTED:** ChatGPT 5.2, 2026-01-02
 - **EDITED:** render_sections.py, 2026-07-19
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-SOURCE-FIXES), 2026-10-27 — reword the SOURCE entry for publication (was an internal-tooling attribution string, "Prompt to ChatGPT 5.2")
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — label the bare "Cited In" citation-index list, reduce a repeated "navigation" in the Scenario Overview, reword an awkward evaluation-notes phrase, and fix a malformed quote-mark pair around an identifier
 
 ## Scenario Card Summary
 
@@ -27,13 +28,13 @@
   - P5
 - **Ideal Outcome:** robot and human pass each other safely, comfortably, and without prolonged hesitation
 - **Related Scenarios:** blind_corner, movable_obstruction, single_file_hallway
-- **Cited In:** 50, 126, 167
+- **Cited In:** P&G references 50, 126, and 167
 
 ---
 
 ## Scenario Overview
 
-This scenario describes a canonical social navigation conflict in which a robot and a human approach each other in opposite directions in a narrow hallway where neither agent has an explicit right-of-way. Successful navigation depends on sensing and agile navigation, and successful social navigation may require trajectory prediction, interpreting intent, resolving hesitation, and resolving conflicts. The scenario tests social navigation principles including safety, comfort, legibility, following social norms, and agent understanding.
+This scenario describes a canonical social navigation conflict in which a robot and a human approach each other in opposite directions in a narrow hallway where neither agent has an explicit right-of-way. Successful navigation depends on sensing and agile movement, while successful social navigation may additionally require trajectory prediction, interpreting intent, resolving hesitation, and resolving conflicts. The scenario tests social navigation principles including safety, comfort, legibility, following social norms, and agent understanding.
 
 ---
 
@@ -134,7 +135,7 @@ scenario_usage_guide:
     - sufficient clearance exists for passing
 
 evaluation_notes: >
-  This scenario evaluates how well the robot navigates through shared space with a human in the conditions for a mild and typical conflict.
+  This scenario evaluates how well the robot navigates through shared space with a human under the conditions of a mild, typical conflict.
   Changing direction, slowing down, braking or hesitation may be acceptable if they increase safety, comfort, or legibility, but  prolonged deadlock, abrupt reversals,
   or aggressive advancement are indicative of poor performance.
 
@@ -143,7 +144,7 @@ evaluation_notes: >
 
   Related Scenarios note: P&G Table 3 lists "Ped. Obstruct" as this
   scenario's related entry, which has no implemented scenario directory
-  under src/prosoc/prnc/scenarios/. `related_scenarios` instead references
+  under src/prosoc/prnc/scenarios/. "related_scenarios" instead references
   blind_corner, movable_obstruction, and single_file_hallway, which this
   corpus's own scenario set explicitly treats as a progressively
   constrained variant series of this scenario. This is expected per the

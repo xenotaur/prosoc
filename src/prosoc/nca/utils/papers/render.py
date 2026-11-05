@@ -39,6 +39,21 @@ SEMANTIC_CHECK_MODULES = (
 # dashes silently dropped from ordinary prose and lstlisting content alike.
 KNOWN_PDF_TEXT_CORRUPTIONS = ("P1P9", "itselfby", "obstructionthereby")
 
+# Pre-WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES wording that must not regress
+# back into the compiled supplement: a malformed backtick-quoted identifier
+# (renders as two opening-style marks, not a matching open/close pair), an
+# unlabeled P&G citation-index list, and stale "submitted"/"unpublished"
+# language describing the accompanying article (now in press). Unlike
+# KNOWN_PDF_TEXT_CORRUPTIONS above, none of these substrings is a text-layer
+# encoding defect -- each was deliberate (if since-corrected) prose.
+KNOWN_STALE_SUPPLEMENT_WORDING = (
+    "`related_scenarios` instead references",
+    "Cited In: 50, 126, 167",
+    "Francis, submitted)",
+    "submitted to Frontiers",
+    "no external literature yet exists that could cite it",
+)
+
 Runner = Callable[..., Any]
 
 
@@ -472,6 +487,16 @@ def check_pdf_text_regressions(pdf_text: str) -> list[str]:
     return [bad for bad in KNOWN_PDF_TEXT_CORRUPTIONS if bad in pdf_text]
 
 
+def check_stale_supplement_wording(pdf_text: str) -> list[str]:
+    """Return any known-stale wording substrings found in extracted PDF text.
+
+    Guards against WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES's content fixes
+    (a malformed quote-mark pair, an unlabeled citation-index list, and
+    stale "submitted"/"unpublished" language) silently regressing back to
+    their pre-fix wording."""
+    return [bad for bad in KNOWN_STALE_SUPPLEMENT_WORDING if bad in pdf_text]
+
+
 def build_pdf(
     *,
     repo_root: Path,
@@ -521,6 +546,14 @@ def build_pdf(
             "PDF-text regression check failed: found known corrupted "
             f"substrings {corruptions!r} in extracted text -- outline fonts "
             "may not be loaded, or a dash/quote mapping regressed"
+        )
+
+    stale_wording = check_stale_supplement_wording(pdf_text)
+    if stale_wording:
+        raise RuntimeError(
+            "PDF-text regression check failed: found known-stale wording "
+            f"substrings {stale_wording!r} in extracted text -- a copyedit "
+            "fix from WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES may have regressed"
         )
 
     return {

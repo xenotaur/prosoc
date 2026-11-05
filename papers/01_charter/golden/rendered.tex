@@ -128,7 +128,7 @@
 
 %% Figures, tables, and images will be published under a Creative Commons CC-BY licence and permission must be obtained for use of copyrighted material from other sources (including re-published/adapted/modified/partial figures and images from the internet). It is the responsibility of the authors to acquire the licenses, to follow any citation instructions requested by third-party rights holders, and cover any supplementary charges.
 This section contains normative cards from the Prosocial Robot Navigation Charter available at
-\url{https://github.com/xenotaur/prosoc/}, formatted for display in LaTeX by the Pandoc package available at \url{https://pandoc.org/} and lightly edited for display. These cards represent a snapshot of the system in its current state of development, and are presented to show the expressiveness and scope of the system, not to present fully-audited normative card content suitable for deployment.
+\url{https://github.com/xenotaur/prosoc/}, formatted for display in LaTeX by the Pandoc package available at \url{https://pandoc.org/} and lightly edited for display. These cards represent a snapshot of the system in its current state of development, and are presented to show the expressiveness and scope of the system, not to present fully audited normative card content suitable for deployment.
 
 \section{Prosocial Robot Navigation
 Charter}\label{prosocial-robot-navigation-charter}
@@ -151,7 +151,7 @@ Algorithms} (Francis et al.)\\
 \item
   \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
   Navigation Algorithms (Francis et al.); Prosocial Robotics project
-  documents; The Prosocial Robot Navigation Charter (Francis, submitted)
+  documents; The Prosocial Robot Navigation Charter (Francis, in press)
 \item
   \textbf{DRAFTED:} Prosocial Robotics project
 \item
@@ -192,6 +192,13 @@ Algorithms} (Francis et al.)\\
   \textbf{APPROVED:} Claude, 2026-08-19 (PR \#97) --- re-audited and
   promoted EDITED → AUDITED → APPROVED, closing out the 2026-08-19
   revert
+\item
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES),
+  2026-11-05 --- update the SOURCE attribution's stale
+  publication-status wording to reflect the paper now being in press;
+  define ``P\&G'' at its first in-body use; split a run-on sentence in
+  the P6 explanation; complete the Dragan et al.~reference with its full
+  conference name, pages, and DOI
 \end{itemize}
 
 The charter's lifecycle state is authored in the embedded YAML below
@@ -238,7 +245,8 @@ layer} of a prosocial robotics system.
 \subsection{Definition: Social and Prosocial Robot
 Navigation}\label{definition-social-and-prosocial-robot-navigation}
 
-Following the P\&G paper, we define \textbf{social robot navigation} as:
+Following the Principles and Guidelines (P\&G) paper (Francis et al.,
+2025), we define \textbf{social robot navigation} as:
 
 \begin{quote}
 A socially navigating robot acts and interacts with humans or other
@@ -542,12 +550,12 @@ Understanding other agents means more than detecting them: it requires
 inferring what they are perceiving, doing, and trying to accomplish ---
 for example, recognizing whether two people are conversing before
 deciding whether it is appropriate to pass between them. This
-understanding determines \emph{interaction potential}, the likelihood of
-the robot entering another agent's personal space, which should
-sometimes be minimized and sometimes maximized depending on the task. It
-also lets a robot anticipate \emph{conflicts} --- short encounters in
-which the robot's and another agent's paths would collide without
-intervention --- and adjust its own trajectory before one occurs
+understanding determines \emph{interaction potential} --- the likelihood
+of the robot entering another agent's personal space. Depending on the
+task, that likelihood should sometimes be minimized and sometimes
+maximized. It also lets a robot anticipate \emph{conflicts} --- short
+encounters in which the robot's and another agent's paths would collide
+without intervention --- and adjust its own trajectory before one occurs
 (Francis et al., 2025, p.~8).
 
 \begin{lstlisting}[style=literatecard]
@@ -894,7 +902,9 @@ or a combination thereof.
   https://doi.org/10.1145/3700599
 \item
   Dragan, A. D., Lee, K. C. T., \& Srinivasa, S. S. (2013). Legibility
-  and predictability of robot motion. \emph{HRI}.
+  and predictability of robot motion. In \emph{Proceedings of the 8th
+  ACM/IEEE International Conference on Human-Robot Interaction (HRI
+  '13)}, 301--308. https://doi.org/10.1109/HRI.2013.6483603
 \item
   Hall, E. T. (1966). \emph{The Hidden Dimension}. Doubleday.
 \end{itemize}
@@ -921,6 +931,12 @@ or a combination thereof.
   \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-SOURCE-FIXES),
   2026-10-27 --- reword the SOURCE entry for publication (was an
   internal-tooling attribution string, ``Prompt to ChatGPT 5.2'')
+\item
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES),
+  2026-11-05 --- label the bare ``Cited In'' citation-index list, reduce
+  a repeated ``navigation'' in the Scenario Overview, reword an awkward
+  evaluation-notes phrase, and fix a malformed quote-mark pair around an
+  identifier
 \end{itemize}
 
 \subsubsection{Scenario Card Summary}\label{scenario-card-summary}
@@ -974,7 +990,7 @@ or a combination thereof.
   \textbf{Related Scenarios:} blind\_corner, movable\_obstruction,
   single\_file\_hallway
 \item
-  \textbf{Cited In:} 50, 126, 167
+  \textbf{Cited In:} P\&G references 50, 126, and 167
 \end{itemize}
 
 \subsubsection{Scenario Overview}\label{scenario-overview}
@@ -982,11 +998,12 @@ or a combination thereof.
 This scenario describes a canonical social navigation conflict in which
 a robot and a human approach each other in opposite directions in a
 narrow hallway where neither agent has an explicit right-of-way.
-Successful navigation depends on sensing and agile navigation, and
-successful social navigation may require trajectory prediction,
-interpreting intent, resolving hesitation, and resolving conflicts. The
-scenario tests social navigation principles including safety, comfort,
-legibility, following social norms, and agent understanding.
+Successful navigation depends on sensing and agile movement, while
+successful social navigation may additionally require trajectory
+prediction, interpreting intent, resolving hesitation, and resolving
+conflicts. The scenario tests social navigation principles including
+safety, comfort, legibility, following social norms, and agent
+understanding.
 
 \subsubsection{Scenario Specification
 (Machine-Readable)}\label{scenario-specification-machine-readable}
@@ -1086,7 +1103,7 @@ scenario_usage_guide:
     - sufficient clearance exists for passing
 
 evaluation_notes: >
-  This scenario evaluates how well the robot navigates through shared space with a human in the conditions for a mild and typical conflict.
+  This scenario evaluates how well the robot navigates through shared space with a human under the conditions of a mild, typical conflict.
   Changing direction, slowing down, braking or hesitation may be acceptable if they increase safety, comfort, or legibility, but  prolonged deadlock, abrupt reversals,
   or aggressive advancement are indicative of poor performance.
 
@@ -1095,7 +1112,7 @@ evaluation_notes: >
 
   Related Scenarios note: P&G Table 3 lists "Ped. Obstruct" as this
   scenario's related entry, which has no implemented scenario directory
-  under src/prosoc/prnc/scenarios/. `related_scenarios` instead references
+  under src/prosoc/prnc/scenarios/. "related_scenarios" instead references
   blind_corner, movable_obstruction, and single_file_hallway, which this
   corpus's own scenario set explicitly treats as a progressively
   constrained variant series of this scenario. This is expected per the
@@ -1176,10 +1193,10 @@ Hallway}\label{scenario-single-file-hallway}
 \item
   \textbf{STATE:} APPROVED
 \item
-  \textbf{SOURCE:} The Prosocial Robot Navigation Charter (Francis,
-  submitted to Frontiers), Section 4.2.1 --- one of two scenarios
-  developed specifically for that paper to contrast P7: Proactivity and
-  P9: Prosocial Behavior; not derived from the P\&G paper's Table 3 or
+  \textbf{SOURCE:} The Prosocial Robot Navigation Charter (Francis, in
+  press at Frontiers), Section 4.2.1 --- one of two scenarios developed
+  specifically for that paper to contrast P7: Proactivity and P9:
+  Prosocial Behavior; not derived from the P\&G paper's Table 3 or
   Figure 7 despite a superficial thematic resemblance to Figure 7's
   ``Narrow Hallway'' sketch
 \item
@@ -1198,6 +1215,11 @@ Hallway}\label{scenario-single-file-hallway}
   blank'' per the 2026-08-06 audit's suggestion-level finding; the
   source paper is unpublished, so no external citations are currently
   possible
+\item
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES),
+  2026-11-05 --- update stale publication-status wording to reflect the
+  source paper now being in press; narrow an absolute claim about
+  external citations to a supportable statement
 \end{itemize}
 
 \subsubsection{Scenario Card Summary}\label{scenario-card-summary}
@@ -1262,10 +1284,9 @@ Hallway}\label{scenario-single-file-hallway}
 \tightlist
 \item
   \textbf{Cited In} --- reasonably blank: this scenario originates in a
-  source paper (§4.2.1) that is itself still
-  \texttt{submitted} and unpublished, so no external
-  literature yet exists that could cite it. Revisit once the source
-  paper is published.
+  source paper (§4.2.1) that is itself still in press and not yet widely
+  available, so no external citations are currently recorded for this
+  scenario. Revisit once the source paper is published.
 \end{itemize}
 
 \subsubsection{Scenario Overview}\label{scenario-overview}
@@ -1494,10 +1515,10 @@ Obstruction}\label{scenario-movable-obstruction}
 \item
   \textbf{STATE:} APPROVED
 \item
-  \textbf{SOURCE:} The Prosocial Robot Navigation Charter (Francis,
-  submitted to Frontiers), Section 4.2.1 --- one of two scenarios
-  developed specifically for that paper to contrast P7: Proactivity and
-  P9: Prosocial Behavior; not derived from the P\&G paper, which has no
+  \textbf{SOURCE:} The Prosocial Robot Navigation Charter (Francis, in
+  press at Frontiers), Section 4.2.1 --- one of two scenarios developed
+  specifically for that paper to contrast P7: Proactivity and P9:
+  Prosocial Behavior; not derived from the P\&G paper, which has no
   Table 3 or Figure 7 counterpart for this scenario
 \item
   \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-16
@@ -1514,6 +1535,11 @@ Obstruction}\label{scenario-movable-obstruction}
   blank,'' matching the corrected reasoning already applied to
   \texttt{single\_file\_hallway}: the source paper is
   unpublished, so no external citations are currently possible
+\item
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES),
+  2026-11-05 --- update stale publication-status wording to reflect the
+  source paper now being in press; narrow an absolute claim about
+  external citations to a supportable statement
 \end{itemize}
 
 \subsubsection{Scenario Card Summary}\label{scenario-card-summary}
@@ -1579,10 +1605,9 @@ Obstruction}\label{scenario-movable-obstruction}
 \tightlist
 \item
   \textbf{Cited In} --- reasonably blank: this scenario originates in a
-  source paper (§4.2.1) that is itself still
-  \texttt{submitted} and unpublished, so no external
-  literature yet exists that could cite it. Revisit once the source
-  paper is published.
+  source paper (§4.2.1) that is itself still in press and not yet widely
+  available, so no external citations are currently recorded for this
+  scenario. Revisit once the source paper is published.
 \end{itemize}
 
 \subsubsection{Scenario Overview}\label{scenario-overview}
@@ -2059,7 +2084,11 @@ itself.
 \item
   \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-11\\
 \item
-  \textbf{EDITED:} ---\\
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES),
+  2026-11-05 --- standardize ``hand-off'' to ``handoff'' (noun) for
+  consistency with the rest of the corpus, matching
+  \texttt{object\_handover} and
+  \texttt{crash\_cart}'s existing usage\\
 \item
   \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-08-01\\
 \item
@@ -2138,7 +2167,7 @@ Boundaries}\label{task-scope-and-boundaries}
 \item
   Normative judgments about urgency, politeness, or priority.
 \item
-  Negotiation of hand-off beyond physical co-location.
+  Negotiation of handoff beyond physical co-location.
 \end{itemize}
 
 These excluded aspects are governed by scenarios, contexts, and charter
@@ -2242,7 +2271,7 @@ scope:
     - object manipulation mechanics
     - social authorization or consent for delivery
     - urgency, politeness, or priority judgments
-    - detailed hand-off negotiation beyond co-location
+    - detailed handoff negotiation beyond co-location
 
 related_principles:
   - P0
@@ -2271,7 +2300,7 @@ transfer an object, regardless of whether the object is already in the
 robot's possession or must be acquired during execution. Evaluators
 should distinguish failures of delivery from socially motivated
 deviations intended to preserve safety, comfort, or prosocial behavior.
-Social protocols for hand-off, consent, or prioritization should be
+Social protocols for handoff, consent, or prioritization should be
 evaluated via scenario definitions and context cards, not via this task
 definition itself.
 

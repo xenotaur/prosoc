@@ -12,7 +12,7 @@
 ## Status
 
 - **STATE:** APPROVED
-- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms (Francis et al.); Prosocial Robotics project documents; The Prosocial Robot Navigation Charter (Francis, submitted)
+- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms (Francis et al.); Prosocial Robotics project documents; The Prosocial Robot Navigation Charter (Francis, in press)
 - **DRAFTED:** Prosocial Robotics project
 - **EDITED:** Claude (WI-CARD-STATUS-CHARTER), 2026-07-29 — add machine-readable lifecycle state
 - **EDITED:** Claude, 2026-08-05 — update the prosocial navigation definition (Section 2) and P9 to match the paper's revised definition; reverted from APPROVED pending re-audit
@@ -22,6 +22,7 @@
 - **APPROVED:** Claude, 2026-08-07 (PR #79) — re-audited and promoted EDITED → AUDITED → APPROVED, closing out the 2026-08-05 revert
 - **EDITED:** Claude (WI-CHARTER-FRONTIERS-SYNC), 2026-08-19 — implement PROP-CHARTER-FRONTIERS-SYNC's reconciliation decisions: broaden P1's Safety scope (other robots, self-damage); restore P5's "where feasible" hedge; adopt merged P2/P3/P4/P7 wording; apply the MUST-for-P0-and-P1/SHOULD-elsewhere modal convention across all ten principles; inline P8's six-context taxonomy; trim P9's task/context/goals qualifier (Section 2's definition retains it); reverted from APPROVED pending re-audit
 - **APPROVED:** Claude, 2026-08-19 (PR #97) — re-audited and promoted EDITED → AUDITED → APPROVED, closing out the 2026-08-19 revert
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — update the SOURCE attribution's stale publication-status wording to reflect the paper now being in press; define "P&G" at its first in-body use; split a run-on sentence in the P6 explanation; complete the Dragan et al. reference with its full conference name, pages, and DOI
 
 The charter's lifecycle state is authored in the embedded YAML below (the
 authoritative source), projected into the **STATE** bullet above, and enforced
@@ -52,7 +53,7 @@ This charter is intended to function as the **constitutional layer** of a prosoc
 
 ## 2. Definition: Social and Prosocial Robot Navigation
 
-Following the P&G paper, we define **social robot navigation** as:
+Following the Principles and Guidelines (P&G) paper (Francis et al., 2025), we define **social robot navigation** as:
 
 > A socially navigating robot acts and interacts with humans or other robots, achieving its navigation goals while modifying its behavior so the experience of agents around the robot is not degraded—or is even enhanced.
 
@@ -273,7 +274,7 @@ Robots should predict and accommodate the behavior of other agents.
 
 ### Explanation
 
-Understanding other agents means more than detecting them: it requires inferring what they are perceiving, doing, and trying to accomplish — for example, recognizing whether two people are conversing before deciding whether it is appropriate to pass between them. This understanding determines *interaction potential*, the likelihood of the robot entering another agent's personal space, which should sometimes be minimized and sometimes maximized depending on the task. It also lets a robot anticipate *conflicts* — short encounters in which the robot's and another agent's paths would collide without intervention — and adjust its own trajectory before one occurs (Francis et al., 2025, p. 8).
+Understanding other agents means more than detecting them: it requires inferring what they are perceiving, doing, and trying to accomplish — for example, recognizing whether two people are conversing before deciding whether it is appropriate to pass between them. This understanding determines *interaction potential* — the likelihood of the robot entering another agent's personal space. Depending on the task, that likelihood should sometimes be minimized and sometimes maximized. It also lets a robot anticipate *conflicts* — short encounters in which the robot's and another agent's paths would collide without intervention — and adjust its own trajectory before one occurs (Francis et al., 2025, p. 8).
 
 ```yaml
 id: P6
@@ -481,5 +482,5 @@ An **implementation** is any concrete navigation system, planner, controller, or
 ## References
 
 - Francis, A., Pérez-D'Arpino, C., et al. (2025). *Principles and Guidelines for Evaluating Social Robot Navigation Algorithms*. ACM Transactions on Human-Robot Interaction, 14(2), Article 34. https://doi.org/10.1145/3700599
-- Dragan, A. D., Lee, K. C. T., & Srinivasa, S. S. (2013). Legibility and predictability of robot motion. *HRI*.
+- Dragan, A. D., Lee, K. C. T., & Srinivasa, S. S. (2013). Legibility and predictability of robot motion. In *Proceedings of the 8th ACM/IEEE International Conference on Human-Robot Interaction (HRI '13)*, 301–308. https://doi.org/10.1109/HRI.2013.6483603
 - Hall, E. T. (1966). *The Hidden Dimension*. Doubleday.
