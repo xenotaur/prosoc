@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #128 (commit 05b7e6d4a7a1b14c081fcfd59cc69e53b30ec6ce) -- backfilled real AUDITED: provenance bullets for all 8 affected APPROVED task/context cards from their own audit.md evidence; confirmed scripts/validate/status's check_audit_evidence already hard-fails APPROVED-without-evidence independently of this bullet (pre-existing test coverage, no validator change needed); regenerated papers/01_charter/golden/rendered.tex for the 5 in-supplement cards."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-AUDIT-EVIDENCE-BACKFILL
 title: "Project real audit.md evidence into blank AUDITED: bullets for APPROVED task/context cards, and strengthen the status validator"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PROOFREADING
 depends_on: []

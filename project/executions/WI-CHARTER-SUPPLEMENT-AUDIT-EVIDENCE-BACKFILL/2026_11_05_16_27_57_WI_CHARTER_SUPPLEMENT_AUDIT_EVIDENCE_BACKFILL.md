@@ -2,14 +2,14 @@
 execution_id: 2026_11_05_16_27_57_WI_CHARTER_SUPPLEMENT_AUDIT_EVIDENCE_BACKFILL
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-AUDIT-EVIDENCE-BACKFILL:WI_CHARTER_SUPPLEMENT_AUDIT_EVIDENCE_BACKFILL)[2026-11-05T16:14:20+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-AUDIT-EVIDENCE-BACKFILL
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/128
-commit:
+commit: 05b7e6d4a7a1b14c081fcfd59cc69e53b30ec6ce
 created_at: 2026-11-05T16:27:57+00:00
 agent: claude-code
 instruction_source: project/work_items/proposed/WI-CHARTER-SUPPLEMENT-AUDIT-EVIDENCE-BACKFILL.md
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary

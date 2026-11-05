@@ -2,14 +2,14 @@
 execution_id: 2026_11_05_16_46_24_WI_CHARTER_SUPPLEMENT_AUDIT_EVIDENCE_BACKFILL_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_AUDIT_EVIDENCE_BACKFILL_SELFREVIEW)[2026-11-05T16:46:18+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_05_16_27_57_WI_CHARTER_SUPPLEMENT_AUDIT_EVIDENCE_BACKFILL
 pr: https://github.com/xenotaur/prosoc/pull/128
-commit:
+commit: 05b7e6d4a7a1b14c081fcfd59cc69e53b30ec6ce
 created_at: 2026-11-05T16:46:24+00:00
 agent: claude-code
 instruction_source: https://github.com/xenotaur/prosoc/pull/128
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary
