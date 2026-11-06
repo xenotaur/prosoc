@@ -1,12 +1,12 @@
 # Task: Navigate from Start to Goal
 
 ## STATUS
-- **STATE:** APPROVED  
-- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common mobile robot navigation task  
-- **DRAFTED:** ChatGPT 5.2, 2026-01-11  
-- **EDITED:** —  
-- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02  
-- **VALIDATED:** —  
+- **STATE:** APPROVED
+- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common mobile robot navigation task
+- **DRAFTED:** ChatGPT 5.2, 2026-01-11
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from the STATUS and Task Summary bullets, matching the scenario family's tighter rendered spacing
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02
+- **VALIDATED:** —
 
 ---
 
@@ -14,11 +14,11 @@
 
 > **Required**
 
-- **Task ID:** `navigate.point_to_point`  
-- **Task Name:** Navigate from Start to Goal  
-- **Task Type:** navigation  
-- **Primary Intent:** Reach a specified destination from an initial location.  
-- **Applies To:** single robot  
+- **Task ID:** `navigate.point_to_point`
+- **Task Name:** Navigate from Start to Goal
+- **Task Type:** navigation
+- **Primary Intent:** Reach a specified destination from an initial location.
+- **Applies To:** single robot
 
 ---
 

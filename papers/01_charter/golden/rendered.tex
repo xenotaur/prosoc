@@ -106,6 +106,20 @@
 
 % Leave a blank line between paragraphs instead of using \\
 
+% Author-controlled PDF metadata (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH):
+% hyperref is already loaded above, so these populate the PDF's own
+% Title/Author/Subject/Keywords/Language document properties. This is
+% separate from the supplement's typeset title/author block, which the
+% Frontiers template's own guidance (below, near \maketitle) says to
+% leave out to avoid discrepancies with the published article.
+\hypersetup{
+  pdftitle={Supplementary Material: The Prosocial Robot Navigation Charter},
+  pdfauthor={Anthony Francis},
+  pdfsubject={Normative cards and supporting documentation for the Prosocial Robot Navigation Charter},
+  pdfkeywords={social robot navigation, prosocial robotics, normative cards, navigation charter, human-robot interaction},
+  pdflang={en-US}
+}
+
 \begin{document}
 \onecolumn
 \firstpage{1}
@@ -1870,16 +1884,19 @@ Goal}\label{task-navigate-from-start-to-goal}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{STATE:} APPROVED\\
+  \textbf{STATE:} APPROVED
 \item
   \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
-  Navigation Algorithms; common mobile robot navigation task\\
+  Navigation Algorithms; common mobile robot navigation task
 \item
-  \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-11\\
+  \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-11
 \item
-  \textbf{EDITED:} ---\\
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH),
+  2026-11-06 --- remove trailing hard-line-break whitespace from the
+  STATUS and Task Summary bullets, matching the scenario family's
+  tighter rendered spacing
 \item
-  \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-08-02\\
+  \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-08-02
 \item
   \textbf{VALIDATED:} ---
 \end{itemize}
@@ -1893,15 +1910,14 @@ Goal}\label{task-navigate-from-start-to-goal}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Task ID:}
-  \texttt{navigate.point\_to\_point}\\
+  \textbf{Task ID:} \texttt{navigate.point\_to\_point}
 \item
-  \textbf{Task Name:} Navigate from Start to Goal\\
+  \textbf{Task Name:} Navigate from Start to Goal
 \item
-  \textbf{Task Type:} navigation\\
+  \textbf{Task Type:} navigation
 \item
   \textbf{Primary Intent:} Reach a specified destination from an initial
-  location.\\
+  location.
 \item
   \textbf{Applies To:} single robot
 \end{itemize}
@@ -2099,20 +2115,25 @@ itself.
 \begin{itemize}
 \tightlist
 \item
-  \textbf{STATE:} APPROVED\\
+  \textbf{STATE:} APPROVED
 \item
   \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
-  Navigation Algorithms; common service-robot delivery task\\
+  Navigation Algorithms; common service-robot delivery task
 \item
-  \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-11\\
+  \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-11
 \item
   \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES),
   2026-11-05 --- standardize ``hand-off'' to ``handoff'' (noun) for
   consistency with the rest of the corpus, matching
   \texttt{object\_handover} and
-  \texttt{crash\_cart}'s existing usage\\
+  \texttt{crash\_cart}'s existing usage
 \item
-  \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-08-01\\
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH),
+  2026-11-06 --- remove trailing hard-line-break whitespace from the
+  STATUS and Task Summary bullets, matching the scenario family's
+  tighter rendered spacing
+\item
+  \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-08-01
 \item
   \textbf{VALIDATED:} ---
 \end{itemize}
@@ -2126,14 +2147,14 @@ itself.
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Task ID:} \texttt{deliver.object}\\
+  \textbf{Task ID:} \texttt{deliver.object}
 \item
-  \textbf{Task Name:} Deliver an Object\\
+  \textbf{Task Name:} Deliver an Object
 \item
-  \textbf{Task Type:} navigation\\
+  \textbf{Task Type:} navigation
 \item
   \textbf{Primary Intent:} Transfer a specified object from a source to
-  a destination.\\
+  a destination.
 \item
   \textbf{Applies To:} single robot
 \end{itemize}

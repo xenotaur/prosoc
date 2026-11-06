@@ -1,12 +1,12 @@
 # Task: Lead an Agent
 
 ## STATUS
-- **STATE:** APPROVED  
-- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot guidance task  
-- **DRAFTED:** ChatGPT 5.2, 2026-01-11  
-- **EDITED:** —  
-- **AUDITED:** Claude (prosoc-card-audit skill), 2026-07-29  
-- **VALIDATED:** —  
+- **STATE:** APPROVED
+- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot guidance task
+- **DRAFTED:** ChatGPT 5.2, 2026-01-11
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from the STATUS and Task Summary bullets, matching the scenario family's tighter rendered spacing
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-07-29
+- **VALIDATED:** —
 
 ---
 
@@ -14,11 +14,11 @@
 
 > **Required**
 
-- **Task ID:** `navigate.lead_agent`  
-- **Task Name:** Lead an Agent  
-- **Task Type:** navigation  
-- **Primary Intent:** Guide a target agent by moving ahead and providing a navigational reference.  
-- **Applies To:** single robot  
+- **Task ID:** `navigate.lead_agent`
+- **Task Name:** Lead an Agent
+- **Task Type:** navigation
+- **Primary Intent:** Guide a target agent by moving ahead and providing a navigational reference.
+- **Applies To:** single robot
 
 ---
 
