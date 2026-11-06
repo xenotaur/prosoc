@@ -2,14 +2,14 @@
 execution_id: 2026_11_06_00_30_06_WI_CHARTER_SUPPLEMENT_DEFINITIONAL_CONSISTENCY
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-DEFINITIONAL-CONSISTENCY:WI_CHARTER_SUPPLEMENT_DEFINITIONAL_CONSISTENCY)[2026-11-06T00:20:59+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-DEFINITIONAL-CONSISTENCY
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/130
-commit:
+commit: fed0d17a05bc15e736fe15480be619ca19ebf93e
 created_at: 2026-11-06T00:30:06+00:00
 agent: claude-code
 instruction_source: project/work_items/proposed/WI-CHARTER-SUPPLEMENT-DEFINITIONAL-CONSISTENCY.md
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary

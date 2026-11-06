@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #130 (commit fed0d17a05bc15e736fe15480be619ca19ebf93e) -- added the glossary's missing shared-environment-navigability branch to the Prosocial definition and corrected the baseline-vs-P9 distinction to match Principle 13's own Explanation (a reviewer finding caught and fixed an initial inversion of that distinction); moved P9 from emphasized to deprioritized in the high_urgency context, with the user's explicit confirmation, and corrected the P1/P9 prose attributing harm prevention to P1."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-DEFINITIONAL-CONSISTENCY
 title: "Reconcile the glossary definition of prosocial behavior and P9's emergency-context framing with the charter's formal definitions"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PROOFREADING
 depends_on: []
