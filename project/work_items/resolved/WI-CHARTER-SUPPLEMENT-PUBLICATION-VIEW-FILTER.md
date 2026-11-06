@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #131 (commit 0d7294e44ef90904ef7a3e82952b1af01a4a5086) -- cataloged actual instances of internal-development content in the compiled PDF and presented the retain-vs-filter choice to the user, who chose retain: the corpus's own stated purpose is a transparent, auditable snapshot, not a polished publication-only artifact. Documented this decision and its rationale durably in docs/paper-supplements.md. Regardless of the decision, reworded 3 specific phrases that referenced internal development context meaninglessly to an external reader."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-PUBLICATION-VIEW-FILTER
 title: "Decide and implement how much internal development/provenance history belongs in the publication-facing charter supplement"
 type: investigation
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PROOFREADING
 depends_on: []

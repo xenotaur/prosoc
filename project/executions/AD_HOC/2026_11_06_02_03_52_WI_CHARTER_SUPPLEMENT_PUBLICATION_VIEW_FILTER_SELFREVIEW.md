@@ -2,14 +2,14 @@
 execution_id: 2026_11_06_02_03_52_WI_CHARTER_SUPPLEMENT_PUBLICATION_VIEW_FILTER_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_PUBLICATION_VIEW_FILTER_SELFREVIEW)[2026-11-06T02:03:45+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_06_01_56_29_WI_CHARTER_SUPPLEMENT_PUBLICATION_VIEW_FILTER
 pr: https://github.com/xenotaur/prosoc/pull/131
-commit:
+commit: 0d7294e44ef90904ef7a3e82952b1af01a4a5086
 created_at: 2026-11-06T02:03:52+00:00
 agent: claude-code
 instruction_source: https://github.com/xenotaur/prosoc/pull/131
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary

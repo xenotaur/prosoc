@@ -2,14 +2,14 @@
 execution_id: 2026_11_06_01_56_29_WI_CHARTER_SUPPLEMENT_PUBLICATION_VIEW_FILTER
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-PUBLICATION-VIEW-FILTER:WI_CHARTER_SUPPLEMENT_PUBLICATION_VIEW_FILTER)[2026-11-06T01:47:17+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-PUBLICATION-VIEW-FILTER
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/131
-commit:
+commit: 0d7294e44ef90904ef7a3e82952b1af01a4a5086
 created_at: 2026-11-06T01:56:29+00:00
 agent: claude-code
 instruction_source: project/work_items/proposed/WI-CHARTER-SUPPLEMENT-PUBLICATION-VIEW-FILTER.md
-session_transcript: pending
+session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
 # Summary
