@@ -4,7 +4,7 @@ prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH:WI_CHARTER_SUPPLEMENT
 work_item: WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH
 status: in_progress
 rerun_of:
-pr:
+pr: https://github.com/xenotaur/prosoc/pull/132
 commit:
 created_at: 2026-11-06T02:30:12+00:00
 agent: claude_app
