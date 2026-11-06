@@ -360,6 +360,37 @@ renderer behavior and render again.
 Historical comparison files, such as `papers/01_charter/golden/original.tex`,
 should remain unchanged unless the history itself is being corrected.
 
+## Publication View and Internal Provenance
+
+A rendered supplement embeds each card's full content verbatim, including
+its `## Status`/`## STATUS` provenance block: model names (Claude, ChatGPT),
+work-item and PR identifiers, script filenames such as `render_sections.py`,
+and repository paths. A second-pass external proofread of the charter
+supplement (2026-11-04) flagged this as worth an explicit decision rather
+than a silent fix in either direction.
+
+**Decision (confirmed with the user, `WI-CHARTER-SUPPLEMENT-PUBLICATION-VIEW-FILTER`,
+2026-11-06): retain it.** The normative-card corpus's own stated purpose,
+per each paper's intro prose (see `papers/01_charter/template.tex`), is to
+"show the expressiveness and scope of the system," not to present polished,
+publication-only prose -- the supplement is meant to read as a transparent,
+auditable snapshot of a living corpus, not a stripped-down publication
+artifact. Suppressing provenance would also contradict the renderer's own
+reproducibility goal: the compiled view should be a faithful rendering of
+the canonical source, not a filtered subset of it.
+
+This decision does not excuse leaving genuinely reader-meaningless
+commentary in place -- prose that only makes sense with internal session
+context (e.g. referencing something as "previously guessed in internal
+scenario-sourcing notes," or "not a source-fidelity gap" with no stated
+gap) should still be reworded to read sensibly on its own, independent of
+whether provenance in general is retained or filtered. If a future paper's
+needs genuinely require suppressing provenance for publication, design that
+as a paper-specific post-processing step in that paper's own directory
+(e.g. `papers/<paper-id>/`), never generalized into
+`prosoc.nca.utils.papers.render` -- consistent with this document's existing
+paper-specific-vs-shared boundary (see "Renderer Shim" above).
+
 ## Validation
 
 For renderer changes, run the focused unit tests:
