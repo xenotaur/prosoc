@@ -450,7 +450,7 @@ In this document, **social** refers to behaviors that respect or respond to huma
 
 ### Prosocial
 
-**Prosocial** behavior goes beyond social compliance to include actions that actively improve the experience, safety, or success of others, or that preserve or improve the navigability of the shared environment for other agents (e.g., not leaving an obstruction, or clearing one that is already there). Prosocial actions are typically discretionary rather than strictly required and may involve helping, accommodating, or cooperating with other agents. Merely avoiding degradation of the shared environment is baseline social behavior, not prosocial behavior in itself — prosocial behavior requires actively preserving or improving it.
+**Prosocial** behavior goes beyond social compliance to include actions that actively improve the experience, safety, or success of others, or that preserve or improve the navigability of the shared environment for other agents (e.g., not leaving an obstruction, or clearing one that is already there). Prosocial actions are typically discretionary rather than strictly required and may involve helping, accommodating, or cooperating with other agents. Only the shared-environment branch admits mere preservation as prosocial — merely avoiding degradation of another agent's own experience is baseline social behavior already required generally, not prosocial behavior in itself.
 
 ### Agent
 
