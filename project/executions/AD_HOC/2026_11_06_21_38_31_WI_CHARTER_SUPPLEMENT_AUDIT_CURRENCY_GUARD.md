@@ -4,7 +4,7 @@ prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_AUDIT_CURRENCY_GUARD)[2026-11-06T
 work_item: AD_HOC
 status: in_progress
 rerun_of:
-pr:
+pr: https://github.com/xenotaur/prosoc/pull/133
 commit:
 created_at: 2026-11-06T21:38:31+00:00
 agent: claude_app
