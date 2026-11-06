@@ -10,7 +10,11 @@ related_focus: []
 related_roadmap: []
 related_design:
   - 'project/design/proposals/adopted/normative-card-approval/00_proposal.md'
-work_items: []
+work_items:
+  - WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION
+  - WI-CHARTER-SUPPLEMENT-LIFECYCLE-AUDIT-REFRESH
+  - WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION
+  - WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD
 exit_criteria:
   - 'All 9 identified cards (charter, frontal_approach, single_file_hallway, movable_obstruction, navigate_point_to_point, deliver_object, navigate_follow_agent, navigate_lead_agent, high_urgency) have a current audit.md and are back to APPROVED via an explicit human-confirmed promotion, or are left below APPROVED with recorded rationale'
   - 'scripts/validate/status and the full test suite pass with 0 errors'
