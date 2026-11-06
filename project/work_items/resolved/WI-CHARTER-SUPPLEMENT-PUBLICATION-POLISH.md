@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #132 (commit 71009327ca63460813aa0c58f3dfcbc29845aec7) -- stripped the trailing Markdown hard-line-break whitespace causing the mismatched status-block spacing from the 4 affected task cards (navigate_point_to_point, deliver_object, navigate_follow_agent, navigate_lead_agent), covering both their STATUS blocks and, after a substitute PR-mode self-review caught the gap, their Task Summary blocks too; and added author-controlled PDF Title/Author/Subject/Keywords/Language metadata to the Frontiers template via hyperref. Final page left untouched (no distortion to fill it), per the acceptance criteria."
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH
 title: "Normalize status-block spacing and set author-controlled PDF metadata for the charter supplement"
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-PROOFREADING
 depends_on: []

@@ -2,10 +2,10 @@
 execution_id: 2026_11_06_02_30_12_WI_CHARTER_SUPPLEMENT_PUBLICATION_POLISH
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH:WI_CHARTER_SUPPLEMENT_PUBLICATION_POLISH)[2026-11-06T02:29:44+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/132
-commit:
+commit: 71009327ca63460813aa0c58f3dfcbc29845aec7
 created_at: 2026-11-06T02:30:12+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH.md

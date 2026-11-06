@@ -2,8 +2,8 @@
 id: WS-CHARTER-SUPPLEMENT-PROOFREADING
 kind: planning_node
 title: "Charter Supplementary-Material Second-Pass Proofreading"
-status: proposed
-stage: planned
+status: resolved
+stage: closed
 origin: follow_up
 summary: "Resolve the defects found by a second-pass external proofread of the charter supplement PDF produced by WS-CHARTER-SUPPLEMENT-PIPELINE: a visually-incorrect dash glyph regression inside lstlisting blocks, blank audit-evidence bullets, stale/incomplete citation and status language, charter definitional inconsistencies, a publication-view provenance decision, and remaining layout/metadata polish."
 related_focus: []
