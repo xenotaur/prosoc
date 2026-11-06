@@ -5,7 +5,7 @@
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot delivery task
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — standardize "hand-off" to "handoff" (noun) for consistency with the rest of the corpus, matching `object_handover` and `crash_cart`'s existing usage
-- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from STATUS bullets, matching the scenario family's tighter rendered spacing
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from the STATUS and Task Summary bullets, matching the scenario family's tighter rendered spacing
 - **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-01
 - **VALIDATED:** —
 
@@ -15,11 +15,11 @@
 
 > **Required**
 
-- **Task ID:** `deliver.object`  
-- **Task Name:** Deliver an Object  
-- **Task Type:** navigation  
-- **Primary Intent:** Transfer a specified object from a source to a destination.  
-- **Applies To:** single robot  
+- **Task ID:** `deliver.object`
+- **Task Name:** Deliver an Object
+- **Task Type:** navigation
+- **Primary Intent:** Transfer a specified object from a source to a destination.
+- **Applies To:** single robot
 
 ---
 
