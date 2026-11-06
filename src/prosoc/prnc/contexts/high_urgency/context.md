@@ -5,7 +5,7 @@
 - **CONTEXT TYPE:** CORE
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; emergency robotics and medical transport literature
 - **CREATED:** 2026-01-11
-- **MODIFIED:** —
+- **MODIFIED:** 2026-11-06
 - **AUDITED:** Claude (prosoc-card-audit skill), 2026-07-29
 - **VALIDATED:** —
 
@@ -90,9 +90,9 @@ Failures in this context are especially salient when excessive caution undermine
 In this context:
 
 - **P0 (Goal Achievement)** is strongly emphasized due to urgency.
-- **P1 (Safety)** remains critical and cannot be abandoned.
+- **P1 (Safety)** remains critical and cannot be abandoned; harm prevention is P1's role, not P9's.
 - **P2 (Comfort)** and **P3 (Legibility)** may be deprioritized when they conflict with urgent response.
-- **P9 (Prosocial Behavior)** is interpreted as prioritizing harm prevention over everyday politeness.
+- **P9 (Prosocial Behavior)** is deprioritized in this context: the urgency that elevates P0 and P1 leaves little slack for the discretionary, beyond-baseline acts P9 describes.
 
 Common tensions include:
 
@@ -180,10 +180,10 @@ principle_emphasis:
   emphasized:
     - P0
     - P1
-    - P9
   deprioritized:
     - P2
     - P3
+    - P9
   common_tensions:
     - speed versus safety
     - assertiveness versus predictability

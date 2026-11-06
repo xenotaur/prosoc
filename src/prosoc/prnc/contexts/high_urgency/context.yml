@@ -35,10 +35,10 @@ principle_emphasis:
   emphasized:
   - P0
   - P1
-  - P9
   deprioritized:
   - P2
   - P3
+  - P9
   common_tensions:
   - speed versus safety
   - assertiveness versus predictability

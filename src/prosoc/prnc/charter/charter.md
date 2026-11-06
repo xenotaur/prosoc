@@ -23,6 +23,7 @@
 - **EDITED:** Claude (WI-CHARTER-FRONTIERS-SYNC), 2026-08-19 — implement PROP-CHARTER-FRONTIERS-SYNC's reconciliation decisions: broaden P1's Safety scope (other robots, self-damage); restore P5's "where feasible" hedge; adopt merged P2/P3/P4/P7 wording; apply the MUST-for-P0-and-P1/SHOULD-elsewhere modal convention across all ten principles; inline P8's six-context taxonomy; trim P9's task/context/goals qualifier (Section 2's definition retains it); reverted from APPROVED pending re-audit
 - **APPROVED:** Claude, 2026-08-19 (PR #97) — re-audited and promoted EDITED → AUDITED → APPROVED, closing out the 2026-08-19 revert
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — update the SOURCE attribution's stale publication-status wording to reflect the paper now being in press; define "P&G" at its first in-body use; split a run-on sentence in the P6 explanation; complete the Dragan et al. reference with its full conference name, pages, and DOI
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-DEFINITIONAL-CONSISTENCY), 2026-11-06 — add the glossary's missing shared-environment-navigability branch to the Prosocial definition, matching Section 2 and Principle 13's Explanation, while preserving the existing baseline-vs-P9 distinction
 
 The charter's lifecycle state is authored in the embedded YAML below (the
 authoritative source), projected into the **STATE** bullet above, and enforced
@@ -449,7 +450,7 @@ In this document, **social** refers to behaviors that respect or respond to huma
 
 ### Prosocial
 
-**Prosocial** behavior goes beyond social compliance to include actions that actively improve the experience, safety, or success of others. Prosocial actions are typically discretionary rather than strictly required and may involve helping, accommodating, or cooperating with other agents.
+**Prosocial** behavior goes beyond social compliance to include actions that actively improve the experience, safety, or success of others, or that preserve or improve the navigability of the shared environment for other agents (e.g., not leaving an obstruction, or clearing one that is already there). Prosocial actions are typically discretionary rather than strictly required and may involve helping, accommodating, or cooperating with other agents. Only the shared-environment branch admits mere preservation as prosocial — merely avoiding degradation of another agent's own experience is baseline social behavior already required generally, not prosocial behavior in itself.
 
 ### Agent
 

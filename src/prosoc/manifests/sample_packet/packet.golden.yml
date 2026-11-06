@@ -2,7 +2,7 @@ _type: https://in-toto.io/Statement/v1
 subject:
 - name: guidance
   digest:
-    sha256: d342773daeb35725d79ddab8bee36d22ffc4af67d910a285fef38404ad36f184
+    sha256: a3cd8341c3885a4c6e25e994106eb554b165c7587aca115c850bd143cbe746c9
 predicate_type: https://prosocial-robotics.org/NormativePacket/v1
 predicate:
   builder:
@@ -35,7 +35,7 @@ predicate:
   - family: contexts
     id: high_urgency
     path: src/prosoc/prnc/contexts/high_urgency/context.yml
-    sha256: 6bc30b6b338a3bfbfbc8d88342130e781e3bce935bd0b77b4b880cb85b700f90
+    sha256: fadc4a29ec787487816ef8b1874e94122d38cc92aa92b7948950f7b24cc91fd0
     state: APPROVED
 guidance:
   charter:
@@ -421,10 +421,10 @@ guidance:
         emphasized:
         - P0
         - P1
-        - P9
         deprioritized:
         - P2
         - P3
+        - P9
         common_tensions:
         - speed versus safety
         - assertiveness versus predictability
@@ -549,7 +549,7 @@ guidance:
       - Robot could have warned about a hazard but didn't.
       - Robot leaves clutter behind that inconveniences others.
       - Robot abandons its delivery task to tidy an unrelated room.
-    emphasis: emphasized
+    emphasis: deprioritized
   tensions:
     common_tensions:
     - context: high_urgency
