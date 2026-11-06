@@ -1,12 +1,12 @@
 # Task: Follow an Agent
 
 ## STATUS
-- **STATE:** APPROVED  
-- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot navigation task  
-- **DRAFTED:** ChatGPT 5.2, 2026-01-11  
-- **EDITED:** —  
-- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02  
-- **VALIDATED:** —  
+- **STATE:** APPROVED
+- **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot navigation task
+- **DRAFTED:** ChatGPT 5.2, 2026-01-11
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from STATUS bullets, matching the scenario family's tighter rendered spacing
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02
+- **VALIDATED:** —
 
 ---
 
