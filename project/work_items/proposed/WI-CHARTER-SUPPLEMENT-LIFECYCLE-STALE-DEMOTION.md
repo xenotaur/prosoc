@@ -164,13 +164,20 @@ stale pre-demotion state right back. Distill before `--fix`, every time.
    `WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION` returns all 3 overlapping
    members to `APPROVED`.
 6. Run the full test suite and `scripts/validate/status`. Expect and
-   document exactly two known, temporary test failures --
-   `tests/nca/packet/cli_test.py::test_check_matches_the_checked_in_golden`
-   and `::test_matching_golden_exits_zero_silently` -- per the
-   Problem/Context note above; confirm no *other* test fails.
-   `scripts/validate/status` itself checks per-card state/audit
-   consistency, not packet membership, so it is unaffected and must
-   report 0 errors.
+   document the known, temporary test failures caused by demoting 3
+   `sample_packet` members -- verified during implementation to be 6, not
+   the 2 originally estimated here, since every `tests/nca/packet/cli_test.py`
+   test that assembles the real `SAMPLE` manifest without
+   `--allow-unapproved` now hits the same fail-closed gate:
+   `CliTest.test_sample_packet_default_now_succeeds_since_pilot_approved`,
+   `CliTest.test_allow_unapproved_on_fully_approved_manifest_does_not_engage_hatch`,
+   `CliTest.test_check_matches_the_checked_in_golden`,
+   `CliCheckTest.test_matching_golden_exits_zero_silently`,
+   `CliCheckTest.test_drifted_golden_exits_one_with_diff`, and
+   `CliCheckTest.test_missing_golden_exits_one_with_clear_error`. Confirm
+   no *other* test fails. `scripts/validate/status` itself checks
+   per-card state/audit consistency, not packet membership, so it is
+   unaffected and must report 0 errors.
 
 ## Non-Goals
 
@@ -193,7 +200,7 @@ stale pre-demotion state right back. Distill before `--fix`, every time.
 - `scripts/validate/status`
 - `lrh validate`
 - `PYTHONPATH="$(pwd)/src" python -m unittest discover tests "*_test.py"` --
-  expect exactly the 2 named `tests/nca/packet/cli_test.py` failures, no
+  expect exactly the 6 named `tests/nca/packet/cli_test.py` failures, no
   others
 - `scripts/assemble src/prosoc/manifests/sample_packet/manifest.yml --check`
   -- expect a fail-closed error naming the demoted member(s), not a

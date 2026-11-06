@@ -1,11 +1,12 @@
 # Context: Emergency High-Urgency Operation
 
 ## STATUS
-- **STATE:** APPROVED
+- **STATE:** EDITED
 - **CONTEXT TYPE:** CORE
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; emergency robotics and medical transport literature
 - **CREATED:** 2026-01-11
 - **MODIFIED:** 2026-11-06
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 modification above postdates this card's existing audit.md (2026-07-29), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
 - **AUDITED:** Claude (prosoc-card-audit skill), 2026-07-29
 - **VALIDATED:** —
 
@@ -147,7 +148,7 @@ Common tensions include:
 ```yaml
 id: emergency.high_urgency
 name: Emergency High-Urgency Operation
-state: APPROVED
+state: EDITED
 context_class: core
 
 primary_robot_role: emergency responder

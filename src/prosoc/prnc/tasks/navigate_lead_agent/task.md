@@ -1,10 +1,11 @@
 # Task: Lead an Agent
 
 ## STATUS
-- **STATE:** APPROVED
+- **STATE:** EDITED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot guidance task
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from the STATUS and Task Summary bullets, matching the scenario family's tighter rendered spacing
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 edit above postdates this card's existing audit.md (2026-07-29), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
 - **AUDITED:** Claude (prosoc-card-audit skill), 2026-07-29
 - **VALIDATED:** —
 
@@ -93,7 +94,7 @@ Evaluation of this task focuses on whether the robot provides a clear, followabl
 ```yaml
 id: navigate.lead_agent
 name: Lead an Agent
-state: APPROVED
+state: EDITED
 
 summary: >
   The robot navigates ahead of a human or other agent, providing a moving

@@ -2,13 +2,14 @@
 
 ## Status
 
-- **STATE:** APPROVED
+- **STATE:** EDITED
 - **SOURCE:** Original scenario concept, LLM-assisted drafting (ChatGPT 5.2); a common pedestrian-interaction benchmark pattern, not derived from a specific external citation
 - **DRAFTED:** ChatGPT 5.2, 2026-01-02
 - **EDITED:** render_sections.py, 2026-07-19
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-SOURCE-FIXES), 2026-10-27 — reword the SOURCE entry for publication clarity
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — label the bare "Cited In" citation-index list, reduce a repeated "navigation" in the Scenario Overview, reword an awkward evaluation-notes phrase, and fix a malformed quote-mark pair around an identifier
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-VIEW-FILTER), 2026-11-06 — reword two phrases that referenced internal development context meaninglessly to an external reader, independent of the project's retain-vs-filter decision for provenance generally
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 edits above postdate this card's existing audit.md (2026-08-02), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
 
 ## Scenario Card Summary
 
@@ -44,7 +45,7 @@ This scenario describes a canonical social navigation conflict in which a robot 
 ```yaml
 id: frontal_approach_01
 name: Frontal Approach
-state: APPROVED
+state: EDITED
 
 summary: >
   A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without
