@@ -1,9 +1,9 @@
 ---
 family: scenarios
 card: single_file_hallway
-verdict: ready
+verdict: ready_with_fixes
 blocking: 0
-should_fix: 0
+should_fix: 1
 suggestion: 1
 audited: 2026-11-07
 ---
@@ -12,8 +12,9 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/scenarios/single_file_hallway/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready, no blocking or should-fix issues found — one low-priority
-  structural suggestion.
+- **Verdict:** Ready for AUDITED with a minor fix — one should-fix prose/YAML
+  drift, caught and corrected in review, plus one low-priority structural
+  suggestion.
 
 This is a fresh audit of the card's current content, written from scratch
 after the card was demoted from `APPROVED` back to `EDITED`
@@ -23,7 +24,25 @@ It does not carry forward or assume any findings from that prior audit.
 
 ## Findings
 
-### 1. No dedicated "Social Navigation Context" prose section — suggestion
+### 1. `expected_behaviors.must` drops the prose's conflict-recognition qualifier — should-fix
+- **Section/field:** "Normative Expectations" prose vs.
+  `expected_behaviors.must`
+- **Issue:** **Caught in review.** An earlier draft of this audit declared
+  the prose and YAML `must` items an exact match. They are not: the prose
+  says the robot "must not enter the hallway simultaneously with the human
+  **once a conflict is recognized**," but the YAML `must` item reads only
+  "avoid entering the hallway simultaneously with the human," with no
+  recognition condition. A robot that enters simultaneously before a
+  conflict is recognized would satisfy the prose's conditional requirement
+  but violate the YAML's unconditional one -- a genuine one-sided drift
+  (YAML is stricter than prose), not a cosmetic wording difference.
+- **Recommended fix:** A human editor should reconcile the two: either add
+  the recognition condition to the YAML `must` item, or confirm the
+  unconditional YAML reading is actually intended (i.e. the robot must
+  never enter simultaneously, recognition or not) and loosen the prose's
+  qualifier to match. This audit does not edit the card.
+
+### 2. No dedicated "Social Navigation Context" prose section — suggestion
 - **Section/field:** Markdown structure vs. `template.md`'s "Social Navigation
   Context" section (marked "Optional but recommended").
 - **Issue:** The card includes "Scenario Overview" and "Normative
@@ -39,7 +58,8 @@ It does not carry forward or assume any findings from that prior audit.
   Context section purely for closer conformance to `template.md`'s section
   layout.
 
-No contradictions, drift, schema violations, or blocking issues were found.
+One should-fix prose/YAML drift was found (Finding 1); no contradictions,
+schema violations, or blocking issues were found.
 
 ## Prose/YAML Consistency
 
@@ -48,10 +68,11 @@ No contradictions, drift, schema violations, or blocking issues were found.
   single-file geometry (`context.environment.width: single_file`,
   `geometric_layout: narrow hallway`), and the two agents' tasks all match.
 - **Normative Expectations prose vs. `expected_behaviors.{must,should,should_not}`:**
-  Consistent, essentially verbatim. "must maintain a safe physical distance...
-  must not enter the hallway simultaneously" matches the two `must` items
-  exactly; the `should` paragraph matches all three `should` items; the
-  `should_not` paragraph matches all three `should_not` items.
+  Mostly consistent, but see Finding 1: the prose's first `must` item
+  carries a "once a conflict is recognized" qualifier the YAML `must` item
+  drops -- a genuine one-sided drift, not an exact match. The `should`
+  paragraph matches all three `should` items; the `should_not` paragraph
+  matches all three `should_not` items.
 - **`ideal_outcome`:** Identical string used in the Scenario Card Summary, the
   fenced YAML, and the standalone Scenario Usage Guide section — no drift.
 - **Scenario Card Summary vs. fenced YAML:** Success Metrics, Quality
@@ -129,10 +150,14 @@ AUDITED" in `template.md` are present and non-contradictory:
 - Scenario Usage Guide: Success Metrics, Quality Metrics, Ideal Outcome,
   Failure Modes, Labeling Criteria — all present, both in the Summary and in
   the standalone "Scenario Usage Guide" section.
-- **`Cited In`** — reasonably blank. The card's own "Remaining gaps" note
-  explains this scenario originates in a source paper that is itself still
-  in press and not yet widely available, so no external citations currently
-  exist to record. This phrasing (and label) is itself correct and current.
+- **`Cited In`** — reasonably blank. **Caught in review:** the card's own
+  "Remaining gaps" note makes the narrower claim that no external citations
+  are currently *recorded* for this scenario -- not that none exist. The
+  2026-11-05 copyedit (`WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES`) deliberately
+  narrowed this from an earlier, broader claim; being in press doesn't
+  establish that no citations exist, only that none are currently known/
+  recorded. This phrasing (and label) is itself correct and current as
+  written -- an earlier draft of this audit reversed the distinction.
 - **"Social Navigation Context" section** — reasonably blank (optional,
   see Finding 1); its substance is already covered by the Discussion
   section elsewhere in the card.

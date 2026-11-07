@@ -28,9 +28,9 @@ multi-family convention.
 
 | Family | Card | Verdict | Blocking | Should-fix | Suggestion |
 |---|---|---|---|---|---|
-| charter | charter | ready_with_fixes | 0 | 2 | 1 |
+| charter | charter | ready_with_fixes | 0 | 1 | 1 |
 | scenarios | frontal_approach | ready_with_fixes | 0 | 1 | 1 |
-| scenarios | single_file_hallway | ready | 0 | 0 | 1 |
+| scenarios | single_file_hallway | ready_with_fixes | 0 | 1 | 1 |
 | scenarios | movable_obstruction | ready_with_fixes | 0 | 1 | 2 |
 | tasks | navigate_point_to_point | ready_with_fixes | 0 | 1 | 0 |
 | tasks | deliver_object | ready_with_fixes | 0 | 1 | 0 |
@@ -38,8 +38,13 @@ multi-family convention.
 | tasks | navigate_lead_agent | ready_with_fixes | 0 | 2 | 0 |
 | contexts | high_urgency | ready_with_fixes | 0 | 2 | 2 |
 
-**Totals:** 9 cards, 1 `ready`, 8 `ready_with_fixes`, 0 `not_ready`.
+**Totals:** 9 cards, 0 `ready`, 9 `ready_with_fixes`, 0 `not_ready`.
 0 blocking, 11 should-fix, 7 suggestion findings.
+
+*(Revised after review-response: `charter`'s should-fix count dropped from
+2 to 1, and `single_file_hallway`'s rose from 0/`ready` to 1/`ready_with_fixes`
+-- see each card's own `audit.md` for what changed and why. Totals are
+unchanged, since the two corrections offset exactly.)*
 
 No card's content was found wrong enough to block promotion -- every
 one of the 9 cards is eligible for `EDITED -> AUDITED` under this

@@ -185,10 +185,14 @@ AUDITED" in `template.md` are present and non-contradictory:
 - Scenario Usage Guide: Success Metrics, Quality Metrics, Ideal Outcome,
   Failure Modes, Labeling Criteria — all present, both in the Summary and in
   the standalone "Scenario Usage Guide" section.
-- **`Cited In`** — reasonably blank. The card's own "Remaining gaps" note
-  explains this scenario originates in a source paper that is itself still
-  in press and not yet widely available, so no external citations currently
-  exist to record. This phrasing (and label) is itself correct and current.
+- **`Cited In`** — reasonably blank. **Caught in review:** the card's own
+  "Remaining gaps" note makes the narrower claim that no external citations
+  are currently *recorded* for this scenario -- not that none exist. The
+  2026-11-05 copyedit (`WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES`) deliberately
+  narrowed this from an earlier, broader claim; being in press doesn't
+  establish that no citations exist, only that none are currently known/
+  recorded. This phrasing (and label) is itself correct and current as
+  written -- an earlier draft of this audit reversed the distinction.
 - **"Normative Expectations" section — should probably be filled in now**
   (see Finding 1): directly inferable from the already-present
   `expected_behaviors` YAML, not genuinely unknown or inapplicable.

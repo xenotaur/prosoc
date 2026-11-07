@@ -3,7 +3,7 @@ family: charter
 card: charter
 verdict: ready_with_fixes
 blocking: 0
-should_fix: 2
+should_fix: 1
 suggestion: 1
 audited: 2026-11-07
 ---
@@ -12,9 +12,8 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/charter/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready for AUDITED with minor fixes — two should-fix items (a
-  recurring Normative-Statement/description drift, and a stale
-  `principles.md` cross-reference), no blocking issues.
+- **Verdict:** Ready for AUDITED with minor fixes — one should-fix item (a
+  recurring Normative-Statement/description drift), no blocking issues.
 
 ## Findings
 
@@ -60,24 +59,25 @@ audited: 2026-11-07
   Normative Statement is deliberately a headline summary. Either is
   acceptable; leaving the asymmetry undocumented is the actual gap.
 
-### 2. `../_shared/principles.md`'s P9 summary row restates wording the charter itself deliberately trimmed — should-fix
-- **Section/field:** `principles.md` P9 summary ("...without sacrificing own goals or task/context fit") vs. charter P9 Normative Statement / `description`
-- **Issue:** The charter's 2026-08-19 EDITED entry (WI-CHARTER-FRONTIERS-SYNC)
-  explicitly "trim[med] P9's task/context/goals qualifier (Section 2's
-  definition retains it)" from P9's Normative Statement and YAML description.
-  The shared `principles.md` reference table's P9 row still reads "Improve
-  others' navigation experience, or preserve/improve shared navigability,
-  without sacrificing own goals or task/context fit" — the pre-trim wording.
-  Per `principles.md`'s own header, the charter is the sole source of truth
-  and `principles.md` should be flagged as stale if the two disagree. They
-  disagree here, specifically on a point the charter changed on purpose.
-- **Recommended fix:** A human editor should update `principles.md`'s P9 row
-  to match the charter's current, trimmed P9 wording (the qualifier remains
-  true and findable via charter Section 2 and the P9 Explanation, just not in
-  the Normative Statement/description any more). This audit does not edit
-  `principles.md` itself, per this skill's scope.
+### Considered and rejected: `principles.md`'s P9 summary row
 
-### 3. P4 and P5 positive examples both illustrate "yielding to people passing" — suggestion
+An earlier draft of this audit flagged `../_shared/principles.md`'s P9
+summary row ("...without sacrificing own goals or task/context fit") as
+should-fix stale wording, reasoning that the charter's 2026-08-19
+WI-CHARTER-FRONTIERS-SYNC edit "trimmed" this qualifier from P9's
+Normative Statement. **Caught in review and corrected:** the charter's own
+P9 Explanation states the qualifier explicitly remains operative —
+"even though its normative statement no longer restates the limit
+explicitly, P9 still cannot be read in isolation from P0 and P8 — that
+bound is expressed here, in this Explanation, rather than in the statement
+itself." `principles.md`'s own header says it is a one-line *summary* per
+principle, not a transcription of the Normative Statement specifically,
+and instructs the reader to verify against the charter if the two "ever
+appear to disagree" — which, read in full (statement + Explanation), they
+do not. Retaining the qualifier in the summary is accurate, not stale;
+this is not a finding.
+
+### 2. P4 and P5 positive examples both illustrate "yielding to people passing" — suggestion
 - **Section/field:** P4 Politeness `examples.positive` vs. P5 Social Competency `examples.positive`
 - **Issue:** P4's "Robot pauses to let two people pass during their
   conversation" and P5's "Robot waits at the side while people pass in a

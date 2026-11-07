@@ -62,26 +62,28 @@ audited: 2026-11-07
   charter Principle 13 (P9) Explanation
 - **Issue:** Not a contradiction, but a missed nuance. The charter's P9 has
   two branches: (a) actively improving another agent's navigation
-  experience (discretionary, beyond-baseline), and (b) preserving/improving
-  shared-environment navigability (where *mere preservation* already
-  counts as prosocial, since baseline behavior only requires not actively
-  degrading another agent's own experience — charter §2 and Principle 13's
-  Explanation). The card's "P9 is deprioritized" bullet treats P9 as a
-  single undifferentiated concern. The charter's own urgency/delay reasoning
-  ("weigh [clearing an obstruction] against how much delay... and how urgent
-  that task is") most directly supports deprioritizing branch (a) —
-  discretionary extra acts like giving directions or helping a bystander
-  with an unrelated task. Branch (b) (e.g., not leaving a new obstruction
-  behind while moving quickly through a crowded emergency space) arguably
-  stays just as relevant under urgency, since P9's own positive example
-  ("Robot clears debris to make the path safer for others") is exactly the
-  kind of low-cost, environment-preserving act an emergency responder could
-  still owe to others while moving fast.
-- **Recommended fix:** Optionally sharpen the P9 bullet to note that the
-  deprioritization chiefly concerns discretionary, experience-improving acts
-  (branch a), not the lower-bar environment-preservation branch (b), which
-  can remain compatible with urgent task execution. Not required for
-  AUDITED — this is a refinement, not an error.
+  experience (discretionary, beyond-baseline, e.g. giving directions,
+  holding a door), and (b) preserving or improving the shared environment's
+  navigability (e.g. not leaving an obstruction behind, or clearing one
+  that's already there) — charter §2 and Principle 13's Explanation. The
+  card's "P9 is deprioritized" bullet treats P9 as a single undifferentiated
+  concern. **Caught in review:** an earlier draft of this finding
+  misattributed the charter's own urgency/delay example — "weigh [clearing
+  an obstruction] against how much delay... and how urgent that task is" —
+  to branch (a); the charter's own Explanation names clearing an obstruction
+  as branch (b) explicitly. So the charter's chosen illustration for
+  urgency-driven deprioritization is itself a branch (b) example, which
+  argues *against*, not for, treating branch (b) as the one that "stays just
+  as relevant under urgency." If anything, this is evidence the charter
+  intends the deprioritization to cover both branches, or at least does not
+  single out branch (a) as the only one affected — the opposite of this
+  finding's original framing.
+- **Recommended fix:** Optionally note in the P9 bullet that the charter's
+  own illustrative example for P9-under-urgency is itself an environment-
+  preservation (branch b) case, so the card's blanket "P9 is deprioritized"
+  framing is, if anything, under-qualified in the other direction from what
+  an earlier draft of this finding suggested. Not required for AUDITED —
+  this is a refinement, not an error in the card.
 
 ## P9 Reclassification Coherence (this audit's focus)
 
@@ -112,12 +114,20 @@ other principle-emphasis entries:
 - **P0/P1 emphasized:** matches the charter's framing of goal achievement
   and safety as the principles urgency elevates (P8's canonical crash-cart
   illustration: "politeness is properly subordinate to task success").
-- **P2/P3 deprioritized:** comfort and legibility are explicitly named in
-  the charter's P8 discussion as the kind of principle that yields to task
-  context; P9 (discretionary, "deliberately the lowest-severity principle")
-  fits the same pattern at least as readily — if anything, P9's own
-  `severity: optional` in `charter.yml` makes it the principle *most*
-  disposed to being set aside under time pressure, not the least.
+- **P2/P3 deprioritized:** **caught in review -- corrected.** P8's
+  crash-cart example explicitly names "politeness" yielding to task
+  success, not comfort (P2) or legibility (P3) -- "politeness" is itself a
+  distinct principle (P4) in this charter, not a synonym for P2/P3. P8's
+  Explanation does state a *general* weighting rule (context determines
+  the relative importance of every other principle), and extending that
+  general rule to P2/P3 under high urgency is a reasonable inference, but
+  it is an inference, not something the cited passage states explicitly --
+  this paragraph should not have presented it as explicit canonical
+  evidence. P9 (discretionary, "deliberately the lowest-severity
+  principle") fits the deprioritization pattern more directly, on its own
+  textual grounds -- P9's own `severity: optional` in `charter.yml` makes
+  it the principle *most* disposed to being set aside under time pressure,
+  independent of the P8/P2/P3 inference above.
 - **P1 vs. P9 separation:** the new P1 bullet ("harm prevention is P1's
   role, not P9's") correctly draws the charter's own line — P1's Explanation
   is about not causing harm (a MUST-level, critical-severity constraint),
@@ -125,10 +135,10 @@ other principle-emphasis entries:
   (an optional-severity concern). These are not substitutes for each other,
   and the card no longer implies they are.
 
-The one nuance not fully captured — that P9's environment-preservation
-branch arguably survives urgency better than its experience-improvement
-branch — is noted as Finding 4 above, but it is a refinement opportunity,
-not evidence that the reclassification itself is wrong. Nothing in the
+The nuance between P9's two branches (noted as Finding 4 above, and
+corrected there in review -- the charter's own urgency example is itself
+a branch-(b) case, not a branch-(a) one) is a refinement opportunity, not
+evidence that the reclassification itself is wrong. Nothing in the
 charter's text about P9 contradicts treating it as deprioritized overall in
 this context.
 
