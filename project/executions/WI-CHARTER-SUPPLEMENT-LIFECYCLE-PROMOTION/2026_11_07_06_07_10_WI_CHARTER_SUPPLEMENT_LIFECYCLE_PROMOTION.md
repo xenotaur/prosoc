@@ -2,10 +2,10 @@
 execution_id: 2026_11_07_06_07_10_WI_CHARTER_SUPPLEMENT_LIFECYCLE_PROMOTION
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION:WI_CHARTER_SUPPLEMENT_LIFECYCLE_PROMOTION)[2026-11-07T04:58:54+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/136
-commit:
+commit: 4c7ab6c486dec48747b4d6fe69920278277f49a5
 created_at: 2026-11-07T06:07:10+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION.md

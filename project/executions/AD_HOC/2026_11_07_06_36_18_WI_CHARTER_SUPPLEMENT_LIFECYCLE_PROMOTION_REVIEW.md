@@ -2,10 +2,10 @@
 execution_id: 2026_11_07_06_36_18_WI_CHARTER_SUPPLEMENT_LIFECYCLE_PROMOTION_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_LIFECYCLE_PROMOTION_REVIEW)[2026-11-07T06:36:13+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_07_06_07_10_WI_CHARTER_SUPPLEMENT_LIFECYCLE_PROMOTION
 pr: https://github.com/xenotaur/prosoc/pull/136
-commit:
+commit: 4c7ab6c486dec48747b4d6fe69920278277f49a5
 created_at: 2026-11-07T06:36:18+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/136

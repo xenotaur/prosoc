@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: 'Implemented and merged in PR #136 (commit 4c7ab6c486dec48747b4d6fe69920278277f49a5) -- promoted all 9 refreshed cards through 18 individually human-confirmed EDITED -> AUDITED -> APPROVED transitions, none batched. Fixed a real Normative Statement/description drift in the charter (P1, P2, P4, P5, P6) and should-fix findings on 5 other cards along the way, rather than carrying them forward; two of those (navigate_lead_agent, high_urgency) had sat open in project/design/backlog.md since 2026-08-02 and were resolved and removed from that table. Discovered and fixed a pre-existing history-bullet ordering bug in 5 cards, caught by this work item''s own PDF-text history-ordering acceptance check. Regenerated papers/01_charter/golden/rendered.tex and src/prosoc/manifests/sample_packet/packet.golden.yml via their supported pipelines. All 344 tests pass (0 failures) -- the 6 packet-related failures WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION left as a disclosed consequence are now gone.'
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION
 title: 'Re-promote the 9 refreshed charter-supplement cards to APPROVED and regenerate the PDF'
 type: operation
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-LIFECYCLE-CURRENCY
 related_design:
