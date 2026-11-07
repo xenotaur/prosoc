@@ -28,29 +28,29 @@ The prior audit's should-fix Finding 1 (Normative Statement vs. `description`
 drift for P1, P2, P4, P5, and P6) is resolved. Re-verified directly against
 the current `charter.md`/`charter.yml`:
 
-- **P1 Safety** ([`charter.md:132`](src/prosoc/prnc/charter/charter.md)): Normative
+- **P1 Safety** ([`charter.md:135`](charter.md)): Normative
   Statement now reads "...or themselves. This includes maintaining a safe
   distance unless explicitly invited to approach." — an exact match to
   `description`.
-- **P2 Comfort** (`charter.md:163`): Normative Statement now includes "This
+- **P2 Comfort** (`charter.md:166`): Normative Statement now includes "This
   includes refraining from sudden movements or uninvited approaches." — exact
   match to `description`.
-- **P4 Politeness** (`charter.md:219`, `:223`, `:229-231`): Normative
+- **P4 Politeness** (`charter.md:222`, `:226`, `:232-234`): Normative
   Statement, Explanation, and `description` were all three updated
   consistently, and the previously-unconditional "offering help when asked"
   was hedged to "offering help or at least an acknowledgement when asked" —
   a genuine content correction, not just a backport, since an unconditional
   help obligation conflicted with a robot's actual capability and with P8's
-  own crash-cart subordination example (`charter.md:337`). Re-distilled
+  own crash-cart subordination example (`charter.md:341`). Re-distilled
   (`scripts/distill/charter --dry-run --show-diffs` reports no diff) and
   schema-validated clean.
-- **P5 Social Competency** (`charter.md:247`): Normative Statement now
+- **P5 Social Competency** (`charter.md:251`): Normative Statement now
   includes "...avoiding inappropriate behaviors such as interrupting
   conversations or blocking passage." — consistent in substance with
   `description` (Normative Statement retains additional "basic... governing
   shared spaces" framing `description` doesn't carry, a superset, not a
   contradiction).
-- **P6 Agent Understanding** (`charter.md:275`): Normative Statement now
+- **P6 Agent Understanding** (`charter.md:279`): Normative Statement now
   includes "(humans, robots, pets, etc.)" — exact match to `description`.
 
 No new contradiction was introduced by this round of edits; `scripts/distill/charter
