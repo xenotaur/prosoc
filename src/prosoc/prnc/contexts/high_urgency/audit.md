@@ -1,9 +1,9 @@
 ---
 family: contexts
 card: high_urgency
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 2
+should_fix: 0
 suggestion: 2
 audited: 2026-11-07
 ---
@@ -12,38 +12,41 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/contexts/high_urgency/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready for AUDITED with minor fixes
+- **Verdict:** Ready for AUDITED, no blocking or should-fix issues — two
+  low-priority suggestions only.
+
+This is a fresh audit written after `WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION`
+resolved both should-fix findings tracked for this card since 2026-08-02 in
+`project/design/backlog.md`'s "APPROVED cards with unresolved findings"
+table (now removed from that table, since both are fixed) — the same
+backlog-driven cleanup pattern used for `charter` in 2026-08-06. It does
+not carry forward either finding's text, since the content it described no
+longer exists.
 
 ## Findings
 
-### 1. Common tension wording drift — should-fix
-- **Section/field:** Relationship to Prosocial Navigation Principles vs.
-  `principle_emphasis.common_tensions`
-- **Issue:** Prose lists "urgency versus perceived rudeness" as a common
-  tension, but the YAML list has "urgency versus politeness" in that slot —
-  a paraphrase, not the same phrase, and "perceived rudeness" and
-  "politeness" aren't quite the same axis (one is an outcome/perception,
-  the other a norm). Unresolved carryover from the 2026-07-29 audit; the
-  2026-11-05/11-06 content edits did not touch this section.
-- **Recommended fix:** Reconcile the wording — pick one phrasing and use it
-  in both places (or note explicitly in prose if they are meant to describe
-  slightly different things).
+### Resolved: Common tension wording drift
 
-### 2. `related_contexts` prose/YAML mismatch — should-fix
-- **Section/field:** Derived and Related Contexts vs. `related_contexts`
-- **Issue:** Prose lists three related contexts (`service.routine_delivery`,
-  `baseline.public_navigation`, `emergency.coordinated_response`), but the
-  YAML `related_contexts` only has the first two. `emergency.coordinated_response`
-  still has no matching card under `src/prosoc/prnc/contexts/` (confirmed: only
-  `high_urgency`, `public_navigation`, and `routine_delivery` exist) — it remains
-  a prose-only forward reference. Unresolved carryover from the 2026-07-29 audit.
-- **Recommended fix:** Either add `emergency.coordinated_response` to
-  `related_contexts` once it exists as a card (not before, per the "resolve
-  to a real card" convention `related_scenarios` enforces for scenarios), or
-  note explicitly in prose that it is a planned/future context rather than
-  presenting it as an existing peer of the other two.
+The prose now reads "urgency versus politeness," matching
+`principle_emphasis.common_tensions`'s existing "urgency versus politeness"
+entry exactly (the YAML side was already correct; only the prose needed to
+change). This is a Markdown-prose-only edit — confirmed by
+`scripts/distill/contexts --dry-run --show-diffs` reporting no differences
+for the whole contexts family (re-run fresh for this audit, with the
+correct `PYTHONPATH` for this checkout).
 
-### 3. Task-axis one-sided wording — suggestion
+### Resolved: `related_contexts` prose/YAML mismatch
+
+`related_contexts` now includes `emergency.coordinated_response`, matching
+the prose's three-entry list. `emergency.coordinated_response` still has
+no matching card under `src/prosoc/prnc/contexts/` — rather than leave
+this as an unresolved prose/YAML drift, it is now logged in
+`project/design/backlog.md`'s "Missing forward-referenced cards" table
+(added 2026-11-07), the same convention already used corpus-wide for this
+exact gap pattern (e.g. `guidance.accessibility_sensitive`,
+`environment.child_centric`). Re-distilled and schema-validated clean.
+
+### 1. Task-axis one-sided wording — suggestion
 - **Section/field:** Context Axes Instantiated → Task Context vs. `axes.task`
 - **Issue:** Prose says "Delays are treated as significant failures" (no
   counterpart in the YAML), while the YAML adds "when safety constraints are
@@ -57,7 +60,7 @@ audited: 2026-11-07
   as significant failures" into `axes.task`, so both sides carry the same
   content.
 
-### 4. P9's two branches not distinguished in the deprioritization — suggestion
+### 2. P9's two branches not distinguished in the deprioritization — suggestion
 - **Section/field:** Relationship to Prosocial Navigation Principles vs.
   charter Principle 13 (P9) Explanation
 - **Issue:** Not a contradiction, but a missed nuance. The charter's P9 has
@@ -135,7 +138,7 @@ other principle-emphasis entries:
   (an optional-severity concern). These are not substitutes for each other,
   and the card no longer implies they are.
 
-The nuance between P9's two branches (noted as Finding 4 above, and
+The nuance between P9's two branches (noted as Finding 2 above, and
 corrected there in review -- the charter's own urgency example is itself
 a branch-(b) case, not a branch-(a) one) is a refinement opportunity, not
 evidence that the reclassification itself is wrong. Nothing in the
@@ -157,7 +160,9 @@ this context.
   weightings encoded, consistent with the template's explicit instruction.
 - `related_contexts` entries (`service.routine_delivery`,
   `baseline.public_navigation`) both resolve to real context cards by their
-  dotted `id` field. See Finding 2 for the third prose-only entry.
+  dotted `id` field; the third entry (`emergency.coordinated_response`) is a
+  tracked forward reference (see the resolved finding above), not yet a
+  real card.
 - `context.yml`'s top-level keys and nested objects (`axes.environmental`,
   `principle_emphasis`, `limits`) contain only the schema's allowed
   properties — no `additionalProperties` violations.
@@ -170,5 +175,5 @@ All Required sections present: Context Summary, Context Description,
 Normative Significance, Context Axes Instantiated (all five subsections),
 Relationship to Prosocial Navigation Principles, Applicability and Limits.
 Both optional-but-recommended sections (Derived and Related Contexts,
-Example Scenario Classes) are populated — see Finding 2 for the one
-content issue in the former.
+Example Scenario Classes) are populated and consistent with the YAML — see
+the resolved findings above.

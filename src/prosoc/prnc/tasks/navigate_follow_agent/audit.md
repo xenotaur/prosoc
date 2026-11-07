@@ -1,9 +1,9 @@
 ---
 family: tasks
 card: navigate_follow_agent
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 1
+should_fix: 0
 suggestion: 0
 audited: 2026-11-07
 ---
@@ -12,24 +12,33 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/tasks/navigate_follow_agent/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready for AUDITED with one minor finding
+- **Verdict:** Ready for AUDITED, no blocking, should-fix, or suggestion
+  findings.
+
+This is a fresh audit written after confirming the prior audit's should-fix
+finding (dangling `example_scenarios` entry) is already tracked as a
+known, open gap in `project/design/backlog.md`, consistent with that
+file's own stated policy for this exact class of finding (the same basis
+already applied to `tasks/deliver_object`'s audit this session).
 
 ## Findings
 
-### 1. Dangling `example_scenarios` entry — should-fix
-- **Section/field:** Example Scenarios (Non-Exhaustive) / `example_scenarios`
-- **Issue:** `example_scenarios` lists `following` and `group_following_open_space`.
-  `following` resolves to a real scenario directory
-  (`src/prosoc/prnc/scenarios/following/`) and is a strong topical match.
-  `group_following_open_space` has no matching directory under
-  `src/prosoc/prnc/scenarios/` — no multi-agent/group-following scenario
-  currently exists in the corpus.
-- **Recommended fix:** Author a scenario covering group/multi-agent
-  following, or replace the entry with an existing scenario directory that
-  exercises this task, or explicitly log it as tracked backlog work (per
-  `PROP-NORMATIVE-PACKET-ASSEMBLY`'s Non-Goals, this corpus is known to have
-  dangling `example_scenarios` entries — not unique to this card, and not
-  itself a blocker for `AUDITED`).
+### Resolved: Dangling `example_scenarios` entry, but already tracked
+
+**Verified:** `group_following_open_space` still has no matching directory
+under `src/prosoc/prnc/scenarios/` — re-confirmed fresh for this audit,
+unchanged from the prior pass. It is already listed in
+`project/design/backlog.md`'s "Missing forward-referenced cards" table
+(entry dated 2026-08-02, status `open`, referenced by
+`tasks/navigate_follow_agent`'s `example_scenarios`) — not a new finding
+this audit is surfacing. `following` (the other `example_scenarios` entry)
+continues to resolve to a real, strong-match scenario directory.
+
+Per `project/design/backlog.md`'s own stated policy, a dangling
+`example_scenarios` entry that is already tracked in the backlog does not
+warrant a should-fix on this card specifically — the gap is the missing
+sibling scenario's absence, not an error in `navigate_follow_agent` itself.
+No new backlog entry was needed — the entry already existed.
 
 ## Prose/YAML Consistency
 
@@ -66,5 +75,5 @@ Principles names P0, P2, P3, P6 in prose, matching
 All Required sections present and filled: Task Summary, Task Description,
 Task Scope and Boundaries, Relationship to Prosocial Navigation Principles.
 Both optional-but-recommended sections (Common Failure Modes, Example
-Scenarios) are populated — see Finding 1 for the one still-open content
-issue (tracked, not blocking `AUDITED`).
+Scenarios) are populated — see the resolved finding above for the one
+already-tracked content issue (not blocking `AUDITED`).

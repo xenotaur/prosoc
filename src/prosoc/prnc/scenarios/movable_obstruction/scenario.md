@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** EDITED
+- **STATE:** APPROVED
 - **SOURCE:** The Prosocial Robot Navigation Charter (Francis, in press at Frontiers), Section 4.2.1 — one of two scenarios developed specifically for that paper to contrast P7: Proactivity and P9: Prosocial Behavior; not derived from the P&G paper, which has no Table 3 or Figure 7 counterpart for this scenario
 - **DRAFTED:** ChatGPT 5.2, 2026-01-16
 - **EDITED:** render_sections.py, 2026-07-19
@@ -10,6 +10,9 @@
 - **EDITED:** Claude, 2026-08-07 — reword the "Cited In" remaining-gaps note from "should-fill-in-now" to "reasonably blank," matching the corrected reasoning already applied to `single_file_hallway`: the source paper is unpublished, so no external citations are currently possible
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — update stale publication-status wording to reflect the source paper now being in press; narrow an absolute claim about external citations to a supportable statement
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-05 edit above postdates this card's existing audit.md (2026-08-06), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — added a "Normative Expectations" prose section restating `expected_behaviors` in natural language, resolving the should-fix finding that the card lacked one (unlike its sibling `single_file_hallway`)
+- **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit after the section addition above: verdict ready, 0 blocking, 0 should-fix, 2 suggestions; promoted EDITED → AUDITED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #136) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 
 ## Scenario Card Summary
 
@@ -46,12 +49,20 @@ Unlike *Frontal Approach*, successful navigation in this scenario may involve **
 
 ---
 
+## Normative Expectations
+
+At minimum, the robot must maintain a safe physical distance from the human and avoid causing the human to take evasive or unsafe actions. Beyond these required behaviors, acceptable robot behavior may include recognizing that the obstruction limits comfortable passing, communicating intent clearly, and selecting a response that resolves or mitigates the conflict — removing the obstruction if physically capable and task-appropriate, reporting it to facility management when appropriate, or yielding or waiting if intervention would be inappropriate for the robot's task or context.
+
+Unacceptable behavior includes ignoring the obstruction when it predictably causes repeated conflicts, forcing the human into single-file passage without acknowledgment, or manipulating the obstruction in a way that creates new hazards.
+
+---
+
 ## Scenario Specification (Machine-Readable)
 
 ```yaml
 id: movable_obstruction_01
 name: Movable Obstruction
-state: EDITED
+state: APPROVED
 
 summary: >
   A robot and a human approach each other in a hallway that is partially blocked by a movable obstruction.

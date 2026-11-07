@@ -148,7 +148,7 @@ This section contains normative cards from the Prosocial Robot Navigation Charte
 Charter}\label{prosocial-robot-navigation-charter}
 
 \textbf{Version:} 0.1\\
-\textbf{Status:} Edited (Normative)\\
+\textbf{Status:} Approved (Normative)\\
 \textbf{Scope:} Mobile robot navigation in human-populated
 environments\\
 \textbf{Derived from:}\\
@@ -161,7 +161,7 @@ Algorithms} (Francis et al.)\\
 \begin{itemize}
 \tightlist
 \item
-  \textbf{STATE:} EDITED
+  \textbf{STATE:} APPROVED
 \item
   \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
   Navigation Algorithms (Francis et al.); Prosocial Robotics project
@@ -227,6 +227,27 @@ Algorithms} (Francis et al.)\\
   making the prior APPROVED state stale per
   project/focus/current\_focus.md's audit-currency policy; pending
   re-audit and re-approval
+\item
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- reconcile a Normative
+  Statement/\texttt{description} drift for P1, P2, P4,
+  P5, P6 flagged by the 2026-11-07 audit: backport P1/P2/P5/P6's
+  YAML-only content into their Normative Statements verbatim; for P4,
+  additionally hedge ``offering help when asked'' to ``offering help or
+  at least an acknowledgement when asked'' (consistently across the
+  Normative Statement, \texttt{description}, and
+  Explanation), since an unconditional help obligation conflicts with a
+  robot's actual capability and with P8's own crash-cart subordination
+  example
+\item
+  \textbf{AUDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- fresh audit after the above reconciliation: verdict
+  ready, 0 blocking, 0 should-fix, 1 suggestion; promoted EDITED →
+  AUDITED
+\item
+  \textbf{APPROVED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 (PR \#136) --- human-confirmed re-approval closing out the
+  2026-11-06 demotion; promoted AUDITED → APPROVED
 \end{itemize}
 
 The charter's lifecycle state is authored in the embedded YAML below
@@ -243,7 +264,7 @@ state applies to the charter document as a whole, not to individual
 principles.
 
 \begin{lstlisting}[style=literatecard]
-state: EDITED
+state: APPROVED
 \end{lstlisting}
 
 \subsection{Purpose of This Charter}\label{purpose-of-this-charter}
@@ -401,7 +422,8 @@ examples:
 \subsubsection{Normative Statement}\label{normative-statement-1}
 
 Robots must not cause harm to humans, or damage to other robots,
-environments, or themselves.
+environments, or themselves. This includes maintaining a safe distance
+unless explicitly invited to approach.
 
 \subsubsection{Explanation}\label{explanation-1}
 
@@ -437,6 +459,7 @@ examples:
 \subsubsection{Normative Statement}\label{normative-statement-2}
 
 Robots should avoid causing stress, fear, or annoyance in nearby humans.
+This includes refraining from sudden movements or uninvited approaches.
 
 \subsubsection{Explanation}\label{explanation-2}
 
@@ -494,7 +517,8 @@ examples:
 \subsubsection{Normative Statement}\label{normative-statement-4}
 
 Robots should be respectful and considerate toward other agents in
-shared social spaces.
+shared social spaces, offering help or at least an acknowledgement when
+asked, and avoiding dismissive or intrusive behaviors.
 
 \subsubsection{Explanation}\label{explanation-4}
 
@@ -506,9 +530,13 @@ narrow space forces the robot to enter someone's personal space).
 Politeness is not purely a human-facing concern --- social robots should
 also be considerate of each other, so one robot's behavior does not
 prevent another agent from accomplishing its own task (Francis et al.,
-2025, p.~8). Concretely, this includes offering help when it is asked
-for rather than ignoring the request, and avoiding behavior that reads
-as dismissive or intrusive even when it is not physically obstructive.
+2025, p.~8). Concretely, this includes offering help or at least an
+acknowledgement when it is asked for, rather than ignoring the request
+outright --- a robot that is physically incapable of helping, or for
+which helping would be contextually inappropriate (e.g., a crash-cart
+robot mid-delivery; see P8), still owes a response, not silence --- and
+avoiding behavior that reads as dismissive or intrusive even when it is
+not physically obstructive.
 
 \begin{lstlisting}[style=literatecard]
 id: P4
@@ -516,7 +544,8 @@ name: Politeness
 severity: medium
 description: >
   Robots should be respectful and considerate toward other agents,
-  offering help when asked and avoiding dismissive or intrusive behaviors.
+  offering help or at least an acknowledgement when asked, and avoiding
+  dismissive or intrusive behaviors.
 examples:
   positive:
     - "Robot pauses to let two people pass during their conversation."
@@ -532,7 +561,8 @@ Competency}\label{principle-p5-social-competency}
 \subsubsection{Normative Statement}\label{normative-statement-5}
 
 Robots should follow basic social norms governing shared spaces where
-feasible.
+feasible, avoiding inappropriate behaviors such as interrupting
+conversations or blocking passage.
 
 \subsubsection{Explanation}\label{explanation-5}
 
@@ -570,7 +600,8 @@ Understanding}\label{principle-p6-agent-understanding}
 
 \subsubsection{Normative Statement}\label{normative-statement-6}
 
-Robots should predict and accommodate the behavior of other agents.
+Robots should predict and accommodate the behavior of other agents
+(humans, robots, pets, etc.).
 
 \subsubsection{Explanation}\label{explanation-6}
 
@@ -952,11 +983,11 @@ or a combination thereof.
 \begin{itemize}
 \tightlist
 \item
-  \textbf{STATE:} EDITED
+  \textbf{STATE:} APPROVED
 \item
-  \textbf{SOURCE:} Original scenario concept, LLM-assisted drafting
-  (ChatGPT 5.2); a common pedestrian-interaction benchmark pattern, not
-  derived from a specific external citation
+  \textbf{SOURCE:} P\&G Paper, Table 3 ``Frontal Approach'' entry
+  (Francis et al., 2025, ACM THRI Vol. 14, No.~2, Article 34); cited in
+  {[}50, 126, 167{]}
 \item
   \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-02
 \item
@@ -983,6 +1014,20 @@ or a combination thereof.
   this card's existing audit.md (2026-08-02), making the prior APPROVED
   state stale per project/focus/current\_focus.md's audit-currency
   policy; pending re-audit and re-approval
+\item
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- reworded SOURCE to cite the P\&G Table 3 ``Frontal
+  Approach'' entry explicitly, resolving the should-fix finding that the
+  prior ``not derived from a specific external citation'' wording
+  contradicted the card's own close fidelity to that table entry
+\item
+  \textbf{AUDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- fresh audit after the SOURCE fix above: verdict ready,
+  0 blocking, 0 should-fix, 1 suggestion; promoted EDITED → AUDITED
+\item
+  \textbf{APPROVED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 (PR \#136) --- human-confirmed re-approval closing out the
+  2026-11-06 demotion; promoted AUDITED → APPROVED
 \end{itemize}
 
 \subsubsection{Scenario Card Summary}\label{scenario-card-summary}
@@ -1057,7 +1102,7 @@ understanding.
 \begin{lstlisting}[style=literatecard]
 id: frontal_approach_01
 name: Frontal Approach
-state: EDITED
+state: APPROVED
 
 summary: >
   A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without
@@ -1238,7 +1283,7 @@ Hallway}\label{scenario-single-file-hallway}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{STATE:} EDITED
+  \textbf{STATE:} APPROVED
 \item
   \textbf{SOURCE:} The Prosocial Robot Navigation Charter (Francis, in
   press at Frontiers), Section 4.2.1 --- one of two scenarios developed
@@ -1278,6 +1323,20 @@ Hallway}\label{scenario-single-file-hallway}
   above postdate this card's existing audit.md (2026-08-06), making the
   prior APPROVED state stale per project/focus/current\_focus.md's
   audit-currency policy; pending re-audit and re-approval
+\item
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- added the ``once a conflict is recognized'' qualifier
+  to the YAML \texttt{must} item, resolving the
+  should-fix finding that it was stricter than the matching prose
+\item
+  \textbf{AUDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- fresh audit after the qualifier fix above: verdict
+  ready, 0 blocking, 0 should-fix, 1 suggestion; promoted EDITED →
+  AUDITED
+\item
+  \textbf{APPROVED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 (PR \#136) --- human-confirmed re-approval closing out the
+  2026-11-06 demotion; promoted AUDITED → APPROVED
 \end{itemize}
 
 \subsubsection{Scenario Card Summary}\label{scenario-card-summary}
@@ -1381,7 +1440,7 @@ on last-moment braking to resolve the conflict.
 \begin{lstlisting}[style=literatecard]
 id: single_file_hallway_01
 name: Single File Hallway
-state: EDITED
+state: APPROVED
 
 summary: >
   A robot and a human approach each other in a hallway that is too narrow for safe and comfortable
@@ -1428,7 +1487,7 @@ intended_human_behavior: navigate from the opposite end toward the robot
 expected_behaviors:
   must:
     - maintain a safe physical distance from the human
-    - avoid entering the hallway simultaneously with the human
+    - avoid entering the hallway simultaneously with the human once a conflict is recognized
   should:
     - recognize early that the hallway does not permit passing
     - signal intent clearly (e.g., yielding, requesting priority, or other clear signaling)
@@ -1571,7 +1630,7 @@ Obstruction}\label{scenario-movable-obstruction}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{STATE:} EDITED
+  \textbf{STATE:} APPROVED
 \item
   \textbf{SOURCE:} The Prosocial Robot Navigation Charter (Francis, in
   press at Frontiers), Section 4.2.1 --- one of two scenarios developed
@@ -1605,6 +1664,21 @@ Obstruction}\label{scenario-movable-obstruction}
   this card's existing audit.md (2026-08-06), making the prior APPROVED
   state stale per project/focus/current\_focus.md's audit-currency
   policy; pending re-audit and re-approval
+\item
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- added a ``Normative Expectations'' prose section
+  restating \texttt{expected\_behaviors} in natural
+  language, resolving the should-fix finding that the card lacked one
+  (unlike its sibling \texttt{single\_file\_hallway})
+\item
+  \textbf{AUDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- fresh audit after the section addition above: verdict
+  ready, 0 blocking, 0 should-fix, 2 suggestions; promoted EDITED →
+  AUDITED
+\item
+  \textbf{APPROVED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 (PR \#136) --- human-confirmed re-approval closing out the
+  2026-11-06 demotion; promoted AUDITED → APPROVED
 \end{itemize}
 
 \subsubsection{Scenario Card Summary}\label{scenario-card-summary}
@@ -1691,13 +1765,30 @@ may involve \textbf{environmental intervention} (physically moving the
 obstruction or reporting it), not just motion planning or yielding
 behavior.
 
+\subsubsection{Normative Expectations}\label{normative-expectations}
+
+At minimum, the robot must maintain a safe physical distance from the
+human and avoid causing the human to take evasive or unsafe actions.
+Beyond these required behaviors, acceptable robot behavior may include
+recognizing that the obstruction limits comfortable passing,
+communicating intent clearly, and selecting a response that resolves or
+mitigates the conflict --- removing the obstruction if physically
+capable and task-appropriate, reporting it to facility management when
+appropriate, or yielding or waiting if intervention would be
+inappropriate for the robot's task or context.
+
+Unacceptable behavior includes ignoring the obstruction when it
+predictably causes repeated conflicts, forcing the human into
+single-file passage without acknowledgment, or manipulating the
+obstruction in a way that creates new hazards.
+
 \subsubsection{Scenario Specification
 (Machine-Readable)}\label{scenario-specification-machine-readable}
 
 \begin{lstlisting}[style=literatecard]
 id: movable_obstruction_01
 name: Movable Obstruction
-state: EDITED
+state: APPROVED
 
 summary: >
   A robot and a human approach each other in a hallway that is partially blocked by a movable obstruction.
@@ -1913,12 +2004,14 @@ Goal}\label{task-navigate-from-start-to-goal}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{STATE:} EDITED
+  \textbf{STATE:} APPROVED
 \item
   \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
   Navigation Algorithms; common mobile robot navigation task
 \item
   \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-11
+\item
+  \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-08-02
 \item
   \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH),
   2026-11-06 --- remove trailing hard-line-break whitespace from the
@@ -1932,7 +2025,19 @@ Goal}\label{task-navigate-from-start-to-goal}
   state stale per project/focus/current\_focus.md's audit-currency
   policy; pending re-audit and re-approval
 \item
-  \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-08-02
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- added ``rerouting toward the destination'' to
+  \texttt{scope.includes} and restored ``politeness''
+  to \texttt{scope.excludes}, resolving the should-fix
+  finding that the YAML dropped behaviors the prose named explicitly
+\item
+  \textbf{AUDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- fresh audit after the scope fix above: verdict ready, 0
+  blocking, 0 should-fix, 0 suggestions; promoted EDITED → AUDITED
+\item
+  \textbf{APPROVED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 (PR \#136) --- human-confirmed re-approval closing out the
+  2026-11-06 demotion; promoted AUDITED → APPROVED
 \item
   \textbf{VALIDATED:} ---
 \end{itemize}
@@ -2092,7 +2197,7 @@ at all costs.
 \begin{lstlisting}[style=literatecard]
 id: navigate.point_to_point
 name: Navigate from Start to Goal
-state: EDITED
+state: APPROVED
 
 summary: >
   The robot attempts to move from an initial location to a specified destination,
@@ -2108,11 +2213,12 @@ scope:
     - progressing toward a destination
     - pausing or stopping temporarily while pursuing the goal
     - resuming motion toward the goal after interruption
+    - rerouting toward the destination
   excludes:
     - explicit interaction with specific agents
     - yielding or asserting right-of-way as a primary objective
     - interpretation of social signals or gestures
-    - optimization for social comfort or legibility beyond goal completion
+    - optimization for social comfort, legibility, or politeness beyond goal completion
 
 related_principles:
   - P0
@@ -2151,12 +2257,14 @@ itself.
 \begin{itemize}
 \tightlist
 \item
-  \textbf{STATE:} EDITED
+  \textbf{STATE:} APPROVED
 \item
   \textbf{SOURCE:} Principles and Guidelines for Evaluating Social Robot
   Navigation Algorithms; common service-robot delivery task
 \item
   \textbf{DRAFTED:} ChatGPT 5.2, 2026-01-11
+\item
+  \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-08-01
 \item
   \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES),
   2026-11-05 --- standardize ``hand-off'' to ``handoff'' (noun) for
@@ -2176,7 +2284,15 @@ itself.
   prior APPROVED state stale per project/focus/current\_focus.md's
   audit-currency policy; pending re-audit and re-approval
 \item
-  \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-08-01
+  \textbf{AUDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- fresh audit confirming the one should-fix finding (3
+  dangling example\_scenarios entries) is already tracked in
+  project/design/backlog.md, not a new defect: verdict ready, 0
+  blocking, 0 should-fix, 0 suggestions; promoted EDITED → AUDITED
+\item
+  \textbf{APPROVED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 (PR \#136) --- human-confirmed re-approval closing out the
+  2026-11-06 demotion; promoted AUDITED → APPROVED
 \item
   \textbf{VALIDATED:} ---
 \end{itemize}
@@ -2337,7 +2453,7 @@ and context-specific constraints.
 \begin{lstlisting}[style=literatecard]
 id: deliver.object
 name: Deliver an Object
-state: EDITED
+state: APPROVED
 
 summary: >
   The robot transfers a specified object from a source to a destination,
@@ -3081,7 +3197,7 @@ Operation}\label{context-emergency-high-urgency-operation}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{STATE:} EDITED
+  \textbf{STATE:} APPROVED
 \item
   \textbf{CONTEXT TYPE:} CORE
 \item
@@ -3090,6 +3206,8 @@ Operation}\label{context-emergency-high-urgency-operation}
   literature
 \item
   \textbf{CREATED:} 2026-01-11
+\item
+  \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-07-29
 \item
   \textbf{MODIFIED:} 2026-11-06
 \item
@@ -3100,7 +3218,21 @@ Operation}\label{context-emergency-high-urgency-operation}
   APPROVED state stale per project/focus/current\_focus.md's
   audit-currency policy; pending re-audit and re-approval
 \item
-  \textbf{AUDITED:} Claude (prosoc-card-audit skill), 2026-07-29
+  \textbf{EDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- reworded the common-tension prose to ``urgency versus
+  politeness'' and backfilled
+  \texttt{emergency.coordinated\_response} into
+  \texttt{related\_contexts}, resolving the two
+  should-fix findings tracked in
+  \texttt{project/design/backlog.md} since 2026-08-02
+\item
+  \textbf{AUDITED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 --- fresh audit after the fixes above: verdict ready, 0
+  blocking, 0 should-fix, 2 suggestions; promoted EDITED → AUDITED
+\item
+  \textbf{APPROVED:} Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION),
+  2026-11-07 (PR \#136) --- human-confirmed re-approval closing out the
+  2026-11-06 demotion; promoted AUDITED → APPROVED
 \item
   \textbf{VALIDATED:} ---
 \end{itemize}
@@ -3276,7 +3408,7 @@ Common tensions include:
 \item
   assertiveness versus predictability,
 \item
-  urgency versus perceived rudeness.
+  urgency versus politeness.
 \end{itemize}
 
 \subsubsection{Applicability and Limits}\label{applicability-and-limits}
@@ -3356,7 +3488,7 @@ Contexts}\label{derived-and-related-contexts}
 \begin{lstlisting}[style=literatecard]
 id: emergency.high_urgency
 name: Emergency High-Urgency Operation
-state: EDITED
+state: APPROVED
 context_class: core
 
 primary_robot_role: emergency responder
@@ -3409,6 +3541,7 @@ limits:
 related_contexts:
   - service.routine_delivery
   - baseline.public_navigation
+  - emergency.coordinated_response
 \end{lstlisting}
 
 \subsubsection{Notes for Context Designers and

@@ -1,9 +1,9 @@
 ---
 family: charter
 card: charter
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 1
+should_fix: 0
 suggestion: 1
 audited: 2026-11-07
 ---
@@ -12,72 +12,61 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/charter/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready for AUDITED with minor fixes — one should-fix item (a
-  recurring Normative-Statement/description drift), no blocking issues.
+- **Verdict:** Ready for AUDITED, no blocking or should-fix issues — one
+  low-priority suggestion only.
+
+This is a fresh audit written after `WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION`
+reconciled the Normative Statement/`description` drift the prior 2026-11-07
+audit flagged as should-fix (Finding 1). It does not carry forward that
+finding's text, since the content it described no longer exists.
 
 ## Findings
 
-### 1. Normative Statement omits content the YAML `description` and prose Explanation carry — should-fix
-- **Section/field:** Prose `### Normative Statement` vs. embedded YAML `description` (P1, P2, P4, P5, and to a lesser extent P6)
-- **Issue:** For several principles, the terse `### Normative Statement` subsection
-  no longer states the full normative content that the embedded YAML
-  `description` field carries (and that the `### Explanation` subsection
-  elaborates). Concretely:
-  - **P1 Safety:** Normative Statement reads "Robots must not cause harm to
-    humans, or damage to other robots, environments, or themselves." The YAML
-    `description` adds "This includes maintaining a safe distance unless
-    explicitly invited to approach." — present in the Explanation but not in
-    the headline statement.
-  - **P2 Comfort:** Normative Statement omits the description's "This includes
-    refraining from sudden movements or uninvited approaches."
-  - **P4 Politeness:** Normative Statement says "...toward other agents in
-    shared social spaces," while the YAML `description` instead emphasizes
-    "...offering help when asked and avoiding dismissive or intrusive
-    behaviors" — the two statements foreground different content rather than
-    one simply being a subset of the other.
-  - **P5 Social Competency:** similarly, the Normative Statement's "governing
-    shared spaces" framing and the YAML description's "avoiding inappropriate
-    behaviors such as interrupting conversations or blocking passage" diverge
-    in emphasis.
-  - **P6 Agent Understanding** (minor): the YAML description's parenthetical
-    "(humans, robots, pets, etc.)" has no counterpart in the Normative
-    Statement.
+### Resolved: Normative Statement omitted content the YAML `description` and prose Explanation carried
 
-  This is drift rather than contradiction — nothing here is factually
-  incompatible, and `scripts/distill/charter --dry-run --show-diffs` reports
-  no diff, so this is not a tooling-freshness issue. It traces to the
-  2026-08-06 EDITED entry that explicitly "fold[ed] P1/P4/P5's YAML-only
-  `description` content ... into their prose Explanations" without
-  back-porting the same content into the terse Normative Statement headline.
-  A reader who only skims the Normative Statement (the subsection the
-  Definitions and Glossary section calls "the primary reference point for
-  interpretation and enforcement") would miss normatively real content for
-  four of ten principles.
-- **Recommended fix:** For P1, P2, P4, P5 (and optionally P6), either fold the
-  extra clause back into the Normative Statement itself, or add an explicit
-  note that the YAML `description` is the fuller operative text and the
-  Normative Statement is deliberately a headline summary. Either is
-  acceptable; leaving the asymmetry undocumented is the actual gap.
+The prior audit's should-fix Finding 1 (Normative Statement vs. `description`
+drift for P1, P2, P4, P5, and P6) is resolved. Re-verified directly against
+the current `charter.md`/`charter.yml`:
+
+- **P1 Safety** ([`charter.md:135`](charter.md)): Normative
+  Statement now reads "...or themselves. This includes maintaining a safe
+  distance unless explicitly invited to approach." — an exact match to
+  `description`.
+- **P2 Comfort** (`charter.md:166`): Normative Statement now includes "This
+  includes refraining from sudden movements or uninvited approaches." — exact
+  match to `description`.
+- **P4 Politeness** (`charter.md:222`, `:226`, `:232-234`): Normative
+  Statement, Explanation, and `description` were all three updated
+  consistently, and the previously-unconditional "offering help when asked"
+  was hedged to "offering help or at least an acknowledgement when asked" —
+  a genuine content correction, not just a backport, since an unconditional
+  help obligation conflicted with a robot's actual capability and with P8's
+  own crash-cart subordination example (`charter.md:341`). Re-distilled
+  (`scripts/distill/charter --dry-run --show-diffs` reports no diff) and
+  schema-validated clean.
+- **P5 Social Competency** (`charter.md:251`): Normative Statement now
+  includes "...avoiding inappropriate behaviors such as interrupting
+  conversations or blocking passage." — consistent in substance with
+  `description` (Normative Statement retains additional "basic... governing
+  shared spaces" framing `description` doesn't carry, a superset, not a
+  contradiction).
+- **P6 Agent Understanding** (`charter.md:279`): Normative Statement now
+  includes "(humans, robots, pets, etc.)" — exact match to `description`.
+
+No new contradiction was introduced by this round of edits; `scripts/distill/charter
+--dry-run --show-diffs` (run fresh for this audit, with the correct
+`PYTHONPATH` for this checkout) reports no differences.
 
 ### Considered and rejected: `principles.md`'s P9 summary row
 
-An earlier draft of this audit flagged `../_shared/principles.md`'s P9
-summary row ("...without sacrificing own goals or task/context fit") as
-should-fix stale wording, reasoning that the charter's 2026-08-19
-WI-CHARTER-FRONTIERS-SYNC edit "trimmed" this qualifier from P9's
-Normative Statement. **Caught in review and corrected:** the charter's own
-P9 Explanation states the qualifier explicitly remains operative —
-"even though its normative statement no longer restates the limit
-explicitly, P9 still cannot be read in isolation from P0 and P8 — that
-bound is expressed here, in this Explanation, rather than in the statement
-itself." `principles.md`'s own header says it is a one-line *summary* per
-principle, not a transcription of the Normative Statement specifically,
-and instructs the reader to verify against the charter if the two "ever
-appear to disagree" — which, read in full (statement + Explanation), they
-do not. Retaining the qualifier in the summary is accurate, not stale;
-this is not a finding.
+Unchanged from the prior audit — carried forward since the 2026-11-07 edits
+did not touch P9 or `principles.md`. The charter's own P9 Explanation states
+the task/context/goals qualifier remains operative ("that bound is expressed
+here, in this Explanation, rather than in the statement itself" —
+`charter.md`, P9 Explanation); `principles.md`'s retained qualifier is
+accurate, not stale. Not a finding.
 
-### 2. P4 and P5 positive examples both illustrate "yielding to people passing" — suggestion
+### 1. P4 and P5 positive examples both illustrate "yielding to people passing" — suggestion
 - **Section/field:** P4 Politeness `examples.positive` vs. P5 Social Competency `examples.positive`
 - **Issue:** P4's "Robot pauses to let two people pass during their
   conversation" and P5's "Robot waits at the side while people pass in a
@@ -95,7 +84,8 @@ this is not a finding.
 
 - All ten principles (P0–P9) have every schema-required field (`id`, `name`,
   `description`, `severity`, non-empty `examples.positive`/`.negative`) — no
-  blanks found.
+  blanks found. Schema validation (`jsonschema.validate` against
+  `schema.json`) passes clean.
 - All structural sections required by the checklist are present: `## Status`,
   `## 1. Purpose of This Charter`, `## 2. Definition...`, `## 3. Structure of
   the Principles`, `## 14. Use of This Charter...`, `## Definitions and

@@ -1,9 +1,9 @@
 ---
 family: tasks
 card: navigate_lead_agent
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 2
+should_fix: 0
 suggestion: 0
 audited: 2026-11-07
 ---
@@ -12,36 +12,38 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/tasks/navigate_lead_agent/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready for AUDITED with minor fixes
+- **Verdict:** Ready for AUDITED, no blocking, should-fix, or suggestion
+  findings.
+
+This is a fresh audit written after `WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION`
+resolved both should-fix findings tracked for this card since 2026-08-02 in
+`project/design/backlog.md`'s "APPROVED cards with unresolved findings"
+table (now removed from that table, since both are fixed) — the same
+backlog-driven cleanup pattern used for `charter` in 2026-08-06. It does
+not carry forward either finding's text, since the content it described no
+longer exists.
 
 ## Findings
 
-### 1. Common failure mode omitted from YAML — should-fix
-- **Section/field:** Common Failure Modes (Task-Level) vs. `common_failure_modes`
-- **Issue:** The prose section lists four failure modes, but the fourth —
-  "Abandonment of the leading relationship without external cause" — has no
-  corresponding entry in the embedded YAML `common_failure_modes` list,
-  which has only three entries (each matching one of the other three prose
-  bullets: excessive speed, unclear/erratic motion, unsafe path selection).
-- **Recommended fix:** Add an entry such as `unexplained abandonment of the
-  leading relationship` to `common_failure_modes` (and, once a human
-  confirms the fix, re-run `scripts/distill/tasks` for real to regenerate
-  `task.yml`), or remove the prose bullet if it was intentionally dropped.
+### Resolved: Common failure mode omitted from YAML
 
-### 2. Dangling `example_scenarios` entries; existing match omitted — should-fix
-- **Section/field:** Example Scenarios (Non-Exhaustive) / `example_scenarios`
-- **Issue:** Both listed scenarios, `guided_navigation_corridor` and
-  `escort_to_destination`, have no matching directory under
-  `src/prosoc/prnc/scenarios/`. Meanwhile, `src/prosoc/prnc/scenarios/leading/`
-  exists in the corpus and is a close topical match for this task — its
-  scenario is titled "Leading," its `Robot Role` is `leader`, and its
-  `Robot Task` is "lead the human to a destination" — yet it is not
-  referenced here.
-- **Recommended fix:** Replace one or both dangling entries with `leading`
-  (an existing, `APPROVED` scenario directory), and either author the
-  remaining missing scenario(s) or log them as tracked backlog work, per
-  `PROP-NORMATIVE-PACKET-ASSEMBLY`'s Non-Goals (dangling `example_scenarios`
-  entries are known, corpus-wide, not-yet-blocking work).
+`common_failure_modes` now includes "unexplained abandonment of the leading
+relationship," matching the prose's fourth bullet. Re-distilled
+(`PYTHONPATH="$(pwd)/src" python -m prosoc.prnc.tasks.distill --dry-run
+--show-diffs` reports no diff for the whole tasks family) and
+schema-validated clean.
+
+### Resolved: Dangling `example_scenarios` entries; existing match now used
+
+`example_scenarios` (and the matching prose list) now reads `leading`,
+`escort_to_destination` — replacing the dangling `guided_navigation_corridor`
+with the existing, `APPROVED` `leading` scenario directory (role `leader`,
+task "lead the human to a destination" — a direct match, re-verified
+directly against `scenarios/leading/scenario.md`). `escort_to_destination`
+remains dangling; rather than leave it untracked, it is now logged in
+`project/design/backlog.md`'s "Missing forward-referenced cards" table
+(added 2026-11-07), consistent with that table's existing entries for this
+same corpus-wide, not-yet-blocking gap pattern.
 
 ## Prose/YAML Consistency
 
@@ -51,8 +53,9 @@ cleanly with `task_type`, `primary_intent`, `summary`, and
 map list-for-list onto the YAML arrays (5 includes, 4 excludes, matched in
 both). Relationship to Prosocial Navigation Principles names P0, P3, P2, P6
 in prose (order differs from the YAML list, not a defect), matching
-`related_principles: [P0, P2, P3, P6]` exactly. See Finding 1 for the one
-Common Failure Modes discrepancy.
+`related_principles: [P0, P2, P3, P6]` exactly. Common Failure Modes and
+Example Scenarios are now both consistent — see the resolved findings
+above.
 
 ## Schema and Charter Compliance
 
@@ -69,13 +72,14 @@ Common Failure Modes discrepancy.
   specific social setting leaks into `scope`, `primary_intent`, or the Task
   Description.
 - `common_failure_modes` entries are task-level (independent of social
-  context) — see Finding 1 for the one missing entry; no scenario- or
-  context-specific failure leaked in among the three that are present.
+  context) and now complete (see the resolved finding above); no scenario-
+  or context-specific failure leaked in among the four.
 
 ## Completeness
 
 All Required sections present and filled: Task Summary, Task Description,
 Task Scope and Boundaries, Relationship to Prosocial Navigation Principles.
 Both optional-but-recommended sections (Common Failure Modes, Example
-Scenarios) are populated — see Findings 1–2 for their content issues
-(tracked, not blocking `AUDITED`).
+Scenarios) are populated and now consistent with the YAML — see the
+resolved findings above (one entry, `escort_to_destination`, remains a
+tracked backlog item, not blocking `AUDITED`).

@@ -1,6 +1,6 @@
 id: emergency.high_urgency
 name: Emergency High-Urgency Operation
-state: EDITED
+state: APPROVED
 context_class: core
 primary_robot_role: emergency responder
 applies_to_tasks:
@@ -53,3 +53,4 @@ limits:
 related_contexts:
 - service.routine_delivery
 - baseline.public_navigation
+- emergency.coordinated_response

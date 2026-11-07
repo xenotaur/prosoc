@@ -1,9 +1,9 @@
 ---
 family: scenarios
 card: frontal_approach
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 1
+should_fix: 0
 suggestion: 1
 audited: 2026-11-07
 ---
@@ -12,45 +12,30 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/scenarios/frontal_approach/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready for AUDITED with a minor fix — reconcile the SOURCE
-  field's non-derivation disclaimer against the card's otherwise exact
-  fidelity to P&G Table 3; no blocking issues.
+- **Verdict:** Ready for AUDITED, no blocking or should-fix issues — one
+  low-priority suggestion only.
+
+This is a fresh audit written after `WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION`
+resolved the prior audit's should-fix Finding 1 (SOURCE line vs. Table 3
+fidelity). It does not carry forward that finding's text, since the SOURCE
+line it described no longer exists.
 
 ## Findings
 
-### 1. SOURCE field disclaims external-citation derivation that the card's own content contradicts — should-fix
-- **Section/field:** `## Status` `**SOURCE:**` line vs. `cited_in`, `evaluation_notes`, and the Scenario Card Summary's content
-- **Issue:** The SOURCE line reads "Original scenario concept, LLM-assisted
-  drafting (ChatGPT 5.2); a common pedestrian-interaction benchmark pattern,
-  **not derived from a specific external citation**." But the card's own
-  content matches the P&G paper's Table 3 "Frontal Approach" entry closely
-  and specifically: `cited_in: ["50", "126", "167"]` is exactly Table 3's
-  "Cited In: [50, 126, 167]"; `scientific_purpose`, `geometric_layout`,
-  `intended_robot_task`, `intended_human_behavior`, and `ideal_outcome` all
-  match Table 3's Scientific Purpose / Geometric Layout / Robot Task / Human
-  Behavior / Ideal Outcome fields (specialized to an indoor office hallway,
-  but not contradicting them); and `evaluation_notes` explicitly discusses
-  what "P&G Table 3 lists ... as this scenario's related entry." A card this
-  closely aligned to a specific, identifiable Table 3 row is hard to square
-  with a SOURCE line asserting it is "not derived from a specific external
-  citation." This may be an artifact of the project's ongoing
-  internal-development-vs-external-reader provenance wording effort
-  (WI-CHARTER-SUPPLEMENT-SOURCE-FIXES, 2026-10-27; and
-  WI-CHARTER-SUPPLEMENT-PUBLICATION-VIEW-FILTER, 2026-11-06, both editing
-  this same SOURCE line's phrasing), in which case the current wording may be
-  an intentional simplification rather than an oversight — but as written it
-  reads as a factual claim that the card's own `cited_in`/`evaluation_notes`
-  content contradicts.
-- **Recommended fix:** A human editor should decide whether SOURCE should
-  instead acknowledge the P&G Table 3 row as (at least) the originating
-  template this scenario specializes — e.g. "Specializes the P&G Table 3
-  'Frontal Approach' entry (Francis et al., 2025); drafted with LLM
-  assistance (ChatGPT 5.2)" — or, if the "not derived from a specific
-  external citation" framing is intentional per the project's provenance
-  policy, confirm that reading explicitly rather than leaving the tension
-  implicit.
+### Resolved: SOURCE field disclaimed external-citation derivation that the card's own content contradicted
 
-### 2. Optional "Social Navigation Context" and "Normative Expectations" prose sections are entirely absent — suggestion
+The prior audit's should-fix Finding 1 is resolved. SOURCE now reads:
+`P&G Paper, Table 3 "Frontal Approach" entry (Francis et al., 2025, ACM
+THRI Vol. 14, No. 2, Article 34); cited in [50, 126, 167]` — matching the
+convention used by other Table-3-sourced cards in this family (e.g.
+`blind_corner/scenario.md`'s SOURCE line) and no longer contradicting the
+card's own `cited_in`/`evaluation_notes` content. This is a Markdown-only
+metadata edit — `scenario.yml` has no `source` field, confirmed by
+`scripts/distill/scenarios --scenario frontal_approach --dry-run
+--show-diffs` reporting no differences (re-run fresh for this audit, with
+the correct `PYTHONPATH` for this checkout).
+
+### 1. Optional "Social Navigation Context" and "Normative Expectations" prose sections are entirely absent — suggestion
 - **Section/field:** `template.md`'s optional `## Social Navigation Context` / `## Normative Expectations` sections
 - **Issue:** `template.md` marks these sections "Optional but recommended."
   `scenario.md` has neither heading at all (not merely blank) — the
@@ -69,10 +54,8 @@ audited: 2026-11-07
 
 ## Source Fidelity
 
-SOURCE cites no specific external reference (see Finding 1 on the tension
-this creates), so the comparison below is made against `../pg_scenarios.md`'s
-"Frontal Approach" entry (P&G Table 3) on its own merits, since the scenario
-name and content make that the only plausible checkable source:
+SOURCE now explicitly cites the P&G Table 3 "Frontal Approach" entry.
+Re-verified directly against `../pg_scenarios.md`:
 
 | Field | P&G Table 3 | Card | Match |
 |---|---|---|---|
@@ -90,9 +73,8 @@ All verified `related_scenarios` directory references (`blind_corner`,
 `movable_obstruction`, `single_file_hallway`) exist under
 `src/prosoc/prnc/scenarios/`. Overall: the card is faithful to Table 3
 wherever Table 3 specifies a value, with only the expected and
-self-documented Related-Scenarios substitution — the only real issue is the
-SOURCE line's framing versus this fidelity (Finding 1), not the content
-itself.
+self-documented Related-Scenarios substitution; SOURCE now accurately
+reflects that fidelity instead of contradicting it.
 
 ## Completeness
 
@@ -104,5 +86,5 @@ itself.
   Failure Modes, and Labeling Criteria are all present and match the embedded
   YAML `scenario_usage_guide` block.
 - `## Social Navigation Context` and `## Normative Expectations` are
-  reasonably blank (optional per `template.md`; see Finding 2) — not required
+  reasonably blank (optional per `template.md`; see Finding 1) — not required
   for AUDITED and not blocking.

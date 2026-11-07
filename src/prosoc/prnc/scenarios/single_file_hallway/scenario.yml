@@ -1,6 +1,6 @@
 id: single_file_hallway_01
 name: Single File Hallway
-state: EDITED
+state: APPROVED
 summary: 'A robot and a human approach each other in a hallway that is too narrow
   for safe and comfortable passing. The robot must proactively avoid conflict by yielding,
   signaling, or negotiating right-of-way.
@@ -39,7 +39,7 @@ intended_human_behavior: navigate from the opposite end toward the robot
 expected_behaviors:
   must:
   - maintain a safe physical distance from the human
-  - avoid entering the hallway simultaneously with the human
+  - avoid entering the hallway simultaneously with the human once a conflict is recognized
   should:
   - recognize early that the hallway does not permit passing
   - signal intent clearly (e.g., yielding, requesting priority, or other clear signaling)

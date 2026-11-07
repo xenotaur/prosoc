@@ -1,12 +1,15 @@
 # Task: Navigate from Start to Goal
 
 ## STATUS
-- **STATE:** EDITED
+- **STATE:** APPROVED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common mobile robot navigation task
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from the STATUS and Task Summary bullets, matching the scenario family's tighter rendered spacing
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 edit above postdates this card's existing audit.md (2026-08-02), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
-- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — added "rerouting toward the destination" to `scope.includes` and restored "politeness" to `scope.excludes`, resolving the should-fix finding that the YAML dropped behaviors the prose named explicitly
+- **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit after the scope fix above: verdict ready, 0 blocking, 0 should-fix, 0 suggestions; promoted EDITED → AUDITED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #136) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 - **VALIDATED:** —
 
 ---
@@ -98,7 +101,7 @@ Evaluation of this task therefore requires assessing how goal achievement is bal
 ```yaml
 id: navigate.point_to_point
 name: Navigate from Start to Goal
-state: EDITED
+state: APPROVED
 
 summary: >
   The robot attempts to move from an initial location to a specified destination,
@@ -114,11 +117,12 @@ scope:
     - progressing toward a destination
     - pausing or stopping temporarily while pursuing the goal
     - resuming motion toward the goal after interruption
+    - rerouting toward the destination
   excludes:
     - explicit interaction with specific agents
     - yielding or asserting right-of-way as a primary objective
     - interpretation of social signals or gestures
-    - optimization for social comfort or legibility beyond goal completion
+    - optimization for social comfort, legibility, or politeness beyond goal completion
 
 related_principles:
   - P0

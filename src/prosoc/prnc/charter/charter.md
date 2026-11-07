@@ -1,7 +1,7 @@
 # Prosocial Robot Navigation Charter
 
 **Version:** 0.1  
-**Status:** Edited (Normative)  
+**Status:** Approved (Normative)  
 **Scope:** Mobile robot navigation in human-populated environments  
 **Derived from:**  
 - *Principles and Guidelines for Evaluating Social Robot Navigation Algorithms* (Francis et al.)  
@@ -11,7 +11,7 @@
 
 ## Status
 
-- **STATE:** EDITED
+- **STATE:** APPROVED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms (Francis et al.); Prosocial Robotics project documents; The Prosocial Robot Navigation Charter (Francis, in press)
 - **DRAFTED:** Prosocial Robotics project
 - **EDITED:** Claude (WI-CARD-STATUS-CHARTER), 2026-07-29 — add machine-readable lifecycle state
@@ -25,6 +25,9 @@
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — update the SOURCE attribution's stale publication-status wording to reflect the paper now being in press; define "P&G" at its first in-body use; split a run-on sentence in the P6 explanation; complete the Dragan et al. reference with its full conference name, pages, and DOI
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-DEFINITIONAL-CONSISTENCY), 2026-11-06 — add the glossary's missing shared-environment-navigability branch to the Prosocial definition, matching Section 2 and Principle 13's Explanation, while preserving the existing baseline-vs-P9 distinction
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-05 and 2026-11-06 content edits above postdate this card's existing audit.md (2026-08-19), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — reconcile a Normative Statement/`description` drift for P1, P2, P4, P5, P6 flagged by the 2026-11-07 audit: backport P1/P2/P5/P6's YAML-only content into their Normative Statements verbatim; for P4, additionally hedge "offering help when asked" to "offering help or at least an acknowledgement when asked" (consistently across the Normative Statement, `description`, and Explanation), since an unconditional help obligation conflicts with a robot's actual capability and with P8's own crash-cart subordination example
+- **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit after the above reconciliation: verdict ready, 0 blocking, 0 should-fix, 1 suggestion; promoted EDITED → AUDITED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #136) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 
 The charter's lifecycle state is authored in the embedded YAML below (the
 authoritative source), projected into the **STATE** bullet above, and enforced
@@ -34,7 +37,7 @@ by `scripts/validate/status`. It is one of `DRAFTED`, `EDITED`, `AUDITED`,
 whole, not to individual principles.
 
 ```yaml
-state: EDITED
+state: APPROVED
 ```
 
 ---
@@ -129,7 +132,7 @@ examples:
 
 ### Normative Statement
 
-Robots must not cause harm to humans, or damage to other robots, environments, or themselves.
+Robots must not cause harm to humans, or damage to other robots, environments, or themselves. This includes maintaining a safe distance unless explicitly invited to approach.
 
 ### Explanation
 
@@ -160,7 +163,7 @@ examples:
 
 ### Normative Statement
 
-Robots should avoid causing stress, fear, or annoyance in nearby humans.
+Robots should avoid causing stress, fear, or annoyance in nearby humans. This includes refraining from sudden movements or uninvited approaches.
 
 ### Explanation
 
@@ -216,11 +219,11 @@ examples:
 
 ### Normative Statement
 
-Robots should be respectful and considerate toward other agents in shared social spaces.
+Robots should be respectful and considerate toward other agents in shared social spaces, offering help or at least an acknowledgement when asked, and avoiding dismissive or intrusive behaviors.
 
 ### Explanation
 
-Politeness has two distinct dimensions: *physical* politeness, how a robot moves around people (e.g., not cutting them off), and *communicative* politeness, signaling intent through gesture or speech (e.g., saying "excuse me" or announcing "on your left" when a narrow space forces the robot to enter someone's personal space). Politeness is not purely a human-facing concern — social robots should also be considerate of each other, so one robot's behavior does not prevent another agent from accomplishing its own task (Francis et al., 2025, p. 8). Concretely, this includes offering help when it is asked for rather than ignoring the request, and avoiding behavior that reads as dismissive or intrusive even when it is not physically obstructive.
+Politeness has two distinct dimensions: *physical* politeness, how a robot moves around people (e.g., not cutting them off), and *communicative* politeness, signaling intent through gesture or speech (e.g., saying "excuse me" or announcing "on your left" when a narrow space forces the robot to enter someone's personal space). Politeness is not purely a human-facing concern — social robots should also be considerate of each other, so one robot's behavior does not prevent another agent from accomplishing its own task (Francis et al., 2025, p. 8). Concretely, this includes offering help or at least an acknowledgement when it is asked for, rather than ignoring the request outright — a robot that is physically incapable of helping, or for which helping would be contextually inappropriate (e.g., a crash-cart robot mid-delivery; see P8), still owes a response, not silence — and avoiding behavior that reads as dismissive or intrusive even when it is not physically obstructive.
 
 ```yaml
 id: P4
@@ -228,7 +231,8 @@ name: Politeness
 severity: medium
 description: >
   Robots should be respectful and considerate toward other agents,
-  offering help when asked and avoiding dismissive or intrusive behaviors.
+  offering help or at least an acknowledgement when asked, and avoiding
+  dismissive or intrusive behaviors.
 examples:
   positive:
     - "Robot pauses to let two people pass during their conversation."
@@ -244,7 +248,7 @@ examples:
 
 ### Normative Statement
 
-Robots should follow basic social norms governing shared spaces where feasible.
+Robots should follow basic social norms governing shared spaces where feasible, avoiding inappropriate behaviors such as interrupting conversations or blocking passage.
 
 ### Explanation
 
@@ -272,7 +276,7 @@ examples:
 
 ### Normative Statement
 
-Robots should predict and accommodate the behavior of other agents.
+Robots should predict and accommodate the behavior of other agents (humans, robots, pets, etc.).
 
 ### Explanation
 

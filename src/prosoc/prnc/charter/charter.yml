@@ -1,4 +1,4 @@
-state: EDITED
+state: APPROVED
 principles:
 - id: P0
   name: Goal Achievement
@@ -59,7 +59,8 @@ principles:
   name: Politeness
   severity: medium
   description: 'Robots should be respectful and considerate toward other agents, offering
-    help when asked and avoiding dismissive or intrusive behaviors.
+    help or at least an acknowledgement when asked, and avoiding dismissive or intrusive
+    behaviors.
 
     '
   examples:
