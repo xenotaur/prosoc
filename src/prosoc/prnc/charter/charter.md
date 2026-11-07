@@ -27,7 +27,7 @@
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-05 and 2026-11-06 content edits above postdate this card's existing audit.md (2026-08-19), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — reconcile a Normative Statement/`description` drift for P1, P2, P4, P5, P6 flagged by the 2026-11-07 audit: backport P1/P2/P5/P6's YAML-only content into their Normative Statements verbatim; for P4, additionally hedge "offering help when asked" to "offering help or at least an acknowledgement when asked" (consistently across the Normative Statement, `description`, and Explanation), since an unconditional help obligation conflicts with a robot's actual capability and with P8's own crash-cart subordination example
 - **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit after the above reconciliation: verdict ready, 0 blocking, 0 should-fix, 1 suggestion; promoted EDITED → AUDITED
-- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #TBD) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #136) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 
 The charter's lifecycle state is authored in the embedded YAML below (the
 authoritative source), projected into the **STATE** bullet above, and enforced

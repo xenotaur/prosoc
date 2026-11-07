@@ -10,7 +10,7 @@
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 modification above postdates this card's existing audit.md (2026-07-29), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — reworded the common-tension prose to "urgency versus politeness" and backfilled `emergency.coordinated_response` into `related_contexts`, resolving the two should-fix findings tracked in `project/design/backlog.md` since 2026-08-02
 - **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit after the fixes above: verdict ready, 0 blocking, 0 should-fix, 2 suggestions; promoted EDITED → AUDITED
-- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #TBD) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #136) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 - **VALIDATED:** —
 
 ---

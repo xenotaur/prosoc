@@ -12,7 +12,7 @@
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 edits above postdate this card's existing audit.md (2026-08-02), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — reworded SOURCE to cite the P&G Table 3 "Frontal Approach" entry explicitly, resolving the should-fix finding that the prior "not derived from a specific external citation" wording contradicted the card's own close fidelity to that table entry
 - **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit after the SOURCE fix above: verdict ready, 0 blocking, 0 should-fix, 1 suggestion; promoted EDITED → AUDITED
-- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #TBD) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #136) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 
 ## Scenario Card Summary
 
