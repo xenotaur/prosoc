@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: 'Implemented and merged in PR #138 (commit cc067a285a5fbb26b5f598b266018c982f40dce9). Fixed the page-one disclaimer (template.tex) and the "Principle 13" reference in charter.md''s history bullet, both verified masked-safe against the audit-currency guard. Investigated the context-history field-ordering question: an initial read of contexts/template.md suggested the order was intentional fixed-schema behavior, but checking high_urgency (the one other context card that went through the original repair, not just a drive-by fix) disproved that -- routine_delivery/guidance_docent were the actual outliers, fixed by moving MODIFIED to its chronologically-correct position. The publication-view-provenance question needed no change -- an adopted decision to retain full provenance already exists. A pre-push self-review caught and fixed 3 documentation-accuracy issues (wrong card count, missing artifacts_expected entry, uninformative instruction_source) in the new WI/execution-record files. A real Copilot review then caught that the recorded PDF visual-inspection coverage (a sample plus automated scans) did not satisfy this WI''s own "every page" acceptance criterion; completed a full individual inspection of all 48 pages in response, finding zero issues. All 32 cards remain APPROVED and consistent throughout.'
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-PUBLICATION-CLEANUP
 title: 'Fix the page-one disclaimer, a "Principle 13" reference, and context-history ordering in the charter supplement'
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams: []
 related_design:
   - 'project/design/proposals/adopted/normative-card-approval/00_proposal.md'

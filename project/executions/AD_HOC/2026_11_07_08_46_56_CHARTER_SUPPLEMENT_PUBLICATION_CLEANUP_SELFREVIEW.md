@@ -5,7 +5,7 @@ work_item: AD_HOC
 status: landed
 rerun_of: 2026_11_07_08_37_32_CHARTER_SUPPLEMENT_PUBLICATION_CLEANUP
 pr: https://github.com/xenotaur/prosoc/pull/138
-commit: ca4a08ef38a4f2e3debfa2572393ca18928de2eb
+commit: cc067a285a5fbb26b5f598b266018c982f40dce9
 created_at: 2026-11-07T08:46:56+00:00
 agent: claude_app
 instruction_source: WI-CHARTER-SUPPLEMENT-PUBLICATION-CLEANUP

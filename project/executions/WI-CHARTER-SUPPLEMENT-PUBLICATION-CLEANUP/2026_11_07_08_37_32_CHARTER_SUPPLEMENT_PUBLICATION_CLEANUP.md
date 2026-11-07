@@ -2,10 +2,10 @@
 execution_id: 2026_11_07_08_37_32_CHARTER_SUPPLEMENT_PUBLICATION_CLEANUP
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-PUBLICATION-CLEANUP:CHARTER_SUPPLEMENT_PUBLICATION_CLEANUP)[2026-11-07T08:37:32+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-PUBLICATION-CLEANUP
-status: in_progress
+status: landed
 rerun_of: null
 pr: https://github.com/xenotaur/prosoc/pull/138
-commit: null
+commit: cc067a285a5fbb26b5f598b266018c982f40dce9
 created_at: 2026-11-07T08:37:32+00:00
 agent: claude_app
 instruction_source: ad hoc — follow-up publication cleanup requested in a review session after WS-CHARTER-SUPPLEMENT-LIFECYCLE-CURRENCY closed; WI created in this same session, so no prior WI file to point to
