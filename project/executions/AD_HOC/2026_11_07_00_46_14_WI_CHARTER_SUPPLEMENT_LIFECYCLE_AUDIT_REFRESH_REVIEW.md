@@ -2,10 +2,10 @@
 execution_id: 2026_11_07_00_46_14_WI_CHARTER_SUPPLEMENT_LIFECYCLE_AUDIT_REFRESH_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_LIFECYCLE_AUDIT_REFRESH_REVIEW)[2026-11-07T00:46:06+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_07_00_35_49_WI_CHARTER_SUPPLEMENT_LIFECYCLE_AUDIT_REFRESH
 pr: https://github.com/xenotaur/prosoc/pull/135
-commit:
+commit: e70e4f353c59000bc1b666dbbfc469ad5120268a
 created_at: 2026-11-07T00:46:14+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/135
