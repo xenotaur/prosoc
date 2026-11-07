@@ -1,12 +1,14 @@
 # Task: Follow an Agent
 
 ## STATUS
-- **STATE:** EDITED
+- **STATE:** APPROVED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot navigation task
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from the STATUS and Task Summary bullets, matching the scenario family's tighter rendered spacing
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 edit above postdates this card's existing audit.md (2026-08-02), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
-- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02
+- **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit confirming the one should-fix finding (dangling example_scenarios entry) is already tracked in project/design/backlog.md, not a new defect: verdict ready, 0 blocking, 0 should-fix, 0 suggestions; promoted EDITED → AUDITED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #TBD) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 - **VALIDATED:** —
 
 ---
@@ -95,7 +97,7 @@ Evaluation of this task focuses on whether the robot sustains the intended relat
 ```yaml
 id: navigate.follow_agent
 name: Follow an Agent
-state: EDITED
+state: APPROVED
 
 summary: >
   The robot navigates by following a human or other agent, maintaining an

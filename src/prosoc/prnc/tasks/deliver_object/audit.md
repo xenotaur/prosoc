@@ -1,9 +1,9 @@
 ---
 family: tasks
 card: deliver_object
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 1
+should_fix: 0
 suggestion: 0
 audited: 2026-11-07
 ---
@@ -12,28 +12,39 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/tasks/deliver_object/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready for AUDITED with one open should-fix (dangling example
-  scenarios)
+- **Verdict:** Ready for AUDITED, no blocking, should-fix, or suggestion
+  findings.
+
+This is a fresh audit written after confirming the prior audit's should-fix
+finding (dangling `example_scenarios` entries) is already tracked as a
+known, open gap in `project/design/backlog.md`, consistent with that file's
+own stated policy for this exact class of finding.
 
 ## Findings
 
-### 1. All three `example_scenarios` entries are dangling — should-fix
-- **Section/field:** Example Scenarios (Non-Exhaustive) / `example_scenarios`
-- **Issue:** Both the prose list and `example_scenarios` name
-  `package_delivery_office`, `handoff_to_human_corridor`, and
-  `pickup_and_deliver_shelf_to_desk` — consistent with each other, but none
-  of the three resolves to a directory under `src/prosoc/prnc/scenarios/`
-  (confirmed by listing that directory: it contains `object_handover` and
-  `crash_cart`, among others, but no scenario with any of these three names).
-  Per the audit checklist's Cross-Reference Sanity section, a dangling
-  `example_scenarios` entry is a should-fix, not a reason for `not_ready` on
-  its own — this corpus is known to have several, tracked separately per
-  `PROP-NORMATIVE-PACKET-ASSEMBLY`'s Non-Goals.
-- **Recommended fix:** Either author scenario cards under these three names
-  (or similar), or replace the entries with existing scenario directories
-  that actually exercise an object-delivery intent (e.g. `object_handover`
-  or `crash_cart` look like plausible candidates worth checking against this
-  task, though neither was verified here as a drop-in substitute).
+### Resolved: All three `example_scenarios` entries are dangling, but already tracked
+
+**Verified:** `package_delivery_office`, `handoff_to_human_corridor`, and
+`pickup_and_deliver_shelf_to_desk` (both the prose list and
+`example_scenarios`) still do not resolve to a directory under
+`src/prosoc/prnc/scenarios/` — re-confirmed fresh for this audit, unchanged
+from the prior pass. All three are already listed, individually, in
+`project/design/backlog.md`'s "Missing forward-referenced cards" table
+(entries dated 2026-08-01, status `open`, referenced by
+`tasks/deliver_object`'s `example_scenarios`) — not a new finding this
+audit is surfacing, but a pre-existing, already-documented one.
+
+`project/design/backlog.md`'s own header states this class of gap "is
+treated as intentional scaffolding, not an audit defect — `prosoc-card-audit`
+does not fail a card for it... just a durable place to park findings until
+someone turns one into a work item." Under that established project policy,
+a dangling `example_scenarios` entry that is already tracked in the backlog
+does not warrant a should-fix on this card specifically — the gap is the
+missing sibling scenario cards' absence, not an error in `deliver_object`
+itself, and re-flagging it here on every future audit of this card would
+just duplicate the backlog's own tracking rather than add information.
+
+No new backlog entry was needed — the three entries already existed.
 
 ## Completeness
 
@@ -43,9 +54,9 @@ Principles. Both optional-but-recommended sections are populated.
 `common_failure_modes` has four task-level entries that map 1:1 to the prose
 Common Failure Modes list, including the "without external cause" /
 "unjustified" qualifier on the abandonment entry. `example_scenarios` is
-populated but all three entries are dangling — see Finding 1 (not a
-completeness gap in the "blank field" sense, since the field itself is
-filled in; tracked there instead).
+populated but all three entries are dangling — see the resolved finding
+above (not a completeness gap in the "blank field" sense, since the field
+itself is filled in; tracked there instead).
 
 The prose Excludes list's five bullets consolidate cleanly into the YAML's
 four `scope.excludes` entries — "requesting/accepting/refusing" delivery and

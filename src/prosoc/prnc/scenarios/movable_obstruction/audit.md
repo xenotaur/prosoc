@@ -1,9 +1,9 @@
 ---
 family: scenarios
 card: movable_obstruction
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 1
+should_fix: 0
 suggestion: 2
 audited: 2026-11-07
 ---
@@ -12,48 +12,28 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/scenarios/movable_obstruction/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready with one should-fix — the card is internally coherent
-  and schema/charter-compliant, but is missing a prose section that its
-  sibling card (`single_file_hallway`) already has, and that a prior audit
-  of this exact card once required closing before full readiness.
+- **Verdict:** Ready for AUDITED, no blocking or should-fix issues — two
+  low-priority suggestions only.
 
-This is a fresh audit of the card's current content, written from scratch
-after the card was demoted from `APPROVED` back to `EDITED`
-(`WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION`) because a prose-only edit
-(2026-11-05) postdated the prior `audit.md` (2026-08-06). It does not carry
-forward or assume any findings from that prior audit.
+This is a fresh audit written after `WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION`
+resolved the prior audit's should-fix Finding 1 (missing "Normative
+Expectations" prose section). It does not carry forward that finding's
+text, since the gap it described no longer exists.
 
 ## Findings
 
-### 1. Missing "Normative Expectations" prose section — should-fix
-- **Section/field:** Markdown structure — the card has "Scenario Overview"
-  followed directly by "Scenario Specification (Machine-Readable)", with no
-  "Normative Expectations" section in between.
-- **Issue:** `template.md` marks "Normative Expectations" as "Optional but
-  recommended," intended to describe acceptable/unacceptable robot behavior
-  in natural language, as interpretive guidance beyond the formal YAML spec.
-  The sibling scenario `single_file_hallway` has this section, restating its
-  `must`/`should`/`should_not` items as readable prose. `movable_obstruction`
-  does not: a human reader gets the YAML's `expected_behaviors` list and a
-  high-level "Discussion," but no plain-language walk-through of what the
-  robot must/should/should-not do. This is also the audit checklist's
-  Prose/YAML Cross-Check target for this section — with no prose to check,
-  there is nothing to cross-reference `expected_behaviors` against beyond
-  the YAML's own comments and the brief bullet list in the Scenario Usage
-  Guide, which essentially repeats the YAML rather than restating it in
-  natural language.
-  Notably, a prior audit of `single_file_hallway` (referenced in that card's
-  own edit history) once treated this exact gap as a should-fix that had to
-  be closed before promotion; this card has never had that gap closed.
-- **Recommended fix:** Add a "Normative Expectations" section between
-  "Scenario Overview" and "Scenario Specification (Machine-Readable)",
-  restating the `must`/`should`/`should_not` items in prose — directly
-  inferable from the content already present in the card's own
-  `expected_behaviors` YAML, so this requires no new content decisions, only
-  transcription into prose (mirroring `single_file_hallway`'s existing
-  section as a model).
+### Resolved: Missing "Normative Expectations" prose section
 
-### 2. `relevant_principles` count (6) exceeds the 3–5 guideline, and P5 lacks explicit grounding — suggestion
+The prior audit's should-fix Finding 1 is resolved. A "Normative
+Expectations" section was added between "Scenario Overview" and "Scenario
+Specification (Machine-Readable)", restating the `must`/`should`/
+`should_not` items as prose, mirroring `single_file_hallway`'s existing
+section. This is a Markdown-prose-only addition — confirmed by
+`scripts/distill/scenarios --scenario movable_obstruction --dry-run
+--show-diffs` reporting no differences (re-run fresh for this audit, with
+the correct `PYTHONPATH` for this checkout).
+
+### 1. `relevant_principles` count (6) exceeds the 3–5 guideline, and P5 lacks explicit grounding — suggestion
 - **Section/field:** `relevant_principles` (`P0, P1, P3, P5, P7, P9`) vs.
   the card's prose (Scenario Overview, Discussion) and
   `scenario_usage_guide.quality_metrics` (`P3, P7, P9`).
@@ -73,11 +53,11 @@ forward or assume any findings from that prior audit.
   currently reads as padding against the 3–5 guideline), or — if a human
   editor believes it belongs (e.g., tying it to "force the human into
   single-file passage without acknowledgment" as a social-norms concern) —
-  add a sentence to the (currently-missing, see Finding 1) Normative
-  Expectations section naming and justifying it explicitly, and consider
-  adding it to `quality_metrics` for consistency.
+  add a sentence to the now-present Normative Expectations section naming
+  and justifying it explicitly, and consider adding it to `quality_metrics`
+  for consistency.
 
-### 3. No dedicated "Social Navigation Context" prose section — suggestion
+### 2. No dedicated "Social Navigation Context" prose section — suggestion
 - **Section/field:** Markdown structure vs. `template.md`'s "Social
   Navigation Context" section (marked "Optional but recommended").
 - **Issue:** Same gap as noted in `single_file_hallway`'s audit: no section
@@ -97,11 +77,12 @@ forward or assume any findings from that prior audit.
   `context`:** Consistent. The "nominally wide enough... partially blocked
   by a movable obstruction" framing matches `geometric_layout: passable
   space, partially obstructed` and `context.environment.obstruction`.
-- **`expected_behaviors` vs. prose:** No contradictions found, but (per
-  Finding 1) there is no dedicated prose section to cross-check against —
-  the Discussion section's high-level framing ("boundary between conflict
-  avoidance (P7) and environmental stewardship (P9)") is consistent with,
-  but does not restate, the specific `must`/`should`/`should_not` items.
+- **`expected_behaviors` vs. the new "Normative Expectations" section:**
+  Consistent — the added prose directly restates the `must`/`should`/
+  `should_not` items (see the resolved finding above). The Discussion
+  section's high-level framing ("boundary between conflict avoidance (P7)
+  and environmental stewardship (P9)") remains consistent with, and now
+  complements, that restatement.
 - **`ideal_outcome`:** Identical string used in the Scenario Card Summary,
   the fenced YAML, and the standalone Scenario Usage Guide section — no
   drift.
@@ -123,7 +104,7 @@ in sync; no drift to report as blocking.
 
 - `scenario.yml` validates against `schema.json`; `expected_behaviors` has
   only `must`/`should`/`should_not`.
-- `relevant_principles` entries are all valid P0–P9 IDs (see Finding 2 for
+- `relevant_principles` entries are all valid P0–P9 IDs (see Finding 1 for
   the count/grounding concern — a suggestion, not a schema violation).
 - `scenario_usage_guide.quality_metrics` (`P3, P7, P9`) — valid IDs, a
   subset of `relevant_principles` as expected.
@@ -193,9 +174,8 @@ AUDITED" in `template.md` are present and non-contradictory:
   establish that no citations exist, only that none are currently known/
   recorded. This phrasing (and label) is itself correct and current as
   written -- an earlier draft of this audit reversed the distinction.
-- **"Normative Expectations" section — should probably be filled in now**
-  (see Finding 1): directly inferable from the already-present
-  `expected_behaviors` YAML, not genuinely unknown or inapplicable.
+- **"Normative Expectations" section** — now present (see the resolved
+  finding above); restates `expected_behaviors` in prose.
 - **"Social Navigation Context" section** — reasonably blank (optional,
-  see Finding 3); its substance is already covered by the Discussion
+  see Finding 2); its substance is already covered by the Discussion
   section elsewhere in the card.

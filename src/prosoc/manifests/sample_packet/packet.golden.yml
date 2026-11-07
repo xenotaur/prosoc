@@ -2,7 +2,7 @@ _type: https://in-toto.io/Statement/v1
 subject:
 - name: guidance
   digest:
-    sha256: a3cd8341c3885a4c6e25e994106eb554b165c7587aca115c850bd143cbe746c9
+    sha256: 1bbf42c25f5b2971d66b9aa78a330725407de14f0157d4d6f2b86e4d88b26d0d
 predicate_type: https://prosocial-robotics.org/NormativePacket/v1
 predicate:
   builder:
@@ -15,7 +15,7 @@ predicate:
   - family: charter
     id: charter
     path: src/prosoc/prnc/charter/charter.yml
-    sha256: 502eadaae68f498a6e5075c1c4b06416ce77b94df2cad92f9e1462b69787bf37
+    sha256: 3deba80b50a95418ed9a4bda155ef67c772c2c4c38b70194dc0d887816b7d8da
     state: APPROVED
   - family: constitutions
     id: asimov_three_laws
@@ -30,12 +30,12 @@ predicate:
   - family: tasks
     id: navigate_lead_agent
     path: src/prosoc/prnc/tasks/navigate_lead_agent/task.yml
-    sha256: 6aea48b3818cb4be0dc8ea16da17394f4599c8aded608172f417d1ad6a731cfc
+    sha256: bdaa76f1dc77a335676f95ba0f3a235802d540bc7452c53fdf2ebefaeb594c4a
     state: APPROVED
   - family: contexts
     id: high_urgency
     path: src/prosoc/prnc/contexts/high_urgency/context.yml
-    sha256: fadc4a29ec787487816ef8b1874e94122d38cc92aa92b7948950f7b24cc91fd0
+    sha256: 5d0e395df81bc952a24493b93689af1b699115b6884f3053e64c6f485f07c050
     state: APPROVED
 guidance:
   charter:
@@ -102,7 +102,8 @@ guidance:
         name: Politeness
         severity: medium
         description: 'Robots should be respectful and considerate toward other agents,
-          offering help when asked and avoiding dismissive or intrusive behaviors.
+          offering help or at least an acknowledgement when asked, and avoiding dismissive
+          or intrusive behaviors.
 
           '
         examples:
@@ -380,8 +381,9 @@ guidance:
       - excessive speed preventing following
       - unclear or erratic leading motion
       - selection of unsafe or impractical paths
+      - unexplained abandonment of the leading relationship
       example_scenarios:
-      - guided_navigation_corridor
+      - leading
       - escort_to_destination
   contexts:
     high_urgency:
@@ -439,6 +441,7 @@ guidance:
       related_contexts:
       - service.routine_delivery
       - baseline.public_navigation
+      - emergency.coordinated_response
   principles:
   - id: P0
     name: Goal Achievement
@@ -505,7 +508,8 @@ guidance:
     name: Politeness
     severity: medium
     description: 'Robots should be respectful and considerate toward other agents,
-      offering help when asked and avoiding dismissive or intrusive behaviors.
+      offering help or at least an acknowledgement when asked, and avoiding dismissive
+      or intrusive behaviors.
 
       '
     examples:

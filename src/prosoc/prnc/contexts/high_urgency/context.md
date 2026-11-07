@@ -1,13 +1,16 @@
 # Context: Emergency High-Urgency Operation
 
 ## STATUS
-- **STATE:** EDITED
+- **STATE:** APPROVED
 - **CONTEXT TYPE:** CORE
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; emergency robotics and medical transport literature
 - **CREATED:** 2026-01-11
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-07-29
 - **MODIFIED:** 2026-11-06
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 modification above postdates this card's existing audit.md (2026-07-29), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
-- **AUDITED:** Claude (prosoc-card-audit skill), 2026-07-29
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — reworded the common-tension prose to "urgency versus politeness" and backfilled `emergency.coordinated_response` into `related_contexts`, resolving the two should-fix findings tracked in `project/design/backlog.md` since 2026-08-02
+- **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit after the fixes above: verdict ready, 0 blocking, 0 should-fix, 2 suggestions; promoted EDITED → AUDITED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #TBD) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 - **VALIDATED:** —
 
 ---
@@ -99,7 +102,7 @@ Common tensions include:
 
 - speed versus safety,
 - assertiveness versus predictability,
-- urgency versus perceived rudeness.
+- urgency versus politeness.
 
 ---
 
@@ -148,7 +151,7 @@ Common tensions include:
 ```yaml
 id: emergency.high_urgency
 name: Emergency High-Urgency Operation
-state: EDITED
+state: APPROVED
 context_class: core
 
 primary_robot_role: emergency responder
@@ -201,6 +204,7 @@ limits:
 related_contexts:
   - service.routine_delivery
   - baseline.public_navigation
+  - emergency.coordinated_response
 ```
 
 ---

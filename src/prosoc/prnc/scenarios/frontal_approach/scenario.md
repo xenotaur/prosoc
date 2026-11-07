@@ -2,14 +2,17 @@
 
 ## Status
 
-- **STATE:** EDITED
-- **SOURCE:** Original scenario concept, LLM-assisted drafting (ChatGPT 5.2); a common pedestrian-interaction benchmark pattern, not derived from a specific external citation
+- **STATE:** APPROVED
+- **SOURCE:** P&G Paper, Table 3 "Frontal Approach" entry (Francis et al., 2025, ACM THRI Vol. 14, No. 2, Article 34); cited in [50, 126, 167]
 - **DRAFTED:** ChatGPT 5.2, 2026-01-02
 - **EDITED:** render_sections.py, 2026-07-19
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-SOURCE-FIXES), 2026-10-27 — reword the SOURCE entry for publication clarity
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — label the bare "Cited In" citation-index list, reduce a repeated "navigation" in the Scenario Overview, reword an awkward evaluation-notes phrase, and fix a malformed quote-mark pair around an identifier
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-VIEW-FILTER), 2026-11-06 — reword two phrases that referenced internal development context meaninglessly to an external reader, independent of the project's retain-vs-filter decision for provenance generally
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 edits above postdate this card's existing audit.md (2026-08-02), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — reworded SOURCE to cite the P&G Table 3 "Frontal Approach" entry explicitly, resolving the should-fix finding that the prior "not derived from a specific external citation" wording contradicted the card's own close fidelity to that table entry
+- **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit after the SOURCE fix above: verdict ready, 0 blocking, 0 should-fix, 1 suggestion; promoted EDITED → AUDITED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #TBD) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 
 ## Scenario Card Summary
 
@@ -45,7 +48,7 @@ This scenario describes a canonical social navigation conflict in which a robot 
 ```yaml
 id: frontal_approach_01
 name: Frontal Approach
-state: EDITED
+state: APPROVED
 
 summary: >
   A robot and a human approach each other in opposite directions in a narrow hallway and pass each other safely, comfortably, and without

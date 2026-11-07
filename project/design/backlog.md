@@ -24,6 +24,8 @@ filled deliberately rather than forgotten.
 | `handoff_to_human_corridor` (scenario) | `tasks/deliver_object` (`example_scenarios`) | 2026-08-01 | open |
 | `pickup_and_deliver_shelf_to_desk` (scenario) | `tasks/deliver_object` (`example_scenarios`) | 2026-08-01 | open |
 | `group_following_open_space` (scenario) | `tasks/navigate_follow_agent` (`example_scenarios`; sibling entry `human_following_corridor` swapped for the real `following` scenario 2026-08-02) | 2026-08-02 | open |
+| `escort_to_destination` (scenario) | `tasks/navigate_lead_agent` (`example_scenarios`; sibling entry `guided_navigation_corridor` swapped for the real `leading` scenario 2026-11-07, `WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION`) | 2026-11-07 | open |
+| `emergency.coordinated_response` (context) | `contexts/high_urgency` (`related_contexts`; prose already named this, YAML backfilled to match 2026-11-07, `WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION`) | 2026-11-07 | open |
 | `entering_elevator` (scenario) | `scenarios/entering_room`'s Table 3 entry cites this as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `exiting_room`/`narrow_doorway` instead | 2026-08-02 | open |
 | `exiting_elevator` (scenario) | `scenarios/exiting_room`'s Table 3 entry cites this as its related scenario, same gap as above | 2026-08-02 | open |
 | `ped_obstruct` (scenario, name unconfirmed) | `scenarios/frontal_approach`'s Table 3 entry cites "Ped. Obstruct" as its related scenario, but no such card exists — the card's own `related_scenarios` substitutes `blind_corner`/`movable_obstruction`/`single_file_hallway` instead | 2026-08-02 | open |
@@ -97,8 +99,6 @@ findings were fully resolved by 2026-08-06 and its row removed — see
 
 | Card | Findings (from audit.md, date noted) | Noted | Status |
 |---|---|---|---|
-| `contexts/high_urgency` | 1. Common tension wording drift. 2. `related_contexts` prose/YAML mismatch. | 2026-08-02 | open |
-| `tasks/navigate_lead_agent` | 1. Common failure mode omitted or softened in YAML. 2. Dangling `example_scenarios` entries. | 2026-08-02 | open |
 | `constitutions/asimov_three_laws` | `scope.exclusions` (`military_combat`, `self-modifying_agents`) claims are contested, not factually wrong — same finding as `asimov_four_laws`'s `## Discussion` "Contested scope claims" bullet (identical exclusions text, byte-for-byte, on both cards). Not a should-fix, a suggestion-level open question the user raised at `asimov_four_laws`'s `APPROVED` review; `asimov_three_laws` was already `APPROVED` before this was noticed, so nothing routed back to it. Consider adding the same "Contested scope claims" Discussion bullet here too, or reverting to a lower state to do so formally — not yet decided | 2026-08-08 | open |
 
 ## Scenario `cited_in` fields are bare reference numbers

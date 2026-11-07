@@ -1,12 +1,15 @@
 # Task: Lead an Agent
 
 ## STATUS
-- **STATE:** EDITED
+- **STATE:** APPROVED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot guidance task
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-07-29
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from the STATUS and Task Summary bullets, matching the scenario family's tighter rendered spacing
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 edit above postdates this card's existing audit.md (2026-07-29), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
-- **AUDITED:** Claude (prosoc-card-audit skill), 2026-07-29
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — added the missing "unexplained abandonment" entry to `common_failure_modes` and replaced the dangling `guided_navigation_corridor` example scenario with the existing `leading` scenario, resolving the two should-fix findings tracked in `project/design/backlog.md` since 2026-08-02
+- **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit after the fixes above: verdict ready, 0 blocking, 0 should-fix, 0 suggestions; promoted EDITED → AUDITED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #TBD) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 - **VALIDATED:** —
 
 ---
@@ -82,7 +85,7 @@ Evaluation of this task focuses on whether the robot provides a clear, followabl
 
 > **Optional but recommended**
 
-- `guided_navigation_corridor`
+- `leading`
 - `escort_to_destination`
 
 ---
@@ -94,7 +97,7 @@ Evaluation of this task focuses on whether the robot provides a clear, followabl
 ```yaml
 id: navigate.lead_agent
 name: Lead an Agent
-state: EDITED
+state: APPROVED
 
 summary: >
   The robot navigates ahead of a human or other agent, providing a moving
@@ -129,9 +132,10 @@ common_failure_modes:
   - excessive speed preventing following
   - unclear or erratic leading motion
   - selection of unsafe or impractical paths
+  - unexplained abandonment of the leading relationship
 
 example_scenarios:
-  - guided_navigation_corridor
+  - leading
   - escort_to_destination
 ```
 

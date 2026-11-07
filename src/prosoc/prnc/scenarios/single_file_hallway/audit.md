@@ -1,9 +1,9 @@
 ---
 family: scenarios
 card: single_file_hallway
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 1
+should_fix: 0
 suggestion: 1
 audited: 2026-11-07
 ---
@@ -12,37 +12,30 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/scenarios/single_file_hallway/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready for AUDITED with a minor fix — one should-fix prose/YAML
-  drift, caught and corrected in review, plus one low-priority structural
-  suggestion.
+- **Verdict:** Ready for AUDITED, no blocking or should-fix issues — one
+  low-priority structural suggestion only.
 
-This is a fresh audit of the card's current content, written from scratch
-after the card was demoted from `APPROVED` back to `EDITED`
-(`WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION`) because two prose-only
-edits (2026-11-05, 2026-11-06) postdated the prior `audit.md` (2026-08-06).
-It does not carry forward or assume any findings from that prior audit.
+This is a fresh audit written after `WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION`
+resolved the prior audit's should-fix Finding 1 (`expected_behaviors.must`
+vs. prose conflict-recognition qualifier). It does not carry forward that
+finding's text, since the YAML content it described no longer exists.
 
 ## Findings
 
-### 1. `expected_behaviors.must` drops the prose's conflict-recognition qualifier — should-fix
-- **Section/field:** "Normative Expectations" prose vs.
-  `expected_behaviors.must`
-- **Issue:** **Caught in review.** An earlier draft of this audit declared
-  the prose and YAML `must` items an exact match. They are not: the prose
-  says the robot "must not enter the hallway simultaneously with the human
-  **once a conflict is recognized**," but the YAML `must` item reads only
-  "avoid entering the hallway simultaneously with the human," with no
-  recognition condition. A robot that enters simultaneously before a
-  conflict is recognized would satisfy the prose's conditional requirement
-  but violate the YAML's unconditional one -- a genuine one-sided drift
-  (YAML is stricter than prose), not a cosmetic wording difference.
-- **Recommended fix:** A human editor should reconcile the two: either add
-  the recognition condition to the YAML `must` item, or confirm the
-  unconditional YAML reading is actually intended (i.e. the robot must
-  never enter simultaneously, recognition or not) and loosen the prose's
-  qualifier to match. This audit does not edit the card.
+### Resolved: `expected_behaviors.must` dropped the prose's conflict-recognition qualifier
 
-### 2. No dedicated "Social Navigation Context" prose section — suggestion
+The prior audit's should-fix Finding 1 is resolved. The YAML `must` item now
+reads "avoid entering the hallway simultaneously with the human once a
+conflict is recognized," matching the prose's conditional framing exactly —
+chosen over the alternative (loosening the prose instead) because a robot
+cannot act on a conflict it has not yet recognized, so the prose's
+conditional requirement was the behaviorally realistic one; the YAML's
+unconditional phrasing was the drift, not the prose. Re-distilled
+(`scripts/distill/scenarios --scenario single_file_hallway --dry-run
+--show-diffs` reports no diff, run fresh for this audit with the correct
+`PYTHONPATH` for this checkout) and schema-validated clean.
+
+### 1. No dedicated "Social Navigation Context" prose section — suggestion
 - **Section/field:** Markdown structure vs. `template.md`'s "Social Navigation
   Context" section (marked "Optional but recommended").
 - **Issue:** The card includes "Scenario Overview" and "Normative
@@ -58,8 +51,7 @@ It does not carry forward or assume any findings from that prior audit.
   Context section purely for closer conformance to `template.md`'s section
   layout.
 
-One should-fix prose/YAML drift was found (Finding 1); no contradictions,
-schema violations, or blocking issues were found.
+No contradictions, schema violations, or blocking issues were found.
 
 ## Prose/YAML Consistency
 
@@ -68,11 +60,10 @@ schema violations, or blocking issues were found.
   single-file geometry (`context.environment.width: single_file`,
   `geometric_layout: narrow hallway`), and the two agents' tasks all match.
 - **Normative Expectations prose vs. `expected_behaviors.{must,should,should_not}`:**
-  Mostly consistent, but see Finding 1: the prose's first `must` item
-  carries a "once a conflict is recognized" qualifier the YAML `must` item
-  drops -- a genuine one-sided drift, not an exact match. The `should`
-  paragraph matches all three `should` items; the `should_not` paragraph
-  matches all three `should_not` items.
+  Consistent — the prose's "once a conflict is recognized" qualifier now
+  matches the YAML `must` item exactly (see the resolved finding above).
+  The `should` paragraph matches all three `should` items; the
+  `should_not` paragraph matches all three `should_not` items.
 - **`ideal_outcome`:** Identical string used in the Scenario Card Summary, the
   fenced YAML, and the standalone Scenario Usage Guide section — no drift.
 - **Scenario Card Summary vs. fenced YAML:** Success Metrics, Quality
@@ -159,5 +150,5 @@ AUDITED" in `template.md` are present and non-contradictory:
   recorded. This phrasing (and label) is itself correct and current as
   written -- an earlier draft of this audit reversed the distinction.
 - **"Social Navigation Context" section** — reasonably blank (optional,
-  see Finding 2); its substance is already covered by the Discussion
+  see Finding 1); its substance is already covered by the Discussion
   section elsewhere in the card.

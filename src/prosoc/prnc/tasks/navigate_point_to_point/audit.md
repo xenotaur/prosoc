@@ -1,9 +1,9 @@
 ---
 family: tasks
 card: navigate_point_to_point
-verdict: ready_with_fixes
+verdict: ready
 blocking: 0
-should_fix: 1
+should_fix: 0
 suggestion: 0
 audited: 2026-11-07
 ---
@@ -12,28 +12,26 @@ audited: 2026-11-07
 
 - **Card:** `src/prosoc/prnc/tasks/navigate_point_to_point/`
 - **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
-- **Verdict:** Ready for AUDITED with one minor wording fix
+- **Verdict:** Ready for AUDITED, no blocking, should-fix, or suggestion
+  findings.
+
+This is a fresh audit written after `WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION`
+resolved the prior audit's should-fix finding (Scope prose/YAML one-sided
+claims for "rerouting" and "politeness"). It does not carry forward that
+finding's text, since the YAML content it described no longer exists.
 
 ## Findings
 
-### 1. Scope prose mentions "rerouting" and "politeness" that the YAML scope omits — should-fix
-- **Section/field:** Task Scope and Boundaries vs. `scope.includes` / `scope.excludes`
-- **Issue:** The prose Includes list names "slowing, stopping, **or rerouting**
-  in service of reaching the goal," but `scope.includes` only has "progressing
-  toward a destination," "pausing or stopping temporarily while pursuing the
-  goal," and "resuming motion toward the goal after interruption" — rerouting
-  has no explicit counterpart. Symmetrically, the prose Excludes list names
-  "Optimizing for comfort, legibility, **or politeness** beyond what is
-  required to reach the destination," but the matching `scope.excludes` entry
-  reads "optimization for social comfort or legibility beyond goal
-  completion" — "politeness" is dropped. Neither is a contradiction (the
-  surrounding YAML entries are broad enough to arguably cover both), but both
-  are one-sided claims per the audit checklist's Prose/YAML Cross-Checks
-  guidance.
-- **Recommended fix:** Add "rerouting toward the destination" to
-  `scope.includes`, and restore "politeness" (or an equivalent "comfort,
-  legibility, or politeness" phrasing) to `scope.excludes`, so the YAML
-  enumerates the same behaviors the prose calls out by name.
+### Resolved: Scope prose mentioned "rerouting" and "politeness" that the YAML scope omitted
+
+The prior audit's should-fix finding is resolved. `scope.includes` now adds
+"rerouting toward the destination," and `scope.excludes` now reads
+"optimization for social comfort, legibility, or politeness beyond goal
+completion" — both now enumerate the exact behaviors the prose Scope and
+Boundaries section already named. Re-distilled
+(`scripts/distill/tasks --dry-run --show-diffs`, whole-family, reports no
+differences — re-run fresh for this audit with the correct `PYTHONPATH`
+for this checkout) and schema-validated clean.
 
 ## Completeness
 

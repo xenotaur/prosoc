@@ -2,7 +2,7 @@
 
 ## Status
 
-- **STATE:** EDITED
+- **STATE:** APPROVED
 - **SOURCE:** The Prosocial Robot Navigation Charter (Francis, in press at Frontiers), Section 4.2.1 — one of two scenarios developed specifically for that paper to contrast P7: Proactivity and P9: Prosocial Behavior; not derived from the P&G paper's Table 3 or Figure 7 despite a superficial thematic resemblance to Figure 7's "Narrow Hallway" sketch
 - **DRAFTED:** ChatGPT 5.2, 2026-01-16
 - **EDITED:** render_sections.py, 2026-07-19
@@ -11,6 +11,9 @@
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — update stale publication-status wording to reflect the source paper now being in press; narrow an absolute claim about external citations to a supportable statement
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-VIEW-FILTER), 2026-11-06 — remove a reference to internal development context from an earlier EDITED entry's description that was meaningless to an external reader
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-05 and 2026-11-06 edits above postdate this card's existing audit.md (2026-08-06), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — added the "once a conflict is recognized" qualifier to the YAML `must` item, resolving the should-fix finding that it was stricter than the matching prose
+- **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 — fresh audit after the qualifier fix above: verdict ready, 0 blocking, 0 should-fix, 1 suggestion; promoted EDITED → AUDITED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION), 2026-11-07 (PR #TBD) — human-confirmed re-approval closing out the 2026-11-06 demotion; promoted AUDITED → APPROVED
 
 ## Scenario Card Summary
 
@@ -60,7 +63,7 @@ Unacceptable behavior includes forcing the human to back up unexpectedly, enteri
 ```yaml
 id: single_file_hallway_01
 name: Single File Hallway
-state: EDITED
+state: APPROVED
 
 summary: >
   A robot and a human approach each other in a hallway that is too narrow for safe and comfortable
@@ -107,7 +110,7 @@ intended_human_behavior: navigate from the opposite end toward the robot
 expected_behaviors:
   must:
     - maintain a safe physical distance from the human
-    - avoid entering the hallway simultaneously with the human
+    - avoid entering the hallway simultaneously with the human once a conflict is recognized
   should:
     - recognize early that the hallway does not permit passing
     - signal intent clearly (e.g., yielding, requesting priority, or other clear signaling)

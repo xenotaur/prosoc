@@ -1,6 +1,6 @@
 id: navigate.point_to_point
 name: Navigate from Start to Goal
-state: EDITED
+state: APPROVED
 summary: 'The robot attempts to move from an initial location to a specified destination,
   serving as the baseline navigation intent underlying most social navigation scenarios.
 
@@ -14,11 +14,12 @@ scope:
   - progressing toward a destination
   - pausing or stopping temporarily while pursuing the goal
   - resuming motion toward the goal after interruption
+  - rerouting toward the destination
   excludes:
   - explicit interaction with specific agents
   - yielding or asserting right-of-way as a primary objective
   - interpretation of social signals or gestures
-  - optimization for social comfort or legibility beyond goal completion
+  - optimization for social comfort, legibility, or politeness beyond goal completion
 related_principles:
 - P0
 - P1
