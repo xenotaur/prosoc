@@ -5,8 +5,12 @@
 - **CONTEXT TYPE:** CORE
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; museum guide and escort robot literature
 - **CREATED:** 2026-01-11
-- **MODIFIED:** —
+- **MODIFIED:** 2026-10-27
 - **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD), 2026-11-07 — demoted from APPROVED to EDITED: the new audit-currency guard found the 2026-10-27 formatting fix above (WI-CHARTER-SUPPLEMENT-SOURCE-FIXES, PR #112 — code-span `Context ID:`/`Applies To Tasks:` values, blank lines before bullet lists) postdates this card's existing audit.md (2026-08-02) and was never given its own EDITED bullet or re-audit at the time; pending re-audit and re-approval
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD), 2026-11-07 — expanded `primary_robot_role` to "guide / escort", matching the prose's "Primary Role of Robot" field exactly, resolving a should-fix found during re-audit
+- **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD), 2026-11-07 — fresh audit after the fixes above: verdict ready, 0 blocking, 0 should-fix, 0 suggestions; promoted EDITED → AUDITED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD), 2026-11-07 (PR #137) — human-confirmed re-approval closing out the 2026-11-07 demotion; promoted AUDITED → APPROVED
 - **VALIDATED:** —
 
 ---
@@ -149,7 +153,7 @@ name: Guidance and Docent Operation
 state: APPROVED
 context_class: core
 
-primary_robot_role: guide
+primary_robot_role: guide / escort
 
 applies_to_tasks:
   - navigate.lead_agent

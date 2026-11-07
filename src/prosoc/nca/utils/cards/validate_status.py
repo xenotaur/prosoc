@@ -5,7 +5,10 @@ with the machine-readable ``state`` field in its distilled ``*.yml``. Also
 checks (see ``prosoc.nca.utils.cards.status``) that an ``AUDITED``/``APPROVED``
 card has real audit evidence (``audit.md`` in directory layout, or a
 card-specific ``<stem>.audit.md`` in flat layout, with an acceptable verdict —
-not the optional ``AUDITED:`` provenance bullet) and, for the charter
+not the optional ``AUDITED:`` provenance bullet); that its content hasn't
+drifted since that audit evidence was last touched (comparing the card's
+Markdown, with the lifecycle-tracking surface masked out, against its git
+history — see ``status.check_audit_currency``); and, for the charter
 specifically, that its free-text ``**Status:**`` header agrees with its
 ``STATE``. Exits non-zero if any card fails any of these checks.
 
@@ -27,7 +30,7 @@ from typing import Callable
 from prosoc.constitutions import distill as constitutions_distill
 from prosoc.manifests import distill as manifests_distill
 from prosoc.nca.literate import utils
-from prosoc.nca.utils.cards import status
+from prosoc.nca.utils.cards import git_history, status
 from prosoc.prnc.charter import distill as charter_distill
 from prosoc.prnc.contexts import distill as contexts_distill
 from prosoc.prnc.scenarios import distill as scenarios_distill
@@ -117,9 +120,9 @@ def _label(source, layout: str, family: Family) -> str:
 
 
 def _check_extras(family: Family, source, layout: str) -> list[str]:
-    """Run the audit-evidence check (all families) and the charter-only
-    Status:-line check. Returns a failure-detail string per failing check
-    (empty if both pass).
+    """Run the audit-evidence check, the audit-currency check (all
+    families), and the charter-only Status:-line check. Returns a
+    failure-detail string per failing check (empty if all pass).
 
     Evaluated against the Markdown's *current* STATE line (as it stands on
     disk when this runs, before any ``--fix`` rewrite in this same
@@ -141,6 +144,35 @@ def _check_extras(family: Family, source, layout: str) -> list[str]:
     )
     if not audit_result.ok:
         problems.append(audit_result.detail)
+
+    reference_text = None
+    yml_reference_text = None
+    current_yml_text = None
+    if markdown_state in ("AUDITED", "APPROVED"):
+        # check_audit_currency is a no-op below AUDITED; skip the git
+        # subprocess calls entirely rather than running them (now doubled,
+        # one pass each for the Markdown and the distilled YAML) only to
+        # discard the result.
+        audit_path = status.audit_path_for(source.md_path, layout=layout)
+        reference_text = git_history.audit_reference_text(audit_path, source.md_path)
+        yml_reference_text = git_history.audit_reference_text(
+            audit_path, source.yml_path
+        )
+        if yml_reference_text is not None:
+            # Only needed for the comparison itself; reading it costs
+            # nothing extra when there's no reference point to compare
+            # against anyway.
+            current_yml_text = source.yml_path.read_text(encoding="utf-8")
+    currency_result = status.check_audit_currency(
+        current_md_text=md_text,
+        audit_reference_md_text=reference_text,
+        state=markdown_state,
+        yaml_root_key=family.yaml_root_key,
+        current_yml_text=current_yml_text,
+        audit_reference_yml_text=yml_reference_text,
+    )
+    if not currency_result.ok:
+        problems.append(currency_result.detail)
 
     if family.name == "charter":
         charter_result = status.check_charter_status_line(md_text, markdown_state)
