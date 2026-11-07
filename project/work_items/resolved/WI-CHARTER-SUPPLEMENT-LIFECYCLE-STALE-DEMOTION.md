@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: 'Implemented and merged in PR #134 (commit 24e5aadf9d5255fbcd1ca1529a696f603da7d2ef) -- demoted all 9 stale cards from APPROVED to EDITED, added dated EDITED history bullets (including a new bullet convention for high_urgency, whose contexts family had none), hand-synced the charter''s separate Status: header, and regenerated papers/01_charter/golden/rendered.tex for the 7 in-paper cards. Leaves check-packet-drift and 6 tests/nca/packet/cli_test.py tests intentionally red -- a documented, temporary consequence of 3 demoted cards being sample_packet members, resolved once WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION lands.'
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION
 title: 'Demote 9 charter-supplement cards from APPROVED to EDITED pending re-audit'
 type: operation
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-LIFECYCLE-CURRENCY
 related_design:

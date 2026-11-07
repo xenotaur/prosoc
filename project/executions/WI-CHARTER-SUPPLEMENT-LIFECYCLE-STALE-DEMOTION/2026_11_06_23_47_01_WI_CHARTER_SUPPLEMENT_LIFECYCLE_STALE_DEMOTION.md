@@ -2,10 +2,10 @@
 execution_id: 2026_11_06_23_47_01_WI_CHARTER_SUPPLEMENT_LIFECYCLE_STALE_DEMOTION
 prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION:WI_CHARTER_SUPPLEMENT_LIFECYCLE_STALE_DEMOTION)[2026-11-06T23:34:03+00:00]
 work_item: WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/134
-commit:
+commit: 24e5aadf9d5255fbcd1ca1529a696f603da7d2ef
 created_at: 2026-11-06T23:47:01+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION.md
