@@ -8,7 +8,7 @@ pr: null
 commit: null
 created_at: 2026-11-07T08:37:32+00:00
 agent: claude_app
-instruction_source: https://github.com/xenotaur/prosoc/
+instruction_source: ad hoc — follow-up publication cleanup requested in a review session after WS-CHARTER-SUPPLEMENT-LIFECYCLE-CURRENCY closed; WI created in this same session, so no prior WI file to point to
 session_transcript: claude-app:0e614511-4f01-4980-80be-9f1202cf16c6
 ---
 
@@ -21,8 +21,8 @@ three concrete defects and resolved two investigation questions.
 # Result
 
 1. **Page-one disclaimer** (`papers/01_charter/template.tex:144-145`) --
-   reworded to distinguish `AUDITED`/`APPROVED` (achieved by all 11 included
-   cards) from deployment validation (not achieved), replacing the now-stale
+   reworded to distinguish `AUDITED`/`APPROVED` (achieved by all 9 included
+   cards, per `papers/01_charter/sources.txt`) from deployment validation (not achieved), replacing the now-stale
    "not ... fully audited" wording. URLs and attribution prose preserved.
 2. **"Principle 13" reference** (`src/prosoc/prnc/charter/charter.md`) --
    corrected the 2026-11-06 history bullet to read "P9's Explanation in

@@ -20,11 +20,12 @@ acceptance:
   - 'The context-history field-ordering question (routine_delivery, guidance_docent) is resolved by moving MODIFIED to its chronologically-correct position (after AUDITED), matching the convention already demonstrated by high_urgency -- a reorder verified safe against the audit-currency guard, not merely assumed safe'
   - 'The publication-view-provenance question is resolved by citing the existing adopted decision in docs/paper-supplements.md (WI-CHARTER-SUPPLEMENT-PUBLICATION-VIEW-FILTER, confirmed 2026-11-06: retain), not by a new editorial policy change'
   - 'papers/01_charter is regenerated exclusively through papers/01_charter/render.py (no hand-edited golden .tex or PDF), with no golden-file drift'
-  - 'All 11 included cards remain APPROVED with current audit evidence; full corpus scripts/validate/status passes'
+  - 'All 9 included cards (per papers/01_charter/sources.txt) remain APPROVED with current audit evidence; full corpus scripts/validate/status passes'
   - 'Every rendered PDF page is visually inspected for clipping, overlap, broken URLs, orphaned headings, and pagination regressions'
 required_evidence: [manual_review, lrh_validate, test_output]
 artifacts_expected:
   - papers/01_charter/template.tex
+  - papers/01_charter/golden/rendered.tex
   - src/prosoc/prnc/charter/charter.md
   - src/prosoc/prnc/contexts/routine_delivery/context.md
   - src/prosoc/prnc/contexts/guidance_docent/context.md
@@ -42,7 +43,8 @@ unilateral policy change.
 
 1. **Page-one disclaimer is now stale.** `papers/01_charter/template.tex:144-145`
    says the included cards are "not ... fully audited normative card content
-   suitable for deployment." Every one of the 11 cards the supplement includes
+   suitable for deployment." Every one of the 9 cards the supplement includes
+   (per `papers/01_charter/sources.txt`)
    is `APPROVED` (the human-accountability gate per
    `src/prosoc/prnc/scenarios/workflow.md` stage 5) with current audit
    evidence; none is `VALIDATED` (the empirical-evidence stage, per the same
