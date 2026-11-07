@@ -4,7 +4,7 @@ prompt_id: PROMPT(AD_HOC:CHARTER_SUPPLEMENT_PUBLICATION_CLEANUP_SELFREVIEW)[2026
 work_item: AD_HOC
 status: landed
 rerun_of: 2026_11_07_08_37_32_CHARTER_SUPPLEMENT_PUBLICATION_CLEANUP
-pr: null
+pr: https://github.com/xenotaur/prosoc/pull/138
 commit: ca4a08ef38a4f2e3debfa2572393ca18928de2eb
 created_at: 2026-11-07T08:46:56+00:00
 agent: claude_app

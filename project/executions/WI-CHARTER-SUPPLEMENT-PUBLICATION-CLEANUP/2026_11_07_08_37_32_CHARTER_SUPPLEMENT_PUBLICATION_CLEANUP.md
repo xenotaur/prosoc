@@ -4,7 +4,7 @@ prompt_id: PROMPT(WI-CHARTER-SUPPLEMENT-PUBLICATION-CLEANUP:CHARTER_SUPPLEMENT_P
 work_item: WI-CHARTER-SUPPLEMENT-PUBLICATION-CLEANUP
 status: in_progress
 rerun_of: null
-pr: null
+pr: https://github.com/xenotaur/prosoc/pull/138
 commit: null
 created_at: 2026-11-07T08:37:32+00:00
 agent: claude_app
