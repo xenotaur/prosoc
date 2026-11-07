@@ -57,8 +57,11 @@ regenerated exclusively through `papers/01_charter/render.py --pdf`; the
 golden `.tex` was updated to match, with the diff scoped exactly to the
 three intended changes each time. All 48 PDF pages were checked
 programmatically (blank-page scan, broken-URL scan, malformed-quote scan,
-footer consistency) and a representative sample (including every changed
-page) was visually inspected.
+footer consistency) and every page was individually visually inspected (not
+a sample -- a Copilot review of an earlier commit on this PR correctly
+flagged that the sample-plus-scans approach did not actually satisfy the
+WI's own "every page" acceptance criterion; completed the full inspection
+in response).
 
 # Validation
 
@@ -78,10 +81,9 @@ page) was visually inspected.
 - `lrh validate` -- 0 errors, 20 pre-existing warnings (unrelated).
 - PDF: 48 pages, no blank pages, no broken/malformed URLs, no malformed
   quotes, consistent odd/even footer convention (pre-existing Frontiers
-  template behavior, unchanged). Visual inspection of the title page, both
-  edited charter-history pages, both edited context-card pages, and a
-  spread of unrelated pages (3, 9, 11, 18, 30, 44) showed no clipping,
-  overlap, or pagination regressions.
+  template behavior, unchanged). All 48 pages individually visually
+  inspected -- no clipping, overlap, orphaned headings, malformed code
+  blocks, or pagination regressions found anywhere.
 
 # Follow-up
 
