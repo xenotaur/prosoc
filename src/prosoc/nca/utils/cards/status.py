@@ -35,6 +35,7 @@ definition of record).
 
 from __future__ import annotations
 
+import copy
 import pathlib
 import re
 from typing import NamedTuple
@@ -68,15 +69,6 @@ _STATE_LINE_RE = re.compile(
 # e.g. ``- **AUDITED:** Claude, 2026-08-02``. ``STATES`` is defined above this
 # point in the module, so the pattern always reflects the current vocabulary.
 _HISTORY_BULLET_RE = re.compile(r"^- \*\*(?:" + "|".join(STATES) + r"):\*\*")
-
-# Any properly-formatted STATUS-block field bullet, e.g. ``- **SOURCE:**`` or
-# ``- **CONTEXT TYPE:**`` — bold, all-caps label. Used to recognise where a
-# history bullet's own wrapped continuation lines end: only a blank line or
-# another *bulleted field* ends the run, not a bare line that merely happens
-# to start with ``- `` (prose, a nested list item, etc.), which would
-# otherwise be misread as "the history bullet ended here" and leak unmasked
-# into the comparison.
-_ANY_FIELD_BULLET_RE = re.compile(r"^- \*\*[A-Z][A-Z0-9 _]*:\*\*")
 
 
 class StatusStateError(ValueError):
@@ -290,7 +282,7 @@ def parse_charter_status_line(md_text: str) -> str | None:
     return match.group("value") if match is not None else None
 
 
-def _mask_lifecycle_surface(md_text: str) -> str:
+def _mask_lifecycle_surface(md_text: str, *, yaml_root_key: str | None = None) -> str:
     """Strip/mask everything in ``md_text`` that is part of the lifecycle-
     tracking surface, leaving normative content untouched.
 
@@ -306,8 +298,16 @@ def _mask_lifecycle_surface(md_text: str) -> str:
       must compare equal to a version that never had it.
     - The ``- **STATE:**`` bullet's value (it legitimately changes every
       transition).
-    - The embedded fenced-YAML ``state:`` line's value (tolerant of
-      leading indentation, for root-wrapped families like constitutions).
+    - The embedded fenced-YAML ``state:`` line's value — at column 0, or
+      (when ``yaml_root_key`` names a root-wrapped family, e.g.
+      ``"constitution"``) at exactly 2-space indent as its direct child.
+      Masking is scoped to exactly this one line, not "``state:`` at any
+      indentation" — a looser match would also mask unrelated prose
+      inside a *different* field's YAML block scalar that happens to
+      contain a line reading ``state: <word>`` (a real, verified false
+      negative: that prose could change and the masked comparison would
+      show no difference), since block-scalar content can land at the
+      same indentation depth as a sibling key by coincidence.
     - For the charter only: the free-text ``**Status:**`` header's value.
 
     Not masked: ``SOURCE:``, ``CREATED:``, ``MODIFIED:``, and any other
@@ -315,40 +315,77 @@ def _mask_lifecycle_surface(md_text: str) -> str:
     drift, not lifecycle bookkeeping (confirmed by this project's own
     history: SOURCE-line corrections always paired with a new ``EDITED:``
     bullet and correctly triggered re-audit).
+
+    A wrapped continuation line is recognised by **indentation alone**
+    (the real, 100%-consistent convention every history bullet in this
+    corpus already uses), not by what follows the bullet. A pattern-based
+    "ends on the next thing that looks like a bullet" rule was tried and
+    rejected: it silently swallowed a Markdown heading or paragraph that
+    happened to immediately follow the last history bullet with no blank
+    line in between — a real, verified false negative (content disappears
+    from the comparison, so real drift goes undetected), which is a far
+    more dangerous failure mode than the false positive an unindented,
+    non-conventional continuation line would produce under this simpler
+    rule (it would be preserved and compared as ordinary content instead
+    of being stripped, so a change to it, if any, gets flagged for
+    re-audit rather than silently passed).
     """
     lines = md_text.splitlines(keepends=True)
     out: list[str] = []
     in_history_bullet = False
     for line in lines:
+        if in_history_bullet:
+            if line.strip() != "" and line[:1].isspace():
+                # Indented, non-blank: a wrapped continuation line of the
+                # bullet above — dropped with it.
+                continue
+            # Blank, or not indented: the continuation run ends here. This
+            # line was not consumed as a continuation, so it falls through
+            # to the fresh checks below (it may itself be a new history
+            # bullet, immediately back-to-back with no blank line).
+            in_history_bullet = False
         if _HISTORY_BULLET_RE.match(line):
             in_history_bullet = True
-            continue
-        if in_history_bullet:
-            if line.strip() == "":
-                in_history_bullet = False
-                out.append(line)
-                continue
-            if _ANY_FIELD_BULLET_RE.match(line):
-                # A different field bullet (e.g. SOURCE:, STATE:) — not a
-                # continuation of the history bullet above.
-                in_history_bullet = False
-                out.append(line)
-                continue
-            # Wrapped-prose continuation line of the bullet above — dropped
-            # with it, regardless of indentation or leading punctuation.
             continue
         out.append(line)
     masked = "".join(out)
     masked = _STATE_LINE_RE.sub(
         lambda m: m.group("prefix") + "<STATE>" + m.group("suffix"), masked
     )
-    masked = re.sub(r"(?m)^(\s*state:[^\S\n]*)\S+[^\S\n]*$", r"\1<STATE>", masked)
+    state_prefix = r"^  state:" if yaml_root_key is not None else r"^state:"
+    masked = re.sub(rf"(?m)({state_prefix}[^\S\n]*)\S+(.*)$", r"\1<STATE>\2", masked)
     masked = _CHARTER_STATUS_LINE_RE.sub("**Status:** <STATUS>", masked)
     return masked
 
 
+def _mask_yaml_state(yaml_text: str, *, yaml_root_key: str | None = None):
+    """Parse ``yaml_text`` and return it with the lifecycle ``state`` field
+    removed (top-level, or ``data[yaml_root_key]["state"]`` for root-wrapped
+    families), for structural comparison. Returns ``None`` if the text
+    doesn't parse as a mapping — the caller then skips the YAML-side
+    comparison for this pair rather than guessing.
+    """
+    try:
+        data = yaml.safe_load(yaml_text)
+    except yaml.YAMLError:
+        return None
+    if not isinstance(data, dict):
+        return None
+    data = copy.deepcopy(data)
+    target = data.get(yaml_root_key) if yaml_root_key is not None else data
+    if isinstance(target, dict):
+        target.pop("state", None)
+    return data
+
+
 def check_audit_currency(
-    *, current_md_text: str, audit_reference_md_text: str | None, state: str
+    *,
+    current_md_text: str,
+    audit_reference_md_text: str | None,
+    state: str,
+    yaml_root_key: str | None = None,
+    current_yml_text: str | None = None,
+    audit_reference_yml_text: str | None = None,
 ) -> ConsistencyResult:
     """Check that an ``AUDITED``/``APPROVED`` card's content hasn't drifted
     since the audit evidence it's relying on.
@@ -360,6 +397,24 @@ def check_audit_currency(
     the only changes since the audit were lifecycle bookkeeping — a
     provenance backfill or an ordinary ``prosoc-card-approve`` promotion —
     not real content drift, so this passes.
+
+    Also compares the distilled YAML the same way (state field removed,
+    structural equality) when ``current_yml_text``/
+    ``audit_reference_yml_text`` are both given and parse as mappings — the
+    distilled ``*.yml`` is normally only ever regenerated from the Markdown
+    by that family's distiller, but it is the artifact prosoc's own
+    runtime code actually consumes, so a direct edit to it that bypasses
+    the Markdown entirely must still be caught; this work item's own
+    acceptance criteria name "Markdown or distilled YAML" explicitly, not
+    Markdown alone. Omit both YAML arguments (or pass text that fails to
+    parse as a mapping) to skip this half of the check — never a reason to
+    fail, just nothing to compare.
+
+    ``yaml_root_key`` is forwarded to :func:`_mask_lifecycle_surface` and
+    :func:`_mask_yaml_state` — pass the same value as the family's
+    ``yaml_root_key`` (e.g. ``"constitution"``) so the embedded ``state:``
+    line and the distilled YAML's ``state`` field are each masked at the
+    right place for this family, not guessed.
 
     ``audit_reference_md_text`` is ``None`` when no reliable reference
     point exists — ``audit.md`` has uncommitted changes (mid-edit), no git
@@ -374,14 +429,34 @@ def check_audit_currency(
         return ConsistencyResult(
             True, "audit currency not checkable (no reliable git reference point)"
         )
-    if _mask_lifecycle_surface(current_md_text) == _mask_lifecycle_surface(
-        audit_reference_md_text
-    ):
+    md_unchanged = _mask_lifecycle_surface(
+        current_md_text, yaml_root_key=yaml_root_key
+    ) == _mask_lifecycle_surface(audit_reference_md_text, yaml_root_key=yaml_root_key)
+
+    yml_unchanged = True
+    if current_yml_text is not None and audit_reference_yml_text is not None:
+        current_masked = _mask_yaml_state(current_yml_text, yaml_root_key=yaml_root_key)
+        reference_masked = _mask_yaml_state(
+            audit_reference_yml_text, yaml_root_key=yaml_root_key
+        )
+        if current_masked is not None and reference_masked is not None:
+            yml_unchanged = current_masked == reference_masked
+
+    if md_unchanged and yml_unchanged:
         return ConsistencyResult(True, "no content change since last audit")
+    changed = [
+        label
+        for label, unchanged in (
+            ("Markdown", md_unchanged),
+            ("distilled YAML", yml_unchanged),
+        )
+        if not unchanged
+    ]
     return ConsistencyResult(
         False,
-        f"{state} card has content changes since its last audit "
-        "(outside the lifecycle-tracking surface) -- re-audit required",
+        f"{state} card has content changes since its last audit in its "
+        f"{' and '.join(changed)} (outside the lifecycle-tracking surface) "
+        "-- re-audit required",
     )
 
 

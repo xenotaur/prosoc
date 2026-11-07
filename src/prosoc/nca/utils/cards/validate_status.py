@@ -145,12 +145,31 @@ def _check_extras(family: Family, source, layout: str) -> list[str]:
     if not audit_result.ok:
         problems.append(audit_result.detail)
 
-    audit_path = status.audit_path_for(source.md_path, layout=layout)
-    reference_text = git_history.audit_reference_text(audit_path, source.md_path)
+    reference_text = None
+    yml_reference_text = None
+    current_yml_text = None
+    if markdown_state in ("AUDITED", "APPROVED"):
+        # check_audit_currency is a no-op below AUDITED; skip the git
+        # subprocess calls entirely rather than running them (now doubled,
+        # one pass each for the Markdown and the distilled YAML) only to
+        # discard the result.
+        audit_path = status.audit_path_for(source.md_path, layout=layout)
+        reference_text = git_history.audit_reference_text(audit_path, source.md_path)
+        yml_reference_text = git_history.audit_reference_text(
+            audit_path, source.yml_path
+        )
+        if yml_reference_text is not None:
+            # Only needed for the comparison itself; reading it costs
+            # nothing extra when there's no reference point to compare
+            # against anyway.
+            current_yml_text = source.yml_path.read_text(encoding="utf-8")
     currency_result = status.check_audit_currency(
         current_md_text=md_text,
         audit_reference_md_text=reference_text,
         state=markdown_state,
+        yaml_root_key=family.yaml_root_key,
+        current_yml_text=current_yml_text,
+        audit_reference_yml_text=yml_reference_text,
     )
     if not currency_result.ok:
         problems.append(currency_result.detail)

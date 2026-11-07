@@ -327,9 +327,58 @@ class MaskLifecycleSurfaceTest(unittest.TestCase):
         self.assertNotIn("APPROVED", masked)
 
     def test_masks_indented_root_wrapped_yaml_state_line(self):
-        # Constitutions nest state under a `constitution:` key.
-        masked = status._mask_lifecycle_surface("constitution:\n  state: APPROVED\n")
+        # Constitutions nest state under a `constitution:` key -- only
+        # masked when the caller says so via yaml_root_key.
+        masked = status._mask_lifecycle_surface(
+            "constitution:\n  state: APPROVED\n", yaml_root_key="constitution"
+        )
         self.assertIn("  state: <STATE>\n", masked)
+
+    def test_unindented_state_not_masked_when_yaml_root_key_given(self):
+        # A root-wrapped family's real state: is at 2-space indent, not 0 --
+        # the top-level (unindented) form must not be masked for it.
+        masked = status._mask_lifecycle_surface(
+            "state: APPROVED\n", yaml_root_key="constitution"
+        )
+        self.assertEqual(masked, "state: APPROVED\n")
+
+    def test_indented_state_not_masked_for_flat_families(self):
+        # The inverse: a flat family's real state: is at column 0 -- a line
+        # that merely happens to be indented and read "state: X" (e.g.
+        # prose inside a different field's YAML block scalar) must not be
+        # masked, since it is not the authoritative lifecycle field.
+        text = "evaluation_notes: |\n  state: blocked\n  more text\nstate: APPROVED\n"
+        masked = status._mask_lifecycle_surface(text)
+        self.assertIn("state: blocked", masked)
+        self.assertIn("state: <STATE>\n", masked)
+
+    def test_state_value_change_inside_a_block_scalar_is_not_hidden(self):
+        # Regression: a block scalar's own prose happening to read
+        # "state: <word>" must never be masked -- found and fixed via
+        # PR-mode review (PR #137). If it were masked, real content drift
+        # confined to that prose would be invisible to the comparison.
+        before = "evaluation_notes: |\n  state: blocked\nstate: APPROVED\n"
+        after = "evaluation_notes: |\n  state: clear\nstate: APPROVED\n"
+        self.assertNotEqual(
+            status._mask_lifecycle_surface(before),
+            status._mask_lifecycle_surface(after),
+        )
+
+    def test_masks_state_value_with_trailing_inline_comment(self):
+        # Regression: a lifecycle state with an inline YAML comment (valid
+        # YAML syntax) must still be masked, with the comment text
+        # preserved for comparison -- found and fixed via PR-mode review
+        # (PR #137).
+        masked = status._mask_lifecycle_surface("state: AUDITED # reviewed\n")
+        self.assertEqual(masked, "state: <STATE> # reviewed\n")
+
+    def test_promotion_with_inline_comment_still_compares_equal(self):
+        before = "state: AUDITED # reviewed\n"
+        after = "state: APPROVED # reviewed\n"
+        self.assertEqual(
+            status._mask_lifecycle_surface(before),
+            status._mask_lifecycle_surface(after),
+        )
 
     def test_masks_charter_status_header_value(self):
         masked = status._mask_lifecycle_surface("**Status:** Approved (Normative)  \n")
@@ -353,14 +402,52 @@ class MaskLifecycleSurfaceTest(unittest.TestCase):
         masked = status._mask_lifecycle_surface(text)
         self.assertIn("- **SOURCE:** x\n", masked)
 
-    def test_unindented_continuation_line_starting_with_hyphen_is_still_stripped(self):
-        # An un-indented wrapped continuation line that happens to start
-        # with a literal "- " must not be misread as a new field bullet --
-        # only a *properly bulleted field* (bold, all-caps label) or a blank
-        # line ends a history bullet's continuation run.
+    def test_indented_continuation_line_is_stripped_even_if_it_starts_with_hyphen(self):
+        # A genuine wrapped continuation line is recognised by indentation
+        # alone, regardless of what text it starts with.
         text = (
             "- **EDITED:** Claude, 2026-11-06 -- demoted\n"
-            "- from APPROVED to EDITED (unindented continuation)\n"
+            "  - from APPROVED to EDITED (indented, starts with a hyphen)\n"
+            "- **SOURCE:** x\n"
+        )
+        masked = status._mask_lifecycle_surface(text)
+        self.assertEqual(masked, "- **SOURCE:** x\n")
+
+    def test_unindented_non_bullet_line_right_after_a_history_bullet_is_preserved(self):
+        # An unindented line that is *not* itself a recognised bullet (e.g.
+        # a malformed/unconventional continuation, or just stray text) is
+        # never silently dropped -- only indentation marks a continuation.
+        # This is the safe direction: if such a line's content ever changes,
+        # it shows up as a real diff (should-fix via re-audit) rather than
+        # vanishing from the comparison.
+        text = (
+            "- **EDITED:** Claude, 2026-11-06 -- demoted\n"
+            "- from APPROVED to EDITED (unindented, not a recognised bullet)\n"
+            "- **SOURCE:** x\n"
+        )
+        masked = status._mask_lifecycle_surface(text)
+        self.assertEqual(
+            masked,
+            "- from APPROVED to EDITED (unindented, not a recognised bullet)\n"
+            "- **SOURCE:** x\n",
+        )
+
+    def test_heading_immediately_after_the_last_bullet_is_not_swallowed(self):
+        # Regression: a Markdown heading (or any other real content) with
+        # no blank line before it, directly after the last history bullet,
+        # must never be mistaken for a continuation line and dropped -- a
+        # genuine prior bug, found and fixed via PR-mode review (PR #137).
+        text = (
+            "- **AUDITED:** Claude, 2026-08-01\n"
+            "## Normative Expectations\n\nThe robot must do X.\n"
+        )
+        masked = status._mask_lifecycle_surface(text)
+        self.assertEqual(masked, "## Normative Expectations\n\nThe robot must do X.\n")
+
+    def test_back_to_back_history_bullets_with_no_blank_line_both_stripped(self):
+        text = (
+            "- **AUDITED:** Claude, 2026-08-01\n"
+            "- **APPROVED:** Claude, 2026-11-07\n"
             "- **SOURCE:** x\n"
         )
         masked = status._mask_lifecycle_surface(text)
@@ -449,6 +536,78 @@ class CheckAuditCurrencyTest(unittest.TestCase):
             current_md_text=after, audit_reference_md_text=before, state="APPROVED"
         )
         self.assertFalse(result.ok)
+
+    def test_yaml_only_content_drift_fails(self):
+        # Regression: the work item's own acceptance criteria name
+        # "Markdown or distilled YAML" explicitly -- a direct edit to the
+        # distilled *.yml that never touches the Markdown at all (bypassing
+        # the normal authoring workflow) must still be caught. Found and
+        # fixed via PR-mode review (PR #137).
+        md = "- **STATE:** APPROVED\n\nThe robot must do X.\n"
+        result = status.check_audit_currency(
+            current_md_text=md,
+            audit_reference_md_text=md,
+            state="APPROVED",
+            current_yml_text="id: x\nstate: APPROVED\nsummary: new\n",
+            audit_reference_yml_text="id: x\nstate: AUDITED\nsummary: old\n",
+        )
+        self.assertFalse(result.ok)
+        self.assertIn("distilled YAML", result.detail)
+
+    def test_yaml_state_only_change_does_not_false_positive(self):
+        # The YAML-side equivalent of an ordinary promotion: only the
+        # state field differs.
+        md = "- **STATE:** APPROVED\n\nThe robot must do X.\n"
+        result = status.check_audit_currency(
+            current_md_text=md,
+            audit_reference_md_text=md,
+            state="APPROVED",
+            current_yml_text="id: x\nstate: APPROVED\nsummary: same\n",
+            audit_reference_yml_text="id: x\nstate: AUDITED\nsummary: same\n",
+        )
+        self.assertTrue(result.ok)
+
+    def test_yaml_comparison_skipped_when_not_provided(self):
+        # Callers that don't pass YAML text at all (or it fails to parse)
+        # get Markdown-only comparison, same as before this field existed
+        # -- never a reason to fail on its own.
+        md = "- **STATE:** APPROVED\n\nThe robot must do X.\n"
+        result = status.check_audit_currency(
+            current_md_text=md, audit_reference_md_text=md, state="APPROVED"
+        )
+        self.assertTrue(result.ok)
+
+    def test_root_wrapped_yaml_state_only_change_does_not_false_positive(self):
+        md = "- **STATE:** APPROVED\n\nThe robot must do X.\n"
+        result = status.check_audit_currency(
+            current_md_text=md,
+            audit_reference_md_text=md,
+            state="APPROVED",
+            yaml_root_key="constitution",
+            current_yml_text="constitution:\n  id: x\n  state: APPROVED\n  rules: []\n",
+            audit_reference_yml_text=(
+                "constitution:\n  id: x\n  state: AUDITED\n  rules: []\n"
+            ),
+        )
+        self.assertTrue(result.ok)
+
+
+class MaskYamlStateTest(unittest.TestCase):
+    def test_removes_top_level_state(self):
+        masked = status._mask_yaml_state("id: x\nstate: APPROVED\n")
+        self.assertEqual(masked, {"id": "x"})
+
+    def test_removes_root_wrapped_state(self):
+        masked = status._mask_yaml_state(
+            "constitution:\n  id: x\n  state: APPROVED\n", yaml_root_key="constitution"
+        )
+        self.assertEqual(masked, {"constitution": {"id": "x"}})
+
+    def test_malformed_yaml_returns_none(self):
+        self.assertIsNone(status._mask_yaml_state("id: [unterminated\n"))
+
+    def test_non_mapping_yaml_returns_none(self):
+        self.assertIsNone(status._mask_yaml_state("- just\n- a\n- list\n"))
 
 
 class AuditPathForTest(unittest.TestCase):
