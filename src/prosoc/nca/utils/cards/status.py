@@ -69,6 +69,15 @@ _STATE_LINE_RE = re.compile(
 # point in the module, so the pattern always reflects the current vocabulary.
 _HISTORY_BULLET_RE = re.compile(r"^- \*\*(?:" + "|".join(STATES) + r"):\*\*")
 
+# Any properly-formatted STATUS-block field bullet, e.g. ``- **SOURCE:**`` or
+# ``- **CONTEXT TYPE:**`` — bold, all-caps label. Used to recognise where a
+# history bullet's own wrapped continuation lines end: only a blank line or
+# another *bulleted field* ends the run, not a bare line that merely happens
+# to start with ``- `` (prose, a nested list item, etc.), which would
+# otherwise be misread as "the history bullet ended here" and leak unmasked
+# into the comparison.
+_ANY_FIELD_BULLET_RE = re.compile(r"^- \*\*[A-Z][A-Z0-9 _]*:\*\*")
+
 
 class StatusStateError(ValueError):
     """Raised when a card's Markdown STATE line is missing or malformed."""
@@ -319,13 +328,14 @@ def _mask_lifecycle_surface(md_text: str) -> str:
                 in_history_bullet = False
                 out.append(line)
                 continue
-            if line.startswith("- "):
-                # A different bullet (e.g. SOURCE:, STATE:) — not a
+            if _ANY_FIELD_BULLET_RE.match(line):
+                # A different field bullet (e.g. SOURCE:, STATE:) — not a
                 # continuation of the history bullet above.
                 in_history_bullet = False
                 out.append(line)
                 continue
-            # Indented wrapped-prose continuation line of the bullet above.
+            # Wrapped-prose continuation line of the bullet above — dropped
+            # with it, regardless of indentation or leading punctuation.
             continue
         out.append(line)
     masked = "".join(out)

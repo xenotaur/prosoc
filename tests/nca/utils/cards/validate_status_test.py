@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from prosoc.nca.utils.cards import validate_status
+from prosoc.nca.utils.cards import git_history, validate_status
 
 
 MD = """\
@@ -700,6 +700,15 @@ class AuditCurrencyCheckTest(unittest.TestCase):
             (root / "card" / "scenario.md").write_text(backfilled, encoding="utf-8")
             _commit_all(root, "backfill provenance bullet")
 
+            # A passing exit code alone can't distinguish "the guard found
+            # no drift" from "the guard was silently never engaged" (e.g. a
+            # regression in git_history's path resolution). Confirm the
+            # reference lookup actually ran and found real history first.
+            reference = git_history.audit_reference_text(
+                root / "card" / "audit.md", root / "card" / "scenario.md"
+            )
+            self.assertIsNotNone(reference)
+
             self.assertEqual(
                 validate_status.main(["--family", "scenarios", "--root", str(root)]), 0
             )
@@ -726,6 +735,13 @@ class AuditCurrencyCheckTest(unittest.TestCase):
                 "id: card\nname: card\nstate: APPROVED\nsummary: y\n", encoding="utf-8"
             )
             _commit_all(root, "promote AUDITED -> APPROVED")
+
+            # Same rationale as test_provenance_backfill_only_passes: prove
+            # the guard actually engaged, not that it was silently skipped.
+            reference = git_history.audit_reference_text(
+                root / "card" / "audit.md", root / "card" / "scenario.md"
+            )
+            self.assertIsNotNone(reference)
 
             self.assertEqual(
                 validate_status.main(["--family", "scenarios", "--root", str(root)]), 0

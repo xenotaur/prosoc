@@ -353,6 +353,19 @@ class MaskLifecycleSurfaceTest(unittest.TestCase):
         masked = status._mask_lifecycle_surface(text)
         self.assertIn("- **SOURCE:** x\n", masked)
 
+    def test_unindented_continuation_line_starting_with_hyphen_is_still_stripped(self):
+        # An un-indented wrapped continuation line that happens to start
+        # with a literal "- " must not be misread as a new field bullet --
+        # only a *properly bulleted field* (bold, all-caps label) or a blank
+        # line ends a history bullet's continuation run.
+        text = (
+            "- **EDITED:** Claude, 2026-11-06 -- demoted\n"
+            "- from APPROVED to EDITED (unindented continuation)\n"
+            "- **SOURCE:** x\n"
+        )
+        masked = status._mask_lifecycle_surface(text)
+        self.assertEqual(masked, "- **SOURCE:** x\n")
+
 
 class CheckAuditCurrencyTest(unittest.TestCase):
     def test_below_audited_requires_nothing(self):
