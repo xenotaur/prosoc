@@ -68,7 +68,7 @@ exact gap pattern (e.g. `guidance.accessibility_sensitive`,
   experience (discretionary, beyond-baseline, e.g. giving directions,
   holding a door), and (b) preserving or improving the shared environment's
   navigability (e.g. not leaving an obstruction behind, or clearing one
-  that's already there) — charter §2 and Principle 13's Explanation. The
+  that's already there) — charter §2 and Principle 13 (P9)'s Explanation. The
   card's "P9 is deprioritized" bullet treats P9 as a single undifferentiated
   concern. **Caught in review:** an earlier draft of this finding
   misattributed the charter's own urgency/delay example — "weigh [clearing
