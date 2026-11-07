@@ -10,7 +10,7 @@
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD), 2026-11-07 — demoted from APPROVED to EDITED: the new audit-currency guard found the 2026-10-27 formatting fix above (WI-CHARTER-SUPPLEMENT-SOURCE-FIXES, PR #112 — code-span `Context ID:`/`Applies To Tasks:` values, blank lines before bullet lists) postdates this card's existing audit.md (2026-08-01) and was never given its own EDITED bullet or re-audit at the time; pending re-audit and re-approval
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD), 2026-11-07 — reworded the "Common tensions" prose bullets to match `principle_emphasis.common_tensions`'s existing wording exactly, resolving a should-fix found during re-audit
 - **AUDITED:** Claude (WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD), 2026-11-07 — fresh audit after the fixes above: verdict ready, 0 blocking, 0 should-fix, 0 suggestions; promoted EDITED → AUDITED
-- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD), 2026-11-07 (PR #TBD) — human-confirmed re-approval closing out the 2026-11-07 demotion; promoted AUDITED → APPROVED
+- **APPROVED:** Claude (WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD), 2026-11-07 (PR #137) — human-confirmed re-approval closing out the 2026-11-07 demotion; promoted AUDITED → APPROVED
 - **VALIDATED:** —
 
 ---
