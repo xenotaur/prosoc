@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: 'Implemented and merged in PR #137 (commit 70c51fba846ca319731bcde2d48f461018814564) -- added a mask-and-compare audit-currency check to scripts/validate/status, confirmed with the user before implementing per the work item''s own risk notes. Validated the design against two real historical cases before writing code (PR #128''s provenance backfill, this workstream''s own promotion diff). Running it against the full corpus surfaced and fixed 2 genuinely stale pre-existing cards outside this workstream''s original 9 (routine_delivery, guidance_docent). A subsequent real Copilot review round found and all fixes verified 6 further issues, including a severe shallow-clone boundary bug that could have silently defeated the guard entirely; all reproduced against real data (including a real git clone --depth 1) before fixing. 26 new regression tests; full corpus scripts/validate/status passes clean (32/32 cards).'
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-AUDIT-CURRENCY-GUARD
 title: 'Add a git-history audit-currency check to scripts/validate/status'
 type: deliverable
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-LIFECYCLE-CURRENCY
 related_design:

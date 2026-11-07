@@ -2,10 +2,10 @@
 execution_id: 2026_11_07_08_01_12_WI_CHARTER_SUPPLEMENT_AUDIT_CURRENCY_GUARD_CONFIRM2
 prompt_id: PROMPT(AD_HOC:WI_CHARTER_SUPPLEMENT_AUDIT_CURRENCY_GUARD_CONFIRM2)[2026-11-07T08:00:30+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_07_07_05_00_WI_CHARTER_SUPPLEMENT_AUDIT_CURRENCY_GUARD
 pr: https://github.com/xenotaur/prosoc/pull/137
-commit:
+commit: 70c51fba846ca319731bcde2d48f461018814564
 created_at: 2026-11-07T08:01:12+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/137

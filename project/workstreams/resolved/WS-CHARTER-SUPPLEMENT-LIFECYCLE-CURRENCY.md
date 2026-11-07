@@ -2,8 +2,8 @@
 id: WS-CHARTER-SUPPLEMENT-LIFECYCLE-CURRENCY
 kind: planning_node
 title: 'Repair stale APPROVED lifecycle state across the charter supplement corpus'
-status: proposed
-stage: planned
+status: resolved
+stage: closed
 origin: follow_up
 summary: 'Demote and re-promote the 9 normative cards whose APPROVED state postdates their last real audit, add a regression guard against recurrence, and confirm the resulting charter-supplement PDF is internally consistent.'
 related_focus: []
