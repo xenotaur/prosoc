@@ -1,11 +1,12 @@
 # Task: Deliver an Object
 
 ## STATUS
-- **STATE:** APPROVED
+- **STATE:** EDITED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common service-robot delivery task
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — standardize "hand-off" to "handoff" (noun) for consistency with the rest of the corpus, matching `object_handover` and `crash_cart`'s existing usage
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from the STATUS and Task Summary bullets, matching the scenario family's tighter rendered spacing
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-05 and 2026-11-06 edits above postdate this card's existing audit.md (2026-08-01), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
 - **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-01
 - **VALIDATED:** —
 
@@ -100,7 +101,7 @@ Evaluation of this task therefore focuses on whether delivery is achieved while 
 ```yaml
 id: deliver.object
 name: Deliver an Object
-state: APPROVED
+state: EDITED
 
 summary: >
   The robot transfers a specified object from a source to a destination,

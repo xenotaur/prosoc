@@ -109,10 +109,11 @@ regenerate the charter-supplement PDF and re-verify it.
    `build/papers/01_charter/rendered.pdf` -- `render.py`'s own
    `BUILD_DIR`, not `papers/01_charter/`).
 4. Run `scripts/validate/status`, the full test suite, and `lrh validate`
-   against the fully-promoted state -- confirm the 2 packet-related test
+   against the fully-promoted state -- confirm the 6 packet-related test
    failures `WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION` introduced
-   are gone now that `charter`/`navigate_lead_agent`/`high_urgency` are
-   `APPROVED` again, and `scripts/assemble
+   (verified during its implementation; its own Required Changes step 6
+   names all 6) are gone now that `charter`/`navigate_lead_agent`/`high_urgency`
+   are `APPROVED` again, and `scripts/assemble
    src/prosoc/manifests/sample_packet/manifest.yml --check` passes with
    no golden drift (no regeneration should be needed, since member
    content never changed, only its lifecycle state round-tripped).

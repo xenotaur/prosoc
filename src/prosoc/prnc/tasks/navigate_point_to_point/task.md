@@ -1,10 +1,11 @@
 # Task: Navigate from Start to Goal
 
 ## STATUS
-- **STATE:** APPROVED
+- **STATE:** EDITED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms; common mobile robot navigation task
 - **DRAFTED:** ChatGPT 5.2, 2026-01-11
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-PUBLICATION-POLISH), 2026-11-06 — remove trailing hard-line-break whitespace from the STATUS and Task Summary bullets, matching the scenario family's tighter rendered spacing
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-06 edit above postdates this card's existing audit.md (2026-08-02), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
 - **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-02
 - **VALIDATED:** —
 
@@ -97,7 +98,7 @@ Evaluation of this task therefore requires assessing how goal achievement is bal
 ```yaml
 id: navigate.point_to_point
 name: Navigate from Start to Goal
-state: APPROVED
+state: EDITED
 
 summary: >
   The robot attempts to move from an initial location to a specified destination,

@@ -1,7 +1,7 @@
 # Prosocial Robot Navigation Charter
 
 **Version:** 0.1  
-**Status:** Approved (Normative)  
+**Status:** Edited (Normative)  
 **Scope:** Mobile robot navigation in human-populated environments  
 **Derived from:**  
 - *Principles and Guidelines for Evaluating Social Robot Navigation Algorithms* (Francis et al.)  
@@ -11,7 +11,7 @@
 
 ## Status
 
-- **STATE:** APPROVED
+- **STATE:** EDITED
 - **SOURCE:** Principles and Guidelines for Evaluating Social Robot Navigation Algorithms (Francis et al.); Prosocial Robotics project documents; The Prosocial Robot Navigation Charter (Francis, in press)
 - **DRAFTED:** Prosocial Robotics project
 - **EDITED:** Claude (WI-CARD-STATUS-CHARTER), 2026-07-29 — add machine-readable lifecycle state
@@ -24,6 +24,7 @@
 - **APPROVED:** Claude, 2026-08-19 (PR #97) — re-audited and promoted EDITED → AUDITED → APPROVED, closing out the 2026-08-19 revert
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-COPYEDIT-FIXES), 2026-11-05 — update the SOURCE attribution's stale publication-status wording to reflect the paper now being in press; define "P&G" at its first in-body use; split a run-on sentence in the P6 explanation; complete the Dragan et al. reference with its full conference name, pages, and DOI
 - **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-DEFINITIONAL-CONSISTENCY), 2026-11-06 — add the glossary's missing shared-environment-navigability branch to the Prosocial definition, matching Section 2 and Principle 13's Explanation, while preserving the existing baseline-vs-P9 distinction
+- **EDITED:** Claude (WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION), 2026-11-06 — demoted from APPROVED to EDITED: the 2026-11-05 and 2026-11-06 content edits above postdate this card's existing audit.md (2026-08-19), making the prior APPROVED state stale per project/focus/current_focus.md's audit-currency policy; pending re-audit and re-approval
 
 The charter's lifecycle state is authored in the embedded YAML below (the
 authoritative source), projected into the **STATE** bullet above, and enforced
@@ -33,7 +34,7 @@ by `scripts/validate/status`. It is one of `DRAFTED`, `EDITED`, `AUDITED`,
 whole, not to individual principles.
 
 ```yaml
-state: APPROVED
+state: EDITED
 ```
 
 ---
