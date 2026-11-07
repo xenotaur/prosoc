@@ -3,71 +3,66 @@ family: tasks
 card: navigate_point_to_point
 verdict: ready_with_fixes
 blocking: 0
-should_fix: 0
+should_fix: 1
 suggestion: 0
-audited: 2026-08-02
+audited: 2026-11-07
 ---
 
 # Audit: Navigate from Start to Goal
 
-- **Card:** `prosoc/tasks/navigate_point_to_point/`
-- **Audited:** Claude (prosoc-card-audit skill), 2026-08-02 (re-audit;
-  supersedes the 2026-07-29 pass)
-- **Verdict:** Ready for AUDITED — both findings resolved
+- **Card:** `src/prosoc/prnc/tasks/navigate_point_to_point/`
+- **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
+- **Verdict:** Ready for AUDITED with one minor wording fix
 
 ## Findings
 
-### 1. Common failure mode omitted or softened in YAML — RESOLVED
-- **Section/field:** Common Failure Modes (Task-Level) vs. `common_failure_modes`
-- **Issue (as originally found):** Prose listed four failure modes; the
-  fourth — "Oscillatory or indecisive motion that prevents sustained
-  progress" — had no corresponding entry in `common_failure_modes` (which
-  had only three). Separately, the third prose bullet, "Abandonment of the
-  goal **without external cause**," was present in YAML only as
-  "abandonment of navigation goal" — the qualifier was dropped.
-- **Fix applied:** Added `oscillatory or indecisive motion preventing
-  sustained progress` to `common_failure_modes`, and reworded
-  `abandonment of navigation goal` to `unjustified abandonment of
-  navigation goal` to restore the qualifier's intent. `task.yml`
-  regenerated and confirmed in sync (`scripts/distill/tasks --dry-run
-  --show-diffs`, no diff).
-
-### 2. `example_scenarios` used a versioned id instead of the directory name — RESOLVED
-- **Section/field:** Example Scenarios (Non-Exhaustive) / `example_scenarios`
-- **Issue (as originally found):** `frontal_approach_01` did not resolve
-  to any directory under `prosoc/scenarios/` — the actual directory is
-  `frontal_approach` (no `_01` suffix). `intersection_no_gesture` and
-  `pedestrian_overtaking` already resolved correctly.
-- **Fix applied:** Changed `frontal_approach_01` to `frontal_approach` in
-  both the fenced YAML and the matching prose bullet list (checked both
-  this time, per the prose/YAML mismatch caught while fixing
-  `navigate_follow_agent` earlier this session). Confirmed
-  `prosoc/scenarios/frontal_approach/` exists.
-
-## Prose/YAML Consistency
-
-Task Summary, Task Description, and Task Scope and Boundaries align with
-`task_type`, `primary_intent`, `summary`, and `scope.{includes,excludes}`.
-Relationship to Prosocial Navigation Principles names P0, P1, P2, P3 in
-prose, matching `related_principles` exactly. Common Failure Modes and
-Example Scenarios now both match prose exactly (Findings 1–2, resolved
-above).
-
-## Schema and Charter Compliance
-
-- `scripts/distill/tasks --dry-run --show-diffs` produced no diff and no
-  schema validation error (whole-family dry-run) after the fixes.
-- `related_principles`: P0, P1, P2, P3 — four valid P0–P9 IDs.
-- `task_type: navigation` — exact enum match.
-- The task stays abstract throughout — no environment/agent-count/social
-  content leaks into `scope`, `primary_intent`, or the description.
-- `common_failure_modes` entries are task-level.
-- All three `example_scenarios` entries now resolve to real scenario
-  directories (`frontal_approach`, `intersection_no_gesture`,
-  `pedestrian_overtaking`).
+### 1. Scope prose mentions "rerouting" and "politeness" that the YAML scope omits — should-fix
+- **Section/field:** Task Scope and Boundaries vs. `scope.includes` / `scope.excludes`
+- **Issue:** The prose Includes list names "slowing, stopping, **or rerouting**
+  in service of reaching the goal," but `scope.includes` only has "progressing
+  toward a destination," "pausing or stopping temporarily while pursuing the
+  goal," and "resuming motion toward the goal after interruption" — rerouting
+  has no explicit counterpart. Symmetrically, the prose Excludes list names
+  "Optimizing for comfort, legibility, **or politeness** beyond what is
+  required to reach the destination," but the matching `scope.excludes` entry
+  reads "optimization for social comfort or legibility beyond goal
+  completion" — "politeness" is dropped. Neither is a contradiction (the
+  surrounding YAML entries are broad enough to arguably cover both), but both
+  are one-sided claims per the audit checklist's Prose/YAML Cross-Checks
+  guidance.
+- **Recommended fix:** Add "rerouting toward the destination" to
+  `scope.includes`, and restore "politeness" (or an equivalent "comfort,
+  legibility, or politeness" phrasing) to `scope.excludes`, so the YAML
+  enumerates the same behaviors the prose calls out by name.
 
 ## Completeness
 
-All Required sections present. Both optional-but-recommended sections
-(Common Failure Modes, Example Scenarios) are populated with no remaining
-content issues.
+All Required sections (per `template.md`) are present: Task Summary, Task
+Description, Task Scope and Boundaries, Relationship to Prosocial Navigation
+Principles. Both optional-but-recommended sections are populated:
+`common_failure_modes` has four task-level entries that map 1:1 to the prose
+Common Failure Modes list (including the "without external cause" /
+"unjustified" qualifier), and `example_scenarios` lists three entries
+(`frontal_approach`, `intersection_no_gesture`, `pedestrian_overtaking`), all
+three of which resolve to real scenario directories under
+`src/prosoc/prnc/scenarios/` — no dangling references.
+
+`related_principles` (P0, P1, P2, P3) matches the principles the
+"Relationship to Prosocial Navigation Principles" section names by number
+(P0 directly, P1–P3 as the principles P0 is in tension with); all four are
+valid P0–P9 IDs and within the 3–5 recommended count. `task_type: navigation`
+is an exact enum match. The card stays abstract throughout — no specific
+environment, agent count, or social setting leaks into `scope`,
+`primary_intent`, or the Task Description; this is itself stated as a design
+goal in the card's own closing "Notes for Task Designers and Evaluators."
+`scope` has only `includes`/`excludes`, matching `schema.json`'s
+`additionalProperties: false` constraint.
+
+`scripts/distill/tasks --dry-run --show-diffs` (whole-family dry-run, no
+per-card scoping available) produced **no diff and no schema validation
+error** — nothing to report for this card, nor was any drift observed
+affecting a different task card in the same run.
+
+`VALIDATED: —` in the STATUS block is reasonably blank — this task has not
+yet been supported by empirical evidence, and VALIDATED is an optional,
+later lifecycle stage per `workflow.md`.
