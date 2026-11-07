@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: 'Implemented and merged in PR #135 (commit e70e4f353c59000bc1b666dbbfc469ad5120268a) -- wrote fresh, findings-only audit.md reports for all 9 demoted cards, plus a run-scoped project/audits/CARD_AUDIT_SUMMARY.md. Two review rounds found and fixed real content-accuracy errors in the audit text itself (P8/P9 principle-identity and branch-assignment mistakes, a genuine prose/YAML drift in single_file_hallway, and two reversed "no citations exist" vs. "none recorded" claims), independently re-verified against the actual charter/card source rather than accepted from review prose. CI''s check-packet-drift/test failures are the same already-disclosed sample_packet consequence inherited from WI-CHARTER-SUPPLEMENT-LIFECYCLE-STALE-DEMOTION, not new.'
 blocked_reason: null
 blocked: false
 id: WI-CHARTER-SUPPLEMENT-LIFECYCLE-AUDIT-REFRESH
 title: 'Re-audit the 9 demoted charter-supplement cards against their current content'
 type: evaluation
-status: proposed
+status: resolved
 related_workstreams:
   - WS-CHARTER-SUPPLEMENT-LIFECYCLE-CURRENCY
 related_design: []
