@@ -159,5 +159,5 @@ AUDITED" in `template.md` are present and non-contradictory:
   recorded. This phrasing (and label) is itself correct and current as
   written -- an earlier draft of this audit reversed the distinction.
 - **"Social Navigation Context" section** — reasonably blank (optional,
-  see Finding 1); its substance is already covered by the Discussion
+  see Finding 2); its substance is already covered by the Discussion
   section elsewhere in the card.
