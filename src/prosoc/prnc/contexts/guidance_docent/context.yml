@@ -2,7 +2,7 @@ id: guidance.docent
 name: Guidance and Docent Operation
 state: APPROVED
 context_class: core
-primary_robot_role: guide
+primary_robot_role: guide / escort
 applies_to_tasks:
 - navigate.lead_agent
 axes:

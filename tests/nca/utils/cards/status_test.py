@@ -299,6 +299,155 @@ class CheckAuditEvidenceTest(unittest.TestCase):
             self.assertIn("no acceptable verdict", result.detail)
 
 
+class MaskLifecycleSurfaceTest(unittest.TestCase):
+    def test_strips_history_bullets_and_continuations(self):
+        text = (
+            "- **STATE:** APPROVED\n"
+            "- **SOURCE:** x\n"
+            "- **EDITED:** Claude, 2026-11-06 -- demoted\n"
+            "  from APPROVED to EDITED\n"
+            "- **AUDITED:** Claude, 2026-08-01\n"
+            "- **VALIDATED:** --\n"
+        )
+        masked = status._mask_lifecycle_surface(text)
+        self.assertEqual(masked, "- **STATE:** <STATE>\n- **SOURCE:** x\n")
+
+    def test_masks_state_bullet_value_only(self):
+        masked = status._mask_lifecycle_surface(
+            "- **STATE:** EDITED\n- **SOURCE:** x\n"
+        )
+        self.assertIn("- **STATE:** <STATE>\n", masked)
+        self.assertIn("- **SOURCE:** x\n", masked)
+
+    def test_masks_fenced_yaml_state_line(self):
+        masked = status._mask_lifecycle_surface(
+            "summary: y\nstate: APPROVED\nname: z\n"
+        )
+        self.assertIn("state: <STATE>\n", masked)
+        self.assertNotIn("APPROVED", masked)
+
+    def test_masks_indented_root_wrapped_yaml_state_line(self):
+        # Constitutions nest state under a `constitution:` key.
+        masked = status._mask_lifecycle_surface("constitution:\n  state: APPROVED\n")
+        self.assertIn("  state: <STATE>\n", masked)
+
+    def test_masks_charter_status_header_value(self):
+        masked = status._mask_lifecycle_surface("**Status:** Approved (Normative)  \n")
+        self.assertIn("**Status:** <STATUS>", masked)
+
+    def test_does_not_mask_source_or_other_fields(self):
+        # SOURCE/CREATED/MODIFIED are content/provenance, not lifecycle
+        # bookkeeping -- a change here must still show up after masking.
+        masked = status._mask_lifecycle_surface(
+            "- **SOURCE:** original\n- **CREATED:** 2026-01-01\n"
+        )
+        self.assertIn("- **SOURCE:** original\n", masked)
+        self.assertIn("- **CREATED:** 2026-01-01\n", masked)
+
+    def test_a_different_bullet_right_after_a_history_bullet_is_not_swallowed(self):
+        # A non-lifecycle bullet (e.g. SOURCE:) right after a history bullet
+        # must be recognised as its own bullet, not treated as a
+        # continuation line of the one before -- only VALIDATED/DRAFTED/etc.
+        # (themselves in STATES) are expected to be stripped too.
+        text = "- **AUDITED:** Claude, 2026-08-01\n- **SOURCE:** x\n"
+        masked = status._mask_lifecycle_surface(text)
+        self.assertIn("- **SOURCE:** x\n", masked)
+
+
+class CheckAuditCurrencyTest(unittest.TestCase):
+    def test_below_audited_requires_nothing(self):
+        for state in ("DRAFTED", "EDITED"):
+            result = status.check_audit_currency(
+                current_md_text="anything",
+                audit_reference_md_text="anything else",
+                state=state,
+            )
+            self.assertTrue(result.ok)
+
+    def test_no_reference_point_skips_the_check(self):
+        # No reliable git reference (uncommitted audit.md, no history, etc.)
+        # must never itself be treated as evidence of staleness.
+        result = status.check_audit_currency(
+            current_md_text="- **STATE:** APPROVED\n\nchanged content\n",
+            audit_reference_md_text=None,
+            state="APPROVED",
+        )
+        self.assertTrue(result.ok)
+        self.assertIn("not checkable", result.detail)
+
+    def test_genuine_content_drift_fails(self):
+        before = "- **STATE:** APPROVED\n\nThe robot must do X.\n"
+        after = "- **STATE:** APPROVED\n\nThe robot must do Y.\n"
+        result = status.check_audit_currency(
+            current_md_text=after, audit_reference_md_text=before, state="APPROVED"
+        )
+        self.assertFalse(result.ok)
+        self.assertIn("content changes since its last audit", result.detail)
+
+    def test_provenance_backfill_only_does_not_false_positive(self):
+        # The real WI-CHARTER-SUPPLEMENT-AUDIT-EVIDENCE-BACKFILL case (PR
+        # #128): a blank AUDITED bullet filled in with a date copied from
+        # the card's own audit.md -- no content change.
+        before = (
+            "- **STATE:** APPROVED\n- **SOURCE:** x\n- **AUDITED:** --\n"
+            "- **VALIDATED:** --\n\nThe robot must do X.\n"
+        )
+        after = (
+            "- **STATE:** APPROVED\n- **SOURCE:** x\n"
+            "- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-01\n"
+            "- **VALIDATED:** --\n\nThe robot must do X.\n"
+        )
+        result = status.check_audit_currency(
+            current_md_text=after, audit_reference_md_text=before, state="APPROVED"
+        )
+        self.assertTrue(result.ok)
+
+    def test_ordinary_promotion_commit_does_not_false_positive(self):
+        # The real WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION case: a
+        # prosoc-card-approve run changes STATE, the fenced-YAML state:
+        # line, and adds one new history bullet -- no content change.
+        before = (
+            "- **STATE:** AUDITED\n- **SOURCE:** x\n"
+            "- **AUDITED:** Claude, 2026-08-01\n- **VALIDATED:** --\n\n"
+            "The robot must do X.\n\nstate: AUDITED\n"
+        )
+        after = (
+            "- **STATE:** APPROVED\n- **SOURCE:** x\n"
+            "- **AUDITED:** Claude, 2026-08-01\n"
+            "- **APPROVED:** Claude (WI), 2026-11-07 (PR #136)\n"
+            "- **VALIDATED:** --\n\n"
+            "The robot must do X.\n\nstate: APPROVED\n"
+        )
+        result = status.check_audit_currency(
+            current_md_text=after, audit_reference_md_text=before, state="APPROVED"
+        )
+        self.assertTrue(result.ok)
+
+    def test_new_history_bullet_with_hidden_content_change_still_fails(self):
+        # A promotion-shaped diff is not a blank check -- a real content
+        # change riding along with a new bullet must still be caught.
+        before = "- **STATE:** AUDITED\n\nThe robot must do X.\n"
+        after = (
+            "- **STATE:** APPROVED\n"
+            "- **APPROVED:** Claude (WI), 2026-11-07\n\n"
+            "The robot must do Y.\n"
+        )
+        result = status.check_audit_currency(
+            current_md_text=after, audit_reference_md_text=before, state="APPROVED"
+        )
+        self.assertFalse(result.ok)
+
+
+class AuditPathForTest(unittest.TestCase):
+    def test_directory_layout_uses_sibling_audit_md(self):
+        p = status.audit_path_for(Path("/root/card/card.md"), layout="directory")
+        self.assertEqual(p, Path("/root/card/audit.md"))
+
+    def test_flat_layout_uses_stem_specific_audit_md(self):
+        p = status.audit_path_for(Path("/root/card_b.md"), layout="flat")
+        self.assertEqual(p, Path("/root/card_b.audit.md"))
+
+
 CHARTER_HEADER = (
     "# Charter\n\n**Version:** 0.1  \n**Status:** {status}  \n**Scope:** x  \n"
 )

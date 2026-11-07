@@ -1,5 +1,6 @@
 # Unit tests for prosoc.nca.utils.cards.validate_status (family-aware CLI)
 
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -596,6 +597,151 @@ class GuardsAndDefaultsTest(unittest.TestCase):
         # Integration smoke test: the checked-in corpus (scenarios + tasks) must
         # stay consistent. This is the guard the WI's acceptance depends on.
         self.assertEqual(validate_status.main([]), 0)
+
+
+def _run_git(args: list[str], cwd: Path) -> None:
+    subprocess.run(args, cwd=cwd, check=True, capture_output=True, text=True)
+
+
+def _init_git_repo(root: Path) -> None:
+    _run_git(["git", "init", "-q"], root)
+    _run_git(["git", "config", "user.email", "test@example.com"], root)
+    _run_git(["git", "config", "user.name", "Test"], root)
+
+
+def _commit_all(root: Path, message: str) -> None:
+    _run_git(["git", "add", "-A"], root)
+    _run_git(["git", "commit", "-q", "-m", message], root)
+
+
+# A directory-layout card with real body content (not just STATUS-block
+# bullets), so the audit-currency check's masking has something to compare
+# that actually distinguishes "content changed" from "bullets only".
+_CARD_MD = """\
+# Scenario: Example
+
+## Status
+
+- **STATE:** AUDITED
+- **SOURCE:** somewhere
+- **DRAFTED:** someone, 2026-01-01
+- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-01
+
+---
+
+## Normative Expectations
+
+The robot must do X.
+
+```yaml
+id: example
+name: Example
+state: AUDITED
+```
+"""
+
+_AUDIT_MD = "---\nfamily: scenarios\ncard: example\nverdict: ready\n---\n"
+
+
+def _write_currency_card(root: Path, name: str, md_text: str) -> None:
+    d = root / name
+    d.mkdir()
+    (d / "scenario.md").write_text(md_text, encoding="utf-8")
+    (d / "scenario.yml").write_text(
+        f"id: {name}\nname: {name}\nstate: AUDITED\nsummary: y\n", encoding="utf-8"
+    )
+    (d / "audit.md").write_text(_AUDIT_MD, encoding="utf-8")
+
+
+class AuditCurrencyCheckTest(unittest.TestCase):
+    # Integration coverage for status.check_audit_currency, wired through
+    # the family loop (_check_extras) and backed by a real, disposable git
+    # repo (never the real prosoc repo) so the full git_history ->
+    # check_audit_currency path is exercised end to end, not just the pure
+    # comparison function in isolation (see status_test.py for that).
+
+    def test_genuinely_stale_card_fails(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _init_git_repo(root)
+            _write_currency_card(root, "card", _CARD_MD)
+            _commit_all(root, "initial: audited")
+
+            # Real content change after the audit, no accompanying bullet.
+            stale = (root / "card" / "scenario.md").read_text(encoding="utf-8")
+            stale = stale.replace(
+                "The robot must do X.", "The robot must do something else entirely."
+            )
+            (root / "card" / "scenario.md").write_text(stale, encoding="utf-8")
+            _commit_all(root, "silent content drift")
+
+            self.assertEqual(
+                validate_status.main(["--family", "scenarios", "--root", str(root)]), 1
+            )
+
+    def test_provenance_backfill_only_passes(self):
+        # The real WI-CHARTER-SUPPLEMENT-AUDIT-EVIDENCE-BACKFILL case (PR
+        # #128): only the AUDITED bullet's value changes.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _init_git_repo(root)
+            blank = _CARD_MD.replace(
+                "- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-01",
+                "- **AUDITED:** --",
+            )
+            _write_currency_card(root, "card", blank)
+            _commit_all(root, "initial: audited, blank bullet")
+
+            backfilled = (root / "card" / "scenario.md").read_text(encoding="utf-8")
+            backfilled = backfilled.replace(
+                "- **AUDITED:** --",
+                "- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-01",
+            )
+            (root / "card" / "scenario.md").write_text(backfilled, encoding="utf-8")
+            _commit_all(root, "backfill provenance bullet")
+
+            self.assertEqual(
+                validate_status.main(["--family", "scenarios", "--root", str(root)]), 0
+            )
+
+    def test_ordinary_promotion_commit_passes(self):
+        # The real WI-CHARTER-SUPPLEMENT-LIFECYCLE-PROMOTION case: STATE,
+        # the fenced-YAML state: line, and one new history bullet change --
+        # no content change.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _init_git_repo(root)
+            _write_currency_card(root, "card", _CARD_MD)
+            _commit_all(root, "initial: audited")
+
+            promoted = _CARD_MD.replace("- **STATE:** AUDITED", "- **STATE:** APPROVED")
+            promoted = promoted.replace(
+                "- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-01",
+                "- **AUDITED:** Claude (prosoc-card-audit skill), 2026-08-01\n"
+                "- **APPROVED:** Claude, 2026-11-07 (PR #1)",
+            )
+            promoted = promoted.replace("state: AUDITED", "state: APPROVED")
+            (root / "card" / "scenario.md").write_text(promoted, encoding="utf-8")
+            (root / "card" / "scenario.yml").write_text(
+                "id: card\nname: card\nstate: APPROVED\nsummary: y\n", encoding="utf-8"
+            )
+            _commit_all(root, "promote AUDITED -> APPROVED")
+
+            self.assertEqual(
+                validate_status.main(["--family", "scenarios", "--root", str(root)]), 0
+            )
+
+    def test_no_git_repo_skips_the_check_rather_than_failing(self):
+        # No git history at all (e.g. a non-repo checkout) must never be
+        # treated as evidence of staleness.
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            _write_currency_card(root, "card", _CARD_MD)
+            # Deliberately no `git init`.
+
+            self.assertEqual(
+                validate_status.main(["--family", "scenarios", "--root", str(root)]), 0
+            )
 
 
 if __name__ == "__main__":
