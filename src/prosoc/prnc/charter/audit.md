@@ -1,99 +1,104 @@
 ---
 family: charter
 card: charter
-verdict: ready
+verdict: ready_with_fixes
 blocking: 0
-should_fix: 0
+should_fix: 2
 suggestion: 1
-audited: 2026-08-19
+audited: 2026-11-07
 ---
 
 # Audit: Prosocial Robot Navigation Charter
 
 - **Card:** `src/prosoc/prnc/charter/`
-- **Audited:** Claude (prosoc-card-audit skill), 2026-08-19
-- **Verdict:** Ready, no blocking or should-fix issues found
-
-This audit reviews the `WI-CHARTER-FRONTIERS-SYNC` content edit that
-implements `PROP-CHARTER-FRONTIERS-SYNC`'s reconciliation decisions
-against the Frontiers paper "The Prosocial Robot Navigation Charter"
-(Francis, submitted): P1's broadened Safety scope (other robots,
-self-damage); P2/P3/P4/P7's merged wording; P5's restored "where
-feasible" hedge; P6's modal-only change; P8's inlined six-context
-taxonomy; P9's trimmed task/context/goals qualifier; and the
-MUST-for-P0-and-P1/SHOULD-elsewhere modal convention applied across all
-ten principles' normative statements and YAML `description` fields.
-
-During this audit, P1's Explanation prose was found not to reflect its
-newly broadened Normative Statement (it still narrated only "harms
-people or damages shared environments," omitting the newly-added
-other-robots and self-damage protection) — this was fixed directly as
-part of implementation before finalizing this audit, not left as an
-open finding, since it was squarely in scope for the edit that
-introduced the gap.
+- **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
+- **Verdict:** Ready for AUDITED with minor fixes — two should-fix items (a
+  recurring Normative-Statement/description drift, and a stale
+  `principles.md` cross-reference), no blocking issues.
 
 ## Findings
 
-### 1. `principles.md`'s summary table uses stale pre-restructure paths — suggestion
-- **Section/field:** N/A (external shared reference file, not the charter itself)
-- **Issue:** `.claude/skills/_shared/principles.md`'s header cites
-  `prosoc/charter/charter.md`/`prosoc/charter/charter.yml`; the actual
-  path since PR #95's package restructure is
-  `src/prosoc/prnc/charter/charter.md`/`charter.yml`. This is a path
-  staleness issue, not a content disagreement — the table's principle
-  descriptions themselves still accurately summarize the charter's
-  content after this edit.
-- **Recommended fix:** Update `principles.md`'s header paths in a
-  separate, small edit (out of this WI's scope per its Non-Goals — this
-  WI touches only `charter.md`/`charter.yml`/`audit.md`).
+### 1. Normative Statement omits content the YAML `description` and prose Explanation carry — should-fix
+- **Section/field:** Prose `### Normative Statement` vs. embedded YAML `description` (P1, P2, P4, P5, and to a lesser extent P6)
+- **Issue:** For several principles, the terse `### Normative Statement` subsection
+  no longer states the full normative content that the embedded YAML
+  `description` field carries (and that the `### Explanation` subsection
+  elaborates). Concretely:
+  - **P1 Safety:** Normative Statement reads "Robots must not cause harm to
+    humans, or damage to other robots, environments, or themselves." The YAML
+    `description` adds "This includes maintaining a safe distance unless
+    explicitly invited to approach." — present in the Explanation but not in
+    the headline statement.
+  - **P2 Comfort:** Normative Statement omits the description's "This includes
+    refraining from sudden movements or uninvited approaches."
+  - **P4 Politeness:** Normative Statement says "...toward other agents in
+    shared social spaces," while the YAML `description` instead emphasizes
+    "...offering help when asked and avoiding dismissive or intrusive
+    behaviors" — the two statements foreground different content rather than
+    one simply being a subset of the other.
+  - **P5 Social Competency:** similarly, the Normative Statement's "governing
+    shared spaces" framing and the YAML description's "avoiding inappropriate
+    behaviors such as interrupting conversations or blocking passage" diverge
+    in emphasis.
+  - **P6 Agent Understanding** (minor): the YAML description's parenthetical
+    "(humans, robots, pets, etc.)" has no counterpart in the Normative
+    Statement.
 
-## Prose/YAML Consistency
+  This is drift rather than contradiction — nothing here is factually
+  incompatible, and `scripts/distill/charter --dry-run --show-diffs` reports
+  no diff, so this is not a tooling-freshness issue. It traces to the
+  2026-08-06 EDITED entry that explicitly "fold[ed] P1/P4/P5's YAML-only
+  `description` content ... into their prose Explanations" without
+  back-porting the same content into the terse Normative Statement headline.
+  A reader who only skims the Normative Statement (the subsection the
+  Definitions and Glossary section calls "the primary reference point for
+  interpretation and enforcement") would miss normatively real content for
+  four of ten principles.
+- **Recommended fix:** For P1, P2, P4, P5 (and optionally P6), either fold the
+  extra clause back into the Normative Statement itself, or add an explicit
+  note that the YAML `description` is the fuller operative text and the
+  Normative Statement is deliberately a headline summary. Either is
+  acceptable; leaving the asymmetry undocumented is the actual gap.
 
-`scripts/distill/charter --dry-run --show-diffs` reports no differences
-— `charter.yml` is exactly in sync with `charter.md`'s fenced YAML
-blocks, for all ten principles including the nine edited this session.
+### 2. `../_shared/principles.md`'s P9 summary row restates wording the charter itself deliberately trimmed — should-fix
+- **Section/field:** `principles.md` P9 summary ("...without sacrificing own goals or task/context fit") vs. charter P9 Normative Statement / `description`
+- **Issue:** The charter's 2026-08-19 EDITED entry (WI-CHARTER-FRONTIERS-SYNC)
+  explicitly "trim[med] P9's task/context/goals qualifier (Section 2's
+  definition retains it)" from P9's Normative Statement and YAML description.
+  The shared `principles.md` reference table's P9 row still reads "Improve
+  others' navigation experience, or preserve/improve shared navigability,
+  without sacrificing own goals or task/context fit" — the pre-trim wording.
+  Per `principles.md`'s own header, the charter is the sole source of truth
+  and `principles.md` should be flagged as stale if the two disagree. They
+  disagree here, specifically on a point the charter changed on purpose.
+- **Recommended fix:** A human editor should update `principles.md`'s P9 row
+  to match the charter's current, trimmed P9 wording (the qualifier remains
+  true and findable via charter Section 2 and the P9 Explanation, just not in
+  the Normative Statement/description any more). This audit does not edit
+  `principles.md` itself, per this skill's scope.
 
-Each edited principle's Normative Statement and YAML `description` were
-checked pairwise; all match in substance (P1, P2, P3, P7, P8, P9 are
-verbatim-identical between prose and YAML; P4, P5, P6 carry the same
-pre-existing pattern of the YAML `description` restating the normative
-content with minor additional elaboration that predates this edit and
-was already accepted in the 2026-08-06 audit — not re-litigated here
-per this WI's Non-Goals).
-
-## Schema Compliance
-
-- `charter.yml` validates against `schema.json` (confirmed via
-  `lrh validate`, 0 errors).
-- Every `severity` value is unchanged from the pre-edit charter, per
-  `PROP-CHARTER-FRONTIERS-SYNC`'s explicit decision not to re-level
-  severity. P1 (Safety) remains `critical`.
-- No principle's examples were changed by this edit; none read as
-  interchangeable with another principle's.
-
-## Collective Coherence
-
-- The ten principles remain distinct; no new redundancy introduced by
-  this edit's wording changes.
-- P0 and P9 remain genuinely distinct from each other and from P1–P8 —
-  P9's trimmed normative statement (no longer restating the
-  task/context/goals qualifier) does not collapse it into P0 or P8,
-  since the Explanation still explicitly cross-references both ("It
-  should never be read as license to sacrifice the robot's own goals
-  (P0) or to act inappropriately for the task or context (P8)").
-- Coverage against `.claude/skills/_shared/principles.md`'s summary
-  table: content-wise consistent (see Finding 1 for that file's own
-  path-staleness-only issue, unrelated to this audit's own reference to
-  it).
+### 3. P4 and P5 positive examples both illustrate "yielding to people passing" — suggestion
+- **Section/field:** P4 Politeness `examples.positive` vs. P5 Social Competency `examples.positive`
+- **Issue:** P4's "Robot pauses to let two people pass during their
+  conversation" and P5's "Robot waits at the side while people pass in a
+  narrow hallway" both depict a robot yielding so people can pass. They are
+  not interchangeable on close reading — P4's is about not interrupting a
+  conversation (an individual-courtesy angle) while P5's is about following a
+  narrow-space queueing norm — but the surface similarity is close enough
+  that a reader skimming examples alone could conflate the two principles.
+- **Recommended fix:** No action required; optionally sharpen one example's
+  wording (e.g., naming the conversational-interruption angle explicitly in
+  P4's example) to make the distinction more self-evident without relying on
+  the surrounding prose.
 
 ## Completeness
 
-- All ten principles retain every required field (`id`, `name`,
-  `description`, `severity`, `examples.positive`, `examples.negative`).
-- `## Status`, `## 1. Purpose`, `## 2. Definition`, `## 3. Structure of
-  the Principles`, `## 14. Use of This Charter`, `## Definitions and
-  Glossary`, and `## References` sections are all present and
-  unmodified by this edit (Section 2's definition was explicitly
-  preserved unchanged, per `PROP-CHARTER-FRONTIERS-SYNC`'s decision that
-  only P9's own statement — not the general definition — drops the
-  qualifier).
+- All ten principles (P0–P9) have every schema-required field (`id`, `name`,
+  `description`, `severity`, non-empty `examples.positive`/`.negative`) — no
+  blanks found.
+- All structural sections required by the checklist are present: `## Status`,
+  `## 1. Purpose of This Charter`, `## 2. Definition...`, `## 3. Structure of
+  the Principles`, `## 14. Use of This Charter...`, `## Definitions and
+  Glossary`, and `## References`.
+- Nothing is reasonably-blank or should-fill-in-now — the charter document is
+  complete per both the schema and the structural checklist.

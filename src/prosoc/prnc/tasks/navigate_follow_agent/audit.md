@@ -5,75 +5,66 @@ verdict: ready_with_fixes
 blocking: 0
 should_fix: 1
 suggestion: 0
-audited: 2026-08-02
+audited: 2026-11-07
 ---
 
 # Audit: Follow an Agent
 
-- **Card:** `prosoc/tasks/navigate_follow_agent/`
-- **Audited:** Claude (prosoc-card-audit skill), 2026-08-02 (re-audit;
-  supersedes the 2026-07-29 pass)
-- **Verdict:** Ready for AUDITED with one minor finding remaining
+- **Card:** `src/prosoc/prnc/tasks/navigate_follow_agent/`
+- **Audited:** Claude (prosoc-card-audit skill), 2026-11-07
+- **Verdict:** Ready for AUDITED with one minor finding
 
 ## Findings
 
-### 1. Common failure mode missing from YAML — RESOLVED
-- **Section/field:** Common Failure Modes (Task-Level) vs. `common_failure_modes`
-- **Issue (as originally found):** Prose listed four failure modes, but the
-  fourth — "Abandonment of following without external cause" — had no
-  corresponding entry in the YAML `common_failure_modes` list (which had
-  only three).
-- **Fix applied:** Added `unjustified abandonment of following` to
-  `common_failure_modes`. `task.yml` regenerated and confirmed in sync
-  (`scripts/distill/tasks --dry-run --show-diffs`, no diff).
-
-### 2. Dangling `example_scenarios` entries — PARTIALLY RESOLVED, one remains open
+### 1. Dangling `example_scenarios` entry — should-fix
 - **Section/field:** Example Scenarios (Non-Exhaustive) / `example_scenarios`
-- **Issue (as originally found):** Both listed scenarios,
-  `human_following_corridor` and `group_following_open_space`, had no
-  matching directory under `prosoc/scenarios/`.
-- **Fix applied:** `human_following_corridor` replaced with `following` —
-  a real, existing scenario directory (`prosoc/scenarios/following/`,
-  internal `scenario.yml` id `following_01`) whose description ("A robot
-  in a servant role follows a human who leads their own navigation...
-  maintain an appropriate following distance") is a strong topical match
-  for this task. Uses the directory name, not the versioned `scenario.yml`
-  id, per the convention `tasks/navigate_point_to_point/audit.md` Finding 2
-  establishes (`example_scenarios` resolves against scenario directory
-  names). Two self-caught slips corrected before finalizing this audit:
-  the fenced YAML was initially updated but not the matching prose bullet
-  list, and the entry was initially written as the id form
-  (`following_01`) before being corrected to the directory form
-  (`following`).
-- **Still open:** `group_following_open_space` remains dangling — no
-  existing scenario covers a multi-agent/group-following variant. Logged
-  to `project/design/backlog.md` (2026-08-02) as a missing forward
-  reference rather than fixed inline.
+- **Issue:** `example_scenarios` lists `following` and `group_following_open_space`.
+  `following` resolves to a real scenario directory
+  (`src/prosoc/prnc/scenarios/following/`) and is a strong topical match.
+  `group_following_open_space` has no matching directory under
+  `src/prosoc/prnc/scenarios/` — no multi-agent/group-following scenario
+  currently exists in the corpus.
+- **Recommended fix:** Author a scenario covering group/multi-agent
+  following, or replace the entry with an existing scenario directory that
+  exercises this task, or explicitly log it as tracked backlog work (per
+  `PROP-NORMATIVE-PACKET-ASSEMBLY`'s Non-Goals, this corpus is known to have
+  dangling `example_scenarios` entries — not unique to this card, and not
+  itself a blocker for `AUDITED`).
 
 ## Prose/YAML Consistency
 
-Task Summary, Task Description, and Task Scope and Boundaries align cleanly
-with `task_type`, `primary_intent`, `summary`, and
-`scope.{includes,excludes}` — the Scope section's bullets match the YAML
-list-for-list. Relationship to Prosocial Navigation Principles names P0, P2,
-P3, P6 in prose, matching `related_principles` exactly. Common Failure Modes
-now matches prose exactly (Finding 1, resolved above).
+Task Summary, Task Description, and Task Scope and Boundaries all align
+cleanly with `task_type`, `primary_intent`, `summary`, and
+`scope.{includes,excludes}` — the Scope section's includes/excludes bullets
+map list-for-list onto the YAML arrays. Relationship to Prosocial Navigation
+Principles names P0, P2, P3, P6 in prose, matching
+`related_principles: [P0, P2, P3, P6]` exactly. Common Failure Modes
+(Task-Level) lists four bullets that map 1:1 onto the four
+`common_failure_modes` YAML entries — no omissions or contradictions found.
 
 ## Schema and Charter Compliance
 
-- `scripts/distill/tasks --dry-run --show-diffs` produced no diff and no
-  schema validation error (whole-family dry-run) after the fixes.
-- `related_principles`: P0, P2, P3, P6 — four valid P0–P9 IDs.
+- `PYTHONPATH="$(pwd)/src" python3 -m prosoc.prnc.tasks.distill --dry-run
+  --show-diffs` (run with an explicit `PYTHONPATH` to target this worktree's
+  own `src/`, since this machine's global `prosoc` editable install
+  otherwise resolves to an unrelated, stale checkout) produced no diff and no
+  schema-validation error for the whole tasks family (4 cards, including
+  this one) — `task.yml` is in sync with `task.md`'s embedded YAML, and no
+  other task card in the family showed drift either.
+- `related_principles`: P0, P2, P3, P6 — four valid P0–P9 identifiers.
 - `task_type: navigation` — exact enum match.
-- The task stays abstract throughout — no environment/agent-count/social
-  content leaks into `scope`, `primary_intent`, or the description.
-- `common_failure_modes` entries are task-level.
-- `example_scenarios[0]` (`following`) resolves to a real scenario card;
-  `example_scenarios[1]` (`group_following_open_space`) does not (see
-  Finding 2, tracked not blocking).
+- The task stays abstract throughout: no geometric layout, agent count, or
+  specific social setting leaks into `scope`, `primary_intent`, or the Task
+  Description, consistent with the schema's "abstract robot intents" framing
+  and `template.md`'s "avoid geometric layouts, agent counts, or social
+  norms" instruction.
+- `common_failure_modes` entries are task-level (independent of social
+  context) — none are really scenario- or context-specific.
 
 ## Completeness
 
-All Required sections present. Both optional-but-recommended sections
-(Common Failure Modes, Example Scenarios) are populated — see Finding 2 for
-its one still-open content issue (tracked, not blocking `AUDITED`).
+All Required sections present and filled: Task Summary, Task Description,
+Task Scope and Boundaries, Relationship to Prosocial Navigation Principles.
+Both optional-but-recommended sections (Common Failure Modes, Example
+Scenarios) are populated — see Finding 1 for the one still-open content
+issue (tracked, not blocking `AUDITED`).
