@@ -1,0 +1,3 @@
+## 2025-01-20 - [Avoid top-level jsonschema.validate in hot paths]
+**Learning:** Top-level `jsonschema.validate` parses the schema JSON and recompiles the validator on every call. This causes major performance issues in hot paths and loops, creating a substantial performance bottleneck in validation logic.
+**Action:** When validating using `jsonschema`, always use `jsonschema.validators.validator_for(schema)(schema)` to pre-compile the validator instance, and use `@functools.lru_cache` to cache both schema parsing (JSON load) and compilation logic so that validation runs instantly without recomputing the validator structure.
