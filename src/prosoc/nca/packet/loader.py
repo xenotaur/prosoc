@@ -51,7 +51,15 @@ class PacketFamily:
     def yml_path(self, card_id: str) -> pathlib.Path:
         if self.single:
             return self.root / self.card_filename
-        return self.root / card_id / self.card_filename
+        candidate = self.root / card_id / self.card_filename
+        try:
+            candidate.resolve().relative_to(self.root.resolve())
+        except ValueError as exc:
+            raise ResolveError(
+                f"{self.name}/{card_id}: card id resolves outside family root "
+                f"{self.root.resolve()}"
+            ) from exc
+        return candidate
 
 
 def _family(name, module, card_filename, *, single=False, yaml_root_key=None):
