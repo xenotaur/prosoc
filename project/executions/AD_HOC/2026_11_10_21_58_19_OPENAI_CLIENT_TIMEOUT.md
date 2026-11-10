@@ -2,10 +2,10 @@
 execution_id: 2026_11_10_21_58_19_OPENAI_CLIENT_TIMEOUT
 prompt_id: PROMPT(AD_HOC:OPENAI_CLIENT_TIMEOUT)[2026-11-10T21:58:19+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/142
-commit:
+commit: fdab8e88e38db14b0952dab6575c2d74b0905478
 created_at: 2026-11-10T21:58:19+00:00
 agent: claude_app
 instruction_source: "ad_hoc conversation — /lrh-pr-triage recommended closing PR #25 (obsolete: targeted a pre-layout-migration path) and re-opening a fresh fix against the still-live issue at its current location; user approved proceeding"

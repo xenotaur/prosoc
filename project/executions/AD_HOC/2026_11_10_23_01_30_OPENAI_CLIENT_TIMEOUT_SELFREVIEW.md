@@ -2,10 +2,10 @@
 execution_id: 2026_11_10_23_01_30_OPENAI_CLIENT_TIMEOUT_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:OPENAI_CLIENT_TIMEOUT_SELFREVIEW)[2026-11-10T23:01:30+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_10_21_58_19_OPENAI_CLIENT_TIMEOUT
 pr: https://github.com/xenotaur/prosoc/pull/142
-commit:
+commit: fdab8e88e38db14b0952dab6575c2d74b0905478
 created_at: 2026-11-10T23:01:30+00:00
 agent: claude_app
 instruction_source: "ad_hoc conversation — /lrh-land Step 8 substitute self-review: no automatic reviewer response had landed on the latest doc-only commit after a reasonable CI/bot wait"
