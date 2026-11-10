@@ -52,6 +52,22 @@ class LoaderTest(unittest.TestCase):
         with self.assertRaises(ResolveError):
             load_card("scenarios", "does_not_exist")
 
+    def test_card_id_path_traversal_is_rejected(self):
+        # A malicious card_id must not be able to escape the family root.
+        # Calls yml_path() directly, not load_card(), so the assertion
+        # isolates the containment check: load_card's separate "no card"
+        # ResolveError on a nonexistent path would otherwise also raise
+        # ResolveError and mask a missing containment guard.
+        with self.assertRaises(ResolveError):
+            FAMILIES["scenarios"].yml_path("../../etc")
+
+    def test_card_id_absolute_path_is_rejected(self):
+        # pathlib's Path.__truediv__ discards the left operand entirely
+        # when the right operand is absolute, so an absolute card_id must
+        # be caught by the same containment check as a relative traversal.
+        with self.assertRaises(ResolveError):
+            FAMILIES["scenarios"].yml_path("/etc")
+
 
 if __name__ == "__main__":
     unittest.main()
