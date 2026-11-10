@@ -2,10 +2,10 @@
 execution_id: 2026_11_10_23_47_18_BOLT_JSONSCHEMA_VALIDATOR_CACHE_9441916545774571715_REVIEW
 prompt_id: PROMPT(AD_HOC:BOLT_JSONSCHEMA_VALIDATOR_CACHE_9441916545774571715_REVIEW)[2026-11-10T23:45:35+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/141
-commit: f3f8b91
+commit: 12e3c2b4d9e25105bf69d2dd36f4cf7c4644f511
 created_at: 2026-11-10T23:47:18+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/141
