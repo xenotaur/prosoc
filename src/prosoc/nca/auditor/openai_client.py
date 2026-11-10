@@ -33,10 +33,13 @@ class OpenAIClient:
         organization: Optional[str] = None,
         default_model: str = "gpt-4.1",
         temperature: float = 0.0,
+        timeout: float = 60.0,
     ):
+        # Security: Added timeout to prevent infinite hanging on API calls
         self._client = OpenAI(
             api_key=api_key,
             organization=organization,
+            timeout=timeout,
         )
         self._default_model = default_model
         self._temperature = temperature
