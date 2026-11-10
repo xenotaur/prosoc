@@ -3,8 +3,8 @@ execution_id: 2026_11_10_22_05_06_OPENAI_CLIENT_TIMEOUT_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:OPENAI_CLIENT_TIMEOUT_SELFREVIEW)[2026-11-10T22:05:06+00:00]
 work_item: AD_HOC
 status: in_progress
-rerun_of:
-pr:
+rerun_of: 2026_11_10_21_58_19_OPENAI_CLIENT_TIMEOUT
+pr: https://github.com/xenotaur/prosoc/pull/142
 commit:
 created_at: 2026-11-10T22:05:06+00:00
 agent: claude_app
