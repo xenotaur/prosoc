@@ -2,10 +2,10 @@
 execution_id: 2026_11_09_06_14_12_PATH_TRAVERSAL_LOADER_FIX
 prompt_id: PROMPT(AD_HOC:PATH_TRAVERSAL_LOADER_FIX)[2026-11-09T05:42:28+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/140
-commit:
+commit: 14119c38c25562b17b551b91dc6c13a07f311e43
 created_at: 2026-11-09T06:14:12+00:00
 agent: claude_app
 instruction_source: "ad_hoc conversation — /lrh-pr-triage recommended closing PR #73 (obsolete: targeted a pre-layout-migration path) and re-opening a fresh fix against the still-live vulnerability at its current location; user approved proceeding"

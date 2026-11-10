@@ -2,10 +2,10 @@
 execution_id: 2026_11_09_06_12_23_PATH_TRAVERSAL_LOADER_FIX_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:PATH_TRAVERSAL_LOADER_FIX_SELFREVIEW)[2026-11-09T06:12:17+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_09_06_14_12_PATH_TRAVERSAL_LOADER_FIX
 pr: https://github.com/xenotaur/prosoc/pull/140
-commit:
+commit: 14119c38c25562b17b551b91dc6c13a07f311e43
 created_at: 2026-11-09T06:12:23+00:00
 agent: claude_app
 instruction_source: "ad_hoc conversation — re-doing PR #73's path-traversal fix at its current post-layout-migration location"

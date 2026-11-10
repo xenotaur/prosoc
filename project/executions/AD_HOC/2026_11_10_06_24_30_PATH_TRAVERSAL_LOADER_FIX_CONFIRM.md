@@ -2,10 +2,10 @@
 execution_id: 2026_11_10_06_24_30_PATH_TRAVERSAL_LOADER_FIX_CONFIRM
 prompt_id: PROMPT(AD_HOC:PATH_TRAVERSAL_LOADER_FIX_CONFIRM)[2026-11-10T06:24:22+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_09_06_14_12_PATH_TRAVERSAL_LOADER_FIX
 pr: https://github.com/xenotaur/prosoc/pull/140
-commit:
+commit: 14119c38c25562b17b551b91dc6c13a07f311e43
 created_at: 2026-11-10T06:24:30+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/140
