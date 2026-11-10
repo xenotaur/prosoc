@@ -87,6 +87,26 @@ class TestOpenAIClient(unittest.TestCase):
         _, kwargs = self.mock_completions.create.call_args
         self.assertEqual(kwargs["model"], "gpt-default")
 
+    def test_default_timeout_is_passed_to_openai_constructor(self):
+        """
+        The OpenAI client constructor should receive a default timeout so
+        a hung network call cannot block indefinitely.
+        """
+        OpenAIClient(default_model="gpt-test")
+
+        _, kwargs = self.mock_openai_cls.call_args
+        self.assertEqual(kwargs["timeout"], 60.0)
+
+    def test_explicit_timeout_overrides_default(self):
+        """
+        An explicit timeout argument should override the default and be
+        passed through to the OpenAI client constructor unchanged.
+        """
+        OpenAIClient(default_model="gpt-test", timeout=5.0)
+
+        _, kwargs = self.mock_openai_cls.call_args
+        self.assertEqual(kwargs["timeout"], 5.0)
+
     def test_explicit_model_name_overrides_default(self):
         """
         If an explicit model_name is provided, it should override
