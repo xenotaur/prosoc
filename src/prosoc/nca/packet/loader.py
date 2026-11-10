@@ -86,6 +86,7 @@ def _get_validator(schema_path: pathlib.Path) -> validators.Draft202012Validator
     """Pre-compile and cache the JSON Schema validator for performance."""
     schema = json.loads(schema_path.read_text(encoding="utf-8"))
     validator_cls = validators.validator_for(schema)
+    validator_cls.check_schema(schema)
     return validator_cls(schema)
 
 
