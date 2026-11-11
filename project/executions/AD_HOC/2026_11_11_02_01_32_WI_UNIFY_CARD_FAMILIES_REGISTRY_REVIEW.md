@@ -2,10 +2,10 @@
 execution_id: 2026_11_11_02_01_32_WI_UNIFY_CARD_FAMILIES_REGISTRY_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_UNIFY_CARD_FAMILIES_REGISTRY_REVIEW)[2026-11-11T02:01:03+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_11_00_09_34_WI_UNIFY_CARD_FAMILIES_REGISTRY
 pr: https://github.com/xenotaur/prosoc/pull/143
-commit: "9104372"
+commit: "a8d28f82809733c3432079d33a1e73efcaf5ce12"
 created_at: 2026-11-11T02:01:32+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/143

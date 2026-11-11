@@ -2,10 +2,10 @@
 execution_id: 2026_11_11_02_20_30_WI_UNIFY_CARD_FAMILIES_REGISTRY_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_UNIFY_CARD_FAMILIES_REGISTRY_SELFREVIEW)[2026-11-11T02:20:30+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_11_00_09_34_WI_UNIFY_CARD_FAMILIES_REGISTRY
 pr: https://github.com/xenotaur/prosoc/pull/143
-commit: "84d78de"
+commit: "a8d28f82809733c3432079d33a1e73efcaf5ce12"
 created_at: 2026-11-11T02:20:30+00:00
 agent: claude_app
 instruction_source: "ad_hoc conversation — /lrh-land Step 8 substitute self-review: no automatic reviewer response had landed on the _CONFIRM commit after a 10-minute wait"
