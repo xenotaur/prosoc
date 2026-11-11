@@ -244,10 +244,12 @@ terms regardless of any extraction.
 burndown if LRH's needs firm up — full trigger list recorded in the
 sibling `logical_robotics_harness` repo's own `project/design/backlog.md`
 § "Card-architecture reuse assessment (prosoc) — not yet warranted".
-Independently of that: worth unifying `prosoc/packet/loader.py`'s
-`FAMILIES` dict with `prosoc/utils/cards/validate_status.py`'s separate,
-duplicate `Family`/`FAMILIES` dict — that's a real duplication today and
-doesn't need a second consumer to justify fixing.
+Independently of that: the `prosoc/packet/loader.py`/
+`prosoc/utils/cards/validate_status.py` `FAMILIES`-dict duplication noted
+here has been fixed — `WI-UNIFY-CARD-FAMILIES-REGISTRY` (PR #144, merged
+2026-11-11) extracted the shared card-family identity into
+`src/prosoc/nca/utils/cards/family_registry.py`, which both modules now
+build their `FAMILIES` dicts from.
 
 **Related:** `prosoc/packet/assemble.py`, `prosoc/packet/loader.py:69-80`,
 `prosoc/packet/schema.json:108-136`, `prosoc/manifests/schema.json:50-59`,
