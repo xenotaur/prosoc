@@ -29,7 +29,7 @@ forbidden_actions:
   - modify_schema_json
 acceptance:
   - "A single shared definition of each card family's common fields (name, default root, yaml_root_key, single/layout-support) exists, and both src/prosoc/nca/packet/loader.py's FAMILIES and src/prosoc/nca/utils/cards/validate_status.py's FAMILIES are built from it rather than independently hardcoded"
-  - "No behavioral change: scripts/validate/status and scripts/assemble/scripts/validate produce identical output to before on the full corpus"
+  - "No behavioral change: scripts/validate/status and scripts/assemble src/prosoc/manifests/sample_packet/manifest.yml produce identical output before and after, for every family scripts/validate/status covers"
   - "scripts/test passes with no new failures"
   - "lrh validate reports 0 errors"
 required_evidence:
@@ -41,7 +41,9 @@ artifacts_expected:
   - src/prosoc/nca/utils/cards/validate_status.py
 ---
 
-# Summary
+# WI-UNIFY-CARD-FAMILIES-REGISTRY
+
+## Summary
 
 Replace the two independently-maintained `FAMILIES` registries in
 `src/prosoc/nca/packet/loader.py` (`PacketFamily`) and
@@ -52,7 +54,7 @@ so the two consumer-specific fields (`schema_path`/`card_filename` for
 the packet loader; `discover`/`supports_flat`/`label_by_stem` for the
 status validator) are the only parts still defined per-consumer.
 
-# Problem / Context
+## Problem / Context
 
 Both modules hardcode the same five card families (`scenarios`, `tasks`,
 `contexts`, `constitutions`, `charter`), import the same `*_distill`
@@ -83,7 +85,7 @@ need a second consumer to justify fixing."
 - Recommendation: Offer to remove that backlog bullet once this work
   item exists.
 
-# Scope
+## Scope
 
 - Extract the common per-family fields (name, default root,
   `yaml_root_key`, single-document/layout treatment) into one shared
@@ -96,7 +98,7 @@ need a second consumer to justify fixing."
   shared ones; `validate_status.py`'s extra `manifests` entry is
   unaffected since `loader.py` has no equivalent).
 
-# Required Changes
+## Required Changes
 
 1. Design and add a shared family-identity module (exact
    location/shape left to the implementor — see Open Questions) covering
@@ -111,7 +113,7 @@ need a second consumer to justify fixing."
    `discover`/`supports_flat`/`label_by_stem`.
 4. Remove the now-redundant hardcoded family lists from both files.
 
-# Non-Goals
+## Non-Goals
 
 - Do not add a sixth family to `loader.py` (e.g. `manifests`) — out of
   scope.
@@ -120,29 +122,35 @@ need a second consumer to justify fixing."
   backlog section — this item is explicitly the piece the backlog note
   says doesn't need that larger question resolved first.
 
-# Open Questions
+## Open Questions
 
 - Where the shared definition should live (a new small module under
   `src/prosoc/nca/` vs. one of the two existing files importing from the
   other) is left to the implementor's judgment at implementation time.
 
-# Acceptance Criteria
+## Acceptance Criteria
 
 - A single shared definition of each family's common fields exists;
   both `FAMILIES` dicts are built from it.
-- `scripts/validate/status` and `scripts/assemble`/`lrh validate`
-  produce identical output on the full corpus before and after.
+- `scripts/validate/status` produces identical output before and after,
+  for every family it covers.
+- `scripts/assemble src/prosoc/manifests/sample_packet/manifest.yml`
+  produces an identical assembled packet before and after (the only
+  manifest currently in the repo).
 - `scripts/test` passes with no new failures.
 - `lrh validate` reports 0 errors.
 
-# Validation
+## Validation
 
 - `scripts/format --check --diff`
 - `scripts/lint`
 - `scripts/test`
 - `lrh validate`
+- `scripts/validate/status` (before and after, diffed)
+- `scripts/assemble src/prosoc/manifests/sample_packet/manifest.yml`
+  (before and after, diffed)
 
-# Risk Notes
+## Risk Notes
 
 - The two registries' special-case fields (`yaml_root_key`,
   single-document handling) must map identically after the refactor — a
