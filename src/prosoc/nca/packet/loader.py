@@ -21,12 +21,8 @@ import yaml
 from jsonschema import ValidationError
 from jsonschema import validators
 
-from prosoc.constitutions import distill as constitutions_distill
-from prosoc.prnc.charter import distill as charter_distill
-from prosoc.prnc.contexts import distill as contexts_distill
-from prosoc.prnc.scenarios import distill as scenarios_distill
-from prosoc.prnc.tasks import distill as tasks_distill
 from prosoc.nca.utils.cards import status
+from prosoc.nca.utils.cards.family_registry import CARD_FAMILIES
 
 from .errors import ManifestError, ResolveError
 
@@ -63,29 +59,23 @@ class PacketFamily:
         return candidate
 
 
-def _family(name, module, card_filename, *, single=False, yaml_root_key=None):
-    root = pathlib.Path(module.__file__).parent
+def _family(identity, card_filename: str) -> PacketFamily:
     return PacketFamily(
-        name=name,
-        root=root,
-        schema_path=root / "schema.json",
+        name=identity.name,
+        root=identity.root,
+        schema_path=identity.root / "schema.json",
         card_filename=card_filename,
-        single=single,
-        yaml_root_key=yaml_root_key,
+        single=identity.single,
+        yaml_root_key=identity.yaml_root_key,
     )
 
 
 FAMILIES: dict[str, PacketFamily] = {
-    "scenarios": _family("scenarios", scenarios_distill, "scenario.yml"),
-    "tasks": _family("tasks", tasks_distill, "task.yml"),
-    "contexts": _family("contexts", contexts_distill, "context.yml"),
-    "constitutions": _family(
-        "constitutions",
-        constitutions_distill,
-        "constitution.yml",
-        yaml_root_key="constitution",
-    ),
-    "charter": _family("charter", charter_distill, "charter.yml", single=True),
+    "scenarios": _family(CARD_FAMILIES["scenarios"], "scenario.yml"),
+    "tasks": _family(CARD_FAMILIES["tasks"], "task.yml"),
+    "contexts": _family(CARD_FAMILIES["contexts"], "context.yml"),
+    "constitutions": _family(CARD_FAMILIES["constitutions"], "constitution.yml"),
+    "charter": _family(CARD_FAMILIES["charter"], "charter.yml"),
 }
 
 

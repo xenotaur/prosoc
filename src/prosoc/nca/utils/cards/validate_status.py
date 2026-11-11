@@ -31,6 +31,7 @@ from prosoc.constitutions import distill as constitutions_distill
 from prosoc.manifests import distill as manifests_distill
 from prosoc.nca.literate import utils
 from prosoc.nca.utils.cards import git_history, status
+from prosoc.nca.utils.cards.family_registry import CARD_FAMILIES
 from prosoc.prnc.charter import distill as charter_distill
 from prosoc.prnc.contexts import distill as contexts_distill
 from prosoc.prnc.scenarios import distill as scenarios_distill
@@ -55,53 +56,56 @@ class Family:
     label_by_stem: bool = False
 
 
+def _family(identity, *, supports_flat: bool, discover) -> Family:
+    return Family(
+        name=identity.name,
+        default_root=identity.root,
+        supports_flat=supports_flat,
+        discover=discover,
+        yaml_root_key=identity.yaml_root_key,
+        # The one single-document family (charter) is labeled by its
+        # Markdown stem rather than its parent directory name.
+        label_by_stem=identity.single,
+    )
+
+
 FAMILIES: dict[str, Family] = {
-    "scenarios": Family(
-        name="scenarios",
-        default_root=pathlib.Path(scenarios_distill.__file__).parent,
+    "scenarios": _family(
+        CARD_FAMILIES["scenarios"],
         supports_flat=True,
         discover=lambda root, layout: scenarios_distill.discover_scenarios(
             root, layout
         ),
     ),
-    "tasks": Family(
-        name="tasks",
-        default_root=pathlib.Path(tasks_distill.__file__).parent,
+    "tasks": _family(
+        CARD_FAMILIES["tasks"],
         supports_flat=False,
         discover=lambda root, layout: tasks_distill.discover_tasks(root),
     ),
-    "contexts": Family(
-        name="contexts",
-        default_root=pathlib.Path(contexts_distill.__file__).parent,
+    "contexts": _family(
+        CARD_FAMILIES["contexts"],
         supports_flat=False,
         # discover_contexts is a generator; wrap in list() so the caller's
         # len()/`not sources` checks work.
         discover=lambda root, layout: list(contexts_distill.discover_contexts(root)),
     ),
-    "constitutions": Family(
-        name="constitutions",
-        default_root=pathlib.Path(constitutions_distill.__file__).parent,
+    "constitutions": _family(
+        CARD_FAMILIES["constitutions"],
         # discover_constitutions dispatches on layout and handles flat too.
         supports_flat=True,
         discover=lambda root, layout: constitutions_distill.discover_constitutions(
             root, layout
         ),
-        # constitution.yml is root-wrapped: state lives at constitution.state.
-        yaml_root_key="constitution",
     ),
-    "charter": Family(
-        name="charter",
-        default_root=pathlib.Path(charter_distill.__file__).parent,
+    "charter": _family(
+        CARD_FAMILIES["charter"],
         # The charter is a single document (charter.md -> charter.yml), not a
         # directory/flat layout; discover_charter returns at most one source.
         supports_flat=False,
         discover=lambda root, layout: charter_distill.discover_charter(root),
-        # charter.yml carries state at the top level (sibling of principles).
-        yaml_root_key=None,
-        # Single-source: id by the charter.md stem ("charter"), not the root
-        # dir name, so --card/reporting stay stable under any --root.
-        label_by_stem=True,
     ),
+    # manifests is validate_status-only -- loader.py has no equivalent, so
+    # it isn't part of the shared CARD_FAMILIES registry.
     "manifests": Family(
         name="manifests",
         default_root=pathlib.Path(manifests_distill.__file__).parent,
