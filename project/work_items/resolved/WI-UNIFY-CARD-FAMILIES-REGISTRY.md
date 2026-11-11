@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: "Implemented and merged in PR #144 (commit 75b5381f69fc0950f75982ec9e7d891e837630f4), squashed. src/prosoc/nca/utils/cards/family_registry.py now holds the shared card-family identity (CARD_FAMILIES), consumed by both loader.py's PacketFamily-building FAMILIES and validate_status.py's Family-building FAMILIES; zero behavioral change confirmed via byte-identical scripts/validate/status and scripts/assemble output before/after."
 blocked_reason: null
 blocked: false
 id: WI-UNIFY-CARD-FAMILIES-REGISTRY
 title: "Unify the duplicate card-families registry in loader.py and validate_status.py"
 type: operation
-status: proposed
+status: resolved
 owner: anthony
 contributors:
   - anthony

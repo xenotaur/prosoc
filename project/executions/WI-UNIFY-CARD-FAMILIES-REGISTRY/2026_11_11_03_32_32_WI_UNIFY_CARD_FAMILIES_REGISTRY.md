@@ -2,10 +2,10 @@
 execution_id: 2026_11_11_03_32_32_WI_UNIFY_CARD_FAMILIES_REGISTRY
 prompt_id: PROMPT(WI-UNIFY-CARD-FAMILIES-REGISTRY:WI_UNIFY_CARD_FAMILIES_REGISTRY)[2026-11-11T03:22:58+00:00]
 work_item: WI-UNIFY-CARD-FAMILIES-REGISTRY
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/144
-commit:
+commit: "75b5381f69fc0950f75982ec9e7d891e837630f4"
 created_at: 2026-11-11T03:32:32+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-UNIFY-CARD-FAMILIES-REGISTRY.md
