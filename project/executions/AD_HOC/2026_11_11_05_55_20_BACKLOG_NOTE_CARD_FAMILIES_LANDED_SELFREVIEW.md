@@ -2,10 +2,10 @@
 execution_id: 2026_11_11_05_55_20_BACKLOG_NOTE_CARD_FAMILIES_LANDED_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:BACKLOG_NOTE_CARD_FAMILIES_LANDED_SELFREVIEW)[2026-11-11T05:55:14+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/145
-commit: "6ec584a1da35cf001ddc332b1547ea303f18e941"
+commit: "5c055aeadb64d3d3e82e51ba6c82f94c7a5fd41a"
 created_at: 2026-11-11T05:55:20+00:00
 agent: claude_app
 instruction_source: "ad_hoc conversation — /lrh-land Step 8 substitute self-review: no automatic reviewer response had landed after a 10-minute wait"

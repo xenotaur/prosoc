@@ -2,10 +2,10 @@
 execution_id: 2026_11_11_05_40_30_BACKLOG_NOTE_CARD_FAMILIES_LANDED_CONFIRM
 prompt_id: PROMPT(AD_HOC:BACKLOG_NOTE_CARD_FAMILIES_LANDED_CONFIRM)[2026-11-11T05:40:13+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/145
-commit:
+commit: "5c055aeadb64d3d3e82e51ba6c82f94c7a5fd41a"
 created_at: 2026-11-11T05:40:30+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/145
