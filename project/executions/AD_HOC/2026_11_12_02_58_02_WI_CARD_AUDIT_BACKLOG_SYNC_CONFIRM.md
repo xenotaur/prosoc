@@ -64,3 +64,34 @@ correct): 2/2 checks passing (`lint`, `test`).
 REVIEW-LANDED re-check against this `_CONFIRM` commit still required
 before the merge gate, per Step 8 — a fresh commit can draw a fresh
 reviewer finding even though the prior threads are resolved.
+
+---
+
+**Step 8 update.** No automatic reviewer response landed for commit
+`8c79bdb` after a bounded ~3-minute wait (the one formal review on
+record still cited the earlier pre-fix commit). CI was green. Dispatched
+a cold-context `general-purpose` subagent (`/lrh-self-review --pr`) as
+the substitute review signal.
+
+The subagent confirmed both prior Copilot findings were genuinely
+resolved, and surfaced one new finding (non-thread, a plain report, not
+a GitHub review thread): `prosoc-card-review-all`'s own Step 7 commit
+step and Quality Checklist (`.claude/skills/prosoc-card-review-all/
+SKILL.md` lines 140–146, 180–181) impose the identical staging
+restriction as `prosoc-card-audit-all`'s already-fixed Step 8/checklist
+— but `prosoc-card-review-all` is directly named as an actor in Required
+Changes 2 and 3, and this gap was left unaddressed. Independently
+re-verified by this session directly (read the cited SKILL.md lines) per
+this skill's mandatory top-finding check — confirmed accurate.
+
+Fixed: added Required Change 6, a matching acceptance criterion and
+Validation step, and expanded Scope to cover both bulk-wrapper skills'
+staging contracts symmetrically. Also fixed a minor finding (frontmatter
+`owner: anthony` not listed in `contributors`, inconsistent with all 5
+other work items in this repo that set an `owner`) by adding `anthony`
+to `contributors`.
+
+This counts as one no-thread finding handled via Step 3's taxonomy
+(Unaddressed → fixed) per Step 8's non-thread-finding procedure. A fresh
+REVIEW-LANDED check against the resulting commit is still required before
+the merge gate.

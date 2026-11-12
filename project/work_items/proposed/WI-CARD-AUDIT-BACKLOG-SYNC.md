@@ -7,7 +7,8 @@ title: "Teach prosoc-card-audit/-review/-review-all to sync findings into backlo
 type: deliverable
 status: proposed
 owner: anthony
-contributors: []
+contributors:
+  - anthony
 assigned_agents: []
 related_focus: []
 related_roadmap: []
@@ -32,6 +33,7 @@ acceptance:
   - "Re-running prosoc-card-audit against the same card and the same missing-reference finding does not append a duplicate row to the 'Missing forward-referenced cards' table"
   - "Dedup for the two promotion-based tables is verified against an isolated fixture with a matching row pre-seeded before an eligible promotion, not via a literal re-run -- prosoc-card-review's own Step 3 stops immediately on an already-APPROVED card, before any append logic runs"
   - "prosoc-card-audit-all's Step 8 commit step and Quality Checklist are updated to permit project/design/backlog.md among staged files when a per-card prosoc-card-audit run generates a backlog append, so a bulk audit that discovers a trackable finding is not blocked by the wrapper's own 'audit.md and summary files only' contract"
+  - "prosoc-card-review-all's Step 7 commit step and Quality Checklist are updated the same way, so a bulk review-and-promote session that triggers Required Change 2 or 3 is not blocked by its own 'nothing swept in from git status' contract"
   - "Existing hand-authored rows in all three tables are preserved verbatim"
   - "Each card's own audit.md remains self-contained -- no Required Change shortens or removes audit.md findings in favor of the backlog.md row"
   - "lrh validate reports 0 errors"
@@ -98,14 +100,17 @@ other open work item, proposal, or backlog row asks for the same thing.
 # Scope
 
 In scope: the three named skills (`prosoc-card-audit`, `prosoc-card-review`,
-`prosoc-card-review-all`), the three named backlog.md tables, and
-`prosoc-card-audit-all`'s own staging/checklist step to the extent needed
-to let its per-card `prosoc-card-audit` runs' backlog appends reach the PR
-it opens (`prosoc-card-audit-all` dispatches `prosoc-card-audit`'s
-unmodified single-card procedure per card and today's version of it
-excludes anything but `audit.md` and summary files from its commit and
-checklist). Out of scope: any other skill, any other backlog.md section,
-and any change to `audit.md`'s own format or content.
+`prosoc-card-review-all`), the three named backlog.md tables, and the
+staging/checklist steps of both bulk-wrapper skills —
+`prosoc-card-audit-all` (wraps `prosoc-card-audit` unmodified per card)
+and `prosoc-card-review-all` (wraps `prosoc-card-review` unmodified per
+card) — to the extent needed to let a wrapped skill's backlog append
+reach the PR either wrapper opens. Today, both wrappers' own commit steps
+and Quality Checklists restrict staging to card/audit/summary files only
+and treat anything else as unrelated — a restriction that would silently
+block the backlog appends this work item adds to the skills they wrap.
+Out of scope: any other skill, any other backlog.md section, and any
+change to `audit.md`'s own format or content.
 
 # Required Changes
 
@@ -134,6 +139,15 @@ and any change to `audit.md`'s own format or content.
    today reads "Do not stage anything else" and its checklist reads "The
    commit contains only `audit.md` files and the summary file(s)," both of
    which would block or flag a backlog row produced by Required Change 1.
+6. In `prosoc-card-review-all`, update Step 7's commit step and the
+   Quality Checklist the same way — its own commit step today reads
+   "Stage every card file this session actually changed ... Do not stage
+   anything else" and its checklist reads "nothing swept in from `git
+   status`," both of which would block or flag a backlog row produced by
+   Required Change 2 or 3 during a bulk review-and-promote session. This
+   is the identical bug class as item 5, on the sibling wrapper skill
+   `prosoc-card-review-all` is explicitly named as a direct actor for in
+   Required Changes 2 and 3 above.
 
 # Non-Goals
 
@@ -175,6 +189,10 @@ and any change to `audit.md`'s own format or content.
 - `prosoc-card-audit-all`'s Step 8 commit step and Quality Checklist are
   updated to permit `project/design/backlog.md` among staged files when a
   per-card `prosoc-card-audit` run generates a backlog append.
+- `prosoc-card-review-all`'s Step 7 commit step and Quality Checklist are
+  updated the same way, so a bulk review-and-promote session that
+  triggers Required Change 2 or 3 is not blocked by its own "nothing
+  swept in from `git status`" contract.
 - Existing hand-authored rows in all three tables are preserved verbatim.
 - Each card's own `audit.md` remains self-contained — no Required Change
   shortens or removes `audit.md` findings in favor of the backlog.md row.
@@ -204,6 +222,11 @@ and any change to `audit.md`'s own format or content.
   PR's commit includes the generated backlog.md row alongside the
   audit.md/summary files, and that its Quality Checklist no longer flags
   this as an unrelated change.
+- Manual run of `prosoc-card-review-all` across a small fixture queue
+  that includes an eligible promotion triggering an unresolved finding
+  or open suggestion; confirm its opened PR's commit includes the
+  generated backlog.md row alongside the promoted card files, and that
+  its Quality Checklist no longer flags this as swept-in.
 - Diff backlog.md's pre-existing rows against their post-change state to
   confirm they are unchanged.
 
