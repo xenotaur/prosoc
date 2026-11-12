@@ -29,7 +29,9 @@ acceptance:
   - "Running prosoc-card-audit against a card with a missing forward-referenced related_contexts/related_scenarios/example_scenarios entry appends a row to backlog.md's 'Missing forward-referenced cards' table in addition to (not instead of) noting it in the card's own audit.md"
   - "Running prosoc-card-review or prosoc-card-review-all against a card being promoted to APPROVED with an unresolved should-fix/suggestion finding appends a row to backlog.md's 'APPROVED cards with unresolved findings' table"
   - "Running prosoc-card-review or prosoc-card-review-all against a card promoted with open suggestion-level findings appends a row to backlog.md's 'Open suggestions on promoted cards' table, per the existing 2026-08-02 standing policy"
-  - "Re-running the audit/review against the same card and finding does not produce a duplicate row in any of the three tables"
+  - "Re-running prosoc-card-audit against the same card and the same missing-reference finding does not append a duplicate row to the 'Missing forward-referenced cards' table"
+  - "Dedup for the two promotion-based tables is verified against an isolated fixture with a matching row pre-seeded before an eligible promotion, not via a literal re-run -- prosoc-card-review's own Step 3 stops immediately on an already-APPROVED card, before any append logic runs"
+  - "prosoc-card-audit-all's Step 8 commit step and Quality Checklist are updated to permit project/design/backlog.md among staged files when a per-card prosoc-card-audit run generates a backlog append, so a bulk audit that discovers a trackable finding is not blocked by the wrapper's own 'audit.md and summary files only' contract"
   - "Existing hand-authored rows in all three tables are preserved verbatim"
   - "Each card's own audit.md remains self-contained -- no Required Change shortens or removes audit.md findings in favor of the backlog.md row"
   - "lrh validate reports 0 errors"
@@ -39,6 +41,7 @@ required_evidence:
   - test_output
 artifacts_expected:
   - .claude/skills/prosoc-card-audit/SKILL.md
+  - .claude/skills/prosoc-card-audit-all/SKILL.md
   - .claude/skills/prosoc-card-review/SKILL.md
   - .claude/skills/prosoc-card-review-all/SKILL.md
   - project/design/backlog.md
@@ -95,9 +98,14 @@ other open work item, proposal, or backlog row asks for the same thing.
 # Scope
 
 In scope: the three named skills (`prosoc-card-audit`, `prosoc-card-review`,
-`prosoc-card-review-all`) and the three named backlog.md tables. Out of
-scope: any other skill, any other backlog.md section, and any change to
-`audit.md`'s own format or content.
+`prosoc-card-review-all`), the three named backlog.md tables, and
+`prosoc-card-audit-all`'s own staging/checklist step to the extent needed
+to let its per-card `prosoc-card-audit` runs' backlog appends reach the PR
+it opens (`prosoc-card-audit-all` dispatches `prosoc-card-audit`'s
+unmodified single-card procedure per card and today's version of it
+excludes anything but `audit.md` and summary files from its commit and
+checklist). Out of scope: any other skill, any other backlog.md section,
+and any change to `audit.md`'s own format or content.
 
 # Required Changes
 
@@ -119,6 +127,13 @@ scope: any other skill, any other backlog.md section, and any change to
 4. Define and apply one dedupe key per table (card path + finding
    description, or equivalent) so re-running an audit/review against a
    card whose finding is already tracked does not append a duplicate row.
+5. In `prosoc-card-audit-all`, update Step 8's commit step and the Quality
+   Checklist so `project/design/backlog.md` is permitted (not flagged as
+   unrelated) among staged files whenever a per-card `prosoc-card-audit`
+   run in its fan-out generated a backlog append — its own commit step
+   today reads "Do not stage anything else" and its checklist reads "The
+   commit contains only `audit.md` files and the summary file(s)," both of
+   which would block or flag a backlog row produced by Required Change 1.
 
 # Non-Goals
 
@@ -149,8 +164,17 @@ scope: any other skill, any other backlog.md section, and any change to
   promoted with open suggestion-level findings appends a row to
   backlog.md's "Open suggestions on promoted cards" table, per the
   existing 2026-08-02 standing policy.
-- Re-running the audit/review against the same card and finding does not
-  produce a duplicate row in any of the three tables.
+- Re-running `prosoc-card-audit` against the same card and the same
+  missing-reference finding does not append a duplicate row to the
+  "Missing forward-referenced cards" table.
+- Dedup for the two promotion-based tables is verified against an
+  isolated fixture with a matching row pre-seeded before an eligible
+  promotion, not via a literal re-run — `prosoc-card-review`'s own Step 3
+  stops immediately on an already-APPROVED card, before any append logic
+  runs, so a literal re-run would never actually exercise the dedupe key.
+- `prosoc-card-audit-all`'s Step 8 commit step and Quality Checklist are
+  updated to permit `project/design/backlog.md` among staged files when a
+  per-card `prosoc-card-audit` run generates a backlog append.
 - Existing hand-authored rows in all three tables are preserved verbatim.
 - Each card's own `audit.md` remains self-contained — no Required Change
   shortens or removes `audit.md` findings in favor of the backlog.md row.
@@ -165,8 +189,21 @@ scope: any other skill, any other backlog.md section, and any change to
 - Manual run of `prosoc-card-review`/`prosoc-card-review-all` against a
   card with an unresolved finding being promoted; diff backlog.md to
   confirm the new row.
-- Re-run the same audit/review a second time; diff backlog.md to confirm
-  no duplicate row was appended.
+- Re-run `prosoc-card-audit` a second time against the same missing-
+  reference finding; diff backlog.md to confirm no duplicate row was
+  appended.
+- In an isolated fixture copy of backlog.md, pre-seed a matching row in
+  the "APPROVED cards with unresolved findings" (or "Open suggestions on
+  promoted cards") table, then run the append logic directly against an
+  eligible promotion; diff the fixture to confirm no duplicate row was
+  appended. This is a fixture-level test, not a literal skill re-run,
+  because `prosoc-card-review` stops on an already-APPROVED card before
+  reaching the append step.
+- Manual run of `prosoc-card-audit-all` across a small fixture batch that
+  includes a card with a missing forward reference; confirm its opened
+  PR's commit includes the generated backlog.md row alongside the
+  audit.md/summary files, and that its Quality Checklist no longer flags
+  this as an unrelated change.
 - Diff backlog.md's pre-existing rows against their post-change state to
   confirm they are unchanged.
 
@@ -178,3 +215,10 @@ loose (silently swallowing a real new finding) or too strict (producing
 duplicate rows). Required Change 4 exists specifically to make the dedupe
 key an explicit, reviewable design decision rather than an implementation
 afterthought.
+
+A second risk, raised in review: because `prosoc-card-review` stops
+before any append logic on a card that is already `APPROVED` or later,
+the promotion-table dedupe key can never be exercised by literally
+re-running the skill against the same card — the Validation section's
+fixture-based test exists specifically to close that gap rather than rely
+on a test that cannot actually run the code path it claims to check.
