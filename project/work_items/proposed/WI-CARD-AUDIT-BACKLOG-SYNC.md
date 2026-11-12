@@ -49,7 +49,9 @@ artifacts_expected:
   - project/design/backlog.md
 ---
 
-# Summary
+# WI-CARD-AUDIT-BACKLOG-SYNC
+
+## Summary
 
 Teach `prosoc-card-audit`, `prosoc-card-review`, and `prosoc-card-review-all`
 to append a row to the matching table in `project/design/backlog.md` when
@@ -59,7 +61,7 @@ promoted card with an open suggestion — **in addition to** each card's own
 self-contained `audit.md`, so cross-card findings are also tracked
 centrally instead of only being discoverable one `audit.md` at a time.
 
-# Problem / Context
+## Problem / Context
 
 `project/design/backlog.md` already holds three hand-maintained Markdown
 tables that these three skills' findings logically belong in:
@@ -97,7 +99,7 @@ plane by design. No existing prosoc script performs this sync either
 work item scopes) is the only existing request for this capability; no
 other open work item, proposal, or backlog row asks for the same thing.
 
-# Scope
+## Scope
 
 In scope: the three named skills (`prosoc-card-audit`, `prosoc-card-review`,
 `prosoc-card-review-all`), the three named backlog.md tables, and the
@@ -112,7 +114,7 @@ block the backlog appends this work item adds to the skills they wrap.
 Out of scope: any other skill, any other backlog.md section, and any
 change to `audit.md`'s own format or content.
 
-# Required Changes
+## Required Changes
 
 1. In `prosoc-card-audit`, when the audit finds a missing
    forward-referenced card, append a row to backlog.md's "Missing
@@ -149,7 +151,7 @@ change to `audit.md`'s own format or content.
    `prosoc-card-review-all` is explicitly named as a direct actor for in
    Required Changes 2 and 3 above.
 
-# Non-Goals
+## Non-Goals
 
 - Does not change `audit.md`'s format, content, or self-contained nature.
 - Does not remove or shorten a card's `audit.md` findings in favor of the
@@ -163,7 +165,7 @@ change to `audit.md`'s own format or content.
   only appends; removing or resolving a row stays a human/editorial
   decision, as it is today.
 
-# Acceptance Criteria
+## Acceptance Criteria
 
 - Running `prosoc-card-audit` against a card with a missing
   forward-referenced `related_contexts`/`related_scenarios`/
@@ -198,7 +200,7 @@ change to `audit.md`'s own format or content.
   shortens or removes `audit.md` findings in favor of the backlog.md row.
 - `lrh validate` reports 0 errors.
 
-# Validation
+## Validation
 
 - `lrh validate`
 - Manual run of `prosoc-card-audit` against a card with a known missing
@@ -230,7 +232,7 @@ change to `audit.md`'s own format or content.
 - Diff backlog.md's pre-existing rows against their post-change state to
   confirm they are unchanged.
 
-# Risk Notes
+## Risk Notes
 
 The main risk is an append that is scoped too loosely and spills into
 adjacent hand-written prose in backlog.md, or a dedupe key that is too
