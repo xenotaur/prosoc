@@ -2,10 +2,10 @@
 execution_id: 2026_11_12_21_16_46_WI_CARD_AUDIT_BACKLOG_SYNC_HEADING_FIX_CONFIRM
 prompt_id: PROMPT(AD_HOC:WI_CARD_AUDIT_BACKLOG_SYNC_HEADING_FIX_CONFIRM)[2026-11-12T21:16:39+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_12_21_15_27_WI_CARD_AUDIT_BACKLOG_SYNC_HEADING_FIX
 pr: https://github.com/xenotaur/prosoc/pull/147
-commit:
+commit: b7b6d68b819e5e0c417e2929b78081d5e8e4ed16
 created_at: 2026-11-12T21:16:46+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/147
@@ -36,5 +36,8 @@ CI (`gh pr checks`): 2/2 checks passing (`lint`, `test`).
 
 # Follow-up
 
-REVIEW-LANDED re-check against this `_CONFIRM` commit still required
-before the merge gate.
+REVIEW-LANDED re-check completed: Copilot's clean review on commit
+`6dd97e6` (immediately preceding this `_CONFIRM` commit) was confirmed to
+cover the only substantive content — `git diff --stat 6dd97e6..18b3ebf`
+showed only this doc-only execution-record addition. Merge gate verdict:
+green. PR #147 merged (squash) as `b7b6d68b819e5e0c417e2929b78081d5e8e4ed16`.

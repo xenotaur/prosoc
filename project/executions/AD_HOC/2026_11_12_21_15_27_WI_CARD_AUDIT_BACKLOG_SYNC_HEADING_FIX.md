@@ -2,10 +2,10 @@
 execution_id: 2026_11_12_21_15_27_WI_CARD_AUDIT_BACKLOG_SYNC_HEADING_FIX
 prompt_id: PROMPT(AD_HOC:WI_CARD_AUDIT_BACKLOG_SYNC_HEADING_FIX)[2026-11-12T21:15:08+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/147
-commit:
+commit: b7b6d68b819e5e0c417e2929b78081d5e8e4ed16
 created_at: 2026-11-12T21:15:27+00:00
 agent: claude_app
 instruction_source: "ad_hoc conversation -- /lrh-execute Step 1 readiness check on WI-CARD-AUDIT-BACKLOG-SYNC failed, surfacing a structural authoring bug"
