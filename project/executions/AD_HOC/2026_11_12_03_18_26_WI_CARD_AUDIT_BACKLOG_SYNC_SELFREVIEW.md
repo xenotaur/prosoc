@@ -2,10 +2,10 @@
 execution_id: 2026_11_12_03_18_26_WI_CARD_AUDIT_BACKLOG_SYNC_SELFREVIEW
 prompt_id: PROMPT(AD_HOC:WI_CARD_AUDIT_BACKLOG_SYNC_SELFREVIEW)[2026-11-12T03:18:20+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of: 2026_11_12_02_29_23_WI_CARD_AUDIT_BACKLOG_SYNC
 pr: https://github.com/xenotaur/prosoc/pull/146
-commit:
+commit: 51cba60928edc665b54486b2d00dba09374c9ff2
 created_at: 2026-11-12T03:18:26+00:00
 agent: claude_app
 instruction_source: "ad_hoc conversation -- /lrh-land Step 8 (via /lrh-confirm-fixes) second substitute self-review round, against the fix commit for the first round's finding"

@@ -2,10 +2,10 @@
 execution_id: 2026_11_12_02_55_43_WI_CARD_AUDIT_BACKLOG_SYNC_REVIEW
 prompt_id: PROMPT(AD_HOC:WI_CARD_AUDIT_BACKLOG_SYNC_REVIEW)[2026-11-12T02:55:38+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/146
-commit: "f02485f9b6786a7906513da8dcb98528903a940f"
+commit: 51cba60928edc665b54486b2d00dba09374c9ff2
 created_at: 2026-11-12T02:55:43+00:00
 agent: claude_app
 instruction_source: https://github.com/xenotaur/prosoc/pull/146
