@@ -139,11 +139,18 @@ If the user wants one, write Step 5's table plus the run's scope
 
 Stage every card file this session actually changed: each promoted card's
 Markdown + distilled YAML, any `audit.md` files created or refreshed while
-reviewing cards, plus the optional snapshot from Step 6. Do not stage
-anything else — if `git status` shows unrelated changes, stop and ask
-rather than sweeping them in. Skip the commit/PR steps only if the session
-left no file changes at all; if cards were held but audit evidence was
-created or refreshed, commit that audit work and open the PR.
+reviewing cards, plus the optional snapshot from Step 6, **and
+`project/design/backlog.md` if any per-card `prosoc-card-review`
+invocation this session appended a row to it — either its own Step 6
+backlog-sync addition on promotion, or its Step 2 delegation to
+`prosoc-card-audit`'s Step 6.5, which can append independently of this
+skill's promotion decision, including on a card this session ultimately
+Held** — a backlog append belongs to this commit, not a sweep-in, in
+either case. Do not stage anything else — if `git status` shows other
+unrelated changes, stop and ask rather than sweeping them in. Skip the
+commit/PR steps only if the session left no file changes at all; if cards
+were held but audit evidence was created or refreshed, commit that audit
+work and open the PR.
 
 ### 8. Push and open the PR
 
@@ -177,8 +184,10 @@ Before reporting completion, verify:
       gate) — none were promoted by skipping straight to
       `prosoc-card-approve`
 - [ ] No card's normative content was edited anywhere in this session
-- [ ] The commit contains only card files actually promoted this session
-      plus the optional snapshot — nothing swept in from `git status`
+- [ ] The commit contains only card files actually promoted this session,
+      the optional snapshot, and `project/design/backlog.md` if a backlog
+      row was appended this session — nothing else swept in from `git
+      status`
 - [ ] A no-promotion session skipped the commit/PR steps rather than
       opening an empty PR
 - [ ] The PR body's summary table matches the session's actual outcomes

@@ -194,9 +194,12 @@ Template (adapt the header for a single-family vs. multi-family run):
 
 ### 8. Commit
 
-Stage every touched `audit.md` plus the summary file(s) from Step 7. Do not
-stage anything else — if `git status` shows unrelated changes, stop and ask
-rather than sweeping them in.
+Stage every touched `audit.md` plus the summary file(s) from Step 7, **and
+`project/design/backlog.md` if any per-card `prosoc-card-audit` run in this
+fan-out appended a row to it (that skill's own Step 6.5)** — a backlog
+append belongs to this commit, not a sweep-in. Do not stage anything else
+— if `git status` shows other unrelated changes, stop and ask rather than
+sweeping them in.
 
 ### 9. Push and open the PR
 
@@ -227,7 +230,9 @@ Before reporting completion, verify:
 - [ ] No card's lifecycle STATE was promoted
 - [ ] Summary file(s) were regenerated wholesale, not appended to, at the
       correct path(s) per Step 7's single-family vs. multi-family rule
-- [ ] The commit contains only `audit.md` files and the summary file(s)
+- [ ] The commit contains only `audit.md` files, the summary file(s), and
+      `project/design/backlog.md` if a fan-out run appended a row to it —
+      nothing else swept in
 - [ ] The PR body's table matches the summary file(s)
 
 ---

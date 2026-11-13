@@ -149,7 +149,43 @@ findings, manual editing — as the alternative to promoting now).
 - **Promote:** invoke `prosoc-card-approve` for this card and this exact
   transition. Per that skill's own Step 4, the confirmation just given
   here satisfies its confirm gate — do not ask the human to approve the
-  same transition a second time.
+  same transition a second time. Then sync to `project/design/backlog.md`:
+
+  - **If this transition is `→APPROVED`** and any should-fix or
+    suggestion-level finding from the card's current `audit.md` (Step 2)
+    is still unresolved at promotion time, append one row per such
+    finding to backlog.md's "APPROVED cards with unresolved findings"
+    table — **in addition to** the finding's existing record in
+    `audit.md`, never instead of it. **Dedupe key:** `(card, finding
+    text)` — before appending, check whether a row with the same card and
+    the same finding already exists (regardless of minor wording
+    differences — each re-audit regenerates `audit.md` wholesale, so the
+    same underlying finding can be reworded slightly between runs; match
+    on substance, not exact string); skip if so. Row format:
+
+    ```
+    | `<family>/<id>` | `<finding text, from audit.md>` | <today's date, YYYY-MM-DD> | open |
+    ```
+  - **For either transition**, if the card still carries one or more open
+    suggestion-level findings at promotion time, append one row per such
+    finding to backlog.md's "Open suggestions on promoted cards" table,
+    per the standing 2026-08-02 policy already documented there.
+    **Dedupe key:** `(card, suggestion text)` — same wording-tolerance
+    rule as above; skip any suggestion already present as a matching row
+    in substance. Row format (this table has no Status column):
+
+    ```
+    | `<family>/<id>` | `<suggestion text>` | <today's date, YYYY-MM-DD> |
+    ```
+  - A `→APPROVED` promotion with an open suggestion-level finding gets a
+    row in **both** tables — they track different things (an orphaned
+    APPROVED card vs. the burndown source list) and are not mutually
+    exclusive.
+  - Touch no other row or section of `backlog.md`, and never shorten or
+    remove anything from the card's own `audit.md` in favor of a backlog
+    row.
+  - If no unresolved should-fix/suggestion finding exists at promotion
+    time, skip this sync entirely.
 - **Hold:** stop here. Record the reason in the report; do not touch the
   card.
 - **Address findings first:** offer (do not auto-invoke) `prosoc-card-audit`
@@ -184,6 +220,10 @@ Before reporting completion, verify:
 - [ ] Exactly one lifecycle step was in scope for this invocation
 - [ ] `prosoc-card-approve` was not asked to re-confirm a transition this
       skill's own gate already approved
+- [ ] On promotion, any unresolved should-fix/suggestion finding was
+      synced to the relevant `backlog.md` table(s), deduped against
+      existing rows, without touching any other row, section, or the
+      card's own `audit.md`
 
 ---
 
@@ -199,3 +239,11 @@ Before reporting completion, verify:
   `prosoc-card-review-all`'s job, which calls this skill once per card in
   its ranked queue.
 - Does not silently accept a stale audit — always checks currency first.
+- Does not, on its own, edit any `backlog.md` row or section other than
+  appending to the two promotion-related tables, and only on an actual
+  promotion with an unresolved should-fix/suggestion finding — this does
+  not restrict a delegated `prosoc-card-audit` run's own Step 6.5 sync
+  (Step 2, triggered whenever `audit.md` is missing or stale), which can
+  append to the "Missing forward-referenced cards" table independently of
+  this skill's promotion decision, including when the human later
+  chooses Hold.
