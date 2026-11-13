@@ -2,10 +2,10 @@
 execution_id: 2026_11_13_00_15_38_WI_CARD_AUDIT_BACKLOG_SYNC
 prompt_id: PROMPT(WI-CARD-AUDIT-BACKLOG-SYNC:WI_CARD_AUDIT_BACKLOG_SYNC)[2026-11-13T00:00:20+00:00]
 work_item: WI-CARD-AUDIT-BACKLOG-SYNC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/148
-commit:
+commit: 0544d955a8625da48d35cf1af82d6e42f7e54bdf
 created_at: 2026-11-13T00:15:38+00:00
 agent: claude_app
 instruction_source: project/work_items/proposed/WI-CARD-AUDIT-BACKLOG-SYNC.md

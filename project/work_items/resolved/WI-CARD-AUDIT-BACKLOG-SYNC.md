@@ -1,11 +1,11 @@
 ---
-resolution: null
+resolution: 'Implemented and merged in PR #148 (commit 0544d955a8625da48d35cf1af82d6e42f7e54bdf).'
 blocked_reason: null
 blocked: false
 id: WI-CARD-AUDIT-BACKLOG-SYNC
 title: "Teach prosoc-card-audit/-review/-review-all to sync findings into backlog.md"
 type: deliverable
-status: proposed
+status: resolved
 owner: anthony
 contributors:
   - anthony
