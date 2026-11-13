@@ -239,6 +239,11 @@ Before reporting completion, verify:
   `prosoc-card-review-all`'s job, which calls this skill once per card in
   its ranked queue.
 - Does not silently accept a stale audit — always checks currency first.
-- Does not edit any `backlog.md` row or section other than appending to
-  the two promotion-related tables, and only on an actual promotion with
-  an unresolved should-fix/suggestion finding.
+- Does not, on its own, edit any `backlog.md` row or section other than
+  appending to the two promotion-related tables, and only on an actual
+  promotion with an unresolved should-fix/suggestion finding — this does
+  not restrict a delegated `prosoc-card-audit` run's own Step 6.5 sync
+  (Step 2, triggered whenever `audit.md` is missing or stale), which can
+  append to the "Missing forward-referenced cards" table independently of
+  this skill's promotion decision, including when the human later
+  chooses Hold.

@@ -333,7 +333,8 @@ Before reporting completion, verify:
   (scenarios) or claim source fidelity for families that have no such field
 - Does not edit any `backlog.md` row or section other than appending to
   the "Missing forward-referenced cards" table (Step 6.5), and only when
-  Step 3 actually found a missing forward reference
+  a missing forward-referenced card entry was actually found (by Step 2
+  or Step 3, whichever checklist section surfaced it — see Step 6.5)
 - Does not guarantee scientific or normative correctness beyond what is
   checkable against the schema, the charter, and (for scenarios) the cited
   source
