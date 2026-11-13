@@ -164,7 +164,7 @@ findings, manual editing — as the alternative to promoting now).
     on substance, not exact string); skip if so. Row format:
 
     ```
-    | `<family>/<id>` | `<finding text, from audit.md, date noted>` | <today's date, YYYY-MM-DD> | open |
+    | `<family>/<id>` | `<finding text, from audit.md>` | <today's date, YYYY-MM-DD> | open |
     ```
   - **For either transition**, if the card still carries one or more open
     suggestion-level findings at promotion time, append one row per such

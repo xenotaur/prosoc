@@ -141,9 +141,12 @@ Stage every card file this session actually changed: each promoted card's
 Markdown + distilled YAML, any `audit.md` files created or refreshed while
 reviewing cards, plus the optional snapshot from Step 6, **and
 `project/design/backlog.md` if any per-card `prosoc-card-review`
-invocation this session appended a row to it (that skill's own Step 6
-backlog-sync addition)** — a backlog append belongs to this commit, not a
-sweep-in. Do not stage anything else — if `git status` shows other
+invocation this session appended a row to it — either its own Step 6
+backlog-sync addition on promotion, or its Step 2 delegation to
+`prosoc-card-audit`'s Step 6.5, which can append independently of this
+skill's promotion decision, including on a card this session ultimately
+Held** — a backlog append belongs to this commit, not a sweep-in, in
+either case. Do not stage anything else — if `git status` shows other
 unrelated changes, stop and ask rather than sweeping them in. Skip the
 commit/PR steps only if the session left no file changes at all; if cards
 were held but audit evidence was created or refreshed, commit that audit
