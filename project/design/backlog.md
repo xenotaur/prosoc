@@ -185,12 +185,17 @@ one-off/card-specific suggestions.)
 ## Tooling
 
 - **Update `prosoc-card-audit`/`prosoc-card-review`/`prosoc-card-review-all`
-  to use this backlog directly.** Right now a missing forward reference is
-  just prose in that card's `audit.md` (or, before this note, not tracked
-  anywhere at all) — the skills should append a row to this file's table
-  automatically when they notice one, and consult it rather than relying on
-  ad-hoc notes in individual audit reports. Noted 2026-08-01, not yet
-  scoped as a work item.
+  to use this backlog directly.** Noted 2026-08-01; implemented by
+  `WI-CARD-AUDIT-BACKLOG-SYNC` (PR #148, merged 2026-11-13) —
+  `prosoc-card-audit` now appends to the "Missing forward-referenced
+  cards" table (its own Step 6.5) in addition to its existing `audit.md`
+  note, and `prosoc-card-review` (used directly or via
+  `prosoc-card-review-all`) now appends to the "APPROVED cards with
+  unresolved findings" and "Open suggestions on promoted cards" tables on
+  promotion (its own Step 6), each deduped against existing rows. The
+  skills still do not *consult* this backlog before acting (e.g. to skip
+  re-flagging an already-tracked gap) — only append to it; that remains
+  future work if ever wanted.
 
 ## LRH card-architecture reuse assessment — not yet warranted
 
