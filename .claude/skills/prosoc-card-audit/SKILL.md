@@ -247,6 +247,45 @@ This file is a report for the EDITED/AUDITED review pass, not something
 applied automatically. **Do not edit the card's Markdown, YAML, or the
 STATUS/STATE block.** A human takes responsibility for acting on it.
 
+### 6.5. Sync missing forward-referenced cards to backlog.md
+
+If any step above (Step 2 or Step 3, whichever checklist section actually
+surfaced it — for scenarios this is Step 3's Schema/Charter Compliance
+check on `related_scenarios`; for tasks it is the checklist's own
+"Cross-Reference Sanity" section on `example_scenarios`, a dangling
+`example_scenarios` entry being checked against the **scenarios**
+directory, not the task's own family directory; contexts' checklist
+currently has no equivalent check for `related_contexts`, so this will
+not fire for contexts today) found one or more missing forward-referenced
+card entries — a `related_scenarios`, `example_scenarios`, or
+`related_contexts` entry pointing at a card that does not exist —
+append one row per finding to `project/design/backlog.md`'s
+"Missing forward-referenced cards" table. This is **in addition to** the
+note already written in Step 6's `audit.md`, never instead of it, and
+never shortening or removing that note — each card's `audit.md` stays
+fully self-contained.
+
+**Dedupe key:** `(missing id, referencing card)` — the missing card's id
+plus the family/id of the card that names it. Before appending, read the
+table's existing rows: if a row already has the same missing id *and* the
+same referencing card (regardless of minor wording differences in the
+"Referenced by" note), the gap is already tracked — skip it. Re-running
+this audit against the same card and the same missing reference must
+never produce a duplicate row.
+
+**Row format** (append only — never reorder, edit, or remove an existing
+row):
+
+```
+| `<missing-id>` | `<family>/<card-id>` (`<field-name>`[; brief note]) | <today's date, YYYY-MM-DD> | open |
+```
+
+matching the style of the table's existing rows. Touch no other row, and
+no other section of `backlog.md`.
+
+If no missing forward-referenced card entry was found, skip this step
+entirely — do not write to `backlog.md`.
+
 ### 7. Report to the user
 
 Tell the user:
@@ -269,6 +308,12 @@ Before reporting completion, verify:
 - [ ] Every finding has a severity, a section/field, and a recommended fix
 - [ ] The frontmatter's `blocking`/`should_fix`/`suggestion` counts match the
       findings actually listed
+- [ ] Any missing forward-referenced card finding actually surfaced by
+      the family checklist (scenarios' Schema/Charter Compliance, or
+      tasks' Cross-Reference Sanity section) was synced to `backlog.md`'s
+      table (Step 6.5), deduped against existing rows, without touching
+      any other row or section, and without shortening the `audit.md`
+      note it duplicates
 - [ ] Principle-reference fields were checked against P0–P9 only
 - [ ] For scenarios: source fidelity was either checked against a real source
       or explicitly marked not checkable — never fabricated. For every other
@@ -286,6 +331,9 @@ Before reporting completion, verify:
   across multiple cards — that is `prosoc-card-audit-all`'s job
 - Does not fabricate a source comparison when no checkable source exists
   (scenarios) or claim source fidelity for families that have no such field
+- Does not edit any `backlog.md` row or section other than appending to
+  the "Missing forward-referenced cards" table (Step 6.5), and only when
+  Step 3 actually found a missing forward reference
 - Does not guarantee scientific or normative correctness beyond what is
   checkable against the schema, the charter, and (for scenarios) the cited
   source
