@@ -2,10 +2,10 @@
 execution_id: 2026_11_13_01_17_49_BACKLOG_NOTE_CARD_AUDIT_SYNC_LANDED
 prompt_id: PROMPT(AD_HOC:BACKLOG_NOTE_CARD_AUDIT_SYNC_LANDED)[2026-11-13T01:16:52+00:00]
 work_item: AD_HOC
-status: in_progress
+status: landed
 rerun_of:
 pr: https://github.com/xenotaur/prosoc/pull/149
-commit:
+commit: ddc2b4dc02b19f0f997521575dc2886232432fba
 created_at: 2026-11-13T01:17:49+00:00
 agent: claude_app
 instruction_source: "ad_hoc conversation -- follow-up noted after landing PR #148, confirmed with the user before proceeding"
