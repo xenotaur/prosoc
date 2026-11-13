@@ -159,9 +159,12 @@ Flag:
 Follow the resolved family checklist's **Schema Compliance** section (each
 checklist's own structural/normative-coherence checks — e.g. principle-id
 validity, rule contradiction checks for constitutions, collective coherence
-for the charter). If there's any doubt the YAML reflects the current
-Markdown, re-run Step 1's dry-run check — do not re-derive schema validity by
-hand.
+for the charter). **If the resolved checklist also has a separate
+"Cross-Reference Sanity" section** (tasks only, as of this writing), follow
+that too as part of this step — it is the same kind of structural check (a
+dangling cross-reference), just named and scoped separately in that
+checklist. If there's any doubt the YAML reflects the current Markdown,
+re-run Step 1's dry-run check — do not re-derive schema validity by hand.
 
 ### 4. Fidelity to source (scenarios only)
 
@@ -249,17 +252,14 @@ STATUS/STATE block.** A human takes responsibility for acting on it.
 
 ### 6.5. Sync missing forward-referenced cards to backlog.md
 
-If any step above (Step 2 or Step 3, whichever checklist section actually
-surfaced it — for scenarios this is Step 3's Schema/Charter Compliance
-check on `related_scenarios`; for tasks it is the checklist's own
-"Cross-Reference Sanity" section on `example_scenarios`, a dangling
-`example_scenarios` entry being checked against the **scenarios**
-directory, not the task's own family directory; contexts' checklist
-currently has no equivalent check for `related_contexts`, so this will
-not fire for contexts today) found one or more missing forward-referenced
-card entries — a `related_scenarios`, `example_scenarios`, or
-`related_contexts` entry pointing at a card that does not exist —
-append one row per finding to `project/design/backlog.md`'s
+If Step 3 found one or more missing forward-referenced card entries — for
+scenarios, via its Schema/Charter Compliance check on `related_scenarios`;
+for tasks, via the checklist's separate "Cross-Reference Sanity" section,
+which Step 3 now also follows (a dangling `example_scenarios` entry being
+checked against the **scenarios** directory, not the task's own family
+directory); contexts' checklist currently has no equivalent check for
+`related_contexts`, so this will not fire for contexts today — append one
+row per finding to `project/design/backlog.md`'s
 "Missing forward-referenced cards" table. This is **in addition to** the
 note already written in Step 6's `audit.md`, never instead of it, and
 never shortening or removing that note — each card's `audit.md` stays
@@ -333,8 +333,7 @@ Before reporting completion, verify:
   (scenarios) or claim source fidelity for families that have no such field
 - Does not edit any `backlog.md` row or section other than appending to
   the "Missing forward-referenced cards" table (Step 6.5), and only when
-  a missing forward-referenced card entry was actually found (by Step 2
-  or Step 3, whichever checklist section surfaced it — see Step 6.5)
+  Step 3 actually found a missing forward-referenced card entry
 - Does not guarantee scientific or normative correctness beyond what is
   checkable against the schema, the charter, and (for scenarios) the cited
   source
